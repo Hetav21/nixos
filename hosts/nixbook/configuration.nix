@@ -392,8 +392,8 @@ in {
     os-prober
 
     # Downloaders
-    ##    yt-dlp
-    ##    localsend
+    yt-dlp
+    localsend
 
     # Clipboard managers
     cliphist
@@ -409,8 +409,8 @@ in {
     networkmanagerapplet
 
     # Education
-    ##    ciscoPacketTracer8
-    ##    wireshark
+    ## ciscoPacketTracer8
+    ## wireshark
     ventoy
 
     # Music and streaming

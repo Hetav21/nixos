@@ -166,6 +166,7 @@ in {
         rebuild = "sh /etc/nixos/rebuild.sh";
         rebuild-log = "tail -f /etc/nixos/nixos-switch.log";
         ff = "fastfetch";
+        btop = "btop --utf-force";
         files-space = "sudo ncdu --exclude /.snapshots /";
         docker-clean = "docker container prune -f and docker image prune -f and docker network prune -f and docker volume prune -f";
         ld = "lazydocker";
