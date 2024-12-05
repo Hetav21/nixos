@@ -133,101 +133,95 @@ in {
     home-manager.enable = true;
     nushell = {
       enable = true;
-      ##  configFile.source = ../../dotfiles/.config/nushell/config.nu;
       extraConfig = ''
-               let carapace_completer = {|spans|
-               carapace $spans.0 nushell $spans | from json
-               }
-               $env.config = {
-                show_banner: false,
-                completions: {
-                case_sensitive: false # case-sensitive completions
-                quick: true    # set to false to prevent auto-selecting completions
-                partial: true    # set to false to prevent partial filling of the prompt
-                algorithm: "fuzzy"    # prefix or fuzzy
-                external: {
-                # set to false to prevent nushell looking into $env.PATH to find more suggestions
-                    enable: true
-                # set to lower can improve completion performance at the cost of omitting some options
-                    max_results: 100
-                    completer: $carapace_completer # check 'carapace_completer'
-                  }
-                }
-               }
-               $env.PATH = ($env.PATH |
-               split row (char esep) |
-               prepend /home/myuser/.apps |
-               append /usr/bin/env
-               )
+                     let carapace_completer = {|spans|
+                     carapace $spans.0 nushell $spans | from json
+                     }
+                     $env.config = {
+                      show_banner: false,
+                      completions: {
+                      case_sensitive: false # case-sensitive completions
+                      quick: true    # set to false to prevent auto-selecting completions
+                      partial: true    # set to false to prevent partial filling of the prompt
+                      algorithm: "fuzzy"    # prefix or fuzzy
+                      external: {
+                      # set to false to prevent nushell looking into $env.PATH to find more suggestions
+                          enable: true
+                      # set to lower can improve completion performance at the cost of omitting some options
+                          max_results: 100
+                          completer: $carapace_completer # check 'carapace_completer'
+                        }
+                      }
+                     }
+                     $env.PATH = ($env.PATH |
+                     split row (char esep) |
+                     prepend /home/myuser/.apps |
+                     append /usr/bin/env
+                     )
+
+        def lsfind [] {
+          		   ll "$1" | grep "$2"
+        }
+
+        def warp [] {
+        	   sudo systemctl "$1" warp-svc
+        }
+
+               # Starship
+             		use ~/.cache/starship/init.nu
+
+              	# NPM global packages
+              	$env.PATH = ($env.PATH | append ~/.npm-global/bin)
+
+              	# Command Run
+              	date
+              	microfetch
+      '';
+      shellAliases = {
         # Core Utils Aliases
-        alias l = eza -lh  --icons=auto
-        alias ls = eza -1   --icons=auto # short list
-        alias ll = eza -lha --icons=auto --sort=name --group-directories-first # long list all
-        alias ld = eza -lhD --icons=auto # long list dirs
-        alias tree = tree -a -I .git
-        alias cat = bat
-        alias c = clear # clear terminal
-        alias e = exit
-        alias grep = rg --color=auto
-        alias ssn = sudo shutdown now
-        alias srn = sudo reboot now
+        l = "eza -lh  --icons=auto";
+        ls = "eza -1   --icons=auto"; # short list
+        ll = "eza -lha --icons=auto --sort=name --group-directories-first"; # long list all
+        #	ld = "eza -lhD --icons=auto"; # long list dirs
+        tree = "tree -a -I .git";
+        cat = "bat";
+        c = "clear"; # clear terminal
+        e = "exit";
+        grep = "rg --color=auto";
+        ssn = "sudo shutdown now";
+        srn = "sudo reboot now";
 
         # Git Aliases
-        alias gac = git add . and git commit -m
-        alias gs = git status
-        alias gpush = git push origin
-        alias lg = lazygit
+        gac = "git add . and git commit -m";
+        gs = "git status";
+        gpush = "git push origin";
+        lg = "lazygit";
 
         # Downloads Aliases
-        alias yd = yt-dlp -f "bestvideo+bestaudio" --embed-chapters --external-downloader aria2c --concurrent-fragments 8 --throttled-rate 100K
-        alias td = yt-dlp --external-downloader aria2c -o "%(title)s."
-        alias download = aria2c --split=16 --max-connection-per-server=16 --timeout=600 --max-download-limit=10M --file-allocation=none
+        #yd = 'yt-dlp -f "bestvideo+bestaudio" --embed-chapters --external-downloader aria2c --concurrent-fragments 8 --throttled-rate 100K';
+        #td = 'yt-dlp --external-downloader aria2c -o "%(title)s."';
+        download = "aria2c --split=16 --max-connection-per-server=16 --timeout=600 --max-download-limit=10M --file-allocation=none";
 
         # VPN Aliases
-        alias vu = sudo tailscale up --exit-node=raspberrypi --accept-routes
-        alias vd = sudo tailscale down
-        def warp [] {
-            sudo systemctl "$1" warp-svc
-        }
+        vu = "sudo tailscale up --exit-node=raspberrypi --accept-routes";
+        vd = "sudo tailscale down";
 
         # Other Aliases
-        alias rebuild = sh /etc/nixos/rebuild.sh
-        alias rebuild-log = tail -f /etc/nixos/nixos-switch.log
-        alias ff = fastfetch
-        alias files-space = sudo ncdu --exclude /.snapshots /
-        alias ld = lazydocker
-        alias docker-clean = docker container prune -f and docker image prune -f and docker network prune -f and docker volume prune -f
-        alias crdown = mpv --yt-dlp-raw-options=cookies-from-browser=brave
-        alias cr = cargo run
-        alias battery = upower -i /org/freedesktop/UPower/devices/battery_BAT1
-        alias y = yazi
-        def lsfind [] {
-            ll "$1" | grep "$2"
-        }
-
-        # X11 Clipboard Aliases `xsel`
-        # alias pbcopy='xsel --input --clipboard'
-        # alias pbpaste='xsel --output --clipboard'
+        rebuild = "sh /etc/nixos/rebuild.sh";
+        rebuild-log = "tail -f /etc/nixos/nixos-switch.log";
+        ff = "fastfetch";
+        files-space = "sudo ncdu --exclude /.snapshots /";
+        ld = "lazydocker";
+        docker-clean = "docker container prune -f and docker image prune -f and docker network prune -f and docker volume prune -f";
+        crdown = "mpv --yt-dlp-raw-options=cookies-from-browser=brave";
+        cr = "cargo run";
+        battery = "upower -i /org/freedesktop/UPower/devices/battery_BAT1";
+        y = "yazi";
 
         # Wayland Clipboard Aliases `wl-clipboard`
-        alias pbcopy = wl-copy
-        alias pbpaste = wl-paste
-
-        # Shell Intgrations
-        ## eval "$(fzf --zsh)"
-
-        # Starship
-        use ~/.cache/starship/init.nu
-
-        # NPM global packages
-        $env.PATH = ($env.PATH | append ~/.npm-global/bin)
-
-        # Command Run
-        date
-        microfetch
-
-
-      '';
+        copy = "wl-copy";
+        paste = "wl-paste";
+      };
     };
     fish.enable = true;
     carapace = {
