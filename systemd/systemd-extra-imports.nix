@@ -4,5 +4,7 @@ in {
     ./units/mute-on-boot.nix
     ./units/rclone-mount.nix
     ./units/flatpak-update.nix
+    ./units/warp-cli.nix
+    ./units/localsend.nix
   ];
 }

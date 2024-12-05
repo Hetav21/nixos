@@ -589,6 +589,8 @@ in {
   systemd.extra = {
     rclone.enable = true;
     muteMicrophone.enable = true;
+    warp-cli.enable = true;
+    ##    localsend.enable = true;
   };
 
   services.blueman.enable = true;
