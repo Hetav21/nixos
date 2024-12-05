@@ -135,9 +135,9 @@ in {
       shellAliases = {
         # Core Utils Aliases
         l = "eza -lh  --icons=auto";
-        ls = "eza -1   --icons=auto"; # short list
+        #ls = "eza -1   --icons=auto"; # short list
         ll = "eza -lha --icons=auto --sort=name --group-directories-first"; # long list all
-        #	ld = "eza -lhD --icons=auto"; # long list dirs
+        ## ld = "eza -lhD --icons=auto"; # long list dirs
         tree = "tree -a -I .git";
         cat = "bat";
         c = "clear"; # clear terminal
