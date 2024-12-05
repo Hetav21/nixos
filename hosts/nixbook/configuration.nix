@@ -64,8 +64,6 @@ in {
     timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
     firewall = {
       ##      enable = false; ## Disable firewall
-      allowedTCPPorts = [53317];
-      allowedUDPPorts = [53317];
       allowedTCPPortRanges = [
         {
           from = 8060;
@@ -159,6 +157,10 @@ in {
       libraries = with pkgs; [
         # Add any missing dynamic libraries for unpackaged programs here
       ];
+    };
+    localsend = {
+      enable = true;
+      openFirewall = true;
     };
     firefox.enable = false;
     dconf.enable = true;
@@ -469,7 +471,10 @@ in {
         HandlePowerKey=suspend
       '';
     };
-    cloudflare-warp.enable = true;
+    cloudflare-warp = {
+      enable = true;
+      openFirewall = true;
+    };
     supergfxd.enable = true;
     asusd = {
       enable = true;
