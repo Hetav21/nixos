@@ -135,9 +135,8 @@ in {
       shellAliases = {
         # Core Utils Aliases
         l = "eza -lh  --icons=auto";
-        #ls = "eza -1   --icons=auto"; # short list
+        ## ls = "eza -1   --icons=auto"; # short list
         ll = "eza -lha --icons=auto --sort=name --group-directories-first"; # long list all
-        ## ld = "eza -lhD --icons=auto"; # long list dirs
         tree = "tree -a -I .git";
         cat = "bat";
         c = "clear"; # clear terminal
@@ -168,8 +167,8 @@ in {
         rebuild-log = "tail -f /etc/nixos/nixos-switch.log";
         ff = "fastfetch";
         files-space = "sudo ncdu --exclude /.snapshots /";
-        ld = "lazydocker";
         docker-clean = "docker container prune -f and docker image prune -f and docker network prune -f and docker volume prune -f";
+        ld = "lazydocker";
         crdown = "mpv --yt-dlp-raw-options=cookies-from-browser=brave";
         cr = "cargo run";
         battery = "upower -i /org/freedesktop/UPower/devices/battery_BAT1";
@@ -300,7 +299,6 @@ in {
         "--group-directories-first"
         "--header"
       ];
-      enableNushellIntegration = true;
     };
     atuin = {
       enable = true;
