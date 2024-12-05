@@ -1,0 +1,7 @@
+[init]
+	defaultBranch = main
+[user]
+	email = shahhetav2106@gmail.com
+	name = hetav21
+[pull]
+	rebase = true

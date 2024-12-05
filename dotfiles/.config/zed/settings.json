@@ -1,0 +1,18 @@
+{
+  "base_keymap": "VSCode",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "buffer_font_family": "JetBrainsMono-Regular",
+  "ui_font_family": "JetBrainsMono-Regular",
+  "auto_update": false,
+  "cursor_blink": false,
+  "git_status": "true",
+  "ensure_final_newline_on_save": false,
+  "path": "/home/hetav/CODE",
+  "vim_mode": false,
+  "ui_font_size": 18,
+  "buffer_font_size": 15,
+  "theme": "Colorizer"
+}
