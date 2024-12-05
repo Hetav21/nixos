@@ -30,7 +30,6 @@ in {
       ".zshrc".source = ../../dotfiles/.zshrc;
       ".zshenv".source = ../../dotfiles/.zshenv;
       ".xinitrc".source = ../../dotfiles/.xinitrc;
-      ## ".gitconfig".source = ../../dotfiles/.gitconfig;
       ".ideavimrc".source = ../../dotfiles/.ideavimrc;
       ".nirc".source = ../../dotfiles/.nirc;
       ".local/bin/wallpaper".source = ../../config/assets/${wallpaper};
@@ -133,6 +132,53 @@ in {
     home-manager.enable = true;
     nushell = {
       enable = true;
+      shellAliases = {
+        # Core Utils Aliases
+        l = "eza -lh  --icons=auto";
+        ls = "eza -1   --icons=auto"; # short list
+        ll = "eza -lha --icons=auto --sort=name --group-directories-first"; # long list all
+        #	ld = "eza -lhD --icons=auto"; # long list dirs
+        tree = "tree -a -I .git";
+        cat = "bat";
+        c = "clear"; # clear terminal
+        e = "exit";
+        grep = "rg --color=auto";
+        ssn = "sudo shutdown now";
+        srn = "sudo reboot now";
+
+        # Git Aliases
+        gac = "git add . and git commit -m";
+        gs = "git status";
+        gpush = "git push origin";
+        lg = "lazygit";
+        git-log = ''git log --pretty=%h»¦«%aN»¦«%s»¦«%aD | lines | split column "»¦«" sha1 committer desc merged_at | first 10'';
+        git-histogram = ''git log --pretty=%h»¦«%aN»¦«%s»¦«%aD | lines | split column "»¦«" sha1 committer desc merged_at | histogram committer merger | sort-by merger | reverse'';
+
+        # Downloads Aliases
+        yd = ''yt-dlp -f "bestvideo+bestaudio" --embed-chapters --external-downloader aria2c --concurrent-fragments 8 --throttled-rate 100K'';
+        td = ''yt-dlp --external-downloader aria2c -o "%(title)s."'';
+        download = "aria2c --split=16 --max-connection-per-server=16 --timeout=600 --max-download-limit=10M --file-allocation=none";
+
+        # VPN Aliases
+        vu = "sudo tailscale up --exit-node=raspberrypi --accept-routes";
+        vd = "sudo tailscale down";
+
+        # Other Aliases
+        rebuild = "sh /etc/nixos/rebuild.sh";
+        rebuild-log = "tail -f /etc/nixos/nixos-switch.log";
+        ff = "fastfetch";
+        files-space = "sudo ncdu --exclude /.snapshots /";
+        ld = "lazydocker";
+        docker-clean = "docker container prune -f and docker image prune -f and docker network prune -f and docker volume prune -f";
+        crdown = "mpv --yt-dlp-raw-options=cookies-from-browser=brave";
+        cr = "cargo run";
+        battery = "upower -i /org/freedesktop/UPower/devices/battery_BAT1";
+        y = "yazi";
+
+        # Wayland Clipboard Aliases `wl-clipboard`
+        copy = "wl-copy";
+        paste = "wl-paste";
+      };
       extraConfig = ''
                                      let carapace_completer = {|spans|
                                      carapace $spans.0 nushell $spans | from json
@@ -231,51 +277,6 @@ in {
                               	date
                               	microfetch
       '';
-      shellAliases = {
-        # Core Utils Aliases
-        l = "eza -lh  --icons=auto";
-        ls = "eza -1   --icons=auto"; # short list
-        ll = "eza -lha --icons=auto --sort=name --group-directories-first"; # long list all
-        #	ld = "eza -lhD --icons=auto"; # long list dirs
-        tree = "tree -a -I .git";
-        cat = "bat";
-        c = "clear"; # clear terminal
-        e = "exit";
-        grep = "rg --color=auto";
-        ssn = "sudo shutdown now";
-        srn = "sudo reboot now";
-
-        # Git Aliases
-        gac = "git add . and git commit -m";
-        gs = "git status";
-        gpush = "git push origin";
-        lg = "lazygit";
-
-        # Downloads Aliases
-        #yd = 'yt-dlp -f "bestvideo+bestaudio" --embed-chapters --external-downloader aria2c --concurrent-fragments 8 --throttled-rate 100K';
-        #td = 'yt-dlp --external-downloader aria2c -o "%(title)s."';
-        download = "aria2c --split=16 --max-connection-per-server=16 --timeout=600 --max-download-limit=10M --file-allocation=none";
-
-        # VPN Aliases
-        vu = "sudo tailscale up --exit-node=raspberrypi --accept-routes";
-        vd = "sudo tailscale down";
-
-        # Other Aliases
-        rebuild = "sh /etc/nixos/rebuild.sh";
-        rebuild-log = "tail -f /etc/nixos/nixos-switch.log";
-        ff = "fastfetch";
-        files-space = "sudo ncdu --exclude /.snapshots /";
-        ld = "lazydocker";
-        docker-clean = "docker container prune -f and docker image prune -f and docker network prune -f and docker volume prune -f";
-        crdown = "mpv --yt-dlp-raw-options=cookies-from-browser=brave";
-        cr = "cargo run";
-        battery = "upower -i /org/freedesktop/UPower/devices/battery_BAT1";
-        y = "yazi";
-
-        # Wayland Clipboard Aliases `wl-clipboard`
-        copy = "wl-copy";
-        paste = "wl-paste";
-      };
     };
     fish.enable = true;
     carapace = {
