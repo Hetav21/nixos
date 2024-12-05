@@ -130,50 +130,50 @@ in {
   };
 
   programs = {
-   home-manager.enable = true;
-   nushell = {
+    home-manager.enable = true;
+    nushell = {
       enable = true;
       configFile.source = ../../dotfiles/.config/nushell/config.nu;
-   };
-   carapace = { 
-     enable = true;
-     enableNushellIntegration = true;
-   };
-   starship = { 
-     enable = true; 
-     enableNushellIntegration = true;
-   };
-   zoxide = { 
-     enable = true;
-     enableNushellIntegration = true; 
-   };
-   eza = {
-     enable = true;
-     git = true;
-     icons = "auto";
-     colors = "auto";
-     extraOptions = [
-	  "--group-directories-first"
-	  "--header"
-     ];
-     enableNushellIntegration = true;
-   };
-   atuin = {
-     enable = true;
-     enableNushellIntegration = true;
-     flags = [
-  "--disable-up-arrow"
-];
-   };
-   nix-your-shell = {
-     enable = true;
-     enableNushellIntegration = true;
-   };
-  direnv = {
-     enable = true;
-     enableNushellIntegration = true;
-     nix-direnv.enable = true;
-     silent = true;
-   };
-};
+    };
+    carapace = {
+      enable = true;
+      enableNushellIntegration = true;
+    };
+    starship = {
+      enable = true;
+      enableNushellIntegration = true;
+    };
+    zoxide = {
+      enable = true;
+      enableNushellIntegration = true;
+    };
+    eza = {
+      enable = true;
+      git = true;
+      icons = "auto";
+      colors = "auto";
+      extraOptions = [
+        "--group-directories-first"
+        "--header"
+      ];
+      enableNushellIntegration = true;
+    };
+    atuin = {
+      enable = true;
+      enableNushellIntegration = true;
+      flags = [
+        "--disable-up-arrow"
+      ];
+    };
+    nix-your-shell = {
+      enable = true;
+      enableNushellIntegration = true;
+    };
+    direnv = {
+      enable = true;
+      enableNushellIntegration = true;
+      nix-direnv.enable = true;
+      silent = true;
+    };
+  };
 }
