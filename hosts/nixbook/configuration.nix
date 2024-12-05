@@ -479,10 +479,10 @@ in {
       enable = true;
       useRoutingFeatures = "client";
     };
-    #    ollama = {
-    #      enable = true;
-    #      acceleration = "cuda";
-    #    };
+    ollama = {
+      enable = true;
+      acceleration = "cuda";
+    };
     cron = {
       enable = true;
     };
