@@ -64,6 +64,8 @@ in {
     timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
     firewall = {
       ##      enable = false; ## Disable firewall
+      allowedTCPPorts = [53317];
+      allowedUDPPorts = [53317];
       allowedTCPPortRanges = [
         {
           from = 8060;
