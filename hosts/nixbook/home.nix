@@ -56,7 +56,7 @@ in {
 
     sessionVariables = {
       EDITOR = "vim";
-      VISUAL = "zeditor";
+      VISUAL = "vim";
       TERMINAL = "alacritty";
       BROWSER = "firefox";
       XDG_CONFIG_HOME = "$HOME/.config";
@@ -164,6 +164,7 @@ in {
         vd = "sudo tailscale down";
 
         # Other Aliases
+        nano = "vim";
         rebuild = "sh /etc/nixos/rebuild.sh";
         rebuild-log = "tail -f /etc/nixos/nixos-switch.log";
         ff = "fastfetch";
