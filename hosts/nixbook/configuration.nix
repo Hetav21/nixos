@@ -591,6 +591,7 @@ in {
     rclone.enable = true;
     muteMicrophone.enable = true;
     warp-cli.enable = true;
+    mega-sync.enable = true;
   };
 
   services.blueman.enable = true;
