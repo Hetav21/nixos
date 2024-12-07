@@ -314,6 +314,7 @@ in {
     qbittorrent
     tailscale
     rclone
+    megasync
 
     # Audio and video
     pulseaudio
