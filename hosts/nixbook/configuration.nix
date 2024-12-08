@@ -212,6 +212,7 @@ in {
       onCalendar = "daily";
     };
     packages = [
+      "org.gnome.Loupe"
       "com.github.KRTirtho.Spotube"
       "io.github.zen_browser.zen"
       "com.microsoft.Edge"
@@ -315,7 +316,6 @@ in {
     tailscale
     rclone
     megasync
-    gnome-software
 
     # Audio and video
     pulseaudio
