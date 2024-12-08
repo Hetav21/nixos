@@ -355,7 +355,7 @@ in {
     brave
 
     # Gaming and entertainment
-    stremio
+    ##    stremio
 
     # System utilities
     libgcc
