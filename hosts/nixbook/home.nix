@@ -165,6 +165,7 @@ in {
 
         # Other Aliases
         nano = "vim";
+	edit = "vim";
         rebuild = "sh /etc/nixos/rebuild.sh";
         rebuild-log = "tail -f /etc/nixos/nixos-switch.log";
         ff = "fastfetch";

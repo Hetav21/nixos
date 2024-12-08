@@ -308,13 +308,14 @@ in {
     auto-cpufreq
 
     # Network and internet tools
-    ##    onedrive
+    onedrive
     cloudflare-warp
     aria2
     qbittorrent
     tailscale
     rclone
     megasync
+    gnome-software
 
     # Audio and video
     pulseaudio
@@ -325,7 +326,7 @@ in {
     deadbeef-with-plugins
 
     # Image and graphics
-    ##    gimp
+    gimp
     loupe
     imagemagick
     hyprpicker
@@ -335,15 +336,15 @@ in {
     imv
 
     # Productivity and office
-    ##    spacedrive
-    ##    hugo
+    spacedrive
+    hugo
     obsidian
     onlyoffice-bin
     hplip
 
     # Communication and social
-    ##    telegram-desktop
-    ##    element-desktop
+    telegram-desktop
+    element-desktop
     zoom-us
     discord
     vesktop
@@ -353,7 +354,7 @@ in {
     brave
 
     # Gaming and entertainment
-    ##    stremio
+    stremio
 
     # System utilities
     libgcc
@@ -416,7 +417,7 @@ in {
 
     # Education
     ## ciscoPacketTracer8
-    ## wireshark
+    wireshark
     ventoy
 
     # Music and streaming
