@@ -368,6 +368,7 @@ in {
     ripgrep
     lshw
     bat
+    mlocate
     pkg-config
     brightnessctl
     virt-viewer
