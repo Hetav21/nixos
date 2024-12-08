@@ -545,19 +545,14 @@ in {
     powertop.enable = true;
   };
 
+  systemd.targets = {
+    sleep.enable = true;
+    suspend.enable = false;
+    hibernate.enable = false;
+    hybrid-sleep.enable = false;
+  };
+
   systemd.services = {
-    #   onedrive = {
-    #      description = "Onedrive Sync Service";
-    #      after = [ "network-online.target" ];
-    #      wantedBy = [ "multi-user.target" ];
-    #      serviceConfig = {
-    #        Type = "simple";
-    #        User = username;
-    #        ExecStart = "${pkgs.onedrive}/bin/onedrive --monitor";
-    #        Restart = "always";
-    #        RestartSec = 10;
-    #      };
-    #    };
     ###  To disable a systemd service:
     ##   <service-name>.wantedBy = lib.mkForce [ ];
   };

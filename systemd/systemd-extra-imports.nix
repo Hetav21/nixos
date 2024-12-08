@@ -7,5 +7,6 @@ in {
     ./units/warp-cli.nix
     ./units/localsend.nix
     ./units/mega-sync.nix
+    ./units/onedrive.nix
   ];
 }
