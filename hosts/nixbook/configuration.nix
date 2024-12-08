@@ -545,16 +545,30 @@ in {
     powertop.enable = true;
   };
 
-  systemd.targets = {
-    sleep.enable = true;
-    suspend.enable = false;
-    hibernate.enable = false;
-    hybrid-sleep.enable = false;
-  };
+  systemd = {
+    targets = {
+      sleep = {
+        enable = true;
+        unitConfig.DefaultDependencies = "yes";
+      };
+      suspend = {
+        enable = false;
+        unitConfig.DefaultDependencies = "no";
+      };
+      hibernate = {
+        enable = false;
+        unitConfig.DefaultDependencies = "no";
+      };
+      "hybrid-sleep" = {
+        enable = false;
+        unitConfig.DefaultDependencies = "no";
+      };
+    };
 
-  systemd.services = {
-    ###  To disable a systemd service:
-    ##   <service-name>.wantedBy = lib.mkForce [ ];
+    services = {
+      ###  To disable a systemd service:
+      ##   <service-name>.wantedBy = lib.mkForce [ ];
+    };
   };
 
   hardware = {
