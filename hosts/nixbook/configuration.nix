@@ -424,6 +424,7 @@ in {
     # Music and streaming
     youtube-music
     spotify
+    spicetify-cli
 
     # Miscellaneous
     greetd.greetd
