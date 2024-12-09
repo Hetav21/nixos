@@ -145,6 +145,7 @@ in {
         grep = "rg --color=auto";
         ssn = "sudo shutdown now";
         srn = "sudo reboot now";
+        open = "xdg-open";
 
         # Git Aliases
         gac = "git add . and git commit -m";
