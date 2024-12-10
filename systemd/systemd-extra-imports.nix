@@ -8,5 +8,6 @@ in {
     ./units/localsend.nix
     ./units/mega-sync.nix
     ./units/onedrive.nix
+    ./units/network-online-user.nix
   ];
 }

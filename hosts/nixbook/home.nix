@@ -165,7 +165,6 @@ in {
         vd = "sudo tailscale down";
 
         # Other Aliases
-        nano = "vim";
         edit = "vim";
         rebuild-live = "sh /etc/nixos/rebuild-live.sh";
         rebuild-boot = "sh /etc/nixos/rebuild-boot.sh";
