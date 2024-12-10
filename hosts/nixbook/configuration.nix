@@ -11,7 +11,7 @@
   homeDirectory = "/home/${username}";
   hostName = "nixbook";
   timeZone = "Asia/Kolkata";
-  wallpaper = "mountain-snow.jpeg";
+  wallpaper = "artistic-boy-relaxing.jpg";
 in {
   nixpkgs.config.allowUnfree = true;
   ##  nixpkgs.config.allowUnsupportedSystem = true;
@@ -23,6 +23,8 @@ in {
     ../../systemd/systemd-extra-imports.nix
     inputs.home-manager.nixosModules.default
   ];
+
+  ## nixpkgs.config.allowBroken = true;
 
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;

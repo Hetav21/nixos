@@ -6,7 +6,7 @@
   userName = "hetav";
   homeDirectory = "/home/${userName}";
   stateVersion = "24.11";
-  wallpaper = "mountain-snow.jpeg";
+  wallpaper = "artistic-boy-relaxing.jpg";
 in {
   home = {
     username = userName;
@@ -167,8 +167,9 @@ in {
         # Other Aliases
         nano = "vim";
         edit = "vim";
-        rebuild = "sh /etc/nixos/rebuild.sh";
-        rebuild-log = "tail -f /etc/nixos/nixos-switch.log";
+        rebuild-live = "sh /etc/nixos/rebuild-live.sh";
+        rebuild-boot = "sh /etc/nixos/rebuild-boot.sh";
+        log-rebuild = "tail -f /etc/nixos/nixos-switch.log";
         ff = "fastfetch";
         btop = "btop --utf-force";
         files-space = "sudo ncdu --exclude /.snapshots /";
