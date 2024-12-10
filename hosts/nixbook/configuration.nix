@@ -11,6 +11,7 @@
   homeDirectory = "/home/${username}";
   hostName = "nixbook";
   timeZone = "Asia/Kolkata";
+  wallpaper = "mountain-snow.jpeg";
 in {
   nixpkgs.config.allowUnfree = true;
   ##  nixpkgs.config.allowUnsupportedSystem = true;
@@ -429,7 +430,6 @@ in {
     spicetify-cli
 
     # Miscellaneous
-    greetd.greetd
   ];
 
   fonts.packages = with pkgs; [
@@ -463,12 +463,22 @@ in {
         variant = "";
       };
     };
-    greetd = {
-      enable = true;
-      settings = {
-        default_session = {
-          command = "${pkgs.hyprland}/bin/Hyprland";
-          user = "${username}";
+
+    displayManager.sddm = {
+      enable = true; # Enable SDDM.
+      wayland.enable = true;
+      sugarCandyNix = {
+        enable = true; # This set SDDM's theme to "sddm-sugar-candy-nix".
+        settings = {
+          # Set your configuration options here.
+          # Here is a simple example:
+          Background = lib.cleanSource ../../config/assets/${wallpaper};
+          ScreenWidth = 1920;
+          ScreenHeight = 1080;
+          FormPosition = "left";
+          HaveFormBackground = true;
+          PartialBlur = true;
+          # ...
         };
       };
     };

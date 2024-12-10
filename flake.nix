@@ -10,6 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    sddm-sugar-candy-nix.url = "gitlab:Zhaith-Izaliel/sddm-sugar-candy-nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.5.0"; # Pinning ref because main 'default' branch is unstable
   };
 
@@ -19,6 +20,7 @@
     nixpkgs,
     chaotic,
     nix-flatpak,
+    sddm-sugar-candy-nix,
     ...
   } @ inputs: {
     # Define multiple NixOS configurations
@@ -29,6 +31,14 @@
         modules = [
           ./hosts/nixbook/configuration.nix # Path to your host specific config
           chaotic.nixosModules.default
+          sddm-sugar-candy-nix.nixosModules.default
+          {
+            nixpkgs = {
+              overlays = [
+                sddm-sugar-candy-nix.overlays.default
+              ];
+            };
+          }
           nix-flatpak.nixosModules.nix-flatpak
           inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.default
