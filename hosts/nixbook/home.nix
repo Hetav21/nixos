@@ -45,7 +45,7 @@ in {
       ".config/waybar".source = ../../dotfiles/.config/waybar;
       ".config/yazi".source = ../../dotfiles/.config/yazi;
       ".config/wezterm".source = ../../dotfiles/.config/wezterm;
-      ## ".config/zed/settings.json".source = ../../dotfiles/.config/zed/settings.json;
+      ".config/zed/settings.json".source = ../../dotfiles/.config/zed/settings.json;
       ## ".config/zed/keymap.json".source = ../../dotfiles/.config/zed/keymap.json;
 
       # Individual config files
