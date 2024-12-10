@@ -184,103 +184,102 @@ in {
         paste = "wl-paste";
       };
       extraConfig = ''
-                                         let carapace_completer = {|spans|
-                                         carapace $spans.0 nushell $spans | from json
-                                         }
-                                         $env.config = {
-                                          show_banner: false,
-                                          completions: {
-                                          case_sensitive: false # case-sensitive completions
-                                          quick: true    # set to false to prevent auto-selecting completions
-                                          partial: true    # set to false to prevent partial filling of the prompt
-                                          algorithm: "prefix"    # prefix or fuzzy
-                                          external: {
-                                          # set to false to prevent nushell looking into $env.PATH to find more suggestions
-                                              enable: true
-                                          # set to lower can improve completion performance at the cost of omitting some options
-                                              max_results: 100
-                                              completer: $carapace_completer # check 'carapace_completer'
-                                            }
-                                          }
-                                         }
-                                         $env.PATH = ($env.PATH |
-                                         split row (char esep) |
-                                         prepend /home/myuser/.apps |
-                                         append /usr/bin/env
-                                         )
+                                     let carapace_completer = {|spans|
+                                     carapace $spans.0 nushell $spans | from json
+                                     }
+                                     $env.config = {
+                                      show_banner: false,
+                                      completions: {
+                                      case_sensitive: false # case-sensitive completions
+                                      quick: true    # set to false to prevent auto-selecting completions
+                                      partial: true    # set to false to prevent partial filling of the prompt
+                                      algorithm: "prefix"    # prefix or fuzzy
+                                      external: {
+                                      # set to false to prevent nushell looking into $env.PATH to find more suggestions
+                                          enable: true
+                                      # set to lower can improve completion performance at the cost of omitting some options
+                                          max_results: 100
+                                          completer: $carapace_completer # check 'carapace_completer'
+                                        }
+                                      }
+                                     }
+                                     $env.PATH = ($env.PATH |
+                                     split row (char esep) |
+                                     prepend /home/myuser/.apps |
+                                     append /usr/bin/env
+                                     )
 
-            let fish_completer = {|spans|
-                fish --command $'complete "--do-complete=($spans | str join " ")"'
-                | from tsv --flexible --noheaders --no-infer
-                | rename value description
-            }
+        let fish_completer = {|spans|
+            fish --command $'complete "--do-complete=($spans | str join " ")"'
+            | from tsv --flexible --noheaders --no-infer
+            | rename value description
+        }
 
-                    let carapace_completer = {|spans: list<string>|
-                        carapace $spans.0 nushell ...$spans
-                        | from json
-                        | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
+                let carapace_completer = {|spans: list<string>|
+                    carapace $spans.0 nushell ...$spans
+                    | from json
+                    | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
+                }
+
+                let zoxide_completer = {|spans|
+                    $spans | skip 1 | zoxide query -l ...$in | lines | where {|x| $x != $env.PWD}
+                }
+
+                # This completer will use carapace by default
+                let external_completer = {|spans|
+                    let expanded_alias = scope aliases
+                    | where name == $spans.0
+                    | get -i 0.expansion
+
+                    let spans = if $expanded_alias != null {
+                        $spans
+                        | skip 1
+                        | prepend ($expanded_alias | split row ' ' | take 1)
+                    } else {
+                        $spans
                     }
 
-                    let zoxide_completer = {|spans|
-                        $spans | skip 1 | zoxide query -l ...$in | lines | where {|x| $x != $env.PWD}
+                    match $spans.0 {
+                        # carapace completions are incorrect for nu
+                        nu => $fish_completer
+                        # fish completes commits and branch names in a nicer way
+                        git => $fish_completer
+                        # carapace doesn't have completions for asdf
+                        asdf => $fish_completer
+                        # use zoxide completions for zoxide commands
+                        __zoxide_z | __zoxide_zi => $zoxide_completer
+                        _ => $carapace_completer
+                    } | do $in $spans
+                }
+
+                $env.config = {
+                    # ...
+                    completions: {
+                        external: {
+                            enable: true
+                            completer: $external_completer
+                        }
                     }
+                    # ...
+                }
 
-                    # This completer will use carapace by default
-                    let external_completer = {|spans|
-                        let expanded_alias = scope aliases
-                        | where name == $spans.0
-                        | get -i 0.expansion
-
-                        let spans = if $expanded_alias != null {
-                            $spans
-                            | skip 1
-                            | prepend ($expanded_alias | split row ' ' | take 1)
-                        } else {
-                            $spans
+                        def lsfind [] {
+                          		   ll "$1" | grep "$2"
                         }
 
-                        match $spans.0 {
-                            # carapace completions are incorrect for nu
-                            nu => $fish_completer
-                            # fish completes commits and branch names in a nicer way
-                            git => $fish_completer
-                            # carapace doesn't have completions for asdf
-                            asdf => $fish_completer
-                            # use zoxide completions for zoxide commands
-                            __zoxide_z | __zoxide_zi => $zoxide_completer
-                            _ => $carapace_completer
-                        } | do $in $spans
-                    }
-
-                    $env.config = {
-                        # ...
-                        completions: {
-                            external: {
-                                enable: true
-                                completer: $external_completer
-                            }
+                        def warp [] {
+                        	   sudo systemctl "$1" warp-svc
                         }
-                        # ...
-                    }
 
-                            def lsfind [] {
-                              		   ll "$1" | grep "$2"
-                            }
+                               # Starship
+                             		use ~/.cache/starship/init.nu
 
-                            def warp [] {
-                            	   sudo systemctl "$1" warp-svc
-                            }
+                              	# NPM global packages
+                              	$env.PATH = ($env.PATH | append ~/.npm-global/bin)
 
-                                   # Starship
-                                 		use ~/.cache/starship/init.nu
-
-                                  	# NPM global packages
-                                  	$env.PATH = ($env.PATH | append ~/.npm-global/bin)
-
-                                  	# Command Run
-                                  	date
-                                  	microfetch
-        megasync
+                              	# Command Run
+                              	date
+                              	microfetch
       '';
     };
     fish.enable = true;
