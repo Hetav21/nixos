@@ -18,8 +18,8 @@ in {
         enable = true;
         description = "Starts warp cli on boot";
         wantedBy = ["multi-user.target"];
-        after = ["network-online.target"];
-        requires = ["network-online.target"];
+        #        after = ["network-online.target"];
+        #        requires = ["network-online.target"];
         serviceConfig = {
           Type = "simple";
           ExecStart = "${pkgs.cloudflare-warp}/bin/warp-cli connect";

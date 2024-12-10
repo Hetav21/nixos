@@ -13,13 +13,13 @@ in {
   };
 
   config = mkIf cfg.enable {
-    systemd.services = {
+    systemd.user.services = {
       mega-sync = {
         enable = true;
         description = "Starts mega sync on boot";
         wantedBy = ["multi-user.target"];
-        after = ["network-online.target"];
-        requires = ["network-online.target"];
+        #        after = ["network-online.target"];
+        #        requires = ["network-online.target"];
         serviceConfig = {
           Type = "simple";
           ExecStart = "${pkgs.megasync}/bin/megasync";

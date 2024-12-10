@@ -13,13 +13,13 @@ in {
   };
 
   config = mkIf cfg.enable {
-    systemd.services = {
+    systemd.user.services = {
       onedrive = {
         enable = true;
         description = "Onedrive Sync Service";
         wantedBy = ["multi-user.target"];
-        after = ["network-online.target"];
-        requires = ["network-online.target"];
+        #        after = ["network-online.target"];
+        #        requires = ["network-online.target"];
         serviceConfig = {
           Type = "simple";
           ExecStart = "${pkgs.onedrive}/bin/onedrive --monitor";

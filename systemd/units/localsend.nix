@@ -12,7 +12,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    systemd.services = {
+    systemd.user.services = {
       localsend = {
         enable = true;
         description = "Starts localsend app on startup";
