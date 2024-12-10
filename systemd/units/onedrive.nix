@@ -13,7 +13,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    systemd.user.services = {
+    systemd.services = {
       onedrive = {
         enable = true;
         description = "Onedrive Sync Service";

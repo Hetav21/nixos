@@ -13,7 +13,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    systemd.user.services = {
+    systemd.services = {
       mega-sync = {
         enable = true;
         description = "Starts mega sync on boot";

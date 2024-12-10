@@ -13,7 +13,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    systemd.user.services = {
+    systemd.services = {
       warp-cli = {
         enable = true;
         description = "Starts warp cli on boot";
