@@ -15,6 +15,7 @@
 in {
   nixpkgs.config.allowUnfree = true;
   ##  nixpkgs.config.allowUnsupportedSystem = true;
+  ## nixpkgs.config.allowBroken = true;
 
   imports = [
     ./hardware-configuration.nix
@@ -311,6 +312,7 @@ in {
     lm_sensors
     inxi
     auto-cpufreq
+    dex
 
     # Network and internet tools
     onedrive
