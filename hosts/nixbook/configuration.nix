@@ -24,8 +24,6 @@ in {
     inputs.home-manager.nixosModules.default
   ];
 
-  ## nixpkgs.config.allowBroken = true;
-
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
     kernelModules = ["v4l2loopback" "xe"];

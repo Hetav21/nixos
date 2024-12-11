@@ -2,7 +2,7 @@
 set -e
 pushd /etc/nixos/
 alejandra . &>/dev/null
-cp flake.lock flake.lock.bak
+## cp flake.lock flake.lock.bak
 git diff -U0 flake.lock
 echo "NixOS Rebuilding..."
 sudo nixos-rebuild boot &>nixos-switch.log || (
