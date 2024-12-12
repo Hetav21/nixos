@@ -312,7 +312,6 @@ in {
     lm_sensors
     inxi
     auto-cpufreq
-    dex
 
     # Network and internet tools
     onedrive
