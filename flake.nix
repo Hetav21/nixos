@@ -11,7 +11,7 @@
     };
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     sddm-sugar-candy-nix.url = "gitlab:Zhaith-Izaliel/sddm-sugar-candy-nix";
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.5.0"; # Pinning ref because main 'default' branch is unstable
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.5.1"; # Pinning ref because main 'default' branch is unstable
   };
 
   # Flake Outputs
