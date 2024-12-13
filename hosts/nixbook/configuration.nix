@@ -664,7 +664,10 @@ in {
     };
   };
 
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
 
   home-manager = {
     extraSpecialArgs = {inherit inputs;};
