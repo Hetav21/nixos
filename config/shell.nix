@@ -122,7 +122,7 @@
     };
     starship = {
       enable = true;
-      enableNushellIntegration = true;
+      ## enableNushellIntegration = true;
     };
     zoxide = {
       enable = true;
@@ -140,18 +140,18 @@
     };
     atuin = {
       enable = true;
-      enableNushellIntegration = true;
+      ## enableNushellIntegration = true;
       flags = [
         "--disable-up-arrow"
       ];
     };
     nix-your-shell = {
       enable = true;
-      enableNushellIntegration = true;
+      ## enableNushellIntegration = true;
     };
     direnv = {
       enable = true;
-      enableNushellIntegration = true;
+      ## enableNushellIntegration = true;
       nix-direnv.enable = true;
       silent = true;
     };
