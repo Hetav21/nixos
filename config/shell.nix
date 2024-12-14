@@ -124,7 +124,7 @@
                                                        use ~/.cache/starship/init.nu
 
                                                # NPM global packages
-                                               $env.PATH = ($env.PATH | append ~/.npm-global/bin)
+                                               $env.PATH = ($env.PATH | append "~/.npm-global/bin")
 
                                                # Command Run
                                                date
