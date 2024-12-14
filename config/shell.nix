@@ -143,7 +143,7 @@
     fish.enable = true;
     carapace = {
       enable = true;
-      ## enableNushellIntegration = true;
+      enableNushellIntegration = true;
     };
     starship = {
       enable = true;
@@ -176,7 +176,7 @@
     };
     direnv = {
       enable = true;
-      ## enableNushellIntegration = true;
+      enableNushellIntegration = true;
       nix-direnv.enable = true;
       silent = true;
     };
