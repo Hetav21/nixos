@@ -128,7 +128,7 @@
                     enable: true
                 # set to lower can improve completion performance at the cost of omitting some options
                     max_results: 100
-                    completer: $carapace_completer # check 'carapace_completer'
+                    completer: $external_completer # check 'carapace_completer'
                   }
         	}
                 }
