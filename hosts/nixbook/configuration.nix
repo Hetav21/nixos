@@ -228,6 +228,11 @@ in {
     ];
   };
 
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "adobe-reader"
+    ];
+
   environment.systemPackages = with pkgs; [
     # Text editors and IDEs
     ##    neovim
