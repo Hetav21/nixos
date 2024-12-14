@@ -69,7 +69,7 @@
                }
 
         let fish_completer = {|spans|
-         fish --command complete --do-complete=$"($spans | str join " ")"
+         fish --command complete --do-complete=($spans | str join " ")
          | from tsv --flexible --noheaders --no-infer
          | rename value description
         }
