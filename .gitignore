@@ -1,3 +1,5 @@
 README.md
 nixos-switch.log
 flake.lock.bak*
+*.bak
+*.swp
