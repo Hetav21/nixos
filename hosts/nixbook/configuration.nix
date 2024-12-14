@@ -570,8 +570,8 @@ in {
         unitConfig.DefaultDependencies = "yes";
       };
       suspend = {
-        enable = false;
-        unitConfig.DefaultDependencies = "no";
+        enable = true;
+        unitConfig.DefaultDependencies = "yes";
       };
       hibernate = {
         enable = false;
