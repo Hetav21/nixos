@@ -84,7 +84,7 @@
                    }
 
                           # Starship
-                          use ~/.cache/starship/init.nu
+                          ## use ~/.cache/starship/init.nu
 
                            # NPM global packages
                  $env.PATH = ($env.PATH |
@@ -126,7 +126,7 @@
     };
     zoxide = {
       enable = true;
-      enableNushellIntegration = true;
+      ## enableNushellIntegration = true;
     };
     eza = {
       enable = true;
