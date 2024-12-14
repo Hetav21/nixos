@@ -58,17 +58,17 @@
         paste = "wl-paste";
       };
       extraConfig = ''
-        	let fish_completer = {|spans|
+        let fish_completer = {|spans|
             fish --command $'complete "--do-complete=($spans | str join " ")"'
             | from tsv --flexible --noheaders --no-infer
             | rename value description
         }
 
-                let carapace_completer = {|spans: list<string>|
-                    carapace $spans.0 nushell ...$spans
+        let carapace_completer = {|spans: list<string>|
+             carapace $spans.0 nushell ...$spans
                     | from json
                     | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
-                }
+        }
 
         let zoxide_completer = {|spans|
             $spans | skip 1 | zoxide query -l ...$in | lines | where {|x| $x != $env.PWD}
@@ -97,7 +97,8 @@
                         asdf => $fish_completer
                         # use zoxide completions for zoxide commands
                         __zoxide_z | __zoxide_zi => $zoxide_completer
-                        _ => $carapace_completer
+                        ## _ => $carapace_completer
+                        _ => $fish_completer
                     } | do $in $spans
                 }
 
