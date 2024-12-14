@@ -59,22 +59,6 @@
       };
       extraConfig = ''
 
-
-         let fish_completer = {|spans|
-             fish --command $'complete "--do-complete=($spans | str join " ")"'
-             | from tsv --flexible --noheaders --no-infer
-             | rename value description
-         }
-
-         	let multiple_completers = {|spans|
-          	   match $spans.0 {
-                 	## ls => $ls_completer
-                 	## git => $git_completer
-                 	## _ => $default_completer
-                 	_ => $fish_completer
-             	} | do $in $spans
-         	}
-
                    def lsfind [] {
                                       ll "$1" | grep "$2"
                    }
@@ -84,7 +68,7 @@
                    }
 
                           # Starship
-                          ## use ~/.cache/starship/init.nu
+                          use ~/.cache/starship/init.nu
 
                            # NPM global packages
                  $env.PATH = ($env.PATH |
@@ -100,13 +84,6 @@
          quick: true    # set to false to prevent auto-selecting completions
          partial: true    # set to false to prevent partial filling of the prompt
          algorithm: "fuzzy"    # prefix or fuzzy
-         external: {
-         # set to false to prevent nushell looking into $env.PATH to find more suggestions
-             enable: true
-         # set to lower can improve completion performance at the cost of omitting some options
-             max_results: 100
-             completer: $fish_completer # check 'carapace_completer'
-           }
          }
         }
 
@@ -118,15 +95,15 @@
     fish.enable = true;
     carapace = {
       enable = true;
-      ##      enableNushellIntegration = true;
+      enableNushellIntegration = true;
     };
     starship = {
       enable = true;
-      ## enableNushellIntegration = true;
+      enableNushellIntegration = true;
     };
     zoxide = {
       enable = true;
-      ## enableNushellIntegration = true;
+      enableNushellIntegration = true;
     };
     eza = {
       enable = true;
@@ -140,14 +117,14 @@
     };
     atuin = {
       enable = true;
-      ## enableNushellIntegration = true;
+      enableNushellIntegration = true;
       flags = [
         "--disable-up-arrow"
       ];
     };
     nix-your-shell = {
       enable = true;
-      ## enableNushellIntegration = true;
+      enableNushellIntegration = true;
     };
     direnv = {
       enable = true;
