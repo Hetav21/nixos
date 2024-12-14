@@ -75,14 +75,6 @@
             	} | do $in $spans
         	}
 
-        	# if the current command is an alias, get it's expansion
-        let expanded_alias = (scope aliases | where name == $spans | get -i 0 | get -i expansion)
-
-        # overwrite
-        let spans = (if $expanded_alias != null  {
-            # put the first word of the expanded alias first in the span
-            $spans | skip 1 | prepend ($expanded_alias | split row " " | take 1)
-        } else { $spans })
                   def lsfind [] {
                                      ll "$1" | grep "$2"
                   }
