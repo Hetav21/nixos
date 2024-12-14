@@ -68,7 +68,7 @@
 
         	let multiple_completers = {|spans|
          	   match $spans.0 {
-                	ls => $ls_completer
+                	## ls => $ls_completer
                 	## git => $git_completer
                 	## _ => $default_completer
                 	_ => $fish_completer
