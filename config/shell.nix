@@ -58,48 +58,28 @@
         paste = "wl-paste";
       };
       extraConfig = ''
-          let carapace_completer = {|spans|
-        carapace $spans.0 nushell $spans | from json
-        }
-        $env.config = {
-         show_banner: false,
-         completions: {
-         case_sensitive: false # case-sensitive completions
-         quick: true    # set to false to prevent auto-selecting completions
-         partial: true    # set to false to prevent partial filling of the prompt
-         algorithm: "fuzzy"    # prefix or fuzzy
-         external: {
-         # set to false to prevent nushell looking into $env.PATH to find more suggestions
-             enable: true
-         # set to lower can improve completion performance at the cost of omitting some options
-             max_results: 100
-             completer: $carapace_completer # check 'carapace_completer'
-           }
-         }
-        }
 
+          def lsfind [] {
+                             ll "$1" | grep "$2"
+          }
 
-                            def lsfind [] {
-                                               ll "$1" | grep "$2"
-                            }
+          def warp [] {
+                     sudo systemctl "$1" warp-svc
+          }
 
-                            def warp [] {
-                                       sudo systemctl "$1" warp-svc
-                            }
+                 # Starship
+                 use ~/.cache/starship/init.nu
 
-                                   # Starship
-                                   use ~/.cache/starship/init.nu
+                  # NPM global packages
+        $env.PATH = ($env.PATH |
+        split row (char esep) |
+        prepend /home/hetav/.npm-global/bin |
+        append /home/hetav/.npm-global/bin
+        )
 
-                                    # NPM global packages
-                          $env.PATH = ($env.PATH |
-                          split row (char esep) |
-                          prepend /home/hetav/.npm-global/bin |
-                          append /home/hetav/.npm-global/bin
-                          )
-
-                                    # Command Run
-                                    date
-                                    microfetch
+                  # Command Run
+                  date
+                  microfetch
       '';
     };
     fish.enable = true;
