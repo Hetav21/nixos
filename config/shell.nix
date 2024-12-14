@@ -145,7 +145,7 @@
     fish.enable = true;
     carapace = {
       enable = true;
-      enableNushellIntegration = true;
+      ## enableNushellIntegration = true;
     };
     starship = {
       enable = true;
