@@ -1,5 +1,5 @@
 # Nushell Color Configuration
-def --env set_colors [] {
+export-env {
     $env.config.color = {
         # Autosuggestion color
         autosuggestion: '#26233a'
@@ -102,6 +102,3 @@ def --env set_colors [] {
         selected_background: 'reverse'
     }
 }
-
-# Call the function to set colors when the script is sourced
-set_colors
