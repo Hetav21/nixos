@@ -186,7 +186,7 @@ in {
     users.${username} = {
       isNormalUser = true;
       description = userDescription;
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = ["networkmanager" "mlocate" "wheel"];
       packages = with pkgs; [
         firefox
         thunderbird
