@@ -1,26 +1,26 @@
 # Nushell Configuration
 
 # Carapace completer
-let carapace_completer = {|spans: list<string>|
+const carapace_completer = {|spans: list<string>|
     carapace $spans.0 nushell ...$spans 
     | from json 
     | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
 }
 
 # Zoxide completer
-let zoxide_completer = {|spans|
+const zoxide_completer = {|spans|
     $spans | skip 1 | zoxide query -l ...$in | lines | where {|x| $x != $env.PWD}
 }
 
 # Fish completer
-let fish_completer = {|spans|
+const fish_completer = {|spans|
     fish --command complete "--do-complete=($spans)" 
     | from tsv --flexible --noheaders --no-infer 
     | rename value description
 }
 
 # External completer with smart routing
-let external_completer = {|spans|
+const external_completer = {|spans|
     let expanded_alias = scope aliases 
     | where name == $spans.0 
     | get -i 0.expansion
