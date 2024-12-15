@@ -15,8 +15,8 @@ in {
       description = userDescription;
       #      shell = pkgs.zsh;
       shell = pkgs.nushell;
-      extraGroups = ["wheel" "docker" "wireshark"];
+      extraGroups = ["wheel" "mlocate" "docker" "wireshark"];
     };
-    programs.zsh.enable = true;
+    ## programs.zsh.enable = true;
   };
 }
