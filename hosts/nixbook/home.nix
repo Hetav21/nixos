@@ -49,7 +49,6 @@ in {
       ## ".config/zed/keymap.json".source = ../../dotfiles/.config/zed/keymap.json;
 
       # Individual config files
-      ".config/nushell/completors.nu".source = ../../dotfiles/.config/nushell/completors.nu;
       ".config/kwalletrc".source = ../../dotfiles/.config/kwalletrc;
       ".config/starship.toml".source = ../../dotfiles/.config/starship.toml;
       ".config/mimeapps.list".source = ../../dotfiles/.config/mimeapps.list;
