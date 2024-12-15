@@ -102,3 +102,6 @@ def --env set_colors [] {
         selected_background: 'reverse'
     }
 }
+
+# Call the function to set colors when the script is sourced
+set_colors
