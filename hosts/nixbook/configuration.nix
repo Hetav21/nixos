@@ -225,6 +225,7 @@ in {
       "org.libreoffice.LibreOffice"
       "com.github.tchx84.Flatseal"
       "com.stremio.Stremio"
+      "com.calibre_ebook.calibre"
     ];
   };
 
