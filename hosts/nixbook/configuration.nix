@@ -375,7 +375,6 @@ in {
     ripgrep
     lshw
     bat
-    mlocate
     pkg-config
     brightnessctl
     virt-viewer
@@ -458,6 +457,11 @@ in {
   };
 
   services = {
+    locate = {
+      enable = true;
+      package = pkgs.mlocate;
+    };
+
     xserver = {
       enable = false;
       xkb = {
