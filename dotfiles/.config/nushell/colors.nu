@@ -1,59 +1,38 @@
-# Nushell Color Configuration
 export-env {
-    $env.config = ($env.config | default {} | merge {
-        color_config: {
-            # Primitive colors
-            string: 'yellow'
-            number: 'purple'
-            binary: 'purple'
-            bool: 'purple'
-            date: 'cyan'
-            range: 'purple'
-            float: 'purple'
-            filesize: 'cyan'
-            duration: 'purple'
-            special: 'yellow'
-
-            # Shape colors
-            shape_and: 'green'
-            shape_binary: 'green'
-            shape_block: 'cyan'
-            shape_bool: 'light_green'
-            shape_closure: 'green'
-            shape_custom: 'green'
-            shape_datetime: 'cyan'
-            shape_directory: 'cyan'
-            shape_external: 'cyan'
-            shape_externalarg: 'green'
-            shape_filepath: 'cyan'
-            shape_flag: 'cyan'
-            shape_float: 'purple'
-            shape_garbage: 'red'
-            shape_globpattern: 'cyan'
-            shape_int: 'purple'
-            shape_internalcall: 'cyan'
-            shape_keyword: 'magenta'
-            shape_list: 'cyan'
-            shape_literal: 'green'
-            shape_match_pattern: 'yellow'
-            shape_nothing: 'light_green'
-            shape_operator: 'yellow'
-            shape_or: 'green'
-            shape_pipe: 'green'
-            shape_range: 'purple'
-            shape_record: 'cyan'
-            shape_redirection: 'cyan'
-            shape_signature: 'green'
-            shape_string: 'green'
-            shape_string_interpolation: 'cyan'
-            shape_table: 'cyan'
-            shape_variable: 'purple'
-
-            # Separator colors
-            separator: 'green'
-
-            # Bordercolor
-            border_color: 'green'
-        }
-    })
+    $env.config.color_config = {
+        separator: "#26233a"
+        leading_trailing_space_bg: "#908caa"
+        header: "green"
+        date: "yellow"
+        filesize: "cyan"
+        row_index: "bright black"
+        bool: "red"
+        int: "green"
+        duration: "yellow"
+        range: "blue"
+        float: "blue"
+        string: "yellow"
+        nothing: "red"
+        binary: "yellow"
+        cellpath: "blue"
+        hints: dark_gray
+        
+        shape_garbage: { fg: "#26233a" bg: "red" }
+        shape_bool: "bright green"
+        shape_int: { fg: "green" attr: b }
+        shape_float: { fg: "blue" attr: b }
+        shape_range: { fg: "cyan" attr: b }
+        shape_internalcall: { fg: "bright black" attr: b }
+        shape_external: "cyan"
+        shape_externalarg: { fg: "green" attr: b }
+        shape_literal: "#908caa"
+        shape_operator: "blue"
+        shape_signature: { fg: "green" attr: b }
+        shape_string: "green"
+        shape_filepath: "#908caa"
+        shape_globpattern: { fg: "#908caa" attr: b }
+        shape_variable: "bright green"
+        shape_flag: { fg: "cyan" attr: b }
+        shape_custom: { attr: b }
+    }
 }
