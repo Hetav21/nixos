@@ -1,104 +1,59 @@
 # Nushell Color Configuration
 export-env {
-    $env.config.color = {
-        # Autosuggestion color
-        autosuggestion: '#26233a'
+    $env.config = ($env.config | default {} | merge {
+        color_config: {
+            # Primitive colors
+            string: 'yellow'
+            number: 'purple'
+            binary: 'purple'
+            bool: 'purple'
+            date: 'cyan'
+            range: 'purple'
+            float: 'purple'
+            filesize: 'cyan'
+            duration: 'purple'
+            special: 'yellow'
 
-        # Command color
-        command: 'green'
+            # Shape colors
+            shape_and: 'green'
+            shape_binary: 'green'
+            shape_block: 'cyan'
+            shape_bool: 'light_green'
+            shape_closure: 'green'
+            shape_custom: 'green'
+            shape_datetime: 'cyan'
+            shape_directory: 'cyan'
+            shape_external: 'cyan'
+            shape_externalarg: 'green'
+            shape_filepath: 'cyan'
+            shape_flag: 'cyan'
+            shape_float: 'purple'
+            shape_garbage: 'red'
+            shape_globpattern: 'cyan'
+            shape_int: 'purple'
+            shape_internalcall: 'cyan'
+            shape_keyword: 'magenta'
+            shape_list: 'cyan'
+            shape_literal: 'green'
+            shape_match_pattern: 'yellow'
+            shape_nothing: 'light_green'
+            shape_operator: 'yellow'
+            shape_or: 'green'
+            shape_pipe: 'green'
+            shape_range: 'purple'
+            shape_record: 'cyan'
+            shape_redirection: 'cyan'
+            shape_signature: 'green'
+            shape_string: 'green'
+            shape_string_interpolation: 'cyan'
+            shape_table: 'cyan'
+            shape_variable: 'purple'
 
-        # Comment color
-        comment: '#26233a'
+            # Separator colors
+            separator: 'green'
 
-        # Current working directory color
-        cwd: 'green'
-
-        # Root working directory color
-        cwd_root: 'red'
-
-        # End color (likely for command endings)
-        end: 'bright black'
-
-        # Error color
-        error: 'red'
-
-        # Escape sequence color
-        escape: 'yellow'
-
-        # Current history color
-        history_current: 'bold'
-
-        # Host color
-        host: 'default'
-
-        # Remote host color
-        host_remote: 'yellow'
-
-        # Match color (for selections/matches)
-        match: { bg: 'bright blue' }
-
-        # Normal text color
-        normal: 'default'
-
-        # Operator color
-        operator: 'blue'
-
-        # Parameter color
-        param: '#908caa'
-
-        # Quote color
-        quote: 'yellow'
-
-        # Redirection color
-        redirection: 'cyan'
-
-        # Search match color
-        search_match: { 
-            fg: 'bright yellow'
-            bg: '#26233a'
+            # Bordercolor
+            border_color: 'green'
         }
-
-        # Selection color
-        selection: {
-            fg: 'white'
-            bg: '#26233a'
-            attr: 'bold'
-        }
-
-        # Status color
-        status: 'red'
-
-        # User color
-        user: 'bright green'
-
-        # Valid path color
-        valid_path: 'underline'
-    }
-
-    # Pager colors
-    $env.config.color.pager = {
-        # Completion color
-        completion: 'default'
-
-        # Description color
-        description: {
-            fg: 'yellow'
-            attr: 'dim'
-        }
-
-        # Prefix color
-        prefix: {
-            fg: 'white'
-            attr: 'bold'
-        }
-
-        # Progress color
-        progress: {
-            fg: 'bright white'
-            bg: 'cyan'
-        }
-
-        # Selected background color
-        selected_background: 'reverse'
-    }
+    })
 }
