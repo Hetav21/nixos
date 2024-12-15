@@ -475,6 +475,7 @@ in {
       sddm = {
         enable = true; # Enable SDDM.
         wayland.enable = true;
+        autoNumlock = true;
         sugarCandyNix = {
           enable = true; # This set SDDM's theme to "sddm-sugar-candy-nix".
           settings = {
