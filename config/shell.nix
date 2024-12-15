@@ -39,6 +39,8 @@
         vd = "sudo tailscale down";
 
         # Other Aliases
+        updatedb = "sudo updatedb";
+        locate = "sudo locate";
         edit = "vim";
         rebuild-live = "sh /etc/nixos/rebuild-live.sh";
         rebuild-boot = "sh /etc/nixos/rebuild-boot.sh";
