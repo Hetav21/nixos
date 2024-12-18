@@ -172,6 +172,10 @@ in {
       enable = true;
       enableSSHSupport = true;
     };
+    rog-control-center = {
+      enable = true;
+      autoStart = true;
+    };
     thunar = {
       enable = true;
       plugins = with pkgs.xfce; [
