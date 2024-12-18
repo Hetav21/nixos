@@ -137,7 +137,6 @@
                          }
 
                                             # Command Run
-                                            date
                                             microfetch
       '';
     };
