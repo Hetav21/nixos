@@ -219,6 +219,7 @@ in {
       onCalendar = "daily";
     };
     packages = [
+      "engineer.atlas.Nyxt"
       "com.spotify.Client"
       "org.gnome.Loupe"
       "com.github.KRTirtho.Spotube"
