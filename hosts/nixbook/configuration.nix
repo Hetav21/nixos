@@ -161,6 +161,15 @@ in {
         # Add any missing dynamic libraries for unpackaged programs here
       ];
     };
+    hyprland = {
+      enable = true;
+      withUWSM = true;
+      xwayland.enable = true;
+    };
+    hyprlock = {
+      enable = true;
+      package = pkgs.hyprlock;
+    };
     localsend = {
       enable = true;
       openFirewall = true;
@@ -341,7 +350,6 @@ in {
     imagemagick
     hyprpicker
     swww
-    hyprlock
     waypaper
     imv
 
@@ -392,7 +400,6 @@ in {
 
     # Wayland specific
     hyprshot
-    hypridle
     grim
     slurp
     waybar
@@ -466,6 +473,10 @@ in {
       package = pkgs.mlocate;
     };
 
+    hypridle = {
+      enable = true;
+      package = pkgs.hypridle;
+    };
     xserver = {
       enable = false;
       xkb = {
@@ -475,7 +486,7 @@ in {
     };
 
     displayManager = {
-      defaultSession = "hyprland";
+      defaultSession = "hyprland-uwsm";
       sddm = {
         enable = true; # Enable SDDM.
         wayland.enable = true;
@@ -672,11 +683,6 @@ in {
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-  };
-
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
   };
 
   home-manager = {
