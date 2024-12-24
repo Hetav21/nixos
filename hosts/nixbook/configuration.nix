@@ -228,6 +228,7 @@ in {
       onCalendar = "daily";
     };
     packages = [
+      "com.todoist.Todoist"
       "com.spotify.Client"
       "org.gnome.Loupe"
       "com.github.KRTirtho.Spotube"
