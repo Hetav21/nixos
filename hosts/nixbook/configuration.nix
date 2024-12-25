@@ -487,6 +487,12 @@ in {
       };
     };
 
+    scx = {
+      enable = true;
+      scheduler = "scx_rusty";
+      package = pkgs.scx_git.full;
+    };
+
     displayManager = {
       defaultSession = "hyprland-uwsm";
       sddm = {
