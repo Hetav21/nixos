@@ -490,7 +490,7 @@ in {
     scx = {
       enable = true;
       scheduler = "scx_rusty";
-      package = pkgs.scx.full;
+      package = pkgs.scx_git.full;
     };
 
     displayManager = {
