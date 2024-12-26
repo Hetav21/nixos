@@ -274,11 +274,12 @@ in {
     gcc
 
     # Frappe Bench
-    ##    redis
-    ##    wkhtmltopdf
-    ##    nginx
-    ##    uv
-    ##    mariadb
+    redis
+    wkhtmltopdf
+    nginx
+    uv
+    mariadb
+    mongodb-compass
 
     # Version control and development tools
     git
