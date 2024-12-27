@@ -12,6 +12,7 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     sddm-sugar-candy-nix.url = "gitlab:Zhaith-Izaliel/sddm-sugar-candy-nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    ghostty.url = "github:ghostty-org/ghostty";
   };
 
   # Flake Outputs
@@ -21,6 +22,7 @@
     chaotic,
     nix-flatpak,
     sddm-sugar-candy-nix,
+    ghostty,
     ...
   } @ inputs: {
     # Define multiple NixOS configurations
@@ -40,6 +42,11 @@
             };
           }
           nix-flatpak.nixosModules.nix-flatpak
+          {
+            environment.systemPackages = [
+              ghostty.packages.x86_64-linux.default
+            ];
+          }
           inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.default
           ({pkgs, ...}: {
