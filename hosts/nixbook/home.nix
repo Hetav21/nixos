@@ -86,7 +86,7 @@ in {
   };
 
   imports = [
-    ## ../../config/ghostty.nix
+    ../../config/ghostty.nix
     ../../config/rofi/rofi.nix
     ../../config/wlogout.nix
     ../../config/shell.nix
