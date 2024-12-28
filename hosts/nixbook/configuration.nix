@@ -43,7 +43,7 @@ in {
         enable = true;
         device = "nodev";
         efiSupport = true;
-        useOSProber = true;
+        #  useOSProber = true;
       };
     };
     tmp = {
@@ -208,17 +208,17 @@ in {
     };
   };
 
-  system.autoUpgrade = {
-    enable = true;
-    flake = inputs.self.outPath;
-    flags = [
-      "--update-input"
-      "nixpkgs"
-      "-L"
-    ];
-    dates = "09:00";
-    randomizedDelaySec = "45min";
-  };
+  #  system.autoUpgrade = {
+  #    enable = true;
+  #    flake = inputs.self.outPath;
+  #    flags = [
+  #      "--update-input"
+  #      "nixpkgs"
+  #      "-L"
+  #    ];
+  #    dates = "09:00";
+  #    randomizedDelaySec = "45min";
+  #  };
 
   # Nix-Flatpak
   services.flatpak = {
@@ -251,48 +251,48 @@ in {
     ##    vscode
     vim
     zed-editor_git
-    jetbrains.idea-ultimate
+    ## jetbrains.idea-ultimate
 
     # Zen Browser from custom input
     ##    inputs.zen-browser.packages."${system}".default
 
     # Programming languages and tools
-    go
-    lua
+    ## go
+    ## lua
     python3
     python3Packages.pip
     uv
-    clang
-    zig
-    rustup
-    nodePackages_latest.pnpm
-    nodePackages_latest.yarn
-    nodePackages_latest.nodejs
-    bun
-    jdk
-    maven
-    gcc
+    ## clang
+    ## zig
+    ## rustup
+    ## nodePackages_latest.pnpm
+    ## nodePackages_latest.yarn
+    ## nodePackages_latest.nodejs
+    ## bun
+    ## jdk
+    ## maven
+    ## gcc
 
     # Frappe Bench
-    redis
-    wkhtmltopdf
-    nginx
-    uv
-    mariadb
+    ## redis
+    ## wkhtmltopdf
+    ## nginx
+    ## uv
+    ## mariadb
     mongodb-compass
 
     # Version control and development tools
     git
     gh
-    lazygit
-    lazydocker
-    bruno
+    ## lazygit
+    ## lazydocker
+    ## bruno
     gnumake
     coreutils
-    nixfmt-rfc-style
-    meson
-    ninja
-    home-manager
+    ## nixfmt-rfc-style
+    ## meson
+    ## ninja
+    ## home-manager
     distrobox
     devenv
 
@@ -334,7 +334,7 @@ in {
     onedrive
     cloudflare-warp
     aria2
-    qbittorrent
+    ## qbittorrent
     tailscale
     rclone
     megasync
@@ -361,7 +361,7 @@ in {
     hugo
     obsidian
     onlyoffice-bin
-    hplip
+    ## hplip
 
     # Communication and social
     telegram-desktop
@@ -415,7 +415,7 @@ in {
 
     # File systems
     ntfs3g
-    os-prober
+    ## os-prober
 
     # Downloaders
     yt-dlp
@@ -488,11 +488,11 @@ in {
       };
     };
 
-    scx = {
-      enable = true;
-      scheduler = "scx_rusty";
-      package = pkgs.scx_git.full;
-    };
+    #scx = {
+    #  enable = true;
+    #  scheduler = "scx_rusty";
+    #  package = pkgs.scx_git.full;
+    #};
 
     displayManager = {
       defaultSession = "hyprland-uwsm";
@@ -535,10 +535,10 @@ in {
       enable = true;
       useRoutingFeatures = "client";
     };
-    ollama = {
-      enable = true;
-      acceleration = "cuda";
-    };
+    #ollama = {
+    #  enable = true;
+    #  acceleration = "cuda";
+    #};
     cron = {
       enable = true;
     };
@@ -548,7 +548,7 @@ in {
     openssh.enable = true;
     printing = {
       enable = true;
-      drivers = [pkgs.hplipWithPlugin]; # NIXPKGS_ALLOW_UNFREE=1 nix-shell -p hplipWithPlugin --run 'sudo -E hp-setup'
+      ## drivers = [pkgs.hplipWithPlugin]; # NIXPKGS_ALLOW_UNFREE=1 nix-shell -p hplipWithPlugin --run 'sudo -E hp-setup'
     };
     auto-cpufreq = {
       enable = true;
@@ -686,6 +686,8 @@ in {
       experimental-features = ["nix-command" "flakes"];
       substituters = ["https://hyprland.cachix.org"];
       trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+      stalled-download-timeout = 99999999;
+      max-jobs = 10;
     };
     gc = {
       automatic = true;

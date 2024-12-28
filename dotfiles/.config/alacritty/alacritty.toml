@@ -1,4 +1,3 @@
-
 [bell]
 animation = "EaseOutCirc"
 color = "0x464d6a"
@@ -42,7 +41,7 @@ blinking = "On"
 shape = "Block"
 
 [font]
-size = 12
+size = 12.0
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"
@@ -58,12 +57,16 @@ style = "Italic"
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
-## style = "Regular"
-style = "Medium, Regular"
+style = "Regular"
 
 [font.offset]
 x = 0
 y = 0
+
+[[hints.enabled]]
+regex = "[^ ]+\\.rs:\\d+:\\d+"
+command = { program = "zeditor", args = [ "--goto" ] }
+mouse = { enabled = true }
 
 [mouse]
 hide_when_typing = false
@@ -91,7 +94,7 @@ decorations = "full"
 decorations_theme_variant = "Dark"
 #dynamic_padding = true
 dynamic_title = true
-opacity = 0.55
+opacity = 0.70
 startup_mode = "Windowed"
 title = "Alacritty"
 #decorations = "buttonless"
