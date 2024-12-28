@@ -28,7 +28,7 @@ in {
         confirm-close-surface = false;
         copy-on-select = true;
         font-family = "FiraCode Nerd Font";
-        font-size = 11;
+        font-size = 14;
         font-style = "Medium";
         minimum-contrast = 1.1;
         # term = "xterm-kitty";
