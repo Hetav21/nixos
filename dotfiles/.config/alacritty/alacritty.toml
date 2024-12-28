@@ -44,25 +44,22 @@ shape = "Block"
 [font]
 size = 12
 
-#[font.bold]
-#family = "SauceCodePro NF"
-#style = "Bold"
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
 
-#[font.bold_italic]
-#family = "SauceCodePro NF"
-#style = "Bold Italic"
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+style = "Bold Italic"
 
-#[font.italic]
-#family = "SauceCodePro NF"
-#style = "Italic"
-
-#[font.normal]
-#family = "SauceCodePro NF"
-#style = "Regular"
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
-style = "Regular"
+## style = "Regular"
+style = "Medium"
 
 [font.offset]
 x = 0
@@ -79,11 +76,11 @@ mouse = "Middle"
 action = "Copy"
 mouse = "Right"
 
-#[mouse.double_click]
-#threshold = 300
+[mouse.double_click]
+threshold = 300
 
-#[mouse.triple_click]
-#threshold = 300
+[mouse.triple_click]
+threshold = 300
 
 [scrolling]
 history = 500
