@@ -59,7 +59,7 @@ style = "Italic"
 [font.normal]
 family = "JetBrainsMono Nerd Font"
 ## style = "Regular"
-style = "Medium"
+style = "Medium, Regular"
 
 [font.offset]
 x = 0
