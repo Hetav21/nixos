@@ -76,11 +76,11 @@ mouse = "Middle"
 action = "Copy"
 mouse = "Right"
 
-[mouse.double_click]
-threshold = 300
+#[mouse.double_click]
+#threshold = 300
 
-[mouse.triple_click]
-threshold = 300
+#[mouse.triple_click]
+#threshold = 300
 
 [scrolling]
 history = 500
