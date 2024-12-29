@@ -127,9 +127,13 @@ in {
     cursor.size = 24;
     fonts = {
       monospace = {
-        package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrainsMono Nerd Font Mono";
+        package = pkgs.nerd-fonts.fira-code;
+        name = "FiraCode Nerd Font";
       };
+      #monospace = {
+      #  package = pkgs.nerd-fonts.jetbrains-mono;
+      #  name = "JetBrainsMono Nerd Font Mono";
+      #};
       sansSerif = {
         package = pkgs.montserrat;
         name = "Montserrat";
@@ -329,6 +333,7 @@ in {
     lm_sensors
     inxi
     auto-cpufreq
+    nix-output-monitor
 
     # Network and internet tools
     onedrive
@@ -687,8 +692,8 @@ in {
       substituters = ["https://hyprland.cachix.org"];
       trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
       stalled-download-timeout = 99999999;
-      max-jobs = 1;
-      cores = 5;
+      max-jobs = 2;
+      cores = 8;
     };
     gc = {
       automatic = true;
