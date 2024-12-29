@@ -229,6 +229,7 @@ in {
       onCalendar = "daily";
     };
     packages = [
+      "com.usebruno.Bruno"
       "com.todoist.Todoist"
       "com.spotify.Client"
       "org.gnome.Loupe"
@@ -251,48 +252,47 @@ in {
     ##    vscode
     vim
     zed-editor_git
-    ## jetbrains.idea-ultimate
+    jetbrains.idea-ultimate
 
     # Zen Browser from custom input
     ##    inputs.zen-browser.packages."${system}".default
 
     # Programming languages and tools
-    ## go
-    ## lua
+    go
+    lua
     python3
     python3Packages.pip
     uv
-    ## clang
-    ## zig
-    ## rustup
-    ## nodePackages_latest.pnpm
-    ## nodePackages_latest.yarn
-    ## nodePackages_latest.nodejs
-    ## bun
-    ## jdk
-    ## maven
-    ## gcc
+    clang
+    zig
+    rustup
+    nodePackages_latest.pnpm
+    nodePackages_latest.yarn
+    nodePackages_latest.nodejs
+    bun
+    jdk
+    maven
+    gcc
 
     # Frappe Bench
-    ## redis
-    ## wkhtmltopdf
-    ## nginx
-    ## uv
-    ## mariadb
+    redis
+    wkhtmltopdf
+    nginx
+    uv
+    mariadb
     mongodb-compass
 
     # Version control and development tools
+    #    bruno
     git
     gh
-    ## lazygit
-    ## lazydocker
-    ## bruno
+    lazygit
+    lazydocker
     gnumake
     coreutils
-    ## nixfmt-rfc-style
-    ## meson
-    ## ninja
-    ## home-manager
+    nixfmt-rfc-style
+    meson
+    ninja
     distrobox
     devenv
 
@@ -335,7 +335,7 @@ in {
     onedrive
     cloudflare-warp
     aria2
-    ## qbittorrent
+    qbittorrent
     tailscale
     rclone
     megasync
@@ -416,7 +416,6 @@ in {
 
     # File systems
     ntfs3g
-    ## os-prober
 
     # Downloaders
     yt-dlp
@@ -442,7 +441,7 @@ in {
 
     # Music and streaming
     youtube-music
-    ## spotify
+    #    spotify
     spicetify-cli
 
     # Miscellaneous
@@ -493,7 +492,7 @@ in {
     #scx = {
     #  enable = true;
     #  scheduler = "scx_rusty";
-    #  package = pkgs.scx_git.full;
+    #  package = pkgs.scx.full;
     #};
 
     displayManager = {
@@ -536,10 +535,10 @@ in {
       enable = true;
       useRoutingFeatures = "client";
     };
-    #ollama = {
-    #  enable = true;
-    #  acceleration = "cuda";
-    #};
+    ollama = {
+      enable = true;
+      acceleration = "cuda";
+    };
     cron = {
       enable = true;
     };
