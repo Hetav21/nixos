@@ -43,7 +43,7 @@ in {
         enable = true;
         device = "nodev";
         efiSupport = true;
-        #  useOSProber = true;
+        useOSProber = true;
       };
     };
     tmp = {
@@ -119,7 +119,7 @@ in {
       base0E = "f6c177";
       base0F = "524f67";
     };
-    image = ../../config/assets/China.jpeg;
+    image = ../../config/assets/${wallpaper};
     polarity = "dark";
     opacity.terminal = 0.8;
     cursor.package = pkgs.bibata-cursors;
@@ -459,6 +459,7 @@ in {
     noto-fonts-cjk-sans
     font-awesome
     material-icons
+    fira-code
   ];
 
   xdg.portal = {
@@ -516,7 +517,6 @@ in {
             FormPosition = "left";
             HaveFormBackground = true;
             PartialBlur = true;
-            # ...
           };
         };
       };
