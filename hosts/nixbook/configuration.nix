@@ -14,8 +14,8 @@
   wallpaper = "artistic-boy-relaxing.jpg";
 in {
   nixpkgs.config.allowUnfree = true;
-  ##  nixpkgs.config.allowUnsupportedSystem = true;
   ## nixpkgs.config.allowBroken = true;
+  ## nixpkgs.config.allowUnsupportedSystem = true;
 
   imports = [
     ./hardware-configuration.nix
@@ -43,7 +43,7 @@ in {
         enable = true;
         device = "nodev";
         efiSupport = true;
-        useOSProber = true;
+        ## useOSProber = true;
       };
     };
     tmp = {

@@ -42,7 +42,7 @@ in {
     hardware.graphics = {
       extraPackages = with pkgs; [
         nvidia-vaapi-driver
-        nvtopPackages.nvidia
+        #       nvtopPackages.nvidia
         #	nvidia-docker
         #	nvidia-podman
         #	nvidia-texture-tools
