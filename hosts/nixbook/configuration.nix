@@ -127,13 +127,9 @@ in {
     cursor.size = 24;
     fonts = {
       monospace = {
-        package = pkgs.nerd-fonts.fira-code;
-        name = "FiraCode Nerd Font";
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font Mono";
       };
-      #monospace = {
-      #  package = pkgs.nerd-fonts.jetbrains-mono;
-      #  name = "JetBrainsMono Nerd Font Mono";
-      #};
       sansSerif = {
         package = pkgs.montserrat;
         name = "Montserrat";
