@@ -43,7 +43,7 @@ in {
         enable = true;
         device = "nodev";
         efiSupport = true;
-        ## useOSProber = true;
+        useOSProber = true;
       };
     };
     tmp = {
@@ -440,8 +440,8 @@ in {
     ventoy
 
     # Music and streaming
-    youtube-music
     #    spotify
+    youtube-music
     spicetify-cli
 
     # Miscellaneous
