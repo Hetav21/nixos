@@ -362,7 +362,7 @@ in {
     hugo
     obsidian
     onlyoffice-bin
-    ## hplip
+    hplip
 
     # Communication and social
     telegram-desktop
@@ -548,7 +548,7 @@ in {
     openssh.enable = true;
     printing = {
       enable = true;
-      ## drivers = [pkgs.hplipWithPlugin]; # NIXPKGS_ALLOW_UNFREE=1 nix-shell -p hplipWithPlugin --run 'sudo -E hp-setup'
+      drivers = [pkgs.hplipWithPlugin]; # NIXPKGS_ALLOW_UNFREE=1 nix-shell -p hplipWithPlugin --run 'sudo -E hp-setup'
     };
     auto-cpufreq = {
       enable = true;
