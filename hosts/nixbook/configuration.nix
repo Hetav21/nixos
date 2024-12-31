@@ -229,7 +229,7 @@ in {
       onCalendar = "daily";
     };
     packages = [
-      "com.usebruno.Bruno"
+      ## "com.usebruno.Bruno"
       "com.todoist.Todoist"
       "com.spotify.Client"
       "org.gnome.Loupe"
@@ -283,7 +283,7 @@ in {
     mongodb-compass
 
     # Version control and development tools
-    #    bruno
+    bruno
     git
     gh
     lazygit
