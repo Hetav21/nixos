@@ -229,12 +229,9 @@ in {
       onCalendar = "daily";
     };
     packages = [
-      ## "com.usebruno.Bruno"
       "com.todoist.Todoist"
       "com.spotify.Client"
       "org.gnome.Loupe"
-      "com.github.KRTirtho.Spotube"
-      "io.github.zen_browser.zen"
       "com.microsoft.Edge"
       "com.github.IsmaelMartinez.teams_for_linux"
       "com.visualstudio.code"
