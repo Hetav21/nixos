@@ -255,7 +255,7 @@ in {
     jetbrains.idea-ultimate
 
     # Zen Browser from custom input
-    ##    inputs.zen-browser.packages."${system}".default
+    inputs.zen-browser.packages."${system}".default
 
     # Programming languages and tools
     go
