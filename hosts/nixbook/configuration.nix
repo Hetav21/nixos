@@ -442,6 +442,7 @@ in {
     spicetify-cli
 
     # Miscellaneous
+    libsForQt5.qt5.qtgraphicaleffects # sddm dep
   ];
 
   fonts.packages = with pkgs; [
