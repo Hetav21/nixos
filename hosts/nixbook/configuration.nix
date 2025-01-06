@@ -499,6 +499,8 @@ in {
       };
     };
 
+    pulseaudio.enable = false;
+
     #scx = {
     #  enable = true;
     #  scheduler = "scx_rusty";
@@ -643,7 +645,6 @@ in {
       enable = true;
       powerOnBoot = true;
     };
-    pulseaudio.enable = false;
     graphics = {
       enable = true;
       enable32Bit = true;
