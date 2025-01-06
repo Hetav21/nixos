@@ -17,6 +17,10 @@ in {
   ## nixpkgs.config.allowBroken = true;
   ## nixpkgs.config.allowUnsupportedSystem = true;
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "openssl-1.1.1w"
+  ];
+
   imports = [
     ./hardware-configuration.nix
     ./user.nix
@@ -223,11 +227,14 @@ in {
   # Nix-Flatpak
   services.flatpak = {
     enable = true;
+
     uninstallUnmanaged = true;
+
     update.auto = {
       enable = true;
       onCalendar = "daily";
     };
+
     packages = [
       "com.todoist.Todoist"
       "com.spotify.Client"
@@ -248,6 +255,7 @@ in {
     ##    neovide
     ##    vscode
     vim
+    sublime4
     zed-editor_git
     jetbrains.idea-ultimate
 
@@ -457,11 +465,14 @@ in {
 
   xdg.portal = {
     enable = true;
+
     wlr.enable = true;
+
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal
     ];
+
     configPackages = [
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal-hyprland
@@ -479,6 +490,7 @@ in {
       enable = true;
       package = pkgs.hypridle;
     };
+
     xserver = {
       enable = false;
       xkb = {
