@@ -228,7 +228,7 @@ in {
   services.flatpak = {
     enable = true;
 
-    uninstallUnmanaged = true;
+    ## uninstallUnmanaged = true;
 
     update.auto = {
       enable = true;
@@ -319,7 +319,6 @@ in {
     alacritty
 
     # File management and archives
-    nnn
     yazi
     p7zip
     unzip
