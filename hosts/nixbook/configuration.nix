@@ -319,6 +319,7 @@ in {
     alacritty
 
     # File management and archives
+    nnn
     yazi
     p7zip
     unzip
