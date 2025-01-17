@@ -59,7 +59,7 @@ in {
     sessionVariables = {
       EDITOR = "vim";
       VISUAL = "vim";
-      TERMINAL = "alacritty";
+      TERMINAL = "ghostty";
       ## BROWSER = "firefox";
       BROWSER = "zen";
       XDG_CONFIG_HOME = "$HOME/.config";

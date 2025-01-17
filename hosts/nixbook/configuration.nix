@@ -152,6 +152,9 @@ in {
   };
 
   virtualisation = {
+    podman = {
+      enable = true;
+    };
     docker = {
       enable = true;
     };
@@ -344,7 +347,6 @@ in {
     tailscale
     rclone
     megasync
-    megacmd
 
     # Audio and video
     pulseaudio
