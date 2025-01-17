@@ -344,6 +344,7 @@ in {
     tailscale
     rclone
     megasync
+    megacmd
 
     # Audio and video
     pulseaudio
