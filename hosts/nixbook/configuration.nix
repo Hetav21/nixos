@@ -154,10 +154,11 @@ in {
   virtualisation = {
     podman = {
       enable = true;
+      dockerCompat = true;
     };
-    docker = {
-      enable = true;
-    };
+    #    docker = {
+    #      enable = true;
+    #    };
     waydroid.enable = true;
   };
 
