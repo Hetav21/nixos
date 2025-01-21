@@ -20,6 +20,7 @@
         ssn = "sudo shutdown now";
         srn = "sudo reboot now";
         open = "xdg-open";
+        de = "devenv";
 
         # Git Aliases
         gac = "git add . and git commit -m";
