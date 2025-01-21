@@ -32,8 +32,9 @@ in {
   boot = {
     ## kernelPackages = pkgs.linuxPackages_zen;
     kernelPackages = pkgs.linuxPackages_cachyos;
-    kernelModules = ["v4l2loopback" "xe"];
-    extraModulePackages = [config.boot.kernelPackages.v4l2loopback];
+    kernelModules = ["xe"];
+    #    kernelModules = ["v4l2loopback" "xe"];
+    #    extraModulePackages = [config.boot.kernelPackages.v4l2loopback];
     kernel.sysctl = {
       "vm.max_map_count" = 2147483642;
     };
@@ -348,6 +349,7 @@ in {
     tailscale
     rclone
     megasync
+    megacmd
 
     # Audio and video
     pulseaudio
