@@ -13,8 +13,6 @@ in {
     homeDirectory = homeDirectory;
     stateVersion = stateVersion;
 
-    # enableNixpkgsReleaseCheck = false;
-
     file = {
       # Cached Wallpaper for rofi
       ".cache/wallpaper".source = ../../config/assets/${wallpaper};
@@ -41,7 +39,6 @@ in {
       ".config/fastfetch".source = ../../dotfiles/.config/fastfetch;
       ".config/kitty".source = ../../dotfiles/.config/kitty;
       ".config/mpv".source = ../../dotfiles/.config/mpv;
-      ## ".config/tmux/tmux.conf".source = ../../dotfiles/.config/tmux/tmux.conf;
       ".config/waybar".source = ../../dotfiles/.config/waybar;
       ".config/yazi".source = ../../dotfiles/.config/yazi;
       ".config/wezterm".source = ../../dotfiles/.config/wezterm;
@@ -66,12 +63,12 @@ in {
       XDG_STATE_HOME = "$HOME/.local/state";
       XDG_CACHE_HOME = "$HOME/.cache";
       XDG_SCREENSHOTS_DIR = "$HOME/Pictures/screenshots";
-      #  JAVA_AWT_WM_NONREPARENTING = "1";
-      #  XDG_SESSION_TYPE = "wayland";
-      #  XDG_CURRENT_DESKTOP = "Hyprland";
-      #  XDG_SESSION_DESKTOP = "Hyprland";
-      #  __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      #  GBM_BACKEND = "nvidia-drm";
+      JAVA_AWT_WM_NONREPARENTING = "1";
+      XDG_SESSION_TYPE = "wayland";
+      XDG_CURRENT_DESKTOP = "Hyprland";
+      XDG_SESSION_DESKTOP = "Hyprland";
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      GBM_BACKEND = "nvidia-drm";
       LC_ALL = "en_IN";
     };
 
@@ -93,23 +90,25 @@ in {
   ];
 
   # Styling
-  stylix.targets.waybar.enable = false;
+  ## stylix.targets.waybar.enable = false;
+  stylix.targets.waybar.enable = true;
+
   gtk = {
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
-    #  gtk3.extraConfig = {
-    #    gtk-application-prefer-dark-theme = 1;
-    #  };
-    #  gtk4.extraConfig = {
-    #    gtk-application-prefer-dark-theme = 1;
-    #  };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
   };
   qt = {
     enable = true;
     style.name = "adwaita-dark";
-    #  platformTheme.name = "gtk3";
+    platformTheme.name = "gtk3";
   };
 
   services.hypridle = {
