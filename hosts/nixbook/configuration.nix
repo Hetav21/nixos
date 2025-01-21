@@ -290,6 +290,7 @@ in {
     uv
     mariadb
     mongodb-compass
+    zenity
 
     # Version control and development tools
     bruno
