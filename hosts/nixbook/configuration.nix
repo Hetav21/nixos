@@ -30,11 +30,10 @@ in {
   ];
 
   boot = {
-    ## kernelPackages = pkgs.linuxPackages_zen;
     kernelPackages = pkgs.linuxPackages_cachyos;
-    kernelModules = ["xe"];
-    #    kernelModules = ["v4l2loopback" "xe"];
-    #    extraModulePackages = [config.boot.kernelPackages.v4l2loopback];
+    # kernelModules = ["xe"];
+    kernelModules = ["v4l2loopback" "xe"];
+    extraModulePackages = [config.boot.kernelPackages.v4l2loopback];
     kernel.sysctl = {
       "vm.max_map_count" = 2147483642;
     };
@@ -241,12 +240,12 @@ in {
     };
 
     packages = [
+      "org.texstudio.TeXstudio"
       "com.todoist.Todoist"
       "com.spotify.Client"
       "org.gnome.Loupe"
       "com.microsoft.Edge"
       "com.github.IsmaelMartinez.teams_for_linux"
-      "com.visualstudio.code"
       "org.libreoffice.LibreOffice"
       "com.github.tchx84.Flatseal"
       "com.stremio.Stremio"
@@ -258,7 +257,7 @@ in {
     # Text editors and IDEs
     ##    neovim
     ##    neovide
-    ##    vscode
+    vscode
     vim
     sublime4
     zed-editor_git
@@ -348,8 +347,8 @@ in {
     qbittorrent
     tailscale
     rclone
-    megasync
-    megacmd
+    ## megasync
+    ## megacmd
 
     # Audio and video
     pulseaudio
@@ -667,7 +666,7 @@ in {
     rclone.enable = true;
     muteMicrophone.enable = true;
     # warp-cli.enable = true;
-    mega-sync.enable = true;
+    # mega-sync.enable = true;
   };
 
   services.blueman.enable = true;
