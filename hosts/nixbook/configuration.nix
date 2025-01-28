@@ -217,29 +217,14 @@ in {
     };
   };
 
-  #  system.autoUpgrade = {
-  #    enable = true;
-  #    flake = inputs.self.outPath;
-  #    flags = [
-  #      "--update-input"
-  #      "nixpkgs"
-  #      "-L"
-  #    ];
-  #    dates = "09:00";
-  #    randomizedDelaySec = "45min";
-  #  };
-
   # Nix-Flatpak
   services.flatpak = {
     enable = true;
-
-    ## uninstallUnmanaged = true;
-
+    uninstallUnmanaged = true;
     update.auto = {
       enable = true;
       onCalendar = "daily";
     };
-
     packages = [
       "org.texstudio.TeXstudio"
       "com.todoist.Todoist"
@@ -507,12 +492,6 @@ in {
 
     pulseaudio.enable = false;
 
-    #scx = {
-    #  enable = true;
-    #  scheduler = "scx_rusty";
-    #  package = pkgs.scx.full;
-    #};
-
     displayManager = {
       defaultSession = "hyprland-uwsm";
       sddm = {
@@ -666,7 +645,6 @@ in {
   systemd.extra = {
     rclone.enable = true;
     muteMicrophone.enable = true;
-    # warp-cli.enable = true;
     mega-sync.enable = true;
   };
 
