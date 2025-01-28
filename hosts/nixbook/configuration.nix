@@ -176,10 +176,10 @@ in {
       withUWSM = true;
       xwayland.enable = true;
     };
-    hyprlock = {
-      enable = true;
-      package = pkgs.hyprlock;
-    };
+    # hyprlock = {
+    #  enable = true;
+    #  package = pkgs.hyprlock;
+    # };
     localsend = {
       enable = true;
       openFirewall = true;
@@ -492,10 +492,10 @@ in {
       package = pkgs.mlocate;
     };
 
-    hypridle = {
-      enable = true;
-      package = pkgs.hypridle;
-    };
+    # hypridle = {
+    #  enable = true;
+    #  package = pkgs.hypridle;
+    # };
 
     xserver = {
       enable = false;
