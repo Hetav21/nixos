@@ -364,6 +364,7 @@ in {
     loupe
     imagemagick
     hyprpicker
+    hyprlock
     swww
     waypaper
     imv
