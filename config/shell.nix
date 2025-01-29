@@ -19,7 +19,6 @@
         grep = "rg --color=auto";
         ssn = "sudo shutdown now";
         srn = "sudo reboot now";
-        open = "xdg-open";
         de = "devenv";
 
         # Git Aliases
