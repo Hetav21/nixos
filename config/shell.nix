@@ -112,7 +112,7 @@
                                           # Starship
                                           use ~/.cache/starship/init.nu
                                           use ~/.config/nushell/colors.nu
-                                          ## use ~/.nu_scripts/custom-completions *
+
                                           # NPM global packages
                                 $env.PATH = ($env.PATH |
                                 split row (char esep) |
