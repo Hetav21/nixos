@@ -60,6 +60,7 @@ in {
       TERMINAL = "ghostty";
       BROWSER = "zen";
       QT_QPA_PLATFORM = "wayland";
+      LIBVA_DRIVER_NAME = "nvidia";
       JAVA_AWT_WM_NONREPARENTING = "1";
       GBM_BACKEND = "nvidia-drm";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
