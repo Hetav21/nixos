@@ -248,6 +248,7 @@ in {
     sublime4
     zed-editor_git
     jetbrains.idea-ultimate
+    zenity
 
     # Zen Browser from custom input
     inputs.zen-browser.packages."${system}".default
