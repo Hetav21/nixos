@@ -296,6 +296,7 @@ in {
     ninja
     distrobox
     devenv
+    open-webui
 
     # Shell and terminal utilities
     ##    inputs.nixCats.packages.${pkgs.system}.nixCats
@@ -549,7 +550,6 @@ in {
       enable = true;
       port = 11111;
       openFirewall = true;
-      package = pkgs.open-webui;
     };
 
     cron = {
