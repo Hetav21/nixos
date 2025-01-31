@@ -343,6 +343,7 @@ in {
     ffmpeg
     mpv
     deadbeef-with-plugins
+    obs-studio
 
     # Image and graphics
     gimp

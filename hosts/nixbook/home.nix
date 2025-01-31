@@ -54,23 +54,23 @@ in {
     };
 
     sessionVariables = {
+      LC_ALL = "en_IN";
       EDITOR = "vim";
       VISUAL = "vim";
       TERMINAL = "ghostty";
       BROWSER = "zen";
       QT_QPA_PLATFORM = "wayland";
+      JAVA_AWT_WM_NONREPARENTING = "1";
+      GBM_BACKEND = "nvidia-drm";
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       XDG_CONFIG_HOME = "$HOME/.config";
       XDG_DATA_HOME = "$HOME/.local/share";
       XDG_STATE_HOME = "$HOME/.local/state";
       XDG_CACHE_HOME = "$HOME/.cache";
       XDG_SCREENSHOTS_DIR = "$HOME/Pictures/screenshots";
-      JAVA_AWT_WM_NONREPARENTING = "1";
       XDG_SESSION_TYPE = "wayland";
       XDG_CURRENT_DESKTOP = "Hyprland";
       XDG_SESSION_DESKTOP = "Hyprland";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      GBM_BACKEND = "nvidia-drm";
-      LC_ALL = "en_IN";
     };
 
     sessionPath = [
