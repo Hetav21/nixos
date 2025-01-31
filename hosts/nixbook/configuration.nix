@@ -522,30 +522,47 @@ in {
         HandlePowerKey=suspend
       '';
     };
+
     cloudflare-warp = {
       enable = true;
       openFirewall = true;
     };
+
     supergfxd.enable = true;
+
     asusd = {
       enable = true;
       enableUserService = true;
     };
+
     tailscale = {
       enable = true;
       useRoutingFeatures = "client";
     };
+
     ollama = {
       enable = true;
       acceleration = "cuda";
     };
+
+    open-webui = {
+      enable = true;
+      port = 11111;
+      openFirewall = true;
+    };
+
     cron = {
       enable = true;
     };
+
     libinput.enable = true;
+
     fstrim.enable = true;
+
     gvfs.enable = true;
+
     openssh.enable = true;
+
     printing = {
       enable = true;
       drivers = [pkgs.hplipWithPlugin]; # NIXPKGS_ALLOW_UNFREE=1 nix-shell -p hplipWithPlugin --run 'sudo -E hp-setup'
@@ -563,19 +580,24 @@ in {
         };
       };
     };
+
     gnome.gnome-keyring.enable = true;
+
     avahi = {
       enable = true;
       nssmdns4 = true;
       openFirewall = true;
     };
+
     ipp-usb.enable = true;
+
     syncthing = {
       enable = true;
       user = username;
       dataDir = homeDirectory;
       configDir = "${homeDirectory}/.config/syncthing";
     };
+
     pipewire = {
       enable = true;
       alsa = {
