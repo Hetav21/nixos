@@ -39,6 +39,15 @@ in {
       ##      package = config.boot.kernelPackages.nvidiaPackages.production;
     };
 
+    environment.systemPackages = with pkgs; [
+      nvtopPackages.nvidia
+      # nvidia-docker
+      # nvidia-podman
+      # nvidia-texture-tools
+      # nvidia-container-toolkit
+      # nvidia_cg_toolkit
+    ];
+
     hardware.graphics = {
       extraPackages = with pkgs; [
         nvidia-vaapi-driver
