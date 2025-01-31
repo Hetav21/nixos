@@ -157,9 +157,6 @@ in {
       enable = true;
       dockerCompat = true;
     };
-    #    docker = {
-    #      enable = true;
-    #    };
     waydroid.enable = true;
   };
 
@@ -493,6 +490,7 @@ in {
         layout = "us";
         variant = "";
       };
+      videoDrivers = ["modesetting"];
     };
 
     pulseaudio.enable = false;
