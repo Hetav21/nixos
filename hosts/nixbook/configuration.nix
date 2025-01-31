@@ -171,30 +171,39 @@ in {
         # Add any missing dynamic libraries for unpackaged programs here
       ];
     };
+
     hyprland = {
       enable = true;
       withUWSM = true;
       xwayland.enable = true;
     };
+
     hyprlock = {
       enable = true;
       package = pkgs.hyprlock;
     };
+
     localsend = {
       enable = true;
       openFirewall = true;
     };
+
     firefox.enable = false;
+
     dconf.enable = true;
+
     fuse.userAllowOther = true;
+
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
     };
+
     rog-control-center = {
       enable = true;
       autoStart = true;
     };
+
     thunar = {
       enable = true;
       plugins = with pkgs.xfce; [
@@ -476,11 +485,6 @@ in {
     locate = {
       enable = true;
       package = pkgs.mlocate;
-    };
-
-    hypridle = {
-      enable = true;
-      package = pkgs.hypridle;
     };
 
     xserver = {
