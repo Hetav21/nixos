@@ -549,6 +549,7 @@ in {
       enable = true;
       port = 11111;
       openFirewall = true;
+      package = pkgs.open-webui;
     };
 
     cron = {
