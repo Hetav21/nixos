@@ -58,6 +58,7 @@ in {
       VISUAL = "vim";
       TERMINAL = "ghostty";
       BROWSER = "zen";
+      QT_QPA_PLATFORM = "wayland";
       XDG_CONFIG_HOME = "$HOME/.config";
       XDG_DATA_HOME = "$HOME/.local/share";
       XDG_STATE_HOME = "$HOME/.local/state";
