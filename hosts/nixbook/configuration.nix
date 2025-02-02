@@ -26,6 +26,7 @@ in {
     ./user.nix
     ../../modules/modules-imports.nix
     ../../systemd/systemd-extra-imports.nix
+    ../../lib/electron-apps.nix
     inputs.home-manager.nixosModules.default
   ];
 
