@@ -15,14 +15,13 @@
         " --add-flags \"--enable-webrtc-pipewire-capturer\""
         " --add-flags \"--enable-features=WaylandWindowDecorations\""
         " --add-flags \"--enable-wayland-ime\""
+        " --add-flags \"--disable-gpu\""
       ];
     };
 
-  obsidian = wrap {appName = "obsidian";};
   bruno = wrap {appName = "bruno";};
 in {
   environment.systemPackages = [
     bruno
-    obsidian
   ];
 }
