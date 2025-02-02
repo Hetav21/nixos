@@ -285,7 +285,7 @@ in {
     mongodb-compass
 
     # Version control and development tools
-    bruno
+    ## bruno
     git
     gh
     lazygit
@@ -365,7 +365,7 @@ in {
     # Productivity and office
     spacedrive
     hugo
-    obsidian
+    ## obsidian
     onlyoffice-bin
     hplip
 
