@@ -20,8 +20,10 @@
     };
 
   bruno = wrap {appName = "bruno";};
+  obsidian = wrap {appName = "obsidian";};
 in {
   environment.systemPackages = [
     bruno
+    obsidian
   ];
 }

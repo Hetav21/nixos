@@ -365,7 +365,7 @@ in {
     # Productivity and office
     spacedrive
     hugo
-    obsidian
+    ## obsidian
     onlyoffice-bin
     hplip
 
