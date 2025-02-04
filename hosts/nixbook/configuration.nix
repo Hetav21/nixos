@@ -378,7 +378,6 @@ in {
 
     # Browsers
     firefox
-    chromium
     brave
 
     # Gaming and entertainment
