@@ -28,7 +28,7 @@ in {
         xorg.libXfixes
         libGL
         libva
-        ## pipewire.lib
+        pipewire
         xorg.libxcb
         xorg.libXdamage
         xorg.libxshmfence
