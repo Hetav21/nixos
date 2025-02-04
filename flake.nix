@@ -56,6 +56,7 @@
           nix-index-database.nixosModules.nix-index
           # optional to also wrap and install comma
           {programs.nix-index-database.comma.enable = true;}
+          {programs.nix-index.enable = true;}
           ({pkgs, ...}: {
             ## Add specific packages that you need
           })
