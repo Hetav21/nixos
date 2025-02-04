@@ -14,6 +14,8 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     ghostty.url = "github:ghostty-org/ghostty";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   # Flake Outputs
@@ -24,6 +26,7 @@
     nix-flatpak,
     sddm-sugar-candy-nix,
     ghostty,
+    nix-index-database,
     ...
   } @ inputs: {
     # Define multiple NixOS configurations
@@ -50,6 +53,9 @@
           }
           inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.default
+          nix-index-database.nixosModules.nix-index
+          # optional to also wrap and install comma
+          {programs.nix-index-database.comma.enable = true;}
           ({pkgs, ...}: {
             ## Add specific packages that you need
           })
