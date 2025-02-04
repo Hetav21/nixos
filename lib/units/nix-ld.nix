@@ -38,6 +38,7 @@ in {
         # Required
         glib
         gtk2
+        gtk3
         bzip2
 
         # Without these it silently fails
