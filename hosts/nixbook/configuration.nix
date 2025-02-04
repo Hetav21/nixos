@@ -19,6 +19,7 @@ in {
 
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w"
+    "SDL_ttf-2.0.11"
   ];
 
   imports = [
@@ -26,7 +27,7 @@ in {
     ./user.nix
     ../../modules/modules-imports.nix
     ../../systemd/systemd-extra-imports.nix
-    ../../lib/electron-apps.nix
+    ../../lib/lib-imports.nix
     inputs.home-manager.nixosModules.default
   ];
 
@@ -162,22 +163,22 @@ in {
   };
 
   programs = {
-    nix-ld = {
-      enable = true;
-      package = pkgs.nix-ld-rs;
-      ## find the name of the package from the error message, like:
-      ## $ nix run github:mic92/nix-index-database missinglib.so
-      ## More details: https://github.com/nix-community/nix-index-database, you might like
-
-      libraries =
-        options.programs.nix-ld.libraries.default
-        ++ (with pkgs; [
-          # put here missing libraries
-          libdrm
-          mesa
-          libxkbcommon
-        ]);
-    };
+    #    nix-ld = {
+    #      enable = true;
+    #      package = pkgs.nix-ld-rs;
+    #      ## find the name of the package from the error message, like:
+    #      ## $ nix run github:mic92/nix-index-database missinglib.so
+    #      ## More details: https://github.com/nix-community/nix-index-database, you might like
+    #
+    #      libraries =
+    #        options.programs.nix-ld.libraries.default
+    #        ++ (with pkgs; [
+    #          # put here missing libraries
+    #          libdrm
+    #          mesa
+    #          libxkbcommon
+    #        ]);
+    #    };
 
     hyprland = {
       enable = true;
