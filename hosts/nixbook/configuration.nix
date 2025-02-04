@@ -173,6 +173,9 @@ in {
         options.programs.nix-ld.libraries.default
         ++ (with pkgs; [
           # put here missing libraries
+          libdrm
+          mesa
+          libxkbcommon
         ]);
     };
 
@@ -321,6 +324,7 @@ in {
     progress
     tree
     alacritty
+    nix-index
 
     # File management and archives
     yazi
