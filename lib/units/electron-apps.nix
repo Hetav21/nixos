@@ -11,6 +11,7 @@
       postBuild = lib.strings.concatStrings [
         "wrapProgram $out/bin/"
         appName
+        " --add-flags \"--enable-features=UseOzonePlatform\""
         " --add-flags \"--ozone-platform-hint=wayland\""
         " --add-flags \"--enable-webrtc-pipewire-capturer\""
         " --add-flags \"--enable-features=WaylandWindowDecorations\""

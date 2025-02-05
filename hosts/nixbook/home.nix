@@ -62,6 +62,7 @@ in {
       QT_QPA_PLATFORM = "wayland";
       LIBVA_DRIVER_NAME = "nvidia";
       JAVA_AWT_WM_NONREPARENTING = "1";
+      ELECTRON_OZONE_PLATFORM_HINT = "wayland";
       GBM_BACKEND = "nvidia-drm";
       WLR_NO_HARDWARE_CURSORS = "1";
       NIXOS_OZONE_WL = "1";
