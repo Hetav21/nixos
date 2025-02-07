@@ -501,7 +501,7 @@ in {
         sugarCandyNix = {
           enable = true; # This set SDDM's theme to "sddm-sugar-candy-nix".
           settings = {
-            # Set your configuration options here.
+            Font = "FiraCode Nerd Font";
             # Here is a simple example:
             Background = lib.cleanSource ../../config/assets/${wallpaper};
             ScreenWidth = 1920;
