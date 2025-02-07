@@ -449,10 +449,17 @@ in {
   ];
 
   fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk-sans
     noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts.githubRelease
+    dina-font
+    proggyfonts
     fira-sans
     roboto
-    noto-fonts-cjk-sans
     font-awesome
     material-icons
     fira-code
@@ -501,7 +508,6 @@ in {
         sugarCandyNix = {
           enable = true; # This set SDDM's theme to "sddm-sugar-candy-nix".
           settings = {
-            Font = "FiraCode Nerd Font";
             # Here is a simple example:
             Background = lib.cleanSource ../../config/assets/${wallpaper};
             ScreenWidth = 1920;
