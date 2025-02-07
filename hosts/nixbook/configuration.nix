@@ -298,6 +298,7 @@ in {
     stow
     tmux
     wget
+    pandoc
     killall
     eza
     starship
