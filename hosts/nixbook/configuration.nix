@@ -34,7 +34,6 @@ in {
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
     # kernelPackages = pkgs.linuxPackages_cachyos;
-    # kernelModules = ["xe"];
     kernelModules = ["v4l2loopback" "xe"];
     extraModulePackages = [config.boot.kernelPackages.v4l2loopback];
     kernel.sysctl = {
@@ -287,7 +286,7 @@ in {
     mongodb-compass
 
     # Version control and development tools
-    ## bruno
+    bruno
     git
     gh
     lazygit
