@@ -286,7 +286,7 @@ in {
     mongodb-compass
 
     # Version control and development tools
-    bruno
+    ## bruno
     git
     gh
     lazygit
