@@ -225,6 +225,18 @@ in {
       enable = true;
       onCalendar = "daily";
     };
+    overrides = {
+      global = {
+        # Force Wayland by default
+        Context.sockets = ["wayland" "!x11" "!fallback-x11"];
+
+        # Define environment variables here
+        Environment = {
+          LIBVA_DRIVER_NAME = "iHD";
+          ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+        };
+      };
+    };
     packages = [
       "org.texstudio.TeXstudio"
       "com.todoist.Todoist"
