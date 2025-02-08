@@ -25,7 +25,7 @@ in {
 
       # Top Level Files symlinks
       ".vimrc".source = ../../dotfiles/.vimrc;
-      ".npmrc".source = ../../dotfiles/.npmrc;
+      ## ".npmrc".source = ../../dotfiles/.npmrc;
       ".zshrc".source = ../../dotfiles/.zshrc;
       ".zshenv".source = ../../dotfiles/.zshenv;
       ".xinitrc".source = ../../dotfiles/.xinitrc;
