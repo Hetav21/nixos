@@ -457,20 +457,20 @@ in {
   ];
 
   fonts.packages = with pkgs; [
+    roboto
+    montserrat
+    liberation_ttf
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-emoji
-    liberation_ttf
     fira-code
+    fira-sans
     fira-code-symbols
-    mplus-outline-fonts.githubRelease
     dina-font
     proggyfonts
-    fira-sans
-    roboto
+    mplus-outline-fonts.githubRelease
     font-awesome
     material-icons
-    fira-code
   ];
 
   xdg.portal = {
