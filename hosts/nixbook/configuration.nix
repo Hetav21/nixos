@@ -257,9 +257,6 @@ in {
     zed-editor_git
     jetbrains.idea-ultimate
 
-    # Zen Browser from custom input
-    inputs.zen-browser.packages."${system}".default
-
     # Programming languages and tools
     go
     lua
@@ -382,6 +379,8 @@ in {
     # Browsers
     firefox
     brave
+    chromium
+    inputs.zen-browser.packages."${system}".default
 
     # Gaming and entertainment
     ##    stremio
