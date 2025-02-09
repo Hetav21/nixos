@@ -19,7 +19,10 @@
         grep = "rg --color=auto";
         ssn = "sudo shutdown now";
         srn = "sudo reboot now";
+
+        # Dev
         de = "devenv";
+        nix-shell = "fish -c nix-shell";
 
         # Git Aliases
         gac = "git add . and git commit -m";
