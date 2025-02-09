@@ -16,7 +16,6 @@
         " --add-flags \"--enable-webrtc-pipewire-capturer\""
         " --add-flags \"--enable-features=WaylandWindowDecorations\""
         " --add-flags \"--enable-wayland-ime\""
-        " --add-flags \"--disable-gpu\""
       ];
     };
 
