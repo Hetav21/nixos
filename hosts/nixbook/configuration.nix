@@ -156,7 +156,14 @@ in {
   virtualisation = {
     podman = {
       enable = true;
-      dockerCompat = true;
+      #  dockerCompat = true;
+    };
+    docker = {
+      enable = true;
+      rootless = {
+        enable = true;
+        setSocketVariable = true;
+      };
     };
     waydroid.enable = true;
   };
