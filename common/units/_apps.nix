@@ -91,7 +91,6 @@ in {
     btop
     lm_sensors
     inxi
-    auto-cpufreq
     nix-output-monitor
 
     # Network and internet tools
@@ -100,9 +99,6 @@ in {
     aria2
     qbittorrent
     tailscale
-    rclone
-    megasync
-    megacmd
 
     # Audio and video
     pulseaudio
@@ -117,7 +113,6 @@ in {
     gimp
     loupe
     imagemagick
-    hyprpicker
     swww
     waypaper
     imv
@@ -127,7 +122,6 @@ in {
     hugo
     ## obsidian
     onlyoffice-bin
-    hplip
 
     # Communication and social
     telegram-desktop
@@ -169,7 +163,6 @@ in {
     kdePackages.kwallet
 
     # Wayland specific
-    hyprshot
     grim
     slurp
     waybar
@@ -177,15 +170,11 @@ in {
     wl-clipboard
     swaynotificationcenter
 
-    # Virtualization
-    libvirt
-
     # File systems
     ntfs3g
 
     # Downloaders
     yt-dlp
-    localsend
     # Clipboard managers
     cliphist
 
@@ -210,6 +199,5 @@ in {
     spicetify-cli
 
     # Miscellaneous
-    libsForQt5.qt5.qtgraphicaleffects # sddm dep
   ];
 }

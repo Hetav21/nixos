@@ -11,7 +11,6 @@
   homeDirectory = "/home/${username}";
   hostName = "nixbook";
   timeZone = "Asia/Kolkata";
-  wallpaper = "artistic-boy-relaxing.jpg";
 in {
   nixpkgs.config.allowUnfree = true;
   ## nixpkgs.config.allowBroken = true;
@@ -106,86 +105,7 @@ in {
     };
   };
 
-  stylix = {
-    enable = true;
-    base16Scheme = {
-      base00 = "191724";
-      base01 = "1f1d2e";
-      base02 = "26233a";
-      base03 = "6e6a86";
-      base04 = "908caa";
-      base05 = "e0def4";
-      base06 = "e0def4";
-      base07 = "524f67";
-      base08 = "eb6f92";
-      base09 = "f6c177";
-      base0A = "ebbcba";
-      base0B = "31748f";
-      base0C = "9ccfd8";
-      base0D = "c4a7e7";
-      base0E = "f6c177";
-      base0F = "524f67";
-    };
-    image = ../../config/assets/${wallpaper};
-    polarity = "dark";
-    opacity.terminal = 0.8;
-    cursor.package = pkgs.bibata-cursors;
-    cursor.name = "Bibata-Modern-Ice";
-    cursor.size = 24;
-    fonts = {
-      monospace = {
-        package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrainsMono Nerd Font Mono";
-      };
-      sansSerif = {
-        package = pkgs.montserrat;
-        name = "Montserrat";
-      };
-      serif = {
-        package = pkgs.montserrat;
-        name = "Montserrat";
-      };
-      sizes = {
-        applications = 12;
-        terminal = 15;
-        desktop = 11;
-        popups = 12;
-      };
-    };
-  };
-
-  virtualisation = {
-    podman = {
-      enable = true;
-      #  dockerCompat = true;
-    };
-    docker = {
-      enable = true;
-      rootless = {
-        enable = true;
-        setSocketVariable = true;
-      };
-    };
-    waydroid.enable = true;
-  };
-
   programs = {
-    hyprland = {
-      enable = true;
-      withUWSM = true;
-      xwayland.enable = true;
-    };
-
-    hyprlock = {
-      enable = true;
-      package = pkgs.hyprlock;
-    };
-
-    localsend = {
-      enable = true;
-      openFirewall = true;
-    };
-
     firefox.enable = false;
 
     dconf.enable = true;
@@ -195,11 +115,6 @@ in {
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
-    };
-
-    rog-control-center = {
-      enable = true;
-      autoStart = true;
     };
 
     thunar = {
@@ -258,27 +173,6 @@ in {
 
     pulseaudio.enable = false;
 
-    displayManager = {
-      defaultSession = "hyprland-uwsm";
-      sddm = {
-        enable = true; # Enable SDDM.
-        wayland.enable = true;
-        autoNumlock = true;
-        sugarCandyNix = {
-          enable = true; # This set SDDM's theme to "sddm-sugar-candy-nix".
-          settings = {
-            # Here is a simple example:
-            Background = lib.cleanSource ../../config/assets/${wallpaper};
-            ScreenWidth = 1920;
-            ScreenHeight = 1080;
-            FormPosition = "left";
-            HaveFormBackground = true;
-            PartialBlur = true;
-          };
-        };
-      };
-    };
-
     logind = {
       extraConfig = ''
         HandlePowerKey=suspend
@@ -288,13 +182,6 @@ in {
     cloudflare-warp = {
       enable = true;
       openFirewall = true;
-    };
-
-    supergfxd.enable = true;
-
-    asusd = {
-      enable = true;
-      enableUserService = true;
     };
 
     tailscale = {
@@ -323,24 +210,6 @@ in {
     gvfs.enable = true;
 
     openssh.enable = true;
-
-    printing = {
-      enable = true;
-      drivers = [pkgs.hplipWithPlugin]; # NIXPKGS_ALLOW_UNFREE=1 nix-shell -p hplipWithPlugin --run 'sudo -E hp-setup'
-    };
-    auto-cpufreq = {
-      enable = true;
-      settings = {
-        battery = {
-          governor = "powersave";
-          turbo = "never";
-        };
-        charger = {
-          governor = "performance";
-          turbo = "auto";
-        };
-      };
-    };
 
     gnome.gnome-keyring.enable = true;
 
@@ -371,37 +240,6 @@ in {
     };
   };
 
-  powerManagement = {
-    enable = true;
-    powertop.enable = true;
-  };
-
-  systemd = {
-    targets = {
-      sleep = {
-        enable = true;
-        unitConfig.DefaultDependencies = "yes";
-      };
-      suspend = {
-        enable = false;
-        unitConfig.DefaultDependencies = "no";
-      };
-      hibernate = {
-        enable = false;
-        unitConfig.DefaultDependencies = "no";
-      };
-      "hybrid-sleep" = {
-        enable = false;
-        unitConfig.DefaultDependencies = "no";
-      };
-    };
-
-    services = {
-      ###  To disable a systemd service:
-      ##   <service-name>.wantedBy = lib.mkForce [ ];
-    };
-  };
-
   hardware = {
     sane = {
       enable = true;
@@ -429,9 +267,7 @@ in {
   };
 
   systemd.extra = {
-    rclone.enable = true;
     muteMicrophone.enable = true;
-    mega-sync.enable = true;
   };
 
   services.blueman.enable = true;
