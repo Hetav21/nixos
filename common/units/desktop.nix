@@ -65,15 +65,15 @@ in {
   xdg = {
     mime.defaultApplications = {
       # Web and HTML
-      "x-scheme-handler/http" = "zen.desktop";
-      "x-scheme-handler/https" = "zen.desktop";
-      "x-scheme-handler/chrome" = "zen.desktop";
-      "text/html" = "zen.desktop";
-      "application/x-extension-htm" = "zen.desktop";
-      "application/x-extension-html" = "zen.desktop";
-      "application/x-extension-shtml" = "zen.desktop";
-      "application/x-extension-xhtml" = "zen.desktop";
-      "application/xhtml+xml" = "zen.desktop";
+      "x-scheme-handler/http" = "userapp-Zen Browser-CWEPZ2.desktop";
+      "x-scheme-handler/https" = "userapp-Zen Browser-CWEPZ2.desktop";
+      "x-scheme-handler/chrome" = "userapp-Zen Browser-CWEPZ2.desktop";
+      "text/html" = "userapp-Zen Browser-CWEPZ2.desktop";
+      "application/x-extension-htm" = "userapp-Zen Browser-CWEPZ2.desktop";
+      "application/x-extension-html" = "userapp-Zen Browser-CWEPZ2.desktop";
+      "application/x-extension-shtml" = "userapp-Zen Browser-CWEPZ2.desktop";
+      "application/x-extension-xhtml" = "userapp-Zen Browser-CWEPZ2.desktop";
+      "application/xhtml+xml" = "userapp-Zen Browser-CWEPZ2.desktop";
 
       # File management
       "inode/directory" = "thunar.desktop";
@@ -107,8 +107,8 @@ in {
       "x-scheme-handler/magnet" = "org.qbittorrent.qBittorrent.desktop";
 
       # Other handlers
-      "x-scheme-handler/about" = "zen.desktop";
-      "x-scheme-handler/unknown" = "zen.desktop";
+      "x-scheme-handler/about" = "userapp-Zen Browser-CWEPZ2.desktop";
+      "x-scheme-handler/unknown" = "userapp-Zen Browser-CWEPZ2.desktop";
       "x-scheme-handler/postman" = "Postman.desktop";
       "x-scheme-handler/tonsite" = "org.telegram.desktop.desktop";
     };
