@@ -15,6 +15,7 @@ in {
       enableUserService = true;
     };
   };
+
   programs = {
     rog-control-center = {
       enable = true;

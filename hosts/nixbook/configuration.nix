@@ -27,13 +27,11 @@ in {
     ../../lib/lib-imports.nix
     ../../common/common-imports.nix
     ../../modules/modules-imports.nix
-    ../../systemd/systemd-extra-imports.nix
     inputs.home-manager.nixosModules.default
   ];
 
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
-    # kernelPackages = pkgs.linuxPackages_cachyos;
     kernelModules = ["v4l2loopback" "xe"];
     extraModulePackages = [config.boot.kernelPackages.v4l2loopback];
     kernel.sysctl = {
@@ -56,36 +54,7 @@ in {
       useTmpfs = true;
       tmpfsSize = "30%";
     };
-    binfmt.registrations.appimage = {
-      wrapInterpreterInShell = false;
-      interpreter = "${pkgs.appimage-run}/bin/appimage-run";
-      recognitionType = "magic";
-      offset = 0;
-      mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
-      magicOrExtension = ''\x7fELF....AI\x02'';
-    };
     plymouth.enable = true;
-  };
-
-  networking = {
-    hostName = hostName;
-    networkmanager.enable = true;
-    timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
-    firewall = {
-      ##      enable = false; ## Disable firewall
-      allowedTCPPortRanges = [
-        {
-          from = 8060;
-          to = 8090;
-        }
-      ];
-      allowedUDPPortRanges = [
-        {
-          from = 8060;
-          to = 8090;
-        }
-      ];
-    };
   };
 
   time.timeZone = timeZone;
@@ -105,158 +74,12 @@ in {
     };
   };
 
-  programs = {
-    firefox.enable = false;
-
-    dconf.enable = true;
-
-    fuse.userAllowOther = true;
-
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-
-    thunar = {
-      enable = true;
-      plugins = with pkgs.xfce; [
-        thunar-archive-plugin
-        thunar-volman
-      ];
-    };
-  };
-
   users = {
     mutableUsers = true;
     users.${username} = {
       isNormalUser = true;
       description = userDescription;
       extraGroups = ["networkmanager" "mlocate" "wheel"];
-      packages = with pkgs; [
-        firefox
-        thunderbird
-      ];
-    };
-  };
-
-  xdg.portal = {
-    enable = true;
-
-    wlr.enable = true;
-
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal
-    ];
-
-    configPackages = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal
-    ];
-  };
-
-  services = {
-    locate = {
-      enable = true;
-      package = pkgs.mlocate;
-    };
-
-    xserver = {
-      enable = false;
-      xkb = {
-        layout = "us";
-        variant = "";
-      };
-      videoDrivers = ["modesetting"];
-    };
-
-    pulseaudio.enable = false;
-
-    logind = {
-      extraConfig = ''
-        HandlePowerKey=suspend
-      '';
-    };
-
-    cloudflare-warp = {
-      enable = true;
-      openFirewall = true;
-    };
-
-    tailscale = {
-      enable = true;
-      useRoutingFeatures = "client";
-    };
-
-    ollama = {
-      enable = true;
-      acceleration = "cuda";
-    };
-
-    open-webui = {
-      enable = true;
-      openFirewall = true;
-    };
-
-    cron = {
-      enable = true;
-    };
-
-    libinput.enable = true;
-
-    fstrim.enable = true;
-
-    gvfs.enable = true;
-
-    openssh.enable = true;
-
-    gnome.gnome-keyring.enable = true;
-
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
-    };
-
-    ipp-usb.enable = true;
-
-    syncthing = {
-      enable = true;
-      user = username;
-      dataDir = homeDirectory;
-      configDir = "${homeDirectory}/.config/syncthing";
-    };
-
-    pipewire = {
-      enable = true;
-      alsa = {
-        enable = true;
-        support32Bit = true;
-      };
-      pulse.enable = true;
-      jack.enable = true;
-      wireplumber.enable = true;
-    };
-  };
-
-  hardware = {
-    sane = {
-      enable = true;
-      extraBackends = [pkgs.sane-airscan];
-      disabledDefaultBackends = ["escl"];
-    };
-    logitech.wireless = {
-      enable = true;
-      enableGraphical = true;
-    };
-    bluetooth = {
-      enable = true;
-      powerOnBoot = true;
-    };
-    graphics = {
-      enable = true;
-      enable32Bit = true;
     };
   };
 
@@ -264,36 +87,6 @@ in {
     intel.enable = true;
     nvidia.enable = true;
     nvidia-prime.enable = true;
-  };
-
-  systemd.extra = {
-    muteMicrophone.enable = true;
-  };
-
-  services.blueman.enable = true;
-
-  security = {
-    rtkit.enable = true;
-    polkit = {
-      enable = true;
-      extraConfig = ''
-        polkit.addRule(function(action, subject) {
-          if (
-            subject.isInGroup("users")
-              && (
-                action.id == "org.freedesktop.login1.reboot" ||
-                action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
-                action.id == "org.freedesktop.login1.power-off" ||
-                action.id == "org.freedesktop.login1.power-off-multiple-sessions"
-              )
-            )
-          {
-            return polkit.Result.YES;
-          }
-        })
-      '';
-    };
-    pam.services.swaylock.text = "auth include login";
   };
 
   nix = {

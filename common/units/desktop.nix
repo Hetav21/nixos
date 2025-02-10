@@ -8,6 +8,12 @@
 }: let
   wallpaper = "artistic-boy-relaxing.jpg";
 in {
+  environment.systemPackages = with pkgs; [
+    hyprpicker
+    hyprshot
+    libsForQt5.qt5.qtgraphicaleffects # sddm dep
+  ];
+
   stylix = {
     enable = true;
     base16Scheme = {
@@ -56,6 +62,73 @@ in {
     };
   };
 
+  xdg = {
+    mime.defaultApplications = {
+      # Web and HTML
+      "x-scheme-handler/http" = "zen.desktop";
+      "x-scheme-handler/https" = "zen.desktop";
+      "x-scheme-handler/chrome" = "zen.desktop";
+      "text/html" = "zen.desktop";
+      "application/x-extension-htm" = "zen.desktop";
+      "application/x-extension-html" = "zen.desktop";
+      "application/x-extension-shtml" = "zen.desktop";
+      "application/x-extension-xhtml" = "zen.desktop";
+      "application/xhtml+xml" = "zen.desktop";
+
+      # File management
+      "inode/directory" = "thunar.desktop";
+
+      # Text editor
+      ## "text/plain" = "vim";
+
+      # Terminal
+      "x-scheme-handler/terminal" = "ghostty.desktop";
+
+      # Videos
+      "video/quicktime" = "mpv-2.desktop";
+      "video/x-matroska" = "mpv-2.desktop";
+
+      # LibreOffice formats
+      "application/vnd.oasis.opendocument.text" = "libreoffice-writer.desktop";
+      "application/vnd.oasis.opendocument.spreadsheet" = "libreoffice-calc.desktop";
+      "application/vnd.oasis.opendocument.presentation" = "libreoffice-impress.desktop";
+      "application/vnd.ms-excel" = "libreoffice-calc.desktop";
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = "libreoffice-calc.desktop";
+      "application/msword" = "libreoffice-writer.desktop";
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "libreoffice-writer.desktop";
+      "application/vnd.ms-powerpoint" = "libreoffice-impress.desktop";
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "libreoffice-impress.desktop";
+
+      # PDF
+      "application/pdf" = "com.microsoft.Edge.desktop";
+
+      # Torrents
+      "application/x-bittorrent" = "org.qbittorrent.qBittorrent.desktop";
+      "x-scheme-handler/magnet" = "org.qbittorrent.qBittorrent.desktop";
+
+      # Other handlers
+      "x-scheme-handler/about" = "zen.desktop";
+      "x-scheme-handler/unknown" = "zen.desktop";
+      "x-scheme-handler/postman" = "Postman.desktop";
+      "x-scheme-handler/tonsite" = "org.telegram.desktop.desktop";
+    };
+    portal = {
+      enable = true;
+
+      wlr.enable = true;
+
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal
+      ];
+
+      configPackages = [
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-hyprland
+        pkgs.xdg-desktop-portal
+      ];
+    };
+  };
   programs = {
     hyprland = {
       enable = true;
@@ -68,29 +141,42 @@ in {
       package = pkgs.hyprlock;
     };
   };
-  services.displayManager = {
-    defaultSession = "hyprland-uwsm";
-    sddm = {
-      enable = true; # Enable SDDM.
-      wayland.enable = true;
-      autoNumlock = true;
-      sugarCandyNix = {
-        enable = true; # This set SDDM's theme to "sddm-sugar-candy-nix".
-        settings = {
-          # Here is a simple example:
-          Background = lib.cleanSource ../../config/assets/${wallpaper};
-          ScreenWidth = 1920;
-          ScreenHeight = 1080;
-          FormPosition = "left";
-          HaveFormBackground = true;
-          PartialBlur = true;
+
+  services = {
+    logind = {
+      extraConfig = ''
+        HandlePowerKey=suspend
+      '';
+    };
+
+    xserver = {
+      enable = false;
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
+      videoDrivers = ["modesetting"];
+    };
+
+    displayManager = {
+      defaultSession = "hyprland-uwsm";
+      sddm = {
+        enable = true; # Enable SDDM.
+        wayland.enable = true;
+        autoNumlock = true;
+        sugarCandyNix = {
+          enable = true; # This set SDDM's theme to "sddm-sugar-candy-nix".
+          settings = {
+            # Here is a simple example:
+            Background = lib.cleanSource ../../config/assets/${wallpaper};
+            ScreenWidth = 1920;
+            ScreenHeight = 1080;
+            FormPosition = "left";
+            HaveFormBackground = true;
+            PartialBlur = true;
+          };
         };
       };
     };
   };
-  environment.systemPackages = with pkgs; [
-    hyprpicker
-    hyprshot
-    libsForQt5.qt5.qtgraphicaleffects # sddm dep
-  ];
 }

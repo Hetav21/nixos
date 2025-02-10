@@ -7,6 +7,10 @@
   ...
 }: let
 in {
+  environment.systemPackages = with pkgs; [
+    libvirt
+  ];
+
   virtualisation = {
     podman = {
       enable = true;
@@ -21,7 +25,4 @@ in {
     };
     waydroid.enable = true;
   };
-  environment.systemPackages = with pkgs; [
-    libvirt
-  ];
 }

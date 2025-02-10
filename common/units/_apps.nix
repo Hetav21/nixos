@@ -55,7 +55,6 @@ in {
     ninja
     distrobox
     devenv
-    open-webui
 
     # Shell and terminal utilities
     ##    inputs.nixCats.packages.${pkgs.system}.nixCats
@@ -94,14 +93,10 @@ in {
     nix-output-monitor
 
     # Network and internet tools
-    onedrive
-    cloudflare-warp
     aria2
     qbittorrent
-    tailscale
 
     # Audio and video
-    pulseaudio
     alsa-utils
     pavucontrol
     ffmpeg
@@ -126,6 +121,7 @@ in {
     # Communication and social
     telegram-desktop
     element-desktop
+    thunderbird
     zoom-us
     discord
     vesktop
@@ -155,7 +151,6 @@ in {
     brightnessctl
     virt-viewer
     swappy
-    appimage-run
     yad
     playerctl
     nh

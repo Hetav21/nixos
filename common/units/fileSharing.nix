@@ -6,10 +6,29 @@
   options,
   ...
 }: let
+  username = "hetav";
+  homeDirectory = "/home/${username}";
 in {
+  environment.systemPackages = with pkgs; [
+    rclone
+    onedrive
+    localsend
+    megasync
+    megacmd
+  ];
+
   programs.localsend = {
     enable = true;
     openFirewall = true;
+  };
+
+  services = {
+    syncthing = {
+      enable = true;
+      user = username;
+      dataDir = homeDirectory;
+      configDir = "${homeDirectory}/.config/syncthing";
+    };
   };
 
   imports = [
@@ -20,11 +39,4 @@ in {
     rclone.enable = true;
     mega-sync.enable = true;
   };
-
-  environment.systemPackages = with pkgs; [
-    rclone
-    localsend
-    megasync
-    megacmd
-  ];
 }
