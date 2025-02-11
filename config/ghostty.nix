@@ -4,7 +4,8 @@
   pkgs,
   ...
 }: let
-  ghostty = inputs.ghostty.packages.${pkgs.system}.default;
+  ghostty = pkgs.ghostty;
+  #  ghostty = inputs.ghostty.packages.${pkgs.system}.default;
 
   ghosttyTheme = pkgs.writeTextFile {
     name = "ghostty-theme-Dracula";
