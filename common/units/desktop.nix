@@ -11,6 +11,11 @@ in {
   environment.systemPackages = with pkgs; [
     hyprpicker
     hyprshot
+    hyprlang
+    hyprutils
+    hyprgraphics
+    hyprwayland-scanner
+    wlr-protocols
     libsForQt5.qt5.qtgraphicaleffects # sddm dep
   ];
 
