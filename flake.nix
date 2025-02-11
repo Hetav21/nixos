@@ -44,6 +44,7 @@
       megacmd = pkgs.megacmd;
       megasync = pkgs.megasync;
       open-webui = pkgs.open-webui;
+      hyprlock = pkgs.hyprlock;
     };
   in {
     # Define multiple NixOS configurations

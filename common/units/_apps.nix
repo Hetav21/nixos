@@ -15,7 +15,7 @@ in {
     vim
     sublime4
     zed-editor_git
-    jetbrains.idea-ultimate
+    ##    jetbrains.idea-ultimate
 
     # Programming languages and tools
     go
@@ -46,9 +46,8 @@ in {
     ## bruno
     git
     gh
-    lazygit
-    lazydocker
     gnumake
+    progress
     coreutils
     nixfmt-rfc-style
     meson
@@ -57,7 +56,8 @@ in {
     devenv
 
     # Shell and terminal utilities
-    ##    inputs.nixCats.packages.${pkgs.system}.nixCats
+    alacritty
+    ghostty
     alejandra
     stow
     tmux
@@ -66,17 +66,13 @@ in {
     killall
     eza
     starship
-    kitty
     zoxide
     fzf
     tmux
-    progress
     tree
-    alacritty
     nix-index
 
     # File management and archives
-    yazi
     p7zip
     unzip
     unrar
@@ -134,6 +130,7 @@ in {
 
     # Gaming and entertainment
     ##    stremio
+
     # System utilities
     libgcc
     bc
@@ -170,12 +167,12 @@ in {
 
     # Downloaders
     yt-dlp
+
     # Clipboard managers
     cliphist
 
     # Fun and customization
     cmatrix
-    lolcat
     fastfetch
     onefetch
     microfetch

@@ -7,6 +7,11 @@
   ...
 }: let
 in {
+  environment.systemPackages = with pkgs; [
+    yazi
+    xfce.thunar
+  ];
+
   programs = {
     thunar = {
       enable = true;
