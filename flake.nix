@@ -35,15 +35,48 @@
   } @ inputs: let
     system = "x86_64-linux";
 
+    lib = nixpkgs.lib;
+
     pkgs = import inputs.stablePkgs {
       inherit system;
       config.allowUnfree = true;
     };
 
+    electronWrap = {appName}:
+      pkgs.symlinkJoin {
+        name = appName;
+        paths = [pkgs.${appName}];
+        buildInputs = [pkgs.makeWrapper];
+        postBuild = lib.strings.concatStrings [
+          "wrapProgram $out/bin/"
+          appName
+          " --add-flags \"--enable-features=UseOzonePlatform\""
+          " --add-flags \"--ozone-platform-hint=wayland\""
+          " --add-flags \"--enable-webrtc-pipewire-capturer\""
+          " --add-flags \"--enable-features=WaylandWindowDecorations\""
+          " --add-flags \"--enable-wayland-ime\""
+        ];
+      };
+
+    disableGpuWrap = {appName}:
+      pkgs.symlinkJoin {
+        name = appName;
+        paths = [pkgs.${appName}];
+        buildInputs = [pkgs.makeWrapper];
+        postBuild = lib.strings.concatStrings [
+          "wrapProgram $out/bin/"
+          appName
+          " --add-flags \"--disable-gpu\""
+        ];
+      };
+
     overlay = final: prev: {
       megacmd = pkgs.megacmd;
       megasync = pkgs.megasync;
       open-webui = pkgs.open-webui;
+      bruno = disableGpuWrap {appName = "bruno";};
+      obsidian = disableGpuWrap {appName = "obsidian";};
+      chromium = disableGpuWrap {appName = "chromium";};
     };
   in {
     # Define multiple NixOS configurations

@@ -78,7 +78,6 @@ in {
     ffmpeg
     obs-studio
     mpv
-    deadbeef-with-plugins
 
     # Image and graphics
     loupe
