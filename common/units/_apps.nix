@@ -16,7 +16,7 @@ in {
     vscode
     vim
     sublime4
-    zed-editor_git
+    zed-editor
 
     # Programming languages and build tools
     nodePackages_latest.pnpm

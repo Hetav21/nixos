@@ -82,6 +82,7 @@ in {
   };
 
   xdg = {
+    autostart.enable = true;
     mime.defaultApplications = {
       # Web and HTML
       "x-scheme-handler/http" = "userapp-Zen Browser-CWEPZ2.desktop";

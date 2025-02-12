@@ -24,13 +24,9 @@ in {
     gnome.gnome-keyring.enable = true;
   };
 
-  programs = {
-    dconf.enable = true;
-
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
   };
 
   imports = [

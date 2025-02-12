@@ -10,7 +10,6 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     sddm-sugar-candy-nix = {
       url = "gitlab:Zhaith-Izaliel/sddm-sugar-candy-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,7 +26,6 @@
   outputs = {
     self,
     nixpkgs,
-    chaotic,
     nix-flatpak,
     sddm-sugar-candy-nix,
     nix-index-database,
@@ -86,7 +84,6 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./hosts/nixbook/configuration.nix # Path to your host specific config
-          chaotic.nixosModules.default
           sddm-sugar-candy-nix.nixosModules.default
           {
             nixpkgs = {
@@ -99,7 +96,6 @@
           inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.default
           nix-index-database.nixosModules.nix-index
-          # optional to also wrap and install comma
           {programs.nix-index-database.comma.enable = true;}
           {programs.nix-index.enable = true;}
           ({pkgs, ...}: {

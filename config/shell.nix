@@ -22,7 +22,6 @@
 
         # Dev
         de = "devenv";
-        nix-shell = "fish -c nix-shell";
 
         # Git Aliases
         gac = "git add . and git commit -m";

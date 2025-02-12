@@ -24,7 +24,6 @@ in {
   imports = [
     ./hardware-configuration.nix
     ./user.nix
-    ../../lib/lib-imports.nix
     ../../common/common-imports.nix
     ../../modules/modules-imports.nix
     inputs.home-manager.nixosModules.default
