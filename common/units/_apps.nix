@@ -8,115 +8,86 @@
 }: let
 in {
   environment.systemPackages = with pkgs; [
+    # Nix Related
+    nixfmt-rfc-style
+    nix-index
+
     # Text editors and IDEs
-    ##    neovim
-    ##    neovide
     vscode
     vim
     sublime4
     zed-editor_git
-    ##    jetbrains.idea-ultimate
 
-    # Programming languages and tools
-    go
-    lua
-    python3
-    python3Packages.pip
-    uv
-    clang
-    zig
-    rustup
+    # Programming languages and build tools
     nodePackages_latest.pnpm
     nodePackages_latest.yarn
     nodePackages_latest.nodejs
     bun
+    go
+    lua
+    zig
+    rustup
+    rustc
+    python3
     jdk
     maven
     gcc
-
-    # Frappe Bench
-    redis
-    wkhtmltopdf
-    nginx
-    uv
-    mariadb
-    mongodb-compass
-
-    # Version control and development tools
-    ## bruno
-    git
-    gh
+    clang
     gnumake
     progress
-    coreutils
-    nixfmt-rfc-style
     meson
     ninja
+
+    # Version control and development tools
+    bruno
+    git
+    gh
+    mongodb-compass
     distrobox
     devenv
 
     # Shell and terminal utilities
+    coreutils
     alacritty
     ghostty
+    tmux
     alejandra
-    stow
-    tmux
     wget
-    pandoc
     killall
-    eza
-    starship
-    zoxide
-    fzf
-    tmux
     tree
-    nix-index
+    stow
+    pandoc
 
     # File management and archives
     p7zip
     unzip
     unrar
     file-roller
-    ncdu
-    duf
     zip
 
     # System monitoring and management
     htop
     btop
-    lm_sensors
-    inxi
-    nix-output-monitor
 
     # Network and internet tools
-    aria2
+    yt-dlp
     qbittorrent
 
     # Audio and video
-    alsa-utils
     pavucontrol
     ffmpeg
+    obs-studio
     mpv
     deadbeef-with-plugins
-    obs-studio
 
     # Image and graphics
-    gimp
     loupe
-    imagemagick
-    swww
-    waypaper
-    imv
 
     # Productivity and office
-    spacedrive
-    hugo
-    ## obsidian
+    obsidian
     onlyoffice-bin
 
     # Communication and social
-    telegram-desktop
-    element-desktop
     thunderbird
     zoom-us
     discord
@@ -129,64 +100,31 @@ in {
     inputs.zen-browser.packages."${system}".default
 
     # Gaming and entertainment
-    ##    stremio
 
     # System utilities
     libgcc
-    bc
-    lxqt.lxqt-policykit
     libnotify
     v4l-utils
-    ydotool
     pciutils
-    socat
-    cowsay
-    ripgrep
-    lshw
-    bat
     pkg-config
-    brightnessctl
-    virt-viewer
-    swappy
-    yad
-    playerctl
-    nh
-    ansible
-    kdePackages.kwallet
-
-    # Wayland specific
-    grim
-    slurp
-    waybar
-    dunst
-    wl-clipboard
-    swaynotificationcenter
 
     # File systems
     ntfs3g
-
-    # Downloaders
-    yt-dlp
 
     # Clipboard managers
     cliphist
 
     # Fun and customization
-    cmatrix
     fastfetch
-    onefetch
     microfetch
+    onefetch
 
     # Networking
-    networkmanagerapplet
 
     # Education
-    ## ciscoPacketTracer8
     wireshark
-    ventoy
 
     # Music and streaming
-    #    spotify
     youtube-music
     spicetify-cli
 

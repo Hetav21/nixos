@@ -1,3 +1,4 @@
+### CONTAINS HARDWARE AND RELATED UTILITIES
 {
   config,
   lib,
@@ -9,6 +10,8 @@
 in {
   environment.systemPackages = with pkgs; [
     pulseaudio
+    alsa-utils
+    brightnessctl
   ];
 
   services = {

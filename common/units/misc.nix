@@ -7,6 +7,10 @@
   ...
 }: let
 in {
+  environment.systemPackages = with pkgs; [
+    kdePackages.kwallet
+  ];
+
   services = {
     locate = {
       enable = true;

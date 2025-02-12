@@ -8,14 +8,28 @@
 }: let
   wallpaper = "artistic-boy-relaxing.jpg";
 in {
+  ### CONTAINS ALL PACKAGES THAT ARE DE SPECIFIC
+
   environment.systemPackages = with pkgs; [
+    # Wayland specific
+    swww
+    waypaper
+    grim
+    slurp
+    swappy
+    waybar
+    wl-clipboard
+    wlr-protocols
+
+    # Hyprland Specific
     hyprpicker
     hyprshot
     hyprlang
     hyprutils
     hyprgraphics
     hyprwayland-scanner
-    wlr-protocols
+
+    # Sddm Specific
     libsForQt5.qt5.qtgraphicaleffects # sddm dep
   ];
 

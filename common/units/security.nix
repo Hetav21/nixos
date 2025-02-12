@@ -7,6 +7,10 @@
   ...
 }: let
 in {
+  environment.systemPackages = with pkgs; [
+    lxqt.lxqt-policykit
+  ];
+
   security = {
     rtkit.enable = true;
     polkit = {

@@ -167,6 +167,15 @@
         "--header"
       ];
     };
+    bat.enable = true;
+    ripgrep = {
+      enable = true;
+      arguments = [
+        "--max-columns-preview"
+        "--colors=line:style:bold"
+      ];
+    };
+    fzf.enable = true;
     atuin = {
       enable = true;
       enableNushellIntegration = true;

@@ -9,6 +9,7 @@
   hostName = "nixbook";
 in {
   environment.systemPackages = with pkgs; [
+    networkmanagerapplet
     openssh
     tailscale
     cloudflare-warp

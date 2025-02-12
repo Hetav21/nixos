@@ -9,6 +9,7 @@
 in {
   environment.systemPackages = with pkgs; [
     libvirt
+    virt-viewer
   ];
 
   virtualisation = {
