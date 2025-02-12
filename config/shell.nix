@@ -158,6 +158,8 @@
     };
     eza = {
       enable = true;
+      enableNushellIntegration = false;
+      enableFishIntegration = true;
       git = true;
       icons = "auto";
       colors = "auto";
