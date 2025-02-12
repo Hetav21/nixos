@@ -13,8 +13,6 @@
   timeZone = "Asia/Kolkata";
 in {
   nixpkgs.config.allowUnfree = true;
-  ## nixpkgs.config.allowBroken = true;
-  ## nixpkgs.config.allowUnsupportedSystem = true;
 
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w"
