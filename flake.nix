@@ -88,8 +88,6 @@
           inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.default
           nix-index-database.nixosModules.nix-index
-          {programs.nix-index-database.comma.enable = true;}
-          {programs.nix-index.enable = true;}
           {
             nixpkgs = {
               overlays = [
