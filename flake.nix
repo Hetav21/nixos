@@ -77,34 +77,24 @@
       chromium = disableGpuWrap {appName = "chromium";};
     };
   in {
-    # Define multiple NixOS configurations
     nixosConfigurations = {
       nixbook = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit inputs;};
         modules = [
-          ./hosts/nixbook/configuration.nix # Path to your host specific config
+          ./hosts/nixbook/configuration.nix
           sddm-sugar-candy-nix.nixosModules.default
-          {
-            nixpkgs = {
-              overlays = [
-                sddm-sugar-candy-nix.overlays.default
-              ];
-            };
-          }
           nix-flatpak.nixosModules.nix-flatpak
           inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.default
           nix-index-database.nixosModules.nix-index
           {programs.nix-index-database.comma.enable = true;}
           {programs.nix-index.enable = true;}
-          ({pkgs, ...}: {
-            ## Add specific packages that you need
-          })
           {
             nixpkgs = {
               overlays = [
                 overlay
+                sddm-sugar-candy-nix.overlays.default
               ];
             };
           }
