@@ -8,10 +8,6 @@
 }: let
 in {
   environment.systemPackages = with pkgs; [
-    # Nix Related
-    nixfmt-rfc-style
-    nix-index
-
     # Text editors and IDEs
     vscode
     vim

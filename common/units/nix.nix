@@ -13,6 +13,11 @@ in {
     nix-index
   ];
 
+  programs = {
+    nix-index.enable = true;
+    nix-index-database.comma.enable = true;
+  };
+
   nix = {
     settings = {
       trusted-users = ["root" "${username}"];
@@ -29,10 +34,5 @@ in {
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-  };
-
-  programs = {
-    nix-index.enable = true;
-    nix-index-database.comma.enable = true;
   };
 }
