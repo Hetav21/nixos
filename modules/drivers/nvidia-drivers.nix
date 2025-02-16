@@ -12,58 +12,29 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # Load nvidia driver for Xorg and Wayland
+    environment.systemPackages = with pkgs; [nvtopPackages.nvidia nvidia-vaapi-driver];
+
+    hardware.graphics.enable = true;
     services.xserver.videoDrivers = ["nvidia"];
 
-    hardware.nvidia = {
-      # Modesetting is required.
-      modesetting.enable = true;
-      # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-      powerManagement.enable = false;
-      # Fine-grained power management. Turns off GPU when not in use.
-      # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-      powerManagement.finegrained = false;
-      # Use the NVidia open source kernel module (not to be confused with the
-      # independent third-party "nouveau" open source driver).
-      # Support is limited to the Turing and later architectures. Full list of
-      # supported GPUs is at:
-      # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
-      # Only available from driver 515.43.04+
-      # Currently alpha-quality/buggy, so false is currently the recommended setting.
-      open = false;
-      # Enable the Nvidia settings menu,
-      # accessible via `nvidia-settings`.
-      nvidiaSettings = true;
-      # Optionally, you may need to select the appropriate driver version for your specific GPU.
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-      ##      package = config.boot.kernelPackages.nvidiaPackages.production;
-    };
-
-    environment.systemPackages = with pkgs; [
-      nvtopPackages.nvidia
-      # nvidia-docker
-      # nvidia-podman
-      # nvidia-texture-tools
-      # nvidia-container-toolkit
-      # nvidia_cg_toolkit
+    boot.kernelParams = [
+      "nvidia-drm.modeset=1"
+      "nvidia-drm.fbdev=1"
     ];
 
-    hardware.graphics = {
-      extraPackages = with pkgs; [
-        nvidia-vaapi-driver
-        #       nvtopPackages.nvidia
-        #	nvidia-docker
-        #	nvidia-podman
-        #	nvidia-texture-tools
-        #	nvidia-container-toolkit
-        #	nvidia_cg_toolkit
-      ];
+    nixpkgs.config = {
+      packageOverrides = _: {inherit (pkgs) linuxPackages_latest nvidia_x11;};
     };
 
-    systemd.services."systemd-suspend" = {
-      serviceConfig = {
-        Environment = ''"SYSTEMD_SLEEP_FREEZE_USER_SESSIONS=false"'';
+    hardware.nvidia = {
+      modesetting.enable = true;
+      powerManagement = {
+        enable = true;
+        finegrained = false;
       };
+      open = false;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
   };
 }
