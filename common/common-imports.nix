@@ -10,6 +10,7 @@ in {
     ./units/fileManager.nix
     ./units/fileSharing.nix
     ./units/hardware.nix
+    ./units/hibernation.nix
     ./units/llm.nix
     ./units/misc.nix
     ./units/networking.nix
