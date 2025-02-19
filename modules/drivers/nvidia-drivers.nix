@@ -12,7 +12,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [nvtopPackages.nvidia nvidia-vaapi-driver];
+    environment.systemPackages = with pkgs; [nvtopPackages.nvidia nvidia-vaapi-driver cudatoolkit];
 
     hardware.graphics.enable = true;
     services.xserver.videoDrivers = ["nvidia"];
