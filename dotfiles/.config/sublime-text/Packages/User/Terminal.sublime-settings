@@ -1,0 +1,7 @@
+// Terminal Settings - User
+{
+  // Replace with your own path to cmder.exe
+  // "terminal": "C:\\Program Files\\cmder\\cmder.exe",
+  "terminal": "st",
+  // "parameters": ["", ""]
+}

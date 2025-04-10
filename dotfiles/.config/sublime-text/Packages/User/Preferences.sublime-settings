@@ -1,0 +1,20 @@
+{
+	"font_size": 15,
+	"ignored_packages":
+	[
+		"SublimeAStyleFormatter",
+	],
+	"color_scheme": "Dark+.sublime-color-scheme",
+	"theme": "Afterglow.sublime-theme",
+    "tabs_medium": true,
+    "sidebar_size_14": true,
+	"statusbar_size_14": true,
+	"status_bar_brighter": true,
+	"sidebar_row_padding_large": true,
+	"tabs_padding_medium": true,
+	/*"ignored_packages": [""],*/
+	"vintage_start_in_command_mode": true,
+	"vintage_ctrl_keys": true,
+	
+	"index_files": true,
+}
