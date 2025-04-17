@@ -37,6 +37,7 @@ in {
       gtk2
       gtk3
       bzip2
+      libgbm
 
       # Without these it silently fails
       xorg.libXinerama
