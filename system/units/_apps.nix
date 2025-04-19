@@ -59,7 +59,6 @@ in {
     tree
     stow
     pandoc
-    imagemagick
 
     # File management and archives
     p7zip
@@ -80,6 +79,7 @@ in {
 
     # Image and graphics
     loupe
+    upscayl
 
     # Productivity and office
     obsidian
