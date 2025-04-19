@@ -13,6 +13,7 @@ in {
     vim
     sublime4
     zed-editor
+    code-cursor
     android-studio
 
     # Programming languages and build tools
