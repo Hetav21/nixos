@@ -59,6 +59,7 @@ in {
     tree
     stow
     pandoc
+    imagemagick
 
     # File management and archives
     p7zip
