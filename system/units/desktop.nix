@@ -16,6 +16,7 @@ in {
     ## kdePackages.kwallet
 
     # Wayland specific
+    dunst
     swww
     waypaper
     grim
