@@ -17,6 +17,8 @@ in {
     megacmd
   ];
 
+  programs.droidcam.enable = true;
+
   programs.localsend = {
     enable = true;
     openFirewall = true;
