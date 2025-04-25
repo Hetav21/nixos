@@ -54,6 +54,7 @@
       auto-cpufreq = pkgs.auto-cpufreq;
       bruno = disableGpuWrap {appName = "bruno";};
       obsidian = disableGpuWrap {appName = "obsidian";};
+      nushell = pkgs.nushell;
     };
   in {
     nixosConfigurations = {
