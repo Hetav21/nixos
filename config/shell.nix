@@ -57,6 +57,9 @@
         copy = "wl-copy";
         paste = "wl-paste";
       };
+      extraConfig = ''
+        $env.config.show_banner = false
+      '';
     };
     fish.enable = true;
     carapace = {
@@ -90,10 +93,6 @@
         "--max-columns-preview"
         "--colors=line:style:bold"
       ];
-    };
-    broot = {
-      #      enable = true;
-      #      enableNushellIntegration = true;
     };
     fzf.enable = true;
     atuin = {
