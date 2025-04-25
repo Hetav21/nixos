@@ -48,8 +48,8 @@ in {
       ## ".config/zed/keymap.json".source = ../../dotfiles/.config/zed/keymap.json;
 
       # Individual config files
-      ".config/nushell/completer.nu".source = ../../dotfiles/.config/nushell/completer.nu;
-      ".config/nushell/colors.nu".source = ../../dotfiles/.config/nushell/colors.nu;
+      ## ".config/nushell/completer.nu".source = ../../dotfiles/.config/nushell/completer.nu;
+      ## ".config/nushell/colors.nu".source = ../../dotfiles/.config/nushell/colors.nu;
       ".config/kwalletrc".source = ../../dotfiles/.config/kwalletrc;
       ## ".config/starship.toml".source = ../../dotfiles/.config/starship.toml;
     };
