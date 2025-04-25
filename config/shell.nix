@@ -175,7 +175,7 @@
     };
     broot = {
       enable = true;
-      enableNushellIntegration = true;
+      #      enableNushellIntegration = true;
     };
     thefuck = {
       enable = true;
