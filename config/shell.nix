@@ -59,6 +59,8 @@
       };
       extraConfig = ''
         $env.config.show_banner = false
+        date now | format date "%Y-%m-%d %H:%M:%S"
+        microfetch
       '';
     };
     fish.enable = true;
