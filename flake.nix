@@ -5,6 +5,7 @@
   inputs = {
     stablePkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     stylix.url = "github:danth/stylix";
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -22,6 +23,7 @@
   outputs = {
     self,
     nixpkgs,
+    chaotic,
     nix-flatpak,
     nix-index-database,
     ...
@@ -62,6 +64,7 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./hosts/nixbook/configuration.nix
+          chaotic.nixosModules.default
           nix-flatpak.nixosModules.nix-flatpak
           inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.default
