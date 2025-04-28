@@ -16,7 +16,6 @@ in {
 
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w"
-    "SDL_ttf-2.0.11"
   ];
 
   imports = [
