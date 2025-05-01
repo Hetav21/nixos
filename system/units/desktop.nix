@@ -35,8 +35,6 @@ in {
     hyprwayland-scanner
   ];
 
-  services.gnome.gnome-keyring.enable = true;
-
   stylix = {
     enable = true;
     base16Scheme = {
@@ -174,6 +172,10 @@ in {
   };
 
   services = {
+    gnome.gnome-keyring.enable = true;
+
+    preload.enable = true;
+
     logind = {
       extraConfig = ''
         HandlePowerKey=suspend
