@@ -8,10 +8,6 @@
 }: let
 in {
   services = {
-    mysql = {
-      enable = true;
-      package = pkgs.mariadb;
-    };
     locate = {
       enable = true;
       package = pkgs.mlocate;
