@@ -87,7 +87,7 @@ in {
   drivers = {
     intel.enable = true;
     nvidia.enable = true;
-    nvidia-prime.enable = true;
+    nvidia-prime.sync.enable = true;
   };
 
   home-manager = {
