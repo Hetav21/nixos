@@ -78,7 +78,8 @@ in {
       XDG_SESSION_DESKTOP = "Hyprland";
 
       VDPAU_DRIVER = "va_gl";
-      GBM_BACKEND = "nvidia-drm";
+      # GBM_BACKEND = "nvidia-drm";
+      NVD_BACKEND = "direct";
       LIBVA_DRIVER_NAME = "nvidia";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       JAVA_AWT_WM_NONREPARENTING = "1";
