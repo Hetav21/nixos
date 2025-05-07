@@ -14,12 +14,12 @@ in {
   config = mkIf cfg.enable {
     hardware.graphics = {
       extraPackages = with pkgs; [
-        # intel-media-driver
-        # intel-vaapi-driver
+        intel-media-driver
+        intel-vaapi-driver
       ];
 
       extraPackages32 = with pkgs.pkgsi686Linux; [
-        #intel-vaapi-driver
+        intel-vaapi-driver
       ];
     };
   };
