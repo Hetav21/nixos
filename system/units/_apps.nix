@@ -37,6 +37,7 @@ in {
     ninja
 
     # Version control and development tools
+    codex
     hoppscotch
     bruno
     python3Packages.huggingface-hub
