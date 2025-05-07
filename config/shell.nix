@@ -5,6 +5,8 @@
   ...
 }: {
   programs = {
+    fish.enable = true;
+
     nushell = {
       enable = true;
       shellAliases = {
@@ -62,18 +64,20 @@
         microfetch
       '';
     };
-    fish.enable = true;
     carapace = {
       enable = true;
       enableNushellIntegration = true;
+      enableFishIntegration = true;
     };
     starship = {
       enable = true;
       enableNushellIntegration = true;
+      enableFishIntegration = true;
     };
     zoxide = {
       enable = true;
       enableNushellIntegration = true;
+      enableFishIntegration = true;
     };
     eza = {
       enable = true;
@@ -99,6 +103,7 @@
     atuin = {
       enable = true;
       enableNushellIntegration = true;
+      enableFishIntegration = true;
       flags = [
         "--disable-up-arrow"
       ];
@@ -106,6 +111,7 @@
     nix-your-shell = {
       enable = true;
       enableNushellIntegration = true;
+      enableFishIntegration = true;
     };
     direnv = {
       enable = true;
