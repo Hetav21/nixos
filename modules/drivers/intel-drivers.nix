@@ -15,11 +15,13 @@ in {
     hardware.graphics = {
       extraPackages = with pkgs; [
         intel-media-driver
-        intel-vaapi-driver
+        vpl-gpu-rt
+        libvdpau-va-gl
+        vaapiVdpau
       ];
 
       extraPackages32 = with pkgs.pkgsi686Linux; [
-        intel-vaapi-driver
+        intel-media-driver
       ];
     };
   };

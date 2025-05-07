@@ -77,12 +77,13 @@ in {
       XDG_CURRENT_DESKTOP = "Hyprland";
       XDG_SESSION_DESKTOP = "Hyprland";
 
-      VDPAU_DRIVER = "va_gl";
+      VDPAU_DRIVER = "nvidia";
       GBM_BACKEND = "nvidia-drm";
       NVD_BACKEND = "direct";
       LIBVA_DRIVER_NAME = "nvidia";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
+      ANV_VIDEO_DECODE = 1;
 
       JAVA_AWT_WM_NONREPARENTING = "1";
     };

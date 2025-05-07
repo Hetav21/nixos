@@ -19,8 +19,6 @@ in {
       extraPackages = with pkgs; [
         nvidia-vaapi-driver
         libvdpau-va-gl
-        nvtopPackages.nvidia
-        cudatoolkit
       ];
     };
 
