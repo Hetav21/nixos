@@ -12,11 +12,16 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [nvtopPackages.nvidia nvidia-vaapi-driver cudatoolkit];
-
     hardware.graphics = {
       enable = true;
       enable32Bit = true;
+
+      extraPackages = with pkgs; [
+        nvidia-vaapi-driver
+        libvdpau-va-gl
+        nvtopPackages.nvidia
+        cudatoolkit
+      ];
     };
 
     nix.settings = {
@@ -45,7 +50,7 @@ in {
         enable = true;
         finegrained = false;
       };
-      open = true;
+      open = false;
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.latest;
     };

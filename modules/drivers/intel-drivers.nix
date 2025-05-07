@@ -14,13 +14,12 @@ in {
   config = mkIf cfg.enable {
     hardware.graphics = {
       extraPackages = with pkgs; [
-        mesa
-        libva
-        vpl-gpu-rt
-        intel-media-driver
-        intel-vaapi-driver
-        vaapiVdpau
-        libvdpau-va-gl
+        # intel-media-driver
+        # intel-vaapi-driver
+      ];
+
+      extraPackages32 = with pkgs.pkgsi686Linux; [
+        #intel-vaapi-driver
       ];
     };
   };
