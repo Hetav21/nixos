@@ -106,7 +106,6 @@ in {
   ];
 
   # Styling
-  ## stylix.targets.waybar.enable = false;
   stylix.targets.waybar.enable = true;
 
   gtk = {
@@ -123,11 +122,10 @@ in {
   };
   qt = {
     enable = true;
-    ## style.name = "adwaita-dark";
-    ## platformTheme.name = "gtk3";
   };
 
   services.hypridle = {
+    enable = true;
     settings = {
       general = {
         after_sleep_cmd = "hyprctl dispatch dpms on";
