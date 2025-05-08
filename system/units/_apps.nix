@@ -14,7 +14,6 @@ in {
     sublime4
     zed-editor
     code-cursor
-    android-studio
 
     # Programming languages and build tools
     nodePackages_latest.pnpm
