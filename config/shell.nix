@@ -47,7 +47,7 @@
         recats = "sudo nix flake lock --update-input nixCats and sudo nixos-rebuild switch";
         log-rebuild = "tail -f /etc/nixos/nixos-switch.log";
         ff = "fastfetch";
-        btop = "btop --utf-force";
+        btop = "btop --force-utf";
         files-space = "sudo ncdu --exclude /.snapshots /";
         docker-clean = "docker container prune -f and docker image prune -f and docker network prune -f and docker volume prune -f";
         crdown = "mpv --yt-dlp-raw-options=cookies-from-browser=brave";
