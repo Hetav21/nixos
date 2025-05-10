@@ -37,6 +37,8 @@ in {
 
   programs.dconf.enable = true;
 
+  systemd.tmpfiles.rules = ["L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware"];
+
   virtualisation = {
     # Enable common container config files in /etc/containers
     containers.enable = true;
