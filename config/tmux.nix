@@ -10,6 +10,7 @@ in {
     plugins = with pkgs; [
       tmuxPlugins.sensible
       tmuxPlugins.rose-pine
+      tmuxPlugins.vim-tmux-navigator
       {
         plugin = tmuxPlugins.yank;
         extraConfig = ''
