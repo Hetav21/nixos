@@ -40,6 +40,5 @@ in {
       set-window-option -g pane-base-index 1
       set-option -g renumber-windows on
     '';
-    newSession = true;
   };
 }
