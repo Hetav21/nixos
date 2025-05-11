@@ -11,6 +11,7 @@ in {
       tmuxPlugins.sensible
       tmuxPlugins.vim-tmux-navigator
     ];
+    sensibleOnTop = true;
     extraConfig = ''
       set-option -sa terminal-overrides ",xterm*:Tc"
 
@@ -18,5 +19,8 @@ in {
       bind -n M-H previous-window
       bind -n M-L next-window
     '';
+    newSession = true;
+    prefix = "C-Shift";
+    keyMode = "vi";
   };
 }
