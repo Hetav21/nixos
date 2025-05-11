@@ -27,8 +27,8 @@ in {
 
       # Change the prefix key
       unbind C-b
-      set -g prefix C-a
-      bind C-a send-prefix
+      set -g prefix M-a
+      bind M-a send-prefix
 
       # Shift Alt vim keys to switch windows
       bind -n M-H previous-window
