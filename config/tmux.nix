@@ -9,7 +9,7 @@ in {
     enable = true;
     plugins = with pkgs; [
       tmuxPlugins.sensible
-      tmuxPlugins.vim-tmux-navigator
+      tmuxPlugins.rose-pine
     ];
     sensibleOnTop = true;
     extraConfig = ''
@@ -20,7 +20,7 @@ in {
       bind -n M-L next-window
     '';
     newSession = true;
-    prefix = "C-Space";
+    prefix = "S-Space";
     keyMode = "vi";
   };
 }
