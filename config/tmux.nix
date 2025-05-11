@@ -30,8 +30,8 @@ in {
     '';
     newSession = true;
     baseIndex = 1;
-    prefix = "C-Space";
     keyMode = "vi";
+    shortcut = "a";
     mouse = true;
   };
 }
