@@ -8,7 +8,6 @@ in {
   programs.tmux = {
     enable = true;
     plugins = with pkgs; [
-      tmuxPlugins.sensible
       tmuxPlugins.rose-pine
       tmuxPlugins.vim-tmux-navigator
       {
@@ -24,15 +23,23 @@ in {
     terminal = "tmux-256color";
     extraConfig = ''
       set-option -sa terminal-overrides ",xterm*:Tc"
+      set -g mouse on
+
+      # Change the prefix key
+      unbind C-b
+      set -g prefix C-a
+      bind C-a send-prefix
 
       # Shift Alt vim keys to switch windows
       bind -n M-H previous-window
       bind -n M-L next-window
+
+      # Change the base index to 1
+      set -g base-index 1
+      set -g pane-base-index 1
+      set-window-option -g pane-base-index 1
+      set-option -g renumber-windows on
     '';
     newSession = true;
-    baseIndex = 1;
-    keyMode = "vi";
-    shortcut = "a";
-    mouse = true;
   };
 }
