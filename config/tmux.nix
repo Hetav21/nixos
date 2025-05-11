@@ -22,6 +22,7 @@ in {
     ];
     customPaneNavigationAndResize = true;
     sensibleOnTop = true;
+    terminal = "tmux-256color";
     extraConfig = ''
       set-option -sa terminal-overrides ",xterm*:Tc"
 
