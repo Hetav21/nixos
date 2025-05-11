@@ -20,6 +20,7 @@ in {
         '';
       }
     ];
+    customPaneNavigationAndResize = true;
     sensibleOnTop = true;
     extraConfig = ''
       set-option -sa terminal-overrides ",xterm*:Tc"
