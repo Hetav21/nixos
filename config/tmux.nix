@@ -20,7 +20,7 @@ in {
       bind -n M-L next-window
     '';
     newSession = true;
-    prefix = "C-Shift";
+    prefix = "C-Space";
     keyMode = "vi";
   };
 }
