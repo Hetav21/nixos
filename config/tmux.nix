@@ -9,6 +9,14 @@ in {
     enable = true;
     plugins = with pkgs; [
       tmuxPlugins.sensible
+      tmuxPlugins.vim-tmux-navigator
     ];
+    extraConfig = ''
+      set-option -sa terminal-overrides ",xterm*:Tc"
+
+      # Shift Alt vim keys to switch windows
+      bind -n M-H previous-window
+      bind -n M-L next-window
+    '';
   };
 }
