@@ -103,6 +103,7 @@ in {
     ../../config/rofi/rofi.nix
     ../../config/wlogout.nix
     ../../config/shell.nix
+    ../../config/tmux.nix
   ];
 
   # Styling

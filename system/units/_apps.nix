@@ -52,7 +52,6 @@ in {
     coreutils
     alacritty
     ghostty
-    tmux
     alejandra
     wget
     killall
