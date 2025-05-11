@@ -10,6 +10,14 @@ in {
     plugins = with pkgs; [
       tmuxPlugins.sensible
       tmuxPlugins.rose-pine
+      {
+        plugin = tmuxPlugins.yank;
+        extraConfig = ''
+          bind-key -T copy-mode-vi v send-keys -X begin-selection
+          bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+          bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+        '';
+      }
     ];
     sensibleOnTop = true;
     extraConfig = ''
@@ -20,7 +28,9 @@ in {
       bind -n M-L next-window
     '';
     newSession = true;
-    prefix = "S-Space";
+    baseIndex = 1;
+    prefix = "C-Space";
     keyMode = "vi";
+    mouse = true;
   };
 }
