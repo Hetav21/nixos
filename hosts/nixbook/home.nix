@@ -110,7 +110,7 @@ in {
 
   zen-nebula = {
     enable = true;
-    profile = "hetav";
+    profile = "default";
   };
 
   # Styling
