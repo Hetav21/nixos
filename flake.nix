@@ -12,6 +12,7 @@
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-nebula.url = "github:JustAdumbPrsn/Nebula-A-Minimal-Theme-for-Zen-Browser";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,6 +23,7 @@
   outputs = {
     self,
     nixpkgs,
+    home-manager,
     nix-flatpak,
     nix-index-database,
     ...
@@ -64,9 +66,13 @@
           ./hosts/nixbook/configuration.nix
           nix-flatpak.nixosModules.nix-flatpak
           inputs.stylix.nixosModules.stylix
+          home-manager.nixosModules.home-manager
           inputs.home-manager.nixosModules.default
           nix-index-database.nixosModules.nix-index
           {
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+            };
             nixpkgs = {
               overlays = [
                 overlay

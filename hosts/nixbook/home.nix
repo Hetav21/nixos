@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: let
   userName = "hetav";
@@ -99,12 +100,18 @@ in {
   };
 
   imports = [
+    inputs.zen-nebula.homeModules.default
     ../../config/ghostty.nix
     ../../config/rofi/rofi.nix
     ../../config/wlogout.nix
     ../../config/shell.nix
     ../../config/tmux.nix
   ];
+
+  zen-nebula = {
+    enable = true;
+    profile = "hetav";
+  };
 
   # Styling
   stylix.targets.waybar.enable = true;
