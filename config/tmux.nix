@@ -21,9 +21,11 @@ in {
     ];
     sensibleOnTop = true;
     terminal = "tmux-256color";
+    mouse = true;
+    prefix = "M-a";
     extraConfig = ''
       set-option -sa terminal-overrides ",xterm*:Tc"
-      set -g mouse on
+      ## set -g mouse on
 
       # Change the prefix key
       unbind C-b
