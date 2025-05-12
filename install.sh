@@ -16,4 +16,7 @@ cd "$FLAKE_DIR" || { echo "Failed to cd to $FLAKE_DIR"; exit 1; }
 # Rebuild NixOS configuration
 sudo nixos-rebuild switch --flake .#default || { echo "Failed to rebuild NixOS configuration"; exit 1; }
 
+# Post Install
+sudo virsh net-autostart default
+
 echo "Script completed successfully."
