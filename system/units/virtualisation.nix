@@ -16,6 +16,7 @@ in {
     win-virtio
     win-spice
     adwaita-icon-theme
+    qemu_full
 
     dive # look into docker image layers
     docker-compose # start group of containers for dev
