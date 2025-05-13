@@ -87,10 +87,6 @@ in {
 
     # Gaming and entertainment
 
-    # CUDA
-    cudaPackages.cudatoolkit
-    cudaPackages.cudnn
-
     # System utilities
     libgcc
     libnotify

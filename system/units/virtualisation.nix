@@ -16,13 +16,17 @@ in {
     win-virtio
     win-spice
     adwaita-icon-theme
-    qemu_full
 
     dive # look into docker image layers
     docker-compose # start group of containers for dev
     podman-compose # start group of containers for dev
     quickemu
     quickgui
+  ];
+
+  boot.binfmt.emulatedSystems = [
+    "aarch64-linux"
+    "riscv64-linux"
   ];
 
   programs.adb.enable = true;

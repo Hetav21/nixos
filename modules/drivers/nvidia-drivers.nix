@@ -12,6 +12,14 @@ in {
   };
 
   config = mkIf cfg.enable {
+    hardware.nvidia-container-toolkit.enable = true;
+
+    environment.systemPackages = with pkgs; [
+      # CUDA
+      cudaPackages.cudatoolkit
+      cudaPackages.cudnn
+    ];
+
     hardware.graphics = {
       enable = true;
       enable32Bit = true;
