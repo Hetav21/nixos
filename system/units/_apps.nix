@@ -110,6 +110,5 @@ in {
     # Education
 
     # Miscellaneous
-    screenkey
   ];
 }
