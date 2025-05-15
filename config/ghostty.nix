@@ -5,7 +5,6 @@
   ...
 }: let
   ghostty = pkgs.ghostty;
-  #  ghostty = inputs.ghostty.packages.${pkgs.system}.default;
 
   ghosttyTheme = pkgs.writeTextFile {
     name = "ghostty-theme-Dracula";
@@ -32,7 +31,6 @@ in {
         font-size = 12;
         font-style = "Medium";
         minimum-contrast = 1.1;
-        # term = "xterm-kitty";
         theme = "${ghosttyTheme}";
         window-decoration = false;
         window-padding-x = 16;
