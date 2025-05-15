@@ -10,7 +10,7 @@
 in {
   environment.systemPackages = with pkgs; [
     ollama
-    open-webui
+    # open-webui
   ];
 
   services = {
@@ -19,15 +19,14 @@ in {
       acceleration = "cuda";
     };
 
-    open-webui = {
-      enable = true;
-      openFirewall = true;
-      # stateDir = "/home/hetav/.open-webui";
-      environment = {
-        ANONYMIZED_TELEMETRY = "False";
-        DO_NOT_TRACK = "True";
-        SCARF_NO_ANALYTICS = "True";
-      };
-    };
+    # open-webui = {
+    #   enable = true;
+    #   openFirewall = true;
+    #   environment = {
+    #     ANONYMIZED_TELEMETRY = "False";
+    #     DO_NOT_TRACK = "True";
+    #     SCARF_NO_ANALYTICS = "True";
+    #   };
+    # };
   };
 }

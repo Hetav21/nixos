@@ -26,8 +26,8 @@ in {
           enable = true;
           enableOffloadCmd = true;
         };
-        intelBusId = "PCI:0:02:0";
-        nvidiaBusId = "PCI:1:00:0";
+        intelBusId = "${cfg.intelBusID}";
+        nvidiaBusId = "${cfg.nvidiaBusID}";
       };
     };
   };

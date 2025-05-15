@@ -87,7 +87,16 @@ in {
   drivers = {
     intel.enable = true;
     nvidia.enable = true;
-    nvidia-prime.sync.enable = true;
+    nvidia-prime.sync = {
+      enable = false;
+      intelBusID = "PCI:0:2:0";
+      nvidiaBusID = "PCI:1:0:0";
+    };
+    nvidia-prime.offload = {
+      enable = true;
+      intelBusID = "PCI:0:2:0";
+      nvidiaBusID = "PCI:1:0:0";
+    };
   };
 
   home-manager = {

@@ -23,8 +23,8 @@ in {
     hardware.nvidia = {
       prime = {
         sync.enable = true;
-        intelBusId = "PCI:0:02:0";
-        nvidiaBusId = "PCI:1:00:0";
+        intelBusId = "${cfg.intelBusID}";
+        nvidiaBusId = "${cfg.nvidiaBusID}";
       };
     };
   };
