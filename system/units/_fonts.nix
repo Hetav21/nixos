@@ -32,11 +32,11 @@ in {
   stylix.fonts = {
     monospace = {
       package = pkgs.nerd-fonts.ubuntu-sans;
-      name = "UbuntuSansMono";
+      name = "Ubuntu Mono";
     };
     sansSerif = {
       package = pkgs.nerd-fonts.ubuntu-sans;
-      name = "UbuntuSans";
+      name = "Ubuntu";
     };
     serif = {
       package = pkgs.noto-fonts;
