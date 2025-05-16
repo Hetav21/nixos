@@ -11,15 +11,15 @@ in {
     enableDefaultPackages = true;
 
     packages = with pkgs; [
-      noto-fonts
       fira-code
+      nerd-fonts.jetbrains-mono
     ];
   };
 
   stylix.fonts = {
     monospace = {
-      package = pkgs.nerd-fonts.jetbrains-mono;
-      name = "JetBrainsMono Nerd Font Mono";
+      package = pkgs.nerd-fonts.ubuntu-sans;
+      name = "Ubuntu Mono";
     };
     sansSerif = {
       package = pkgs.nerd-fonts.ubuntu-sans;
