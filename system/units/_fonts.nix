@@ -10,8 +10,20 @@ in {
   fonts = {
     enableDefaultPackages = true;
 
+    fontconfig = {
+      hinting = {
+        enable = true;
+        style = "slight";
+        autohint = false;
+      };
+      antialias = true;
+      subpixel = {
+        rgba = "rgb";
+        lcdfilter = "default";
+      };
+    };
+
     packages = with pkgs; [
-      fira-code
       nerd-fonts.jetbrains-mono
     ];
   };
@@ -19,11 +31,11 @@ in {
   stylix.fonts = {
     monospace = {
       package = pkgs.nerd-fonts.ubuntu-sans;
-      name = "Ubuntu Mono";
+      name = "UbuntuSansMono";
     };
     sansSerif = {
       package = pkgs.nerd-fonts.ubuntu-sans;
-      name = "Ubuntu";
+      name = "UbuntuSans";
     };
     serif = {
       package = pkgs.noto-fonts;
