@@ -18,8 +18,8 @@ in {
 
   stylix.fonts = {
     monospace = {
-      package = pkgs.nerd-fonts.ubuntu-sans;
-      name = "Ubuntu Mono";
+      package = pkgs.nerd-fonts.jetbrains-mono;
+      name = "JetBrainsMono Nerd Font Mono";
     };
     sansSerif = {
       package = pkgs.nerd-fonts.ubuntu-sans;
