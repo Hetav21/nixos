@@ -7,23 +7,14 @@
   ...
 }: let
 in {
-  fonts.packages = with pkgs; [
-    roboto
-    montserrat
-    liberation_ttf
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-emoji
-    fira-code
-    fira-sans
-    fira-code-symbols
-    dina-font
-    proggyfonts
-    mplus-outline-fonts.githubRelease
-    font-awesome
-    material-icons
-    nerd-fonts.ubuntu-sans
-  ];
+  fonts = {
+    enableDefaultPackages = true;
+
+    packages = with pkgs; [
+      noto-fonts
+      fira-code
+    ];
+  };
 
   stylix.fonts = {
     monospace = {
@@ -35,8 +26,12 @@ in {
       name = "Ubuntu";
     };
     serif = {
-      package = pkgs.nerd-fonts.ubuntu-sans;
-      name = "Ubuntu";
+      package = pkgs.noto-fonts;
+      name = "Noto Serif";
+    };
+    emoji = {
+      package = pkgs.noto-fonts-emoji;
+      name = "Noto Color Emoji";
     };
     sizes = {
       applications = 12;
