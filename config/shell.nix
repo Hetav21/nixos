@@ -44,6 +44,7 @@
         edit = "vim";
         rebuild-live = "sh /etc/nixos/rebuild-live.sh";
         rebuild-boot = "sh /etc/nixos/rebuild-boot.sh";
+        rebuild-test = "sh /etc/nixos/rebuild-test.sh";
         recats = "sudo nix flake lock --update-input nixCats and sudo nixos-rebuild switch";
         log-rebuild = "tail -f /etc/nixos/nixos-switch.log";
         ff = "fastfetch";
