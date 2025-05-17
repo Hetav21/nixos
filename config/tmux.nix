@@ -20,7 +20,7 @@ in {
       }
     ];
     sensibleOnTop = true;
-    terminal = "tmux-256color";
+    ## terminal = "tmux-256color";
     mouse = true;
     prefix = "M-a";
     extraConfig = ''
