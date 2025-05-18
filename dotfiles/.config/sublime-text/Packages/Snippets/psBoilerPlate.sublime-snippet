@@ -1,0 +1,38 @@
+<snippet>
+	<content><![CDATA[
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public: 
+
+	Solution()
+	{
+		ios_base::sync_with_stdio(false);
+		cin.tie(0);
+		cout.tie(0);	
+	}
+
+	$2
+
+};
+
+int main() {
+
+#ifndef ONLINE_JUDGE
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
+#endif
+
+	Solution f;
+
+	$3
+
+	return 0;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>ps_BoilerPlate_bigPapa</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
