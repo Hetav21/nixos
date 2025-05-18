@@ -11,7 +11,7 @@ sudo nixos-rebuild switch &> nixos-switch.log || (
 gen=$(nixos-rebuild list-generations | grep current | sed 's/ .*//')
 patch_file="patch/${gen}.patch"
 mkdir -p patch
-git diff -U0 flake.lock > "$patch_file"
+git diff > "$patch_file"
 echo "Patch stored in '$patch_file'."
 git commit -am "$gen"
 popd && true
