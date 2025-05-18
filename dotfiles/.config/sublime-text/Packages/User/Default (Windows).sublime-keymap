@@ -1,0 +1,11 @@
+[
+	{ "keys": ["ctrl+shift+b"], "command": "cancel_build" },
+	{ "keys": ["ctrl+alt+b"], "command": "build", "args": {"select": true} },
+	{ "keys": ["ctrl+q"], "command": "toggle_side_bar" },
+{
+    "keys": ["alt+shift+q"],
+    "command": "set_max_columns",
+    "args": {"columns": 2}
+},
+	{ "keys": ["ctrl+alt+i"], "command": "open_terminal" },
+]

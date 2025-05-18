@@ -1,0 +1,1456 @@
+{
+	"file_history":
+	[
+		"/home/hetav/CODE/Practice/CF_1A.cpp",
+		"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/output.txt",
+		"/home/hetav/fastfetch",
+		"/usr/local/bin/scroll",
+		"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/previousGreaterElement.cpp",
+		"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/RemoveConsecutiveDublicatesInAString.cpp",
+		"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/nextGreaterElement.cpp",
+		"/usr/lib/gcc/x86_64-pc-linux-gnu/13/include/g++-v13/bits/stl_stack.h",
+		"/home/hetav/.config/sublime-text/Packages/Terminal/Terminal.sublime-settings",
+		"/home/hetav/.config/sublime-text/Packages/User/Terminal.sublime-settings",
+		"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/BalancedBrackets.cpp",
+		"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/Stacks.cpp",
+		"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/ReverseStack.cpp",
+		"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/Stacks.cpp",
+		"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/input.txt",
+		"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/LC_430.cpp",
+		"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/LC_2074.cpp",
+		"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/LC_138.cpp",
+		"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/LC_2058.cpp",
+		"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/LC_725.cpp",
+		"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/output.txt",
+		"/home/hetav/CODE/helloC/hello.c",
+		"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/input.txt",
+		"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/temp.txt",
+		"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/LRU.cpp",
+		"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/main.cpp",
+		"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/output.txt",
+		"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/new.cpp",
+		"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/FIFO.cpp",
+		"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/optimal.cpp",
+		"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/lab.cpp",
+		"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/LFU.cpp",
+		"/home/Archbtw/.config/sublime-text/Packages/Terminal/Terminal.sublime-settings",
+		"/home/Archbtw/.config/sublime-text/Packages/User/Terminal.sublime-settings",
+		"/home/Archbtw/.config/sublime-text/Packages/User/Terminal (Linux).sublime-settings",
+		"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/FIFO",
+		"/home/Archbtw/CODE",
+		"/home/Archbtw/.config/sublime-text/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/Archbtw/.config/sublime-text/Packages/User/Default (Linux).sublime-keymap",
+		"/home/Archbtw/.config/sublime-text/Packages/Default/Preferences.sublime-settings",
+		"/home/Archbtw/.config/sublime-text/Packages/User/Plain text.sublime-settings",
+		"/home/Archbtw/.config/sublime-text/Packages/Default/Distraction Free.sublime-settings",
+		"/home/Archbtw/.config/sublime-text/Packages/User/Distraction Free.sublime-settings",
+		"/home/Archbtw/.config/sublime-text/Packages/User/Preferences.sublime-settings"
+	],
+	"folder_history":
+	[
+		"/home/hetav/CODE/Practice",
+		"/home/hetav",
+		"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks",
+		"/home/hetav/CODE/DECODE/lecturePrograms",
+		"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList",
+		"/home/hetav/CODE/helloC",
+		"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16"
+	],
+	"last_version": 4180,
+	"last_window_id": 27,
+	"log_indexing": false,
+	"next_update_check": 1731220016,
+	"settings":
+	{
+		"new_window_full_screen": false,
+		"new_window_height": 1051.0,
+		"new_window_maximized": false,
+		"new_window_position":
+		[
+			0.0,
+			29.0
+		],
+		"new_window_settings":
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+					[
+						"ne",
+						"nextGreaterElement"
+					],
+					[
+						"rem",
+						"removeDublicates"
+					],
+					[
+						"te",
+						"temp2"
+					],
+					[
+						"tem",
+						"temp2"
+					],
+					[
+						"stack",
+						"printStack_BoilerPlate_bigPapa\tStackPrint"
+					],
+					[
+						"d",
+						"duplicate"
+					],
+					[
+						"gr",
+						"grpStartPtr"
+					],
+					[
+						"grp",
+						"grpSize"
+					],
+					[
+						"Pre",
+						"PreviousCNIdx"
+					],
+					[
+						"spl",
+						"splitListToParts"
+					],
+					[
+						"n",
+						"nFrame"
+					],
+					[
+						"L",
+						"LFU"
+					],
+					[
+						"obj",
+						"obj4"
+					],
+					[
+						"ob",
+						"obj3"
+					],
+					[
+						"o",
+						"obj2"
+					],
+					[
+						"Swi",
+						"switch\tsyntax_switchCase"
+					],
+					[
+						"e",
+						"elementFromRefString"
+					],
+					[
+						"aut",
+						"autoITR\tautoITR"
+					],
+					[
+						"fre",
+						"freq"
+					],
+					[
+						"be",
+						"begin"
+					],
+					[
+						"cut",
+						"currentFrame"
+					]
+				]
+			},
+			"build_system_choices":
+			[
+				[
+					[
+						[
+							"Packages/C++/C++ Single File.sublime-build",
+							""
+						],
+						[
+							"Packages/C++/C++ Single File.sublime-build",
+							"Run"
+						],
+						[
+							"Packages/C++ Starting Kit/C++ - Starting Kit.sublime-build",
+							""
+						],
+						[
+							"Packages/C++ Starting Kit/C++ - Starting Kit.sublime-build",
+							"Run"
+						],
+						[
+							"Packages/C++11/C++11.sublime-build",
+							""
+						],
+						[
+							"Packages/C++11/C++11.sublime-build",
+							"Run"
+						],
+						[
+							"Packages/User/_CP_CONTEST.sublime-build",
+							""
+						],
+						[
+							"Packages/User/_CP_CONTEST.sublime-build",
+							"Run"
+						],
+						[
+							"Packages/User/_PS_LC.sublime-build",
+							""
+						],
+						[
+							"Packages/User/_PS_LC.sublime-build",
+							"Run"
+						],
+						[
+							"Packages/User/bigPapa_gcc _cpp23.sublime-build",
+							""
+						],
+						[
+							"Packages/User/bigPapa_gcc _cpp23.sublime-build",
+							"Run"
+						],
+						[
+							"Packages/User/newBuildSystem.sublime-build",
+							""
+						],
+						[
+							"Packages/User/newBuildSystem.sublime-build",
+							"Run"
+						],
+						[
+							"Packages/User/newBS/bigPapa_gcc_cpp23_Wextra.sublime-build",
+							""
+						],
+						[
+							"Packages/User/newBS/bigPapa_gcc_cpp23_Wextra.sublime-build",
+							"Run"
+						],
+						[
+							"Packages/User/newBS/LINUX_bigPapa_clang.sublime-build",
+							""
+						],
+						[
+							"Packages/User/newBS/LINUX_bigPapa_clang.sublime-build",
+							"Run"
+						],
+						[
+							"Packages/User/newBS/newBS_gcc.sublime-build",
+							""
+						]
+					],
+					[
+						"Packages/C++/C++ Single File.sublime-build",
+						"Run"
+					]
+				]
+			],
+			"build_varint": "",
+			"command_palette":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+					[
+						"install",
+						"Package Control: Install Package"
+					],
+					[
+						"instal",
+						"Package Control: Install Package"
+					],
+					[
+						"insta",
+						"Package Control: Install Package"
+					],
+					[
+						"pack",
+						"Install Package Control"
+					]
+				],
+				"width": 0.0
+			},
+			"console":
+			{
+				"height": 168.0,
+				"history":
+				[
+				]
+			},
+			"distraction_free":
+			{
+				"menu_visible": true,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"file_history":
+			[
+				"/home/hetav/CODE/Practice/output.txt",
+				"/home/hetav/CODE/Practice/input.txt",
+				"/home/hetav/CODE/Practice/CF_2002B.cpp",
+				"/home/hetav/CODE/Practice/CF_1A.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/output.txt",
+				"/home/hetav/fastfetch",
+				"/usr/local/bin/scroll",
+				"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/previousGreaterElement.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/RemoveConsecutiveDublicatesInAString.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/nextGreaterElement.cpp",
+				"/usr/lib/gcc/x86_64-pc-linux-gnu/13/include/g++-v13/bits/stl_stack.h",
+				"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/BalancedBrackets.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/Stacks.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/ReverseStack.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/Stacks.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/input.txt",
+				"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/LC_430.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/LC_2074.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/LC_138.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/LC_2058.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/LC_725.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/output.txt",
+				"/home/hetav/CODE/helloC/hello.c",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/input.txt",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/temp.txt",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/LRU.cpp",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/main.cpp",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/output.txt",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/new.cpp",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/FIFO.cpp",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/optimal.cpp",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/lab.cpp",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/LFU.cpp",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/FIFO",
+				"/home/Archbtw/CODE"
+			],
+			"find":
+			{
+				"height": 33.0
+			},
+			"find_in_files":
+			{
+				"height": 0.0,
+				"where_history":
+				[
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": false,
+				"find_history":
+				[
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+				],
+				"reverse": true,
+				"scrollbar_highlights": true,
+				"show_context": true,
+				"use_buffer2": true,
+				"use_gitignore": true,
+				"whole_word": false,
+				"wrap": true
+			},
+			"incremental_find":
+			{
+				"height": 33.0
+			},
+			"input":
+			{
+				"height": 71.0
+			},
+			"menu_visible": false,
+			"output.SublimeLinter":
+			{
+				"height": 0.0
+			},
+			"output.exec":
+			{
+				"height": 337.0
+			},
+			"output.find_results":
+			{
+				"height": 0.0
+			},
+			"pinned_build_system": "",
+			"replace":
+			{
+				"height": 62.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 500.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 380.0
+			},
+			"select_symbol":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"show_minimap": true,
+			"show_open_files": false,
+			"show_tabs": true,
+			"side_bar_visible": true,
+			"side_bar_width": 180.0,
+			"status_bar_visible": false,
+			"template_settings":
+			{
+				"max_columns": 2
+			}
+		},
+		"new_window_width": 1920.0
+	},
+	"windows":
+	[
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+					[
+						"ne",
+						"nextGreaterElement"
+					],
+					[
+						"rem",
+						"removeDublicates"
+					],
+					[
+						"te",
+						"temp2"
+					],
+					[
+						"tem",
+						"temp2"
+					],
+					[
+						"stack",
+						"printStack_BoilerPlate_bigPapa\tStackPrint"
+					],
+					[
+						"d",
+						"duplicate"
+					],
+					[
+						"gr",
+						"grpStartPtr"
+					],
+					[
+						"grp",
+						"grpSize"
+					],
+					[
+						"Pre",
+						"PreviousCNIdx"
+					],
+					[
+						"spl",
+						"splitListToParts"
+					],
+					[
+						"n",
+						"nFrame"
+					],
+					[
+						"L",
+						"LFU"
+					],
+					[
+						"obj",
+						"obj4"
+					],
+					[
+						"ob",
+						"obj3"
+					],
+					[
+						"o",
+						"obj2"
+					],
+					[
+						"Swi",
+						"switch\tsyntax_switchCase"
+					],
+					[
+						"e",
+						"elementFromRefString"
+					],
+					[
+						"aut",
+						"autoITR\tautoITR"
+					],
+					[
+						"fre",
+						"freq"
+					],
+					[
+						"be",
+						"begin"
+					],
+					[
+						"cut",
+						"currentFrame"
+					]
+				]
+			},
+			"buffers":
+			[
+				{
+					"file": "/home/hetav/CODE/Practice/CF_2002B.cpp",
+					"redo_stack":
+					[
+						[
+							35,
+							1,
+							"left_delete",
+							null,
+							"AQAAAEABAAAAAAAAQQEAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAQAEAAAAAAABAAQAAAAAAAAAAAAAAAPC/"
+						]
+					],
+					"settings":
+					{
+						"buffer_size": 323,
+						"encoding": "UTF-8",
+						"line_ending": "Unix"
+					},
+					"undo_stack":
+					[
+						[
+							6,
+							1,
+							"insert",
+							{
+								"characters": " "
+							},
+							"AQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							8,
+							1,
+							"left_delete",
+							null,
+							"AQAAAAAAAAAAAAAAAAAAAAAAAAABAAAAIA",
+							"AQAAAAAAAAABAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							10,
+							1,
+							"insert",
+							{
+								"characters": "c"
+							},
+							"AQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							12,
+							1,
+							"insert",
+							{
+								"characters": "p"
+							},
+							"AQAAAAEAAAAAAAAAAgAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							14,
+							1,
+							"insert_completion",
+							{
+								"completion": "/*$1*/\n\n#include <bits/stdc++.h>\nusing namespace std;\n#pragma GCC optimize(\"O3,unroll-loops\")\n#pragma GCC target(\"avx2,bmi,bmi2,lzcnt,popcnt\")\n\nint main() {\n\n#ifndef ONLINE_JUDGE\n\tfreopen(\"input.txt\", \"r\", stdin);\n\tfreopen(\"output.txt\", \"w\", stdout);\n#endif\n\t\n\t$2\n\n\treturn 0;\n}",
+								"format": "snippet",
+								"keep_prefix": false,
+								"must_insert": false,
+								"trigger": "cp_BoilerPlate_bigPapa"
+							},
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAACAAAAY3AAAAAAAAAAABEBAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAgAAAAAAAAACAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							18,
+							1,
+							"insert",
+							{
+								"characters": "\n"
+							},
+							"AQAAAAIAAAAAAAAAAwAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAgAAAAAAAAACAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							20,
+							1,
+							"insert",
+							{
+								"characters": "\n"
+							},
+							"AQAAAAMAAAAAAAAABAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAwAAAAAAAAADAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							24,
+							1,
+							"",
+							null,
+							"AQAAAAMAAAAAAAAAMwAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAwAAAAAAAAADAAAAAAAAAAAAAAAAAAAA"
+						]
+					]
+				},
+				{
+					"file": "/home/hetav/CODE/Practice/input.txt",
+					"settings":
+					{
+						"buffer_size": 0,
+						"encoding": "UTF-8",
+						"line_ending": "Unix"
+					},
+					"undo_stack":
+					[
+						[
+							6,
+							1,
+							"vi_eval",
+							{
+								"action_args":
+								{
+								},
+								"action_command": "vi_delete",
+								"motion_args": null,
+								"motion_clip_to_line": false,
+								"motion_command": null,
+								"motion_inclusive": false,
+								"motion_mode": 0
+							},
+							"AQAAAAAAAAAAAAAAAAAAAAAAAAAaAAAANwoxMgoxCjIKMwoxNDM0CjIwMjQKMjAwMDA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							7,
+							1,
+							"vi_eval",
+							{
+								"action_args":
+								{
+								},
+								"action_command": "vi_delete",
+								"motion_args":
+								{
+									"to": "line"
+								},
+								"motion_clip_to_line": false,
+								"motion_command": "expand_selection",
+								"motion_inclusive": false,
+								"motion_mode": 0
+							},
+							"AQAAAAAAAAAAAAAAAAAAAAAAAAACAAAAMAo",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							9,
+							1,
+							"insert",
+							{
+								"characters": " 66"
+							},
+							"AwAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAACAAAAAAAAAAAAAAACAAAAAAAAAAMAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							10,
+							1,
+							"insert",
+							{
+								"characters": " "
+							},
+							"AQAAAAMAAAAAAAAABAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAwAAAAAAAAADAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							11,
+							2,
+							"left_delete",
+							null,
+							"AgAAAAMAAAAAAAAAAwAAAAAAAAABAAAAIAIAAAAAAAAAAgAAAAAAAAABAAAANg",
+							"AQAAAAAAAAABAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							12,
+							1,
+							"insert",
+							{
+								"characters": " 6"
+							},
+							"AgAAAAIAAAAAAAAAAwAAAAAAAAAAAAAAAwAAAAAAAAAEAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAgAAAAAAAAACAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							13,
+							1,
+							"insert",
+							{
+								"characters": " 4"
+							},
+							"AgAAAAQAAAAAAAAABQAAAAAAAAAAAAAABQAAAAAAAAAGAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							19,
+							1,
+							"left_delete",
+							null,
+							"AQAAAAAAAAAAAAAAAAAAAAAAAAAGAAAAIDYgNiA0",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							21,
+							1,
+							"",
+							null,
+							"AQAAAAAAAAAAAAAAGAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							22,
+							1,
+							"left_delete",
+							null,
+							"AQAAABcAAAAAAAAAFwAAAAAAAAABAAAACg",
+							"AQAAAAAAAAABAAAAGAAAAAAAAAAYAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							27,
+							1,
+							"",
+							null,
+							"AgAAAAAAAAAAAAAAGgAAAAAAAAAAAAAAGgAAAAAAAAAaAAAAAAAAABcAAAAxMDAwMDAwMDAwIDEwMDAwMDAwMDAgMQ",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAXAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							31,
+							1,
+							"left_delete",
+							null,
+							"AQAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAMgoyCjEgMgoxIDIKMwoxIDIgMwoyIDMgMQo",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAPC/"
+						]
+					]
+				},
+				{
+					"file": "/home/hetav/CODE/Practice/output.txt",
+					"settings":
+					{
+						"buffer_size": 19,
+						"line_ending": "Unix"
+					},
+					"undo_stack":
+					[
+						[
+							2,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAAPAAAAMwoxCjIKMwoxMgo4CjIKAAAAAAAAAAACAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							3,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAACAAAAMgoAAAAAAAAAAAIAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							4,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAACAAAAMgoAAAAAAAAAAAIAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							5,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAACAAAAMgoAAAAAAAAAAAIAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							6,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAACAAAAMgoAAAAAAAAAAAUAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							7,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAAFAAAANjY0MgoAAAAAAAAAAAQAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							8,
+							1,
+							"revert",
+							null,
+							"AwAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAMzYyCgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							10,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAABAAAAMgAAAAAAAAAABQAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							11,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAAFAAAAMQoyCjIAAAAAAAAAAAUAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							12,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAAFAAAAMQoyCjIAAAAAAAAAAAUAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							13,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAAFAAAAMQoyCjIAAAAAAAAAAAUAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							14,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAAFAAAAMQoyCjIAAAAAAAAAAAkAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							15,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAAJAAAANjQxCjY0MgoyAAAAAAAAAAAFAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							16,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAAFAAAAMQoyCjIAAAAAAAAAAAUAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							17,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAAFAAAAMgo0CjQAAAAAAAAAAAEAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							18,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAABAAAANAAAAAAAAAAAAQAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							19,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAABAAAAMQAAAAAAAAAAAQAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							20,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAABAAAAMQAAAAAAAAAAAQAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							21,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAABAAAAMQAAAAAAAAAAAQAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							22,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAABAAAAMQAAAAAAAAAAAQAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							23,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAABAAAANAAAAAAAAAAAAQAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							24,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAABAAAANAAAAAAAAAAAAQAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							25,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAABAAAANAAAAAAAAAAAAQAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							28,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAABAAAANAAAAAAAAAAACwAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							29,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAALAAAALTE0ODY2MTg2MjQAAAAAAAAAACAAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							30,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAMTAwMDAwMDAwMDEwMDAwMDAwMDAKLTE0ODY2MTg2MjQAAAAAAAAAACgAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							31,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAAoAAAAMTAwMDAwMDAwMDEwMDAwMDAwMDAKMTAwMDAwMDAwMDAwMDAwMDAwMAAAAAAAAAAABQAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							32,
+							1,
+							"revert",
+							null,
+							"AgAAAAAAAAAAAAAAAAAAAAAAAAAFAAAAMWUrMTgAAAAAAAAAABMAAAAAAAAAAAAAAA",
+							"AQAAAAAAAAABAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAPC/"
+						]
+					]
+				}
+			],
+			"build_system": "",
+			"build_system_choices":
+			[
+				[
+					[
+						[
+							"Packages/C++/C++ Single File.sublime-build",
+							""
+						],
+						[
+							"Packages/C++/C++ Single File.sublime-build",
+							"Run"
+						],
+						[
+							"Packages/C++ Starting Kit/C++ - Starting Kit.sublime-build",
+							""
+						],
+						[
+							"Packages/C++ Starting Kit/C++ - Starting Kit.sublime-build",
+							"Run"
+						],
+						[
+							"Packages/C++11/C++11.sublime-build",
+							""
+						],
+						[
+							"Packages/C++11/C++11.sublime-build",
+							"Run"
+						],
+						[
+							"Packages/User/_CP_CONTEST.sublime-build",
+							""
+						],
+						[
+							"Packages/User/_CP_CONTEST.sublime-build",
+							"Run"
+						],
+						[
+							"Packages/User/_PS_LC.sublime-build",
+							""
+						],
+						[
+							"Packages/User/_PS_LC.sublime-build",
+							"Run"
+						],
+						[
+							"Packages/User/bigPapa_gcc _cpp23.sublime-build",
+							""
+						],
+						[
+							"Packages/User/bigPapa_gcc _cpp23.sublime-build",
+							"Run"
+						],
+						[
+							"Packages/User/newBuildSystem.sublime-build",
+							""
+						],
+						[
+							"Packages/User/newBuildSystem.sublime-build",
+							"Run"
+						],
+						[
+							"Packages/User/newBS/bigPapa_gcc_cpp23_Wextra.sublime-build",
+							""
+						],
+						[
+							"Packages/User/newBS/bigPapa_gcc_cpp23_Wextra.sublime-build",
+							"Run"
+						],
+						[
+							"Packages/User/newBS/LINUX_bigPapa_clang.sublime-build",
+							""
+						],
+						[
+							"Packages/User/newBS/LINUX_bigPapa_clang.sublime-build",
+							"Run"
+						],
+						[
+							"Packages/User/newBS/newBS_gcc.sublime-build",
+							""
+						]
+					],
+					[
+						"Packages/C++/C++ Single File.sublime-build",
+						"Run"
+					]
+				]
+			],
+			"build_varint": "",
+			"command_palette":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+					[
+						"install",
+						"Package Control: Install Package"
+					],
+					[
+						"instal",
+						"Package Control: Install Package"
+					],
+					[
+						"insta",
+						"Package Control: Install Package"
+					],
+					[
+						"pack",
+						"Install Package Control"
+					]
+				],
+				"width": 0.0
+			},
+			"console":
+			{
+				"height": 168.0,
+				"history":
+				[
+				]
+			},
+			"distraction_free":
+			{
+				"menu_visible": true,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"expanded_folders":
+			[
+				"/home/hetav/CODE/Practice"
+			],
+			"file_history":
+			[
+				"/home/hetav/CODE/Practice/CF_1A.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/output.txt",
+				"/home/hetav/fastfetch",
+				"/usr/local/bin/scroll",
+				"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/previousGreaterElement.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/RemoveConsecutiveDublicatesInAString.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/nextGreaterElement.cpp",
+				"/usr/lib/gcc/x86_64-pc-linux-gnu/13/include/g++-v13/bits/stl_stack.h",
+				"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/BalancedBrackets.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/Stacks.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/22_Stacks/ReverseStack.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/Stacks.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/input.txt",
+				"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/LC_430.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/LC_2074.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/LC_138.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/LC_2058.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/LC_725.cpp",
+				"/home/hetav/CODE/DECODE/lecturePrograms/21_LinkedList/output.txt",
+				"/home/hetav/CODE/helloC/hello.c",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/input.txt",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/temp.txt",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/LRU.cpp",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/main.cpp",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/output.txt",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/new.cpp",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/FIFO.cpp",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/optimal.cpp",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/lab.cpp",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/LFU.cpp",
+				"/home/Archbtw/CODE/COLLEGE/OSlab/lab_16/FIFO",
+				"/home/Archbtw/CODE"
+			],
+			"find":
+			{
+				"height": 33.0
+			},
+			"find_in_files":
+			{
+				"height": 0.0,
+				"where_history":
+				[
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": false,
+				"find_history":
+				[
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+				],
+				"reverse": true,
+				"scrollbar_highlights": true,
+				"show_context": true,
+				"use_buffer2": true,
+				"use_gitignore": true,
+				"whole_word": false,
+				"wrap": true
+			},
+			"folders":
+			[
+				{
+					"path": "/home/hetav/CODE/Practice"
+				}
+			],
+			"groups":
+			[
+				{
+					"sheets":
+					[
+						{
+							"buffer": 0,
+							"file": "/home/hetav/CODE/Practice/CF_2002B.cpp",
+							"selected": true,
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 323,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										309,
+										309
+									]
+								],
+								"settings":
+								{
+									"syntax": "Packages/C++11/C++11.tmLanguage"
+								},
+								"translation.x": 0.0,
+								"translation.y": 0.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 0,
+							"stack_multiselect": false,
+							"type": "text"
+						}
+					]
+				},
+				{
+					"sheets":
+					[
+						{
+							"buffer": 1,
+							"file": "/home/hetav/CODE/Practice/input.txt",
+							"selected": true,
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 0,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										0,
+										0
+									]
+								],
+								"settings":
+								{
+									"syntax": "Packages/Text/Plain text.tmLanguage"
+								},
+								"translation.x": 0.0,
+								"translation.y": 0.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 0,
+							"stack_multiselect": false,
+							"type": "text"
+						}
+					]
+				},
+				{
+					"sheets":
+					[
+						{
+							"buffer": 2,
+							"file": "/home/hetav/CODE/Practice/output.txt",
+							"selected": true,
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 19,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										1,
+										1
+									]
+								],
+								"settings":
+								{
+									"syntax": "Packages/Text/Plain text.tmLanguage"
+								},
+								"translation.x": 0.0,
+								"translation.y": 0.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 0,
+							"stack_multiselect": false,
+							"type": "text"
+						}
+					]
+				}
+			],
+			"incremental_find":
+			{
+				"height": 33.0
+			},
+			"input":
+			{
+				"height": 71.0
+			},
+			"layout":
+			{
+				"cells":
+				[
+					[
+						0,
+						0,
+						1,
+						2
+					],
+					[
+						1,
+						0,
+						2,
+						1
+					],
+					[
+						1,
+						1,
+						2,
+						2
+					]
+				],
+				"cols":
+				[
+					0.0,
+					0.667314902119,
+					1.0
+				],
+				"rows":
+				[
+					0.0,
+					0.5,
+					1.0
+				]
+			},
+			"menu_visible": false,
+			"output.SublimeLinter":
+			{
+				"height": 0.0
+			},
+			"output.exec":
+			{
+				"height": 337.0
+			},
+			"output.find_results":
+			{
+				"height": 0.0
+			},
+			"pinned_build_system": "",
+			"position": "0,0,0,0,0,0,29,1920,1080,1920,1080,0",
+			"project": "",
+			"replace":
+			{
+				"height": 62.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 500.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 380.0
+			},
+			"select_symbol":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"selected_group": 0,
+			"settings":
+			{
+				"last_automatic_layout":
+				[
+					[
+						0,
+						0,
+						1,
+						2
+					],
+					[
+						1,
+						0,
+						2,
+						1
+					],
+					[
+						1,
+						1,
+						2,
+						2
+					]
+				]
+			},
+			"show_minimap": true,
+			"show_open_files": false,
+			"show_tabs": true,
+			"side_bar_visible": true,
+			"side_bar_width": 180.0,
+			"status_bar_visible": false,
+			"template_settings":
+			{
+				"max_columns": 2
+			},
+			"window_id": 27,
+			"workspace_name": ""
+		}
+	],
+	"workspaces":
+	{
+		"recent_workspaces":
+		[
+		]
+	}
+}

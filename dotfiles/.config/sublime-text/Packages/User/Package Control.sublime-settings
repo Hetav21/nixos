@@ -1,0 +1,28 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+		"SublimeAStyleFormatter",
+	],
+	"installed_packages":
+	[
+		"C++ Completions",
+		"C++ Starting Kit",
+		"C++11",
+		"CppFastOlympicCoding",
+		"Markdown Extended",
+		"One Dark Material - Theme",
+		"Package Control",
+		"Sass",
+		"SublimeAStyleFormatter",
+		"SublimeLinter",
+		"SublimeLinter-clang",
+		"SublimeLinter-cpplint",
+		"SublimeLinter-gcc",
+		"Terminal",
+		"Theme - Afterglow",
+		"Visual Studio Code Plus Scheme",
+		"Visual Studio Dark",
+		"Wrap Plus",
+	],
+}
