@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}: let
+{pkgs, ...}: let
   userName = "hetav";
   homeDirectory = "/home/${userName}";
   stateVersion = "24.11";
@@ -34,7 +29,8 @@ in {
       ".ideavimrc".source = ../../dotfiles/.ideavimrc;
       ".nirc".source = ../../dotfiles/.nirc;
       ".local/bin/wallpaper".source = ../../wallpapers/${wallpaper};
-      ".local/share/applications/microsoft-edge.desktop".source = ../../dotfiles/.local/share/applications/microsoft-edge.desktop;
+      ".local/share/applications/microsoft-edge.desktop".source =
+        ../../dotfiles/.local/share/applications/microsoft-edge.desktop;
 
       # Config directories
       ".config/alacritty".source = ../../dotfiles/.config/alacritty;
@@ -42,7 +38,7 @@ in {
       ".config/fastfetch".source = ../../dotfiles/.config/fastfetch;
       ".config/kitty".source = ../../dotfiles/.config/kitty;
       ".config/mpv".source = ../../dotfiles/.config/mpv;
-      ".config/waybar".source = ../../dotfiles/.config/waybar;
+      # ".config/waybar".source = ../../dotfiles/.config/waybar;
       ".config/yazi".source = ../../dotfiles/.config/yazi;
       ".config/wezterm".source = ../../dotfiles/.config/wezterm;
       ## ".config/zed/settings.json".source = ../../dotfiles/.config/zed/settings.json;

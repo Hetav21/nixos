@@ -246,7 +246,6 @@
         monitor=,preferred,auto,1
 
         exec-once = nm-applet &
-        exec-once = waybar
         exec-once = blueman-applet &
         exec-once = systemctl --user start warp-taskbar.service
         exec-once = localsend_app --hidden
