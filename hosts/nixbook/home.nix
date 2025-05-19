@@ -7,7 +7,7 @@
   userName = "hetav";
   homeDirectory = "/home/${userName}";
   stateVersion = "24.11";
-  wallpaper = "artistic-boy-relaxing.jpg";
+  wallpaper = "linus_nvidia2.jpg";
 in {
   home = {
     username = userName;

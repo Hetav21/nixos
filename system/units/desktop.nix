@@ -6,7 +6,7 @@
   options,
   ...
 }: let
-  wallpaper = "artistic-boy-relaxing.jpg";
+  wallpaper = "linus_nvidia2.jpg";
 in {
   ### CONTAINS ALL PACKAGES THAT ARE DE SPECIFIC
 
