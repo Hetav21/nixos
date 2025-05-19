@@ -9,9 +9,9 @@ sudo nixos-rebuild boot &> nixos-switch.log || (
     cat nixos-switch.log | grep --color error && false
 )
 gen=$(nixos-rebuild list-generations | grep current | sed 's/ .*//')
-patch_file="patch/${gen}.patch"
-mkdir -p patch
-git diff > "$patch_file"
-echo "Patch stored in '$patch_file'."
 git commit -am "$gen"
+mkdir -p patch
+git format-patch -1 HEAD
+mv *.patch patch/
+echo "Patch Created."
 popd && true
