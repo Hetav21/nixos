@@ -20,7 +20,7 @@ in {
       ".local/bin/cliphist-rofi-img".source = ../../dotfiles/.local/bin/cliphist-rofi-img;
 
       # Hyprland Config
-      ".config/hypr".source = ../../dotfiles/.config/hypr;
+      # ".config/hypr".source = ../../dotfiles/.config/hypr;
 
       # wlogout icons
       ".config/wlogout/icons".source = ../../config/wlogout;
@@ -105,6 +105,7 @@ in {
     ../../config/wlogout.nix
     ../../config/shell.nix
     ../../config/tmux.nix
+    ../../config/desktop
   ];
 
   # Styling
@@ -124,28 +125,6 @@ in {
   };
   qt = {
     enable = true;
-  };
-
-  services.hypridle = {
-    enable = true;
-    settings = {
-      general = {
-        after_sleep_cmd = "hyprctl dispatch dpms on";
-        ignore_dbus_inhibit = false;
-        lock_cmd = "hyprlock";
-      };
-      listener = [
-        {
-          timeout = 900;
-          on-timeout = "hyprlock";
-        }
-        {
-          timeout = 1200;
-          on-timeout = "hyprctl dispatch dpms off";
-          on-resume = "hyprctl dispatch dpms on";
-        }
-      ];
-    };
   };
 
   programs = {

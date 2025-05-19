@@ -11,10 +11,6 @@ in {
   ### CONTAINS ALL PACKAGES THAT ARE DE SPECIFIC
 
   environment.systemPackages = with pkgs; [
-    # Secret Service
-    ## seahorse
-    ## kdePackages.kwallet
-
     # Wayland specific
     dunst
     swww
