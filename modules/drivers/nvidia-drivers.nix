@@ -15,6 +15,9 @@ in {
     hardware.nvidia-container-toolkit.enable = true;
 
     environment.systemPackages = with pkgs; [
+      # Top
+      nvtopPackages.nvidia
+
       # CUDA
       cudaPackages.cudatoolkit
       cudaPackages.cudnn
