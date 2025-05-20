@@ -1,15 +1,11 @@
 {
   config,
-  lib,
   pkgs,
   inputs,
-  options,
   ...
 }: let
   username = "hetav";
   userDescription = "Hetav Shah";
-  homeDirectory = "/home/${username}";
-  hostName = "nixbook";
   timeZone = "Asia/Kolkata";
 in {
   nixpkgs.config.allowUnfree = true;
@@ -80,7 +76,11 @@ in {
     users.${username} = {
       isNormalUser = true;
       description = userDescription;
-      extraGroups = ["networkmanager" "mlocate" "wheel"];
+      extraGroups = [
+        "networkmanager"
+        "mlocate"
+        "wheel"
+      ];
     };
   };
 
