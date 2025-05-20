@@ -1,11 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  options,
-  ...
-}: let
+{pkgs, ...}: let
 in {
   environment.systemPackages = with pkgs; [
     virt-viewer
@@ -34,7 +27,11 @@ in {
 
   users.groups.libvirtd.members = ["hetav"];
 
-  users.users.hetav.extraGroups = ["libvirtd" "kvm" "adbusers"];
+  users.users.hetav.extraGroups = [
+    "libvirtd"
+    "kvm"
+    "adbusers"
+  ];
 
   services.udev.packages = with pkgs; [
     android-udev-rules

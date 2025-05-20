@@ -1,11 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  options,
-  ...
-}: let
+{pkgs, ...}: let
   username = "hetav";
   homeDirectory = "/home/${username}";
 in {

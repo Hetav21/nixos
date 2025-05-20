@@ -1,11 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  options,
-  ...
-}: let
+{pkgs, ...}: let
 in {
   environment.systemPackages = with pkgs; [
     lxqt.lxqt-policykit
