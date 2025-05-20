@@ -32,7 +32,6 @@ in {
     codex
     hoppscotch
     bruno
-    python3Packages.huggingface-hub
     git
     git-lfs
     gh
@@ -76,7 +75,7 @@ in {
     # Productivity and office
     obsidian
     onlyoffice-bin
-    texlive.combined.scheme-full
+    # texlive.combined.scheme-full
 
     # Gaming and entertainment
 
