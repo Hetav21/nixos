@@ -8,7 +8,7 @@
     stylix.url = "github:danth/stylix";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
@@ -23,9 +23,6 @@
   outputs = {
     self,
     nixpkgs,
-    chaotic,
-    nix-flatpak,
-    nix-index-database,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -62,11 +59,11 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./hosts/nixbook/configuration.nix
-          chaotic.nixosModules.default
-          nix-flatpak.nixosModules.nix-flatpak
+          inputs.chaotic.nixosModules.default
+          inputs.nix-flatpak.nixosModules.nix-flatpak
           inputs.stylix.nixosModules.stylix
-          inputs.home-manager.nixosModules.default
-          nix-index-database.nixosModules.nix-index
+          inputs.home-manager.nixosModules.home-manager
+          inputs.nix-index-database.nixosModules.nix-index
           {
             nixpkgs = {
               overlays = [

@@ -102,6 +102,7 @@ in {
   home-manager = {
     extraSpecialArgs = {inherit inputs;};
     users.${username} = import ./home.nix;
+    useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "backup";
   };
