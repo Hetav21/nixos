@@ -1,12 +1,5 @@
 ### CONTAINS HARDWARE AND RELATED UTILITIES
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  options,
-  ...
-}: let
+{pkgs, ...}: let
 in {
   environment.systemPackages = with pkgs; [
     pulseaudio

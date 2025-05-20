@@ -1,9 +1,4 @@
-{
-  inputs,
-  lib,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
 in {
   programs.tmux = {
     enable = true;

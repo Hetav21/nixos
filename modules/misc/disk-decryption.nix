@@ -1,14 +1,15 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  ...
-}: let
+{pkgs, ...}: let
   PRIMARYUSBID = "A31A-87EC";
   BACKUPUSBID = "A31A-87EC";
 in {
-  boot.initrd.kernelModules = ["uas" "usbcore" "usb_storage" "vfat" "nls_cp437" "nls_iso8859_1"];
+  boot.initrd.kernelModules = [
+    "uas"
+    "usbcore"
+    "usb_storage"
+    "vfat"
+    "nls_cp437"
+    "nls_iso8859_1"
+  ];
 
   # Mount USB key before trying to decrypt root filesystem
   boot.initrd.postDeviceCommands = pkgs.lib.mkBefore ''

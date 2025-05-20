@@ -1,5 +1,4 @@
 {
-  inputs,
   lib,
   pkgs,
   ...
@@ -20,10 +19,12 @@ in {
     };
 
     xdg.configFile."ghostty/config".text =
-      lib.generators.toKeyValue {
+      lib.generators.toKeyValue
+      {
         mkKeyValue = lib.generators.mkKeyValueDefault {} " = ";
         listsAsDuplicateKeys = true;
-      } {
+      }
+      {
         background-opacity = 0.7;
         confirm-close-surface = false;
         copy-on-select = true;

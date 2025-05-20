@@ -20,7 +20,6 @@ in {
     ./units/powerManagement.nix
     ./units/printing.nix
     ./units/security.nix
-    ./units/systemd.nix
     ./units/virtualisation.nix
   ];
 }

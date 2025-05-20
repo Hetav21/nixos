@@ -1,11 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  options,
-  ...
-}: let
+{...}: let
 in {
   # Nix-Flatpak
   services.flatpak = {

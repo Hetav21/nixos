@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  ...
-}: let
+{...}: let
   PARTITION_ID = "a96c2e2f-5a1a-4249-8a3c-283532bb14a9";
 in {
   boot.initrd.availableKernelModules = [

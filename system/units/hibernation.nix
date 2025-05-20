@@ -1,11 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  options,
-  ...
-}: let
+{...}: let
   ROOT_UUID = "luks-6f996364-18a9-457c-8914-3203ed6b7fb4";
   OFFSET = "6244352";
 in {

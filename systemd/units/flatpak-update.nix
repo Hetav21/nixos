@@ -6,7 +6,6 @@
 }:
 with lib; let
   cfg = config.systemd.extra.flatpak;
-  username = "hetav";
 in {
   options.systemd.extra.flatpak = {
     enable = mkEnableOption "Auto Update Flatpak";

@@ -1,9 +1,4 @@
-{
-  lib,
-  config,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   userName = "hetav";
   userDescription = "Hetav Shah";
 in {
@@ -14,7 +9,12 @@ in {
       isNormalUser = true;
       description = userDescription;
       shell = pkgs.nushell;
-      extraGroups = ["wheel" "mlocate" "docker" "wireshark"];
+      extraGroups = [
+        "wheel"
+        "mlocate"
+        "docker"
+        "wireshark"
+      ];
     };
   };
 }

@@ -1,13 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  options,
-  ...
-}: let
-  username = "hetav";
-in {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     ollama
     # open-webui
