@@ -3,7 +3,9 @@
   config,
   lib,
   ...
-}: {
+}: let
+  wallpaper_path = "/etc/nixos/wallpapers/China.jpeg";
+in {
   programs = {
     rofi = {
       enable = true;
@@ -56,8 +58,7 @@
         };
         "inputbar" = {
           enabled = true;
-          # 	padding = mkLiteral "10px 10px 200px 10px";
-          padding = mkLiteral "10px 10px 100px 10px";
+          padding = mkLiteral "10px 10px 200px 10px";
           margin = mkLiteral "10px";
           background-color = lib.mkForce (mkLiteral "transparent");
           border-radius = "25px";
@@ -67,7 +68,7 @@
             "dummy"
             "mode-switcher"
           ];
-          ##          background-image = mkLiteral ''url("~/.cache/wallpaper", width)'';
+          background-image = mkLiteral ''url("${wallpaper_path}", width)'';
         };
         "entry" = {
           enabled = true;
@@ -186,7 +187,7 @@
         };
         "element-text" = {
           background-color = lib.mkForce (mkLiteral "transparent");
-          # font = "JetBrainsMono Nerd Font Mono 12";
+          font = "JetBrainsMono Nerd Font Mono 12";
           text-color = lib.mkForce (mkLiteral "inherit");
           cursor = mkLiteral "inherit";
           vertical-align = mkLiteral "0.5";

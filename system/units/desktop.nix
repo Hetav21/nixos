@@ -1,12 +1,5 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  options,
-  ...
-}: let
-  wallpaper = "linus_nvidia2.jpg";
+{pkgs, ...}: let
+  wallpaper = "China.jpeg";
 in {
   ### CONTAINS ALL PACKAGES THAT ARE DE SPECIFIC
 
