@@ -1,5 +1,4 @@
-{pkgs, ...}: let
-in {
+{pkgs, ...}: {
   systemd.user.services = {
     networkd-wait-online = {
       enable = true;

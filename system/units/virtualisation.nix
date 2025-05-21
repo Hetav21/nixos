@@ -1,5 +1,4 @@
-{pkgs, ...}: let
-in {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     virt-viewer
     virt-manager
@@ -10,32 +9,23 @@ in {
     win-spice
     adwaita-icon-theme
 
-    dive # look into docker image layers
-    docker-compose # start group of containers for dev
-    podman-compose # start group of containers for dev
+    dive
+    docker-compose
+    podman-compose
     quickemu
     quickgui
   ];
 
-  boot.binfmt.emulatedSystems = [
-    "aarch64-linux"
-    "riscv64-linux"
-  ];
+  boot.binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
 
   programs.adb.enable = true;
   programs.virt-manager.enable = true;
 
   users.groups.libvirtd.members = ["hetav"];
 
-  users.users.hetav.extraGroups = [
-    "libvirtd"
-    "kvm"
-    "adbusers"
-  ];
+  users.users.hetav.extraGroups = ["libvirtd" "kvm" "adbusers"];
 
-  services.udev.packages = with pkgs; [
-    android-udev-rules
-  ];
+  services.udev.packages = with pkgs; [android-udev-rules];
 
   programs.dconf.enable = true;
 

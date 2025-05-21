@@ -1,8 +1,5 @@
-{pkgs, ...}: let
-in {
-  environment.systemPackages = with pkgs; [
-    lxqt.lxqt-policykit
-  ];
+{pkgs, ...}: {
+  environment.systemPackages = with pkgs; [lxqt.lxqt-policykit];
 
   security = {
     rtkit.enable = true;

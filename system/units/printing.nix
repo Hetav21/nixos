@@ -1,8 +1,9 @@
-{pkgs, ...}: let
-in {
+{pkgs, ...}: {
   services.printing = {
     enable = true;
-    drivers = [pkgs.hplipWithPlugin]; # NIXPKGS_ALLOW_UNFREE=1 nix-shell -p hplipWithPlugin --run 'sudo -E hp-setup'
+    drivers = [
+      pkgs.hplipWithPlugin
+    ]; # NIXPKGS_ALLOW_UNFREE=1 nix-shell -p hplipWithPlugin --run 'sudo -E hp-setup'
   };
 
   hardware = {
@@ -13,7 +14,5 @@ in {
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    hplip
-  ];
+  environment.systemPackages = with pkgs; [hplip];
 }

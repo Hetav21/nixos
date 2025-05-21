@@ -7,10 +7,23 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "assistant": {
+  "show_edit_predictions": true,
+  "lsp": {
+    "nil": {
+      "initialization_options": {
+        "formatting": {
+          "command": ["nixfmt"]
+        }
+      }
+    }
+  },
+  "features": {
+    "edit_prediction_provider": "zed"
+  },
+  "agent": {
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-4o"
+      "model": "gpt-4.1"
     },
     "version": "2"
   },
@@ -20,6 +33,6 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "JetBrains New Dark"
+    "dark": "Github Dark"
   }
 }

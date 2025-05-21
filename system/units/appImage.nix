@@ -1,8 +1,5 @@
-{pkgs, ...}: let
-in {
-  environment.systemPackages = with pkgs; [
-    appimage-run
-  ];
+{pkgs, ...}: {
+  environment.systemPackages = with pkgs; [appimage-run];
 
   programs.fuse.userAllowOther = true;
 

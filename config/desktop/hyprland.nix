@@ -9,31 +9,21 @@
     systemd = {
       enable = true;
       enableXdgAutostart = true;
-      variables = [
-        "--all"
-      ];
+      variables = ["--all"];
     };
     settings = {
-      debug = {
-        disable_logs = true;
-      };
+      debug = {disable_logs = true;};
 
-      ecosystem = {
-        no_update_news = true;
-      };
+      ecosystem = {no_update_news = true;};
 
-      cursor = {
-        no_hardware_cursors = true;
-      };
+      cursor = {no_hardware_cursors = true;};
 
       xwayland = {
         force_zero_scaling = true;
         use_nearest_neighbor = true;
       };
 
-      input = {
-        kb_options = "ctrl:nocaps";
-      };
+      input = {kb_options = "ctrl:nocaps";};
 
       general = {
         border_size = 1;
@@ -125,7 +115,6 @@
         $firefox = firefox
         $browser = zen-beta
         $clipHistory = rofi -modi clipboard:/home/hetav/.local/bin/cliphist-rofi-img -show clipboard -show-icons
-        $powermenu = rofi -show power-menu -modi power-menu:/home/hetav/.local/bin/rofi-power-menu
         $lock = hyprlock
 
         # Binds

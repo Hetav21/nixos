@@ -1,6 +1,10 @@
 {...}: {
   programs.waybar = {
     enable = true;
+    systemd = {
+      enable = true;
+      target = "hyprland-session.target";
+    };
     settings = [
       {
         layer = "top";
@@ -18,23 +22,21 @@
           "battery"
           "custom/right"
         ];
-        modules-center = [
-          "custom/left"
-          "hyprland/workspaces"
-          "custom/right"
-        ];
-        modules-right = [
-          "custom/left"
-          "tray"
-          "clock"
-          "custom/right"
-        ];
+        modules-center = ["custom/left" "hyprland/workspaces" "custom/right"];
+        modules-right = ["custom/left" "tray" "clock" "custom/right"];
 
         "network" = {
           tooltip = true;
           format-wifi = "<span foreground='#FF8B49'> {bandwidthDownBytes}</span> <span foreground='#FF6962'> {bandwidthUpBytes}</span>";
           format-ethernet = "<span foreground='#FF8B49'> {bandwidthDownBytes}</span> <span foreground='#FF6962'> {bandwidthUpBytes}</span>";
-          tooltip-format = "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>";
+          tooltip-format = ''
+            Network: <big><b>{essid}</b></big>
+            Signal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>
+            Frequency: <b>{frequency}MHz</b>
+            Interface: <b>{ifname}</b>
+            IP: <b>{ipaddr}/{cidr}</b>
+            Gateway: <b>{gwaddr}</b>
+            Netmask: <b>{netmask}</b>'';
           format-linked = "󰈀 {ifname} (No IP)";
           format-disconnected = " 󰖪 ";
           tooltip-format-disconnected = "Disconnected";
@@ -42,9 +44,7 @@
           on-click-right = "~/.config/waybar/network.py";
         };
 
-        "temperature" = {
-          format = "{temperatureC}°C ";
-        };
+        "temperature" = {format = "{temperatureC}°C ";};
 
         "custom/rofi" = {
           format = "  {}";
@@ -67,28 +67,13 @@
           format-charging = " {capacity}%";
           format-plugged = " {capacity}%";
           format-alt = "{time} {icon}";
-          format-icons = [
-            "󰂎"
-            "󰁺"
-            "󰁻"
-            "󰁼"
-            "󰁽"
-            "󰁾"
-            "󰁿"
-            "󰂀"
-            "󰂁"
-            "󰂂"
-            "󰁹"
-          ];
+          format-icons = ["󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
         };
 
         "pulseaudio" = {
           format = "{icon} {volume}";
           format-muted = "󰖁";
           on-click = "pavucontrol -t 3";
-          on-click-middle = "~/.config/hypr/scripts/volumecontrol.sh -o m";
-          on-scroll-up = "~/.config/hypr/scripts/volumecontrol.sh -o i";
-          on-scroll-down = "~/.config/hypr/scripts/volumecontrol.sh -o d";
           tooltip-format = "{icon} {desc} // {volume}%";
           scroll-step = 5;
           format-icons = {
@@ -98,11 +83,7 @@
             phone = "";
             portable = "";
             car = "";
-            default = [
-              ""
-              ""
-              ""
-            ];
+            default = ["" "" ""];
           };
         };
 
@@ -121,18 +102,7 @@
           on-scroll-up = "light -A 7";
           on-scroll-down = "light -U 7";
           format = "{icon} {percent}%";
-          format-icons = [
-            "󰃞"
-            "󰃟"
-            "󰃠"
-            "󱩎"
-            "󱩏"
-            "󱩐"
-            "󱩑"
-            "󱩒"
-            "󱩓"
-            "󰛨"
-          ];
+          format-icons = ["󰃞" "󰃟" "󰃠" "󱩎" "󱩏" "󱩐" "󱩑" "󱩒" "󱩓" "󰛨"];
         };
 
         "custom/left" = {
@@ -289,9 +259,5 @@
         border-radius: 22px 0px 0px 22px;
       }
     '';
-    systemd = {
-      enable = true;
-      target = "hyprland-session.target";
-    };
   };
 }

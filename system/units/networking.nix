@@ -17,7 +17,6 @@ in {
 
     # Music and streaming
     youtube-music
-    spicetify-cli
 
     # Communication and social
     thunderbird
@@ -31,11 +30,7 @@ in {
 
     # Networking Tools
     networkmanagerapplet
-    openssh
     wireshark
-    tailscale
-    cloudflare-warp
-    avahi
   ];
 
   networking = {
@@ -56,23 +51,6 @@ in {
           to = 8090;
         }
       ];
-    };
-  };
-
-  services = {
-    openssh.enable = true;
-    cloudflare-warp = {
-      enable = true;
-      openFirewall = true;
-    };
-    tailscale = {
-      enable = true;
-      useRoutingFeatures = "client";
-    };
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
     };
   };
 }

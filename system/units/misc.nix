@@ -1,14 +1,11 @@
-{pkgs, ...}: let
-in {
+{pkgs, ...}: {
   services = {
     locate = {
       enable = true;
       package = pkgs.mlocate;
     };
 
-    cron = {
-      enable = true;
-    };
+    cron = {enable = true;};
 
     gnome.gnome-keyring.enable = true;
   };
@@ -18,11 +15,7 @@ in {
     enableSSHSupport = true;
   };
 
-  imports = [
-    ../../systemd/systemd-extra-imports.nix
-  ];
+  imports = [../../systemd/systemd-extra-imports.nix];
 
-  systemd.extra = {
-    muteMicrophone.enable = true;
-  };
+  systemd.extra = {muteMicrophone.enable = true;};
 }
