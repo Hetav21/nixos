@@ -10,45 +10,26 @@ in {
     stateVersion = stateVersion;
 
     file = {
-      # Cached Wallpaper for rofi
-      ".cache/wallpaper".source = ../../wallpapers/${wallpaper};
-      ".local/bin/cliphist-rofi-img".source = ../../dotfiles/.local/bin/cliphist-rofi-img;
-
-      # Hyprland Config
-      # ".config/hypr".source = ../../dotfiles/.config/hypr;
-
-      # wlogout icons
-      ".config/wlogout/icons".source = ../../config/wlogout;
-
       # Top Level Files symlinks
+      # ".zshrc".source = ../../dotfiles/.zshrc;
+      # ".zshenv".source = ../../dotfiles/.zshenv;
       ".vimrc".source = ../../dotfiles/.vimrc;
-      ## ".npmrc".source = ../../dotfiles/.npmrc;
-      ".zshrc".source = ../../dotfiles/.zshrc;
-      ".zshenv".source = ../../dotfiles/.zshenv;
-      ".xinitrc".source = ../../dotfiles/.xinitrc;
-      ".ideavimrc".source = ../../dotfiles/.ideavimrc;
-      ".nirc".source = ../../dotfiles/.nirc;
-      ".local/bin/wallpaper".source = ../../wallpapers/${wallpaper};
       ".local/share/applications/microsoft-edge.desktop".source =
         ../../dotfiles/.local/share/applications/microsoft-edge.desktop;
 
-      # Config directories
-      ".config/alacritty".source = ../../dotfiles/.config/alacritty;
-      ".config/dunst".source = ../../dotfiles/.config/dunst;
-      ".config/fastfetch".source = ../../dotfiles/.config/fastfetch;
-      ".config/kitty".source = ../../dotfiles/.config/kitty;
+      # Directories
+      # ".config/kitty".source = ../../dotfiles/.config/kitty;
+      # ".config/wezterm".source = ../../dotfiles/.config/wezterm;
       ".config/mpv".source = ../../dotfiles/.config/mpv;
-      # ".config/waybar".source = ../../dotfiles/.config/waybar;
       ".config/yazi".source = ../../dotfiles/.config/yazi;
-      ".config/wezterm".source = ../../dotfiles/.config/wezterm;
-      ## ".config/zed/settings.json".source = ../../dotfiles/.config/zed/settings.json;
-      ## ".config/zed/keymap.json".source = ../../dotfiles/.config/zed/keymap.json;
+      ".config/fastfetch".source = ../../dotfiles/.config/fastfetch;
+      ".config/wlogout/icons".source = ../../dotfiles/.config/wlogout/icons;
 
-      # Individual config files
-      ## ".config/nushell/completer.nu".source = ../../dotfiles/.config/nushell/completer.nu;
-      ## ".config/nushell/colors.nu".source = ../../dotfiles/.config/nushell/colors.nu;
-      ".config/kwalletrc".source = ../../dotfiles/.config/kwalletrc;
-      ## ".config/starship.toml".source = ../../dotfiles/.config/starship.toml;
+      # Files
+      # ".config/starship.toml".source = ../../dotfiles/.config/starship.toml;
+      ".cache/wallpaper".source = ../../wallpapers/${wallpaper};
+      ".local/bin/cliphist-rofi-img".source =
+        ../../dotfiles/.local/bin/cliphist-rofi-img;
     };
 
     sessionVariables = {
@@ -79,51 +60,36 @@ in {
       NVD_BACKEND = "direct";
       LIBVA_DRIVER_NAME = "nvidia";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
-      ANV_VIDEO_DECODE = 1;
+      # VK_ICD_FILENAMES =
+      #   "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
+      # ANV_VIDEO_DECODE = 1;
 
-      JAVA_AWT_WM_NONREPARENTING = "1";
+      # JAVA_AWT_WM_NONREPARENTING = "1";
     };
 
-    sessionPath = [
-      "$HOME/.local/bin"
-      "$HOME/go/bin"
-    ];
+    sessionPath = ["$HOME/.local/bin" "$HOME/go/bin"];
 
-    packages = [
-      (import ../../scripts/rofi-launcher.nix {inherit pkgs;})
-    ];
+    packages = [(import ../../scripts/rofi-launcher.nix {inherit pkgs;})];
   };
 
   imports = [
     ../../config/ghostty.nix
-    ../../config/rofi/rofi.nix
     ../../config/wlogout.nix
     ../../config/shell.nix
     ../../config/tmux.nix
     ../../config/desktop
   ];
 
-  # Styling
-  stylix.targets.waybar.enable = true;
-
   gtk = {
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
-    gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
-    };
-    gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
-    };
-  };
-  qt = {
-    enable = true;
+    gtk3.extraConfig = {gtk-application-prefer-dark-theme = 1;};
+    gtk4.extraConfig = {gtk-application-prefer-dark-theme = 1;};
   };
 
-  programs = {
-    home-manager.enable = true;
-  };
+  qt.enable = true;
+
+  programs.home-manager.enable = true;
 }

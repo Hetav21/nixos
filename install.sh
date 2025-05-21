@@ -17,6 +17,11 @@ cd "$FLAKE_DIR" || { echo "Failed to cd to $FLAKE_DIR"; exit 1; }
 sudo nixos-rebuild switch --flake .#default || { echo "Failed to rebuild NixOS configuration"; exit 1; }
 
 # Post Install
+## Auto Start virt network bridge
 sudo virsh net-autostart default
+## Copy zed dotfiles
+## Copy vscode settings
+## Copy npm config
+## Copy sublime text
 
 echo "Script completed successfully."

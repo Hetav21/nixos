@@ -1,5 +1,4 @@
-{pkgs, ...}: let
-in {
+{pkgs, ...}: {
   programs.nix-ld = {
     enable = true;
     ## find the name of the package from the error message, like:

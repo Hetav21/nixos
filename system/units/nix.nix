@@ -2,10 +2,10 @@
   username = "hetav";
 in {
   environment.systemPackages = with pkgs; [
-    nixfmt-rfc-style
+    nixfmt-classic
     nix-index
     cachix
-    nixd
+    nil
   ];
 
   programs = {
@@ -15,17 +15,9 @@ in {
 
   nix = {
     settings = {
-      trusted-users = [
-        "root"
-        "${username}"
-      ];
+      trusted-users = ["root" "${username}"];
       auto-optimise-store = true;
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-      substituters = ["https://hyprland.cachix.org"];
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+      experimental-features = ["nix-command" "flakes"];
       stalled-download-timeout = 99999999;
       max-jobs = 2;
       cores = 8;

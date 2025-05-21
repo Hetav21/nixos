@@ -1,5 +1,4 @@
-{pkgs, ...}: let
-in {
+{pkgs, ...}: {
   fonts = {
     enableDefaultPackages = true;
 
@@ -16,10 +15,7 @@ in {
       };
     };
 
-    packages = with pkgs; [
-      nerd-fonts.jetbrains-mono
-      dejavu_fonts
-    ];
+    packages = with pkgs; [nerd-fonts.jetbrains-mono dejavu_fonts];
   };
 
   stylix.fonts = {

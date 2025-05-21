@@ -1,5 +1,4 @@
-{...}: let
-in {
+{...}: {
   # Nix-Flatpak
   services.flatpak = {
     enable = true;

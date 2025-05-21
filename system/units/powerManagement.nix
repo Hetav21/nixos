@@ -1,5 +1,4 @@
-{pkgs, ...}: let
-in {
+{pkgs, ...}: {
   services = {
     auto-cpufreq = {
       enable = true;
@@ -21,7 +20,5 @@ in {
     powertop.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    auto-cpufreq
-  ];
+  environment.systemPackages = with pkgs; [auto-cpufreq];
 }

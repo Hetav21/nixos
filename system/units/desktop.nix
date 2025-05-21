@@ -1,27 +1,13 @@
 {pkgs, ...}: let
   wallpaper = "China.jpeg";
 in {
-  ### CONTAINS ALL PACKAGES THAT ARE DE SPECIFIC
-
   environment.systemPackages = with pkgs; [
     # Wayland specific
-    dunst
     swww
     waypaper
-    grim
-    slurp
-    swappy
-    waybar
-    wl-clipboard
-    wlr-protocols
-
-    # Hyprland Specific
-    hyprpicker
+    # grim swappy slurp
     hyprshot
-    hyprlang
-    hyprutils
-    hyprgraphics
-    hyprwayland-scanner
+    wl-clipboard
   ];
 
   stylix = {
@@ -118,10 +104,7 @@ in {
 
       wlr.enable = true;
 
-      extraPortals = [
-        pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal
-      ];
+      extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal];
 
       configPackages = [
         pkgs.xdg-desktop-portal-gtk
@@ -135,11 +118,6 @@ in {
       enable = true;
       withUWSM = true;
       xwayland.enable = true;
-    };
-
-    hyprlock = {
-      enable = true;
-      package = pkgs.hyprlock;
     };
   };
 

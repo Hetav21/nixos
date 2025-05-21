@@ -1,5 +1,4 @@
-{...}: let
-in {
+{...}: {
   imports = [
     ./units/_apps.nix
     ./units/_fonts.nix
@@ -11,7 +10,6 @@ in {
     ./units/fileManager.nix
     ./units/fileSharing.nix
     ./units/hardware.nix
-    ## ./units/hibernation.nix
     ./units/llm.nix
     ./units/misc.nix
     ./units/networking.nix

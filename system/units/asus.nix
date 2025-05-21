@@ -1,5 +1,4 @@
-{...}: let
-in {
+{...}: {
   services = {
     supergfxd.enable = true;
 

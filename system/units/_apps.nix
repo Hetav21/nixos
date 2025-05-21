@@ -1,5 +1,4 @@
-{pkgs, ...}: let
-in {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     # Text editors and IDEs
     vscode
@@ -9,24 +8,11 @@ in {
     code-cursor
 
     # Programming languages and build tools
-    nodePackages_latest.pnpm
-    nodePackages_latest.yarn
     nodePackages_latest.nodejs
     bun
-    go
-    lua
-    zig
-    rustup
-    rustc
-    python3
-    jdk
-    maven
+    # python3
     gcc
     clang
-    gnumake
-    progress
-    meson
-    ninja
 
     # Version control and development tools
     codex
@@ -37,26 +23,14 @@ in {
     gh
     mongodb-compass
     distrobox
-    devenv
 
     # Shell and terminal utilities
-    openssl
-    coreutils
-    alacritty
-    ghostty
     alejandra
-    wget
     killall
     tree
-    stow
-    pandoc
 
     # File management and archives
-    p7zip
-    unzip
-    unrar
     file-roller
-    zip
 
     # System monitoring and management
     htop
@@ -64,7 +38,6 @@ in {
 
     # Audio and video
     pavucontrol
-    ffmpeg
     obs-studio
     mpv
 
@@ -80,22 +53,13 @@ in {
     # Gaming and entertainment
 
     # System utilities
-    libgcc
-    libnotify
-    v4l-utils
-    pciutils
-    pkg-config
 
     # File systems
     ntfs3g
 
-    # Clipboard managers
-    cliphist
-
     # Fun and customization
     fastfetch
     microfetch
-    onefetch
 
     # Networking
 

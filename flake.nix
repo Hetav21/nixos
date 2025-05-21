@@ -27,24 +27,22 @@
   } @ inputs: let
     system = "x86_64-linux";
 
-    lib = nixpkgs.lib;
-
     pkgs = import inputs.stablePkgs {
       inherit system;
       config.allowUnfree = true;
     };
 
-    disableGpuWrap = {appName}:
-      nixpkgs.symlinkJoin {
-        name = appName;
-        paths = [nixpkgs.${appName}];
-        buildInputs = [nixpkgs.makeWrapper];
-        postBuild = lib.strings.concatStrings [
-          "wrapProgram $out/bin/"
-          appName
-          " --add-flags \"--disable-gpu\""
-        ];
-      };
+    # disableGpuWrap = {appName}:
+    #   nixpkgs.symlinkJoin {
+    #     name = appName;
+    #     paths = [nixpkgs.${appName}];
+    #     buildInputs = [nixpkgs.makeWrapper];
+    #     postBuild = lib.strings.concatStrings [
+    #       "wrapProgram $out/bin/"
+    #       appName
+    #       " --add-flags \"--disable-gpu\""
+    #     ];
+    #   };
 
     overlay = final: prev: {
       megacmd = pkgs.megacmd;

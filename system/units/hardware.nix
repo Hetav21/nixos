@@ -1,6 +1,4 @@
-### CONTAINS HARDWARE AND RELATED UTILITIES
-{pkgs, ...}: let
-in {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     pulseaudio
     alsa-utils
