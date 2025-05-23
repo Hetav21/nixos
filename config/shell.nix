@@ -4,6 +4,11 @@
 
     nushell = {
       enable = true;
+      extraEnv = ''
+        if (('/run/secrets/openai_api_key' | path exists)) {
+          $env.OPENAI_API_KEY = (open /run/secrets/openai_api_key | str trim)
+        }
+      '';
       shellAliases = {
         # Core Utils Aliases
         l = "eza -lh  --icons=auto";

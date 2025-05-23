@@ -7,6 +7,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     stylix.url = "github:danth/stylix";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -58,6 +62,7 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./hosts/nixbook/configuration.nix
+          inputs.sops-nix.nixosModules.sops
           inputs.chaotic.nixosModules.default
           inputs.nix-flatpak.nixosModules.nix-flatpak
           inputs.stylix.nixosModules.stylix
