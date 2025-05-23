@@ -21,7 +21,6 @@ in {
       # ".config/kitty".source = ../../dotfiles/.config/kitty;
       # ".config/wezterm".source = ../../dotfiles/.config/wezterm;
       ".config/mpv".source = ../../dotfiles/.config/mpv;
-      ".config/yazi".source = ../../dotfiles/.config/yazi;
       ".config/fastfetch".source = ../../dotfiles/.config/fastfetch;
       ".config/wlogout/icons".source = ../../dotfiles/.config/wlogout/icons;
 
