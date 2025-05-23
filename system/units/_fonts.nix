@@ -15,7 +15,7 @@
       };
     };
 
-    packages = with pkgs; [nerd-fonts.jetbrains-mono dejavu_fonts];
+    packages = with pkgs; [nerd-fonts.jetbrains-mono dejavu_fonts fira-code-nerdfont];
   };
 
   stylix.fonts = {

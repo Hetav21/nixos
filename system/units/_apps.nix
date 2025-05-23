@@ -10,9 +10,8 @@
     # Programming languages and build tools
     nodePackages_latest.nodejs
     bun
-    # python3
+    python3
     gcc
-    clang
 
     # Version control and development tools
     codex
@@ -25,7 +24,6 @@
     distrobox
 
     # Shell and terminal utilities
-    alejandra
     killall
     tree
 

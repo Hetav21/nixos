@@ -2,9 +2,11 @@
   username = "hetav";
 in {
   environment.systemPackages = with pkgs; [
-    nixfmt-classic
+    # nixfmt-classic
     nix-index
+    alejandra
     cachix
+    nixd
     nil
   ];
 
