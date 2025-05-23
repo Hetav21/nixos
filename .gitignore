@@ -2,3 +2,4 @@ nixos-switch.log
 patch
 *.bak
 *.swp
+*.asc
