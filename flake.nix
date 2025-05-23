@@ -51,6 +51,7 @@
       auto-cpufreq = pkgs.auto-cpufreq;
     };
   in {
+    templates = import ./templates;
     nixosConfigurations = {
       nixbook = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
