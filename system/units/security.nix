@@ -1,5 +1,23 @@
-{pkgs, ...}: {
-  environment.systemPackages = with pkgs; [lxqt.lxqt-policykit];
+{
+  pkgs,
+  config,
+  ...
+}: let
+  username = "hetav";
+in {
+  environment.systemPackages = with pkgs; [lxqt.lxqt-policykit sops];
+
+  sops = {
+    age.keyFile = "/etc/nixos/secrets/keys.asc";
+
+    secrets.openai_api_key = {
+      sopsFile = ../../secrets/openai_api_key.yaml;
+
+      mode = "0440";
+      owner = config.users.users.${username}.name;
+      group = config.users.users.${username}.group;
+    };
+  };
 
   security = {
     rtkit.enable = true;
