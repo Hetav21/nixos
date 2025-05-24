@@ -2,10 +2,10 @@
   lib,
   pkgs,
   config,
+  settings,
   ...
 }:
 with lib; let
-  username = "hetav";
   cfg = config.systemd.extra.mega-sync;
 in {
   options.systemd.extra.mega-sync = {
@@ -25,7 +25,7 @@ in {
           ExecStart = "${pkgs.megasync}/bin/megasync";
           Restart = "on-failure";
           RestartSec = "10s";
-          User = username;
+          User = settings.username;
           Group = "users";
           Environment = ["PATH=/run/wrappers/bin/:$PATH"];
         };

@@ -1,23 +1,17 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    pulseaudio
     alsa-utils
+    pulseaudio
     brightnessctl
   ];
 
   services = {
     blueman.enable = true;
-
     pulseaudio.enable = false;
-
     libinput.enable = true;
-
     fstrim.enable = true;
-
     gvfs.enable = true;
-
     ipp-usb.enable = true;
-
     pipewire = {
       enable = true;
       alsa = {

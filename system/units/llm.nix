@@ -1,14 +1,14 @@
 {pkgs, ...}: {
-  environment.systemPackages = with pkgs; [ollama open-webui];
-
   services = {
     ollama = {
       enable = true;
+      package = pkgs.stable.ollama;
       acceleration = "cuda";
     };
 
     open-webui = {
       enable = true;
+      # package = pkgs.stable.open-webui;
       openFirewall = true;
       environment = {
         ANONYMIZED_TELEMETRY = "False";

@@ -1,10 +1,9 @@
 {
   pkgs,
   config,
+  settings,
   ...
-}: let
-  username = "hetav";
-in {
+}: {
   environment.systemPackages = with pkgs; [lxqt.lxqt-policykit sops];
 
   sops = {
@@ -14,8 +13,8 @@ in {
       sopsFile = ../../secrets/openai_api_key.yaml;
 
       mode = "0440";
-      owner = config.users.users.${username}.name;
-      group = config.users.users.${username}.group;
+      owner = config.users.users.${settings.username}.name;
+      group = config.users.users.${settings.username}.group;
     };
   };
 

@@ -2,13 +2,12 @@
   lib,
   pkgs,
   config,
+  settings,
   ...
 }:
 with lib; let
   cfg = config.systemd.extra.rclone;
-  username = "hetav";
-  folder_path = "/home/hetav/Desktop/University";
-  rclone_path = "Adani:University";
+  folder_path = "/home/${settings.username}/${settings.rclone.local_dir}";
 in {
   options.systemd.extra.rclone = {
     enable = mkEnableOption "Mounting netfs using rclone";
@@ -25,11 +24,11 @@ in {
         serviceConfig = {
           Type = "simple";
           ExecStartPre = "/run/current-system/sw/bin/mkdir -p ${folder_path}"; # Creates folder if didn't exist
-          ExecStart = "${pkgs.rclone}/bin/rclone mount --vfs-cache-mode writes ${rclone_path} ${folder_path} --allow-non-empty"; # Mounts
+          ExecStart = "${pkgs.rclone}/bin/rclone mount --vfs-cache-mode writes ${settings.rclone.remote_dir} ${folder_path} --allow-non-empty"; # Mounts
           ExecStop = "/run/current-system/sw/bin/fusermount -u ${folder_path}"; # Dismounts
           Restart = "on-failure";
           RestartSec = "10s";
-          User = username;
+          User = settings.username;
           Group = "users";
           Environment = ["PATH=/run/wrappers/bin/:$PATH"];
         };

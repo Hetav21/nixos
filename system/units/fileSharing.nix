@@ -1,13 +1,17 @@
-{pkgs, ...}: let
-  username = "hetav";
+{
+  pkgs,
+  settings,
+  ...
+}: let
+  username = settings.username;
   homeDirectory = "/home/${username}";
 in {
   environment.systemPackages = with pkgs; [
     rclone
     onedrive
     localsend
-    megasync
-    megacmd
+    stable.megasync
+    stable.megacmd
   ];
 
   programs.droidcam.enable = true;

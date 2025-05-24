@@ -1,5 +1,5 @@
-nixos-switch.log
-patch
+*.log
 *.bak
 *.swp
 *.asc
+patch

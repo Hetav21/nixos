@@ -1,13 +1,12 @@
-{pkgs, ...}: let
-  userName = "hetav";
-  homeDirectory = "/home/${userName}";
-  stateVersion = "24.11";
-  wallpaper = "China.jpeg";
-in {
+{
+  pkgs,
+  settings,
+  ...
+}: {
   home = {
-    username = userName;
-    homeDirectory = homeDirectory;
-    stateVersion = stateVersion;
+    username = settings.username;
+    homeDirectory = "/home/${settings.username}";
+    stateVersion = "24.11";
 
     file = {
       # Top Level Files symlinks
@@ -26,17 +25,17 @@ in {
 
       # Files
       # ".config/starship.toml".source = ../../dotfiles/.config/starship.toml;
-      ".cache/wallpaper".source = ../../wallpapers/${wallpaper};
+      ".cache/wallpaper".source = ../../wallpapers/${settings.wallpaper};
       ".local/bin/cliphist-rofi-img".source =
         ../../dotfiles/.local/bin/cliphist-rofi-img;
     };
 
     sessionVariables = {
       LC_ALL = "en_IN";
-      EDITOR = "vim";
-      VISUAL = "vim";
-      TERMINAL = "ghostty";
-      BROWSER = "zen";
+      EDITOR = settings.editor;
+      VISUAL = settings.visual;
+      TERMINAL = settings.terminal;
+      BROWSER = settings.browser;
 
       NIXOS_OZONE_WL = "1";
       WLR_NO_HARDWARE_CURSORS = "1";
