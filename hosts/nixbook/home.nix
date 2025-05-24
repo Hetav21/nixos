@@ -31,7 +31,7 @@
     };
 
     sessionVariables = {
-      LC_ALL = "en_IN";
+      LC_ALL = settings.extraLocale;
       EDITOR = settings.editor;
       VISUAL = settings.visual;
       TERMINAL = settings.terminal;
