@@ -1,5 +1,4 @@
-{...}: let
-in {
+{...}: {
   imports = [
     ./drivers/amd-drivers.nix
     ./drivers/intel-drivers.nix
