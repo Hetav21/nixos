@@ -2,8 +2,17 @@
   environment.systemPackages = with pkgs; [
     alsa-utils
     pulseaudio
+
     brightnessctl
+
+    lact
+    nvtopPackages.full
   ];
+
+  systemd = {
+    packages = [pkgs.lact];
+    services.lactd.wantedBy = ["multi-user.target"];
+  };
 
   services = {
     blueman.enable = true;

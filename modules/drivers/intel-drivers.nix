@@ -12,11 +12,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      # Top
-      nvtopPackages.intel
-    ];
-
     hardware.graphics = {
       extraPackages = with pkgs; [
         intel-media-driver
