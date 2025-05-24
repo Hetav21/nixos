@@ -1,6 +1,8 @@
-{pkgs, ...}: let
-  wallpaper = "China.jpeg";
-in {
+{
+  pkgs,
+  settings,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     # Wayland specific
     swww
@@ -33,7 +35,7 @@ in {
       base0E = "f6c177";
       base0F = "524f67";
     };
-    image = ../../wallpapers/${wallpaper};
+    image = ../../wallpapers/${settings.wallpaper};
     polarity = "dark";
     opacity.terminal = 0.8;
     cursor.package = pkgs.bibata-cursors;
@@ -121,6 +123,25 @@ in {
     };
   };
 
+  time.timeZone = settings.timeZone;
+
+  i18n = {
+    defaultLocale = settings.locale;
+    extraLocaleSettings = {
+      LC_ADDRESS = settings.extraLocale;
+      LC_IDENTIFICATION = settings.extraLocale;
+      LC_MEASUREMENT = settings.extraLocale;
+      LC_MONETARY = settings.extraLocale;
+      LC_NAME = settings.extraLocale;
+      LC_NUMERIC = settings.extraLocale;
+      LC_PAPER = settings.extraLocale;
+      LC_TELEPHONE = settings.extraLocale;
+      LC_TIME = settings.extraLocale;
+    };
+  };
+
+  console.keyMap = settings.consoleKeymap;
+
   services = {
     gnome.gnome-keyring.enable = true;
 
@@ -134,9 +155,10 @@ in {
 
     xserver = {
       enable = true;
+      exportConfiguration = true; # Make sure /etc/X11/xkb is populated so localectl works correctly
       xkb = {
-        layout = "us";
-        variant = "";
+        layout = settings.keyboard.layout;
+        variant = settings.keyboard.variant;
       };
       videoDrivers = ["modesetting"];
     };

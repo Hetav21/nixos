@@ -1,5 +1,11 @@
-{...}: let
-  PARTITION_ID = "a96c2e2f-5a1a-4249-8a3c-283532bb14a9";
+{
+  settings,
+  lib,
+  ...
+}: let
+  mountPartitionEnabled =
+    (settings ? mount-partition && settings.mount-partition ? enable)
+    && settings.mount-partition.enable;
 in {
   boot.initrd.availableKernelModules = [
     "xhci_pci"
@@ -10,8 +16,10 @@ in {
     "sd_mod"
   ];
 
-  fileSystems."/virt" = {
-    device = "/dev/disk/by-uuid/${PARTITION_ID}";
-    fsType = "ext4";
+  fileSystems = lib.mkIf mountPartitionEnabled {
+    "/virt" = {
+      device = "/dev/disk/by-uuid/${settings.mount-partition.partition_id}";
+      fsType = "ext4";
+    };
   };
 }

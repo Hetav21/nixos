@@ -2,10 +2,9 @@
   pkgs,
   inputs,
   options,
+  settings,
   ...
-}: let
-  hostName = "nixbook";
-in {
+}: {
   environment.systemPackages = with pkgs; [
     # Browsers
     firefox
@@ -34,7 +33,7 @@ in {
   ];
 
   networking = {
-    hostName = hostName;
+    hostName = settings.hostname;
     networkmanager.enable = true;
     timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
     firewall = {

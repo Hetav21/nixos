@@ -1,6 +1,8 @@
-{pkgs, ...}: let
-  username = "hetav";
-in {
+{
+  pkgs,
+  settings,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     # nixfmt-classic
     nix-index
@@ -17,7 +19,7 @@ in {
 
   nix = {
     settings = {
-      trusted-users = ["root" "${username}"];
+      trusted-users = ["root" "${settings.username}"];
       auto-optimise-store = true;
       experimental-features = ["nix-command" "flakes"];
       stalled-download-timeout = 99999999;

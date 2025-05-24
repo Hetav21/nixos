@@ -1,13 +1,12 @@
-{pkgs, ...}: let
-  userName = "hetav";
-  userDescription = "Hetav Shah";
-in {
-  options = {
-  };
+{
+  pkgs,
+  settings,
+  ...
+}: {
   config = {
-    users.users.${userName} = {
+    users.users.${settings.username} = {
       isNormalUser = true;
-      description = userDescription;
+      description = "Normal User";
       shell = pkgs.nushell;
       extraGroups = [
         "wheel"

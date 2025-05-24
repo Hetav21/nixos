@@ -2,10 +2,9 @@
   pkgs,
   config,
   lib,
+  settings,
   ...
-}: let
-  wallpaper_path = "/etc/nixos/wallpapers/China.jpeg";
-in {
+}: {
   programs = {
     rofi = {
       enable = true;
@@ -68,7 +67,7 @@ in {
             "dummy"
             "mode-switcher"
           ];
-          background-image = mkLiteral ''url("${wallpaper_path}", width)'';
+          background-image = mkLiteral ''url("${settings.rofi_wallpaper_path}", width)'';
         };
         "entry" = {
           enabled = true;

@@ -2,10 +2,10 @@
   lib,
   pkgs,
   config,
+  settings,
   ...
 }:
 with lib; let
-  username = "hetav";
   cfg = config.systemd.extra.onedrive;
 in {
   options.systemd.extra.onedrive = {
@@ -25,7 +25,7 @@ in {
           ExecStart = "${pkgs.onedrive}/bin/onedrive --monitor";
           Restart = "on-failure";
           RestartSec = "10s";
-          User = username;
+          User = settings.username;
           Group = "users";
           Environment = ["PATH=/run/wrappers/bin/:$PATH"];
         };
