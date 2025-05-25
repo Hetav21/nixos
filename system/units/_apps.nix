@@ -25,6 +25,7 @@
 
     # Shell and terminal utilities
     killall
+    most
     tree
 
     # File management and archives

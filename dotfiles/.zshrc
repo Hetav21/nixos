@@ -13,7 +13,7 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Load completions
-## autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit
 
 # Add in zsh plugins
 zinit light Aloxaf/fzf-tab
