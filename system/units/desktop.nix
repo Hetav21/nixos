@@ -103,17 +103,16 @@
     };
     portal = {
       enable = true;
-
       wlr.enable = true;
-
-      extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal];
-
-      configPackages = [
-        pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-hyprland
-        pkgs.xdg-desktop-portal
+      xdgOpenUsePortal = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-hyprland
+        xdg-desktop-portal-gtk
       ];
     };
+    menus.enable = true;
+    icons.enable = true;
+    sounds.enable = true;
   };
   programs = {
     hyprland = {

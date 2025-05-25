@@ -10,11 +10,8 @@
 
     file = {
       # Top Level Files symlinks
-      # ".zshrc".source = ../../dotfiles/.zshrc;
-      # ".zshenv".source = ../../dotfiles/.zshenv;
+      ".zshrc".source = ../../dotfiles/.zshrc;
       ".vimrc".source = ../../dotfiles/.vimrc;
-      ".local/share/applications/microsoft-edge.desktop".source =
-        ../../dotfiles/.local/share/applications/microsoft-edge.desktop;
 
       # Directories
       # ".config/kitty".source = ../../dotfiles/.config/kitty;
@@ -36,13 +33,23 @@
       VISUAL = settings.visual;
       TERMINAL = settings.terminal;
       BROWSER = settings.browser;
+      SIGNAL_PASSWORD_STORE = "gnome-libsecret";
 
       NIXOS_OZONE_WL = "1";
+      GDK_BACKEND = "wayland,x11";
+      QT_QPA_PLATFORM = "wayland;xcb";
+      JAVA_AWT_WM_NONREPARENTING = "1";
       WLR_NO_HARDWARE_CURSORS = "1";
       MOZ_ENABLE_WAYLAND = "1";
-      QT_QPA_PLATFORM = "wayland";
+      OZONE_PLATFORM_HINT = "wayland";
       ELECTRON_OZONE_PLATFORM_HINT = "wayland";
-      SIGNAL_PASSWORD_STORE = "gnome-libsecret";
+
+      VDPAU_DRIVER = "nvidia";
+      ANV_VIDEO_DECODE = "1";
+      LIBVA_DRIVER_NAME = "nvidia";
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      NVD_BACKEND = "direct";
+      GBM_BACKEND = "nvidia-drm";
 
       XDG_CONFIG_HOME = "$HOME/.config";
       XDG_DATA_HOME = "$HOME/.local/share";
@@ -52,18 +59,6 @@
       XDG_SESSION_TYPE = "wayland";
       XDG_CURRENT_DESKTOP = "Hyprland";
       XDG_SESSION_DESKTOP = "Hyprland";
-
-      VDPAU_DRIVER = "nvidia";
-      GBM_BACKEND = "nvidia-drm";
-      NVD_BACKEND = "direct";
-      LIBVA_DRIVER_NAME = "nvidia";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-
-      # VK_ICD_FILENAMES =
-      #   "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
-      # ANV_VIDEO_DECODE = 1;
-
-      # JAVA_AWT_WM_NONREPARENTING = "1";
     };
 
     sessionPath = ["$HOME/.local/bin" "$HOME/go/bin"];
