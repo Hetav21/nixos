@@ -3,19 +3,51 @@
   settings,
   ...
 }: {
-  environment.systemPackages = with pkgs; [
-    # Wayland specific
-    swww
-    waypaper
-    # grim swappy slurp
-    hyprshot
-    wl-clipboard
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      # Wayland specific
+      swww
+      waypaper
+      # grim swappy slurp
+      hyprshot
+      wl-clipboard
+    ];
+
+    sessionVariables = {
+      EDITOR = settings.editor;
+      VISUAL = settings.visual;
+      TERMINAL = settings.terminal;
+      BROWSER = settings.browser;
+      SIGNAL_PASSWORD_STORE = "gnome-libsecret";
+
+      NIXOS_OZONE_WL = "1";
+      GDK_BACKEND = "wayland,x11";
+      QT_QPA_PLATFORM = "wayland;xcb";
+      JAVA_AWT_WM_NONREPARENTING = "1";
+      WLR_NO_HARDWARE_CURSORS = "1";
+      MOZ_ENABLE_WAYLAND = "1";
+      ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+
+      ANV_VIDEO_DECODE = "1";
+      LIBVA_DRIVER_NAME = "iHD";
+      VDPAU_DRIVER = "nvidia";
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      NVD_BACKEND = "direct";
+      GBM_BACKEND = "nvidia-drm";
+
+      XDG_CONFIG_HOME = "$HOME/.config";
+      XDG_DATA_HOME = "$HOME/.local/share";
+      XDG_STATE_HOME = "$HOME/.local/state";
+      XDG_CACHE_HOME = "$HOME/.cache";
+      XDG_SCREENSHOTS_DIR = "$HOME/Pictures/screenshots";
+      XDG_SESSION_TYPE = "wayland";
+      XDG_CURRENT_DESKTOP = "Hyprland";
+      XDG_SESSION_DESKTOP = "Hyprland";
+    };
+  };
 
   stylix = {
     enable = true;
-
-    enableReleaseChecks = false;
 
     base16Scheme = {
       base00 = "191724";
@@ -148,8 +180,6 @@
   console.keyMap = settings.consoleKeymap;
 
   services = {
-    gnome.gnome-keyring.enable = true;
-
     preload.enable = true;
 
     logind = {

@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   services = {
+    upower.enable = true;
     auto-cpufreq = {
       enable = true;
       settings = {

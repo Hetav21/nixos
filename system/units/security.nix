@@ -18,6 +18,8 @@
     };
   };
 
+  services.gnome.gnome-keyring.enable = true;
+
   security = {
     rtkit.enable = true;
     polkit = {
@@ -39,6 +41,11 @@
         })
       '';
     };
-    pam.services.swaylock.text = "auth include login";
+    pam.services = {
+      greetd = {
+        enableGnomeKeyring = true;
+        enableAppArmor = true;
+      };
+    };
   };
 }
