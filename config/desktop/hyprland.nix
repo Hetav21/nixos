@@ -118,7 +118,8 @@
         $lock = hyprlock
 
         # Binds
-        bind = $mainMod, T, exec, $term -e tmux
+        bind = $mainMod, T, exec, $term
+        # bind = $mainMod, T, exec, $term -e tmux
         bind = SUPER_SHIFT, T, exec, $term -e tmux attach
         bind = SUPER_SHIFT, Q, killactive,
         bind = SUPER_SHIFT, M, exit,

@@ -6,8 +6,6 @@
     };
 
     cron = {enable = true;};
-
-    gnome.gnome-keyring.enable = true;
   };
 
   programs.gnupg.agent = {
