@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  settings,
   ...
 }:
 with lib; let
@@ -48,10 +49,6 @@ in {
       "nvidia-drm.fbdev=1"
     ];
 
-    nixpkgs.config = {
-      packageOverrides = _: {inherit (pkgs) linuxPackages_latest nvidia_x11;};
-    };
-
     hardware.nvidia = {
       modesetting.enable = true;
       powerManagement = {
@@ -60,7 +57,7 @@ in {
       };
       open = true;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.latest;
+      package = config.boot.kernelPackages.nvidiaPackages.${settings.nvidia.package};
     };
   };
 }
