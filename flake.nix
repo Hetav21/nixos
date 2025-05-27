@@ -59,6 +59,13 @@
       };
       consoleKeymap = "us"; # CHOOSE YOUR CONSOLE KEYMAP (Affects the tty?)
 
+      # Hardware configuration
+      # TODO: Remove hardware configuration from here and add it to hosts/name
+      nvidia = {
+        enable = true;
+        package = "latest";
+      };
+
       # Application specific configuration
       rofi_wallpaper_path = "/etc/nixos/wallpapers/China.jpeg"; # Should be an absolute path
       rclone = {
