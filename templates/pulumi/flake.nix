@@ -25,7 +25,7 @@
           pulumi-bin
 
           # Python SDK
-          python311
+          python3
 
           # Go SDK
           go_1_22

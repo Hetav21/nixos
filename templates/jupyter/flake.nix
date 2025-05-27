@@ -18,8 +18,8 @@
       default = pkgs.mkShell {
         venvDir = ".venv";
         packages = with pkgs;
-          [poetry python311]
-          ++ (with python311Packages; [
+          [poetry python3]
+          ++ (with python3Packages; [
             ipykernel
             pip
             venvShellHook
