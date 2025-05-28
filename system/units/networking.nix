@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   options,
   settings,
   ...
@@ -8,11 +7,9 @@
   environment.systemPackages = with pkgs; [
     # Browsers
     firefox
-    microsoft-edge
     brave
     mullvad-browser
     chromium
-    inputs.zen-browser.packages."${system}".default
 
     # Music and streaming
     youtube-music

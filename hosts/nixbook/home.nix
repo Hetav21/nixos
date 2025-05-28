@@ -1,5 +1,6 @@
 {
   pkgs,
+  inputs,
   settings,
   ...
 }: {
@@ -29,10 +30,19 @@
 
     sessionPath = ["$HOME/.local/bin" "$HOME/go/bin"];
 
-    packages = [(import ../../scripts/rofi-launcher.nix {inherit pkgs;})];
+    packages = [
+      (import ../../scripts/rofi-launcher.nix {inherit pkgs;})
+      inputs.zen-browser.packages."${settings.system}".default
+    ];
+  };
+
+  zen-nebula = {
+    enable = true;
+    profile = settings.username;
   };
 
   imports = [
+    inputs.zen-nebula.homeModules.default
     ../../config/ghostty.nix
     ../../config/wlogout.nix
     ../../config/shell.nix

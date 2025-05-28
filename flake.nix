@@ -20,14 +20,17 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    zen-nebula.url = "github:JustAdumbPrsn/Nebula-A-Minimal-Theme-for-Zen-Browser";
   };
 
   # Flake Outputs
@@ -48,6 +51,7 @@
       wallpaper = "China.jpeg";
 
       # System configuration
+      system = "x86_64-linux";
       videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia, amdgpu or intel)
       hostname = "nixbook"; # CHOOSE A HOSTNAME HERE
       locale = "en_US.UTF-8"; # CHOOSE YOUR LOCALE
@@ -63,7 +67,7 @@
       # TODO: Remove hardware configuration from here and add it to hosts/name
       nvidia = {
         enable = true;
-        package = "latest";
+        package = "stable"; # stable / beta
       };
 
       # Application specific configuration
@@ -82,12 +86,11 @@
     overlays = import ./overlays {inherit inputs settings;};
     nixosConfigurations = {
       nixbook = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        system = settings.system;
         specialArgs = {inherit self inputs outputs settings;};
         modules = [
           ./hosts/nixbook/configuration.nix
           inputs.sops-nix.nixosModules.sops
-          inputs.chaotic.nixosModules.default
           inputs.nix-flatpak.nixosModules.nix-flatpak
           inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.home-manager
