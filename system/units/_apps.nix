@@ -8,10 +8,6 @@
     code-cursor
 
     # Programming languages and build tools
-    nodePackages_latest.nodejs
-    bun
-    python3
-    gcc
 
     # Version control and development tools
     codex
@@ -47,7 +43,7 @@
     # Productivity and office
     obsidian
     onlyoffice-bin
-    # texlive.combined.scheme-full
+    texliveMinimal
 
     # Gaming and entertainment
 

@@ -8,7 +8,7 @@
 
     open-webui = {
       enable = true;
-      # package = pkgs.stable.open-webui;
+      package = pkgs.stable.open-webui;
       openFirewall = true;
       environment = {
         ANONYMIZED_TELEMETRY = "False";

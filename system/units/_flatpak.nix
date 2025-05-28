@@ -16,6 +16,7 @@
       };
     };
     packages = [
+      "com.microsoft.Edge"
       "net.blix.BlueMail"
       "org.texstudio.TeXstudio"
       "io.github.JakubMelka.Pdf4qt"
