@@ -22,12 +22,10 @@
       "io.github.JakubMelka.Pdf4qt"
       "com.github.jeromerobert.pdfarranger"
       "com.spotify.Client"
-      "org.gnome.Loupe"
       "com.github.IsmaelMartinez.teams_for_linux"
       "org.libreoffice.LibreOffice"
       "com.github.tchx84.Flatseal"
       "com.stremio.Stremio"
-      "com.calibre_ebook.calibre"
       "org.gnome.Papers"
     ];
   };
