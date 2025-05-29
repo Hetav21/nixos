@@ -96,7 +96,7 @@
       "inode/directory" = "thunar.desktop";
 
       # Text editor
-      "text/plain" = "ghostty -e vim";
+      "text/plain" = "dev.zed.Zed.desktop";
       "text/markdown" = "obsidian.desktop;";
       "application/x-zerosize" = "dev.zed.Zed.desktop";
       "application/x-ipynb+json" = "code.desktop";
@@ -107,18 +107,19 @@
       # Image and Videos
       "video/quicktime" = "mpv.desktop";
       "video/x-matroska" = "mpv.desktop";
-      "image/png" = "org.gnome.Loupe.desktop";
+      "image/png" = "org.gnome.Papers.desktop";
+      "image/jpeg" = "org.gnome.Papers.desktop";
 
       # LibreOffice formats
-      "application/vnd.oasis.opendocument.text" = "libreoffice-writer.desktop";
-      "application/vnd.oasis.opendocument.spreadsheet" = "libreoffice-calc.desktop";
-      "application/vnd.oasis.opendocument.presentation" = "libreoffice-impress.desktop";
-      "application/vnd.ms-excel" = "libreoffice-calc.desktop";
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = "libreoffice-calc.desktop";
-      "application/msword" = "libreoffice-writer.desktop";
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "libreoffice-writer.desktop";
-      "application/vnd.ms-powerpoint" = "libreoffice-impress.desktop";
-      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "libreoffice-impress.desktop";
+      "application/vnd.oasis.opendocument.text" = "org.libreoffice.LibreOffice.writer.desktop";
+      "application/vnd.oasis.opendocument.spreadsheet" = "org.libreoffice.LibreOffice.calc.desktop";
+      "application/vnd.oasis.opendocument.presentation" = "org.libreoffice.LibreOffice.impress.desktop";
+      "application/vnd.ms-excel" = "org.libreoffice.LibreOffice.calc.desktop";
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = "org.libreoffice.LibreOffice.calc.desktop";
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "org.libreoffice.LibreOffice.writer.desktop";
+      "application/msword" = "org.libreoffice.LibreOffice.writer.desktop";
+      "application/vnd.ms-powerpoint" = "org.libreoffice.LibreOffice.impress.desktop";
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "org.libreoffice.LibreOffice.impress.desktop";
 
       # PDF
       "application/pdf" = "microsoft-edge.desktop";
