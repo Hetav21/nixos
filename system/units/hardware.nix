@@ -3,6 +3,7 @@
   pkgs,
   config,
   settings,
+  hardware,
   ...
 }: {
   environment.systemPackages = with pkgs; [
@@ -21,7 +22,7 @@
       wantedBy = ["multi-user.target"];
       serviceConfig = {
         User = settings.username;
-        Environment = lib.optionals settings.nvidia.enable [
+        Environment = lib.optionals hardware.nvidia.enable [
           "LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath [
             config.boot.kernelPackages.nvidiaPackages.latest
           ]}"

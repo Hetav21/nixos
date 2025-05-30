@@ -2,11 +2,11 @@
   lib,
   pkgs,
   config,
-  settings,
+  hardware,
   ...
 }:
 with lib; let
-  cfg = config.drivers.nvidia;
+  cfg = hardware.nvidia;
 in {
   options.drivers.nvidia = {
     enable = mkEnableOption "Enable Nvidia Drivers";
@@ -57,7 +57,7 @@ in {
       };
       open = true;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.${settings.nvidia.package};
+      package = config.boot.kernelPackages.nvidiaPackages.${hardware.nvidia.package};
     };
   };
 }

@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  lib,
+  settings,
+  ...
+}: {
   programs.hyprlock = {
     enable = true;
     sourceFirst = true;
@@ -12,7 +16,7 @@
       background = lib.mkForce [
         {
           monitor = "";
-          path = "$HOME/.cache/wallpaper";
+          path = "${settings.wallpaper_path}";
           blur_passes = 3;
           contrast = 0.8916;
           brightness = 0.8172;
