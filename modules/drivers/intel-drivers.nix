@@ -1,11 +1,11 @@
 {
   lib,
   pkgs,
-  config,
+  hardware,
   ...
 }:
 with lib; let
-  cfg = config.drivers.intel;
+  cfg = hardware.intel;
 in {
   options.drivers.intel = {
     enable = mkEnableOption "Enable Intel Graphics Drivers";

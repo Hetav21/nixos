@@ -1,17 +1,30 @@
-{...}: {
-  services = {
-    supergfxd.enable = true;
-
-    asusd = {
-      enable = true;
-      enableUserService = true;
-    };
+{
+  lib,
+  hardware,
+  ...
+}:
+with lib; let
+  cfg = hardware.asus;
+in {
+  options.drivers.asus = {
+    enable = mkEnableOption "Enable Asus Specific Features";
   };
 
-  programs = {
-    rog-control-center = {
-      enable = true;
-      autoStart = true;
+  config = mkIf cfg.enable {
+    services = {
+      supergfxd.enable = true;
+
+      asusd = {
+        enable = true;
+        enableUserService = true;
+      };
+    };
+
+    programs = {
+      rog-control-center = {
+        enable = true;
+        autoStart = true;
+      };
     };
   };
 }

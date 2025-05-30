@@ -48,7 +48,6 @@
       visual = "zeditor";
       browser = "zen";
       terminal = "ghostty";
-      wallpaper = "China.jpeg";
 
       # System configuration
       system = "x86_64-linux";
@@ -63,15 +62,9 @@
       };
       consoleKeymap = "us"; # CHOOSE YOUR CONSOLE KEYMAP (Affects the tty?)
 
-      # Hardware configuration
-      # TODO: Remove hardware configuration from here and add it to hosts/name
-      nvidia = {
-        enable = true;
-        package = "stable"; # stable / beta
-      };
-
       # Application specific configuration
-      rofi_wallpaper_path = "/etc/nixos/wallpapers/China.jpeg"; # Should be an absolute path
+      wallpaper = "China.jpeg";
+      wallpaper_path = "/etc/nixos/wallpapers/China.jpeg"; # Should be an absolute path
       rclone = {
         local_dir = "Desktop/University";
         remote_dir = "Adani:University";
@@ -81,13 +74,33 @@
         partition_id = "a96c2e2f-5a1a-4249-8a3c-283532bb14a9";
       };
     };
+
+    # Hardware configuration
+    hardware_asus = {
+      asus.enable = true;
+      intel.enable = true;
+      amdgpu.enable = false;
+      nvidia = {
+        enable = true;
+        package = "stable"; # stable / beta
+        prime = {
+          sync.enable = true;
+          offload.enable = false;
+          intelBusId = "PCI:0:2:0";
+          nvidiaBusId = "PCI:1:0:0";
+        };
+      };
+    };
   in {
     templates = import ./templates;
     overlays = import ./overlays {inherit inputs settings;};
     nixosConfigurations = {
       nixbook = nixpkgs.lib.nixosSystem {
         system = settings.system;
-        specialArgs = {inherit self inputs outputs settings;};
+        specialArgs = {
+          inherit self inputs outputs settings;
+          hardware = hardware_asus;
+        };
         modules = [
           ./hosts/nixbook/configuration.nix
           inputs.sops-nix.nixosModules.sops

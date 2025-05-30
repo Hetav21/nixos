@@ -1,11 +1,11 @@
 {
   lib,
   pkgs,
-  config,
+  hardware,
   ...
 }:
 with lib; let
-  cfg = config.drivers.amdgpu;
+  cfg = hardware.amdgpu;
 in {
   options.drivers.amdgpu = {
     enable = mkEnableOption "Enable AMD Drivers";

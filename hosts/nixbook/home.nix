@@ -23,7 +23,6 @@
 
       # Files
       # ".config/starship.toml".source = ../../dotfiles/.config/starship.toml;
-      ".cache/wallpaper".source = ../../wallpapers/${settings.wallpaper};
       ".local/bin/cliphist-rofi-img".source =
         ../../dotfiles/.local/bin/cliphist-rofi-img;
     };
