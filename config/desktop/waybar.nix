@@ -19,6 +19,7 @@
           "custom/rofi"
           "backlight"
           "pulseaudio"
+          "pulseaudio#microphone"
           "battery"
           "custom/right"
         ];
@@ -87,6 +88,13 @@
           };
         };
 
+        "pulseaudio#microphone" = {
+          "format" = "{format_source}";
+          "format-source" = "";
+          "format-source-muted" = "";
+          "on-click" = "pavucontrol -t 4";
+        };
+
         "tray" = {
           icon-size = 20;
           spacing = 9;
@@ -139,6 +147,7 @@
       #custom-rofi,
       #tray,
       #pulseaudio,
+      #pulseaudio#microphone,
       #backlight,
       #network,
       #custom-right,
