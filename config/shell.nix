@@ -10,7 +10,7 @@
         }
       '';
       extraConfig = ''
-        def --env y [...args] {
+        def --env yz [...args] {
             let tmp = (mktemp -t "yazi-cwd.XXXXXX")
             ${pkgs.yazi}/bin/yazi ...$args --cwd-file $tmp
             let cwd = (open $tmp)
@@ -18,6 +18,35 @@
                 cd $cwd
             }
             rm -fp $tmp
+        }
+
+        # Git / Docker Aliases
+        alias gac = |message: string| {
+          git add .
+          git commit -m "$message"
+        }
+        def "docker-clean" [] {
+          print "Cleaning Docker..."
+          docker container prune -f
+          docker image prune -f
+          docker network prune -f
+          docker volume prune -f
+          print "Docker clean complete."
+        }
+        def "docker-rmi-all" [] {
+          print "Removing all Docker images (this may take a while)..."
+          let image_ids = (docker images -q)
+          if ($image_ids | is-empty) {
+            print "No Docker images to remove."
+          } else {
+            docker rmi $image_ids
+          }
+          print "All Docker images removed."
+        }
+
+        # Download Aliases
+        alias dl-yt = |url| {
+          ${pkgs.yt-dlp}/bin/yt-dlp -o '~/Downloads/%(title)s.%(ext)s' "$url" | ${pkgs.aria2}/bin/aria2c --input-file=- --dir '~/Downloads'
         }
 
         $env.config.show_banner = false
@@ -35,10 +64,8 @@
         e = "exit";
 
         # Git / Docker Aliases
-        gac = "git add . and git commit -m";
         gs = "git status";
         gpush = "git push origin";
-        docker-clean = "docker container prune -f and docker image prune -f and docker network prune -f and docker volume prune -f";
         lzg = "${pkgs.lazygit}/bin/lazygit";
         lzd = "${pkgs.lazydocker}/bin/lazydocker";
 
@@ -47,8 +74,14 @@
         rebuild-boot = "sh /etc/nixos/rebuild-boot.sh";
         rebuild-test = "sh /etc/nixos/rebuild-test.sh";
         log-rebuild = "tail -f /etc/nixos/nixos-switch.log";
-        update-latest = "nix flake update zen-browser zen-nebula nixpkgs-latest";
-        update-all = "nix flake update";
+        update-latest = "nix flake update --flake /etc/nixos zen-browser zen-nebula nixpkgs-latest";
+        update-all = "nix flake update --flake /etc/nixos";
+
+        # Downlaod Aliases
+        dl = "${pkgs.aria2}/bin/aria2c --continue --max-concurrent-downloads=5 --file-allocation=falloc --summary-interval=0";
+        dl-list = "${pkgs.aria2}/bin/aria2c --continue --max-concurrent-downloads=5 --file-allocation=falloc --summary-interval=0 --input $'($in)'";
+        dl-torrent = "${pkgs.aria2}/bin/aria2c --enable-dht=true --dht-listen-port=6881-6999 --dht-file-path=/tmp/aria2.dht --bt-enable-lpd=true --bt-max-peers=0 --bt-save-metadata=true --listen-port=6881-6999 --seed-time=0 --peer-id-prefix=ARIA2 --user-agent=' aria2/1.36.0 ' --continue --max-concurrent-downloads=5 --file-allocation=falloc --summary-interval=0";
+        dl-magnet = "${pkgs.aria2}/bin/aria2c --enable-dht=true --dht-listen-port=6881-6999 --dht-file-path=/tmp/aria2.dht --bt-enable-lpd=true --bt-max-peers=0 --bt-save-metadata=true --listen-port=6881-6999 --seed-time=0 --peer-id-prefix=ARIA2 --user-agent='aria2/1.36.0' --continue --max-concurrent-downloads=5 --file-allocation=falloc --summary-interval=0";
 
         # Other Aliases
         ff = "${pkgs.fastfetch}/bin/fastfetch";

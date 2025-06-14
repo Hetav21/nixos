@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  environment.systemPackages = with pkgs; [yazi xfce.thunar];
+  environment.systemPackages = with pkgs; [xfce.thunar];
 
   programs = {
     thunar = {

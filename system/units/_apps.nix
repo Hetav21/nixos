@@ -52,8 +52,6 @@
     ntfs3g
 
     # Fun and customization
-    fastfetch
-    microfetch
 
     # Networking
 

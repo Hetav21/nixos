@@ -21,13 +21,19 @@
     vesktop
 
     # Network and internet tools
-    yt-dlp
-    qbittorrent
 
     # Networking Tools
     networkmanagerapplet
     wireshark
   ];
+
+  programs.wireshark = {
+    enable = true;
+    dumpcap.enable = true;
+    usbmon.enable = true;
+  };
+
+  users.users.${settings.username}.extraGroups = ["networkmanager" "wireshark"];
 
   networking = {
     hostName = settings.hostname;

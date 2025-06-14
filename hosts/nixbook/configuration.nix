@@ -50,8 +50,6 @@
       isNormalUser = true;
       description = "Normal User";
       extraGroups = [
-        "networkmanager"
-        "mlocate"
         "wheel"
       ];
     };

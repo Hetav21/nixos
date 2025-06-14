@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  settings,
+  ...
+}: {
   services = {
     locate = {
       enable = true;
@@ -7,6 +11,8 @@
 
     cron = {enable = true;};
   };
+
+  users.users.${settings.username}.extraGroups = ["mlocate"];
 
   programs.gnupg.agent = {
     enable = true;
