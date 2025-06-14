@@ -67,6 +67,8 @@
         # Git / Docker Aliases
         gs = "git status";
         gpush = "git push origin";
+        gpull = "git pull origin";
+        grestore = "git restore";
         lzg = "${pkgs.lazygit}/bin/lazygit";
         lzd = "${pkgs.lazydocker}/bin/lazydocker";
 
