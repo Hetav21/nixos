@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  settings,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     virt-viewer
     virt-manager
@@ -23,7 +27,7 @@
 
   users.groups.libvirtd.members = ["hetav"];
 
-  users.users.hetav.extraGroups = ["libvirtd" "kvm" "adbusers"];
+  users.users.${settings.username}.extraGroups = ["libvirtd" "kvm" "adbusers" "docker"];
 
   services.udev.packages = with pkgs; [android-udev-rules];
 

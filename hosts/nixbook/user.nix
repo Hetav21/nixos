@@ -10,9 +10,6 @@
       shell = pkgs.nushell;
       extraGroups = [
         "wheel"
-        "mlocate"
-        "docker"
-        "wireshark"
       ];
     };
   };

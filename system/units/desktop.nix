@@ -10,7 +10,6 @@
       waypaper
       # grim swappy slurp
       hyprshot
-      wl-clipboard
     ];
 
     sessionVariables = {
