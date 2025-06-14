@@ -1,7 +1,8 @@
-{...}: {
+{pkgs, ...}: {
   # Nix-Flatpak
   services.flatpak = {
     enable = true;
+    package = pkgs.latest.flatpak;
     uninstallUnmanaged = true;
     update.auto = {
       enable = true;
@@ -16,6 +17,7 @@
       };
     };
     packages = [
+      "com.sublimetext.three"
       "com.microsoft.Edge"
       "net.blix.BlueMail"
       "org.texstudio.TeXstudio"

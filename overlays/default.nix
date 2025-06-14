@@ -17,5 +17,9 @@
       system = final.system;
       config.allowUnfree = true;
     };
+    latest = import inputs.nixpkgs-latest {
+      system = final.system;
+      config.allowUnfree = true;
+    };
   };
 }

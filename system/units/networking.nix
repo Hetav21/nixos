@@ -6,16 +6,16 @@
 }: {
   environment.systemPackages = with pkgs; [
     # Browsers
-    firefox
-    brave
-    mullvad-browser
-    chromium
+    latest.firefox
+    latest.brave
+    latest.mullvad-browser
+    latest.chromium
 
     # Music and streaming
     youtube-music
 
     # Communication and social
-    thunderbird
+    latest.thunderbird
     zoom-us
     discord
     vesktop

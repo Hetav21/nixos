@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   programs = {
     fish.enable = true;
 
@@ -9,39 +9,10 @@
           $env.OPENAI_API_KEY = (open /run/secrets/openai_api_key | str trim)
         }
       '';
-      shellAliases = {
-        # Core Utils Aliases
-        l = "eza -lh  --icons=auto";
-        ## ls = "eza -1   --icons=auto"; # short list
-        ll = "eza -lha --icons=auto --sort=name --group-directories-first"; # long list all
-        tree = "tree -a -I .git";
-        cat = "bat";
-        c = "clear";
-        e = "exit";
-        grep = "rg --color=auto";
-
-        # Git Aliases
-        gac = "git add . and git commit -m";
-        gs = "git status";
-        gpush = "git push origin";
-
-        # Other Aliases
-        pkg-find = "echo find '$(nix build nixpkgs#pkg --print-out-paths --no-link)'";
-        rebuild-live = "sh /etc/nixos/rebuild-live.sh";
-        rebuild-boot = "sh /etc/nixos/rebuild-boot.sh";
-        rebuild-test = "sh /etc/nixos/rebuild-test.sh";
-        log-rebuild = "tail -f /etc/nixos/nixos-switch.log";
-        ff = "fastfetch";
-        docker-clean = "docker container prune -f and docker image prune -f and docker network prune -f and docker volume prune -f";
-
-        # Wayland Clipboard Aliases `wl-clipboard`
-        copy = "wl-copy";
-        paste = "wl-paste";
-      };
       extraConfig = ''
         def --env y [...args] {
             let tmp = (mktemp -t "yazi-cwd.XXXXXX")
-            yazi ...$args --cwd-file $tmp
+            ${pkgs.yazi}/bin/yazi ...$args --cwd-file $tmp
             let cwd = (open $tmp)
             if $cwd != "" and $cwd != $env.PWD {
                 cd $cwd
@@ -50,8 +21,42 @@
         }
 
         $env.config.show_banner = false
-        microfetch
+        ${pkgs.microfetch}/bin/microfetch
       '';
+      shellAliases = {
+        # Core Utils Aliases
+        l = "${pkgs.eza}/bin/eza -lh  --icons=auto";
+        ## ls = "${pkgs.eza}/bin/eza -1   --icons=auto"; # short list
+        ll = "${pkgs.eza}/bin/eza -lha --icons=auto --sort=name --group-directories-first"; # long list all
+        tree = "tree -a -I .git";
+        cat = "${pkgs.bat}/bin/bat";
+        grep = "${pkgs.ripgrep}/bin/rg --color=auto";
+        cls = "clear";
+        e = "exit";
+
+        # Git / Docker Aliases
+        gac = "git add . and git commit -m";
+        gs = "git status";
+        gpush = "git push origin";
+        docker-clean = "docker container prune -f and docker image prune -f and docker network prune -f and docker volume prune -f";
+        lzg = "${pkgs.lazygit}/bin/lazygit";
+        lzd = "${pkgs.lazydocker}/bin/lazydocker";
+
+        # System Specific Aliases
+        rebuild-live = "sh /etc/nixos/rebuild-live.sh";
+        rebuild-boot = "sh /etc/nixos/rebuild-boot.sh";
+        rebuild-test = "sh /etc/nixos/rebuild-test.sh";
+        log-rebuild = "tail -f /etc/nixos/nixos-switch.log";
+        update-latest = "nix flake update zen-browser zen-nebula nixpkgs-latest";
+        update-all = "nix flake update";
+
+        # Other Aliases
+        ff = "${pkgs.fastfetch}/bin/fastfetch";
+
+        # Clipboard Aliases
+        copy = "${pkgs.wl-clipboard}/bin/wl-copy";
+        paste = "${pkgs.wl-clipboard}/bin/wl-paste";
+      };
     };
     yazi = {
       enable = true;
