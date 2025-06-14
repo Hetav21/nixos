@@ -10,6 +10,7 @@
         }
       '';
       extraConfig = ''
+        # File Manager Alias
         def --env yz [...args] {
             let tmp = (mktemp -t "yazi-cwd.XXXXXX")
             ${pkgs.yazi}/bin/yazi ...$args --cwd-file $tmp
@@ -21,7 +22,7 @@
         }
 
         # Git / Docker Aliases
-        alias gac = |message: string| {
+        def "gac" [message: string] {
           git add .
           git commit -m "$message"
         }
@@ -44,7 +45,7 @@
           print "All Docker images removed."
         }
 
-        # Download Aliases
+        # Download Alias
         alias dl-yt = |url| {
           ${pkgs.yt-dlp}/bin/yt-dlp -o '~/Downloads/%(title)s.%(ext)s' "$url" | ${pkgs.aria2}/bin/aria2c --input-file=- --dir '~/Downloads'
         }
