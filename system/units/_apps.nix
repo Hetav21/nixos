@@ -1,11 +1,9 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     # Text editors and IDEs
-    vscode
-    vim
-    sublime4
-    zed-editor
-    code-cursor
+    latest.vscode
+    latest.zed-editor
+    latest.code-cursor
 
     # Programming languages and build tools
 
@@ -48,6 +46,7 @@
     # Gaming and entertainment
 
     # System utilities
+    vim
 
     # File systems
     ntfs3g

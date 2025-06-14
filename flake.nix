@@ -4,6 +4,7 @@
   # Flake Inputs
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-latest.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
     home-manager = {
@@ -111,12 +112,7 @@
           {
             nixpkgs = {
               overlays = builtins.attrValues outputs.overlays;
-              config = {
-                allowUnfree = true;
-                permittedInsecurePackages = [
-                  "openssl-1.1.1w"
-                ];
-              };
+              config.allowUnfree = true;
             };
           }
         ];
