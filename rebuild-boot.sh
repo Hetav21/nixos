@@ -9,7 +9,7 @@ sudo nixos-rebuild boot &> nixos-switch.log || (
     cat nixos-switch.log | grep --color error && false
 )
 cp ~/.config/zed/settings.json ./dotfiles/.config/zed/settings.json
-gen=$(nixos-rebuild list-generations | grep current | sed 's/ .*//')
+gen=$(nixos-rebuild list-generations | grep True | sed 's/ .*//')
 git commit -am "$gen"
 mkdir -p patch
 git format-patch -1 HEAD

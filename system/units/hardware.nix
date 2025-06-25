@@ -38,6 +38,7 @@
     fstrim.enable = true;
     gvfs.enable = true;
     ipp-usb.enable = true;
+    fwupd.enable = true;
     pipewire = {
       enable = true;
       alsa = {
