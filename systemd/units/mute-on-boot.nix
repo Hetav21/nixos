@@ -18,7 +18,7 @@ in {
         wantedBy = ["default.target"];
         serviceConfig = {
           Type = "simple";
-          ExecStart = "/run/current-system/sw/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+          ExecStart = "/run/current-system/sw/bin/pactl set-source-mute @DEFAULT_SOURCE@ 1";
           Restart = "on-failure";
           RestartSec = "10s";
         };
