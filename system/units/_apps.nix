@@ -9,6 +9,8 @@
 
     # Version control and development tools
     codex
+    claude-code
+    # gemini-cli
     hoppscotch
     bruno
     git

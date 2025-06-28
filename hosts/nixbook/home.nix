@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   settings,
   ...
 }: {
@@ -31,17 +30,11 @@
 
     packages = [
       (import ../../scripts/rofi-launcher.nix {inherit pkgs;})
-      inputs.zen-browser.packages."${settings.system}".default
     ];
   };
 
-  zen-nebula = {
-    enable = true;
-    profile = settings.username;
-  };
-
   imports = [
-    inputs.zen-nebula.homeModules.default
+    ../../config/zen-browser.nix
     ../../config/ghostty.nix
     ../../config/wlogout.nix
     ../../config/shell.nix
