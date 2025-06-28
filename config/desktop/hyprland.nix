@@ -181,7 +181,7 @@
 
         # Screenshot a region ($mainMod + SHIFT + P)
         bind = CTRL SHIFT, print, exec, hyprshot -m region -o ~/Pictures/Screenshots
-        bind = SUPER_SHIFT, D, exec, hyprshot -m region --clipboard-only
+        bind = SUPER_SHIFT, S, exec, hyprshot -m region --clipboard-only
 
         # Move focus with mainMod + arrow keys
         bind = $mainMod, h, movefocus, l
@@ -215,7 +215,7 @@
 
         # Example special workspace (scratchpad)
         bind = $mainMod, S, togglespecialworkspace, magic
-        bind = $mainMod SHIFT, S, movetoworkspace, special:magic
+        bind = $mainMod SHIFT, D, movetoworkspace, special:magic
 
         # Scroll through existing workspaces with mainMod + scroll
         bind = $mainMod, mouse_down, workspace, e+1
