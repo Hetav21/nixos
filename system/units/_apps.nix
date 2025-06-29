@@ -10,7 +10,7 @@
     # Version control and development tools
     codex
     claude-code
-    # gemini-cli
+    gemini-cli
     hoppscotch
     bruno
     git

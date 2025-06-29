@@ -67,7 +67,7 @@
             "dummy"
             "mode-switcher"
           ];
-          background-image = mkLiteral ''url("${settings.wallpaper_path}", width)'';
+          background-image = mkLiteral ''url("${settings.wallpaper_directory}/${settings.wallpaper}", width)'';
         };
         "entry" = {
           enabled = true;

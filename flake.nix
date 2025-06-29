@@ -68,7 +68,7 @@
 
       # Application specific configuration
       wallpaper = "China.jpeg";
-      wallpaper_path = "/etc/nixos/wallpapers/China.jpeg"; # Should be an absolute path
+      wallpaper_directory = "/etc/nixos/wallpapers"; # Should be an absolute path
       rclone = {
         local_dir = "Desktop/University";
         remote_dir = "Adani:University";

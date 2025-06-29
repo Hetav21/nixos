@@ -16,7 +16,7 @@
       background = lib.mkForce [
         {
           monitor = "";
-          path = "${settings.wallpaper_path}";
+          path = "${settings.wallpaper_directory}/${settings.wallpaper}";
           blur_passes = 3;
           contrast = 0.8916;
           brightness = 0.8172;
