@@ -7,5 +7,5 @@ git diff -U0 flake.lock
 echo "NixOS Rebuilding..."
 sudo nixos-rebuild test &>nixos-switch.log || (
  cat nixos-switch.log | grep --color error && false)
-unlink result
 popd && true
+unlink result
