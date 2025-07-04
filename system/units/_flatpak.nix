@@ -29,6 +29,10 @@
       "com.github.tchx84.Flatseal"
       "com.stremio.Stremio"
       "org.gnome.Papers"
+      "io.github.flattool.Warehouse"
+      "de.schmidhuberj.tubefeeder"
+      "me.iepure.devtoolbox"
+      "io.github.alainm23.planify"
     ];
   };
 }
