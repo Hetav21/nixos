@@ -11,8 +11,8 @@
     codex
     claude-code
     gemini-cli
-    hoppscotch
-    bruno
+    latest.hoppscotch
+    latest.bruno
     git
     git-lfs
     gh
@@ -28,21 +28,21 @@
     file-roller
 
     # System monitoring and management
-    htop
+    neohtop
     btop
 
     # Audio and video
     pavucontrol
     obs-studio
     mpv
+    yt-dlp
 
     # Image and graphics
     loupe
     upscayl
 
     # Productivity and office
-    obsidian
-    onlyoffice-bin
+    latest.obsidian
     texliveMinimal
 
     # Gaming and entertainment

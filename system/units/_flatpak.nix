@@ -26,6 +26,7 @@
       "com.spotify.Client"
       "com.github.IsmaelMartinez.teams_for_linux"
       "org.libreoffice.LibreOffice"
+      "org.onlyoffice.desktopeditors"
       "com.github.tchx84.Flatseal"
       "com.stremio.Stremio"
       "org.gnome.Papers"
