@@ -28,9 +28,9 @@ in {
         background-opacity = 0.7;
         confirm-close-surface = false;
         copy-on-select = true;
-        font-family = "FiraCode Nerd Font";
+        font-family = "JetBrainsMono Nerd Font";
         font-size = 12;
-        font-style = "Medium";
+        font-style = "Regular";
         minimum-contrast = 1.1;
         theme = "${ghosttyTheme}";
         window-decoration = false;

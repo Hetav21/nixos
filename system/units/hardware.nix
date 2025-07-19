@@ -1,11 +1,4 @@
-{
-  lib,
-  pkgs,
-  config,
-  settings,
-  hardware,
-  ...
-}: {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     alsa-utils
     pulseaudio
@@ -17,18 +10,8 @@
   ];
 
   systemd = {
-    packages = [pkgs.lact];
-    services.lactd = {
-      wantedBy = ["multi-user.target"];
-      serviceConfig = {
-        User = settings.username;
-        Environment = lib.optionals hardware.nvidia.enable [
-          "LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath [
-            config.boot.kernelPackages.nvidiaPackages.latest
-          ]}"
-        ];
-      };
-    };
+    packages = with pkgs; [lact];
+    services.lactd.wantedBy = ["multi-user.target"];
   };
 
   services = {

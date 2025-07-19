@@ -8,6 +8,7 @@
     # Programming languages and build tools
 
     # Version control and development tools
+    awscli2
     codex
     claude-code
     gemini-cli

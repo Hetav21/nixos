@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  lib,
+  settings,
+  ...
+}: {
   programs.alacritty = {
     enable = true;
     settings = {
@@ -52,7 +56,7 @@
         {
           regex = "[^ ]+\\\\.rs:\\\\d+:\\\\d+";
           command = {
-            program = "zeditor";
+            program = settings.visual;
             args = ["--goto"];
           };
           mouse = {enabled = true;};
