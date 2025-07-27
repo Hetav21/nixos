@@ -17,23 +17,16 @@
       };
     };
     packages = [
-      "com.sublimetext.three"
-      "com.microsoft.Edge"
-      "net.blix.BlueMail"
-      "org.texstudio.TeXstudio"
-      "io.github.JakubMelka.Pdf4qt"
-      "com.github.jeromerobert.pdfarranger"
-      "com.spotify.Client"
-      "com.github.IsmaelMartinez.teams_for_linux"
-      "org.libreoffice.LibreOffice"
-      "org.onlyoffice.desktopeditors"
-      "com.github.tchx84.Flatseal"
-      "com.stremio.Stremio"
-      "org.gnome.Papers"
-      "io.github.flattool.Warehouse"
-      "de.schmidhuberj.tubefeeder"
-      "me.iepure.devtoolbox"
-      "io.github.alainm23.planify"
+      "org.gnome.Loupe" # Image Viewer
+      "org.kde.kdenlive" # Video Editor
+      "com.github.PintaProject.Pinta" # Image Editor
+      "io.gitlab.theevilskeleton.Upscaler" # Image Upscaler
+      "org.libreoffice.LibreOffice" # Office Suite
+      "org.onlyoffice.desktopeditors" # Office Suite
+      "io.github.flattool.Warehouse" # Flatpak Manager
+      "com.github.tchx84.Flatseal" # Flatpak Permissions Manager
+      "org.texstudio.TeXstudio" # LaTeX Editor
+      "com.sublimetext.three" # Sublime Text Editor
     ];
   };
 }

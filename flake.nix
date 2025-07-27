@@ -47,6 +47,10 @@
     inherit (self) outputs;
 
     settings = {
+      # Upgrade configuration
+      update-latest = "nixpkgs-latest zen-browser"; # Specify the flakes inputs to update when running `update-latest`
+      update-standard = "home-manager lanzaboote stylix sops-nix nix-flatpak ${settings.update-latest}"; # Specify the flakes inputs to update when running `update-standard`
+
       # User configuration
       username = "hetav";
       editor = "vim";

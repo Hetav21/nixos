@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  settings,
+  ...
+}: {
   programs = {
     fish.enable = true;
 
@@ -77,7 +81,8 @@
         rebuild-boot = "sh /etc/nixos/rebuild-boot.sh";
         rebuild-test = "sh /etc/nixos/rebuild-test.sh";
         log-rebuild = "tail -f /etc/nixos/nixos-switch.log";
-        update-latest = "nix flake update --flake /etc/nixos zen-browser zen-nebula nixpkgs-latest";
+        update-latest = "nix flake update --flake /etc/nixos ${settings.update-latest}";
+        update-standard = "nix flake update --flake /etc/nixos ${settings.update-standard}";
         update-all = "nix flake update --flake /etc/nixos";
 
         # Downlaod Aliases
@@ -135,6 +140,7 @@
       ];
     };
     fzf.enable = true;
+    fd.enable = true;
     atuin = {
       enable = true;
       enableNushellIntegration = true;

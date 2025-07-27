@@ -27,6 +27,14 @@
     wireshark
   ];
 
+  services.flatpak.packages = [
+    "com.microsoft.Edge" # Microsoft Edge Browser
+    "com.github.IsmaelMartinez.teams_for_linux" # Teams Client
+    "com.spotify.Client" # Spotify Client
+    "com.stremio.Stremio" # Media Streaming
+    "de.schmidhuberj.tubefeeder" # YouTube Client
+  ];
+
   programs.wireshark = {
     enable = true;
     dumpcap.enable = true;
