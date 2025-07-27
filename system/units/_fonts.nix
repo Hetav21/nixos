@@ -20,16 +20,16 @@
 
   stylix.fonts = {
     monospace = {
-      package = pkgs.nerd-fonts.ubuntu-sans;
-      name = "Ubuntu Mono";
+      package = pkgs.nerd-fonts.jetbrains-mono;
+      name = "JetBrainsMono Nerd Font Mono";
     };
     sansSerif = {
       package = pkgs.nerd-fonts.ubuntu-sans;
-      name = "Ubuntu";
+      name = "UbuntuSans Nerd Font";
     };
     serif = {
-      package = pkgs.noto-fonts;
-      name = "Noto Serif";
+      package = pkgs.nerd-fonts.noto;
+      name = "NotoSerif Nerd Font";
     };
     emoji = {
       package = pkgs.noto-fonts-emoji;

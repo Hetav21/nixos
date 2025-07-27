@@ -6,8 +6,8 @@
   ghostty = pkgs.ghostty;
 
   ghosttyTheme = pkgs.writeTextFile {
-    name = "ghostty-theme-Dracula";
-    text = builtins.readFile "${ghostty}/share/ghostty/themes/Dracula";
+    name = "ghostty-theme-rose-pine-moon";
+    text = builtins.readFile "${ghostty}/share/ghostty/themes/rose-pine-moon";
   };
 in {
   config = {
@@ -25,10 +25,10 @@ in {
         listsAsDuplicateKeys = true;
       }
       {
-        background-opacity = 0.7;
+        background-opacity = 0.8;
         confirm-close-surface = false;
         copy-on-select = true;
-        font-family = "JetBrainsMono Nerd Font";
+        font-family = "JetBrainsMono Nerd Font Mono";
         font-size = 12;
         font-style = "Regular";
         minimum-contrast = 1.1;
