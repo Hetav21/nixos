@@ -2,12 +2,20 @@
   tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
   hyprland-session = "${pkgs.hyprland}/share/wayland-sessions";
 in {
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${tuigreet} --time --remember --remember-session --sessions ${hyprland-session}";
-        user = "greeter";
+  services = {
+    logind = {
+      extraConfig = ''
+        HandlePowerKey=suspend
+      '';
+    };
+
+    greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "${tuigreet} --time --remember --remember-session --sessions ${hyprland-session}";
+          user = "greeter";
+        };
       };
     };
   };

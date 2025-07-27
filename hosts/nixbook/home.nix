@@ -34,12 +34,7 @@
   };
 
   imports = [
-    ../../config/zen-browser.nix
-    ../../config/ghostty.nix
-    ../../config/wlogout.nix
-    ../../config/shell.nix
-    ../../config/tmux.nix
-    ../../config/desktop
+    ../../config
   ];
 
   gtk = {

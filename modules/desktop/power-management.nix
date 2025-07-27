@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{...}: {
   services = {
     upower.enable = true;
     auto-cpufreq = {
@@ -20,6 +20,4 @@
     enable = true;
     powertop.enable = true;
   };
-
-  environment.systemPackages = with pkgs; [auto-cpufreq];
 }

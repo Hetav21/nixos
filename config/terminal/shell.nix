@@ -67,6 +67,7 @@
         grep = "${pkgs.ripgrep}/bin/rg --color=auto";
         cls = "clear";
         e = "exit";
+        less = "${pkgs.most}/bin/most";
 
         # Git / Docker Aliases
         gs = "git status";
