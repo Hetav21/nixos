@@ -24,7 +24,7 @@ in {
         serviceConfig = {
           Type = "simple";
           ExecStartPre = "/run/current-system/sw/bin/mkdir -p ${folder_path}"; # Creates folder if didn't exist
-          ExecStart = "${pkgs.rclone}/bin/rclone mount --vfs-cache-mode full ${settings.rclone.remote_dir} ${folder_path} --allow-non-empty";
+          ExecStart = "${pkgs.rclone}/bin/rclone mount --vfs-cache-mode full ${settings.rclone.remote_dir} ${folder_path} --allow-non-empty --config /home/${settings.username}/.config/rclone/rclone.conf";
           ExecStop = "/run/current-system/sw/bin/fusermount -u ${folder_path}"; # Dismounts
           Restart = "on-failure";
           RestartSec = "10s";
