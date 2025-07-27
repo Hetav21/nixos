@@ -9,9 +9,9 @@
 
     # Version control and development tools
     awscli2
-    codex
-    claude-code
-    gemini-cli
+    latest.codex
+    latest.claude-code
+    latest.gemini-cli
     latest.hoppscotch
     latest.bruno
     git
@@ -29,7 +29,7 @@
     file-roller
 
     # System monitoring and management
-    neohtop
+    impala
     btop
 
     # Audio and video
@@ -39,8 +39,6 @@
     yt-dlp
 
     # Image and graphics
-    loupe
-    upscayl
 
     # Productivity and office
     latest.obsidian

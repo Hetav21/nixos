@@ -8,4 +8,3 @@ echo "NixOS Rebuilding..."
 sudo nixos-rebuild test &>nixos-switch.log || (
  cat nixos-switch.log | grep --color error && false)
 popd && true
-unlink result
