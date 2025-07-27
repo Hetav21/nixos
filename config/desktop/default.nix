@@ -1,12 +1,8 @@
 {...}: {
   imports = [
-    ./alacritty.nix
-    ./hypridle.nix
-    ./hyprland.nix
-    ./hyprlock.nix
-    ./waybar.nix
+    ./hypr
     ./rofi.nix
-    ./cliphist.nix
-    ./notification.nix
+    ./waybar.nix
+    ./wlogout.nix
   ];
 }

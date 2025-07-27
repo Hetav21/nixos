@@ -10,38 +10,23 @@
     latest.brave
     latest.mullvad-browser
     latest.chromium
-
-    # Music and streaming
-    youtube-music
-
-    # Communication and social
-    latest.thunderbird
-    zoom-us
-    discord
-    vesktop
-
-    # Network and internet tools
-
-    # Networking Tools
-    networkmanagerapplet
-    wireshark
   ];
 
   services.flatpak.packages = [
     "com.microsoft.Edge" # Microsoft Edge Browser
-    "com.github.IsmaelMartinez.teams_for_linux" # Teams Client
-    "com.spotify.Client" # Spotify Client
-    "com.stremio.Stremio" # Media Streaming
-    "de.schmidhuberj.tubefeeder" # YouTube Client
   ];
 
-  programs.wireshark = {
-    enable = true;
-    dumpcap.enable = true;
-    usbmon.enable = true;
+  systemd.user.services = {
+    networkd-wait-online = {
+      enable = true;
+      description = "User Wait for Network to be Configured";
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.systemd}/lib/systemd/systemd-networkd-wait-online";
+        RemainAfterExit = "yes";
+      };
+    };
   };
-
-  users.users.${settings.username}.extraGroups = ["networkmanager" "wireshark"];
 
   networking = {
     hostName = settings.hostname;

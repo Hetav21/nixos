@@ -9,8 +9,8 @@
   imports = [
     ./hardware-configuration.nix
     ./user.nix
-    ../../system
     ../../modules
+    ../../secrets
   ];
 
   boot = {

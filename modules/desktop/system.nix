@@ -3,74 +3,22 @@
   settings,
   ...
 }: {
-  environment = {
-    systemPackages = with pkgs; [
-      # Wayland specific
-      swww
-      waypaper
-      # grim swappy slurp
-      hyprshot
-    ];
+  environment.sessionVariables = {
+    ANV_VIDEO_DECODE = "1";
+    LIBVA_DRIVER_NAME = "iHD";
+    VDPAU_DRIVER = "nvidia";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    NVD_BACKEND = "direct";
+    GBM_BACKEND = "nvidia-drm";
 
-    sessionVariables = {
-      EDITOR = settings.editor;
-      VISUAL = settings.visual;
-      TERMINAL = settings.terminal;
-      BROWSER = settings.browser;
-      SIGNAL_PASSWORD_STORE = "gnome-libsecret";
-
-      NIXOS_OZONE_WL = "1";
-      GDK_BACKEND = "wayland,x11";
-      QT_QPA_PLATFORM = "wayland;xcb";
-      JAVA_AWT_WM_NONREPARENTING = "1";
-      WLR_NO_HARDWARE_CURSORS = "1";
-      MOZ_ENABLE_WAYLAND = "1";
-      ELECTRON_OZONE_PLATFORM_HINT = "wayland";
-
-      ANV_VIDEO_DECODE = "1";
-      LIBVA_DRIVER_NAME = "iHD";
-      VDPAU_DRIVER = "nvidia";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      NVD_BACKEND = "direct";
-      GBM_BACKEND = "nvidia-drm";
-
-      XDG_CONFIG_HOME = "$HOME/.config";
-      XDG_DATA_HOME = "$HOME/.local/share";
-      XDG_STATE_HOME = "$HOME/.local/state";
-      XDG_CACHE_HOME = "$HOME/.cache";
-      XDG_SCREENSHOTS_DIR = "$HOME/Pictures/screenshots";
-      XDG_SESSION_TYPE = "wayland";
-      XDG_CURRENT_DESKTOP = "Hyprland";
-      XDG_SESSION_DESKTOP = "Hyprland";
-    };
-  };
-
-  stylix = {
-    enable = true;
-    base16Scheme = {
-      base00 = "191724";
-      base01 = "1f1d2e";
-      base02 = "26233a";
-      base03 = "6e6a86";
-      base04 = "908caa";
-      base05 = "e0def4";
-      base06 = "e0def4";
-      base07 = "524f67";
-      base08 = "eb6f92";
-      base09 = "f6c177";
-      base0A = "ebbcba";
-      base0B = "31748f";
-      base0C = "9ccfd8";
-      base0D = "c4a7e7";
-      base0E = "f6c177";
-      base0F = "524f67";
-    };
-    image = ../../wallpapers/${settings.wallpaper};
-    polarity = "dark";
-    opacity.terminal = 0.8;
-    cursor.package = pkgs.bibata-cursors;
-    cursor.name = "Bibata-Modern-Ice";
-    cursor.size = 24;
+    XDG_CONFIG_HOME = "$HOME/.config";
+    XDG_DATA_HOME = "$HOME/.local/share";
+    XDG_STATE_HOME = "$HOME/.local/state";
+    XDG_CACHE_HOME = "$HOME/.cache";
+    XDG_SCREENSHOTS_DIR = "$HOME/Pictures/screenshots";
+    XDG_SESSION_TYPE = "wayland";
+    XDG_CURRENT_DESKTOP = "Hyprland";
+    XDG_SESSION_DESKTOP = "Hyprland";
   };
 
   xdg = {
@@ -145,19 +93,6 @@
     icons.enable = true;
     sounds.enable = true;
   };
-  programs = {
-    hyprland = {
-      enable = true;
-      withUWSM = true;
-      xwayland.enable = true;
-    };
-  };
-
-  nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  };
 
   time.timeZone = settings.timeZone;
 
@@ -178,23 +113,13 @@
 
   console.keyMap = settings.consoleKeymap;
 
-  services = {
-    preload.enable = true;
-
-    logind = {
-      extraConfig = ''
-        HandlePowerKey=suspend
-      '';
+  services.xserver = {
+    enable = true;
+    exportConfiguration = true; # Make sure /etc/X11/xkb is populated so localectl works correctly
+    xkb = {
+      layout = settings.keyboard.layout;
+      variant = settings.keyboard.variant;
     };
-
-    xserver = {
-      enable = true;
-      exportConfiguration = true; # Make sure /etc/X11/xkb is populated so localectl works correctly
-      xkb = {
-        layout = settings.keyboard.layout;
-        variant = settings.keyboard.variant;
-      };
-      videoDrivers = ["modesetting"];
-    };
+    videoDrivers = ["modesetting"];
   };
 }

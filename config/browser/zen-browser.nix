@@ -5,19 +5,19 @@
   ...
 }: {
   imports = [
-    ../pkgs/zen-nebula/home
+    ../../pkgs/zen-nebula/home
     inputs.zen-browser.homeModules.beta
     # or inputs.zen-browser.homeModules.twilight
     # or inputs.zen-browser.homeModules.twilight-official
   ];
 
   zen-nebula = {
-    enable = false; # set to true if you want to use nebula theme from pkgs
+    enable = true; # set to true if you want to use nebula theme from pkgs
     profile = settings.username;
   };
 
   stylix.targets.zen-browser = {
-    enable = true; # set to true if you want to use nebula theme from Stylix
+    enable = false; # set to true if you want to use theme from Stylix
     profileNames = ["${settings.username}"];
   };
 
