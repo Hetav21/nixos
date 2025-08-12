@@ -6,10 +6,10 @@
 }: {
   environment.systemPackages = with pkgs; [
     # Browsers
-    latest.firefox
-    latest.brave
-    latest.mullvad-browser
-    latest.chromium
+    unstable.firefox
+    unstable.brave
+    unstable.mullvad-browser
+    unstable.chromium
   ];
 
   services.flatpak.packages = [
@@ -46,6 +46,17 @@
           to = 8090;
         }
       ];
+      # Allow libvirt's traffic
+      allowedUDPPorts = [53 67]; # For DNS and DHCP
+      allowedTCPPorts = [53]; # For DNS
+
+      # Allow established connections to pass
+      extraCommands = ''
+        iptables -A INPUT -i virbr0 -p udp -m udp --dport 53 -j ACCEPT
+        iptables -A INPUT -i virbr0 -p tcp -m tcp --dport 53 -j ACCEPT
+        iptables -A INPUT -i virbr0 -p udp -m udp --dport 67 -j ACCEPT
+        iptables -A FORWARD -i virbr0 -j ACCEPT
+      '';
     };
   };
 }

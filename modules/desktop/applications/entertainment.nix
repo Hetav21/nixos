@@ -6,10 +6,10 @@
     youtube-music
 
     # Communication and social
-    latest.thunderbird
+    unstable.thunderbird
+    unstable.discord
+    unstable.vesktop
     zoom-us
-    discord
-    vesktop
   ];
 
   services.flatpak.packages = [

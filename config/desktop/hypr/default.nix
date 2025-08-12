@@ -3,5 +3,6 @@
     ./hyprland.nix
     ./hypridle.nix
     ./hyprlock.nix
+    ./hyprshot.nix
   ];
 }

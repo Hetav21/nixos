@@ -11,8 +11,8 @@ in {
     rclone
     onedrive
     localsend
-    stable.megasync
-    stable.megacmd
+    megasync
+    megacmd
   ];
 
   programs.localsend = {
@@ -20,13 +20,11 @@ in {
     openFirewall = true;
   };
 
-  services = {
-    syncthing = {
-      enable = true;
-      user = username;
-      dataDir = homeDirectory;
-      configDir = "${homeDirectory}/.config/syncthing";
-    };
+  services.syncthing = {
+    enable = true;
+    user = username;
+    dataDir = homeDirectory;
+    configDir = "${homeDirectory}/.config/syncthing";
   };
 
   systemd = {

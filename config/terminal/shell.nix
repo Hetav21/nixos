@@ -4,10 +4,14 @@
   ...
 }: {
   programs = {
-    fish.enable = true;
+    fish = {
+      enable = true;
+      package = pkgs.unstable.fish;
+    };
 
     nushell = {
       enable = true;
+      package = pkgs.unstable.nushell;
       extraEnv = ''
         if (('/run/secrets/openai_api_key' | path exists)) {
           $env.OPENAI_API_KEY = (open /run/secrets/openai_api_key | str trim)
@@ -55,19 +59,23 @@
         }
 
         $env.config.show_banner = false
-        ${pkgs.microfetch}/bin/microfetch
+
+        if ('.git' | path exists) {
+          ${pkgs.onefetch}/bin/onefetch
+        } else {
+          ${pkgs.microfetch}/bin/microfetch
+        }
       '';
       shellAliases = {
         # Core Utils Aliases
-        l = "${pkgs.eza}/bin/eza -lh  --icons=auto";
+        ## l = "${pkgs.eza}/bin/eza -lh  --icons=auto";
         ## ls = "${pkgs.eza}/bin/eza -1   --icons=auto"; # short list
-        ll = "${pkgs.eza}/bin/eza -lha --icons=auto --sort=name --group-directories-first"; # long list all
-        tree = "tree -a -I .git";
+        ## ll = "${pkgs.eza}/bin/eza -lha --icons=auto --sort=name --group-directories-first"; # long list all
+        tree = "${pkgs.tree}/bin/tree -a -I .git";
         cat = "${pkgs.bat}/bin/bat";
         grep = "${pkgs.ripgrep}/bin/rg --color=auto";
         cls = "clear";
         e = "exit";
-        less = "${pkgs.most}/bin/most";
 
         # Git / Docker Aliases
         gs = "git status";
@@ -92,6 +100,9 @@
         dl-torrent = "${pkgs.aria2}/bin/aria2c --enable-dht=true --dht-listen-port=6881-6999 --dht-file-path=/tmp/aria2.dht --bt-enable-lpd=true --bt-max-peers=0 --bt-save-metadata=true --listen-port=6881-6999 --seed-time=0 --peer-id-prefix=ARIA2 --user-agent=' aria2/1.36.0 ' --continue --max-concurrent-downloads=5 --file-allocation=falloc --summary-interval=0";
         dl-magnet = "${pkgs.aria2}/bin/aria2c --enable-dht=true --dht-listen-port=6881-6999 --dht-file-path=/tmp/aria2.dht --bt-enable-lpd=true --bt-max-peers=0 --bt-save-metadata=true --listen-port=6881-6999 --seed-time=0 --peer-id-prefix=ARIA2 --user-agent='aria2/1.36.0' --continue --max-concurrent-downloads=5 --file-allocation=falloc --summary-interval=0";
 
+        # Distrobox Aliases
+        ubuntu = "distrobox enter ubuntu";
+
         # Other Aliases
         ff = "${pkgs.fastfetch}/bin/fastfetch";
 
@@ -102,26 +113,31 @@
     };
     yazi = {
       enable = true;
+      package = pkgs.unstable.yazi;
       enableNushellIntegration = true;
       enableFishIntegration = true;
     };
     carapace = {
       enable = true;
+      package = pkgs.unstable.carapace;
       enableNushellIntegration = true;
       enableFishIntegration = true;
     };
     starship = {
       enable = true;
+      package = pkgs.unstable.starship;
       enableNushellIntegration = true;
       enableFishIntegration = true;
     };
     zoxide = {
       enable = true;
+      package = pkgs.unstable.zoxide;
       enableNushellIntegration = true;
       enableFishIntegration = true;
     };
     eza = {
       enable = true;
+      package = pkgs.unstable.eza;
       enableNushellIntegration = false;
       enableFishIntegration = true;
       git = true;
@@ -132,18 +148,29 @@
         "--header"
       ];
     };
-    bat.enable = true;
+    bat = {
+      enable = true;
+      package = pkgs.unstable.bat;
+    };
     ripgrep = {
       enable = true;
+      package = pkgs.unstable.ripgrep;
       arguments = [
         "--max-columns-preview"
         "--colors=line:style:bold"
       ];
     };
-    fzf.enable = true;
-    fd.enable = true;
+    fzf = {
+      enable = true;
+      package = pkgs.unstable.fzf;
+    };
+    fd = {
+      enable = true;
+      package = pkgs.unstable.fd;
+    };
     atuin = {
       enable = true;
+      package = pkgs.unstable.atuin;
       enableNushellIntegration = true;
       enableFishIntegration = true;
       flags = [
@@ -152,11 +179,13 @@
     };
     nix-your-shell = {
       enable = true;
+      package = pkgs.unstable.nix-your-shell;
       enableNushellIntegration = true;
       enableFishIntegration = true;
     };
     direnv = {
       enable = true;
+      package = pkgs.unstable.direnv;
       enableNushellIntegration = true;
       nix-direnv.enable = true;
       silent = true;

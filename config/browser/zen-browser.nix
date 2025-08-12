@@ -16,10 +16,10 @@
     profile = settings.username;
   };
 
-  stylix.targets.zen-browser = {
-    enable = false; # set to true if you want to use theme from Stylix
-    profileNames = ["${settings.username}"];
-  };
+  # stylix.targets.zen-browser = {
+  #   enable = false; # set to true if you want to use theme from Stylix
+  #   profileNames = ["${settings.username}"];
+  # };
 
   programs.zen-browser = {
     enable = true;
