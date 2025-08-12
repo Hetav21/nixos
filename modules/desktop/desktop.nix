@@ -3,30 +3,20 @@
   settings,
   ...
 }: {
-  environment = {
-    systemPackages = with pkgs; [
-      # Wayland specific
-      swww
-      waypaper
-      # grim swappy slurp
-      hyprshot
-    ];
+  environment.sessionVariables = {
+    EDITOR = settings.editor;
+    VISUAL = settings.visual;
+    TERMINAL = settings.terminal;
+    BROWSER = settings.browser;
+    SIGNAL_PASSWORD_STORE = "gnome-libsecret";
 
-    sessionVariables = {
-      EDITOR = settings.editor;
-      VISUAL = settings.visual;
-      TERMINAL = settings.terminal;
-      BROWSER = settings.browser;
-      SIGNAL_PASSWORD_STORE = "gnome-libsecret";
-
-      NIXOS_OZONE_WL = "1";
-      GDK_BACKEND = "wayland,x11";
-      QT_QPA_PLATFORM = "wayland;xcb";
-      JAVA_AWT_WM_NONREPARENTING = "1";
-      WLR_NO_HARDWARE_CURSORS = "1";
-      MOZ_ENABLE_WAYLAND = "1";
-      ELECTRON_OZONE_PLATFORM_HINT = "wayland";
-    };
+    NIXOS_OZONE_WL = "1";
+    GDK_BACKEND = "wayland,x11";
+    QT_QPA_PLATFORM = "wayland;xcb";
+    JAVA_AWT_WM_NONREPARENTING = "1";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    MOZ_ENABLE_WAYLAND = "1";
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
   };
 
   systemd.user.services = {
@@ -47,7 +37,6 @@
     hyprland = {
       enable = true;
       withUWSM = true;
-      xwayland.enable = true;
     };
   };
 
@@ -73,11 +62,14 @@
       };
     };
 
-    packages = with pkgs; [nerd-fonts.jetbrains-mono nerd-fonts.fira-code dejavu_fonts];
+    packages = with pkgs; [nerd-fonts.jetbrains-mono nerd-fonts.fira-code font-awesome dejavu_fonts];
   };
 
   stylix = {
     enable = true;
+    polarity = "dark";
+    image = ../../wallpapers/${settings.wallpaper};
+
     base16Scheme = {
       base00 = "191724";
       base01 = "1f1d2e";
@@ -89,40 +81,51 @@
       base07 = "524f67";
       base08 = "eb6f92";
       base09 = "f6c177";
-      base0A = "ebbcba";
-      base0B = "31748f";
+      base0A = "ea9a97";
+      base0B = "3e8fb0";
       base0C = "9ccfd8";
       base0D = "c4a7e7";
       base0E = "f6c177";
       base0F = "524f67";
     };
-    image = ../../wallpapers/${settings.wallpaper};
-    polarity = "dark";
-    opacity.terminal = 0.8;
-    cursor.package = pkgs.bibata-cursors;
-    cursor.name = "Bibata-Modern-Ice";
-    cursor.size = 24;
+
+    opacity = {
+      applications = 1.0;
+      desktop = 1.0;
+      terminal = 0.8;
+      popups = 0.7;
+    };
+
+    cursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Ice";
+      size = 24;
+    };
 
     fonts = {
       monospace = {
         package = pkgs.nerd-fonts.jetbrains-mono;
         name = "JetBrainsMono Nerd Font Mono";
       };
+
       sansSerif = {
         package = pkgs.nerd-fonts.ubuntu-sans;
         name = "UbuntuSans Nerd Font";
       };
+
       serif = {
         package = pkgs.nerd-fonts.noto;
         name = "NotoSerif Nerd Font";
       };
+
       emoji = {
         package = pkgs.noto-fonts-emoji;
         name = "Noto Color Emoji";
       };
+
       sizes = {
         applications = 12;
-        terminal = 15;
+        terminal = 12;
         desktop = 11;
         popups = 12;
       };

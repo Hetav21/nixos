@@ -1,6 +1,6 @@
 {
-  pkgs,
   lib,
+  pkgs,
   ...
 }: let
   hypr_border = 5; # adjust as per hyprland config
@@ -9,6 +9,8 @@ in {
 
   services.dunst = {
     enable = true;
+    package = pkgs.dunst;
+
     iconTheme = {
       package = pkgs.tela-circle-icon-theme;
       name = "Tela-circle-dark";

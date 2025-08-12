@@ -10,7 +10,7 @@
 
     file = {
       # Top Level Files symlinks
-      ".zshrc".source = ../../dotfiles/.zshrc;
+      # ".zshrc".source = ../../dotfiles/.zshrc;
       ".vimrc".source = ../../dotfiles/.vimrc;
 
       # Directories
@@ -24,6 +24,7 @@
       # ".config/starship.toml".source = ../../dotfiles/.config/starship.toml;
       ".local/bin/cliphist-rofi-img".source =
         ../../dotfiles/.local/bin/cliphist-rofi-img;
+      ".config/autostart/mega-sync.desktop".source = ../../dotfiles/.config/autostart/mega-sync.desktop;
     };
 
     sessionPath = ["$HOME/.local/bin" "$HOME/go/bin"];

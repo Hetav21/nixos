@@ -10,7 +10,7 @@
   ];
 
   systemd = {
-    packages = with pkgs; [lact];
+    packages = with pkgs; [unstable.lact];
     services.lactd.wantedBy = ["multi-user.target"];
   };
 

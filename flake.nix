@@ -3,27 +3,33 @@
 
   # Flake Inputs
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-latest.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    stylix = {
+      url = "github:danth/stylix/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix.url = "github:danth/stylix";
     sops-nix = {
       url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nur = {
-      url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -31,7 +37,7 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -48,8 +54,8 @@
 
     settings = {
       # Upgrade configuration
-      update-latest = "nixpkgs-latest zen-browser"; # Specify the flakes inputs to update when running `update-latest`
-      update-standard = "home-manager lanzaboote stylix sops-nix nix-flatpak ${settings.update-latest}"; # Specify the flakes inputs to update when running `update-standard`
+      update-latest = "nixpkgs-unstable zen-browser"; # Specify the flakes inputs to update when running `update-latest`
+      update-standard = "stylix home-manager lanzaboote sops-nix nix-flatpak ${settings.update-latest}"; # Specify the flakes inputs to update when running `update-standard`
 
       # User configuration
       username = "hetav";

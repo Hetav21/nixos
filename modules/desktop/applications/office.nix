@@ -13,7 +13,7 @@
     # Image and graphics
 
     # Productivity and office
-    latest.obsidian
+    unstable.obsidian
     texliveMinimal
 
     # Fun and customization

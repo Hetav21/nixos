@@ -1,0 +1,4 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Exec=/run/current-system/sw/bin/megasync %u

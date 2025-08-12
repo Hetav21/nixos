@@ -5,7 +5,6 @@
 }: {
   environment.systemPackages = with pkgs; [
     # nixfmt-classic
-    nix-index
     alejandra
     cachix
     nixd

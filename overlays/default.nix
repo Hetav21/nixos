@@ -13,11 +13,11 @@
   # https://wiki.nixos.org/wiki/Overlays
   modifications = final: _prev: {
     nur = inputs.nur.overlays.default;
-    stable = import inputs.nixpkgs-stable {
+    unstable = import inputs.nixpkgs-unstable {
       system = final.system;
       config.allowUnfree = true;
     };
-    latest = import inputs.nixpkgs-latest {
+    master = import inputs.nixpkgs-master {
       system = final.system;
       config.allowUnfree = true;
     };

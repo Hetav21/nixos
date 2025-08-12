@@ -6,13 +6,13 @@
   environment.systemPackages = with pkgs; [
     # Shell and terminal utilities
     killall
-    tree
+    most
+    vim
 
     # System monitoring and management
     btop
 
     # System utilities
-    vim
 
     # File systems
     ntfs3g
@@ -22,7 +22,7 @@
     # Nix-Flatpak
     flatpak = {
       enable = true;
-      package = pkgs.latest.flatpak;
+      package = pkgs.flatpak;
       uninstallUnmanaged = true;
       update.auto = {
         enable = true;

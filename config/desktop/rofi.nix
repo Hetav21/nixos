@@ -1,16 +1,30 @@
 {
+  lib,
   pkgs,
   config,
-  lib,
   settings,
   ...
 }: {
+  wayland.windowManager.hyprland.settings = {
+    "$mainMod" = "SUPER";
+
+    bind = [
+      "$mainMod, C, exec, rofi -modi clipboard:/home/hetav/.local/bin/cliphist-rofi-img -show clipboard -show-icons"
+      "$mainMod, Q, exec, rofi -modi calc -show calc"
+    ];
+  };
+
   programs = {
     rofi = {
       enable = true;
       package = pkgs.rofi-wayland;
+
+      terminal = "${settings.terminal}";
+
+      plugins = with pkgs; [rofi-calc];
+      modes = ["drun" "run" "filebrowser"];
+
       extraConfig = {
-        modi = "drun,filebrowser,run";
         show-icons = true;
         icon-theme = "Papirus";
         location = 0;

@@ -1,25 +1,33 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     # Text editors and IDEs
-    latest.vscode
-    latest.zed-editor
-    latest.code-cursor
+    unstable.vscode
+    unstable.zed-editor
+    unstable.code-cursor
 
     # Programming languages and build tools
 
     # Version control and development tools
+    unstable.codex
+    unstable.claude-code
+    unstable.gemini-cli
+    unstable.hoppscotch
+    unstable.bruno
     awscli2
-    latest.codex
-    latest.claude-code
-    latest.gemini-cli
-    latest.hoppscotch
-    latest.bruno
-    git
-    git-lfs
     gh
     mongodb-compass
     distrobox
   ];
+
+  # Git configuration
+  programs.git = {
+    enable = true;
+    package = pkgs.unstable.git;
+    lfs = {
+      enable = true;
+      package = pkgs.unstable.git-lfs;
+    };
+  };
 
   # Flatpak
   services.flatpak.packages = [

@@ -115,7 +115,6 @@
         $brave = brave
         $firefox = firefox
         $browser = zen-beta
-        $clipHistory = rofi -modi clipboard:/home/hetav/.local/bin/cliphist-rofi-img -show clipboard -show-icons
         $lock = hyprlock
 
         # Binds
@@ -128,7 +127,6 @@
         bind = SUPER_SHIFT, Y, exec, warp-cli disconnect
         bind = $mainMod, Z, exec, $zeditor
         bind = $mainMod, X, exec, $code
-        bind = $mainMod, C, exec, $clipHistory
         bind = $mainMod, V, exec, $browser --new-window https://chat.deepseek.com/
         bind = SUPER_SHIFT, V, exec, $browser --new-window http://localhost:8080/
         bind = $mainMod, G, exec, $browser --new-window https://gemini.google.com/
@@ -166,23 +164,6 @@
         bind = , XF86AudioNext, exec, playerctl next
         bind = , XF86AudioPrev, exec, playerctl previous
         bind = ALT, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy # Clipboard Manager
-
-        # bind = $mainMod, S, exec, grim -g "$(slurp)" - | swappy -f - # take a screenshot
-
-        # # Screenshots
-        # bind = , print, exec, grim $(xdg-user-dir PICTURES)/Screenshots/$(date +'Screenshot_%s.png')
-        # bind = CTRL, print, exec, grim -g "$(slurp -o)" $(xdg-user-dir PICTURES)/Screenshots/$(date +'Screenshot_%s.png')
-        # bind = CTRL SHIFT, print, exec, grim -g "$(slurp)" $(xdg-user-dir PICTURES)/Screenshots/$(date +'Screenshot_%s.png')
-
-        # # Screenshot a window ($mainMod + P)
-        # bind = $mainMod, P, exec, hyprshot -m window -o ~/Pictures/Screenshots
-        #
-        # Screenshot a monitor/output ($mainMod + ALT + P)
-        bind = CTRL, print, exec, hyprshot -m output -o ~/Pictures/Screenshots
-
-        # Screenshot a region ($mainMod + SHIFT + P)
-        bind = CTRL SHIFT, print, exec, hyprshot -m region -o ~/Pictures/Screenshots
-        bind = SUPER_SHIFT, D, exec, hyprshot -m region --clipboard-only
 
         # Move focus with mainMod + arrow keys
         bind = $mainMod, h, movefocus, l
@@ -238,15 +219,9 @@
 
         exec-once = nm-applet &
         exec-once = blueman-applet &
-        exec-once = systemctl --user start warp-taskbar.service
         exec-once = localsend_app --hidden
         exec-once = wl-paste --type text --watch cliphist store # clipboard store text data
         exec-once = wl-paste --type image --watch cliphist store # clipboard store image data
-
-        exec-once = dunst &
-
-        exec-once = hypridle &
-        exec-once = swww-daemon &
       '';
   };
 }
