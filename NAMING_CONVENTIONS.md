@@ -54,7 +54,7 @@ drivers.asus.*     - ASUS-specific features
 ```
 
 ### `profiles.*` - Configuration Profiles
-Pre-bundled sets of modules for different use cases. Located in `hosts/profiles/`.
+Pre-bundled sets of system modules for different use cases. Located in `hosts/_common/profiles/system/`.
 
 **System Profiles** (`profiles.system.*`):
 ```
@@ -64,11 +64,7 @@ profiles.system.desktop-minimal.* - Minimal desktop (WM only)
 profiles.system.wsl-minimal.*     - WSL CLI/TUI only
 ```
 
-**Home Profiles** (`profiles.home.*`):
-```
-profiles.home.desktop-full.* - Full desktop home config with all modules
-profiles.home.wsl-minimal.*  - Minimal WSL home config (CLI/TUI only)
-```
+**Note:** Home-manager configurations are directly managed in each host's `home.nix` file, not through profiles.
 
 ---
 
@@ -87,17 +83,13 @@ nixos/
 │   │   ├── default.nix    # Common system config (imports modules, profiles, secrets, state version)
 │   │   ├── user.nix       # User configuration
 │   │   ├── home-base.nix  # Base home-manager config
-│   │   └── profiles/      # Configuration profiles (system and home)
-│   │       ├── default.nix    # Imports both system and home profiles
-│   │       ├── system/        # System-level profiles
-│   │       │   ├── default.nix
-│   │       │   ├── desktop-full.nix
-│   │       │   ├── desktop-base.nix
-│   │       │   ├── desktop-minimal.nix
-│   │       │   └── wsl-minimal.nix
-│   │       └── home/          # Home-manager profiles
+│   │   └── profiles/      # System configuration profiles
+│   │       ├── default.nix    # Imports system profiles
+│   │       └── system/        # System-level profiles
 │   │           ├── default.nix
 │   │           ├── desktop-full.nix
+│   │           ├── desktop-base.nix
+│   │           ├── desktop-minimal.nix
 │   │           └── wsl-minimal.nix
 │   ├── nixbook/           # Personal laptop
 │   │   ├── configuration.nix
@@ -247,43 +239,51 @@ profiles.system.wsl-minimal.enable = true;
 
 ---
 
-### Home Profiles (`hosts/profiles/home/`)
+### Home Manager Configuration
 
-#### `profiles.home.desktop-full`
-**Purpose:** Complete home-manager configuration with all desktop features  
-**Ideal for:** Personal laptops, workstations  
-**Includes:**
-- All terminal modules (shell, tmux, alacritty, ghostty)
-- All desktop modules (hyprland, waybar, rofi, etc.)
-- Browser (zen)
-- GTK/Qt theming
+Home-manager configurations are **not** managed through profiles. Instead, each host has its own `home.nix` file where home modules are directly enabled/disabled.
 
-**Usage:**
+**Example - Full Desktop (`hosts/nixbook/home.nix`):**
 ```nix
-# hosts/nixbook/home.nix
-profiles.home.desktop-full.enable = true;
+{pkgs, ...}: {
+  imports = [
+    ../_common/home-base.nix
+  ];
+
+  # Enable terminal modules
+  home.terminal.shell.enable = true;
+  home.terminal.tmux.enable = true;
+  home.terminal.alacritty.enable = true;
+  home.terminal.ghostty.enable = true;
+
+  # Enable desktop modules
+  home.desktop.hyprland.enable = true;
+  home.desktop.waybar.enable = true;
+  # ... etc
+}
 ```
 
-#### `profiles.home.wsl-minimal`
-**Purpose:** Minimal home-manager configuration for WSL  
-**Ideal for:** WSL instances, servers  
-**Includes:**
-- CLI/TUI terminal modules only (shell, tmux, ghostty)
-- **Excludes:** All desktop/GUI modules
-
-**Usage:**
+**Example - WSL Minimal (`hosts/nixwslbook/home.nix`):**
 ```nix
-# hosts/nixwslbook/home.nix
-profiles.home.wsl-minimal.enable = true;
+{...}: {
+  imports = [
+    ../_common/home-base.nix
+  ];
+
+  # Enable only CLI/TUI modules for WSL
+  home.terminal.shell.enable = true;
+  home.terminal.tmux.enable = true;
+  home.terminal.ghostty.enable = true;
+}
 ```
 
 ---
 
-### Creating Custom Profiles
+### Creating Custom System Profiles
 
 **System Profile:**
 ```nix
-# hosts/profiles/system/my-profile.nix
+# hosts/_common/profiles/system/my-profile.nix
 {lib, config, ...}:
 with lib; {
   options.profiles.system.my-profile = {
@@ -295,24 +295,6 @@ with lib; {
     system.nix.settings.enable = true;
     system.desktop.environment.enable = true;
     # ... more system options
-  };
-}
-```
-
-**Home Profile:**
-```nix
-# hosts/profiles/home/my-profile.nix
-{lib, config, ...}:
-with lib; {
-  options.profiles.home.my-profile = {
-    enable = mkEnableOption "My custom home profile";
-  };
-
-  config = mkIf config.profiles.home.my-profile.enable {
-    # Enable specific home modules
-    home.terminal.shell.enable = true;
-    home.desktop.hyprland.enable = true;
-    # ... more home options
   };
 }
 ```
@@ -594,8 +576,10 @@ imports = [
                              # common dotfiles, sessionPath, module imports
 ];
 
-# Use home profiles for bulk configuration
-profiles.home.desktop-full.enable = true;  # Or wsl-minimal, etc.
+# Enable specific home modules as needed
+home.terminal.shell.enable = true;
+home.terminal.tmux.enable = true;
+# ... etc
 ```
 
 This reduces each host's configuration to only what's unique to that host.
@@ -632,14 +616,12 @@ Namespace Prefixes:
   home.*             → User configuration  
   drivers.*          → Hardware drivers
   profiles.system.*  → System configuration bundles
-  profiles.home.*    → Home configuration bundles
 
 File Locations:
   System modules    → modules/system/
   Home modules      → modules/home/
   Drivers           → modules/drivers/
   System profiles   → hosts/_common/profiles/system/
-  Home profiles     → hosts/_common/profiles/home/
   Host configs      → hosts/*/
   Common config     → hosts/_common/
   Scripts           → scripts/
