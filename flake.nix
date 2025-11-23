@@ -45,6 +45,10 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # Flake Outputs
@@ -55,12 +59,11 @@
   } @ inputs: let
     inherit (self) outputs;
 
-    settings = {
+    # Common settings shared across all hosts
+    commonSettings = {
       # Upgrade configuration
-      update-standard = "stylix home-manager lanzaboote sops-nix nix-flatpak zen-browser vicinae"; # Specify the flakes inputs to update when running `update-standard`
-      update-latest = "nixpkgs-unstable nixpkgs-master chaotic nur ${settings.update-standard}"; # Specify the flakes inputs to update when running `update-latest`
-      # update-all updates everything including the base system (nixpkgs, nixpkgs-kernel)
-      # update-standard is auto updated
+      update-standard = "stylix home-manager lanzaboote sops-nix nix-flatpak zen-browser vicinae";
+      update-latest = "nixpkgs-unstable nixpkgs-master chaotic nur stylix home-manager lanzaboote sops-nix nix-flatpak zen-browser vicinae";
 
       # User configuration
       username = "hetav";
@@ -69,32 +72,45 @@
       browser = "zen";
       terminal = "ghostty";
 
-      # System configuration
-      setup_dir = "/etc/nixos/"; # Should be an absolute path
+      # System configuration (common)
+      setup_dir = "/etc/nixos/";
       system = "x86_64-linux";
-      videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia, amdgpu or intel)
-      hostname = "nixbook"; # CHOOSE A HOSTNAME HERE
-      locale = "en_US.UTF-8"; # CHOOSE YOUR LOCALE
-      extraLocale = "en_IN"; # CHOOSE YOUR LOCALE
-      timeZone = "Asia/Kolkata"; # CHOOSE YOUR TIMEZONE
+      locale = "en_US.UTF-8";
+      extraLocale = "en_IN";
+      timeZone = "Asia/Kolkata";
       keyboard = {
-        layout = "us"; # CHOOSE YOUR KEYBOARD LAYOUT
-        variant = ""; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)
+        layout = "us";
+        variant = "";
       };
-      consoleKeymap = "us"; # CHOOSE YOUR CONSOLE KEYMAP (Affects the tty?)
+      consoleKeymap = "us";
 
-      # Application specific configuration
-      wallpaper = "China.jpeg";
-      wallpaper_directory = "/etc/nixos/wallpapers"; # Should be an absolute path
-      rclone = {
-        local_dir = "Desktop/University";
-        remote_dir = "Adani:University";
-      };
-      mount-partition = {
-        enable = true;
-        partition_id = "a96c2e2f-5a1a-4249-8a3c-283532bb14a9";
-      };
+      # Application common configuration
+      wallpaper_directory = "/etc/nixos/wallpapers";
     };
+
+    # Per-host settings for nixbook (personal laptop)
+    nixbookSettings =
+      commonSettings
+      // {
+        hostname = "nixbook";
+        wallpaper = "China.jpeg";
+        rclone = {
+          local_dir = "Desktop/University";
+          remote_dir = "Adani:University";
+        };
+        mount-partition = {
+          enable = true;
+          partition_id = "a96c2e2f-5a1a-4249-8a3c-283532bb14a9";
+        };
+      };
+
+    # Per-host settings for nixwslbook (work WSL)
+    nixwslbookSettings =
+      commonSettings
+      // {
+        hostname = "nixwslbook";
+        # WSL doesn't need wallpaper, rclone, or mount-partition
+      };
 
     # Hardware configuration
     hardware_asus = {
@@ -114,12 +130,16 @@
     };
   in {
     templates = import ./templates;
-    overlays = import ./overlays {inherit inputs settings;};
+    overlays = import ./overlays {
+      inherit inputs;
+      settings = commonSettings;
+    };
     nixosConfigurations = {
       nixbook = nixpkgs.lib.nixosSystem {
-        system = settings.system;
+        system = nixbookSettings.system;
         specialArgs = {
-          inherit self inputs outputs settings;
+          inherit self inputs outputs;
+          settings = nixbookSettings;
           hardware = hardware_asus;
         };
         modules = [
@@ -129,6 +149,34 @@
           inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.home-manager
           inputs.lanzaboote.nixosModules.lanzaboote
+          inputs.nix-index-database.nixosModules.nix-index
+          inputs.chaotic.nixosModules.nyx-cache
+          inputs.chaotic.nixosModules.nyx-overlay
+          inputs.chaotic.nixosModules.nyx-registry
+          {
+            nixpkgs = {
+              overlays = builtins.attrValues outputs.overlays;
+              config = {
+                allowUnfree = true;
+                allowBroken = true;
+              };
+            };
+          }
+        ];
+      };
+
+      nixwslbook = nixpkgs.lib.nixosSystem {
+        system = nixwslbookSettings.system;
+        specialArgs = {
+          inherit self inputs outputs;
+          settings = nixwslbookSettings;
+        };
+        modules = [
+          ./hosts/nixwslbook/configuration.nix
+          inputs.nixos-wsl.nixosModules.default
+          inputs.sops-nix.nixosModules.sops
+          inputs.stylix.nixosModules.stylix
+          inputs.home-manager.nixosModules.home-manager
           inputs.nix-index-database.nixosModules.nix-index
           inputs.chaotic.nixosModules.nyx-cache
           inputs.chaotic.nixosModules.nyx-overlay

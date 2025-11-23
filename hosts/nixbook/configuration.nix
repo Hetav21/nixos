@@ -8,11 +8,20 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ./user.nix
-    ../../modules
-    ../../secrets
+    ../_common
   ];
 
+  # Home Manager configuration
+  # Home Manager configuration
+  home-manager = {
+    extraSpecialArgs = {inherit inputs settings;};
+    users.${settings.username} = import ./home.nix;
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "backup";
+  };
+
+  # Host-specific boot configuration (secure boot with lanzaboote)
   boot = {
     kernelPackages = pkgs.kernel.linuxPackages_zen;
     kernelModules = ["v4l2loopback"];
@@ -27,12 +36,6 @@
       };
       systemd-boot.enable = lib.mkForce false;
       grub.enable = lib.mkForce false;
-      # grub = {
-      #   enable = true;
-      #   device = "nodev";
-      #   efiSupport = true;
-      #   useOSProber = true;
-      # };
     };
     lanzaboote = {
       enable = true;
@@ -44,6 +47,7 @@
     };
   };
 
+  # Swap configuration for memory management
   swapDevices = [
     {
       device = "/var/lib/swapfile";
@@ -51,24 +55,6 @@
     }
   ];
 
-  users = {
-    mutableUsers = true;
-    users.${settings.username} = {
-      isNormalUser = true;
-      description = "Normal User";
-      extraGroups = [
-        "wheel"
-      ];
-    };
-  };
-
-  home-manager = {
-    extraSpecialArgs = {inherit inputs settings;};
-    users.${settings.username} = import ./home.nix;
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    backupFileExtension = "backup";
-  };
-
-  system.stateVersion = "24.11";
+  # Complete desktop environment with all features (system-level profile)
+  profiles.system.desktop-full.enable = true;
 }

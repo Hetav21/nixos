@@ -1,7 +1,0 @@
-{...}: {
-  imports = [
-    ./browser
-    ./desktop
-    ./terminal
-  ];
-}

@@ -1,0 +1,65 @@
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+with lib; let
+  cfg = config.system.hardware.hardware;
+in {
+  options.system.hardware.hardware = {
+    enable = mkEnableOption "Enable hardware configuration";
+  };
+
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      alsa-utils
+      pulseaudio
+
+      brightnessctl
+
+      unstable.lact
+      nvtopPackages.full
+    ];
+
+    systemd = {
+      packages = with pkgs; [unstable.lact];
+      services.lactd.wantedBy = ["multi-user.target"];
+    };
+
+    services = {
+      blueman.enable = true;
+      pulseaudio.enable = false;
+      libinput.enable = true;
+      fstrim.enable = true;
+      gvfs.enable = true;
+      ipp-usb.enable = true;
+      fwupd.enable = true;
+      pipewire = {
+        enable = true;
+        alsa = {
+          enable = true;
+          support32Bit = true;
+        };
+        pulse.enable = true;
+        jack.enable = true;
+        wireplumber.enable = true;
+      };
+      hardware.bolt = {
+        enable = true;
+        package = pkgs.bolt;
+      };
+    };
+
+    hardware = {
+      logitech.wireless = {
+        enable = true;
+        enableGraphical = true;
+      };
+      bluetooth = {
+        enable = true;
+        powerOnBoot = true;
+      };
+    };
+  };
+}
