@@ -17,7 +17,7 @@
   home.desktop.clipboard.enable = true;
   home.desktop.launcher.enable = true;
   home.desktop.notification.enable = true;
-  home.desktop.rofi.enable = true;
+  home.desktop.rofi.enable = false;
   home.desktop.wallpaper.enable = true;
   home.desktop.waybar.enable = true;
   home.desktop.wlogout.enable = true;
