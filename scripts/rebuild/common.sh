@@ -1,0 +1,81 @@
+#!/run/current-system/sw/bin/sh
+# Common functions for NixOS rebuild scripts
+
+set -e
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Function to print colored output
+print_status() {
+    echo -e "${GREEN}[INFO]${NC} $1"
+}
+
+print_warning() {
+    echo -e "${YELLOW}[WARN]${NC} $1"
+}
+
+print_error() {
+    echo -e "${RED}[ERROR]${NC} $1"
+}
+
+# Function to setup environment
+setup_environment() {
+    local setup_dir="$1"
+    print_status "Setting up environment..."
+    pushd "$setup_dir" > /dev/null
+    alejandra . &>/dev/null
+    print_status "Code formatted with alejandra"
+}
+
+# Function to backup and show changes
+backup_and_diff() {
+    print_status "Backing up flake.lock and showing changes..."
+    cp flake.lock flake.lock.bak
+    git diff -U0 flake.lock
+}
+
+# Function to run nixos-rebuild with error handling
+run_rebuild() {
+    local rebuild_type="$1"
+    local log_file="nixos-switch.log"
+    
+    print_status "NixOS rebuilding with '$rebuild_type'..."
+    sudo nixos-rebuild "$rebuild_type" &> "$log_file" || {
+        print_error "Rebuild failed. Showing errors:"
+        cat "$log_file" | grep --color error
+        return 1
+    }
+    print_status "Rebuild completed successfully"
+}
+
+# Function to sync zed settings
+sync_zed_settings() {
+    print_status "Syncing Zed settings..."
+    cp ~/.config/zed/settings.json ./dotfiles/.config/zed/settings.json
+}
+
+# Function to commit changes
+commit_changes() {
+    local gen=$(nixos-rebuild list-generations | grep current | sed 's/ .*//')
+    print_status "Committing changes for generation $gen..."
+    git commit -am "$gen"
+}
+
+# Function to create patch
+create_patch() {
+    print_status "Creating patch..."
+    mkdir -p patch
+    git format-patch -1 HEAD
+    mv *.patch patch/
+    print_status "Patch created in patch/ directory"
+}
+
+# Function to cleanup and exit
+cleanup() {
+    print_status "Cleaning up..."
+    popd > /dev/null
+}

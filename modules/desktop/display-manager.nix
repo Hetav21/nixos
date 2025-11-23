@@ -20,7 +20,10 @@ in {
     };
   };
 
-  security.pam.services.greetd.enableGnomeKeyring = true;
+  security.pam.services.greetd = {
+    enableGnomeKeyring = true;
+    enableAppArmor = true;
+  };
 
   systemd.services.greetd.serviceConfig = {
     Type = "idle";

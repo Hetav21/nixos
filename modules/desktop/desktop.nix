@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   settings,
   ...
 }: {
@@ -108,20 +109,24 @@
         name = "JetBrainsMono Nerd Font Mono";
       };
 
-      sansSerif = {
-        package = pkgs.nerd-fonts.ubuntu-sans;
-        name = "UbuntuSans Nerd Font";
-      };
+      serif = config.stylix.fonts.monospace;
+      sansSerif = config.stylix.fonts.monospace;
+      emoji = config.stylix.fonts.monospace;
 
-      serif = {
-        package = pkgs.nerd-fonts.noto;
-        name = "NotoSerif Nerd Font";
-      };
+      # sansSerif = {
+      #   package = pkgs.nerd-fonts.ubuntu-sans;
+      #   name = "UbuntuSans Nerd Font";
+      # };
 
-      emoji = {
-        package = pkgs.noto-fonts-emoji;
-        name = "Noto Color Emoji";
-      };
+      # serif = {
+      #   package = pkgs.nerd-fonts.noto;
+      #   name = "NotoSerif Nerd Font";
+      # };
+
+      # emoji = {
+      #   package = pkgs.noto-fonts-emoji;
+      #   name = "Noto Color Emoji";
+      # };
 
       sizes = {
         applications = 12;

@@ -7,7 +7,7 @@
   environment.systemPackages = with pkgs; [sops];
 
   sops = {
-    age.keyFile = "/etc/nixos/secrets/keys.asc";
+    age.keyFile = "${settings.setup_dir}secrets/keys.asc";
 
     secrets.openai_api_key = {
       sopsFile = ./openai_api_key.yaml;

@@ -12,8 +12,10 @@ in {
 
   config = mkIf cfg.enable {
     services = {
+      # supergfxd controls GPU switching
       supergfxd.enable = true;
 
+      # ASUS specific software. This also installs asusctl.
       asusd = {
         enable = true;
         enableUserService = true;

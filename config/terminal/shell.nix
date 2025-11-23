@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   settings,
   ...
 }: {
@@ -72,7 +73,7 @@
         ## ls = "${pkgs.eza}/bin/eza -1   --icons=auto"; # short list
         ## ll = "${pkgs.eza}/bin/eza -lha --icons=auto --sort=name --group-directories-first"; # long list all
         tree = "${pkgs.tree}/bin/tree -a -I .git";
-        cat = "${pkgs.bat}/bin/bat";
+        cat = "${config.programs.bat.package}/bin/bat";
         grep = "${pkgs.ripgrep}/bin/rg --color=auto";
         cls = "clear";
         e = "exit";
@@ -86,13 +87,16 @@
         lzd = "${pkgs.lazydocker}/bin/lazydocker";
 
         # System Specific Aliases
-        rebuild-live = "sh /etc/nixos/rebuild-live.sh";
-        rebuild-boot = "sh /etc/nixos/rebuild-boot.sh";
-        rebuild-test = "sh /etc/nixos/rebuild-test.sh";
-        log-rebuild = "tail -f /etc/nixos/nixos-switch.log";
-        update-latest = "nix flake update --flake /etc/nixos ${settings.update-latest}";
-        update-standard = "nix flake update --flake /etc/nixos ${settings.update-standard}";
-        update-all = "nix flake update --flake /etc/nixos";
+        rebuild-live = "sh ${settings.setup_dir}scripts/rebuild/live.sh '${settings.setup_dir}'";
+        rebuild-boot = "sh ${settings.setup_dir}scripts/rebuild/boot.sh '${settings.setup_dir}'";
+        rebuild-test = "sh ${settings.setup_dir}scripts/rebuild/test.sh '${settings.setup_dir}'";
+        # rebuild = "sh ${settings.setup_dir}scripts/rebuild/rebuild";
+        log-rebuild = "tail -f ${settings.setup_dir}nixos-switch.log";
+        update-latest = "sh ${settings.setup_dir}scripts/update/latest.sh '${settings.update-latest}' '${settings.setup_dir}'";
+        update-standard = "sh ${settings.setup_dir}scripts/update/standard.sh '${settings.update-standard}' '${settings.setup_dir}'";
+        update-all = "sh ${settings.setup_dir}scripts/update/all.sh '${settings.update-latest}' '${settings.update-standard}' '${settings.setup_dir}'";
+        update-packages = "sh ${settings.setup_dir}scripts/update/packages.sh '${settings.setup_dir}'";
+        # update = "sh ${settings.setup_dir}scripts/update/update";
 
         # Downlaod Aliases
         dl = "${pkgs.aria2}/bin/aria2c --continue --max-concurrent-downloads=5 --file-allocation=falloc --summary-interval=0";
@@ -116,6 +120,70 @@
       package = pkgs.unstable.yazi;
       enableNushellIntegration = true;
       enableFishIntegration = true;
+
+      # plugins = {
+      #   # Preview:
+      #   rich-preview = pkgs.unstable.yaziPlugins.rich-preview;
+
+      #   # Functional:
+      #   chmod = pkgs.unstable.yaziPlugins.chmod;
+      #   wl-clipboard = pkgs.unstable.yaziPlugins.wl-clipboard;
+      #   toggle-pane = pkgs.unstable.yaziPlugins.toggle-pane;
+      #   mime-ext = pkgs.unstable.yaziPlugins.mime-ext;
+      # };
+      # settings = {
+      #   plugin = {
+      #     prepend_previewers = [
+      #       {
+      #         id = "mime";
+      #         name = "*";
+      #         run = "mime-ext";
+      #         prio = "high";
+      #       }
+      #       {
+      #         name = "*.csv";
+      #         run = "rich-preview";
+      #       } # for csv files
+      #       {
+      #         name = "*.md";
+      #         run = "rich-preview";
+      #       } # for markdown (.md) files
+      #       {
+      #         name = "*.rst";
+      #         run = "rich-preview";
+      #       } # for restructured text (.rst) files
+      #       {
+      #         name = "*.ipynb";
+      #         run = "rich-preview";
+      #       } # for jupyter notebooks (.ipynb)
+      #       {
+      #         name = "*.json";
+      #         run = "rich-preview";
+      #       } # for json (.json) files
+      #       #    { name = "*.lang_type", run = "rich-preview"}; # for particular language files eg. .py, .go., .lua, etc.
+      #     ];
+      #   };
+      # };
+      # keymap = {
+      #   input.prepend_keymap = [];
+      #   manager.prepend_keymap = [
+      #     {
+      #       on = ["c" "m"];
+      #       run = "plugin chmod";
+      #       desc = "Chmod on selected files";
+      #     }
+      #     {
+      #       run = ["plugin wl-clipboard"];
+      #       on = "<C-y>";
+      #       desc = "Copy selected file paths to clipboard";
+      #     }
+      #     {
+      #       on = "T";
+      #       run = "plugin toggle-pane min-preview";
+      #       desc = "Show or hide the preview pane";
+      #     }
+      #   ];
+      # };
     };
     carapace = {
       enable = true;

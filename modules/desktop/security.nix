@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  environment.systemPackages = with pkgs; [lxqt.lxqt-policykit];
+  environment.systemPackages = with pkgs; [hyprpolkitagent];
 
   services.gnome.gnome-keyring.enable = true;
 
@@ -23,12 +23,6 @@
           }
         })
       '';
-    };
-    pam.services = {
-      greetd = {
-        enableGnomeKeyring = true;
-        enableAppArmor = true;
-      };
     };
   };
 }

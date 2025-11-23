@@ -1,10 +1,22 @@
 {
   lib,
+  pkgs,
+  config,
   settings,
   ...
 }: {
+  wayland.windowManager.hyprland.settings = {
+    "$lock" = "hyprlock";
+
+    bind = [
+      "$mainMod, O, exec, ${config.programs.hyprlock.package}/bin/hyprlock"
+    ];
+  };
+
   programs.hyprlock = {
     enable = true;
+    package = pkgs.hyprlock;
+
     sourceFirst = true;
     settings = {
       general = {

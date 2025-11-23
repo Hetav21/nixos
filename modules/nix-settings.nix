@@ -1,15 +1,29 @@
 {
   pkgs,
+  inputs,
   settings,
   ...
 }: {
   environment.systemPackages = with pkgs; [
     # nixfmt-classic
+    nix-update
     alejandra
     cachix
     nixd
     nil
   ];
+
+  system.autoUpgrade = {
+    enable = true;
+    flake = inputs.self.outPath;
+    flags = [
+      "--update-input"
+      "${settings.update-standard}"
+      "-L" # print build logs
+    ];
+    dates = "09:00";
+    randomizedDelaySec = "45min";
+  };
 
   programs = {
     nix-index.enable = true;

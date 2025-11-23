@@ -5,16 +5,10 @@
   ...
 }: {
   imports = [
-    ../../pkgs/zen-nebula/home
     inputs.zen-browser.homeModules.beta
     # or inputs.zen-browser.homeModules.twilight
     # or inputs.zen-browser.homeModules.twilight-official
   ];
-
-  zen-nebula = {
-    enable = true; # set to true if you want to use nebula theme from pkgs
-    profile = settings.username;
-  };
 
   # stylix.targets.zen-browser = {
   #   enable = false; # set to true if you want to use theme from Stylix
@@ -47,15 +41,21 @@
         Cryptomining = true;
         Fingerprinting = true;
       };
-      Preferences = {
-        "browser.tabs.warnOnClose" = {
-          "Value" = false;
+      Preferences = let
+        locked = value: {
+          "Value" = value;
           "Status" = "locked";
         };
-        "zen.view.grey-out-inactive-windows" = {
-          "Value" = false;
-          "Status" = "locked";
-        };
+      in {
+        # Nebula Preferences
+        "nebula-tab-switch-animation" = locked 4;
+        "nebula-tab-loading-animation" = locked 0;
+
+        # Zen Preferences
+        "zen.view.grey-out-inactive-windows" = locked false;
+
+        # Firefox Preferences
+        "browser.tabs.warnOnClose" = locked false;
       };
       SearchEngines = {
         Default = "Unduck";

@@ -8,7 +8,7 @@
     && settings.mount-partition.enable;
 in {
   boot.initrd.availableKernelModules = [
-    "xhci_pci"
+    # "xhci_pci"
     "thunderbolt"
     "vmd"
     "nvme"

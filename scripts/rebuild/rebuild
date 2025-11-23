@@ -1,0 +1,50 @@
+#!/run/current-system/sw/bin/sh
+# NixOS Rebuild Manager
+# Convenience script to run different types of rebuilds
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# Function to show usage
+show_usage() {
+    echo "Usage: $0 [COMMAND]"
+    echo ""
+    echo "Commands:"
+    echo "  live    - Rebuild and apply changes immediately"
+    echo "  boot    - Rebuild and apply changes on next boot"
+    echo "  test    - Test configuration without applying changes"
+    echo "  help    - Show this help message"
+    echo ""
+    echo "Examples:"
+    echo "  scripts/rebuild/rebuild live    # Apply changes immediately"
+    echo "  scripts/rebuild/rebuild boot    # Apply changes on next reboot"
+    echo "  scripts/rebuild/rebuild test    # Test configuration"
+}
+
+# Main function
+main() {
+    local command="$1"
+    
+    case "$command" in
+        "live")
+            "$SCRIPT_DIR/live.sh"
+            ;;
+        "boot")
+            "$SCRIPT_DIR/boot.sh"
+            ;;
+        "test")
+            "$SCRIPT_DIR/test.sh"
+            ;;
+        "help"|"-h"|"--help"|"")
+            show_usage
+            ;;
+        *)
+            echo "Error: Unknown command '$command'"
+            echo ""
+            show_usage
+            exit 1
+            ;;
+    esac
+}
+
+# Run main function
+main "$@"

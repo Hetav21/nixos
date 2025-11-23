@@ -5,17 +5,26 @@
 }: let
   isNvidiaEnabled = hardware.nvidia.enable;
   isAmdgpuEnabled = hardware.amdgpu.enable;
+  package = pkgs.unstable;
 in {
   services = {
     ollama = {
       enable = true;
-
+      environmentVariables = {
+        ## Enable debug logging
+        # OLLAMA_DEBUG = "1";
+        ## Allowing connections from web browsers
+        OLLAMA_ORIGINS = "chrome-extension://*,moz-extension://*,safari-web-extension://*";
+      };
+      ## Preload models, see https://ollama.com/library
+      # loadModels = ["qwen3:8b"];
+      ## Use GPU acceleration if available
       package =
         if isNvidiaEnabled
-        then pkgs.master.ollama-cuda
+        then package.ollama-cuda
         else if isAmdgpuEnabled
-        then pkgs.master.ollama-rocm
-        else pkgs.master.ollama;
+        then package.ollama-rocm
+        else package.ollama;
       acceleration =
         if isNvidiaEnabled
         then "cuda"

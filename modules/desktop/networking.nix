@@ -6,10 +6,11 @@
 }: {
   environment.systemPackages = with pkgs; [
     # Browsers
+    unstable.google-chrome
     unstable.firefox
     unstable.brave
     unstable.mullvad-browser
-    unstable.chromium
+    custom.browseros
   ];
 
   services.flatpak.packages = [

@@ -18,6 +18,8 @@
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
+    nixpkgs-kernel.url = "github:nixos/nixpkgs/nixos-unstable";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,6 +40,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    vicinae.url = "github:vicinaehq/vicinae";
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -54,8 +57,10 @@
 
     settings = {
       # Upgrade configuration
-      update-latest = "nixpkgs-unstable zen-browser"; # Specify the flakes inputs to update when running `update-latest`
-      update-standard = "stylix home-manager lanzaboote sops-nix nix-flatpak ${settings.update-latest}"; # Specify the flakes inputs to update when running `update-standard`
+      update-standard = "stylix home-manager lanzaboote sops-nix nix-flatpak zen-browser vicinae"; # Specify the flakes inputs to update when running `update-standard`
+      update-latest = "nixpkgs-unstable nixpkgs-master chaotic nur ${settings.update-standard}"; # Specify the flakes inputs to update when running `update-latest`
+      # update-all updates everything including the base system (nixpkgs, nixpkgs-kernel)
+      # update-standard is auto updated
 
       # User configuration
       username = "hetav";
@@ -65,6 +70,7 @@
       terminal = "ghostty";
 
       # System configuration
+      setup_dir = "/etc/nixos/"; # Should be an absolute path
       system = "x86_64-linux";
       videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia, amdgpu or intel)
       hostname = "nixbook"; # CHOOSE A HOSTNAME HERE
@@ -99,8 +105,8 @@
         enable = true;
         package = "stable"; # stable / beta
         prime = {
-          sync.enable = true;
-          offload.enable = false;
+          sync.enable = false;
+          offload.enable = true;
           intelBusId = "PCI:0:2:0";
           nvidiaBusId = "PCI:1:0:0";
         };
@@ -124,10 +130,16 @@
           inputs.home-manager.nixosModules.home-manager
           inputs.lanzaboote.nixosModules.lanzaboote
           inputs.nix-index-database.nixosModules.nix-index
+          inputs.chaotic.nixosModules.nyx-cache
+          inputs.chaotic.nixosModules.nyx-overlay
+          inputs.chaotic.nixosModules.nyx-registry
           {
             nixpkgs = {
               overlays = builtins.attrValues outputs.overlays;
-              config.allowUnfree = true;
+              config = {
+                allowUnfree = true;
+                allowBroken = true;
+              };
             };
           }
         ];

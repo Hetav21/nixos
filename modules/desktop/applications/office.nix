@@ -11,6 +11,7 @@
     yt-dlp
 
     # Image and graphics
+    upscayl
 
     # Productivity and office
     unstable.obsidian
@@ -30,7 +31,7 @@
     "org.gnome.Loupe" # Image Viewer
     "org.kde.kdenlive" # Video Editor
     "com.github.PintaProject.Pinta" # Image Editor
-    "io.gitlab.theevilskeleton.Upscaler" # Image Upscaler
+    # "io.gitlab.theevilskeleton.Upscaler" # Image Upscaler
     "org.libreoffice.LibreOffice" # Office Suite
     "org.onlyoffice.desktopeditors" # Office Suite
     "org.texstudio.TeXstudio" # LaTeX Editor

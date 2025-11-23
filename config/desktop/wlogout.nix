@@ -1,4 +1,12 @@
 {config, ...}: {
+  wayland.windowManager.hyprland.settings = {
+    "$mainMod" = "SUPER";
+
+    bind = [
+      "$mainMod, BACKSPACE, exec, wlogout"
+    ];
+  };
+
   programs.wlogout = {
     enable = true;
     layout = [

@@ -103,62 +103,60 @@
         # Main modifier
         $mainMod = SUPER # windows key
 
-        # assign apps
-        $model = deepseek-r1
-        $ollama = ollama run $model
-
-        $fileManager = thunar
-        $menu = rofi -show drun
-        $term = ghostty
-        $zeditor = zeditor
-        $code = code
-        $brave = brave
-        $firefox = firefox
-        $browser = zen-beta
-        $lock = hyprlock
-
         # Binds
-        bind = $mainMod, T, exec, $term
-        # bind = $mainMod, T, exec, $term -e tmux
-        bind = SUPER_SHIFT, T, exec, $term -e tmux attach
-        bind = SUPER_SHIFT, Q, killactive,
-        bind = SUPER_SHIFT, M, exit,
-        bind = $mainMod, Y, exec, warp-cli connect
-        bind = SUPER_SHIFT, Y, exec, warp-cli disconnect
-        bind = $mainMod, Z, exec, $zeditor
-        bind = $mainMod, X, exec, $code
+
+        ## Browser
+        $brave = brave
+        $browser = zen-beta
+        $browser_alternate = browseros
+        bind = $mainMod, F, exec, $browser
+        bind = SUPER_SHIFT, F, exec, $browser_alternate
+        bind = $mainMod, B, exec, $brave
         bind = $mainMod, V, exec, $browser --new-window https://chat.deepseek.com/
         bind = SUPER_SHIFT, V, exec, $browser --new-window http://localhost:8080/
         bind = $mainMod, G, exec, $browser --new-window https://gemini.google.com/
         bind = SUPER_SHIFT, G, exec, $browser --new-window https://chatgpt.com/
         bind = SUPER_SHIFT, C, exec, $browser --new-window https://claude.ai/
         bind = $mainMod, L, exec, $browser --new-window https://leetcode.com/problemset/
-        bind = Alt, Return, fullscreen,
-        bind = $mainMod, N, exec, $fileManager
-        bind = $mainMod, F, exec, $browser
-        bind = $mainMod, B, exec, $brave
-        bind = $mainMod, O, exec, $lock
-        bind = $mainMod, W, togglefloating,
-        bind = $mainMod, D, exec, $menu
-        bind = $mainMod, BACKSPACE, exec, wlogout
-        bind = $mainMod, SPACE, exec, rofimoji
-        bind = $mainMod, slash, exec,
 
+        ## Editor and Terminal
+        $term = ghostty
+        $termNew = $term -e
+        $code = code
+        $zeditor = zeditor
+        bind = $mainMod, Z, exec, $zeditor
+        bind = $mainMod, X, exec, $code
+        bind = $mainMod, T, exec, $term
+        bind = SUPER_SHIFT, T, exec, $termNew tmux attach
+
+        ## Misc
+        $fileManager = $termNew yazi
+        $fileManager2 = thunar
+        bind = $mainMod, N, exec, $fileManager
+        bind = SUPER_SHIFT, N, exec, $fileManager2
+
+        ## Functionality
+        bind = $mainMod, W, togglefloating,
+        bind = SUPER_SHIFT, Q, killactive,
+        bind = SUPER_SHIFT, M, exit,
+        bind = Alt, Return, fullscreen,
         # bind = $mainMod, P, pseudo, # dwindle
         # bind = $mainMod, J, togglesplit, # dwindle
 
+        ## Passthrough SUPER KEY to Virtual Machine
+        bind = $mainMod, P, submap, passthru
+        submap = passthru
+        bind = SUPER, Escape, submap, reset
+        submap = reset
+
         # Fn keys
-        bind = , XF86Launch3, exec, $firefox
+        bind = , XF86Launch3, exec, $browser_alternate
         bind = , XF86MonBrightnessUp, exec, brightnessctl -q s +10%
         bind = , XF86MonBrightnessDown, exec, brightnessctl -q s 10%-
         bind = , XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%
-        ## bind = , XF86AudioRaiseVolume, exec, amixer -q sset Master 3%+
         bind = , XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5%
-        ## bind = , XF86AudioLowerVolume, exec, amixer -q sset Master 3%-
         bind = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-        ## bind = , XF86AudioMute, exec, amixer -q -D pulse sset Master toggle
         bind = , XF86AudioMicMute, exec, pactl set-source-mute @DEFAULT_SOURCE@ toggle
-        ## bind = , XF86AudioMicMute, exec, amixer -q -D pulse sset Capture toggle
         bind = , XF86AudioPlay, exec, playerctl play-pause
         bind = , XF86AudioPause, exec, playerctl pause
         bind = , XF86AudioNext, exec, playerctl next
@@ -207,12 +205,6 @@
         bindm = $mainMod, mouse:272, movewindow
         bindm = $mainMod, mouse:273, resizewindow
         bindm = $mainMod ALT, mouse:272, resizewindow
-
-        # Passthrough SUPER KEY to Virtual Machine
-        bind = $mainMod, P, submap, passthru
-        submap = passthru
-        bind = SUPER, Escape, submap, reset
-        submap = reset
       ''
       + ''
         monitor=,preferred,auto,1

@@ -5,7 +5,7 @@
 
     brightnessctl
 
-    lact
+    unstable.lact
     nvtopPackages.full
   ];
 
@@ -31,6 +31,10 @@
       pulse.enable = true;
       jack.enable = true;
       wireplumber.enable = true;
+    };
+    hardware.bolt = {
+      enable = true;
+      package = pkgs.bolt;
     };
   };
 

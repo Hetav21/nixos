@@ -25,8 +25,6 @@
         shape = "Block";
       };
 
-      font = {size = lib.mkForce 12.0;};
-
       font.bold = {
         family = "JetBrainsMono Nerd Font";
         style = "Bold";
