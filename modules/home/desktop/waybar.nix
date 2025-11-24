@@ -7,10 +7,10 @@ with lib; let
   cfg = config.home.desktop.waybar;
 in {
   options.home.desktop.waybar = {
-    enable = mkEnableOption "Enable waybar configuration";
+    enableGui = mkEnableOption "Enable GUI status bar (waybar)";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enableGui {
   stylix.targets.waybar.enable = false;
   programs.waybar = {
     enable = true;

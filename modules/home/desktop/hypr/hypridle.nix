@@ -7,10 +7,10 @@ with lib; let
   cfg = config.home.desktop.hypridle;
 in {
   options.home.desktop.hypridle = {
-    enable = mkEnableOption "Enable hypridle configuration";
+    enableGui = mkEnableOption "Enable GUI idle daemon (hypridle)";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enableGui {
     services.hypridle = {
       enable = true;
       settings = {

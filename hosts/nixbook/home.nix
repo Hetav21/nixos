@@ -3,28 +3,26 @@
     ../_common/home-base.nix
   ];
 
-  # Enable all terminal modules
-  home.terminal.shell.enable = true;
-  home.terminal.tmux.enable = true;
-  home.terminal.alacritty.enable = true;
-  home.terminal.ghostty.enable = true;
+  # Enable categorized modules with both CLI and GUI
+  home.development = { enable = true; enableGui = true; };
+  home.shell = { enable = true; enableGui = true; };
+  home.system.enable = true;
 
-  # Enable all desktop modules
-  home.desktop.hyprland.enable = true;
-  home.desktop.hypridle.enable = true;
-  home.desktop.hyprlock.enable = true;
-  home.desktop.hyprshot.enable = true;
-  home.desktop.clipboard.enable = true;
-  home.desktop.launcher.enable = true;
-  home.desktop.notification.enable = true;
-  home.desktop.rofi.enable = false;
-  home.desktop.wallpaper.enable = true;
-  home.desktop.waybar.enable = true;
-  home.desktop.wlogout.enable = true;
-  home.desktop.programming.enable = true;
+  # Enable desktop modules (GUI only)
+  home.desktop.hyprland.enableGui = true;
+  home.desktop.hypridle.enableGui = true;
+  home.desktop.hyprlock.enableGui = true;
+  home.desktop.hyprshot.enableGui = true;
+  home.desktop.clipboard.enableGui = true;
+  home.desktop.launcher.enableGui = true;
+  home.desktop.notification.enableGui = true;
+  home.desktop.rofi.enableGui = false;
+  home.desktop.wallpaper.enableGui = true;
+  home.desktop.waybar.enableGui = true;
+  home.desktop.wlogout.enableGui = true;
 
   # Enable browser
-  home.browser.zen.enable = true;
+  home.browser.zen.enableGui = true;
 
   # GTK theming configuration
   gtk = {

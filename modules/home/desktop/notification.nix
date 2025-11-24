@@ -9,10 +9,10 @@ with lib; let
   hypr_border = 5; # adjust as per hyprland config
 in {
   options.home.desktop.notification = {
-    enable = mkEnableOption "Enable notification configuration";
+    enableGui = mkEnableOption "Enable GUI notification daemon";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enableGui {
     home.packages = with pkgs; [libnotify];
 
     services.dunst = {

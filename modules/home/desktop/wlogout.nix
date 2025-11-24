@@ -7,10 +7,10 @@ with lib; let
   cfg = config.home.desktop.wlogout;
 in {
   options.home.desktop.wlogout = {
-    enable = mkEnableOption "Enable wlogout configuration";
+    enableGui = mkEnableOption "Enable GUI logout menu";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enableGui {
     wayland.windowManager.hyprland.settings = {
       "$mainMod" = "SUPER";
 

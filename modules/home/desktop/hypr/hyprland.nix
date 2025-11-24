@@ -8,10 +8,10 @@ with lib; let
   cfg = config.home.desktop.hyprland;
 in {
   options.home.desktop.hyprland = {
-    enable = mkEnableOption "Enable hyprland configuration";
+    enableGui = mkEnableOption "Enable GUI window manager (Hyprland)";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enableGui {
   xdg.portal.config.common.default = "*";
 
   wayland.windowManager.hyprland = {

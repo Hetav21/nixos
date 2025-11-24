@@ -9,10 +9,10 @@ with lib; let
   cfg = config.home.desktop.rofi;
 in {
   options.home.desktop.rofi = {
-    enable = mkEnableOption "Enable rofi configuration";
+    enableGui = mkEnableOption "Enable GUI rofi launcher";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enableGui {
   wayland.windowManager.hyprland.settings = {
     "$mainMod" = "SUPER";
     "$menu" = "rofi -show drun";

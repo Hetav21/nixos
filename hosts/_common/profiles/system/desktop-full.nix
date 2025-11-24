@@ -11,28 +11,20 @@ with lib; {
   };
 
   config = mkIf config.profiles.system.desktop-full.enable {
-    # Enable all system modules
+    # Core system
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
 
-    # Enable all desktop system modules
-    system.desktop.appimage.enable = true;
-    system.desktop.environment.enable = true;
-    system.desktop.display-manager.enable = true;
-    system.desktop.services.enable = true;
-    system.desktop.networking.enable = true;
-    system.desktop.power-management.enable = true;
-    system.desktop.printing.enable = true;
-    system.desktop.security.enable = true;
-    system.desktop.xdg-config.enable = true;
-    system.desktop.virtualisation.enable = true;
-
-    # Enable desktop application modules
-    system.desktop.entertainment.enable = true;
-    system.desktop.llm.enable = true;
-    system.desktop.network-storage.enable = true;
-    system.desktop.network-tools.enable = true;
-    system.desktop.office.enable = true;
+    # Enable all categorized modules with both CLI and GUI
+    system.virtualisation = { enable = true; enableGui = true; };
+    system.network = { enable = true; enableGui = true; };
+    system.storage = { enable = true; enableGui = true; };
+    system.media = { enable = true; enableGui = true; };
+    system.productivity.enableGui = true;
+    system.communication.enableGui = true;
+    system.services = { enable = true; enableGui = true; };
+    system.llm = { enable = true; enableGui = true; };
+    system.desktop-environment.enableGui = true;
 
     # Enable hardware modules
     system.hardware.hardware.enable = true;

@@ -11,31 +11,34 @@ with lib; {
   };
 
   config = mkIf config.profiles.system.wsl-minimal.enable {
-    # Enable only core system modules for WSL
+    # Core system (always needed)
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
 
-    # Disable all desktop system modules (not needed for WSL)
-    system.desktop.appimage.enable = false;
-    system.desktop.environment.enable = false;
-    system.desktop.display-manager.enable = false;
-    system.desktop.services.enable = false;
-    system.desktop.networking.enable = false;
-    system.desktop.power-management.enable = false;
-    system.desktop.printing.enable = false;
-    system.desktop.security.enable = false;
-    system.desktop.xdg-config.enable = false;
-    system.desktop.virtualisation.enable = false;
+    # CLI/TUI tools only (no GUI)
+    system.virtualisation.enable = true;
+    system.network.enable = true;
+    system.storage.enable = true;
+    system.services.enable = true;
 
-    # Disable all desktop application modules
-    system.desktop.entertainment.enable = false;
-    system.desktop.llm.enable = false;
-    system.desktop.network-storage.enable = false;
-    system.desktop.network-tools.enable = false;
-    system.desktop.office.enable = false;
+    # Disable all GUI components
+    system.virtualisation.enableGui = false;
+    system.network.enableGui = false;
+    system.storage.enableGui = false;
+    system.media.enable = false;
+    system.media.enableGui = false;
+    system.productivity.enableGui = false;
+    system.communication.enableGui = false;
+    system.services.enableGui = false;
+    system.llm.enable = false;
+    system.llm.enableGui = false;
+    system.desktop-environment.enableGui = false;
 
     # Disable hardware modules (not needed for WSL)
     system.hardware.hardware.enable = false;
+
+    # Disable desktop sub-modules (not needed for WSL)
+    system.desktop.security.enable = false;
 
     # Disable misc modules (not needed for WSL)
     system.misc.disk-decryption.enable = false;
