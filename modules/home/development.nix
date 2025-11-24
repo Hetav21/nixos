@@ -53,19 +53,6 @@ in {
           package = pkgs.unstable.git;
           lfs.enable = true;
         };
-
-        gh = {
-          enable = true;
-          package = pkgs.unstable.gh;
-          settings.git_protocol = "https";
-          gitCredentialHelper = {
-            enable = true;
-            hosts = [
-              "https://github.com"
-              "https://gist.github.com"
-            ];
-          };
-        };
       };
     })
 
