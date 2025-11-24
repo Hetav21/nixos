@@ -9,7 +9,15 @@ with lib; let
   cfg = config.system.desktop.network-storage;
   username = settings.username;
   homeDirectory = "/home/${username}";
-  folder_path = "/home/${settings.username}/${settings.rclone.local_dir}";
+  # Check if rclone settings exist before accessing them
+  rcloneEnabled = 
+    (settings ? rclone) && 
+    (settings.rclone ? local_dir) && 
+    (settings.rclone ? remote_dir);
+  folder_path = 
+    if rcloneEnabled 
+    then "/home/${settings.username}/${settings.rclone.local_dir}"
+    else "";
 in {
   options.system.desktop.network-storage = {
     enable = mkEnableOption "Enable network storage configuration";
@@ -36,7 +44,7 @@ in {
     configDir = "${homeDirectory}/.config/syncthing";
   };
 
-  systemd = {
+  systemd = mkIf rcloneEnabled {
     services = {
       rclone-mount = {
         enable = true;

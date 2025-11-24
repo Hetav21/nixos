@@ -118,8 +118,9 @@ in {
 
           # Other Aliases
           ff = "${pkgs.fastfetch}/bin/fastfetch";
-
-          # Clipboard Aliases
+        }
+        # Wayland clipboard aliases (only available on systems with wayland/desktop)
+        // lib.optionalAttrs (pkgs ? wl-clipboard) {
           copy = "${pkgs.wl-clipboard}/bin/wl-copy";
           paste = "${pkgs.wl-clipboard}/bin/wl-paste";
         };

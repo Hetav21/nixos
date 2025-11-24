@@ -109,7 +109,11 @@
       commonSettings
       // {
         hostname = "nixwslbook";
-        # WSL doesn't need wallpaper, rclone, or mount-partition
+        # Add wallpaper for stylix TUI/CLI theming (color scheme generation)
+        wallpaper = "China.jpeg";
+        # Override update strings to exclude desktop-only inputs (lanzaboote, nix-flatpak, zen-browser, vicinae)
+        update-standard = "stylix home-manager sops-nix";
+        update-latest = "nixpkgs-unstable nixpkgs-master chaotic nur stylix home-manager sops-nix";
       };
 
     # Hardware configuration
@@ -175,6 +179,7 @@
           ./hosts/nixwslbook/configuration.nix
           inputs.nixos-wsl.nixosModules.default
           inputs.sops-nix.nixosModules.sops
+          inputs.nix-flatpak.nixosModules.nix-flatpak
           inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.home-manager
           inputs.nix-index-database.nixosModules.nix-index

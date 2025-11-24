@@ -25,4 +25,7 @@
 
   # Minimal WSL system profile (CLI/TUI only, no desktop environment)
   profiles.system.wsl-minimal.enable = true;
+
+  # Override flatpak packages to be empty for WSL (no GUI apps needed)
+  services.flatpak.packages = lib.mkForce [];
 }
