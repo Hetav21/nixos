@@ -62,22 +62,6 @@ sync_zed_settings() {
     fi
 }
 
-# Function to commit changes
-commit_changes() {
-    local gen=$(nixos-rebuild list-generations | grep current | sed 's/ .*//')
-    print_status "Committing changes for generation $gen..."
-    git commit -am "$gen"
-}
-
-# Function to create patch
-create_patch() {
-    print_status "Creating patch..."
-    mkdir -p patch
-    git format-patch -1 HEAD
-    mv *.patch patch/
-    print_status "Patch created in patch/ directory"
-}
-
 # Function to cleanup and exit
 cleanup() {
     print_status "Cleaning up..."
