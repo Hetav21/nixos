@@ -132,6 +132,23 @@
         };
       };
     };
+
+    # Minimal hardware configuration for WSL (no physical hardware)
+    hardware_wsl = {
+      asus.enable = false;
+      intel.enable = false;
+      amdgpu.enable = false;
+      nvidia = {
+        enable = false;
+        package = "stable";
+        prime = {
+          sync.enable = false;
+          offload.enable = false;
+          intelBusId = "";
+          nvidiaBusId = "";
+        };
+      };
+    };
   in {
     templates = import ./templates;
     overlays = import ./overlays {
@@ -174,6 +191,7 @@
         specialArgs = {
           inherit self inputs outputs;
           settings = nixwslbookSettings;
+          hardware = hardware_wsl;
         };
         modules = [
           ./hosts/nixwslbook/configuration.nix

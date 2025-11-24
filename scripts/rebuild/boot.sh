@@ -15,8 +15,6 @@ main() {
     backup_and_diff
     run_rebuild "boot"
     sync_zed_settings
-    commit_changes
-    create_patch
     cleanup
     
     print_status "Boot rebuild completed successfully!"

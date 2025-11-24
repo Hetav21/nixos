@@ -11,11 +11,11 @@ with lib; {
   };
 
   config = mkIf config.profiles.system.desktop-minimal.enable {
-    # Enable core system modules
+    # Core system
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
 
-    # Enable only essential desktop components
+    # Minimal desktop environment only (individual components)
     system.desktop.environment.enable = true;
     system.desktop.display-manager.enable = true;
     system.desktop.security.enable = true;
@@ -24,18 +24,21 @@ with lib; {
     # Enable hardware modules
     system.hardware.hardware.enable = true;
 
-    # Disable everything else
-    system.desktop.appimage.enable = false;
-    system.desktop.services.enable = false;
-    system.desktop.networking.enable = false;
-    system.desktop.power-management.enable = false;
-    system.desktop.printing.enable = false;
-    system.desktop.virtualisation.enable = false;
-    system.desktop.entertainment.enable = false;
-    system.desktop.llm.enable = false;
-    system.desktop.network-storage.enable = false;
-    system.desktop.network-tools.enable = false;
-    system.desktop.office.enable = false;
+    # Disable all categorized modules
+    system.virtualisation.enable = false;
+    system.virtualisation.enableGui = false;
+    system.network.enable = false;
+    system.network.enableGui = false;
+    system.storage.enable = false;
+    system.storage.enableGui = false;
+    system.media.enable = false;
+    system.media.enableGui = false;
+    system.productivity.enableGui = false;
+    system.communication.enableGui = false;
+    system.services.enable = false;
+    system.services.enableGui = false;
+    system.llm.enable = false;
+    system.llm.enableGui = false;
+    system.desktop-environment.enableGui = false;
   };
 }
-
