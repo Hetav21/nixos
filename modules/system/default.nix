@@ -4,6 +4,9 @@
     ./nix-settings.nix
     ./nix-ld.nix
 
+    # Theming and fonts (can be enabled independently)
+    ./stylix.nix
+
     # New categorized modules
     ./virtualisation.nix
     ./network.nix

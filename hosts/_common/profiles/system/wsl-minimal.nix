@@ -15,6 +15,9 @@ with lib; {
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
 
+    # Enable Stylix for fonts and TUI theming
+    system.stylix.enable = true;
+
     # CLI/TUI tools only (no GUI)
     system.virtualisation.enable = true;
     system.network.enable = true;

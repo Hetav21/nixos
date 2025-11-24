@@ -23,7 +23,6 @@
   imports = [
     ../../modules/home
     ./profiles/home
-    inputs.stylix.homeModules.stylix
   ];
 
   # Enable home-manager

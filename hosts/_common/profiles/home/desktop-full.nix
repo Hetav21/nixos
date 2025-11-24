@@ -3,6 +3,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 with lib; {
@@ -40,5 +41,15 @@ with lib; {
 
     # Enable browser
     home.browser.zen.enableGui = true;
+
+    # GTK theming configuration (common for all desktop hosts)
+    gtk = {
+      enable = true;
+      gtk3.extraConfig = {gtk-application-prefer-dark-theme = 1;};
+      gtk4.extraConfig = {gtk-application-prefer-dark-theme = 1;};
+    };
+
+    # Qt configuration (common for all desktop hosts)
+    qt.enable = true;
   };
 }
