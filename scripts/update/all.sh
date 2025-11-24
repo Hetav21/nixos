@@ -1,6 +1,6 @@
 #!/run/current-system/sw/bin/sh
 # NixOS Complete Update Script
-# This script updates both packages and all flake inputs
+# This script updates all flake inputs
 
 # Source common functions
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -22,20 +22,16 @@ main() {
         exit 1
     fi
     
-    # Update packages first
-    print_status "Step 1: Updating packages..."
-    run_package_updates "$setup_dir"
-    
     # Update latest inputs
-    print_status "Step 2: Updating latest inputs..."
+    print_status "Step 1: Updating latest inputs..."
     run_flake_update "$latest_inputs" "$setup_dir"
     
     # Update standard inputs
-    print_status "Step 3: Updating standard inputs..."
+    print_status "Step 2: Updating standard inputs..."
     run_flake_update "$standard_inputs" "$setup_dir"
     
     print_success "Complete update finished successfully!"
-    print_status "All packages and flake inputs have been updated"
+    print_status "All flake inputs have been updated"
 }
 
 # Run main function
