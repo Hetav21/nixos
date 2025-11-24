@@ -9,14 +9,12 @@ show_usage() {
     echo "Usage: $0 [COMMAND] [ARGS...]"
     echo ""
     echo "Commands:"
-    echo "  packages [inputs]     - Update packages from packages.conf"
     echo "  latest [inputs]       - Update latest flake inputs (nixpkgs-unstable, etc.)"
     echo "  standard [inputs]     - Update standard flake inputs (stylix, home-manager, etc.)"
-    echo "  all [latest] [std]    - Update both packages and all flake inputs"
+    echo "  all [latest] [std]    - Update all flake inputs"
     echo "  help                  - Show this help message"
     echo ""
     echo "Examples:"
-    echo "  scripts/update/update packages"
     echo "  scripts/update/update latest 'nixpkgs-unstable nixpkgs-master'"
     echo "  scripts/update/update standard 'stylix home-manager'"
     echo "  scripts/update/update all 'nixpkgs-unstable' 'stylix home-manager'"
@@ -30,9 +28,6 @@ main() {
     shift 2>/dev/null || true  # Remove first argument and shift remaining
     
     case "$command" in
-        "packages")
-            "$SCRIPT_DIR/packages.sh" "$@"
-            ;;
         "latest")
             "$SCRIPT_DIR/latest.sh" "$@"
             ;;

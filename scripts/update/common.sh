@@ -48,39 +48,18 @@ run_flake_update() {
     fi
 }
 
-# Function to run package updates
-run_package_updates() {
-    local setup_dir="$1"
-    local config_file="${setup_dir}pkgs/packages.conf"
-    
-    if [ ! -f "$config_file" ]; then
-        print_error "Configuration file $config_file not found"
-        return 1
-    fi
-    
-    print_status "Starting package updates..."
-    
-    # Source the package update script
-    SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-    . "$SCRIPT_DIR/packages.sh"
-    
-    # Run the package update main function
-    update_packages_main "$setup_dir"
-}
 
 # Function to show usage
 show_usage() {
     echo "Usage: $0 [COMMAND]"
     echo ""
     echo "Commands:"
-    echo "  packages - Update packages from packages.conf"
     echo "  latest   - Update latest flake inputs (nixpkgs-unstable, etc.)"
     echo "  standard - Update standard flake inputs (stylix, home-manager, etc.)"
-    echo "  all      - Update both packages and all flake inputs"
+    echo "  all      - Update all flake inputs"
     echo "  help     - Show this help message"
     echo ""
     echo "Examples:"
-    echo "  scripts/update/update packages  # Update packages only"
     echo "  scripts/update/update latest    # Update latest inputs"
     echo "  scripts/update/update standard  # Update standard inputs"
     echo "  scripts/update/update all       # Update everything"
