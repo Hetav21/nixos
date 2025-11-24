@@ -20,12 +20,19 @@ in {
         fish = {
           enable = true;
           package = pkgs.unstable.fish;
+          shellInit = ''
+            # Set SSH agent socket from systemd service
+            set -gx SSH_AUTH_SOCK $XDG_RUNTIME_DIR/ssh-agent
+          '';
         };
 
         nushell = {
           enable = true;
           package = pkgs.unstable.nushell;
           extraEnv = ''
+            # Set SSH agent socket from systemd service
+            $env.SSH_AUTH_SOCK = $"($env.XDG_RUNTIME_DIR)/ssh-agent"
+
             if (('/run/secrets/openai_api_key' | path exists)) {
               $env.OPENAI_API_KEY = (open /run/secrets/openai_api_key | str trim)
             }

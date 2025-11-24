@@ -28,8 +28,26 @@ in {
         unstable.codex
       ];
 
-      # Git configuration
+      services.ssh-agent.enable = true;
+
       programs = {
+        ssh = {
+          enable = true;
+          matchBlocks = {
+            "github.com-work" = {
+              hostname = "github.com";
+              identityFile = "~/.ssh/id_work";
+              identitiesOnly = true;
+            };
+
+            "github.com-personal" = {
+              hostname = "github.com";
+              identityFile = "~/.ssh/id_personal";
+              identitiesOnly = true;
+            };
+          };
+        };
+
         git = {
           enable = true;
           package = pkgs.unstable.git;
