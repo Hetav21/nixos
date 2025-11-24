@@ -11,30 +11,38 @@ with lib; {
   };
 
   config = mkIf config.profiles.system.desktop-base.enable {
-    # Enable core system modules
+    # Core system
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
 
-    # Enable essential desktop system modules
-    system.desktop.appimage.enable = true;
-    system.desktop.environment.enable = true;
-    system.desktop.display-manager.enable = true;
-    system.desktop.services.enable = true;
-    system.desktop.networking.enable = true;
-    system.desktop.security.enable = true;
-    system.desktop.xdg-config.enable = true;
+    # Enable essential modules with both CLI and GUI (but not heavy apps)
+    system.network = {
+      enable = true;
+      enableGui = true;
+    };
+    system.storage = {
+      enable = true;
+      enableGui = true;
+    };
+    system.media = {
+      enable = true;
+      enableGui = true;
+    };
+    system.productivity.enableGui = true;
+    system.services = {
+      enable = true;
+      enableGui = true;
+    };
+    system.desktop-environment.enableGui = true;
+
+    # Disable heavy applications
+    system.virtualisation.enable = false;
+    system.virtualisation.enableGui = false;
+    system.communication.enableGui = false;
+    system.llm.enable = false;
+    system.llm.enableGui = false;
 
     # Enable hardware modules
     system.hardware.hardware.enable = true;
-
-    # Disable heavy applications
-    system.desktop.entertainment.enable = false;
-    system.desktop.llm.enable = false;
-    system.desktop.virtualisation.enable = false;
-    
-    # Enable lighter applications
-    system.desktop.network-tools.enable = true;
-    system.desktop.office.enable = true;
   };
 }
-

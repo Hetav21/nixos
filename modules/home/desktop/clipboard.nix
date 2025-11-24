@@ -8,10 +8,10 @@ with lib; let
   cfg = config.home.desktop.clipboard;
 in {
   options.home.desktop.clipboard = {
-    enable = mkEnableOption "Enable clipboard configuration";
+    enableGui = mkEnableOption "Enable GUI clipboard manager";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enableGui {
     services.cliphist = {
       enable = true;
       package = pkgs.cliphist;
@@ -21,4 +21,3 @@ in {
     };
   };
 }
-

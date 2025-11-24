@@ -12,10 +12,10 @@ in {
   ];
 
   options.home.desktop.launcher = {
-    enable = mkEnableOption "Enable launcher configuration";
+    enableGui = mkEnableOption "Enable GUI launcher";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enableGui {
     wayland.windowManager.hyprland.settings = {
       bind = [
         "$mainMod, D, exec, vicinae toggle"

@@ -9,10 +9,10 @@ with lib; let
   cfg = config.home.desktop.hyprlock;
 in {
   options.home.desktop.hyprlock = {
-    enable = mkEnableOption "Enable hyprlock configuration";
+    enableGui = mkEnableOption "Enable GUI screen locker (hyprlock)";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enableGui {
     wayland.windowManager.hyprland.settings = {
       "$lock" = "hyprlock";
 

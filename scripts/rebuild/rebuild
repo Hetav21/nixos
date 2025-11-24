@@ -23,16 +23,17 @@ show_usage() {
 # Main function
 main() {
     local command="$1"
+    local nixos_dir="/etc/nixos"
     
     case "$command" in
         "live")
-            "$SCRIPT_DIR/live.sh"
+            "$SCRIPT_DIR/live.sh" "$nixos_dir"
             ;;
         "boot")
-            "$SCRIPT_DIR/boot.sh"
+            "$SCRIPT_DIR/boot.sh" "$nixos_dir"
             ;;
         "test")
-            "$SCRIPT_DIR/test.sh"
+            "$SCRIPT_DIR/test.sh" "$nixos_dir"
             ;;
         "help"|"-h"|"--help"|"")
             show_usage

@@ -54,24 +54,12 @@ run_rebuild() {
 
 # Function to sync zed settings
 sync_zed_settings() {
-    print_status "Syncing Zed settings..."
-    cp ~/.config/zed/settings.json ./dotfiles/.config/zed/settings.json
-}
-
-# Function to commit changes
-commit_changes() {
-    local gen=$(nixos-rebuild list-generations | grep current | sed 's/ .*//')
-    print_status "Committing changes for generation $gen..."
-    git commit -am "$gen"
-}
-
-# Function to create patch
-create_patch() {
-    print_status "Creating patch..."
-    mkdir -p patch
-    git format-patch -1 HEAD
-    mv *.patch patch/
-    print_status "Patch created in patch/ directory"
+    if [ -f ~/.config/zed/settings.json ]; then
+        print_status "Syncing Zed settings..."
+        cp ~/.config/zed/settings.json ./dotfiles/.config/zed/settings.json
+    else
+        print_warning "Zed settings file not found, skipping sync"
+    fi
 }
 
 # Function to cleanup and exit

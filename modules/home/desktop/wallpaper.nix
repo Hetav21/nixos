@@ -8,10 +8,10 @@ with lib; let
   cfg = config.home.desktop.wallpaper;
 in {
   options.home.desktop.wallpaper = {
-    enable = mkEnableOption "Enable wallpaper configuration";
+    enableGui = mkEnableOption "Enable GUI wallpaper manager";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enableGui {
     home.packages = with pkgs; [
       waypaper
     ];
@@ -22,4 +22,3 @@ in {
     };
   };
 }
-

@@ -1,5 +1,9 @@
 # Common home-manager base configuration shared across all hosts
-{settings, ...}: {
+{
+  inputs,
+  settings,
+  ...
+}: {
   home = {
     username = settings.username;
     homeDirectory = "/home/${settings.username}";
@@ -15,9 +19,11 @@
     sessionPath = ["$HOME/.local/bin" "$HOME/go/bin"];
   };
 
-  # Import home modules
+  # Import home modules and profiles
   imports = [
     ../../modules/home
+    ./profiles/home
+    inputs.stylix.homeModules.stylix
   ];
 
   # Enable home-manager

@@ -1,7 +1,9 @@
 # NixOS Configuration - Naming Conventions & Structure Guide
 
-**Last Updated:** 2025-11-23  
+**Last Updated:** 2025-11-24  
 **Purpose:** Maintain consistency and clarity in the NixOS configuration structure
+
+**Note:** This configuration now uses a two-tier enable system: `enable` for CLI/TUI tools and `enableGui` for GUI applications.
 
 ---
 
@@ -25,22 +27,31 @@ The configuration uses four top-level namespaces:
 System-wide settings, services, and packages available to all users.
 
 ```
-system.nix.settings        - Nix configuration and settings
-system.nix.ld              - Nix-ld for dynamic linking
-system.desktop.*           - Desktop environment components
-system.hardware.*          - Hardware-specific configuration
-system.misc.*              - Miscellaneous system utilities
-system.time.*              - Time and clock settings
-system.virtualization.*    - VM guest services
+system.nix.settings            - Nix configuration and settings
+system.nix.ld                  - Nix-ld for dynamic linking
+system.virtualisation.*        - Docker, podman, virt-manager, waydroid
+system.network.*               - Networking, firewall, wireshark
+system.storage.*               - Rclone, syncthing, localsend, megasync
+system.media.*                 - MPV, yt-dlp, obs-studio, pavucontrol
+system.productivity.*          - Office suites, file managers
+system.communication.*         - Discord, thunderbird, zoom, spotify
+system.services.*              - System services, flatpak, locate, cron
+system.llm.*                   - Ollama, open-webui
+system.desktop-environment.*   - Display manager, XDG, power management
+system.hardware.*              - Hardware-specific configuration
+system.misc.*                  - Miscellaneous system utilities
 ```
 
 ### `home.*` - User-Level Configuration
 User-specific configurations managed by Home Manager.
 
 ```
-home.terminal.*    - Terminal emulators and shells
-home.desktop.*     - Desktop applications and tools
-home.browser.*     - Web browsers
+home.development.*  - Development tools (git, gh, lazygit, vscode, zed-editor, cursor-cli)
+home.shell.*        - Shell configs (fish, nushell, tmux, alacritty, ghostty)
+home.system.*       - System utilities (vim, btop, fastfetch, killall, most)
+home.downloads.*    - Download tools (aria2, yt-dlp)
+home.desktop.*      - Desktop WM and tools (hyprland, waybar, rofi, dunst)
+home.browser.*      - Web browsers (zen-browser)
 ```
 
 ### `drivers.*` - Hardware Drivers
@@ -64,7 +75,12 @@ profiles.system.desktop-minimal.* - Minimal desktop (WM only)
 profiles.system.wsl-minimal.*     - WSL CLI/TUI only
 ```
 
-**Note:** Home-manager configurations are directly managed in each host's `home.nix` file, not through profiles.
+**Home Profiles** (`profiles.home.*`):
+```
+profiles.home.desktop-full.*    - Full desktop with all CLI/TUI and GUI tools
+profiles.home.desktop-base.*    - Essential desktop without heavy apps
+profiles.home.wsl-minimal.*     - WSL CLI/TUI only
+```
 
 ---
 
@@ -137,43 +153,65 @@ nixos/
 
 #### System Modules (`modules/system/`)
 
-**Desktop Components:**
-- `appimage.nix` - AppImage support
-- `environment.nix` - Desktop environment variables and fonts
-- `display-manager.nix` - Login manager (greetd/tuigreet)
-- `services.nix` - Desktop services (flatpak, preload, mlocate)
-- `networking.nix` - Network configuration and browsers
-- `power-management.nix` - Battery and CPU management
-- `printing.nix` - Printing and scanning
-- `security.nix` - Polkit and keyr ing
-- `xdg-config.nix` - XDG directories and MIME types
-- `virtualisation.nix` - Docker, podman, libvirt, waydroid
+**Categorized Modules (Two-Tier Enable System):**
+- `virtualisation.nix` - Containerization and VMs
+  - `enable`: docker, podman, docker-compose, podman-compose, dive
+  - `enableGui`: virt-manager, quickgui, waydroid
+- `network.nix` - Networking configuration
+  - `enable`: base networking, firewall, network-manager
+  - `enableGui`: network-manager-applet, wireshark GUI
+- `storage.nix` - Cloud and network storage
+  - `enable`: rclone, syncthing, ntfs3g
+  - `enableGui`: localsend, megasync, onedrive
+- `media.nix` - Media tools
+  - `enable`: mpv, yt-dlp
+  - `enableGui`: obs-studio, pavucontrol, kdenlive, image viewers, youtube-music, spotify, stremio
+- `productivity.nix` - Productivity tools (GUI only)
+  - `enableGui`: obsidian, libreoffice, onlyoffice, thunar, file-roller, upscayl
+- `communication.nix` - Communication apps (GUI only)
+  - `enableGui`: discord, vesktop, thunderbird, zoom, teams
+- `services.nix` - System services
+  - `enable`: locate, cron, gnupg, preload
+  - `enableGui`: flatpak
+- `llm.nix` - AI/LLM services
+  - `enable`: ollama service
+  - `enableGui`: open-webui
+- `desktop-environment.nix` - Desktop environment components (GUI only)
+  - `enableGui`: display manager, XDG config, power management, printing, security
 
-**Applications:**
-- `app-entertainment.nix` - Media and communication apps
-- `app-llm.nix` - Ollama and Open WebUI
-- `app-network-storage.nix` - Rclone, OneDrive, Syncthing
-- `app-networking.nix` - Wireshark, network tools
-- `app-office.nix` - Office suites, productivity tools
+**Core Modules (Always Enabled):**
+- `nix-settings.nix` - Nix configuration
+- `nix-ld.nix` - Nix-ld for dynamic linking
+
+**Legacy Desktop Sub-modules (Managed by desktop-environment):**
+- `desktop/` - Individual desktop components
 
 #### Home Modules (`modules/home/`)
 
-**Terminal:**
-- `shell.nix` - Fish shell and CLI tools
-- `tmux.nix` - Terminal multiplexer
-- `alacritty.nix` - Alacritty terminal emulator
-- `ghostty.nix` - Ghostty terminal emulator
+**Categorized Modules (Two-Tier Enable System):**
+- `development.nix` - Development tools
+  - `enable`: git, gh, lazygit, lazydocker, awscli2, distrobox, cursor-cli, gemini-cli, codex
+  - `enableGui`: vscode, cursor, zed-editor, bruno, hoppscotch, mongodb-compass, claude-code
+- `shell.nix` - Shell and CLI tools
+  - `enable`: fish, nushell, tmux, starship, zoxide, eza, bat, ripgrep, fzf, fd, yazi
+  - `enableGui`: alacritty, ghostty (terminal emulators)
+- `system.nix` - System utilities (CLI only)
+  - `enable`: vim, btop, killall, most, tree, fastfetch, microfetch, onefetch, ntfs3g
+- `downloads.nix` - Download managers (CLI only)
+  - `enable`: aria2, yt-dlp
 
-**Desktop:**
-- `hypr/` - Hyprland window manager and ecosystem
-- `clipboard.nix` - Clipboard manager (cliphist)
-- `launcher.nix` - Application launcher (vicinae)
-- `notification.nix` - Notification daemon (dunst)
-- `rofi.nix` - Rofi menu system
-- `wallpaper.nix` - Wallpaper manager (swww)
-- `waybar.nix` - Status bar
-- `wlogout.nix` - Logout menu
-- `programming.nix` - Development tools and IDEs
+**Desktop Modules (GUI Only):**
+- `desktop/hypr/` - Hyprland window manager ecosystem
+- `desktop/clipboard.nix` - Clipboard manager (cliphist)
+- `desktop/launcher.nix` - Application launcher (vicinae)
+- `desktop/notification.nix` - Notification daemon (dunst)
+- `desktop/rofi.nix` - Rofi menu system
+- `desktop/wallpaper.nix` - Wallpaper manager (swww)
+- `desktop/waybar.nix` - Status bar
+- `desktop/wlogout.nix` - Logout menu
+
+**Browser:**
+- `browser/zen-browser.nix` - Zen web browser (GUI only)
 
 ---
 
@@ -241,7 +279,9 @@ profiles.system.wsl-minimal.enable = true;
 
 ### Home Manager Configuration
 
-Home-manager configurations are **not** managed through profiles. Instead, each host has its own `home.nix` file where home modules are directly enabled/disabled.
+Home-manager configurations can use **profiles** for quick setup or **manual module enabling** for fine-grained control.
+
+#### Option 1: Using Home Profiles (Recommended)
 
 **Example - Full Desktop (`hosts/nixbook/home.nix`):**
 ```nix
@@ -250,16 +290,11 @@ Home-manager configurations are **not** managed through profiles. Instead, each 
     ../_common/home-base.nix
   ];
 
-  # Enable terminal modules
-  home.terminal.shell.enable = true;
-  home.terminal.tmux.enable = true;
-  home.terminal.alacritty.enable = true;
-  home.terminal.ghostty.enable = true;
+  # Enable full desktop profile (includes all modules)
+  profiles.home.desktop-full.enable = true;
 
-  # Enable desktop modules
-  home.desktop.hyprland.enable = true;
-  home.desktop.waybar.enable = true;
-  # ... etc
+  # Optional: Override specific settings
+  home.desktop.rofi.enableGui = true;  # Enable if you prefer rofi
 }
 ```
 
@@ -270,11 +305,74 @@ Home-manager configurations are **not** managed through profiles. Instead, each 
     ../_common/home-base.nix
   ];
 
-  # Enable only CLI/TUI modules for WSL
-  home.terminal.shell.enable = true;
-  home.terminal.tmux.enable = true;
-  home.terminal.ghostty.enable = true;
+  # Enable WSL minimal profile (CLI/TUI only)
+  profiles.home.wsl-minimal.enable = true;
 }
+```
+
+#### Option 2: Manual Module Configuration
+
+**Example - Full Desktop (`hosts/nixbook/home.nix`):**
+```nix
+{pkgs, ...}: {
+  imports = [
+    ../_common/home-base.nix
+  ];
+
+  # Enable categorized modules with both CLI and GUI
+  home.development = { enable = true; enableGui = true; };
+  home.shell = { enable = true; enableGui = true; };
+  home.system.enable = true;
+  home.downloads.enable = true;
+
+  # Enable desktop modules (GUI only)
+  home.desktop.hyprland.enableGui = true;
+  home.desktop.waybar.enableGui = true;
+  home.browser.zen.enableGui = true;
+}
+```
+
+**Example - WSL Minimal (`hosts/nixwslbook/home.nix`):**
+```nix
+{...}: {
+  imports = [
+    ../_common/home-base.nix
+  ];
+
+  # Enable only CLI/TUI modules for WSL (manual approach)
+  home.development.enable = true;
+  home.shell.enable = true;
+  home.system.enable = true;
+  home.downloads.enable = true;
+}
+```
+
+### Available Home Profiles
+
+#### `profiles.home.desktop-full`
+**Purpose:** Complete desktop environment with all features  
+**Includes:** All CLI/TUI tools + all GUI applications + browser + complete desktop environment  
+**Usage:**
+```nix
+profiles.home.desktop-full.enable = true;
+```
+
+#### `profiles.home.desktop-base`
+**Purpose:** Essential desktop environment without heavy applications  
+**Includes:** All CLI/TUI tools + essential GUI tools (WM, waybar, browser)  
+**Excludes:** Lock screen, idle manager, screenshot tools, wallpaper manager  
+**Usage:**
+```nix
+profiles.home.desktop-base.enable = true;
+```
+
+#### `profiles.home.wsl-minimal`
+**Purpose:** CLI/TUI tools only for WSL/servers  
+**Includes:** Development tools, shell configs, system utilities, downloads  
+**Excludes:** All GUI applications  
+**Usage:**
+```nix
+profiles.home.wsl-minimal.enable = true;
 ```
 
 ---
@@ -348,16 +446,33 @@ vm.guest-services.enable          # Should be system.virtualization.guest
 ```
 
 ### Enable Options
-All modules follow this pattern:
+
+**Two-Tier Enable System:**
+
+Modules now use a two-tier enable pattern for CLI/TUI vs GUI separation:
+
 ```nix
 options.namespace.module = {
-  enable = mkEnableOption "Description of what this enables";
+  enable = mkEnableOption "Enable CLI/TUI tools";
+  enableGui = mkEnableOption "Enable GUI tools";
 };
 
-config = mkIf cfg.enable {
-  # Configuration goes here
-};
+config = mkMerge [
+  (mkIf cfg.enable {
+    # CLI/TUI packages and configurations
+  })
+  (mkIf cfg.enableGui {
+    # GUI packages and configurations
+    # Optionally auto-enable CLI tools if needed
+    namespace.module.enable = true;
+  })
+];
 ```
+
+**Pattern Usage:**
+- **Both switches**: `system.virtualisation`, `system.network`, `system.storage`, `system.media`, `system.services`, `system.llm`, `home.development`, `home.shell`
+- **GUI only**: `system.productivity`, `system.communication`, `system.desktop-environment`, `home.desktop.*`, `home.browser.*`
+- **CLI only**: `home.system`
 
 ---
 
