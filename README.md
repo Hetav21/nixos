@@ -4,8 +4,10 @@ A modular and maintainable NixOS configuration supporting multiple hosts includi
 
 ## Features
 
-- **Modular Architecture**: Organized module system with enable options for easy customization
+- **Two-Tier Enable System**: Separate CLI/TUI and GUI tools with `enable` and `enableGui` options
+- **Modular Architecture**: Organized module system categorized by function (development, shell, media, etc.)
 - **Multiple Host Support**: Desktop (nixbook) and WSL (nixwslbook) configurations
+- **WSL-Optimized**: Full CLI/TUI development environment without GUI dependencies
 - **Profile-Based Configuration**: Pre-configured profiles for different use cases (desktop-full, desktop-minimal, wsl-minimal)
 - **Home Manager Integration**: Declarative user environment management
 - **Stylix Theming**: Consistent theming across applications
@@ -25,9 +27,19 @@ A modular and maintainable NixOS configuration supporting multiple hosts includi
 │   └── nixwslbook/     # WSL host configuration
 ├── modules/            # Reusable NixOS and home-manager modules
 │   ├── home/           # Home-manager modules
-│   │   ├── terminal/   # Terminal applications
-│   │   └── desktop/    # Desktop applications
+│   │   ├── development.nix  # Development tools (git, IDEs)
+│   │   ├── shell.nix        # Shell and CLI tools
+│   │   ├── system.nix       # System utilities
+│   │   ├── downloads.nix    # Download managers
+│   │   ├── desktop/         # Desktop WM and GUI tools
+│   │   └── browser/         # Web browsers
 │   ├── system/         # NixOS system modules
+│   │   ├── virtualisation.nix   # Docker, VMs
+│   │   ├── network.nix          # Networking
+│   │   ├── storage.nix          # Cloud storage
+│   │   ├── media.nix            # Media tools
+│   │   ├── communication.nix    # Chat, email
+│   │   └── ...                  # More categorized modules
 │   └── drivers/        # Hardware drivers (GPU, etc.)
 ├── dotfiles/           # Configuration files for various applications
 ├── scripts/            # Custom scripts
@@ -184,17 +196,30 @@ This configuration includes several pre-configured profiles:
 
 ### Home Profiles (`hosts/_common/profiles/home/`)
 
-- **desktop-full**: Full desktop user environment
-- **wsl-minimal**: CLI/TUI tools for WSL
+Home-manager configurations can use profiles or manual module enabling:
 
-Use profiles by enabling them in your host configuration:
+- **desktop-full**: Complete desktop environment with all features
+- **desktop-base**: Essential desktop without heavy applications
+- **wsl-minimal**: CLI/TUI tools only for WSL/servers
 
+**Quick Start with Profiles:**
 ```nix
 # In configuration.nix
 profiles.system.desktop-full.enable = true;
 
 # In home.nix
 profiles.home.desktop-full.enable = true;
+```
+
+**Manual Configuration (Advanced):**
+```nix
+# In home.nix
+home.development = { enable = true; enableGui = true; };
+home.shell = { enable = true; enableGui = true; };
+home.system.enable = true;
+home.downloads.enable = true;
+home.desktop.hyprland.enableGui = true;
+home.browser.zen.enableGui = true;
 ```
 
 ## Updating the System
@@ -215,17 +240,35 @@ sudo nixos-rebuild switch --flake .#<your-hostname>
 
 ### Enabling/Disabling Modules
 
-Modules use enable options. In your host configuration:
+This configuration uses a **two-tier enable system** for flexibility:
+- **`enable`** - Enables CLI/TUI tools (works on WSL and desktop)
+- **`enableGui`** - Enables GUI applications (desktop only)
+
+**Examples:**
 
 ```nix
-# Enable a terminal application
-home.terminal.shell.enable = true;
+# Enable CLI development tools (git, lazygit, etc.)
+home.development.enable = true;
 
-# Enable a desktop application
-home.desktop.browser.enable = true;
+# Enable both CLI and GUI development tools (adds vscode, zed-editor, etc.)
+home.development = { enable = true; enableGui = true; };
 
-# Enable a system feature
-system.desktop.environment.enable = true;
+# Enable shell tools
+home.shell.enable = true;
+
+# Enable system utilities
+home.system.enable = true;
+
+# Enable downloads tools
+home.downloads.enable = true;
+
+# Enable GUI-only modules
+home.desktop.hyprland.enableGui = true;
+home.browser.zen.enableGui = true;
+
+# System-level modules work the same way
+system.virtualisation.enable = true;  # CLI: docker, podman
+system.virtualisation.enableGui = true;  # GUI: virt-manager, waydroid
 ```
 
 ### Adding New Packages

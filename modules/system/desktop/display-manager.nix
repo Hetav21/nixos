@@ -15,27 +15,27 @@ in {
 
   config = mkIf cfg.enable {
     services = {
-    logind = {
-      extraConfig = ''
-        HandlePowerKey=suspend
-      '';
-    };
+      logind = {
+        extraConfig = ''
+          HandlePowerKey=suspend
+        '';
+      };
 
-    greetd = {
-      enable = true;
-      settings = {
-        default_session = {
-          command = "${tuigreet} --time --remember --remember-session --sessions ${hyprland-session}";
-          user = "greeter";
+      greetd = {
+        enable = true;
+        settings = {
+          default_session = {
+            command = "${tuigreet} --time --remember --remember-session --sessions ${hyprland-session}";
+            user = "greeter";
+          };
         };
       };
     };
-  };
 
-  security.pam.services.greetd = {
-    enableGnomeKeyring = true;
-    enableAppArmor = true;
-  };
+    security.pam.services.greetd = {
+      enableGnomeKeyring = true;
+      enableAppArmor = true;
+    };
 
     systemd.services.greetd.serviceConfig = {
       Type = "idle";

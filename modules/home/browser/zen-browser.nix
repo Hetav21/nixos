@@ -16,10 +16,10 @@ in {
   ];
 
   options.home.browser.zen = {
-    enable = mkEnableOption "Enable zen-browser configuration";
+    enableGui = mkEnableOption "Enable GUI web browser (Zen)";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enableGui {
     # stylix.targets.zen-browser = {
     #   enable = false; # set to true if you want to use theme from Stylix
     #   profileNames = ["${settings.username}"];

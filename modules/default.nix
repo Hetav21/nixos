@@ -10,7 +10,6 @@
 # - system.desktop.services: mlocate
 # - system.desktop.virtualisation: libvirtd, kvm, adbusers, docker
 # - system.desktop.network-tools: networkmanager, wireshark
-
 {...}: {
   imports = [
     ./system

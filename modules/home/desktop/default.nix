@@ -8,6 +8,5 @@
     ./wallpaper.nix
     ./waybar.nix
     ./wlogout.nix
-    ./programming.nix
   ];
 }
