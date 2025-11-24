@@ -42,4 +42,3 @@ with lib; {
     system.desktop-environment.enableGui = false;
   };
 }
-

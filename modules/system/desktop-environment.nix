@@ -22,4 +22,3 @@ in {
     system.desktop.printing.enable = true;
   };
 }
-

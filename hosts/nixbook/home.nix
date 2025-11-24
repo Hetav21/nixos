@@ -4,8 +4,14 @@
   ];
 
   # Enable categorized modules with both CLI and GUI
-  home.development = { enable = true; enableGui = true; };
-  home.shell = { enable = true; enableGui = true; };
+  home.development = {
+    enable = true;
+    enableGui = true;
+  };
+  home.shell = {
+    enable = true;
+    enableGui = true;
+  };
   home.system.enable = true;
 
   # Enable desktop modules (GUI only)

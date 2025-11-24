@@ -16,14 +16,32 @@ with lib; {
     system.nix.ld.enable = true;
 
     # Enable all categorized modules with both CLI and GUI
-    system.virtualisation = { enable = true; enableGui = true; };
-    system.network = { enable = true; enableGui = true; };
-    system.storage = { enable = true; enableGui = true; };
-    system.media = { enable = true; enableGui = true; };
+    system.virtualisation = {
+      enable = true;
+      enableGui = true;
+    };
+    system.network = {
+      enable = true;
+      enableGui = true;
+    };
+    system.storage = {
+      enable = true;
+      enableGui = true;
+    };
+    system.media = {
+      enable = true;
+      enableGui = true;
+    };
     system.productivity.enableGui = true;
     system.communication.enableGui = true;
-    system.services = { enable = true; enableGui = true; };
-    system.llm = { enable = true; enableGui = true; };
+    system.services = {
+      enable = true;
+      enableGui = true;
+    };
+    system.llm = {
+      enable = true;
+      enableGui = true;
+    };
     system.desktop-environment.enableGui = true;
 
     # Enable hardware modules
@@ -33,4 +51,3 @@ with lib; {
     system.misc.disk-decryption.enable = true;
   };
 }
-

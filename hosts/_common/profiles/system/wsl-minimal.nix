@@ -44,4 +44,3 @@ with lib; {
     system.misc.disk-decryption.enable = false;
   };
 }
-

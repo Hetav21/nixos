@@ -54,8 +54,12 @@ run_rebuild() {
 
 # Function to sync zed settings
 sync_zed_settings() {
-    print_status "Syncing Zed settings..."
-    cp ~/.config/zed/settings.json ./dotfiles/.config/zed/settings.json
+    if [ -f ~/.config/zed/settings.json ]; then
+        print_status "Syncing Zed settings..."
+        cp ~/.config/zed/settings.json ./dotfiles/.config/zed/settings.json
+    else
+        print_warning "Zed settings file not found, skipping sync"
+    fi
 }
 
 # Function to commit changes

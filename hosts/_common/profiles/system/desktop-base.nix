@@ -16,11 +16,23 @@ with lib; {
     system.nix.ld.enable = true;
 
     # Enable essential modules with both CLI and GUI (but not heavy apps)
-    system.network = { enable = true; enableGui = true; };
-    system.storage = { enable = true; enableGui = true; };
-    system.media = { enable = true; enableGui = true; };
+    system.network = {
+      enable = true;
+      enableGui = true;
+    };
+    system.storage = {
+      enable = true;
+      enableGui = true;
+    };
+    system.media = {
+      enable = true;
+      enableGui = true;
+    };
     system.productivity.enableGui = true;
-    system.services = { enable = true; enableGui = true; };
+    system.services = {
+      enable = true;
+      enableGui = true;
+    };
     system.desktop-environment.enableGui = true;
 
     # Disable heavy applications
@@ -34,4 +46,3 @@ with lib; {
     system.hardware.hardware.enable = true;
   };
 }
-

@@ -79,48 +79,50 @@ in {
               ${pkgs.microfetch}/bin/microfetch
             }
           '';
-          shellAliases = {
-            # Core Utils Aliases
-            tree = "${pkgs.tree}/bin/tree -a -I .git";
-            cat = "${config.programs.bat.package}/bin/bat";
-            grep = "${pkgs.ripgrep}/bin/rg --color=auto";
-            cls = "clear";
-            e = "exit";
+          shellAliases =
+            {
+              # Core Utils Aliases
+              tree = "${pkgs.tree}/bin/tree -a -I .git";
+              cat = "${config.programs.bat.package}/bin/bat";
+              grep = "${pkgs.ripgrep}/bin/rg --color=auto";
+              cls = "clear";
+              e = "exit";
 
-            # Git / Docker Aliases
-            gs = "git status";
-            gpush = "git push origin";
-            gpull = "git pull origin";
-            grestore = "git restore";
-            lzg = "${pkgs.lazygit}/bin/lazygit";
-            lzd = "${pkgs.lazydocker}/bin/lazydocker";
+              # Git / Docker Aliases
+              gs = "git status";
+              gpush = "git push origin";
+              gpull = "git pull origin";
+              grestore = "git restore";
+              lzg = "${pkgs.lazygit}/bin/lazygit";
+              lzd = "${pkgs.lazydocker}/bin/lazydocker";
 
-            # System Specific Aliases
-            rebuild-live = "sh ${settings.setup_dir}scripts/rebuild/live.sh '${settings.setup_dir}'";
-            rebuild-boot = "sh ${settings.setup_dir}scripts/rebuild/boot.sh '${settings.setup_dir}'";
-            rebuild-test = "sh ${settings.setup_dir}scripts/rebuild/test.sh '${settings.setup_dir}'";
-            log-rebuild = "tail -f ${settings.setup_dir}nixos-switch.log";
-            update-latest = "sh ${settings.setup_dir}scripts/update/latest.sh '${settings.update-latest}' '${settings.setup_dir}'";
-            update-standard = "sh ${settings.setup_dir}scripts/update/standard.sh '${settings.update-standard}' '${settings.setup_dir}'";
-            update-all = "sh ${settings.setup_dir}scripts/update/all.sh '${settings.update-latest}' '${settings.update-standard}' '${settings.setup_dir}'";
-            update-packages = "sh ${settings.setup_dir}scripts/update/packages.sh '${settings.setup_dir}'";
+              # System Specific Aliases
+              rebuild-live = "sh ${settings.setup_dir}scripts/rebuild/live.sh '${settings.setup_dir}'";
+              rebuild-boot = "sh ${settings.setup_dir}scripts/rebuild/boot.sh '${settings.setup_dir}'";
+              rebuild-test = "sh ${settings.setup_dir}scripts/rebuild/test.sh '${settings.setup_dir}'";
+              log-rebuild = "tail -f ${settings.setup_dir}nixos-switch.log";
+              update-latest = "sh ${settings.setup_dir}scripts/update/latest.sh '${settings.update-latest}' '${settings.setup_dir}'";
+              update-standard = "sh ${settings.setup_dir}scripts/update/standard.sh '${settings.update-standard}' '${settings.setup_dir}'";
+              update-all = "sh ${settings.setup_dir}scripts/update/all.sh '${settings.update-latest}' '${settings.update-standard}' '${settings.setup_dir}'";
+              update-packages = "sh ${settings.setup_dir}scripts/update/packages.sh '${settings.setup_dir}'";
 
-            # Download Aliases
-            dl = "${pkgs.aria2}/bin/aria2c --continue --max-concurrent-downloads=5 --file-allocation=falloc --summary-interval=0";
-            dl-list = "${pkgs.aria2}/bin/aria2c --continue --max-concurrent-downloads=5 --file-allocation=falloc --summary-interval=0 --input $'($in)'";
-            dl-torrent = "${pkgs.aria2}/bin/aria2c --enable-dht=true --dht-listen-port=6881-6999 --dht-file-path=/tmp/aria2.dht --bt-enable-lpd=true --bt-max-peers=0 --bt-save-metadata=true --listen-port=6881-6999 --seed-time=0 --peer-id-prefix=ARIA2 --user-agent=' aria2/1.36.0 ' --continue --max-concurrent-downloads=5 --file-allocation=falloc --summary-interval=0";
-            dl-magnet = "${pkgs.aria2}/bin/aria2c --enable-dht=true --dht-listen-port=6881-6999 --dht-file-path=/tmp/aria2.dht --bt-enable-lpd=true --bt-max-peers=0 --bt-save-metadata=true --listen-port=6881-6999 --seed-time=0 --peer-id-prefix=ARIA2 --user-agent='aria2/1.36.0' --continue --max-concurrent-downloads=5 --file-allocation=falloc --summary-interval=0";
+              # Download Aliases
+              dl = "${pkgs.aria2}/bin/aria2c --continue --max-concurrent-downloads=5 --file-allocation=falloc --summary-interval=0";
+              dl-list = "${pkgs.aria2}/bin/aria2c --continue --max-concurrent-downloads=5 --file-allocation=falloc --summary-interval=0 --input $'($in)'";
+              dl-torrent = "${pkgs.aria2}/bin/aria2c --enable-dht=true --dht-listen-port=6881-6999 --dht-file-path=/tmp/aria2.dht --bt-enable-lpd=true --bt-max-peers=0 --bt-save-metadata=true --listen-port=6881-6999 --seed-time=0 --peer-id-prefix=ARIA2 --user-agent=' aria2/1.36.0 ' --continue --max-concurrent-downloads=5 --file-allocation=falloc --summary-interval=0";
+              dl-magnet = "${pkgs.aria2}/bin/aria2c --enable-dht=true --dht-listen-port=6881-6999 --dht-file-path=/tmp/aria2.dht --bt-enable-lpd=true --bt-max-peers=0 --bt-save-metadata=true --listen-port=6881-6999 --seed-time=0 --peer-id-prefix=ARIA2 --user-agent='aria2/1.36.0' --continue --max-concurrent-downloads=5 --file-allocation=falloc --summary-interval=0";
 
-            # Distrobox Aliases
-            ubuntu = "distrobox enter ubuntu";
+              # Distrobox Aliases
+              ubuntu = "distrobox enter ubuntu";
 
-            # Other Aliases
-            ff = "${pkgs.fastfetch}/bin/fastfetch";
-          } // lib.optionalAttrs (pkgs ? wl-clipboard) {
-            # Wayland clipboard aliases (only available on systems with wayland/desktop)
-            copy = "${pkgs.wl-clipboard}/bin/wl-copy";
-            paste = "${pkgs.wl-clipboard}/bin/wl-paste";
-          };
+              # Other Aliases
+              ff = "${pkgs.fastfetch}/bin/fastfetch";
+            }
+            // lib.optionalAttrs (pkgs ? wl-clipboard) {
+              # Wayland clipboard aliases (only available on systems with wayland/desktop)
+              copy = "${pkgs.wl-clipboard}/bin/wl-copy";
+              paste = "${pkgs.wl-clipboard}/bin/wl-paste";
+            };
         };
 
         # Terminal multiplexer
@@ -273,4 +275,3 @@ in {
     })
   ];
 }
-

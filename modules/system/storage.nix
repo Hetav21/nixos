@@ -10,12 +10,12 @@ with lib; let
   username = settings.username;
   homeDirectory = "/home/${username}";
   # Check if rclone settings exist before accessing them
-  rcloneEnabled = 
-    (settings ? rclone) && 
-    (settings.rclone ? local_dir) && 
-    (settings.rclone ? remote_dir);
-  folder_path = 
-    if rcloneEnabled 
+  rcloneEnabled =
+    (settings ? rclone)
+    && (settings.rclone ? local_dir)
+    && (settings.rclone ? remote_dir);
+  folder_path =
+    if rcloneEnabled
     then "/home/${settings.username}/${settings.rclone.local_dir}"
     else "";
 in {
@@ -82,4 +82,3 @@ in {
     })
   ];
 }
-

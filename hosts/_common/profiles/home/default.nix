@@ -5,4 +5,3 @@
     ./wsl-minimal.nix
   ];
 }
-

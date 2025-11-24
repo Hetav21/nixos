@@ -33,7 +33,7 @@ with lib; {
     home.desktop.clipboard.enableGui = true;
     home.desktop.launcher.enableGui = true;
     home.desktop.notification.enableGui = true;
-    home.desktop.rofi.enableGui = false;  # Using launcher instead
+    home.desktop.rofi.enableGui = false; # Using launcher instead
     home.desktop.wallpaper.enableGui = true;
     home.desktop.waybar.enableGui = true;
     home.desktop.wlogout.enableGui = true;
@@ -42,4 +42,3 @@ with lib; {
     home.browser.zen.enableGui = true;
   };
 }
-

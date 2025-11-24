@@ -36,4 +36,3 @@ with lib; {
     home.browser.zen.enableGui = false;
   };
 }
-

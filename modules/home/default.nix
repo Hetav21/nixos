@@ -5,10 +5,9 @@
     ./shell.nix
     ./system.nix
     ./downloads.nix
-    
+
     # GUI-only modules
     ./desktop
     ./browser
   ];
 }
-

@@ -17,7 +17,7 @@ in {
     # CLI/TUI virtualisation tools
     (mkIf cfg.enable {
       environment.systemPackages = with pkgs; [
-        dive                # Docker image explorer (TUI)
+        dive # Docker image explorer (TUI)
         docker-compose
         podman-compose
       ];
@@ -113,4 +113,3 @@ in {
     })
   ];
 }
-

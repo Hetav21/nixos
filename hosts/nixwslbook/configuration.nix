@@ -23,15 +23,15 @@
   };
 
   # WSL-specific configuration
-   wsl = {
+  wsl = {
     enable = true;
     defaultUser = settings.username;
     wrapBinSh = true;
     extraBin = [
-        {
-          name = "bash";
-          src = config.wsl.binShExe;
-        }
+      {
+        name = "bash";
+        src = config.wsl.binShExe;
+      }
     ];
   };
 

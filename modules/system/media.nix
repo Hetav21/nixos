@@ -16,8 +16,8 @@ in {
     # CLI/TUI media tools
     (mkIf cfg.enable {
       environment.systemPackages = with pkgs; [
-        mpv        # Can be used CLI
-        yt-dlp     # CLI video downloader
+        mpv # Can be used CLI
+        yt-dlp # CLI video downloader
       ];
     })
 
@@ -34,14 +34,13 @@ in {
       ];
 
       services.flatpak.packages = [
-        "org.gnome.Loupe"                # Image viewer
-        "org.kde.kdenlive"               # Video editor
-        "com.github.PintaProject.Pinta"  # Image editor
-        "com.spotify.Client"             # Music streaming
-        "com.stremio.Stremio"            # Video streaming
-        "de.schmidhuberj.tubefeeder"     # YouTube client
+        "org.gnome.Loupe" # Image viewer
+        "org.kde.kdenlive" # Video editor
+        "com.github.PintaProject.Pinta" # Image editor
+        "com.spotify.Client" # Music streaming
+        "com.stremio.Stremio" # Video streaming
+        "de.schmidhuberj.tubefeeder" # YouTube client
       ];
     })
   ];
 }
-

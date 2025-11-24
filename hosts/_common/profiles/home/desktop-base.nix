@@ -44,4 +44,3 @@ with lib; {
     home.browser.zen.enableGui = true;
   };
 }
-
