@@ -32,9 +32,13 @@
         name = "bash";
         src = config.wsl.binShExe;
       }
+      {src = "${pkgs.coreutils}/bin/uname";}
+      {src = "${pkgs.coreutils}/bin/mkdir";}
+      {src = "${pkgs.coreutils}/bin/cp";}
     ];
     # Re-register WSLInterop to allow running .exe files alongside other binfmt registrations
     interop.register = true;
+    docker-desktop.enable = true;
   };
 
   # Minimal WSL system profile (CLI/TUI only, no desktop environment)
