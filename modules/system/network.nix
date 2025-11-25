@@ -20,7 +20,8 @@ in {
       networking = {
         hostName = settings.hostname;
         networkmanager.enable = true;
-        nameservers = ["1.1.1.1" "8.8.8.8"];
+        # Only set custom nameservers on non-WSL systems (WSL manages resolv.conf)
+        nameservers = mkIf (!(config.wsl.enable or false)) ["1.1.1.1" "8.8.8.8"];
         # firewall configuration
         firewall = {
           enable = true;
