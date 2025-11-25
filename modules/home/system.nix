@@ -27,6 +27,9 @@ in {
 
       # Filesystem support
       ntfs3g
+
+      # Misc
+      typioca
     ];
   };
 }

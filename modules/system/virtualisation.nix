@@ -22,7 +22,8 @@ in {
         podman-compose
       ];
 
-      boot.binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
+      # Only enable binfmt emulation on non-WSL systems (WSL handles this differently)
+      boot.binfmt.emulatedSystems = mkIf (!(config.wsl.enable or false)) ["aarch64-linux" "riscv64-linux"];
 
       users.users.${settings.username}.extraGroups = ["docker"];
 
