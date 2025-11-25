@@ -1,0 +1,50 @@
+[colors.bright]
+black = "#6e6a86"
+blue = "#c4a7e7"
+cyan = "#9ccfd8"
+green = "#3e8fb0"
+magenta = "#f6c177"
+red = "#eb6f92"
+white = "#524f67"
+yellow = "#ea9a97"
+
+[colors.cursor]
+cursor = "#e0def4"
+text = "#191724"
+
+[colors.normal]
+black = "#191724"
+blue = "#c4a7e7"
+cyan = "#9ccfd8"
+green = "#3e8fb0"
+magenta = "#f6c177"
+red = "#eb6f92"
+white = "#e0def4"
+yellow = "#ea9a97"
+
+[colors.primary]
+background = "#0a0a0a"
+bright_foreground = "#524f67"
+foreground = "#e0def4"
+
+[colors.selection]
+background = "#26233a"
+text = "#e0def4"
+
+[font]
+size = 12
+[font.normal]
+family = "JetBrainsMono Nerd Font Mono"
+style = "Regular"
+
+[terminal.shell]
+program = "wsl.exe"
+args = ["-d", "NixOS", "--cd", "~"]
+
+[window]
+opacity = 0.95
+padding = { x = 20, y = 20 }
+dimensions = { columns = 120, lines = 30 }
+blur = true
+
+[terminal]
