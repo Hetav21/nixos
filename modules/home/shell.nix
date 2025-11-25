@@ -80,6 +80,7 @@ in {
 
             $env.config.show_banner = false
 
+            clear
             if ('.git' | path exists) {
               ${pkgs.onefetch}/bin/onefetch
             } else {
@@ -173,36 +174,36 @@ in {
         yazi = {
           enable = true;
           package = pkgs.unstable.yazi;
-          enableNushellIntegration = true;
           enableFishIntegration = true;
+          enableNushellIntegration = true;
         };
 
         carapace = {
           enable = true;
           package = pkgs.unstable.carapace;
-          enableNushellIntegration = true;
           enableFishIntegration = true;
+          enableNushellIntegration = true;
         };
 
         starship = {
           enable = true;
           package = pkgs.unstable.starship;
-          enableNushellIntegration = true;
           enableFishIntegration = true;
+          enableNushellIntegration = true;
         };
 
         zoxide = {
           enable = true;
           package = pkgs.unstable.zoxide;
-          enableNushellIntegration = true;
           enableFishIntegration = true;
+          enableNushellIntegration = true;
         };
 
         eza = {
           enable = true;
           package = pkgs.unstable.eza;
-          enableNushellIntegration = false;
           enableFishIntegration = true;
+          enableNushellIntegration = false;
           git = true;
           icons = "auto";
           colors = "auto";
@@ -239,8 +240,8 @@ in {
         atuin = {
           enable = true;
           package = pkgs.unstable.atuin;
-          enableNushellIntegration = true;
           enableFishIntegration = true;
+          enableNushellIntegration = true;
           flags = [
             "--disable-up-arrow"
           ];
@@ -249,25 +250,39 @@ in {
         nix-your-shell = {
           enable = true;
           package = pkgs.unstable.nix-your-shell;
-          enableNushellIntegration = true;
           enableFishIntegration = true;
+          enableNushellIntegration = true;
         };
 
         direnv = {
           enable = true;
           package = pkgs.unstable.direnv;
+          enableFishIntegration = true;
           enableNushellIntegration = true;
-          nix-direnv.enable = true;
+          nix-direnv = {
+            enable = true;
+            package = pkgs.unstable.nix-direnv;
+          };
+          mise = {
+            enable = true;
+            package = pkgs.unstable.mise;
+          };
           silent = true;
         };
+      };
+
+      # Auto-enable CLI tools when GUI is enabled
+      home.shell = {
+        enableShellIntegration = true;
+
+        # Override individual shell integration
+        # enableFishIntegration = false;
+        # enableNushellIntegration = false;
       };
     })
 
     # GUI terminal emulators
     (mkIf cfg.enableGui {
-      # Auto-enable CLI tools when GUI is enabled
-      home.shell.enable = true;
-
       programs = {
         alacritty = {
           enable = true;
