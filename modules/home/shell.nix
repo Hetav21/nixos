@@ -257,7 +257,7 @@ in {
         direnv = {
           enable = true;
           package = pkgs.unstable.direnv;
-          enableFishIntegration = true;
+          # enableFishIntegration = true; # READ ONLY
           enableNushellIntegration = true;
           nix-direnv = {
             enable = true;
