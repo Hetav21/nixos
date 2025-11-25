@@ -52,16 +52,6 @@ run_rebuild() {
     print_status "Rebuild completed successfully"
 }
 
-# Function to sync zed settings
-sync_zed_settings() {
-    if [ -f ~/.config/zed/settings.json ]; then
-        print_status "Syncing Zed settings..."
-        cp ~/.config/zed/settings.json ./dotfiles/.config/zed/settings.json
-    else
-        print_warning "Zed settings file not found, skipping sync"
-    fi
-}
-
 # Function to cleanup and exit
 cleanup() {
     print_status "Cleaning up..."
