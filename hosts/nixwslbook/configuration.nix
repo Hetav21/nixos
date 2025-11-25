@@ -33,6 +33,8 @@
         src = config.wsl.binShExe;
       }
     ];
+    # Re-register WSLInterop to allow running .exe files alongside other binfmt registrations
+    interop.register = true;
   };
 
   # Minimal WSL system profile (CLI/TUI only, no desktop environment)
