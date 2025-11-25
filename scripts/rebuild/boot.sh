@@ -14,7 +14,6 @@ main() {
     setup_environment "$setup_dir"
     backup_and_diff
     run_rebuild "boot"
-    sync_zed_settings
     cleanup
     
     print_status "Boot rebuild completed successfully!"
