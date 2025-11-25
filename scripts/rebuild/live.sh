@@ -14,7 +14,6 @@ main() {
     setup_environment "$setup_dir"
     backup_and_diff
     run_rebuild "switch"
-    sync_zed_settings
     cleanup
     
     print_status "Live rebuild completed successfully!"
