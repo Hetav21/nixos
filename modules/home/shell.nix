@@ -28,7 +28,16 @@ in {
 
         nushell = {
           enable = true;
-          package = pkgs.unstable.nushell;
+          package = pkgs.nushell;
+
+          plugins = with pkgs.nushellPlugins; [
+            query
+            gstat
+            semver
+            formats
+            highlight
+          ];
+
           extraEnv = ''
             # Set SSH agent socket from systemd service
             $env.SSH_AUTH_SOCK = $"($env.XDG_RUNTIME_DIR)/ssh-agent"
