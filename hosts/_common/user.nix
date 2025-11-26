@@ -7,7 +7,7 @@
     users.users.${settings.username} = {
       isNormalUser = true;
       description = "Normal User";
-      shell = pkgs.unstable.nushell;
+      shell = pkgs.nushell;
       extraGroups = [
         "wheel"
       ];
