@@ -23,6 +23,7 @@ with lib; {
     system.network.enable = true;
     system.storage.enable = true;
     system.services.enable = true;
+    system.llm.enable = true;
 
     # Disable all GUI components
     system.virtualisation.enableGui = false;
@@ -33,7 +34,6 @@ with lib; {
     system.productivity.enableGui = false;
     system.communication.enableGui = false;
     system.services.enableGui = false;
-    system.llm.enable = false;
     system.llm.enableGui = false;
     system.desktop-environment.enableGui = false;
 

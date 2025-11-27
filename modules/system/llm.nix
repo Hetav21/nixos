@@ -19,6 +19,10 @@ in {
   config = mkMerge [
     # CLI LLM service
     (mkIf cfg.enable {
+      environment.systemPackages = with package; [
+        vllm
+      ];
+
       services.ollama = {
         enable = true;
         environmentVariables = {
