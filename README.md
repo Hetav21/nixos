@@ -27,6 +27,7 @@ A modular and maintainable NixOS configuration supporting multiple hosts includi
 │   └── nixwslbook/     # WSL host configuration
 ├── modules/            # Reusable NixOS and home-manager modules
 │   ├── home/           # Home-manager modules
+│   │   ├── nix-settings.nix # Nix tools (formatters, LSPs, nix-index)
 │   │   ├── development.nix  # Development tools (git, IDEs)
 │   │   ├── shell.nix        # Shell and CLI tools
 │   │   ├── system.nix       # System utilities
@@ -34,6 +35,7 @@ A modular and maintainable NixOS configuration supporting multiple hosts includi
 │   │   ├── desktop/         # Desktop WM and GUI tools
 │   │   └── browser/         # Web browsers
 │   ├── system/         # NixOS system modules
+│   │   ├── nix-settings.nix     # Nix configuration
 │   │   ├── virtualisation.nix   # Docker, VMs
 │   │   ├── network.nix          # Networking
 │   │   ├── storage.nix          # Cloud storage
@@ -247,6 +249,9 @@ This configuration uses a **two-tier enable system** for flexibility:
 **Examples:**
 
 ```nix
+# Enable Nix development tools (alejandra, nixd, nil, nix-index)
+home.nix-settings.enable = true;
+
 # Enable CLI development tools (git, lazygit, etc.)
 home.development.enable = true;
 
