@@ -23,6 +23,7 @@
   imports = [
     ../../modules/home
     ./profiles/home
+    inputs.nix-index-database.hmModules.nix-index
   ];
 
   # Enable home-manager

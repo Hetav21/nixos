@@ -59,96 +59,17 @@
   } @ inputs: let
     inherit (self) outputs;
 
-    # Common settings shared across all hosts
-    commonSettings = {
-      # Upgrade configuration
-      update-standard = "stylix home-manager lanzaboote sops-nix nix-flatpak zen-browser vicinae";
-      update-latest = "nixpkgs-unstable nixpkgs-master chaotic nur stylix home-manager lanzaboote sops-nix nix-flatpak zen-browser vicinae";
+    # Import modular configurations
+    commonSettings = import ./config/common.nix;
+    nixbookSettings = import ./config/nixbook.nix commonSettings;
+    nixwslbookSettings = import ./config/nixwslbook.nix commonSettings;
 
-      # User configuration
-      username = "hetav";
-      editor = "vim";
-      visual = "zeditor";
-      browser = "zen";
-      terminal = "ghostty";
+    # Import hardware configurations
+    hardware_asus = import ./hardware/asus.nix;
+    hardware_wsl = import ./hardware/wsl.nix;
 
-      # System configuration (common)
-      setup_dir = "/etc/nixos/";
-      system = "x86_64-linux";
-      locale = "en_US.UTF-8";
-      extraLocale = "en_IN";
-      timeZone = "Asia/Kolkata";
-      keyboard = {
-        layout = "us";
-        variant = "";
-      };
-      consoleKeymap = "us";
-
-      # Application common configuration
-      wallpaper_directory = "/etc/nixos/wallpapers";
-    };
-
-    # Per-host settings for nixbook (personal laptop)
-    nixbookSettings =
-      commonSettings
-      // {
-        hostname = "nixbook";
-        wallpaper = "China.jpeg";
-        rclone = {
-          local_dir = "Desktop/University";
-          remote_dir = "Adani:University";
-        };
-        mount-partition = {
-          enable = true;
-          partition_id = "a96c2e2f-5a1a-4249-8a3c-283532bb14a9";
-        };
-      };
-
-    # Per-host settings for nixwslbook (work WSL)
-    nixwslbookSettings =
-      commonSettings
-      // {
-        hostname = "nixwslbook";
-        # Add wallpaper for stylix TUI/CLI theming (color scheme generation)
-        wallpaper = "China.jpeg";
-        # Override update strings to exclude desktop-only inputs (lanzaboote, nix-flatpak, zen-browser, vicinae)
-        update-standard = "stylix home-manager sops-nix";
-        update-latest = "nixpkgs-unstable nixpkgs-master chaotic nur stylix home-manager sops-nix";
-      };
-
-    # Hardware configuration
-    hardware_asus = {
-      asus.enable = true;
-      intel.enable = true;
-      amdgpu.enable = false;
-      nvidia = {
-        enable = true;
-        package = "stable"; # stable / beta
-        prime = {
-          sync.enable = false;
-          offload.enable = true;
-          intelBusId = "PCI:0:2:0";
-          nvidiaBusId = "PCI:1:0:0";
-        };
-      };
-    };
-
-    # Minimal hardware configuration for WSL (no physical hardware)
-    hardware_wsl = {
-      asus.enable = false;
-      intel.enable = false;
-      amdgpu.enable = false;
-      nvidia = {
-        enable = false;
-        package = "stable";
-        prime = {
-          sync.enable = false;
-          offload.enable = false;
-          intelBusId = "";
-          nvidiaBusId = "";
-        };
-      };
-    };
+    # Import module helpers
+    moduleLib = import ./lib/modules.nix inputs outputs;
   in {
     templates = import ./templates;
     overlays = import ./overlays {
@@ -163,27 +84,10 @@
           settings = nixbookSettings;
           hardware = hardware_asus;
         };
-        modules = [
-          ./hosts/nixbook/configuration.nix
-          inputs.sops-nix.nixosModules.sops
-          inputs.nix-flatpak.nixosModules.nix-flatpak
-          inputs.stylix.nixosModules.stylix
-          inputs.home-manager.nixosModules.home-manager
-          inputs.lanzaboote.nixosModules.lanzaboote
-          inputs.nix-index-database.nixosModules.nix-index
-          inputs.chaotic.nixosModules.nyx-cache
-          inputs.chaotic.nixosModules.nyx-overlay
-          inputs.chaotic.nixosModules.nyx-registry
-          {
-            nixpkgs = {
-              overlays = builtins.attrValues outputs.overlays;
-              config = {
-                allowUnfree = true;
-                allowBroken = true;
-              };
-            };
-          }
-        ];
+        modules =
+          [./hosts/nixbook/configuration.nix]
+          ++ moduleLib.common
+          ++ moduleLib.desktop;
       };
 
       nixwslbook = nixpkgs.lib.nixosSystem {
@@ -193,27 +97,10 @@
           settings = nixwslbookSettings;
           hardware = hardware_wsl;
         };
-        modules = [
-          ./hosts/nixwslbook/configuration.nix
-          inputs.nixos-wsl.nixosModules.default
-          inputs.sops-nix.nixosModules.sops
-          inputs.nix-flatpak.nixosModules.nix-flatpak
-          inputs.stylix.nixosModules.stylix
-          inputs.home-manager.nixosModules.home-manager
-          inputs.nix-index-database.nixosModules.nix-index
-          inputs.chaotic.nixosModules.nyx-cache
-          inputs.chaotic.nixosModules.nyx-overlay
-          inputs.chaotic.nixosModules.nyx-registry
-          {
-            nixpkgs = {
-              overlays = builtins.attrValues outputs.overlays;
-              config = {
-                allowUnfree = true;
-                allowBroken = true;
-              };
-            };
-          }
-        ];
+        modules =
+          [./hosts/nixwslbook/configuration.nix]
+          ++ moduleLib.common
+          ++ moduleLib.wsl;
       };
     };
   };

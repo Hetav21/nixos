@@ -15,12 +15,8 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      # nixfmt-classic
       nix-update
-      alejandra
       cachix
-      nixd
-      nil
     ];
 
     system.autoUpgrade = {
@@ -33,11 +29,6 @@ in {
       ];
       dates = "09:00";
       randomizedDelaySec = "45min";
-    };
-
-    programs = {
-      nix-index.enable = true;
-      nix-index-database.comma.enable = true;
     };
 
     nix = {

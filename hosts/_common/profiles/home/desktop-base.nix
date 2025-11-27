@@ -13,6 +13,8 @@ with lib; {
 
   config = mkIf config.profiles.home.desktop-base.enable {
     # Enable categorized modules with both CLI and GUI
+    home.nix-settings.enable = true;
+    
     home.development = {
       enable = true;
       enableGui = true;
