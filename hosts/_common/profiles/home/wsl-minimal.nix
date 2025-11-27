@@ -12,6 +12,7 @@ with lib; {
 
   config = mkIf config.profiles.home.wsl-minimal.enable {
     # Enable only CLI/TUI modules
+    home.nix-settings.enable = true;
     home.development.enable = true;
     home.shell.enable = true;
     home.system.enable = true;

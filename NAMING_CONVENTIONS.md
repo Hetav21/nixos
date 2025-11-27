@@ -46,12 +46,13 @@ system.misc.*                  - Miscellaneous system utilities
 User-specific configurations managed by Home Manager.
 
 ```
-home.development.*  - Development tools (git, gh, lazygit, vscode, zed-editor, cursor-cli)
-home.shell.*        - Shell configs (fish, nushell, tmux, alacritty, ghostty)
-home.system.*       - System utilities (vim, btop, fastfetch, killall, most)
-home.downloads.*    - Download tools (aria2, yt-dlp)
-home.desktop.*      - Desktop WM and tools (hyprland, waybar, rofi, dunst)
-home.browser.*      - Web browsers (zen-browser)
+home.nix-settings.*  - Nix tools (alejandra, nixd, nil, nix-index)
+home.development.*   - Development tools (git, gh, lazygit, vscode, zed-editor, cursor-cli)
+home.shell.*         - Shell configs (fish, nushell, tmux, alacritty, ghostty)
+home.system.*        - System utilities (vim, btop, fastfetch, killall, most)
+home.downloads.*     - Download tools (aria2, yt-dlp)
+home.desktop.*       - Desktop WM and tools (hyprland, waybar, rofi, dunst)
+home.browser.*       - Web browsers (zen-browser)
 ```
 
 ### `drivers.*` - Hardware Drivers
@@ -189,6 +190,8 @@ nixos/
 #### Home Modules (`modules/home/`)
 
 **Categorized Modules (Two-Tier Enable System):**
+- `nix-settings.nix` - Nix development tools (CLI only)
+  - `enable`: alejandra (formatter), nixd (LSP), nil (LSP), nix-index, nix-index-database
 - `development.nix` - Development tools
   - `enable`: git, gh, lazygit, lazydocker, awscli2, distrobox, cursor-cli, gemini-cli, codex
   - `enableGui`: vscode, cursor, zed-editor, bruno, hoppscotch, mongodb-compass, claude-code
@@ -320,6 +323,7 @@ Home-manager configurations can use **profiles** for quick setup or **manual mod
   ];
 
   # Enable categorized modules with both CLI and GUI
+  home.nix-settings.enable = true;
   home.development = { enable = true; enableGui = true; };
   home.shell = { enable = true; enableGui = true; };
   home.system.enable = true;
@@ -340,6 +344,7 @@ Home-manager configurations can use **profiles** for quick setup or **manual mod
   ];
 
   # Enable only CLI/TUI modules for WSL (manual approach)
+  home.nix-settings.enable = true;
   home.development.enable = true;
   home.shell.enable = true;
   home.system.enable = true;
@@ -351,7 +356,7 @@ Home-manager configurations can use **profiles** for quick setup or **manual mod
 
 #### `profiles.home.desktop-full`
 **Purpose:** Complete desktop environment with all features  
-**Includes:** All CLI/TUI tools + all GUI applications + browser + complete desktop environment  
+**Includes:** Nix tools + all CLI/TUI tools + all GUI applications + browser + complete desktop environment  
 **Usage:**
 ```nix
 profiles.home.desktop-full.enable = true;
@@ -359,7 +364,7 @@ profiles.home.desktop-full.enable = true;
 
 #### `profiles.home.desktop-base`
 **Purpose:** Essential desktop environment without heavy applications  
-**Includes:** All CLI/TUI tools + essential GUI tools (WM, waybar, browser)  
+**Includes:** Nix tools + all CLI/TUI tools + essential GUI tools (WM, waybar, browser)  
 **Excludes:** Lock screen, idle manager, screenshot tools, wallpaper manager  
 **Usage:**
 ```nix
@@ -368,7 +373,7 @@ profiles.home.desktop-base.enable = true;
 
 #### `profiles.home.wsl-minimal`
 **Purpose:** CLI/TUI tools only for WSL/servers  
-**Includes:** Development tools, shell configs, system utilities, downloads  
+**Includes:** Nix tools, development tools, shell configs, system utilities, downloads  
 **Excludes:** All GUI applications  
 **Usage:**
 ```nix
@@ -472,7 +477,7 @@ config = mkMerge [
 **Pattern Usage:**
 - **Both switches**: `system.virtualisation`, `system.network`, `system.storage`, `system.media`, `system.services`, `system.llm`, `home.development`, `home.shell`
 - **GUI only**: `system.productivity`, `system.communication`, `system.desktop-environment`, `home.desktop.*`, `home.browser.*`
-- **CLI only**: `home.system`
+- **CLI only**: `home.nix-settings`, `home.system`, `home.downloads`
 
 ---
 
