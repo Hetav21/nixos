@@ -105,10 +105,10 @@ in {
         enable = true;
         wlr.enable = true;
         xdgOpenUsePortal = true;
-        extraPortals = with pkgs; [
+        extraPortals = with pkgs.unstable; [
           xdg-desktop-portal-hyprland
-          xdg-desktop-portal-gtk
         ];
+        config.common.default = ["hyprland"];
       };
       menus.enable = true;
       icons.enable = true;

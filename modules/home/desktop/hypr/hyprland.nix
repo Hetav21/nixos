@@ -12,12 +12,10 @@ in {
   };
 
   config = mkIf cfg.enableGui {
-    xdg.portal.config.common.default = "*";
-
     wayland.windowManager.hyprland = {
       enable = true;
-      package = null;
-      portalPackage = pkgs.xdg-desktop-portal-hyprland;
+      package = pkgs.unstable.hyprland;
+      portalPackage = pkgs.unstable.xdg-desktop-portal-hyprland;
       sourceFirst = true;
       xwayland.enable = true;
       systemd = {
@@ -25,6 +23,7 @@ in {
         enableXdgAutostart = true;
         variables = ["--all"];
       };
+
       settings = {
         debug = {disable_logs = true;};
 
@@ -94,7 +93,6 @@ in {
       };
       extraConfig =
         ''
-          env = AQ_DRM_DEVICES,/dev/dri/renderD129:/dev/dri/card0
           env = HYPRCURSOR_SIZE,24
         ''
         + ''
