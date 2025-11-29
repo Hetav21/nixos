@@ -1,9 +1,5 @@
 # NixOS Configuration - Naming Conventions & Structure Guide
 
-**Last Updated:** 2025-11-24  
-**Purpose:** Maintain consistency and clarity in the NixOS configuration structure
-
-**Note:** This configuration now uses a two-tier enable system: `enable` for CLI/TUI tools and `enableGui` for GUI applications.
 
 ---
 
@@ -38,6 +34,7 @@ system.communication.*         - Discord, thunderbird, zoom, spotify
 system.services.*              - System services, flatpak, locate, cron
 system.llm.*                   - Ollama, open-webui
 system.desktop-environment.*   - Display manager, XDG, power management
+system.stylix.*                - System-wide theming and fonts (Stylix)
 system.hardware.*              - Hardware-specific configuration
 system.misc.*                  - Miscellaneous system utilities
 ```
@@ -62,7 +59,6 @@ Hardware-specific drivers and configurations.
 drivers.nvidia.*   - NVIDIA GPU drivers
 drivers.intel.*    - Intel GPU drivers
 drivers.amdgpu.*   - AMD GPU drivers
-drivers.asus.*     - ASUS-specific features
 ```
 
 ### `profiles.*` - Configuration Profiles
@@ -93,7 +89,11 @@ profiles.home.wsl-minimal.*     - WSL CLI/TUI only
 nixos/
 ├── flake.nix              # Flake definition with per-host settings
 ├── NAMING_CONVENTIONS.md  # This document
-├── SUGGESTIONS.md         # Code review and improvement suggestions
+│
+├── config/                 # Host metadata imports (imported into flake.nix)
+├── hardware/               # Hardware presets
+├── lib/                    # Shared Nix library code
+├── settings/               # Host-specific settings
 │
 ├── hosts/                 # Per-host configurations
 │   ├── _common/           # Shared configuration across all hosts
@@ -127,9 +127,12 @@ nixos/
 │   │   └── nix-ld.nix
 │   │
 │   ├── home/              # Home Manager modules
-│   │   ├── terminal/      # Terminal applications
 │   │   ├── desktop/       # Desktop applications
-│   │   └── browser/       # Web browsers
+│   │   ├── browser/       # Web browsers
+│   │   ├── shell.nix      # Terminal + shell tooling
+│   │   ├── development.nix
+│   │   ├── downloads.nix
+│   │   └── system.nix
 │   │
 │   └── drivers/           # Hardware drivers
 │       ├── nvidia-drivers.nix
@@ -146,6 +149,7 @@ nixos/
 ├── dotfiles/              # Dotfiles and configs
 ├── wallpapers/            # Wallpaper collection
 ├── templates/             # Development environment templates
+├── patch/                 # Patches for packages
 ├── pkgs/                  # Custom package definitions
 └── overlays/              # Nixpkgs overlays
 ```
@@ -407,9 +411,9 @@ with lib; {
 ## File Naming Conventions
 
 ### Module Files
-- Use kebab-case: `power-management.nix`, `app-entertainment.nix`
+- Use kebab-case: `power-management.nix`, `desktop-environment.nix`
 - Descriptive names: `xdg-config.nix` (not `system.nix`)
-- Prefix for categories: `app-*` for applications
+- Match filenames to namespaces: e.g. `media.nix` → `system.media`, `shell.nix` → `home.shell`
 
 ### Script Files
 - Organized by category in subdirectories
@@ -486,35 +490,34 @@ config = mkMerge [
 ### Where Packages Go
 
 #### System Packages (`environment.systemPackages`)
-- **Location:** `modules/system/desktop/app-*.nix`
+- **Location:** Within the system module that owns the namespace (e.g. `modules/system/media.nix`, `modules/system/productivity.nix`, `modules/system/desktop/environment.nix`)
 - **Purpose:** Packages available system-wide to all users
-- **Examples:** Browsers, system tools, global applications
+- **Examples:** Media tools, desktop utilities, virtualization helpers
 
 ```nix
-# modules/system/desktop/app-office.nix
+# modules/system/media.nix
 environment.systemPackages = with pkgs; [
-  xfce.thunar
-  file-roller
-  pavucontrol
+  mpv
+  yt-dlp
 ];
 ```
 
 #### Home Packages (`home.packages`)
-- **Location:** `modules/home/desktop/*.nix`
+- **Location:** Within the corresponding Home Manager module (e.g. `modules/home/development.nix`, `modules/home/shell.nix`, `modules/home/desktop/waybar.nix`)
 - **Purpose:** User-specific packages and tools
-- **Examples:** Development tools, user applications
+- **Examples:** Development CLIs, GUI editors, desktop widgets
 
 ```nix
-# modules/home/desktop/programming.nix
+# modules/home/development.nix
 home.packages = with pkgs; [
-  unstable.code-cursor
-  unstable.codex
+  unstable.lazygit
+  unstable.cursor-cli
   mongodb-compass
 ];
 ```
 
 #### Flatpak Packages
-- **System:** `modules/system/desktop/app-*.nix`
+- **System:** Declare inside the module managing those apps (e.g. `modules/system/media.nix`, `modules/system/services.nix`)
 - **Declaration:** `services.flatpak.packages = [ "app.id" ];`
 
 ### Package Categories
@@ -608,7 +611,7 @@ Same process, but in `modules/home/` with `home.*` namespace.
 ```
 Is it user-specific (dotfiles, user apps)?
 ├─ YES → modules/home/
-│   ├─ Terminal app? → modules/home/terminal/
+│   ├─ Terminal app? → modules/home/shell.nix
 │   ├─ Desktop app? → modules/home/desktop/
 │   └─ Browser? → modules/home/browser/
 │
@@ -653,9 +656,9 @@ Certain modules automatically add users to groups:
 
 | Module | Groups Added |
 |--------|--------------|
-| `system.desktop.services` | `mlocate` |
-| `system.desktop.virtualisation` | `libvirtd`, `kvm`, `adbusers`, `docker` |
-| `system.desktop.network-tools` | `networkmanager`, `wireshark` |
+| `system.services` | `mlocate` |
+| `system.virtualisation` | `libvirtd`, `kvm`, `adbusers`, `docker` |
+| `system.network` | `networkmanager`, `wireshark` |
 
 ---
 
@@ -747,8 +750,8 @@ File Locations:
   Scripts           → scripts/
 
 Common Tasks:
-  Add system package → modules/system/desktop/app-*.nix
-  Add user package   → modules/home/desktop/*.nix
+  Add system package → modules/system/<module>.nix
+  Add user package   → modules/home/<module>.nix
   New module         → Create file + add to default.nix + enable
   New host           → hosts/hostname/ + update flake.nix
 ```
@@ -764,7 +767,6 @@ When making changes:
 4. Keep decision trees current
 
 For questions or clarifications, refer to:
-- `SUGGESTIONS.md` for improvement ideas
 - `secrets/README.md` for secrets management
 - Module source files for implementation details
 
