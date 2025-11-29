@@ -20,19 +20,15 @@ in {
   };
 
   config = mkIf cfg.enableGui {
-    # stylix.targets.zen-browser = {
-    #   enable = false; # set to true if you want to use theme from Stylix
-    #   profileNames = ["${settings.username}"];
-    # };
+    stylix.targets.zen-browser = {
+      enable = true;
+      profileNames = ["${settings.username}"];
+    };
 
     programs.zen-browser = {
       enable = true;
       nativeMessagingHosts = [pkgs.firefoxpwa];
-      profiles = {
-        "${settings.username}" = {
-          isDefault = true;
-        };
-      };
+      profiles = {"${settings.username}" = {isDefault = true;};};
       policies = {
         # find more options here: https://mozilla.github.io/policy-templates/
         AutofillAddressEnabled = true;
@@ -82,9 +78,7 @@ in {
               Alias = "nw";
             }
           ];
-          Remove = [
-            "Bing"
-          ];
+          Remove = ["Bing"];
         };
       };
     };

@@ -14,7 +14,7 @@ with lib; {
   config = mkIf config.profiles.home.desktop-full.enable {
     # Enable categorized modules with both CLI and GUI
     home.nix-settings.enable = true;
-    
+
     home.development = {
       enable = true;
       enableGui = true;

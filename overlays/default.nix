@@ -12,25 +12,21 @@
   };
 
   # https://wiki.nixos.org/wiki/Overlays
-  modifications = final: _prev: {
+  modifications = final: _prev: let
+    nixpkgsConfig = import ../settings/nixpkgs-config.nix;
+  in {
     nur = inputs.nur.overlays.default;
     unstable = import inputs.nixpkgs-unstable {
-      system = final.system;
-      config = {
-        allowUnfree = true;
-        allowBroken = true;
-      };
+      system = final.stdenv.hostPlatform.system;
+      config = nixpkgsConfig;
     };
     master = import inputs.nixpkgs-master {
-      system = final.system;
-      config = {
-        allowUnfree = true;
-        allowBroken = true;
-      };
+      system = final.stdenv.hostPlatform.system;
+      config = nixpkgsConfig;
     };
     kernel = import inputs.nixpkgs-kernel {
-      system = final.system;
-      config.allowUnfree = true;
+      system = final.stdenv.hostPlatform.system;
+      config = nixpkgsConfig;
     };
   };
 }

@@ -8,4 +8,3 @@ commonSettings
   update-standard = "stylix home-manager sops-nix";
   update-latest = "nixpkgs-unstable nixpkgs-master chaotic nur stylix home-manager sops-nix";
 }
-
