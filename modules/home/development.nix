@@ -68,6 +68,17 @@ in {
           enable = true;
           package = pkgs.unstable.git;
           lfs.enable = true;
+          settings = {
+            extraConfig = {
+              init.defaultBranch = "main";
+            };
+            aliases = {
+              s = "status";
+              ac = "!git add -A && git commit -m ";
+              co = "checkout";
+              ci = "commit";
+            };
+          };
         };
       };
     })

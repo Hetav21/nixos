@@ -12,25 +12,14 @@ inputs: outputs: {
     {
       nixpkgs = {
         overlays = builtins.attrValues outputs.overlays;
-        config = {
-          allowUnfree = true;
-          allowBroken = true;
-          permittedInsecurePackages = [
-            # Add any insecure packages you absolutely need here
-          ];
-        };
+        config = import ../settings/nixpkgs-config.nix;
       };
     }
   ];
 
   # Desktop-specific modules (for physical machines)
-  desktop = [
-    inputs.lanzaboote.nixosModules.lanzaboote
-  ];
+  desktop = [inputs.lanzaboote.nixosModules.lanzaboote];
 
   # WSL-specific modules
-  wsl = [
-    inputs.nixos-wsl.nixosModules.default
-  ];
+  wsl = [inputs.nixos-wsl.nixosModules.default];
 }
-
