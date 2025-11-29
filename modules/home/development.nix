@@ -35,6 +35,7 @@ in {
       programs = {
         ssh = {
           enable = true;
+          enableDefaultConfig = false;
           matchBlocks = {
             "github.com-work" = {
               hostname = "github.com";
@@ -46,6 +47,19 @@ in {
               hostname = "github.com";
               identityFile = "~/.ssh/id_personal";
               identitiesOnly = true;
+            };
+
+            "*" = {
+              forwardAgent = false;
+              addKeysToAgent = "no";
+              compression = false;
+              serverAliveInterval = 0;
+              serverAliveCountMax = 3;
+              hashKnownHosts = false;
+              userKnownHostsFile = "~/.ssh/known_hosts";
+              controlMaster = "no";
+              controlPath = "~/.ssh/master-%r@%n:%p";
+              controlPersist = "no";
             };
           };
         };
@@ -66,6 +80,7 @@ in {
       home.packages = with pkgs; [
         # GUI Text editors and IDEs
         unstable.code-cursor
+        unstable.antigravity
 
         # GUI development tools
         unstable.hoppscotch
@@ -78,199 +93,189 @@ in {
         vscode = {
           enable = true;
           package = pkgs.unstable.vscode;
-          extensions = with pkgs.unstable.vscode-extensions; [
-            vscodevim.vim
-          ];
+          profiles.${settings.username} = {
+            extensions = with pkgs.unstable.vscode-extensions; [vscodevim.vim];
 
-          userSettings = {
-            # Editor settings
-            editor = {
-              mouseWheelZoom = true;
-              cursorBlinking = "expand";
-              fontVariations = true;
-              wordWrap = "on";
-              formatOnPaste = true;
-              fontLigatures = true;
-              smoothScrolling = true;
-              letterSpacing = 0.4;
-              lineHeight = 1.4;
-              detectIndentation = false;
-              guides.bracketPairs = "active";
-              defaultColorDecorators = "always";
-              colorDecorators = true;
-              largeFileOptimizations = false;
-            };
-
-            # Workbench settings
-            workbench = {
-              sideBar.location = "left";
-              activityBar.location = "top";
-              startupEditor = "none";
+            userSettings = {
+              # Editor settings
               editor = {
-                enablePreview = false;
-                empty.hint = "hidden";
+                mouseWheelZoom = true;
+                cursorBlinking = "expand";
+                fontVariations = true;
+                wordWrap = "on";
+                formatOnPaste = true;
+                fontLigatures = true;
+                smoothScrolling = true;
+                letterSpacing = 0.4;
+                lineHeight = 1.4;
+                detectIndentation = false;
+                guides.bracketPairs = "active";
+                defaultColorDecorators = "always";
+                colorDecorators = true;
+                largeFileOptimizations = false;
               };
-            };
 
-            # Terminal settings
-            terminal = {
-              integrated = {
-                defaultProfile = {
-                  windows = "Git Bash";
-                  linux = "fish";
-                };
-                env = {
-                  windows = {};
-                  linux = {};
-                };
-                cursorBlinking = true;
-                cursorStyle = "line";
-                cursorStyleInactive = "line";
-                experimentalInlineChat = true;
-                allowedLinkSchemes = [
-                  "file"
-                  "http"
-                  "https"
-                  "mailto"
-                  "vscode"
-                  "vscode-insiders"
-                  "docker-desktop"
-                ];
-                profiles.windows = {
-                  PowerShell = {
-                    source = "PowerShell";
-                    icon = "terminal-powershell";
-                  };
-                  "Command Prompt" = {
-                    path = [
-                      "\${env:windir}\\Sysnative\\cmd.exe"
-                      "\${env:windir}\\System32\\cmd.exe"
-                    ];
-                    args = [];
-                    icon = "terminal-cmd";
-                  };
-                  "Git Bash" = {
-                    source = "Git Bash";
-                  };
-                  "Windows PowerShell" = {
-                    path = "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe";
-                  };
+              # Workbench settings
+              workbench = {
+                sideBar.location = "left";
+                activityBar.location = "top";
+                startupEditor = "none";
+                editor = {
+                  enablePreview = false;
+                  empty.hint = "hidden";
                 };
               };
-              external = {
-                windowsExec = "alacritty.exe";
-                linuxExec = "ghostty";
-                osxExec = "terminal.app";
-              };
-            };
 
-            # Chat/MCP settings
-            chat.mcp = {
-              gallery.enabled = true;
-              autostart = "never";
-              discovery.enabled = {
-                "claude-desktop" = true;
-                windsurf = true;
-                "cursor-global" = true;
-                "cursor-workspace" = true;
-              };
-            };
-
-            # GitHub Copilot settings
-            github.copilot = {
-              enable = {
-                "*" = false;
-                plaintext = true;
-                markdown = true;
-                scminput = false;
-                java = false;
-                python = false;
-                sql = false;
-                javascript = false;
-              };
-              advanced = {};
-              chat.codesearch.enabled = true;
-              nextEditSuggestions.enabled = true;
-            };
-
-            # Git settings
-            git = {
-              autofetch = true;
-              enableSmartCommit = true;
-            };
-
-            git-blame.config.inlineBlameHoverMessage = true;
-
-            # Language-specific settings
-            "[typescript]" = {
-              "editor.defaultFormatter" = "vscode.typescript-language-features";
-            };
-
-            typescript = {
-              updateImportsOnFileMove.enabled = "always";
-              preferences.importModuleSpecifier = "non-relative";
-            };
-
-            javascript = {
-              preferences.importModuleSpecifier = "non-relative";
-            };
-
-            # Python settings
-            python = {
-              analysis = {
-                autoFormatStrings = true;
-                autoImportCompletions = true;
-                typeCheckingMode = "standard";
-                diagnosticSeverityOverrides = {};
-                inlayHints = {
-                  callArgumentNames = "all";
-                  functionReturnTypes = true;
-                  pytestParameters = true;
-                  variableTypes = true;
+              # Terminal settings
+              terminal = {
+                integrated = {
+                  defaultProfile = {
+                    windows = "Git Bash";
+                    linux = "fish";
+                  };
+                  env = {
+                    windows = {};
+                    linux = {};
+                  };
+                  cursorBlinking = true;
+                  cursorStyle = "line";
+                  cursorStyleInactive = "line";
+                  experimentalInlineChat = true;
+                  allowedLinkSchemes = [
+                    "file"
+                    "http"
+                    "https"
+                    "mailto"
+                    "vscode"
+                    "vscode-insiders"
+                    "docker-desktop"
+                  ];
+                  profiles.windows = {
+                    PowerShell = {
+                      source = "PowerShell";
+                      icon = "terminal-powershell";
+                    };
+                    "Command Prompt" = {
+                      path = [
+                        "\${env:windir}\\Sysnative\\cmd.exe"
+                        "\${env:windir}\\System32\\cmd.exe"
+                      ];
+                      args = [];
+                      icon = "terminal-cmd";
+                    };
+                    "Git Bash" = {source = "Git Bash";};
+                    "Windows PowerShell" = {
+                      path = "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe";
+                    };
+                  };
+                };
+                external = {
+                  windowsExec = "alacritty.exe";
+                  linuxExec = "ghostty";
+                  osxExec = "terminal.app";
                 };
               };
-              languageServer = "Pylance";
-            };
 
-            # TailwindCSS settings
-            tailwindCSS = {
-              experimental.classRegex = [
-                [
-                  "cva\\(([^)]*)\\)"
-                  "[\"'`]([^\"'`]*).*?[\"'`]"
-                ]
-              ];
-              classFunctions = [
-                "cva"
-                "cx"
-              ];
-            };
-
-            # File settings
-            files = {
-              exclude = {
-                "**/__init__.py" = true;
-                "**/__pycache__" = true;
+              # Chat/MCP settings
+              chat.mcp = {
+                gallery.enabled = true;
+                autostart = "never";
+                discovery.enabled = {
+                  "claude-desktop" = true;
+                  windsurf = true;
+                  "cursor-global" = true;
+                  "cursor-workspace" = true;
+                };
               };
-              autoSave = "afterDelay";
+
+              # GitHub Copilot settings
+              github.copilot = {
+                enable = {
+                  "*" = false;
+                  plaintext = true;
+                  markdown = true;
+                  scminput = false;
+                  java = false;
+                  python = false;
+                  sql = false;
+                  javascript = false;
+                };
+                advanced = {};
+                chat.codesearch.enabled = true;
+                nextEditSuggestions.enabled = true;
+              };
+
+              # Git settings
+              git = {
+                autofetch = true;
+                enableSmartCommit = true;
+              };
+
+              git-blame.config.inlineBlameHoverMessage = true;
+
+              # Language-specific settings
+              "[typescript]" = {
+                "editor.defaultFormatter" = "vscode.typescript-language-features";
+              };
+
+              typescript = {
+                updateImportsOnFileMove.enabled = "always";
+                preferences.importModuleSpecifier = "non-relative";
+              };
+
+              javascript = {
+                preferences.importModuleSpecifier = "non-relative";
+              };
+
+              # Python settings
+              python = {
+                analysis = {
+                  autoFormatStrings = true;
+                  autoImportCompletions = true;
+                  typeCheckingMode = "standard";
+                  diagnosticSeverityOverrides = {};
+                  inlayHints = {
+                    callArgumentNames = "all";
+                    functionReturnTypes = true;
+                    pytestParameters = true;
+                    variableTypes = true;
+                  };
+                };
+                languageServer = "Pylance";
+              };
+
+              # TailwindCSS settings
+              tailwindCSS = {
+                experimental.classRegex = [["cva\\(([^)]*)\\)" ''["'`]([^"'`]*).*?["'`]'']];
+                classFunctions = ["cva" "cx"];
+              };
+
+              # File settings
+              files = {
+                exclude = {
+                  "**/__init__.py" = true;
+                  "**/__pycache__" = true;
+                };
+                autoSave = "afterDelay";
+              };
+
+              # Other settings
+              window.customTitleBarVisibility = "windowed";
+
+              security.workspace.trust = {
+                startupPrompt = "always";
+                untrustedFiles = "open";
+              };
+
+              explorer.confirmDelete = false;
+              diffEditor.ignoreTrimWhitespace = false;
+
+              notebook.output.scrolling = true;
+
+              "database-client.autoSync" = true;
+
+              remote.autoForwardPortsSource = "hybrid";
             };
-
-            # Other settings
-            window.customTitleBarVisibility = "windowed";
-
-            security.workspace.trust = {
-              startupPrompt = "always";
-              untrustedFiles = "open";
-            };
-
-            explorer.confirmDelete = false;
-            diffEditor.ignoreTrimWhitespace = false;
-
-            notebook.output.scrolling = true;
-
-            "database-client.autoSync" = true;
-
-            remote.autoForwardPortsSource = "hybrid";
           };
         };
 
@@ -337,9 +342,7 @@ in {
                   activate_script = "default";
                 };
               };
-              env = {
-                TERM = "ghostty";
-              };
+              env = {TERM = "ghostty";};
               line_height = "comfortable";
               option_as_meta = false;
               button = false;
@@ -352,14 +355,17 @@ in {
                 binary = {
                   path = lib.getExe' pkgs.clang-tools "clangd";
                   path_lookup = true;
-                  arguments = ["--function-arg-placeholders=0" "--background-index" "--clang-tidy" "--log=verbose"];
+                  arguments = [
+                    "--function-arg-placeholders=0"
+                    "--background-index"
+                    "--clang-tidy"
+                    "--log=verbose"
+                  ];
                 };
               };
               nil = {
                 initialization_options = {
-                  formatting = {
-                    command = ["alejandra"];
-                  };
+                  formatting = {command = ["alejandra"];};
                 };
               };
             };
@@ -370,9 +376,7 @@ in {
                 format_on_save = "on";
                 tab_size = 2;
               };
-              "Python" = {
-                show_edit_predictions = false;
-              };
+              "Python" = {show_edit_predictions = false;};
             };
 
             load_direnv = "shell_hook";
