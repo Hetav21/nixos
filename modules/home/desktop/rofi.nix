@@ -28,7 +28,7 @@ in {
     programs = {
       rofi = {
         enable = true;
-        package = pkgs.rofi-wayland;
+        package = pkgs.rofi;
 
         terminal = "${settings.terminal}";
 
@@ -49,15 +49,24 @@ in {
           inherit (config.lib.formats.rasi) mkLiteral;
         in {
           "*" = {
-            bg = lib.mkForce (mkLiteral "#${config.stylix.base16Scheme.base00}");
-            bg-alt = lib.mkForce (mkLiteral "#${config.stylix.base16Scheme.base09}");
-            foreground = lib.mkForce (mkLiteral "#${config.stylix.base16Scheme.base01}");
-            selected = lib.mkForce (mkLiteral "#${config.stylix.base16Scheme.base08}");
-            active = lib.mkForce (mkLiteral "#${config.stylix.base16Scheme.base0B}");
-            text-selected = lib.mkForce (mkLiteral "#${config.stylix.base16Scheme.base00}");
-            text-color = lib.mkForce (mkLiteral "#${config.stylix.base16Scheme.base05}");
-            border-color = lib.mkForce (mkLiteral "#${config.stylix.base16Scheme.base0F}");
-            urgent = lib.mkForce (mkLiteral "#${config.stylix.base16Scheme.base0E}");
+            bg =
+              lib.mkForce (mkLiteral "#${config.stylix.base16Scheme.base00}");
+            bg-alt =
+              lib.mkForce (mkLiteral "#${config.stylix.base16Scheme.base09}");
+            foreground =
+              lib.mkForce (mkLiteral "#${config.stylix.base16Scheme.base01}");
+            selected =
+              lib.mkForce (mkLiteral "#${config.stylix.base16Scheme.base08}");
+            active =
+              lib.mkForce (mkLiteral "#${config.stylix.base16Scheme.base0B}");
+            text-selected =
+              lib.mkForce (mkLiteral "#${config.stylix.base16Scheme.base00}");
+            text-color =
+              lib.mkForce (mkLiteral "#${config.stylix.base16Scheme.base05}");
+            border-color =
+              lib.mkForce (mkLiteral "#${config.stylix.base16Scheme.base0F}");
+            urgent =
+              lib.mkForce (mkLiteral "#${config.stylix.base16Scheme.base0E}");
           };
           "window" = {
             width = mkLiteral "50%";
@@ -74,10 +83,7 @@ in {
             padding = mkLiteral "15px";
             enabled = true;
             orientation = mkLiteral "vertical";
-            children = map mkLiteral [
-              "inputbar"
-              "listbox"
-            ];
+            children = map mkLiteral ["inputbar" "listbox"];
             background-color = lib.mkForce (mkLiteral "transparent");
           };
           "inputbar" = {
@@ -87,12 +93,10 @@ in {
             background-color = lib.mkForce (mkLiteral "transparent");
             border-radius = "25px";
             orientation = mkLiteral "horizontal";
-            children = map mkLiteral [
-              "entry"
-              "dummy"
-              "mode-switcher"
-            ];
-            background-image = mkLiteral ''url("${settings.wallpaper_directory}/${settings.wallpaper}", width)'';
+            children = map mkLiteral ["entry" "dummy" "mode-switcher"];
+            background-image =
+              mkLiteral ''
+                url("${settings.wallpaper_directory}/${settings.wallpaper}", width)'';
           };
           "entry" = {
             enabled = true;
@@ -111,10 +115,7 @@ in {
             padding = mkLiteral "10px";
             background-color = lib.mkForce (mkLiteral "transparent");
             orientation = mkLiteral "vertical";
-            children = map mkLiteral [
-              "message"
-              "listview"
-            ];
+            children = map mkLiteral ["message" "listview"];
           };
           "listview" = {
             enabled = true;

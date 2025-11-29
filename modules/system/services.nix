@@ -6,9 +6,9 @@
   ...
 }:
 with lib; let
-  cfg = config.system.services;
+  cfg = config.system.baseservices;
 in {
-  options.system.services = {
+  options.system.baseservices = {
     enable = mkEnableOption "Enable base CLI/TUI system services and utilities";
     enableGui = mkEnableOption "Enable GUI system services (flatpak)";
   };
@@ -38,7 +38,7 @@ in {
     # GUI services
     (mkIf cfg.enableGui {
       # Auto-enable base services
-      system.services.enable = true;
+      system.baseservices.enable = true;
 
       services.flatpak = {
         enable = true;

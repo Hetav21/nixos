@@ -12,4 +12,3 @@ commonSettings
     partition_id = "a96c2e2f-5a1a-4249-8a3c-283532bb14a9";
   };
 }
-

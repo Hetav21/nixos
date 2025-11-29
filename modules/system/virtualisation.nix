@@ -9,8 +9,11 @@ with lib; let
   cfg = config.system.virtualisation;
 in {
   options.system.virtualisation = {
-    enable = mkEnableOption "Enable CLI/TUI virtualisation tools (Docker, Podman)";
-    enableGui = mkEnableOption "Enable GUI virtualisation tools (virt-manager, quickgui, waydroid)";
+    enable =
+      mkEnableOption "Enable CLI/TUI virtualisation tools (Docker, Podman)";
+    enableGui =
+      mkEnableOption
+      "Enable GUI virtualisation tools (virt-manager, quickgui, waydroid)";
   };
 
   config = mkMerge [
@@ -23,7 +26,10 @@ in {
       ];
 
       # Only enable binfmt emulation on non-WSL systems (WSL handles this differently)
-      boot.binfmt.emulatedSystems = mkIf (!(config.wsl.enable or false)) ["aarch64-linux" "riscv64-linux"];
+      boot.binfmt.emulatedSystems = mkIf (!(config.wsl.enable or false)) [
+        "aarch64-linux"
+        "riscv64-linux"
+      ];
 
       users.users.${settings.username}.extraGroups = ["docker"];
 
@@ -63,7 +69,9 @@ in {
 
       users.users.${settings.username}.extraGroups = ["libvirtd" "kvm" "adbusers"];
 
-      systemd.tmpfiles.rules = ["L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware"];
+      systemd.tmpfiles.rules = [
+        "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware"
+      ];
 
       virtualisation = {
         waydroid.enable = true;
@@ -75,19 +83,10 @@ in {
             package = pkgs.qemu_kvm;
             runAsRoot = true;
             swtpm.enable = true;
-            ovmf = {
-              enable = true;
-              packages = [
-                (pkgs.OVMF.override {
-                  secureBoot = true;
-                  tpmSupport = true;
-                }).fd
-              ];
-            };
           };
 
           # Ensure libvirt uses a compatible firewall backend
-          extraConfig = "firewall_backend = \"nftables\"";
+          extraConfig = ''firewall_backend = "nftables"'';
         };
 
         spiceUSBRedirection.enable = true;
@@ -109,7 +108,6 @@ in {
           enable = true;
           package = pkgs.spice-autorandr;
         };
-        udev.packages = with pkgs; [android-udev-rules];
       };
     })
   ];
