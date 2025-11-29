@@ -7,9 +7,7 @@
 with lib; let
   cfg = config.home.desktop.launcher;
 in {
-  imports = [
-    inputs.vicinae.homeManagerModules.default
-  ];
+  imports = [inputs.vicinae.homeManagerModules.default];
 
   options.home.desktop.launcher = {
     enableGui = mkEnableOption "Enable GUI launcher";
@@ -49,10 +47,11 @@ in {
         popToRootOnClose = true;
         rootSearch.searchFiles = false;
         closeOnFocusLoss = true;
-        theme = {
-          name = "rose-pine-moon";
-          iconTheme = "Bibata-Modern-Amber";
-        };
+        # handled by stylix
+        # theme = {
+        #   name = "rose-pine-moon";
+        #   iconTheme = "Bibata-Modern-Amber";
+        # };
         window = {
           csd = true;
           opacity = config.stylix.opacity.popups;

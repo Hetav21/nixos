@@ -26,4 +26,3 @@
   # Application common configuration
   wallpaper_directory = "/etc/nixos/wallpapers";
 }
-

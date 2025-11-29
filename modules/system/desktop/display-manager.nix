@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.system.desktop.display-manager;
-  tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
+  tuigreet = "${pkgs.tuigreet}/bin/tuigreet";
   hyprland-session = "${pkgs.hyprland}/share/wayland-sessions";
 in {
   options.system.desktop.display-manager = {
@@ -15,10 +15,9 @@ in {
 
   config = mkIf cfg.enable {
     services = {
-      logind = {
-        extraConfig = ''
-          HandlePowerKey=suspend
-        '';
+      logind.settings.Login = {
+        HandlePowerKey = "suspend";
+        HandleLidSwitch = "hybrid-sleep";
       };
 
       greetd = {
