@@ -32,17 +32,16 @@ setup_environment() {
 }
 
 # Function to backup and show changes
-backup_and_diff() {
-    print_status "Backing up flake.lock and showing changes..."
-    cp flake.lock flake.lock.bak
+show_diff() {
+    print_status "Showing changes..."
     git diff -U0 flake.lock
 }
 
 # Function to run nixos-rebuild with error handling
 run_rebuild() {
     local rebuild_type="$1"
-    local log_file="nixos-switch.log"
-    
+    local log_file="build.log"
+
     print_status "NixOS rebuilding with '$rebuild_type'..."
     sudo nixos-rebuild "$rebuild_type" &> "$log_file" || {
         print_error "Rebuild failed. Showing errors:"

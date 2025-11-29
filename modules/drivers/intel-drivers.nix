@@ -17,12 +17,10 @@ in {
         intel-media-driver
         vpl-gpu-rt
         libvdpau-va-gl
-        vaapiVdpau
+        libva-vdpau-driver
       ];
 
-      extraPackages32 = with pkgs.pkgsi686Linux; [
-        intel-media-driver
-      ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [intel-media-driver];
     };
   };
 }

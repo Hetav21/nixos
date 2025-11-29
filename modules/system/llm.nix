@@ -9,7 +9,7 @@ with lib; let
   cfg = config.system.llm;
   isNvidiaEnabled = hardware.nvidia.enable;
   isAmdgpuEnabled = hardware.amdgpu.enable;
-  package = pkgs.unstable;
+  package = pkgs;
 in {
   options.system.llm = {
     enable = mkEnableOption "Enable CLI LLM services (ollama)";

@@ -29,7 +29,7 @@ with lib; {
       enableGui = true;
     };
     system.productivity.enableGui = true;
-    system.services = {
+    system.baseservices = {
       enable = true;
       enableGui = true;
     };

@@ -10,12 +10,12 @@ source "$SCRIPT_DIR/common.sh"
 main() {
     local setup_dir="$1"
     print_status "Starting NixOS boot rebuild..."
-    
+
     setup_environment "$setup_dir"
-    backup_and_diff
+    show_diff
     run_rebuild "boot"
     cleanup
-    
+
     print_status "Boot rebuild completed successfully!"
     print_warning "Changes will be applied on next reboot"
 }

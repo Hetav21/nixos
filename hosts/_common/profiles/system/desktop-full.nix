@@ -34,7 +34,7 @@ with lib; {
     };
     system.productivity.enableGui = true;
     system.communication.enableGui = true;
-    system.services = {
+    system.baseservices = {
       enable = true;
       enableGui = true;
     };

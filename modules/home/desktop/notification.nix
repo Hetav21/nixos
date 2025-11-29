@@ -68,7 +68,7 @@ in {
           max_icon_size = 128;
           sticky_history = true;
           history_length = 20;
-          dmenu = "${pkgs.rofi-wayland}/bin/rofi -dmenu -p dunst:";
+          dmenu = "${pkgs.rofi}/bin/rofi -dmenu -p dunst:";
           browser = "${pkgs.xdg-utils}/bin/xdg-open";
           always_run_script = true;
           title = "Dunst";
