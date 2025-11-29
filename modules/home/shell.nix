@@ -117,7 +117,7 @@ in {
               rebuild-live = "sh ${settings.setup_dir}scripts/rebuild/live.sh '${settings.setup_dir}'";
               rebuild-boot = "sh ${settings.setup_dir}scripts/rebuild/boot.sh '${settings.setup_dir}'";
               rebuild-test = "sh ${settings.setup_dir}scripts/rebuild/test.sh '${settings.setup_dir}'";
-              log-rebuild = "tail -f ${settings.setup_dir}nixos-switch.log";
+              log-rebuild = "tail -f ${settings.setup_dir}build.log";
               update-latest = "sh ${settings.setup_dir}scripts/update/latest.sh '${settings.update-latest}' '${settings.setup_dir}'";
               update-standard = "sh ${settings.setup_dir}scripts/update/standard.sh '${settings.update-standard}' '${settings.setup_dir}'";
               update-all = "sh ${settings.setup_dir}scripts/update/all.sh '${settings.update-latest}' '${settings.update-standard}' '${settings.setup_dir}'";
