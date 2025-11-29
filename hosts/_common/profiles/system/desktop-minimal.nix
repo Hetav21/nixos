@@ -35,8 +35,8 @@ with lib; {
     system.media.enableGui = false;
     system.productivity.enableGui = false;
     system.communication.enableGui = false;
-    system.services.enable = false;
-    system.services.enableGui = false;
+    system.baseservices.enable = false;
+    system.baseservices.enableGui = false;
     system.llm.enable = false;
     system.llm.enableGui = false;
     system.desktop-environment.enableGui = false;
