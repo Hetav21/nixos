@@ -47,11 +47,6 @@ in {
         popToRootOnClose = true;
         rootSearch.searchFiles = false;
         closeOnFocusLoss = true;
-        # handled by stylix
-        # theme = {
-        #   name = "rose-pine-moon";
-        #   iconTheme = "Bibata-Modern-Amber";
-        # };
         window = {
           csd = true;
           opacity = config.stylix.opacity.popups;

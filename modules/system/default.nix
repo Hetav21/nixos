@@ -14,6 +14,7 @@
     ./media.nix
     ./productivity.nix
     ./communication.nix
+    ./browser.nix
     ./services.nix
     ./llm.nix
     ./desktop-environment.nix

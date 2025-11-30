@@ -31,6 +31,7 @@ system.storage.*               - Rclone, syncthing, localsend, megasync
 system.media.*                 - MPV, yt-dlp, obs-studio, pavucontrol
 system.productivity.*          - Office suites, file managers
 system.communication.*         - Discord, thunderbird, zoom, spotify
+system.browser.*               - Web browsers (Microsoft Edge)
 system.baseservices.*          - System services, flatpak, locate, cron
 system.llm.*                   - Ollama, open-webui
 system.desktop-environment.*   - Display manager, XDG, power management
@@ -175,6 +176,8 @@ nixos/
   - `enableGui`: obsidian, libreoffice, onlyoffice, thunar, file-roller, upscayl
 - `communication.nix` - Communication apps (GUI only)
   - `enableGui`: discord, vesktop, thunderbird, zoom, teams
+- `browser.nix` - Web browsers (GUI only)
+  - `enableGui`: Microsoft Edge (Flatpak)
 - `baseservices.nix` - System base services
   - `enable`: locate, cron, gnupg, preload
   - `enableGui`: flatpak
@@ -400,7 +403,7 @@ with lib; {
   config = mkIf config.profiles.system.my-profile.enable {
     # Enable specific system modules
     system.nix.settings.enable = true;
-    system.desktop.environment.enable = true;
+    system.desktop-environment.enableGui = true;
     # ... more system options
   };
 }
@@ -480,7 +483,7 @@ config = mkMerge [
 
 **Pattern Usage:**
 - **Both switches**: `system.virtualisation`, `system.network`, `system.storage`, `system.media`, `system.baseservices`, `system.llm`, `home.development`, `home.shell`
-- **GUI only**: `system.productivity`, `system.communication`, `system.desktop-environment`, `home.desktop.*`, `home.browser.*`
+- **GUI only**: `system.productivity`, `system.communication`, `system.browser`, `system.desktop-environment`, `home.desktop.*`, `home.browser.*`
 - **CLI only**: `home.nix-settings`, `home.system`, `home.downloads`
 
 ---
