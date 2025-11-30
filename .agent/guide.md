@@ -94,6 +94,13 @@ If in doubt, mention your change in both docs and reference the relevant section
    - System-wide: update relevant `modules/system/...` file and `environment.systemPackages`.
    - User-only: update `home.packages` inside the appropriate home module.
 
+5. **Add a new system module**
+   - Copy pattern from `modules/system/<existing>.nix`.
+   - Export options under `system.<namespace>.*`.
+   - Import module via `modules/system/default.nix`.
+   - Add to relevant profile in `hosts/_common/profiles/system/<profile>.nix`.
+   - Update NAMING_CONVENTIONS.md with new namespace and module details.
+
 ---
 
 ## 7. Quick Reference
