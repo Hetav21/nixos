@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }:
@@ -11,6 +12,10 @@ in {
   };
 
   config = mkIf cfg.enableGui {
+    environment.systemPackages = with pkgs; [
+      custom.browseros
+    ];
+
     services.flatpak.packages = [
       "com.microsoft.Edge"
     ];

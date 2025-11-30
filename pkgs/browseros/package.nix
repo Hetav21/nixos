@@ -5,24 +5,24 @@
   ...
 } @ args: let
   pname = "browseros";
-  version = "0.28.0";
+  version = "0.30.0";
 
   allArchives = {
     aarch64-linux = {
       url = "https://github.com/browseros-ai/BrowserOS/releases/download/v${version}/BrowserOS_v${version}_arm64.dmg";
-      hash = "sha256-KYy7EPbxLiOY9zsU/kFRXAqdTi4Mm0nkBW9uGqQjCv0=";
+      hash = "sha256-/XLumOhKG7j8cuJxJgo7rj3p7ZuX2s3noVFldERijaE=";
     };
     x86_64-linux = {
       url = "https://github.com/browseros-ai/BrowserOS/releases/download/v${version}/BrowserOS_v${version}_amd64.deb";
-      hash = "sha256-6PFL3UspHtjhc1C4rLOoO/pZmApxBUDTvjqI+XzPPNg=";
+      hash = "sha256-35Zpz82UXC7aF9g+LOE8Rmz0yZHT+ym044ND11qQH8g=";
     };
     aarch64-darwin = {
       url = "https://github.com/browseros-ai/BrowserOS/releases/download/v${version}/BrowserOS_v${version}_arm64.dmg";
-      hash = "sha256-KYy7EPbxLiOY9zsU/kFRXAqdTi4Mm0nkBW9uGqQjCv0=";
+      hash = "sha256-/XLumOhKG7j8cuJxJgo7rj3p7ZuX2s3noVFldERijaE=";
     };
     x86_64-darwin = {
       url = "https://github.com/browseros-ai/BrowserOS/releases/download/v${version}/BrowserOS_v${version}_x64.dmg";
-      hash = "sha256-8h7OsZlB30uqIE2Ma4gE2bwxzke3vA4+sUP7gTKelw8=";
+      hash = "sha256-GziL9YxrqKt8LJ3oxQJO8ItADyL/qZFDJI/po9GYFCM=";
     };
   };
 
