@@ -17,8 +17,6 @@ in {
     # Base CLI/TUI services and utilities
     (mkIf cfg.enable {
       services = {
-        preload.enable = true;
-
         locate = {
           enable = true;
           package = pkgs.mlocate;
