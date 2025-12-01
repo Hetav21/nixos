@@ -43,7 +43,7 @@ run_rebuild() {
     local log_file="build.log"
 
     print_status "NixOS rebuilding with '$rebuild_type'..."
-    sudo nixos-rebuild "$rebuild_type" &> "$log_file" || {
+    sudo nixos-rebuild "$rebuild_type" --sudo &> "$log_file" || {
         print_error "Rebuild failed. Showing errors:"
         cat "$log_file" | grep --color error
         return 1
