@@ -62,6 +62,7 @@
         packages = [
           python.pkgs.venvShellHook
           python.pkgs.pip
+          python.pkgs.uv
 
           /*
           Add whatever else you'd like here.
