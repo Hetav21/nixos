@@ -66,17 +66,45 @@ in {
 
         git = {
           enable = true;
-          package = pkgs.unstable.git;
-          lfs.enable = true;
-          settings = {
-            extraConfig = {
-              init.defaultBranch = "main";
-            };
-            aliases = {
-              s = "status";
-              ac = "!git add -A && git commit -m ";
-              co = "checkout";
-              ci = "commit";
+          package = pkgs.unstable.gitFull;
+
+          lfs = {
+            enable = true;
+            package = pkgs.unstable.git-lfs;
+          };
+
+          ## IGNORE: Ignore the rename warnings, since renaming it makes it stop working
+
+          # Additional configuration
+          extraConfig = {
+            color.ui = "auto";
+            core.editor = "vim";
+            pull.rebase = false;
+            init.defaultBranch = "main";
+            push.autoSetupRemote = true;
+            merge.conflictStyle = "diff3";
+            credential.helper = "libsecret";
+          };
+
+          # Git aliases
+          aliases = {
+            st = "status";
+            co = "checkout";
+            br = "branch";
+            ci = "commit -m";
+            aci = "commit -am";
+            unstage = "reset HEAD --";
+            last = "log -1 HEAD";
+            lg = "log --graph --oneline --decorate --all";
+          };
+
+          # Delta for better diffs
+          delta = {
+            enable = true;
+            options = {
+              navigate = true;
+              light = false;
+              side-by-side = true;
             };
           };
         };
