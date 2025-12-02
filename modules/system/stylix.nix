@@ -68,8 +68,13 @@ in {
         };
 
         cursor = {
+          name = let
+            suffix =
+              if config.stylix.polarity == "dark"
+              then "Ice"
+              else "Classic";
+          in "Bibata-Modern-${suffix}";
           package = pkgs.bibata-cursors;
-          name = "Bibata-Modern-Ice";
           size = 24;
         };
 

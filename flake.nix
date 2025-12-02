@@ -4,8 +4,8 @@
   # Flake Inputs
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs?shallow=1&ref=nixos-unstable";
+    nixpkgs-master.url = "github:nixos/nixpkgs?shallow=1&ref=master";
 
     stylix = {
       url = "github:danth/stylix/release-25.11";
@@ -18,7 +18,7 @@
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
-    nixpkgs-kernel.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-kernel.url = "github:nixos/nixpkgs?shallow=1&ref=nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nur = {
       url = "github:nix-community/NUR";

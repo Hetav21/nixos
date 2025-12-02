@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ../_common/home-base.nix
   ];
@@ -8,7 +12,13 @@
 
   # Host-specific GTK icon theme override
   gtk.iconTheme = {
-    name = "Papirus-Dark";
+    name = let
+      suffix =
+        if config.stylix.polarity == "dark"
+        then "Dark"
+        else "Light";
+    in "Papirus-${suffix}";
+
     package = pkgs.unstable.papirus-icon-theme;
   };
 
