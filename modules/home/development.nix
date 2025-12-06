@@ -73,10 +73,8 @@ in {
             package = pkgs.unstable.git-lfs;
           };
 
-          ## IGNORE: Ignore the rename warnings, since renaming it makes it stop working
-
-          # Additional configuration
-          extraConfig = {
+          settings = {
+            # Additional configuration
             color.ui = "auto";
             core.editor = "vim";
             pull.rebase = false;
@@ -84,28 +82,30 @@ in {
             push.autoSetupRemote = true;
             merge.conflictStyle = "diff3";
             credential.helper = "libsecret";
-          };
 
-          # Git aliases
-          aliases = {
-            st = "status";
-            co = "checkout";
-            br = "branch";
-            ci = "commit -m";
-            aci = "commit -am";
-            unstage = "reset HEAD --";
-            last = "log -1 HEAD";
-            lg = "log --graph --oneline --decorate --all";
-          };
-
-          # Delta for better diffs
-          delta = {
-            enable = true;
-            options = {
-              navigate = true;
-              light = false;
-              side-by-side = true;
+            # Git aliases
+            alias = {
+              st = "status";
+              co = "checkout";
+              br = "branch";
+              ci = "commit -m";
+              aci = "commit -am";
+              unstage = "reset HEAD --";
+              last = "log -1 HEAD";
+              lg = "log --graph --oneline --decorate --all";
             };
+          };
+        };
+
+        # Delta for better diffs
+        delta = {
+          enable = true;
+          enableGitIntegration = true;
+          package = pkgs.unstable.delta;
+          options = {
+            navigate = true;
+            light = false;
+            side-by-side = true;
           };
         };
       };
