@@ -12,7 +12,7 @@ inputs: outputs: {
     {
       nixpkgs = {
         overlays = builtins.attrValues outputs.overlays;
-        config = import ../settings/nixpkgs-config.nix;
+        config = import ../config/nixpkgs-config.nix;
       };
     }
   ];

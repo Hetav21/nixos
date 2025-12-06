@@ -94,7 +94,6 @@ nixos/
 ├── config/                 # Host metadata imports (imported into flake.nix)
 ├── hardware/               # Hardware presets
 ├── lib/                    # Shared Nix library code
-├── settings/               # Host-specific settings
 │
 ├── hosts/                 # Per-host configurations
 │   ├── _common/           # Shared configuration across all hosts

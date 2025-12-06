@@ -60,7 +60,7 @@ show_usage() {
     echo "  help     - Show this help message"
     echo ""
     echo "Examples:"
-    echo "  scripts/update/update latest    # Update latest inputs"
-    echo "  scripts/update/update standard  # Update standard inputs"
-    echo "  scripts/update/update all       # Update everything"
+    echo "  scripts/update/latest.sh <inputs> <setup_dir>    # Update latest inputs"
+    echo "  scripts/update/standard.sh <inputs> <setup_dir>  # Update standard inputs"
+    echo "  scripts/update/all.sh <setup_dir>                # Update everything"
 }
