@@ -1,6 +1,6 @@
 #!/run/current-system/sw/bin/sh
-# NixOS Complete Update Script
-# This script updates all flake inputs
+# NixOS Update All Inputs Script
+# This script updates all flake inputs without restrictions
 
 # Source common functions
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -8,30 +8,27 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Main execution
 main() {
-    print_status "Starting NixOS complete update..."
+    print_status "Starting NixOS update (all inputs)..."
     
-    # Get the inputs from command line arguments
-    local latest_inputs="$1"
-    local standard_inputs="$2"
-    local setup_dir="$3"
+    local setup_dir="$1"
     
-    if [ -z "$latest_inputs" ] || [ -z "$standard_inputs" ] || [ -z "$setup_dir" ]; then
-        print_error "Missing required arguments for complete update"
-        print_status "Usage: $0 <latest_inputs> <standard_inputs> <setup_dir>"
-        print_status "Example: $0 'nixpkgs-unstable nixpkgs-master' 'stylix home-manager' '/etc/nixos'"
+    if [ -z "$setup_dir" ]; then
+        print_error "Missing required argument for update all"
+        print_status "Usage: $0 <setup_dir>"
+        print_status "Example: $0 '/etc/nixos'"
         exit 1
     fi
     
-    # Update latest inputs
-    print_status "Step 1: Updating latest inputs..."
-    run_flake_update "$latest_inputs" "$setup_dir"
+    # Update all flake inputs (no restrictions)
+    print_status "Updating all flake inputs..."
+    nix flake update --flake "$setup_dir"
     
-    # Update standard inputs
-    print_status "Step 2: Updating standard inputs..."
-    run_flake_update "$standard_inputs" "$setup_dir"
-    
-    print_success "Complete update finished successfully!"
-    print_status "All flake inputs have been updated"
+    if [ $? -eq 0 ]; then
+        print_success "All flake inputs updated successfully!"
+    else
+        print_error "Flake update failed"
+        return 1
+    fi
 }
 
 # Run main function

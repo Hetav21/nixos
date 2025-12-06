@@ -22,11 +22,9 @@ in {
     system.autoUpgrade = {
       enable = true;
       flake = inputs.self.outPath;
-      flags = [
-        "--update-input"
-        "${settings.update-standard}"
-        "-L" # print build logs
-      ];
+      flags =
+        lib.concatMap (input: ["--update-input" input]) (lib.splitString " " settings.update-standard)
+        ++ ["-L"]; # print build logs
       dates = "09:00";
       randomizedDelaySec = "45min";
     };

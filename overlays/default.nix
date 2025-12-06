@@ -13,7 +13,7 @@
 
   # https://wiki.nixos.org/wiki/Overlays
   modifications = final: _prev: let
-    nixpkgsConfig = import ../settings/nixpkgs-config.nix;
+    nixpkgsConfig = import ../config/nixpkgs-config.nix;
   in {
     nur = inputs.nur.overlays.default;
     unstable = import inputs.nixpkgs-unstable {
