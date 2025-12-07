@@ -26,6 +26,7 @@ with lib; {
     home.desktop.hyprland.enableGui = false;
     home.desktop.hypridle.enableGui = false;
     home.desktop.hyprlock.enableGui = false;
+    home.desktop.hyprpaper.enableGui = false;
     home.desktop.hyprshot.enableGui = false;
     home.desktop.clipboard.enableGui = false;
     home.desktop.launcher.enableGui = false;
