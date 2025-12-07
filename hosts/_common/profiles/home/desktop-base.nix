@@ -37,6 +37,7 @@ with lib; {
     # Disable non-essential desktop modules
     home.desktop.hypridle.enableGui = false;
     home.desktop.hyprlock.enableGui = false;
+    home.desktop.hyprpaper.enableGui = false;
     home.desktop.hyprshot.enableGui = false;
     home.desktop.rofi.enableGui = false;
     home.desktop.wallpaper.enableGui = false;

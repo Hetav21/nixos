@@ -31,6 +31,7 @@ with lib; {
     home.desktop.hyprland.enableGui = true;
     home.desktop.hypridle.enableGui = true;
     home.desktop.hyprlock.enableGui = true;
+    home.desktop.hyprpaper.enableGui = true;
     home.desktop.hyprshot.enableGui = true;
     home.desktop.clipboard.enableGui = true;
     home.desktop.launcher.enableGui = true;

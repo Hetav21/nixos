@@ -34,7 +34,7 @@ setup_environment() {
 # Function to backup and show changes
 show_diff() {
     print_status "Showing changes..."
-    git diff -U0 flake.lock
+    git diff -U0 *.nix
 }
 
 # Function to run nixos-rebuild with error handling
@@ -43,7 +43,7 @@ run_rebuild() {
     local log_file="build.log"
 
     print_status "NixOS rebuilding with '$rebuild_type'..."
-    sudo nixos-rebuild "$rebuild_type" --sudo &> "$log_file" || {
+    sudo nixos-rebuild "$rebuild_type" --sudo --accept-flake-config &> "$log_file" || {
         print_error "Rebuild failed. Showing errors:"
         cat "$log_file" | grep --color error
         return 1

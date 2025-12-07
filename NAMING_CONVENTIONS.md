@@ -215,7 +215,7 @@ nixos/
 - `desktop/launcher.nix` - Application launcher (vicinae)
 - `desktop/notification.nix` - Notification daemon (dunst)
 - `desktop/rofi.nix` - Rofi menu system
-- `desktop/wallpaper.nix` - Wallpaper manager (swww)
+- `desktop/wallpaper.nix` - Wallpaper manager (swww and waypaper)
 - `desktop/waybar.nix` - Status bar
 - `desktop/wlogout.nix` - Logout menu
 
