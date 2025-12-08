@@ -9,14 +9,14 @@ source "$SCRIPT_DIR/common.sh"
 # Main execution
 main() {
     local setup_dir="$1"
-    print_status "Starting NixOS live rebuild..."
+    print_info "Starting NixOS live rebuild..."
 
     setup_environment "$setup_dir"
     show_diff
     run_rebuild "switch"
     cleanup
 
-    print_status "Live rebuild completed successfully!"
+    print_success "Live rebuild completed successfully!"
 }
 
 # Run main function

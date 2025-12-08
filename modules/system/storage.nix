@@ -50,7 +50,7 @@ in {
             serviceConfig = {
               Type = "simple";
               ExecStartPre = "/run/current-system/sw/bin/mkdir -p ${folder_path}";
-              ExecStart = "${pkgs.rclone}/bin/rclone mount --vfs-cache-mode full ${settings.rclone.remote_dir} ${folder_path} --allow-non-empty --config /home/${settings.username}/.config/rclone/rclone.conf";
+              ExecStart = "${lib.getExe pkgs.rclone} mount --vfs-cache-mode full ${settings.rclone.remote_dir} ${folder_path} --allow-non-empty --config /home/${settings.username}/.config/rclone/rclone.conf";
               ExecStop = "/run/current-system/sw/bin/fusermount -u ${folder_path}";
               Restart = "on-failure";
               RestartSec = "10s";

@@ -42,7 +42,7 @@ with lib; {
     system.llm.enable = false;
     system.llm.enableGui = false;
 
-    # Enable hardware modules
-    system.hardware.hardware.enable = true;
+    # Enable base hardware modules (audio, bluetooth, input, etc.)
+    system.hardware.base.enable = true;
   };
 }

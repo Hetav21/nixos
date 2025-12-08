@@ -157,7 +157,7 @@ rec {
   };
   vlang = {
     path = ./vlang;
-    description = "Vlang developent environment";
+    description = "Vlang development environment";
   };
   zig = {
     path = ./zig;

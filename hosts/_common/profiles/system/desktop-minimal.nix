@@ -21,8 +21,8 @@ with lib; {
     system.desktop.security.enable = true;
     system.desktop.xdg-config.enable = true;
 
-    # Enable hardware modules
-    system.hardware.hardware.enable = true;
+    # Enable base hardware modules (audio, bluetooth, input, etc.)
+    system.hardware.base.enable = true;
 
     # Disable all categorized modules
     system.virtualisation.enable = false;

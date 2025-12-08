@@ -42,7 +42,7 @@ in {
       };
       open = true;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.${hardware.nvidia.package};
+      package = config.boot.kernelPackages.nvidiaPackages.${cfg.package};
     };
   };
 }

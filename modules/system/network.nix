@@ -22,11 +22,11 @@ in {
         networkmanager.enable = true;
         # Only set custom nameservers on non-WSL systems (WSL manages resolv.conf)
         nameservers = mkIf (!(config.wsl.enable or false)) ["1.1.1.1" "8.8.8.8"];
-        # firewall configuration
+        # Firewall configuration
+        # Ports are opened by individual services as needed
+        # Add custom ports here if required
         firewall = {
           enable = true;
-          allowedTCPPorts = [];
-          allowedUDPPorts = [];
         };
       };
 

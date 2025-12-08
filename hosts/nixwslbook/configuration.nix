@@ -10,17 +10,11 @@
     ../_common
   ];
 
+  # Point to host-specific home.nix (centralized home-manager is in _common)
+  local.homeConfig = ./home.nix;
+
   # Set hostname for WSL
   networking.hostName = settings.hostname;
-
-  # Home Manager configuration
-  home-manager = {
-    extraSpecialArgs = {inherit inputs settings;};
-    users.${settings.username} = import ./home.nix;
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    backupFileExtension = "backup";
-  };
 
   # WSL-specific configuration
   wsl = {
@@ -32,9 +26,9 @@
         name = "bash";
         src = config.wsl.binShExe;
       }
-      {src = "${pkgs.coreutils}/bin/uname";}
-      {src = "${pkgs.coreutils}/bin/mkdir";}
-      {src = "${pkgs.coreutils}/bin/cp";}
+      {src = "${lib.getExe' pkgs.coreutils "uname"}";}
+      {src = "${lib.getExe' pkgs.coreutils "mkdir"}";}
+      {src = "${lib.getExe' pkgs.coreutils "cp"}";}
     ];
     # Re-register WSLInterop to allow running .exe files alongside other binfmt registrations
     interop.register = true;

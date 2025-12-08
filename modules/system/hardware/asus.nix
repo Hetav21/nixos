@@ -1,3 +1,4 @@
+# ASUS-specific hardware support (asusd, supergfxd, rog-control-center)
 {
   lib,
   hardware,

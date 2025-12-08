@@ -17,7 +17,7 @@ in {
       "$lock" = "hyprlock";
 
       bind = [
-        "$mainMod, O, exec, ${config.programs.hyprlock.package}/bin/hyprlock"
+        "$mainMod, O, exec, ${lib.getExe config.programs.hyprlock.package}"
       ];
     };
 

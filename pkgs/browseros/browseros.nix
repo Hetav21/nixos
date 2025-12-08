@@ -226,8 +226,8 @@ in
         # Icons are already in the correct location in the DEB package
 
         # Replace xdg-settings and xdg-mime
-        ln -sf ${xdg-utils}/bin/xdg-settings $out/usr/lib/browseros/xdg-settings
-        ln -sf ${xdg-utils}/bin/xdg-mime $out/usr/lib/browseros/xdg-mime
+        ln -sf ${lib.getExe' xdg-utils "xdg-settings"} $out/usr/lib/browseros/xdg-settings
+        ln -sf ${lib.getExe' xdg-utils "xdg-mime"} $out/usr/lib/browseros/xdg-mime
 
         runHook postInstall
       ''

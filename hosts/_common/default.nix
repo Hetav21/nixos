@@ -1,5 +1,12 @@
 # Common system configuration shared across all hosts
-{...}: {
+{
+  lib,
+  config,
+  inputs,
+  settings,
+  ...
+}:
+with lib; {
   # Common imports
   imports = [
     ./user.nix
@@ -8,6 +15,23 @@
     ../../secrets
   ];
 
-  # State version
-  system.stateVersion = "24.11";
+  # Option for host-specific home.nix path
+  options.local.homeConfig = mkOption {
+    type = types.path;
+    description = "Path to host-specific home.nix file";
+  };
+
+  config = {
+    # Centralized Home Manager configuration
+    home-manager = {
+      extraSpecialArgs = {inherit inputs settings;};
+      users.${settings.username} = import config.local.homeConfig;
+      useGlobalPkgs = true;
+      useUserPackages = true;
+      backupFileExtension = "backup";
+    };
+
+    # State version
+    system.stateVersion = "24.11";
+  };
 }
