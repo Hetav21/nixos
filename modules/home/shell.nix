@@ -97,6 +97,7 @@ in {
               gpull = "git pull origin";
               grestore = "git restore";
               lzg = "${lib.getExe pkgs.lazygit}";
+              lzjj = "${lib.getExe pkgs.lazyjj}";
               lzd = "${lib.getExe pkgs.lazydocker}";
 
               # Download Aliases

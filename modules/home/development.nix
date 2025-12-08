@@ -97,10 +97,18 @@ in {
           };
         };
 
+        jujutsu = {
+          enable = true;
+          package = pkgs.unstable.jujutsu;
+          # Settings placeholder
+          # settings = {};
+        };
+
         # Delta for better diffs
         delta = {
           enable = true;
           enableGitIntegration = true;
+          enableJujutsuIntegration = true;
           package = pkgs.unstable.delta;
           options = {
             navigate = true;
