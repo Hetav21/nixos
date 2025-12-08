@@ -37,8 +37,8 @@ with lib; {
     system.llm.enableGui = false;
     system.desktop-environment.enableGui = false;
 
-    # Disable hardware modules (not needed for WSL)
-    system.hardware.hardware.enable = false;
+    # Disable base hardware modules (not needed for WSL)
+    system.hardware.base.enable = false;
 
     # Disable desktop sub-modules (not needed for WSL)
     system.desktop.security.enable = false;

@@ -20,10 +20,10 @@ pkgs.writeShellScriptBin "web-search" ''
 
    main() {
      # Pass the list to rofi
-     platform=$( (gen_list) | ${pkgs.wofi}/bin/wofi -dmenu )
+    platform=$( (gen_list) | ${lib.getExe pkgs.wofi} -dmenu )
 
-     if [[ -n "$platform" ]]; then
-       query=$( (echo ) | ${pkgs.wofi}/bin/wofi -dmenu )
+    if [[ -n "$platform" ]]; then
+      query=$( (echo ) | ${lib.getExe pkgs.wofi} -dmenu )
 
        if [[ -n "$query" ]]; then
   url=''${URLS[$platform]}$query

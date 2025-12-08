@@ -68,8 +68,8 @@ in {
           max_icon_size = 128;
           sticky_history = true;
           history_length = 20;
-          dmenu = "${pkgs.rofi}/bin/rofi -dmenu -p dunst:";
-          browser = "${pkgs.xdg-utils}/bin/xdg-open";
+          dmenu = "${lib.getExe pkgs.rofi} -dmenu -p dunst:";
+          browser = "${lib.getExe' pkgs.xdg-utils "xdg-open"}";
           always_run_script = true;
           title = "Dunst";
           class = "Dunst";

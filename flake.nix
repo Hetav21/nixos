@@ -80,18 +80,20 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
+    inherit (nixpkgs) lib;
 
-    # Import modular configurations
+    # Import library helpers
+    hostLib = import ./lib/hosts.nix {inherit lib;};
+    moduleLib = import ./lib/modules.nix inputs outputs;
+
+    # Import modular configurations using mkHostSettings
     commonSettings = import ./config/common.nix;
-    nixbookSettings = import ./config/nixbook.nix commonSettings;
-    nixwslbookSettings = import ./config/nixwslbook.nix commonSettings;
+    nixbookSettings = hostLib.mkHostSettings commonSettings (import ./config/nixbook.nix);
+    nixwslbookSettings = hostLib.mkHostSettings commonSettings (import ./config/nixwslbook.nix);
 
     # Import hardware configurations
-    hardware_asus = import ./hardware/asus.nix;
-    hardware_wsl = import ./hardware/wsl.nix;
-
-    # Import module helpers
-    moduleLib = import ./lib/modules.nix inputs outputs;
+    hardware_asus = import ./config/hardware/asus.nix;
+    hardware_wsl = import ./config/hardware/wsl.nix;
   in {
     templates = import ./templates;
     overlays = import ./overlays {

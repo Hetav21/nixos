@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  inputs,
   config,
   settings,
   ...
@@ -18,29 +17,20 @@ in {
       nix-update
     ];
 
-    system.autoUpgrade = {
-      enable = true;
-      flake = inputs.self.outPath;
-      flags =
-        lib.concatMap (input: ["--update-input" input]) (lib.splitString " " settings.update-standard)
-        ++ ["-L"]; # print build logs
-      dates = "09:00";
-      randomizedDelaySec = "45min";
-    };
-
     nix = {
       settings = {
         trusted-users = ["root" "${settings.username}"];
         auto-optimise-store = true;
         experimental-features = ["nix-command" "flakes"];
         stalled-download-timeout = 99999999;
-        max-jobs = 2;
-        cores = 8;
+        max-jobs = settings.nix.maxJobs or 2;
+        cores = settings.nix.cores or 8;
       };
       gc = {
         automatic = true;
         dates = "weekly";
         options = "--delete-older-than 7d";
+        persistent = true;
       };
       optimise = {
         automatic = true;

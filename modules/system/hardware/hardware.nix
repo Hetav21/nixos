@@ -1,3 +1,4 @@
+# Base hardware configuration (audio, bluetooth, input, etc.)
 {
   lib,
   pkgs,
@@ -5,10 +6,10 @@
   ...
 }:
 with lib; let
-  cfg = config.system.hardware.hardware;
+  cfg = config.system.hardware.base;
 in {
-  options.system.hardware.hardware = {
-    enable = mkEnableOption "Enable hardware configuration";
+  options.system.hardware.base = {
+    enable = mkEnableOption "Enable base hardware configuration (audio, bluetooth, input)";
   };
 
   config = mkIf cfg.enable {

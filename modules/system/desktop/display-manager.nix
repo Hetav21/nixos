@@ -7,8 +7,8 @@
 }:
 with lib; let
   cfg = config.system.desktop.display-manager;
-  tuigreet = "${pkgs.tuigreet}/bin/tuigreet";
-  hyprland = "${inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland}";
+  tuigreet = lib.getExe pkgs.tuigreet;
+  hyprland = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
 in {
   options.system.desktop.display-manager = {
     enable = mkEnableOption "Enable display manager configuration";
@@ -25,7 +25,7 @@ in {
         enable = true;
         settings = {
           default_session = {
-            command = "${tuigreet} --time --cmd ${hyprland}/bin/start-hyprland  --remember --remember-session --sessions ${hyprland}/share/wayland-sessions";
+            command = "${tuigreet} --time --cmd ${lib.getExe' hyprland "start-hyprland"}  --remember --remember-session --sessions ${hyprland}/share/wayland-sessions";
             user = "greeter";
           };
         };

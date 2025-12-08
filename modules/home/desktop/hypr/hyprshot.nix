@@ -15,11 +15,11 @@ in {
     wayland.windowManager.hyprland.settings = {
       bind = [
         # Screenshot a monitor/output
-        "CTRL, print, exec, ${pkgs.hyprshot}/bin/hyprshot -m output -o ~/Pictures/Screenshots"
+        "CTRL, print, exec, ${lib.getExe pkgs.hyprshot} -m output -o ~/Pictures/Screenshots"
 
         # Screenshot a region
-        "CTRL SHIFT, print, exec, ${pkgs.hyprshot}/bin/hyprshot -m region -o ~/Pictures/Screenshots"
-        "SUPER_SHIFT, D, exec, ${pkgs.hyprshot}/bin/hyprshot -m region --clipboard-only"
+        "CTRL SHIFT, print, exec, ${lib.getExe pkgs.hyprshot} -m region -o ~/Pictures/Screenshots"
+        "SUPER_SHIFT, D, exec, ${lib.getExe pkgs.hyprshot} -m region --clipboard-only"
 
         # Miscellaneous
         # ''$mainMod, S, exec, ${pkgs.grim} -g "$(${pkgs.slurp})" - | ${pkgs.swappy} -f -''

@@ -1,5 +1,6 @@
 {
   # Common settings shared across all hosts
+
   # Upgrade configuration
   update-standard = "stylix home-manager lanzaboote sops-nix nix-flatpak zen-browser";
   update-latest = "nixpkgs-unstable nixpkgs-master chaotic nur vicinae hyprland";
@@ -22,6 +23,18 @@
     variant = "";
   };
   consoleKeymap = "us";
+
+  # Nix build configuration (can be overridden per-host)
+  nix = {
+    maxJobs = 2;
+    cores = 8;
+  };
+
+  # SSH key configuration
+  ssh = {
+    work.identityFile = "~/.ssh/id_work";
+    personal.identityFile = "~/.ssh/id_personal";
+  };
 
   # Application common configuration
   wallpaper_directory = "/etc/nixos/wallpapers";

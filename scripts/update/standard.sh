@@ -8,7 +8,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Main execution
 main() {
-    print_status "Starting NixOS standard update..."
+    print_info "Starting NixOS standard update..."
     
     # Get the update-standard inputs from flake.nix
     # This will be passed as command line arguments
@@ -17,8 +17,8 @@ main() {
     
     if [ -z "$inputs" ] || [ -z "$setup_dir" ]; then
         print_error "Missing required arguments for standard update"
-        print_status "Usage: $0 <inputs> <setup_dir>"
-        print_status "Example: $0 'stylix home-manager lanzaboote sops-nix nix-flatpak zen-browser' '/etc/nixos'"
+        print_info "Usage: $0 <inputs> <setup_dir>"
+        print_info "Example: $0 'stylix home-manager lanzaboote sops-nix nix-flatpak zen-browser' '/etc/nixos'"
         exit 1
     fi
     
