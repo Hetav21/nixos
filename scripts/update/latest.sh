@@ -8,7 +8,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Main execution
 main() {
-    print_status "Starting NixOS latest update..."
+    print_info "Starting NixOS latest update..."
     
     # Get the update-latest inputs from flake.nix
     # This will be passed as command line arguments
@@ -17,8 +17,8 @@ main() {
     
     if [ -z "$inputs" ] || [ -z "$setup_dir" ]; then
         print_error "Missing required arguments for latest update"
-        print_status "Usage: $0 <inputs> <setup_dir>"
-        print_status "Example: $0 'nixpkgs-unstable nixpkgs-master chaotic nur' '/etc/nixos'"
+        print_info "Usage: $0 <inputs> <setup_dir>"
+        print_info "Example: $0 'nixpkgs-unstable nixpkgs-master chaotic nur' '/etc/nixos'"
         exit 1
     fi
     

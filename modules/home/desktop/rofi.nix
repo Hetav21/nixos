@@ -19,7 +19,7 @@ in {
 
       bind = [
         "$mainMod, D, exec, $menu"
-        "$mainMod, SPACE, exec, ${pkgs.rofimoji}/bin/rofimoji"
+        "$mainMod, SPACE, exec, ${lib.getExe pkgs.rofimoji}"
         "$mainMod, C, exec, rofi -modi clipboard:${config.home.homeDirectory}/.local/bin/cliphist-rofi-img -show clipboard -show-icons"
         "$mainMod, Q, exec, rofi -modi calc -show calc"
       ];

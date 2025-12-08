@@ -11,15 +11,8 @@
     ../_common
   ];
 
-  # Home Manager configuration
-  # Home Manager configuration
-  home-manager = {
-    extraSpecialArgs = {inherit inputs settings;};
-    users.${settings.username} = import ./home.nix;
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    backupFileExtension = "backup";
-  };
+  # Point to host-specific home.nix (centralized home-manager is in _common)
+  local.homeConfig = ./home.nix;
 
   # Host-specific boot configuration (secure boot with lanzaboote)
   boot = {

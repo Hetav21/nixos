@@ -8,19 +8,19 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Main execution
 main() {
-    print_status "Starting NixOS update (all inputs)..."
+    print_info "Starting NixOS update (all inputs)..."
     
     local setup_dir="$1"
     
     if [ -z "$setup_dir" ]; then
         print_error "Missing required argument for update all"
-        print_status "Usage: $0 <setup_dir>"
-        print_status "Example: $0 '/etc/nixos'"
+        print_info "Usage: $0 <setup_dir>"
+        print_info "Example: $0 '/etc/nixos'"
         exit 1
     fi
     
     # Update all flake inputs (no restrictions)
-    print_status "Updating all flake inputs..."
+    print_info "Updating all flake inputs..."
     nix flake update --flake "$setup_dir"
     
     if [ $? -eq 0 ]; then

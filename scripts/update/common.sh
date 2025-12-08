@@ -3,36 +3,16 @@
 
 set -e
 
-# Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
-
-# Function to print colored output
-print_status() {
-    echo -e "${BLUE}[INFO]${NC} $1"
-}
-
-print_success() {
-    echo -e "${GREEN}[SUCCESS]${NC} $1"
-}
-
-print_warning() {
-    echo -e "${YELLOW}[WARNING]${NC} $1"
-}
-
-print_error() {
-    echo -e "${RED}[ERROR]${NC} $1"
-}
+# Source shared output functions
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+source "$SCRIPT_DIR/../common/output.sh"
 
 # Function to run nix flake update with specific inputs
 run_flake_update() {
     local inputs="$1"
     local flake_path="$2"
     
-    print_status "Updating flake inputs: $inputs"
+    print_info "Updating flake inputs: $inputs"
     
     if [ -n "$inputs" ]; then
         nix flake update --flake "$flake_path" $inputs

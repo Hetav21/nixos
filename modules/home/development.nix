@@ -39,13 +39,13 @@ in {
           matchBlocks = {
             "github.com-work" = {
               hostname = "github.com";
-              identityFile = "~/.ssh/id_work";
+              identityFile = settings.ssh.work.identityFile;
               identitiesOnly = true;
             };
 
             "github.com-personal" = {
               hostname = "github.com";
-              identityFile = "~/.ssh/id_personal";
+              identityFile = settings.ssh.personal.identityFile;
               identitiesOnly = true;
             };
 

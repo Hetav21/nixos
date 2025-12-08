@@ -1,4 +1,8 @@
-{pkgs, ...}:
+{
+  lib,
+  pkgs,
+  ...
+}:
 pkgs.writeShellScriptBin "wallsetter" ''
 
   TIMEOUT=720
@@ -17,7 +21,7 @@ pkgs.writeShellScriptBin "wallsetter" ''
 
   	PREVIOUS=$WALLPAPER
 
-  	${pkgs.swww}/bin/swww img "$WALLPAPER" --transition-type random --transition-step 1 --transition-fps 60
+  	${lib.getExe pkgs.swww} img "$WALLPAPER" --transition-type random --transition-step 1 --transition-fps 60
   	sleep $TIMEOUT
   done
 ''

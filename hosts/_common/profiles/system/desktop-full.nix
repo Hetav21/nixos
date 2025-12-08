@@ -45,8 +45,8 @@ with lib; {
     };
     system.desktop-environment.enableGui = true;
 
-    # Enable hardware modules
-    system.hardware.hardware.enable = true;
+    # Enable base hardware modules (audio, bluetooth, input, etc.)
+    system.hardware.base.enable = true;
 
     # Enable misc modules
     system.misc.disk-decryption.enable = true;
