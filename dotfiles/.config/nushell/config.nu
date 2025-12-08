@@ -125,6 +125,7 @@ def nx-update [
             }
         }
     }
+    run-external flatpak update "-y"
 }
 
 # Completion function for update types
@@ -207,4 +208,3 @@ def "docker-rmi-all" [] {
 }
 
 $env.config.show_banner = false
-
