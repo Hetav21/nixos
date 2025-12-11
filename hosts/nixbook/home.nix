@@ -1,26 +1,10 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ../_common/home-base.nix
   ];
 
   # Enable full desktop profile (includes GTK/Qt configuration)
   profiles.home.desktop-full.enable = true;
-
-  # Host-specific GTK icon theme override
-  gtk.iconTheme = {
-    name = let
-      suffix =
-        if config.stylix.polarity == "dark"
-        then "Dark"
-        else "Light";
-    in "Papirus-${suffix}";
-
-    package = pkgs.unstable.papirus-icon-theme;
-  };
 
   # Host-specific dotfiles and packages
   home = {

@@ -14,6 +14,8 @@ in {
   config = mkIf cfg.enableGui {
     environment.systemPackages = with pkgs; [
       custom.browseros
+      unstable.brave
+      unstable.google-chrome
     ];
 
     services.flatpak.packages = [

@@ -178,7 +178,7 @@ in {
                 integrated = {
                   defaultProfile = {
                     windows = "Git Bash";
-                    linux = "fish";
+                    linux = "nu";
                   };
                   env = {
                     windows = {};
