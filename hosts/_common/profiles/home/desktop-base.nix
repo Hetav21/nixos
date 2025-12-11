@@ -2,6 +2,7 @@
 # Includes: Essential CLI/TUI + lightweight GUI tools
 {
   lib,
+  pkgs,
   config,
   ...
 }:
@@ -29,7 +30,8 @@ with lib; {
 
     # Enable essential desktop modules only
     home.desktop.hyprland.enableGui = true;
-    home.desktop.waybar.enableGui = true;
+    home.desktop.panel.enableGui = true;
+    home.desktop.waybar.enableGui = false;
     home.desktop.clipboard.enableGui = true;
     home.desktop.notification.enableGui = true;
     home.desktop.launcher.enableGui = true;
@@ -51,6 +53,15 @@ with lib; {
       enable = true;
       gtk3.extraConfig = {gtk-application-prefer-dark-theme = 1;};
       gtk4.extraConfig = {gtk-application-prefer-dark-theme = 1;};
+      iconTheme = {
+        name = let
+          suffix =
+            if config.stylix.polarity == "dark"
+            then "Dark"
+            else "Light";
+        in "Papirus-${suffix}";
+        package = pkgs.unstable.papirus-icon-theme;
+      };
     };
 
     # Qt configuration (common for all desktop hosts)
