@@ -2,6 +2,7 @@
 # Includes: All CLI/TUI tools + GUI applications
 {
   lib,
+  pkgs,
   config,
   ...
 }:
@@ -38,7 +39,8 @@ with lib; {
     home.desktop.notification.enableGui = true;
     home.desktop.rofi.enableGui = false; # Using launcher instead
     home.desktop.wallpaper.enableGui = true;
-    home.desktop.waybar.enableGui = true;
+    home.desktop.panel.enableGui = true;
+    home.desktop.waybar.enableGui = false;
     home.desktop.wlogout.enableGui = true;
 
     # Enable browser
@@ -49,6 +51,15 @@ with lib; {
       enable = true;
       gtk3.extraConfig = {gtk-application-prefer-dark-theme = 1;};
       gtk4.extraConfig = {gtk-application-prefer-dark-theme = 1;};
+      iconTheme = {
+        name = let
+          suffix =
+            if config.stylix.polarity == "dark"
+            then "Dark"
+            else "Light";
+        in "Papirus-${suffix}";
+        package = pkgs.unstable.papirus-icon-theme;
+      };
     };
 
     # Qt configuration (common for all desktop hosts)
