@@ -10,7 +10,7 @@ nx update
 nx rebuild switch
 
 # Validate flake syntax
-nx flake-check
+nx flake check
 ```
 
 ## nx Command Reference
@@ -27,13 +27,21 @@ nx flake-check
 | `nx doctor` | Run all maintenance (gc + clean + optimise) |
 | `nx pull` | Pull latest changes from git |
 | `nx log` | Tail the rebuild log |
-| `nx flake-check` | Validate flake syntax |
+| `nx flake check` | Validate flake syntax |
+| `nx flake build [host]` | Dry-run build for host (default: nixwslbook) |
+| `nx flake eval [host]` | Evaluate config for host (default: nixwslbook) |
 
 ## Testing Changes
 
 ```bash
-# Validate before committing
-nx flake-check
+# Validate flake syntax
+nx flake check
+
+# Dry-run build for specific host (without switching)
+nx flake build nixbook
+
+# Evaluate config for specific host
+nx flake eval nixbook
 
 # Test configuration without switching (default)
 nx rebuild test
@@ -122,7 +130,7 @@ in {
 1. Update option paths in module
 2. Update all profile references
 3. Update all host overrides
-4. Test with nx flake-check
+4. Test with nx flake check
 ```
 
 ### Update Flake Input
@@ -174,7 +182,7 @@ rg "home\.development" modules -n
 nx log
 
 # Debug build failures
-nx flake-check
+nx flake check
 
 # Rollback to previous generation
 nx rollback

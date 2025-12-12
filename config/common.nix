@@ -3,7 +3,7 @@
 
   # Upgrade configuration
   update-standard = "stylix home-manager lanzaboote sops-nix nix-flatpak zen-browser";
-  update-latest = "nixpkgs-unstable nixpkgs-master chaotic nur vicinae hyprland";
+  update-latest = "nixpkgs-unstable nixpkgs-master nur vicinae";
 
   # User configuration
   username = "hetav";

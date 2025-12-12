@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  pkgs-unstable,
   config,
   ...
 }:
@@ -58,7 +59,7 @@ in {
 
     programs.quickshell = {
       enable = true;
-      package = pkgs.unstable.quickshell;
+      package = pkgs-unstable.quickshell;
       systemd = {
         enable = true;
         target = "hyprland-session.target";

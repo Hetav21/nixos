@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  pkgs-unstable,
   config,
   ...
 }:
@@ -12,11 +13,14 @@ in {
   };
 
   config = mkIf cfg.enableGui {
-    environment.systemPackages = with pkgs; [
-      custom.browseros
-      unstable.brave
-      unstable.google-chrome
-    ];
+    environment.systemPackages =
+      (with pkgs; [
+        custom.browseros
+      ])
+      ++ (with pkgs-unstable; [
+        brave
+        google-chrome
+      ]);
 
     services.flatpak.packages = [
       "com.microsoft.Edge"

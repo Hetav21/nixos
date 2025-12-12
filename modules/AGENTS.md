@@ -103,8 +103,13 @@ environment.systemPackages = with pkgs; [ new-package ];
 # Home package
 home.packages = with pkgs; [ new-package ];
 
-# Unstable channel
-pkgs.unstable.new-package
+# Unstable channel (add pkgs-unstable to module args)
+pkgs-unstable.new-package
+
+# Multiple packages from different channels
+home.packages =
+  (with pkgs; [ stable-package ])
+  ++ (with pkgs-unstable; [ unstable-package ]);
 ```
 
 ### Add/Modify Service

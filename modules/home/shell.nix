@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  pkgs-unstable,
   config,
   settings,
   ...
@@ -19,7 +20,7 @@ in {
       programs = {
         fish = {
           enable = true;
-          package = pkgs.unstable.fish;
+          package = pkgs-unstable.fish;
           shellInit = ''
             # Set SSH agent socket from systemd service
             set -gx SSH_AUTH_SOCK $XDG_RUNTIME_DIR/ssh-agent
@@ -159,35 +160,35 @@ in {
 
         yazi = {
           enable = true;
-          package = pkgs.unstable.yazi;
+          package = pkgs-unstable.yazi;
           enableFishIntegration = true;
           enableNushellIntegration = true;
         };
 
         carapace = {
           enable = true;
-          package = pkgs.unstable.carapace;
+          package = pkgs-unstable.carapace;
           enableFishIntegration = true;
           enableNushellIntegration = true;
         };
 
         starship = {
           enable = true;
-          package = pkgs.unstable.starship;
+          package = pkgs-unstable.starship;
           enableFishIntegration = true;
           enableNushellIntegration = true;
         };
 
         zoxide = {
           enable = true;
-          package = pkgs.unstable.zoxide;
+          package = pkgs-unstable.zoxide;
           enableFishIntegration = true;
           enableNushellIntegration = true;
         };
 
         eza = {
           enable = true;
-          package = pkgs.unstable.eza;
+          package = pkgs-unstable.eza;
           enableFishIntegration = true;
           enableNushellIntegration = false;
           git = true;
@@ -201,12 +202,12 @@ in {
 
         bat = {
           enable = true;
-          package = pkgs.unstable.bat;
+          package = pkgs-unstable.bat;
         };
 
         ripgrep = {
           enable = true;
-          package = pkgs.unstable.ripgrep;
+          package = pkgs-unstable.ripgrep;
           arguments = [
             "--max-columns-preview"
             "--colors=line:style:bold"
@@ -215,17 +216,17 @@ in {
 
         fzf = {
           enable = true;
-          package = pkgs.unstable.fzf;
+          package = pkgs-unstable.fzf;
         };
 
         fd = {
           enable = true;
-          package = pkgs.unstable.fd;
+          package = pkgs-unstable.fd;
         };
 
         atuin = {
           enable = true;
-          package = pkgs.unstable.atuin;
+          package = pkgs-unstable.atuin;
           enableFishIntegration = true;
           enableNushellIntegration = true;
           flags = [
@@ -235,23 +236,23 @@ in {
 
         nix-your-shell = {
           enable = true;
-          package = pkgs.unstable.nix-your-shell;
+          package = pkgs-unstable.nix-your-shell;
           enableFishIntegration = true;
           enableNushellIntegration = true;
         };
 
         direnv = {
           enable = true;
-          package = pkgs.unstable.direnv;
+          package = pkgs-unstable.direnv;
           # enableFishIntegration = true; # READ ONLY
           enableNushellIntegration = true;
           nix-direnv = {
             enable = true;
-            package = pkgs.unstable.nix-direnv;
+            package = pkgs-unstable.nix-direnv;
           };
           mise = {
             enable = true;
-            package = pkgs.unstable.mise;
+            package = pkgs-unstable.mise;
           };
           silent = true;
         };
@@ -272,12 +273,12 @@ in {
       programs = {
         alacritty = {
           enable = true;
-          package = pkgs.unstable.alacritty;
+          package = pkgs-unstable.alacritty;
         };
 
         ghostty = {
           enable = true;
-          package = pkgs.unstable.ghostty;
+          package = pkgs-unstable.ghostty;
         };
       };
     })

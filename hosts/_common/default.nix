@@ -4,6 +4,8 @@
   config,
   inputs,
   settings,
+  pkgs-unstable,
+  pkgs-master,
   ...
 }:
 with lib; {
@@ -24,7 +26,7 @@ with lib; {
   config = {
     # Centralized Home Manager configuration
     home-manager = {
-      extraSpecialArgs = {inherit inputs settings;};
+      extraSpecialArgs = {inherit inputs settings pkgs-unstable pkgs-master;};
       users.${settings.username} = import config.local.homeConfig;
       useGlobalPkgs = true;
       useUserPackages = true;

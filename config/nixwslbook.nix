@@ -15,5 +15,5 @@
   # Override update strings to exclude desktop-only inputs
   # (lanzaboote, nix-flatpak, zen-browser, vicinae are not used in WSL)
   update-standard = "stylix home-manager sops-nix";
-  update-latest = "nixpkgs-unstable nixpkgs-master chaotic nur";
+  update-latest = "nixpkgs-unstable nixpkgs-master nur";
 }

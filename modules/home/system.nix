@@ -20,10 +20,10 @@ in {
       vim
 
       # System information tools
-      unstable.fastfetch
-      unstable.microfetch
-      unstable.onefetch
       tree
+      fastfetch
+      microfetch
+      onefetch
 
       # Filesystem support
       ntfs3g
