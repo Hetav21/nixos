@@ -15,8 +15,10 @@ def nx [
         print "  nx config\t\t- Open NixOS configuration directory"
         print "  nx rebuild [type]\t- Rebuild NixOS (default: test)"
         print "\t\t\t  Types: test, switch, boot"
+        print "  nx rollback\t\t- Rollback to previous generation"
         print "  nx update [type]\t- Update flake inputs (default: all)"
         print "\t\t\t  Types: latest, standard"
+        print "  nx flake-check\t- Validate flake syntax (nix flake check)"
         print "  nx clean\t\t- Remove old generations"
         print "  nx gc\t\t\t- Run garbage collection"
         print "  nx optimise\t\t- Optimise nix store (deduplicate identical files)"
@@ -31,7 +33,9 @@ def nx [
     match $subcommand {
         "config" => { nx-config }
         "rebuild" => { nx-rebuild $type_arg }
+        "rollback" => { nx-rollback }
         "update" => { nx-update $type_arg }
+        "flake-check" => { nx-flake-check }
         "clean" => { nx-clean }
         "gc" => { nx-gc }
         "optimise" => { nx-optimise }
@@ -47,7 +51,9 @@ def nx-completions [] {
     [
         "config"
         "rebuild"
+        "rollback"
         "update"
+        "flake-check"
         "clean"
         "gc"
         "optimise"
@@ -91,6 +97,20 @@ def nx-rebuild [
             return 1
         }
     }
+}
+
+# Rollback to previous NixOS generation
+def nx-rollback [] {
+    print "\n-> Rolling back to previous generation..."
+    ^sudo nixos-rebuild switch --rollback
+    print "\n-> Rollback completed."
+}
+
+# Validate flake syntax
+def nx-flake-check [] {
+    let setup_dir = ($env.NIXOS_SETUP_DIR? | default "/etc/nixos" | str trim -r -c '/')
+    print "\n-> Validating flake syntax..."
+    ^nix flake check $setup_dir
 }
 
 # Completion function for rebuild types
