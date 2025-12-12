@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  pkgs-unstable,
   config,
   settings,
   ...
@@ -16,19 +17,22 @@ in {
   config = mkMerge [
     # CLI/TUI development tools
     (mkIf cfg.enable {
-      home.packages = with pkgs; [
-        # TUI development tools
-        unstable.lazygit
-        unstable.lazydocker
-
-        # CLI development tools
-        awscli2
-        distrobox
-        unstable.cursor-cli
-        unstable.claude-code
-        unstable.gemini-cli
-        unstable.codex
-      ];
+      home.packages =
+        (with pkgs; [
+          # CLI development tools
+          awscli2
+          distrobox
+        ])
+        ++ (with pkgs-unstable; [
+          # TUI development tools
+          lazygit
+          lazydocker
+          # CLI development tools (unstable)
+          cursor-cli
+          claude-code
+          gemini-cli
+          codex
+        ]);
 
       services.ssh-agent.enable = true;
 
@@ -66,11 +70,11 @@ in {
 
         git = {
           enable = true;
-          package = pkgs.unstable.gitFull;
+          package = pkgs-unstable.gitFull;
 
           lfs = {
             enable = true;
-            package = pkgs.unstable.git-lfs;
+            package = pkgs-unstable.git-lfs;
           };
 
           settings = {
@@ -99,7 +103,7 @@ in {
 
         jujutsu = {
           enable = true;
-          package = pkgs.unstable.jujutsu;
+          package = pkgs-unstable.jujutsu;
           # Settings placeholder
           # settings = {};
         };
@@ -109,7 +113,7 @@ in {
           enable = true;
           enableGitIntegration = true;
           enableJujutsuIntegration = true;
-          package = pkgs.unstable.delta;
+          package = pkgs-unstable.delta;
           options = {
             navigate = true;
             light = false;
@@ -124,24 +128,26 @@ in {
       # Auto-enable CLI tools when GUI is enabled
       home.development.enable = true;
 
-      home.packages = with pkgs; [
-        # GUI Text editors and IDEs
-        unstable.code-cursor
-        unstable.antigravity
-
-        # GUI development tools
-        unstable.hoppscotch
-        unstable.bruno
-        mongodb-compass
-      ];
+      home.packages =
+        (with pkgs; [
+          mongodb-compass
+        ])
+        ++ (with pkgs-unstable; [
+          # GUI Text editors and IDEs
+          code-cursor
+          antigravity
+          # GUI development tools
+          hoppscotch
+          bruno
+        ]);
 
       # GUI program configurations
       programs = {
         vscode = {
           enable = true;
-          package = pkgs.unstable.vscode;
+          package = pkgs-unstable.vscode;
           profiles.${settings.username} = {
-            extensions = with pkgs.unstable.vscode-extensions; [vscodevim.vim];
+            extensions = with pkgs-unstable.vscode-extensions; [vscodevim.vim];
 
             userSettings = {
               # Editor settings
@@ -328,7 +334,7 @@ in {
 
         zed-editor = {
           enable = true;
-          package = pkgs.unstable.zed-editor;
+          package = pkgs-unstable.zed-editor;
           installRemoteServer = true;
           extraPackages = with pkgs; [alejandra];
 

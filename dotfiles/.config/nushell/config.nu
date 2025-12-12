@@ -18,7 +18,9 @@ def nx [
         print "  nx rollback\t\t- Rollback to previous generation"
         print "  nx update [type]\t- Update flake inputs (default: all)"
         print "\t\t\t  Types: latest, standard"
-        print "  nx flake-check\t- Validate flake syntax (nix flake check)"
+        print "  nx flake [cmd] [host]\t- Flake operations"
+        print "\t\t\t  Commands: check, build, eval"
+        print "\t\t\t  Hosts: nixbook, nixwslbook"
         print "  nx clean\t\t- Remove old generations"
         print "  nx gc\t\t\t- Run garbage collection"
         print "  nx optimise\t\t- Optimise nix store (deduplicate identical files)"
@@ -29,13 +31,14 @@ def nx [
     }
 
     let type_arg = (if ($rest | is-empty) { null } else { $rest | first })
+    let second_arg = (if ($rest | length) > 1 { $rest | get 1 } else { null })
 
     match $subcommand {
         "config" => { nx-config }
         "rebuild" => { nx-rebuild $type_arg }
         "rollback" => { nx-rollback }
         "update" => { nx-update $type_arg }
-        "flake-check" => { nx-flake-check }
+        "flake" => { nx-flake $type_arg $second_arg }
         "clean" => { nx-clean }
         "gc" => { nx-gc }
         "optimise" => { nx-optimise }
@@ -53,7 +56,7 @@ def nx-completions [] {
         "rebuild"
         "rollback"
         "update"
-        "flake-check"
+        "flake"
         "clean"
         "gc"
         "optimise"
@@ -106,11 +109,53 @@ def nx-rollback [] {
     print "\n-> Rollback completed."
 }
 
-# Validate flake syntax
-def nx-flake-check [] {
+# Flake operations (check, build, eval)
+def nx-flake [
+    flake_cmd?: string@flake-cmd-completions  # Flake command: check, build, eval
+    host?: string@host-completions            # Host
+] {
     let setup_dir = ($env.NIXOS_SETUP_DIR? | default "/etc/nixos" | str trim -r -c '/')
-    print "\n-> Validating flake syntax..."
-    ^nix flake check $setup_dir
+    let flake_cmd = (if ($flake_cmd | is-empty) { "check" } else { $flake_cmd })
+    
+    match $flake_cmd {
+        "check" => {
+            print "\n-> Validating flake syntax..."
+            print "   [Checks: flake structure, input references]"
+            print "   [Catches: syntax errors, invalid inputs]\n"
+            ^nix flake check $setup_dir
+        }
+        "build" => {
+            let target_host = (if ($host | is-empty) { "nixwslbook" } else { $host })
+            print $"\n-> Dry-run build for ($target_host)..."
+            print "   [Checks: full evaluation + derivation validity]"
+            print "   [Catches: missing packages, broken derivations, build errors]\n"
+            ^nix build $"($setup_dir)#nixosConfigurations.($target_host).config.system.build.toplevel" --dry-run
+            print $"\n-> Build check for ($target_host) completed."
+        }
+        "eval" => {
+            let target_host = (if ($host | is-empty) { "nixwslbook" } else { $host })
+            print $"\n-> Evaluating config for ($target_host)..."
+            print "   [Checks: Nix expression evaluation for host]"
+            print "   [Catches: undefined vars, type errors, missing modules]\n"
+            ^nix eval $"($setup_dir)#nixosConfigurations.($target_host).config.system.build.toplevel" --apply "x: \"ok\""
+            print $"\n-> Evaluation for ($target_host) completed."
+        }
+        _ => {
+            print $"Unknown flake command: ($flake_cmd)"
+            print "Available commands: check, build, eval"
+            return 1
+        }
+    }
+}
+
+# Completion function for flake commands
+def flake-cmd-completions [] {
+    ["check" "build" "eval"]
+}
+
+# Completion function for hosts
+def host-completions [] {
+    ["nixbook" "nixwslbook"]
 }
 
 # Completion function for rebuild types

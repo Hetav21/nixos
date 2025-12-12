@@ -2,13 +2,12 @@
   lib,
   pkgs,
   config,
-  inputs,
   ...
 }:
 with lib; let
   cfg = config.system.desktop.display-manager;
   tuigreet = lib.getExe pkgs.tuigreet;
-  hyprland = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+  hyprland = pkgs.hyprland;
 in {
   options.system.desktop.display-manager = {
     enable = mkEnableOption "Enable display manager configuration";

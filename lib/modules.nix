@@ -9,30 +9,11 @@
 # - home.*       : Home-manager user-level configuration (dotfiles, user packages)
 # - drivers.*    : Hardware driver configuration (nvidia, amd, intel, asus)
 # - profiles.*   : Pre-configured bundles of modules for different use cases
-inputs: outputs: rec {
-  # Common modules shared across all hosts
-  common = [
-    inputs.sops-nix.nixosModules.sops
-    inputs.nix-flatpak.nixosModules.nix-flatpak
-    inputs.stylix.nixosModules.stylix
-    inputs.home-manager.nixosModules.home-manager
-    inputs.nix-index-database.nixosModules.nix-index
-    inputs.chaotic.nixosModules.nyx-cache
-    inputs.chaotic.nixosModules.nyx-overlay
-    inputs.chaotic.nixosModules.nyx-registry
-    {
-      nixpkgs = {
-        overlays = builtins.attrValues outputs.overlays;
-        config = import ../config/nixpkgs-config.nix;
-      };
-    }
-  ];
-
-  # Desktop-specific modules (for physical machines)
-  desktop = [inputs.lanzaboote.nixosModules.lanzaboote];
-
-  # WSL-specific modules
-  wsl = [inputs.nixos-wsl.nixosModules.default];
+inputs: outputs: let
+  inputsConfig = import ../config/inputs-config.nix {inherit inputs outputs;};
+in rec {
+  # Module lists imported from config/inputs-config.nix
+  inherit (inputsConfig.modules) common desktop wsl;
 
   # mkModule: Unified helper for creating modules with CLI/GUI enable options
   #

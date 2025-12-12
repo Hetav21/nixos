@@ -60,7 +60,7 @@ with lib; {
             then "Dark"
             else "Light";
         in "Papirus-${suffix}";
-        package = pkgs.unstable.papirus-icon-theme;
+        package = pkgs.papirus-icon-theme;
       };
     };
 

@@ -18,8 +18,8 @@ in {
       file-roller
 
       # Productivity
-      unstable.obsidian
       texliveMinimal
+      obsidian
     ];
 
     services.flatpak.packages = [

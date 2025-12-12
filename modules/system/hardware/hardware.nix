@@ -2,6 +2,7 @@
 {
   lib,
   pkgs,
+  pkgs-unstable,
   config,
   ...
 }:
@@ -13,18 +14,21 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      alsa-utils
-      pulseaudio
+    environment.systemPackages =
+      (with pkgs; [
+        alsa-utils
+        pulseaudio
 
-      brightnessctl
+        brightnessctl
 
-      unstable.lact
-      nvtopPackages.full
-    ];
+        nvtopPackages.full
+      ])
+      ++ (with pkgs-unstable; [
+        lact
+      ]);
 
     systemd = {
-      packages = with pkgs; [unstable.lact];
+      packages = [pkgs-unstable.lact];
       services.lactd.wantedBy = ["multi-user.target"];
     };
 

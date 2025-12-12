@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  pkgs-unstable,
   config,
   ...
 }:
@@ -12,12 +13,15 @@ in {
   };
 
   config = mkIf cfg.enableGui {
-    environment.systemPackages = with pkgs; [
-      # Communication and social
-      unstable.thunderbird
-      unstable.discord
-      unstable.vesktop
-      zoom-us
-    ];
+    environment.systemPackages =
+      (with pkgs; [
+        zoom-us
+      ])
+      ++ (with pkgs-unstable; [
+        # Communication and social
+        thunderbird
+        discord
+        vesktop
+      ]);
   };
 }

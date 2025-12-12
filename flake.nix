@@ -18,8 +18,6 @@
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
-    nixpkgs-kernel.url = "github:nixos/nixpkgs?shallow=1&ref=nixos-unstable";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,7 +41,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
     vicinae.url = "github:vicinaehq/vicinae";
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
@@ -57,19 +54,16 @@
       "https://nix-community.cachix.org"
       "https://cuda-maintainers.cachix.org"
       "https://vicinae.cachix.org"
-      "https://hyprland.cachix.org"
     ];
     extra-trusted-substituters = [
       "https://nix-community.cachix.org"
       "https://cuda-maintainers.cachix.org"
       "https://vicinae.cachix.org"
-      "https://hyprland.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
       "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
   };
 
@@ -85,6 +79,7 @@
     # Import library helpers
     hostLib = import ./lib/hosts.nix {inherit lib;};
     moduleLib = import ./lib/modules.nix inputs outputs;
+    nixpkgsLib = import ./lib/nixpkgs.nix inputs;
 
     # Import modular configurations using mkHostSettings
     commonSettings = import ./config/common.nix;
@@ -103,11 +98,13 @@
     nixosConfigurations = {
       nixbook = nixpkgs.lib.nixosSystem {
         system = nixbookSettings.system;
-        specialArgs = {
-          inherit self inputs outputs;
-          settings = nixbookSettings;
-          hardware = hardware_asus;
-        };
+        specialArgs =
+          {
+            inherit self inputs outputs;
+            settings = nixbookSettings;
+            hardware = hardware_asus;
+          }
+          // nixpkgsLib.mkChannelsFor nixbookSettings.system;
         modules =
           [./hosts/nixbook/configuration.nix]
           ++ moduleLib.common
@@ -116,11 +113,13 @@
 
       nixwslbook = nixpkgs.lib.nixosSystem {
         system = nixwslbookSettings.system;
-        specialArgs = {
-          inherit self inputs outputs;
-          settings = nixwslbookSettings;
-          hardware = hardware_wsl;
-        };
+        specialArgs =
+          {
+            inherit self inputs outputs;
+            settings = nixwslbookSettings;
+            hardware = hardware_wsl;
+          }
+          // nixpkgsLib.mkChannelsFor nixwslbookSettings.system;
         modules =
           [./hosts/nixwslbook/configuration.nix]
           ++ moduleLib.common
