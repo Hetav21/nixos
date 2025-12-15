@@ -22,9 +22,6 @@
         lazydocker
         # CLI development tools (unstable)
         cursor-cli
-        claude-code
-        gemini-cli
-        codex
       ]);
 
     services.ssh-agent.enable = true;
@@ -111,6 +108,269 @@
           navigate = true;
           light = false;
           side-by-side = true;
+        };
+      };
+
+      opencode = {
+        enable = true;
+        package = pkgs-unstable.opencode;
+        enableMcpIntegration = true;
+
+        settings = {
+          "$schema" = "https://opencode.ai/config.json";
+
+          plugin = [
+            "opencode-google-antigravity-auth" # https://github.com/shekohex/opencode-google-antigravity-auth?tab=readme-ov-file
+          ];
+
+          model = "gemini-claude-opus-4-5-thinking-low";
+          provider = {
+            google = {
+              npm = "@ai-sdk/google";
+              models = {
+                # Gemini 3 Pro with thinking levels
+                gemini-3-pro-preview = {
+                  id = "gemini-3-pro-preview";
+                  name = "Gemini 3 Pro Preview";
+                  reasoning = true;
+                  limit = {
+                    context = 1000000;
+                    output = 64000;
+                  };
+                  modalities = {
+                    input = ["text" "image" "video" "audio" "pdf"];
+                    output = ["text"];
+                  };
+                };
+                gemini-3-pro-high = {
+                  id = "gemini-3-pro-preview";
+                  name = "Gemini 3 Pro (High Thinking)";
+                  options.thinkingConfig = {
+                    thinkingLevel = "high";
+                    includeThoughts = true;
+                  };
+                };
+                gemini-3-pro-medium = {
+                  id = "gemini-3-pro-preview";
+                  name = "Gemini 3 Pro (Medium Thinking)";
+                  options.thinkingConfig = {
+                    thinkingLevel = "medium";
+                    includeThoughts = true;
+                  };
+                };
+                # Gemini 2.5 Flash (fast + cheap)
+                gemini-2-5-flash = {
+                  id = "gemini-2.5-flash";
+                  name = "Gemini 2.5 Flash";
+                  reasoning = true;
+                  limit = {
+                    context = 1048576;
+                    output = 65536;
+                  };
+                  modalities = {
+                    input = ["text" "image" "audio" "video" "pdf"];
+                    output = ["text"];
+                  };
+                };
+                # Claude Sonnet 4.5 via Antigravity proxy (1M context)
+                gemini-claude-sonnet-4-5-1m-high = {
+                  id = "gemini-claude-sonnet-4-5-thinking";
+                  name = "Claude Sonnet 4.5 1M (High Thinking)";
+                  reasoning = true;
+                  limit = {
+                    context = 1000000;
+                    output = 64000;
+                  };
+                  options.thinkingConfig = {
+                    thinkingBudget = 32000;
+                    includeThoughts = true;
+                  };
+                };
+                gemini-claude-sonnet-4-5-1m-medium = {
+                  id = "gemini-claude-sonnet-4-5-thinking";
+                  name = "Claude Sonnet 4.5 1M (Medium Thinking)";
+                  reasoning = true;
+                  limit = {
+                    context = 1000000;
+                    output = 64000;
+                  };
+                  options.thinkingConfig = {
+                    thinkingBudget = 16000;
+                    includeThoughts = true;
+                  };
+                };
+                gemini-claude-sonnet-4-5-1m-low = {
+                  id = "gemini-claude-sonnet-4-5-thinking";
+                  name = "Claude Sonnet 4.5 1M (Low Thinking)";
+                  reasoning = true;
+                  limit = {
+                    context = 1000000;
+                    output = 64000;
+                  };
+                  options.thinkingConfig = {
+                    thinkingBudget = 4000;
+                    includeThoughts = true;
+                  };
+                };
+                # Claude Sonnet 4.5 via Antigravity proxy (200K context)
+                gemini-claude-sonnet-4-5-thinking-high = {
+                  id = "gemini-claude-sonnet-4-5-thinking";
+                  name = "Claude Sonnet 4.5 (High Thinking)";
+                  reasoning = true;
+                  limit = {
+                    context = 200000;
+                    output = 64000;
+                  };
+                  options.thinkingConfig = {
+                    thinkingBudget = 32000;
+                    includeThoughts = true;
+                  };
+                };
+                gemini-claude-sonnet-4-5-thinking-medium = {
+                  id = "gemini-claude-sonnet-4-5-thinking";
+                  name = "Claude Sonnet 4.5 (Medium Thinking)";
+                  reasoning = true;
+                  limit = {
+                    context = 200000;
+                    output = 64000;
+                  };
+                  options.thinkingConfig = {
+                    thinkingBudget = 16000;
+                    includeThoughts = true;
+                  };
+                };
+                gemini-claude-sonnet-4-5-thinking-low = {
+                  id = "gemini-claude-sonnet-4-5-thinking";
+                  name = "Claude Sonnet 4.5 (Low Thinking)";
+                  reasoning = true;
+                  limit = {
+                    context = 200000;
+                    output = 64000;
+                  };
+                  options.thinkingConfig = {
+                    thinkingBudget = 4000;
+                    includeThoughts = true;
+                  };
+                };
+                # Claude Opus 4.5 via Antigravity proxy (1M context)
+                gemini-claude-opus-4-5-1m-high = {
+                  id = "gemini-claude-opus-4-5-thinking";
+                  name = "Claude Opus 4.5 1M (High Thinking)";
+                  reasoning = true;
+                  limit = {
+                    context = 1000000;
+                    output = 64000;
+                  };
+                  options.thinkingConfig = {
+                    thinkingBudget = 32000;
+                    includeThoughts = true;
+                  };
+                };
+                gemini-claude-opus-4-5-1m-medium = {
+                  id = "gemini-claude-opus-4-5-thinking";
+                  name = "Claude Opus 4.5 1M (Medium Thinking)";
+                  reasoning = true;
+                  limit = {
+                    context = 1000000;
+                    output = 64000;
+                  };
+                  options.thinkingConfig = {
+                    thinkingBudget = 16000;
+                    includeThoughts = true;
+                  };
+                };
+                gemini-claude-opus-4-5-1m-low = {
+                  id = "gemini-claude-opus-4-5-thinking";
+                  name = "Claude Opus 4.5 1M (Low Thinking)";
+                  reasoning = true;
+                  limit = {
+                    context = 1000000;
+                    output = 64000;
+                  };
+                  options.thinkingConfig = {
+                    thinkingBudget = 4000;
+                    includeThoughts = true;
+                  };
+                };
+                # Claude Opus 4.5 via Antigravity proxy (200K context)
+                gemini-claude-opus-4-5-thinking-high = {
+                  id = "gemini-claude-opus-4-5-thinking";
+                  name = "Claude Opus 4.5 (High Thinking)";
+                  reasoning = true;
+                  limit = {
+                    context = 200000;
+                    output = 64000;
+                  };
+                  options.thinkingConfig = {
+                    thinkingBudget = 32000;
+                    includeThoughts = true;
+                  };
+                };
+                gemini-claude-opus-4-5-thinking-medium = {
+                  id = "gemini-claude-opus-4-5-thinking";
+                  name = "Claude Opus 4.5 (Medium Thinking)";
+                  reasoning = true;
+                  limit = {
+                    context = 200000;
+                    output = 64000;
+                  };
+                  options.thinkingConfig = {
+                    thinkingBudget = 16000;
+                    includeThoughts = true;
+                  };
+                };
+                gemini-claude-opus-4-5-thinking-low = {
+                  id = "gemini-claude-opus-4-5-thinking";
+                  name = "Claude Opus 4.5 (Low Thinking)";
+                  reasoning = true;
+                  limit = {
+                    context = 200000;
+                    output = 64000;
+                  };
+                  options.thinkingConfig = {
+                    thinkingBudget = 4000;
+                    includeThoughts = true;
+                  };
+                };
+              };
+            };
+          };
+        };
+      };
+
+      mcp = {
+        enable = true;
+        servers = {
+          context7 = {
+            url = "https://mcp.context7.com/mcp";
+            headers = {
+              CONTEXT7_API_KEY = "{env:CONTEXT7_API_KEY}";
+            };
+          };
+          sequential-thinking = {
+            command = lib.getExe' pkgs.bun "bunx";
+            args = [
+              "-y"
+              "@modelcontextprotocol/server-sequential-thinking"
+            ];
+          };
+          memory-bank = {
+            command = lib.getExe' pkgs.bun "bunx";
+            args = [
+              "-y"
+              "@allpepper/memory-bank-mcp@latest"
+            ];
+            env = {
+              MEMORY_BANK_ROOT = "/home/${settings.username}/.memory-bank";
+            };
+            autoApprove = [
+              "memory_bank_read"
+              "memory_bank_write"
+              "memory_bank_update"
+              "list_projects"
+              "list_project_files"
+            ];
+          };
         };
       };
     };

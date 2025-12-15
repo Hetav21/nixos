@@ -42,8 +42,12 @@
           $env.NIXOS_UPDATE_STANDARD = "${settings.update-standard}"
           $env.NIXOS_UPDATE_LATEST = "${settings.update-latest}"
 
-          if (('/run/secrets/openai_api_key' | path exists)) {
-            $env.OPENAI_API_KEY = (open /run/secrets/openai_api_key | str trim)
+          try {
+            $env.OPENAI_API_KEY = (cat /run/secrets/openai_api_key | str trim)
+          }
+
+          try {
+            $env.CONTEXT7_API_KEY = (cat /run/secrets/context7_api_key | str trim)
           }
         '';
 
