@@ -16,5 +16,13 @@
       owner = config.users.users.${settings.username}.name;
       group = config.users.users.${settings.username}.group;
     };
+
+    secrets.context7_api_key = {
+      sopsFile = ./context7_api_key.yaml;
+
+      mode = "0440";
+      owner = config.users.users.${settings.username}.name;
+      group = config.users.users.${settings.username}.group;
+    };
   };
 }
