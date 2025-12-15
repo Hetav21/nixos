@@ -190,7 +190,10 @@ def nx-update [
             }
         }
     }
-    run-external flatpak update "-y"
+    # Update flatpak packages (if flatpak is installed)
+    if (which flatpak | is-not-empty) {
+        run-external flatpak update "-y"
+    }
 }
 
 # Completion function for update types
