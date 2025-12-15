@@ -1,18 +1,14 @@
 {
-  lib,
+  mkModule,
   pkgs,
   pkgs-unstable,
-  config,
   ...
-}:
-with lib; let
-  cfg = config.system.communication;
-in {
-  options.system.communication = {
-    enableGui = mkEnableOption "Enable GUI communication tools (discord, thunderbird, zoom)";
-  };
-
-  config = mkIf cfg.enableGui {
+} @ args:
+(mkModule {
+  name = "system.communication";
+  hasCli = false;
+  hasGui = true;
+  guiConfig = _: {
     environment.systemPackages =
       (with pkgs; [
         zoom-us
@@ -24,4 +20,5 @@ in {
         vesktop
       ]);
   };
-}
+})
+args

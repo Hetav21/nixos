@@ -132,13 +132,8 @@ options.system.category.newOption = mkOption {
 ```
 
 ### Add Enable Flags
-
-```nix
-options.system.category = {
-  enable = mkEnableOption "Enable CLI/TUI tools";
-  enableGui = mkEnableOption "Enable GUI tools";
-};
-```
+ 
+ Use `mkModule` which automatically generates `enable` and `enableGui` options based on `hasCli` and `hasGui`.
 
 ---
 

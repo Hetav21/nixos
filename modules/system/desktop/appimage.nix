@@ -1,17 +1,13 @@
 {
+  mkModule,
   lib,
   pkgs,
-  config,
   ...
-}:
-with lib; let
-  cfg = config.system.desktop.appimage;
-in {
-  options.system.desktop.appimage = {
-    enable = mkEnableOption "Enable AppImage support configuration";
-  };
-
-  config = mkIf cfg.enable {
+} @ args:
+(mkModule {
+  name = "system.desktop.appimage";
+  hasGui = false;
+  cliConfig = _: {
     environment.systemPackages = with pkgs; [appimage-run];
 
     programs.fuse.userAllowOther = true;
@@ -21,4 +17,5 @@ in {
       binfmt = true;
     };
   };
-}
+})
+args

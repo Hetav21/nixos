@@ -103,6 +103,7 @@
             inherit self inputs outputs;
             settings = nixbookSettings;
             hardware = hardware_asus;
+            mkModule = moduleLib.mkModule;
           }
           // nixpkgsLib.mkChannelsFor nixbookSettings.system;
         modules =
@@ -118,6 +119,7 @@
             inherit self inputs outputs;
             settings = nixwslbookSettings;
             hardware = hardware_wsl;
+            mkModule = moduleLib.mkModule;
           }
           // nixpkgsLib.mkChannelsFor nixwslbookSettings.system;
         modules =

@@ -1,18 +1,14 @@
 {
-  lib,
+  mkModule,
   pkgs,
   pkgs-unstable,
-  config,
   ...
-}:
-with lib; let
-  cfg = config.system.browser;
-in {
-  options.system.browser = {
-    enableGui = mkEnableOption "Enable GUI web browsers";
-  };
-
-  config = mkIf cfg.enableGui {
+} @ args:
+(mkModule {
+  name = "system.browser";
+  hasCli = false;
+  hasGui = true;
+  guiConfig = _: {
     environment.systemPackages =
       (with pkgs; [
         custom.browseros
@@ -26,4 +22,5 @@ in {
       "com.microsoft.Edge"
     ];
   };
-}
+})
+args

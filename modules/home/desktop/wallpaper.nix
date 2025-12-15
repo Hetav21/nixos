@@ -1,17 +1,14 @@
 {
+  mkModule,
   lib,
   pkgs,
-  config,
   ...
-}:
-with lib; let
-  cfg = config.home.desktop.wallpaper;
-in {
-  options.home.desktop.wallpaper = {
-    enableGui = mkEnableOption "Enable GUI wallpaper manager";
-  };
-
-  config = mkIf cfg.enableGui {
+} @ args:
+(mkModule {
+  name = "home.desktop.wallpaper";
+  hasCli = false;
+  hasGui = true;
+  guiConfig = _: {
     home.packages = with pkgs; [
       waypaper
     ];
@@ -21,4 +18,5 @@ in {
       package = pkgs.swww;
     };
   };
-}
+})
+args

@@ -1,17 +1,15 @@
 {
+  mkModule,
   lib,
   pkgs,
   config,
   ...
-}:
-with lib; let
-  cfg = config.home.desktop.hyprland;
-in {
-  options.home.desktop.hyprland = {
-    enableGui = mkEnableOption "Enable GUI window manager (Hyprland)";
-  };
-
-  config = mkIf cfg.enableGui {
+} @ args:
+(mkModule {
+  name = "home.desktop.hyprland";
+  hasCli = false;
+  hasGui = true;
+  guiConfig = _: {
     wayland.windowManager.hyprland = {
       enable = true;
       package = pkgs.hyprland;
@@ -228,4 +226,5 @@ in {
         '';
     };
   };
-}
+})
+args

@@ -1,18 +1,15 @@
 {
+  mkModule,
   lib,
   pkgs,
-  config,
   settings,
   ...
-}:
-with lib; let
-  cfg = config.home.desktop.hyprpaper;
-in {
-  options.home.desktop.hyprpaper = {
-    enableGui = mkEnableOption "Enable hyprpaper backend to manage wallpaper";
-  };
-
-  config = mkIf cfg.enableGui {
+} @ args:
+(mkModule {
+  name = "home.desktop.hyprpaper";
+  hasCli = false;
+  hasGui = true;
+  guiConfig = _: {
     services = {
       hyprpaper = {
         enable = true;
@@ -24,4 +21,5 @@ in {
       };
     };
   };
-}
+})
+args

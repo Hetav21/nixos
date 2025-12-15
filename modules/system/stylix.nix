@@ -1,20 +1,18 @@
 {
+  mkModule,
   lib,
   pkgs,
   config,
   settings,
   ...
-}:
-with lib; let
-  cfg = config.system.stylix;
-  # Only use wallpaper if desktop environment is enabled (not for WSL)
-  hasDesktop = config.system.desktop-environment.enableGui or false;
-in {
-  options.system.stylix = {
-    enable = mkEnableOption "Enable Stylix theming and fonts";
-  };
-
-  config = mkIf cfg.enable {
+} @ args:
+(mkModule {
+  name = "system.stylix";
+  hasGui = false;
+  cliConfig = _: let
+    # Only use wallpaper if desktop environment is enabled (not for WSL)
+    hasDesktop = config.system.desktop-environment.enableGui or false;
+  in {
     # Font packages
     fonts = {
       enableDefaultPackages = true;
@@ -36,7 +34,7 @@ in {
     };
 
     # Stylix configuration
-    stylix = mkMerge [
+    stylix = lib.mkMerge [
       {
         enable = true;
         polarity = "dark";
@@ -98,9 +96,10 @@ in {
       }
 
       # Only set wallpaper image for desktop environments (not WSL)
-      (mkIf hasDesktop {
+      (lib.mkIf hasDesktop {
         image = ../../wallpapers/${settings.wallpaper};
       })
     ];
   };
-}
+})
+args

@@ -1,17 +1,9 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}:
-with lib; let
-  cfg = config.system.desktop-environment;
-in {
-  options.system.desktop-environment = {
-    enableGui = mkEnableOption "Enable GUI desktop environment components";
-  };
-
-  config = mkIf cfg.enableGui {
+{mkModule, ...} @ args:
+(mkModule {
+  name = "system.desktop-environment";
+  hasCli = false;
+  hasGui = true;
+  guiConfig = _: {
     # Import desktop environment sub-modules
     system.desktop.appimage.enable = true;
     system.desktop.environment.enable = true;
@@ -21,4 +13,5 @@ in {
     system.desktop.power-management.enable = true;
     system.desktop.printing.enable = true;
   };
-}
+})
+args

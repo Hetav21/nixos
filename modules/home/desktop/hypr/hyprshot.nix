@@ -1,17 +1,14 @@
 {
+  mkModule,
   lib,
   pkgs,
-  config,
   ...
-}:
-with lib; let
-  cfg = config.home.desktop.hyprshot;
-in {
-  options.home.desktop.hyprshot = {
-    enableGui = mkEnableOption "Enable GUI screenshot tool (hyprshot)";
-  };
-
-  config = mkIf cfg.enableGui {
+} @ args:
+(mkModule {
+  name = "home.desktop.hyprshot";
+  hasCli = false;
+  hasGui = true;
+  guiConfig = _: {
     wayland.windowManager.hyprland.settings = {
       bind = [
         # Screenshot a monitor/output
@@ -29,4 +26,5 @@ in {
       ];
     };
   };
-}
+})
+args

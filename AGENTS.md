@@ -74,36 +74,40 @@ nx rebuild switch
 
 ### Module Pattern
 
-All modules should follow the two-tier enable pattern:
-
-```nix
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}:
-with lib; let
-  cfg = config.system.category;
-in {
-  options.system.category = {
-    enable = mkEnableOption "Enable CLI/TUI tools";
-    enableGui = mkEnableOption "Enable GUI tools";
-  };
-
-  config = mkMerge [
-    (mkIf cfg.enable {
-      # CLI/TUI packages and configurations
-    })
-
-    (mkIf cfg.enableGui {
-      # Auto-enable CLI when GUI is enabled
-      system.category.enable = true;
-      # GUI packages and configurations
-    })
-  ];
-}
-```
+### Module Pattern
+ 
+ All modules must use the `mkModule` helper to ensure consistent behavior and auto-generated enable options.
+ 
+ **Requirements:**
+ 1. Destructure `mkModule` and other args (`lib`, `pkgs`, `config`) in the top-level function.
+ 2. Pass `@ args` to the top-level function.
+ 3. Call the result of `mkModule` with `args`.
+ 
+ ```nix
+ {
+   mkModule,
+   lib,
+   pkgs,
+   config,
+   ...
+ } @ args:
+ (mkModule {
+   name = "system.category.feature";
+   # Optional: set to false if module has no CLI/GUI component
+   hasCli = true; 
+   hasGui = true; 
+   
+   # Configuration for CLI/Server (enabled by cfg.enable)
+   cliConfig = _: {
+     environment.systemPackages = [ pkgs.tool ];
+   };
+ 
+   # Configuration for GUI (enabled by cfg.enableGui)
+   guiConfig = _: {
+     programs.gui-tool.enable = true;
+   };
+ }) args
+ ```
 
 ### Best Practices
 

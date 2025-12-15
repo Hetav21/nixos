@@ -1,17 +1,13 @@
 {
+  mkModule,
   lib,
-  config,
   settings,
   ...
-}:
-with lib; let
-  cfg = config.system.desktop.environment;
-in {
-  options.system.desktop.environment = {
-    enable = mkEnableOption "Enable desktop environment configuration";
-  };
-
-  config = mkIf cfg.enable {
+} @ args:
+(mkModule {
+  name = "system.desktop.environment";
+  hasGui = false;
+  cliConfig = _: {
     environment.sessionVariables = {
       EDITOR = settings.editor;
       VISUAL = settings.visual;
@@ -45,4 +41,5 @@ in {
     # Enable Stylix theming for desktop environments
     system.stylix.enable = true;
   };
-}
+})
+args

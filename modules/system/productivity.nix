@@ -1,17 +1,13 @@
 {
-  lib,
+  mkModule,
   pkgs,
-  config,
   ...
-}:
-with lib; let
-  cfg = config.system.productivity;
-in {
-  options.system.productivity = {
-    enableGui = mkEnableOption "Enable GUI productivity tools (office, file managers)";
-  };
-
-  config = mkIf cfg.enableGui {
+} @ args:
+(mkModule {
+  name = "system.productivity";
+  hasCli = false;
+  hasGui = true;
+  guiConfig = _: {
     environment.systemPackages = with pkgs; [
       # File management
       xfce.thunar
@@ -34,4 +30,5 @@ in {
       plugins = with pkgs.xfce; [thunar-archive-plugin thunar-volman];
     };
   };
-}
+})
+args

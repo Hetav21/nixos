@@ -18,37 +18,50 @@ in rec {
   # mkModule: Unified helper for creating modules with CLI/GUI enable options
   #
   # This helper generates consistent module boilerplate with configurable options:
-  # - CLI only:   mkModule { name = "home.downloads"; cliConfig = {...}; }
-  # - CLI + GUI:  mkModule { name = "system.network"; hasGui = true; cliConfig = {...}; guiConfig = {...}; }
-  # - GUI only:   mkModule { name = "system.browser"; hasCli = false; hasGui = true; guiConfig = {...}; }
+  # - CLI only:   mkModule { name = "home.downloads"; cliConfig = args: {...}; }
+  # - CLI + GUI:  mkModule { name = "system.network"; hasGui = true; cliConfig = args: {...}; guiConfig = args: {...}; }
+  # - GUI only:   mkModule { name = "system.browser"; hasCli = false; hasGui = true; guiConfig = args: {...}; }
   #
   # Parameters:
   #   name           - Option path e.g. "system.network" or "home.development"
   #   hasCli         - (default: true) Create `enable` option for CLI/TUI tools
   #   hasGui         - (default: false) Create `enableGui` option for GUI tools
   #   guiRequiresCli - (default: true) Auto-enable CLI when GUI is enabled
-  #   cliConfig      - Config to apply when CLI enabled (required if hasCli)
-  #   guiConfig      - Config to apply when GUI enabled (required if hasGui)
+  #   cliConfig      - Function (args: {...}) or attrset for CLI config
+  #   guiConfig      - Function (args: {...}) or attrset for GUI config
   #
-  # Note: This helper is exposed via specialArgs as `moduleHelpers.mkModule`
-  # for use within module files.
+  # The config functions receive full module args: { lib, pkgs, config, settings, hardware, pkgs-unstable, pkgs-master, ... }
   mkModule = {
     name,
     hasCli ? true,
     hasGui ? false,
     guiRequiresCli ? true,
-    cliConfig ? {},
-    guiConfig ? {},
+    cliConfig ? (_: {}),
+    guiConfig ? (_: {}),
   }: {
     lib,
     config,
+    pkgs ? null,
+    settings ? {},
+    hardware ? {},
+    pkgs-unstable ? pkgs,
+    pkgs-master ? pkgs,
     ...
-  }:
+  } @ args:
     with lib; let
       # Parse the option path (e.g., "system.network" -> ["system" "network"])
       pathParts = lib.splitString "." name;
       # Get the config value at the option path
       cfg = lib.getAttrFromPath pathParts config;
+      # Resolve configs - support both functions and static attrsets for backward compatibility
+      resolvedCliConfig =
+        if builtins.isFunction cliConfig
+        then cliConfig args
+        else cliConfig;
+      resolvedGuiConfig =
+        if builtins.isFunction guiConfig
+        then guiConfig args
+        else guiConfig;
     in {
       options = lib.setAttrByPath pathParts (
         {}
@@ -62,16 +75,16 @@ in rec {
 
       config = mkMerge [
         # CLI/TUI configuration
-        (mkIf (hasCli && cfg.enable or false) cliConfig)
+        (mkIf (hasCli && cfg.enable or false) resolvedCliConfig)
 
         # GUI configuration
         (mkIf (hasGui && cfg.enableGui or false) (
           mkMerge [
-            # Auto-enable CLI when GUI is enabled (if configured)
-            (mkIf (hasCli && guiRequiresCli) (
+            # Auto-enable CLI when GUI is enabled (only if hasCli is true)
+            (lib.optionalAttrs (hasCli && guiRequiresCli) (
               lib.setAttrByPath (pathParts ++ ["enable"]) true
             ))
-            guiConfig
+            resolvedGuiConfig
           ]
         ))
       ];

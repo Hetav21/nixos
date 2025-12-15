@@ -1,16 +1,14 @@
 {
+  mkModule,
   lib,
   config,
   ...
-}:
-with lib; let
-  cfg = config.home.desktop.waybar;
-in {
-  options.home.desktop.waybar = {
-    enableGui = mkEnableOption "Enable GUI status bar (waybar)";
-  };
-
-  config = mkIf cfg.enableGui {
+} @ args:
+(mkModule {
+  name = "home.desktop.waybar";
+  hasCli = false;
+  hasGui = true;
+  guiConfig = _: {
     stylix.targets.waybar.enable = false;
     programs.waybar = {
       enable = true;
@@ -41,8 +39,8 @@ in {
 
           "network" = {
             tooltip = true;
-            format-wifi = "<span foreground='#FF8B49'> {bandwidthDownBytes}</span> <span foreground='#FF6962'> {bandwidthUpBytes}</span>";
-            format-ethernet = "<span foreground='#FF8B49'> {bandwidthDownBytes}</span> <span foreground='#FF6962'> {bandwidthUpBytes}</span>";
+            format-wifi = "<span foreground='#FF8B49'> {bandwidthDownBytes}</span> <span foreground='#FF6962'> {bandwidthUpBytes}</span>";
+            format-ethernet = "<span foreground='#FF8B49'> {bandwidthDownBytes}</span> <span foreground='#FF6962'> {bandwidthUpBytes}</span>";
             tooltip-format = ''
               Network: <big><b>{essid}</b></big>
               Signal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>
@@ -58,10 +56,10 @@ in {
             on-click-right = "~/.config/waybar/network.py";
           };
 
-          "temperature" = {format = "{temperatureC}°C ";};
+          "temperature" = {format = "{temperatureC}°C ";};
 
           "custom/rofi" = {
-            format = "  {}";
+            format = "  {}";
             on-click = "rofi -show drun";
           };
 
@@ -78,8 +76,8 @@ in {
               critical = 20;
             };
             format = "{icon} {capacity}%";
-            format-charging = " {capacity}%";
-            format-plugged = " {capacity}%";
+            format-charging = " {capacity}%";
+            format-plugged = " {capacity}%";
             format-alt = "{time} {icon}";
             format-icons = ["󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
           };
@@ -91,20 +89,20 @@ in {
             tooltip-format = "{icon} {desc} // {volume}%";
             scroll-step = 5;
             format-icons = {
-              headphone = "";
-              "hands-free" = "";
-              headset = "";
-              phone = "";
-              portable = "";
-              car = "";
-              default = ["" "" ""];
+              headphone = "";
+              "hands-free" = "";
+              headset = "";
+              phone = "";
+              portable = "";
+              car = "";
+              default = ["" "" ""];
             };
           };
 
           "pulseaudio#microphone" = {
             "format" = "{format_source}";
-            "format-source" = "";
-            "format-source-muted" = "";
+            "format-source" = "";
+            "format-source-muted" = "";
             "on-click" = "pavucontrol -t 4";
           };
 
@@ -114,7 +112,7 @@ in {
           };
 
           "clock" = {
-            format = " {:%H:%M}";
+            format = " {:%H:%M}";
             on-click = "~/.config/eww/scripts/toggle_control_center.sh";
           };
 
@@ -283,4 +281,5 @@ in {
       '';
     };
   };
-}
+})
+args
