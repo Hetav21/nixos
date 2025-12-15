@@ -1,18 +1,16 @@
 {
+  mkModule,
   lib,
   pkgs,
   config,
   settings,
   ...
-}:
-with lib; let
-  cfg = config.home.desktop.hyprlock;
-in {
-  options.home.desktop.hyprlock = {
-    enableGui = mkEnableOption "Enable GUI screen locker (hyprlock)";
-  };
-
-  config = mkIf cfg.enableGui {
+} @ args:
+(mkModule {
+  name = "home.desktop.hyprlock";
+  hasCli = false;
+  hasGui = true;
+  guiConfig = _: {
     wayland.windowManager.hyprland.settings = {
       "$lock" = "hyprlock";
 
@@ -92,4 +90,5 @@ in {
       };
     };
   };
-}
+})
+args

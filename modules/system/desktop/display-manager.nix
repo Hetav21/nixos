@@ -1,19 +1,16 @@
 {
+  mkModule,
   lib,
   pkgs,
-  config,
   ...
-}:
-with lib; let
-  cfg = config.system.desktop.display-manager;
-  tuigreet = lib.getExe pkgs.tuigreet;
-  hyprland = pkgs.hyprland;
-in {
-  options.system.desktop.display-manager = {
-    enable = mkEnableOption "Enable display manager configuration";
-  };
-
-  config = mkIf cfg.enable {
+} @ args:
+(mkModule {
+  name = "system.desktop.display-manager";
+  hasGui = false;
+  cliConfig = _: let
+    tuigreet = lib.getExe pkgs.tuigreet;
+    hyprland = pkgs.hyprland;
+  in {
     services = {
       logind.settings.Login = {
         HandlePowerKey = "suspend";
@@ -49,4 +46,5 @@ in {
       };
     };
   };
-}
+})
+args

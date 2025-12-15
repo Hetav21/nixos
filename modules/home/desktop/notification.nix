@@ -1,19 +1,17 @@
 {
+  mkModule,
   lib,
   pkgs,
   pkgs-unstable,
-  config,
   ...
-}:
-with lib; let
-  cfg = config.home.desktop.notification;
-  hypr_border = 5; # adjust as per hyprland config
-in {
-  options.home.desktop.notification = {
-    enableGui = mkEnableOption "Enable GUI notification daemon";
-  };
-
-  config = mkIf cfg.enableGui {
+} @ args:
+(mkModule {
+  name = "home.desktop.notification";
+  hasCli = false;
+  hasGui = true;
+  guiConfig = _: let
+    hypr_border = 5; # adjust as per hyprland config
+  in {
     home.packages = with pkgs; [libnotify];
 
     services.dunst = {
@@ -119,4 +117,5 @@ in {
       };
     };
   };
-}
+})
+args

@@ -1,16 +1,12 @@
 {
+  mkModule,
   lib,
-  config,
   ...
-}:
-with lib; let
-  cfg = config.system.desktop.power-management;
-in {
-  options.system.desktop.power-management = {
-    enable = mkEnableOption "Enable power management configuration";
-  };
-
-  config = mkIf cfg.enable {
+} @ args:
+(mkModule {
+  name = "system.desktop.power-management";
+  hasGui = false;
+  cliConfig = _: {
     services = {
       upower.enable = true;
       auto-cpufreq = {
@@ -33,4 +29,5 @@ in {
       powertop.enable = true;
     };
   };
-}
+})
+args

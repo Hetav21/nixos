@@ -1,16 +1,8 @@
-{
-  lib,
-  config,
-  ...
-}:
-with lib; let
-  cfg = config.system.nix.ld;
-in {
-  options.system.nix.ld = {
-    enable = mkEnableOption "Enable nix-ld configuration";
-  };
-
-  config = mkIf cfg.enable {
+{mkModule, ...} @ args:
+(mkModule {
+  name = "system.nix.ld";
+  hasGui = false;
+  cliConfig = _: {
     programs.nix-ld = {
       enable = true;
       ## find the name of the package from the error message, like:
@@ -117,4 +109,5 @@ in {
       # ];
     };
   };
-}
+})
+args

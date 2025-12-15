@@ -1,16 +1,14 @@
 {
+  mkModule,
   lib,
   config,
   ...
-}:
-with lib; let
-  cfg = config.home.desktop.hypridle;
-in {
-  options.home.desktop.hypridle = {
-    enableGui = mkEnableOption "Enable GUI idle daemon (hypridle)";
-  };
-
-  config = mkIf cfg.enableGui {
+} @ args:
+(mkModule {
+  name = "home.desktop.hypridle";
+  hasCli = false;
+  hasGui = true;
+  guiConfig = _: {
     services.hypridle = {
       enable = true;
       settings = {
@@ -41,4 +39,5 @@ in {
       };
     };
   };
-}
+})
+args

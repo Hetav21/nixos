@@ -1,17 +1,13 @@
 {
+  mkModule,
   lib,
   pkgs,
-  config,
   ...
-}:
-with lib; let
-  cfg = config.home.nix-settings;
-in {
-  options.home.nix-settings = {
-    enable = mkEnableOption "Enable Nix development tools and utilities";
-  };
-
-  config = mkIf cfg.enable {
+} @ args:
+(mkModule {
+  name = "home.nix-settings";
+  hasGui = false;
+  cliConfig = _: {
     home.packages = with pkgs; [
       # Nix formatters
       alejandra
@@ -27,4 +23,5 @@ in {
       nix-index-database.comma.enable = true;
     };
   };
-}
+})
+args

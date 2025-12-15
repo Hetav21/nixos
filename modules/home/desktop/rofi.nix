@@ -1,18 +1,16 @@
 {
+  mkModule,
   lib,
   pkgs,
   config,
   settings,
   ...
-}:
-with lib; let
-  cfg = config.home.desktop.rofi;
-in {
-  options.home.desktop.rofi = {
-    enableGui = mkEnableOption "Enable GUI rofi launcher";
-  };
-
-  config = mkIf cfg.enableGui {
+} @ args:
+(mkModule {
+  name = "home.desktop.rofi";
+  hasCli = false;
+  hasGui = true;
+  guiConfig = _: {
     wayland.windowManager.hyprland.settings = {
       "$mainMod" = "SUPER";
       "$menu" = "rofi -show drun";
@@ -41,9 +39,9 @@ in {
           location = 0;
           font = "JetBrainsMono Nerd Font Mono 12";
           drun-display-format = "{icon} {name}";
-          display-drun = " Apps";
-          display-run = " Run";
-          display-filebrowser = " File";
+          display-drun = " Apps";
+          display-run = " Run";
+          display-filebrowser = " File";
         };
         theme = let
           inherit (config.lib.formats.rasi) mkLiteral;
@@ -240,4 +238,5 @@ in {
       };
     };
   };
-}
+})
+args

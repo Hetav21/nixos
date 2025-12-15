@@ -1,20 +1,16 @@
 {
+  mkModule,
   lib,
   pkgs,
-  config,
   settings,
   hardware ? {},
   ...
-}:
-with lib; let
-  cfg = config.system.desktop.xdg-config;
-in {
-  options.system.desktop.xdg-config = {
-    enable = mkEnableOption "Enable desktop XDG configuration";
-  };
-
-  config = mkIf cfg.enable {
-    environment.sessionVariables = mkMerge [
+} @ args:
+(mkModule {
+  name = "system.desktop.xdg-config";
+  hasGui = false;
+  cliConfig = _: {
+    environment.sessionVariables = lib.mkMerge [
       # Common XDG environment variables
       {
         XDG_CONFIG_HOME = "$HOME/.config";
@@ -28,13 +24,13 @@ in {
       }
 
       # Intel-specific variables
-      (mkIf (hardware ? intel && hardware.intel.enable) {
+      (lib.mkIf (hardware ? intel && hardware.intel.enable) {
         ANV_VIDEO_DECODE = "1";
         LIBVA_DRIVER_NAME = "iHD";
       })
 
       # Nvidia-specific variables
-      (mkIf (hardware ? nvidia && hardware.nvidia.enable) {
+      (lib.mkIf (hardware ? nvidia && hardware.nvidia.enable) {
         VDPAU_DRIVER = "nvidia";
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
         NVD_BACKEND = "direct";
@@ -144,4 +140,5 @@ in {
       videoDrivers = ["modesetting"];
     };
   };
-}
+})
+args

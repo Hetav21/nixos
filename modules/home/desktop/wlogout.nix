@@ -1,16 +1,14 @@
 {
+  mkModule,
   lib,
   config,
   ...
-}:
-with lib; let
-  cfg = config.home.desktop.wlogout;
-in {
-  options.home.desktop.wlogout = {
-    enableGui = mkEnableOption "Enable GUI logout menu";
-  };
-
-  config = mkIf cfg.enableGui {
+} @ args:
+(mkModule {
+  name = "home.desktop.wlogout";
+  hasCli = false;
+  hasGui = true;
+  guiConfig = _: {
     wayland.windowManager.hyprland.settings = {
       "$mainMod" = "SUPER";
 
@@ -119,4 +117,5 @@ in {
       '';
     };
   };
-}
+})
+args

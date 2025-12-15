@@ -1,17 +1,14 @@
 {
+  mkModule,
   lib,
   pkgs,
-  config,
   ...
-}:
-with lib; let
-  cfg = config.home.desktop.clipboard;
-in {
-  options.home.desktop.clipboard = {
-    enableGui = mkEnableOption "Enable GUI clipboard manager";
-  };
-
-  config = mkIf cfg.enableGui {
+} @ args:
+(mkModule {
+  name = "home.desktop.clipboard";
+  hasCli = false;
+  hasGui = true;
+  guiConfig = _: {
     services.cliphist = {
       enable = true;
       package = pkgs.cliphist;
@@ -20,4 +17,5 @@ in {
       extraOptions = ["-max-dedupe-search" "10" "-max-items" "500"];
     };
   };
-}
+})
+args

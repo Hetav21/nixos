@@ -1,17 +1,13 @@
 {
+  mkModule,
   lib,
   pkgs,
-  config,
   ...
-}:
-with lib; let
-  cfg = config.system.desktop.printing;
-in {
-  options.system.desktop.printing = {
-    enable = mkEnableOption "Enable printing configuration";
-  };
-
-  config = mkIf cfg.enable {
+} @ args:
+(mkModule {
+  name = "system.desktop.printing";
+  hasGui = false;
+  cliConfig = _: {
     services.printing = {
       enable = true;
       drivers = [
@@ -29,4 +25,5 @@ in {
 
     environment.systemPackages = with pkgs; [hplip];
   };
-}
+})
+args

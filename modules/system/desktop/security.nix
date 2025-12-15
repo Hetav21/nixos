@@ -1,17 +1,13 @@
 {
+  mkModule,
   lib,
   pkgs,
-  config,
   ...
-}:
-with lib; let
-  cfg = config.system.desktop.security;
-in {
-  options.system.desktop.security = {
-    enable = mkEnableOption "Enable desktop security configuration";
-  };
-
-  config = mkIf cfg.enable {
+} @ args:
+(mkModule {
+  name = "system.desktop.security";
+  hasGui = false;
+  cliConfig = _: {
     environment.systemPackages = with pkgs; [hyprpolkitagent];
 
     services.gnome.gnome-keyring.enable = true;
@@ -39,4 +35,5 @@ in {
       };
     };
   };
-}
+})
+args
