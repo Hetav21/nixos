@@ -39,7 +39,7 @@ style = "Regular"
 
 [terminal.shell]
 program = "wsl.exe"
-args = ["-d", "NixOS", "--cd", "~"]
+args = ["-d", "NixOS", "--cd", "~", "nu"]
 
 [window]
 opacity = 0.95
