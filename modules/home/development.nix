@@ -92,6 +92,12 @@
           (lib.importJSON ../../dotfiles/.config/mcp/mcp.json).mcpServers;
       };
     };
+
+    # Fix for opencode-google-antigravity-auth plugin: symlink @opencode-ai/plugin from config to cache
+    home.activation.linkOpencodePlugin = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      $DRY_RUN_CMD mkdir -p ~/.cache/opencode/node_modules/@opencode-ai
+      $DRY_RUN_CMD ln -sf ~/.config/opencode/node_modules/@opencode-ai/plugin ~/.cache/opencode/node_modules/@opencode-ai/plugin
+    '';
   };
 
   guiConfig = _: {
