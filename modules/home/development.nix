@@ -10,8 +10,8 @@
   name = "home.development";
   hasGui = true;
 
-  cliConfig = _: let
-    memoryDir = "/home/${settings.username}/.memory";
+  cliConfig = {config, ...}: let
+    memoryDir = "${config.home.homeDirectory}/.memory";
   in {
     home.packages =
       (with pkgs; [awscli2 distrobox])

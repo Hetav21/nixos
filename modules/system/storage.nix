@@ -12,10 +12,11 @@
     lib,
     pkgs,
     settings,
+    config,
     ...
   }: let
     username = settings.username;
-    homeDirectory = "/home/${username}";
+    homeDirectory = config.users.users.${username}.home;
     # Check if rclone settings exist before accessing them
     rcloneEnabled =
       (settings ? rclone)
@@ -23,7 +24,7 @@
       && (settings.rclone ? remote_dir);
     folder_path =
       if rcloneEnabled
-      then "/home/${settings.username}/${settings.rclone.local_dir}"
+      then "${homeDirectory}/${settings.rclone.local_dir}"
       else "";
   in {
     environment.systemPackages = with pkgs; [
@@ -49,7 +50,7 @@
           serviceConfig = {
             Type = "simple";
             ExecStartPre = "/run/current-system/sw/bin/mkdir -p ${folder_path}";
-            ExecStart = "${lib.getExe pkgs.rclone} mount --vfs-cache-mode full ${settings.rclone.remote_dir} ${folder_path} --allow-non-empty --config /home/${settings.username}/.config/rclone/rclone.conf";
+            ExecStart = "${lib.getExe pkgs.rclone} mount --vfs-cache-mode full ${settings.rclone.remote_dir} ${folder_path} --allow-non-empty --config ${homeDirectory}/.config/rclone/rclone.conf";
             ExecStop = "/run/current-system/sw/bin/fusermount -u ${folder_path}";
             Restart = "on-failure";
             RestartSec = "10s";
