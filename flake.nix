@@ -76,15 +76,14 @@
     inherit (self) outputs;
     inherit (nixpkgs) lib;
 
-    # Import library helpers
-    hostLib = import ./lib/hosts.nix {inherit lib;};
-    moduleLib = import ./lib/modules.nix inputs outputs;
+    # Import unified library helpers (includes mkModule, mkSubstitute, mkProcessFile, mkHostSettings)
+    extraLib = import ./lib {inherit lib inputs outputs;};
     nixpkgsLib = import ./lib/nixpkgs.nix inputs;
 
-    # Import modular configurations using mkHostSettings
+    # Import modular configurations using extraLib.hosts.mkHostSettings
     commonSettings = import ./config/common.nix;
-    nixbookSettings = hostLib.mkHostSettings commonSettings (import ./config/nixbook.nix);
-    nixwslbookSettings = hostLib.mkHostSettings commonSettings (import ./config/nixwslbook.nix);
+    nixbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./config/nixbook.nix);
+    nixwslbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./config/nixwslbook.nix);
 
     # Import hardware configurations
     hardware_asus = import ./config/hardware/asus.nix;
@@ -100,32 +99,30 @@
         system = nixbookSettings.system;
         specialArgs =
           {
-            inherit self inputs outputs;
+            inherit self inputs outputs extraLib;
             settings = nixbookSettings;
             hardware = hardware_asus;
-            mkModule = moduleLib.mkModule;
           }
           // nixpkgsLib.mkChannelsFor nixbookSettings.system;
         modules =
           [./hosts/nixbook/configuration.nix]
-          ++ moduleLib.common
-          ++ moduleLib.desktop;
+          ++ extraLib.modules.common
+          ++ extraLib.modules.desktop;
       };
 
       nixwslbook = nixpkgs.lib.nixosSystem {
         system = nixwslbookSettings.system;
         specialArgs =
           {
-            inherit self inputs outputs;
+            inherit self inputs outputs extraLib;
             settings = nixwslbookSettings;
             hardware = hardware_wsl;
-            mkModule = moduleLib.mkModule;
           }
           // nixpkgsLib.mkChannelsFor nixwslbookSettings.system;
         modules =
           [./hosts/nixwslbook/configuration.nix]
-          ++ moduleLib.common
-          ++ moduleLib.wsl;
+          ++ extraLib.modules.common
+          ++ extraLib.modules.wsl;
       };
     };
   };

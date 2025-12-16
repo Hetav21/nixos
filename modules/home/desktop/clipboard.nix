@@ -1,10 +1,10 @@
 {
-  mkModule,
+  extraLib,
   lib,
   pkgs,
   ...
 } @ args:
-(mkModule {
+(extraLib.modules.mkModule {
   name = "home.desktop.clipboard";
   hasCli = false;
   hasGui = true;

@@ -1,12 +1,12 @@
 {
-  mkModule,
+  extraLib,
   lib,
   pkgs,
   settings,
   hardware ? {},
   ...
 } @ args:
-(mkModule {
+(extraLib.modules.mkModule {
   name = "system.desktop.xdg-config";
   hasGui = false;
   cliConfig = _: {

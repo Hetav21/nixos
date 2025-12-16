@@ -1,11 +1,11 @@
 {
-  mkModule,
+  extraLib,
   lib,
   pkgs,
   pkgs-unstable,
   ...
 } @ args:
-(mkModule {
+(extraLib.modules.mkModule {
   name = "home.desktop.notification";
   hasCli = false;
   hasGui = true;

@@ -1,9 +1,9 @@
 {
-  mkModule,
+  extraLib,
   pkgs,
   ...
 } @ args:
-(mkModule {
+(extraLib.modules.mkModule {
   name = "system.media";
   hasGui = true;
   cliConfig = {pkgs, ...}: {

@@ -1,10 +1,10 @@
 {
-  mkModule,
+  extraLib,
   lib,
   pkgs,
   ...
 } @ args:
-(mkModule {
+(extraLib.modules.mkModule {
   name = "system.desktop.appimage";
   hasGui = false;
   cliConfig = _: {

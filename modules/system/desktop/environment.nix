@@ -1,10 +1,10 @@
 {
-  mkModule,
+  extraLib,
   lib,
   settings,
   ...
 } @ args:
-(mkModule {
+(extraLib.modules.mkModule {
   name = "system.desktop.environment";
   hasGui = false;
   cliConfig = _: {

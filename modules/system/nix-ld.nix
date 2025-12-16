@@ -1,5 +1,5 @@
-{mkModule, ...} @ args:
-(mkModule {
+{extraLib, ...} @ args:
+(extraLib.modules.mkModule {
   name = "system.nix.ld";
   hasGui = false;
   cliConfig = _: {

@@ -1,11 +1,11 @@
 {
-  mkModule,
+  extraLib,
   lib,
   pkgs,
   config,
   ...
 } @ args:
-(mkModule {
+(extraLib.modules.mkModule {
   name = "home.desktop.hyprland";
   hasCli = false;
   hasGui = true;

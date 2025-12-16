@@ -65,7 +65,7 @@ Delete the override from host config. The profile default will apply.
 nixosConfigurations.<hostname> = nixpkgs.lib.nixosSystem {
   system = <settings>.system;
   specialArgs = { ... };
-  modules = [./hosts/<hostname>/configuration.nix] ++ moduleLib.common;
+  modules = [./hosts/<hostname>/configuration.nix] ++ extraLib.modules.common;
 };
 ```
 

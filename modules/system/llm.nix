@@ -1,10 +1,10 @@
 {
-  mkModule,
+  extraLib,
   pkgs,
   hardware,
   ...
 } @ args:
-(mkModule {
+(extraLib.modules.mkModule {
   name = "system.llm";
   hasGui = true;
   cliConfig = {

@@ -1,9 +1,9 @@
 {
-  mkModule,
+  extraLib,
   pkgs,
   ...
 } @ args:
-(mkModule {
+(extraLib.modules.mkModule {
   name = "system.productivity";
   hasCli = false;
   hasGui = true;

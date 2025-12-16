@@ -1,12 +1,12 @@
 {
-  mkModule,
+  extraLib,
   lib,
   pkgs,
   config,
   settings,
   ...
 } @ args:
-(mkModule {
+(extraLib.modules.mkModule {
   name = "home.desktop.rofi";
   hasCli = false;
   hasGui = true;
