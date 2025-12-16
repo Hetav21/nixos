@@ -1,14 +1,14 @@
 {
-    // ─────────────────────────────────────────────────────────────
-    // Editor - Core
-    // ─────────────────────────────────────────────────────────────
+    
+    
+    
     "editor.detectIndentation": false,
     "editor.wordWrap": "on",
     "editor.formatOnPaste": true,
     "editor.largeFileOptimizations": false,
-    // ─────────────────────────────────────────────────────────────
-    // Editor - Appearance
-    // ─────────────────────────────────────────────────────────────
+    
+    
+    
     "editor.cursorBlinking": "expand",
     "editor.fontLigatures": true,
     "editor.fontVariations": true,
@@ -16,52 +16,52 @@
     "editor.lineHeight": 1.4,
     "editor.mouseWheelZoom": true,
     "editor.smoothScrolling": true,
-    // ─────────────────────────────────────────────────────────────
-    // Editor - Visual Aids
-    // ─────────────────────────────────────────────────────────────
+    
+    
+    
     "editor.colorDecorators": true,
     "editor.defaultColorDecorators": "always",
     "editor.guides.bracketPairs": "active",
-    // ─────────────────────────────────────────────────────────────
-    // Workbench
-    // ─────────────────────────────────────────────────────────────
+    
+    
+    
     "workbench.activityBar.location": "top",
     "workbench.editor.empty.hint": "hidden",
     "workbench.editor.enablePreview": false,
     "workbench.sideBar.location": "left",
     "workbench.startupEditor": "none",
-    // ─────────────────────────────────────────────────────────────
-    // Window & Security
-    // ─────────────────────────────────────────────────────────────
+    
+    
+    
     "window.customTitleBarVisibility": "windowed",
     "security.workspace.trust.startupPrompt": "always",
     "security.workspace.trust.untrustedFiles": "open",
-    // ─────────────────────────────────────────────────────────────
-    // Explorer & Files
-    // ─────────────────────────────────────────────────────────────
+    
+    
+    
     "explorer.confirmDelete": false,
     "files.autoSave": "afterDelay",
     "files.exclude": {
         "**/__init__.py": true,
         "**/__pycache__": true
     },
-    // ─────────────────────────────────────────────────────────────
-    // Terminal - Defaults
-    // ─────────────────────────────────────────────────────────────
+    
+    
+    
     "terminal.integrated.defaultProfile.linux": "nu",
     "terminal.integrated.defaultProfile.windows": "Git Bash",
     "terminal.external.linuxExec": "ghostty",
     "terminal.external.osxExec": "terminal.app",
     "terminal.external.windowsExec": "alacritty.exe",
-    // ─────────────────────────────────────────────────────────────
-    // Terminal - Appearance
-    // ─────────────────────────────────────────────────────────────
+    
+    
+    
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.cursorStyle": "line",
     "terminal.integrated.cursorStyleInactive": "line",
-    // ─────────────────────────────────────────────────────────────
-    // Terminal - Features
-    // ─────────────────────────────────────────────────────────────
+    
+    
+    
     "terminal.integrated.env.linux": {},
     "terminal.integrated.env.windows": {},
     "terminal.integrated.experimentalInlineChat": true,
@@ -74,9 +74,9 @@
         "vscode",
         "vscode-insiders"
     ],
-    // ─────────────────────────────────────────────────────────────
-    // Terminal - Windows Profiles
-    // ─────────────────────────────────────────────────────────────
+    
+    
+    
     "terminal.integrated.profiles.windows": {
         "Command Prompt": {
             "args": [],
@@ -97,16 +97,16 @@
             "path": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
         }
     },
-    // ─────────────────────────────────────────────────────────────
-    // Git
-    // ─────────────────────────────────────────────────────────────
+    
+    
+    
     "git.autofetch": true,
     "git.enableSmartCommit": true,
     "git-blame.config.inlineBlameHoverMessage": true,
     "diffEditor.ignoreTrimWhitespace": false,
-    // ─────────────────────────────────────────────────────────────
-    // GitHub Copilot
-    // ─────────────────────────────────────────────────────────────
+    
+    
+    
     "github.copilot.advanced": {},
     "github.copilot.chat.codesearch.enabled": true,
     "github.copilot.nextEditSuggestions.enabled": true,
@@ -120,9 +120,9 @@
         "scminput": false,
         "sql": false
     },
-    // ─────────────────────────────────────────────────────────────
-    // MCP (Chat)
-    // ─────────────────────────────────────────────────────────────
+    
+    
+    
     "chat.mcp.autostart": "never",
     "chat.mcp.gallery.enabled": true,
     "chat.mcp.discovery.enabled": {
@@ -131,18 +131,18 @@
         "cursor-workspace": true,
         "windsurf": true
     },
-    // ─────────────────────────────────────────────────────────────
-    // TypeScript & JavaScript
-    // ─────────────────────────────────────────────────────────────
+    
+    
+    
     "[typescript]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
     },
     "typescript.preferences.importModuleSpecifier": "non-relative",
     "typescript.updateImportsOnFileMove.enabled": "always",
     "javascript.preferences.importModuleSpecifier": "non-relative",
-    // ─────────────────────────────────────────────────────────────
-    // Python
-    // ─────────────────────────────────────────────────────────────
+    
+    
+    
     "python.languageServer": "Pylance",
     "python.analysis.autoFormatStrings": true,
     "python.analysis.autoImportCompletions": true,
@@ -152,9 +152,9 @@
     "python.analysis.inlayHints.functionReturnTypes": true,
     "python.analysis.inlayHints.pytestParameters": true,
     "python.analysis.inlayHints.variableTypes": true,
-    // ─────────────────────────────────────────────────────────────
-    // TailwindCSS
-    // ─────────────────────────────────────────────────────────────
+    
+    
+    
     "tailwindCSS.classFunctions": [
         "cva",
         "cx"
@@ -165,9 +165,9 @@
             "[\"'`]([^\"'`]*).*?[\"'`]"
         ]
     ],
-    // ─────────────────────────────────────────────────────────────
-    // Miscellaneous
-    // ─────────────────────────────────────────────────────────────
+    
+    
+    
     "database-client.autoSync": true,
     "notebook.output.scrolling": true,
     "remote.autoForwardPortsSource": "hybrid"

@@ -4,67 +4,66 @@
   inputs,
   config,
   ...
-} @ args: let
-  # Module uses mkModule for options/config but needs imports at module level
-  moduleResult =
-    (extraLib.modules.mkModule {
-      name = "home.desktop.launcher";
-      hasCli = false;
-      hasGui = true;
-      guiConfig = _: {
-        wayland.windowManager.hyprland.settings = {
-          bind = [
-            "$mainMod, D, exec, vicinae toggle"
-            "$mainMod, C, exec, vicinae vicinae://extensions/vicinae/clipboard/history"
-            "$mainMod, Space, exec, vicinae vicinae://extensions/vicinae/vicinae/search-emojis"
-            "$mainMod, Q, exec, vicinae vicinae://extensions/vicinae/calculator/history"
-          ];
+} @ args:
+{
+  imports = [inputs.vicinae.homeManagerModules.default];
+}
+// (extraLib.modules.mkModule {
+  name = "home.desktop.launcher";
+  hasCli = false;
+  hasGui = true;
+  guiConfig = _: {
+    wayland.windowManager.hyprland.settings = {
+      bind = [
+        "$mainMod, D, exec, vicinae toggle"
+        "$mainMod, C, exec, vicinae vicinae://extensions/vicinae/clipboard/history"
+        "$mainMod, Space, exec, vicinae vicinae://extensions/vicinae/vicinae/search-emojis"
+        "$mainMod, Q, exec, vicinae vicinae://extensions/vicinae/calculator/history"
+      ];
 
-          layerrule = [
-            # blur
-            "blur 1,match:class vicinae"
-            "ignore_alpha 1,match:class vicinae"
-          ];
+      layerrule = [
+        # blur
+        "blur 1,match:class vicinae"
+        "ignore_alpha 1,match:class vicinae"
+      ];
+    };
+
+    services.vicinae = {
+      enable = true;
+      autoStart = true;
+
+      settings = {
+        faviconService = "twenty"; # twenty | google | none
+        font = {
+          normal = config.stylix.fonts.serif;
+          size = config.stylix.fonts.sizes.popups;
         };
-
-        services.vicinae = {
-          enable = true;
-          autoStart = true;
-
-          settings = {
-            faviconService = "twenty"; # twenty | google | none
-            font = {
-              normal = config.stylix.fonts.serif;
-              size = config.stylix.fonts.sizes.popups;
-            };
-            popToRootOnClose = true;
-            rootSearch.searchFiles = false;
-            closeOnFocusLoss = true;
-            window = {
-              csd = true;
-              opacity = config.stylix.opacity.popups;
-              rounding = 10;
-            };
-          };
-
-          # Installing (vicinae) extensions declaratively
-          # extensions = [
-          #   (inputs.vicinae.mkVicinaeExtension.${pkgs.system} {
-          #     inherit pkgs;
-          #     name = "extension-name";
-          #     src = pkgs.fetchFromGitHub {
-          #       # You can also specify different sources other than github
-          #       owner = "repo-owner";
-          #       repo = "repo-name";
-          #       rev = "v1.0"; # If the extension has no releases use the latest commit hash
-          #       # You can get the sha256 by rebuilding once and then copying the output hash from the error message
-          #       sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
-          #     }; # If the extension is in a subdirectory you can add ` + "/subdir"` between the brace and the semicolon here
-          #   })
-          # ];
+        popToRootOnClose = true;
+        rootSearch.searchFiles = false;
+        closeOnFocusLoss = true;
+        window = {
+          csd = true;
+          opacity = config.stylix.opacity.popups;
+          rounding = 10;
         };
       };
-    })
-    args;
-in
-  moduleResult // {imports = [inputs.vicinae.homeManagerModules.default];}
+
+      # Installing (vicinae) extensions declaratively
+      # extensions = [
+      #   (inputs.vicinae.mkVicinaeExtension.${pkgs.system} {
+      #     inherit pkgs;
+      #     name = "extension-name";
+      #     src = pkgs.fetchFromGitHub {
+      #       # You can also specify different sources other than github
+      #       owner = "repo-owner";
+      #       repo = "repo-name";
+      #       rev = "v1.0"; # If the extension has no releases use the latest commit hash
+      #       # You can get the sha256 by rebuilding once and then copying the output hash from the error message
+      #       sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+      #     }; # If the extension is in a subdirectory you can add ` + "/subdir"` between the brace and the semicolon here
+      #   })
+      # ];
+    };
+  };
+})
+args
