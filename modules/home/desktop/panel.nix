@@ -1,12 +1,12 @@
 {
-  mkModule,
+  extraLib,
   lib,
   pkgs,
   pkgs-unstable,
   config,
   ...
 } @ args:
-(mkModule {
+(extraLib.modules.mkModule {
   name = "home.desktop.panel";
   hasCli = false;
   hasGui = true;

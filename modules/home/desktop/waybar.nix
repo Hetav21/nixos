@@ -1,10 +1,10 @@
 {
-  mkModule,
+  extraLib,
   lib,
   config,
   ...
 } @ args:
-(mkModule {
+(extraLib.modules.mkModule {
   name = "home.desktop.waybar";
   hasCli = false;
   hasGui = true;

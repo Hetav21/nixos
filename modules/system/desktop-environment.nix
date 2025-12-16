@@ -1,5 +1,5 @@
-{mkModule, ...} @ args:
-(mkModule {
+{extraLib, ...} @ args:
+(extraLib.modules.mkModule {
   name = "system.desktop-environment";
   hasCli = false;
   hasGui = true;

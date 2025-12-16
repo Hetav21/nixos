@@ -133,7 +133,7 @@ options.system.category.newOption = mkOption {
 
 ### Add Enable Flags
  
- Use `mkModule` which automatically generates `enable` and `enableGui` options based on `hasCli` and `hasGui`.
+ Use `extraLib.modules.mkModule` which automatically generates `enable` and `enableGui` options based on `hasCli` and `hasGui`.
 
 ---
 

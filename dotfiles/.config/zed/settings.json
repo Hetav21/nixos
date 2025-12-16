@@ -1,0 +1,90 @@
+{
+    "show_edit_predictions": true,
+    "agent": {
+        "enabled": true,
+        "default_model": {
+            "provider": "zed.dev",
+            "model": "claude-3-5-sonnet-latest"
+        },
+        "inline_alternatives": [
+            {
+                "provider": "copilot_chat",
+                "model": "gpt-3.5-turbo"
+            }
+        ]
+    },
+    "node": {
+        "path": "@nodePath@",
+        "npm_path": "@npmPath@"
+    },
+    "auto_update": false,
+    "tabs": {
+        "file_icons": true
+    },
+    "buffer_font_features": {
+        "liga": true,
+        "calt": true,
+        "kern": true
+    },
+    "terminal": {
+        "alternate_scroll": "off",
+        "blinking": "off",
+        "copy_on_select": false,
+        "dock": "bottom",
+        "detect_venv": {
+            "on": {
+                "directories": [
+                    ".env",
+                    "env",
+                    ".venv",
+                    "venv"
+                ],
+                "activate_script": "default"
+            }
+        },
+        "env": {
+            "TERM": "ghostty"
+        },
+        "line_height": "comfortable",
+        "option_as_meta": false,
+        "button": false,
+        "shell": "system",
+        "working_directory": "current_project_directory"
+    },
+    "lsp": {
+        "clangd": {
+            "binary": {
+                "path": "@clangdPath@",
+                "path_lookup": true,
+                "arguments": [
+                    "--function-arg-placeholders=0",
+                    "--background-index",
+                    "--clang-tidy",
+                    "--log=verbose"
+                ]
+            }
+        },
+        "nil": {
+            "initialization_options": {
+                "formatting": {
+                    "command": [
+                        "alejandra"
+                    ]
+                }
+            }
+        }
+    },
+    "languages": {
+        "C++": {
+            "show_edit_predictions": false,
+            "format_on_save": "on",
+            "tab_size": 2
+        },
+        "Python": {
+            "show_edit_predictions": false
+        }
+    },
+    "load_direnv": "shell_hook",
+    "vim_mode": true,
+    "show_whitespaces": "selection"
+}

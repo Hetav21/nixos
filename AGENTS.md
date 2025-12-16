@@ -74,40 +74,38 @@ nx rebuild switch
 
 ### Module Pattern
 
-### Module Pattern
- 
- All modules must use the `mkModule` helper to ensure consistent behavior and auto-generated enable options.
- 
- **Requirements:**
- 1. Destructure `mkModule` and other args (`lib`, `pkgs`, `config`) in the top-level function.
- 2. Pass `@ args` to the top-level function.
- 3. Call the result of `mkModule` with `args`.
- 
- ```nix
- {
-   mkModule,
-   lib,
-   pkgs,
-   config,
-   ...
- } @ args:
- (mkModule {
-   name = "system.category.feature";
-   # Optional: set to false if module has no CLI/GUI component
-   hasCli = true; 
-   hasGui = true; 
-   
-   # Configuration for CLI/Server (enabled by cfg.enable)
-   cliConfig = _: {
-     environment.systemPackages = [ pkgs.tool ];
-   };
- 
-   # Configuration for GUI (enabled by cfg.enableGui)
-   guiConfig = _: {
-     programs.gui-tool.enable = true;
-   };
- }) args
- ```
+All modules must use `extraLib.modules.mkModule` helper to ensure consistent behavior and auto-generated enable options.
+
+**Requirements:**
+1. Destructure `extraLib` and other args (`lib`, `pkgs`, `config`) in the top-level function.
+2. Pass `@ args` to the top-level function.
+3. Call the result of `extraLib.modules.mkModule` with `args`.
+
+```nix
+{
+  extraLib,
+  lib,
+  pkgs,
+  config,
+  ...
+} @ args:
+(extraLib.modules.mkModule {
+  name = "system.category.feature";
+  # Optional: set to false if module has no CLI/GUI component
+  hasCli = true; 
+  hasGui = true; 
+  
+  # Configuration for CLI/Server (enabled by cfg.enable)
+  cliConfig = _: {
+    environment.systemPackages = [ pkgs.tool ];
+  };
+
+  # Configuration for GUI (enabled by cfg.enableGui)
+  guiConfig = _: {
+    programs.gui-tool.enable = true;
+  };
+}) args
+```
 
 ### Best Practices
 
@@ -205,3 +203,4 @@ nx doctor
 - **[modules/AGENTS.md](modules/AGENTS.md)** - Module operations, config conversions
 - **[hosts/AGENTS.md](hosts/AGENTS.md)** - Profile and host operations
 - **[secrets/README.md](secrets/README.md)** - Secret management with sops-nix
+

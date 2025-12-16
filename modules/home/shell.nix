@@ -1,5 +1,5 @@
 {
-  mkModule,
+  extraLib,
   lib,
   pkgs,
   pkgs-unstable,
@@ -7,7 +7,7 @@
   settings,
   ...
 } @ args:
-(mkModule {
+(extraLib.modules.mkModule {
   name = "home.shell";
   hasGui = true;
   cliConfig = _: {
@@ -110,6 +110,7 @@
 
             # Other Aliases
             ff = "${lib.getExe pkgs.fastfetch}";
+            oc = "${lib.getExe config.programs.opencode.package}";
           }
           // lib.optionalAttrs (pkgs ? wl-clipboard) {
             # Wayland clipboard aliases (only available on systems with wayland/desktop)

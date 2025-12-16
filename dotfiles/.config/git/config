@@ -1,0 +1,30 @@
+[color]
+	ui = auto
+
+[core]
+	editor = vim
+
+[pull]
+	rebase = false
+
+[init]
+	defaultBranch = main
+
+[push]
+	autoSetupRemote = true
+
+[merge]
+	conflictStyle = diff3
+
+[credential]
+	helper = libsecret
+
+[alias]
+	st = status
+	co = checkout
+	br = branch
+	ci = commit -m
+	aci = commit -am
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	lg = log --graph --oneline --decorate --all

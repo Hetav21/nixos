@@ -1,10 +1,10 @@
 {
-  mkModule,
+  extraLib,
   pkgs,
   pkgs-unstable,
   ...
 } @ args:
-(mkModule {
+(extraLib.modules.mkModule {
   name = "system.browser";
   hasCli = false;
   hasGui = true;

@@ -1,5 +1,5 @@
 {
-  mkModule,
+  extraLib,
   lib,
   inputs,
   config,
@@ -7,7 +7,7 @@
 } @ args: let
   # Module uses mkModule for options/config but needs imports at module level
   moduleResult =
-    (mkModule {
+    (extraLib.modules.mkModule {
       name = "home.desktop.launcher";
       hasCli = false;
       hasGui = true;
