@@ -8,17 +8,11 @@
         },
         "sequential-thinking": {
             "command": "@bunxPath@",
-            "args": [
-                "-y",
-                "@modelcontextprotocol/server-sequential-thinking"
-            ]
+            "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
         },
         "memory-bank": {
             "command": "@bunxPath@",
-            "args": [
-                "-y",
-                "@allpepper/memory-bank-mcp@latest"
-            ],
+            "args": ["-y", "@allpepper/memory-bank-mcp@latest"],
             "env": {
                 "MEMORY_BANK_ROOT": "@memoryDir@/memory-bank"
             },
@@ -32,27 +26,18 @@
         },
         "memory": {
             "command": "@bunxPath@",
-            "args": [
-                "-y",
-                "@modelcontextprotocol/server-memory"
-            ],
+            "args": ["-y", "@modelcontextprotocol/server-memory"],
             "env": {
                 "MEMORY_FILE_PATH": "@memoryDir@/memory.jsonl"
             }
         },
         "mcp-compass": {
             "command": "@bunxPath@",
-            "args": [
-                "-y",
-                "@liuyoshio/mcp-compass"
-            ]
+            "args": ["-y", "@liuyoshio/mcp-compass"]
         },
         "playwright": {
             "command": "@bunxPath@",
-            "args": [
-                "-y",
-                "@playwright/mcp@latest"
-            ]
+            "args": ["-y", "@playwright/mcp@latest"]
         },
         "serena": {
             "command": "@uvxPath@",
@@ -62,7 +47,9 @@
                 "serena",
                 "start-mcp-server",
                 "--context",
-                "agent"
+                "ide",
+                "--enable-web-dashboard",
+                "false"
             ]
         }
     }
