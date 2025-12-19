@@ -1,9 +1,9 @@
 {
-  extraLib,
   lib,
   pkgs,
-  pkgs-unstable,
   settings,
+  extraLib,
+  pkgs-unstable,
   ...
 } @ args:
 (extraLib.modules.mkModule {
@@ -12,12 +12,116 @@
 
   cliConfig = {config, ...}: let
     memoryDir = "${config.home.homeDirectory}/.memory";
+    luaPath = ../../dotfiles/.config/nvim;
+
+    nixCatsCategories = {pkgs, ...}: {
+      lspsAndRuntimeDeps = {
+        general = with pkgs; [
+          # Build tools (needed for treesitter compilation, mason, etc.)
+          gcc
+          gnumake
+          unzip
+          curl
+          wget
+          git
+          tree-sitter # Required by nvim-treesitter
+
+          # Search tools (used by telescope, etc.)
+          ripgrep
+          fd
+
+          # System tools for neovim plugins
+          lsof # For opencode.nvim
+          trash-cli # For snacks.explorer (safe delete)
+          sqlite
+          wl-clipboard # Clipboard for Wayland (desktop); WSL uses clip.exe via init.lua
+
+          # Node/Python for LSP hosts and mason
+          nodejs
+          nodePackages.neovim # Node provider
+          (python3.withPackages (ps: [ps.pynvim])) # Python provider
+
+          # Image tools (CLI) - used by snacks.image
+          imagemagick
+          ghostscript
+          mermaid-cli
+          tectonic
+        ];
+      };
+
+      # No plugins - lazy.nvim will manage them
+      startupPlugins = {};
+      optionalPlugins = {};
+      sharedLibraries = {
+        general = with pkgs; [
+          # For snacks.picker frecency/history
+          sqlite
+        ];
+      };
+      environmentVariables = {
+        general = {
+          # Fix: Warning: Missing "neovim" npm package
+          # Explicitly point to the neovim-node-host binary provided by nodePackages.neovim
+          NEOVIM_NODE_HOST = "${lib.getExe pkgs.nodePackages.neovim}";
+        };
+      };
+      extraWrapperArgs = {
+        # General wrapper args
+        general = [
+          # Fix sqlite library path for LuaJIT to find it
+          "--set"
+          "LIBSQLITE"
+          "${pkgs.sqlite.out}/lib/libsqlite3.so"
+        ];
+      };
+    };
+
+    nixCatsSettings = {...}: {
+      settings = {
+        suffix-path = true;
+        suffix-LD = true;
+        wrapRc = true;
+        aliases = [
+          "vi"
+          "vim"
+          "nvim"
+        ];
+      };
+      categories = {
+        general = true;
+      };
+      extra = {};
+    };
   in {
+    stylix.targets.opencode.enable = false;
+
     home.packages =
-      (with pkgs; [awscli2 distrobox])
-      ++ (with pkgs-unstable; [lazygit lazydocker cursor-cli]);
+      (with pkgs; [
+        awscli2
+        distrobox
+      ])
+      ++ (with pkgs-unstable; [
+        lazygit
+        lazydocker
+        cursor-cli
+      ]);
 
     services.ssh-agent.enable = true;
+
+    # nixCats Neovim configuration
+    # Nix handles: neovim installation + config bundling + essential build tools
+    # Lua handles: plugin management (lazy.nvim) + LSP installation (mason.nvim)
+    nixCats = {
+      enable = true;
+      packageNames = ["nixCats"];
+      luaPath = "${luaPath}";
+
+      categoryDefinitions.replace = nixCatsCategories;
+
+      packageDefinitions.replace = {
+        nixCats = nixCatsSettings;
+      };
+    };
 
     programs = {
       ssh = {
@@ -78,7 +182,8 @@
         enable = true;
         package = pkgs-unstable.opencode;
         enableMcpIntegration = true;
-        settings = lib.importJSON ../../dotfiles/.config/opencode/config.json;
+        settings =
+          lib.importJSON ../../dotfiles/.config/opencode/config.json;
       };
 
       mcp = {
@@ -98,12 +203,21 @@
       $DRY_RUN_CMD mkdir -p ~/.cache/opencode/node_modules/@opencode-ai
       $DRY_RUN_CMD ln -sf ~/.config/opencode/node_modules/@opencode-ai/plugin ~/.cache/opencode/node_modules/@opencode-ai/plugin
     '';
+
+    # oh-my-opencode plugin configuration
+    home.file.".config/opencode/oh-my-opencode.json".source =
+      ../../dotfiles/.config/opencode/oh-my-opencode.json;
   };
 
   guiConfig = _: {
     home.packages =
       (with pkgs; [mongodb-compass])
-      ++ (with pkgs-unstable; [code-cursor antigravity hoppscotch bruno]);
+      ++ (with pkgs-unstable; [
+        code-cursor
+        antigravity
+        hoppscotch
+        bruno
+      ]);
 
     programs = {
       vscode = {

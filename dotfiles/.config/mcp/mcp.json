@@ -6,24 +6,6 @@
                 "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
             }
         },
-        "sequential-thinking": {
-            "command": "@bunxPath@",
-            "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
-        },
-        "memory-bank": {
-            "command": "@bunxPath@",
-            "args": ["-y", "@allpepper/memory-bank-mcp@latest"],
-            "env": {
-                "MEMORY_BANK_ROOT": "@memoryDir@/memory-bank"
-            },
-            "autoApprove": [
-                "memory_bank_read",
-                "memory_bank_write",
-                "memory_bank_update",
-                "list_projects",
-                "list_project_files"
-            ]
-        },
         "memory": {
             "command": "@bunxPath@",
             "args": ["-y", "@modelcontextprotocol/server-memory"],
