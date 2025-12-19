@@ -111,6 +111,7 @@
             # Other Aliases
             ff = "${lib.getExe pkgs.fastfetch}";
             oc = "${lib.getExe config.programs.opencode.package}";
+            nv = "${lib.getExe config.nixCats.out.packages.nixCats}";
           }
           // lib.optionalAttrs (pkgs ? wl-clipboard) {
             # Wayland clipboard aliases (only available on systems with wayland/desktop)

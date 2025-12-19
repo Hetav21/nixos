@@ -15,6 +15,13 @@ nx flake check
 
 ## nx Command Reference
 
+> **IMPORTANT FOR AI AGENTS**: `nx` is a **nushell function** defined in `dotfiles/.config/nushell/config.nu`.
+> It is NOT available in bash/fish/zsh. When executing from non-nushell environments (e.g., subprocess bash calls), use:
+> ```bash
+> nu --config ~/.config/nushell/config.nu -c "nx <command> [args]"
+> ```
+> Example: `nu --config ~/.config/nushell/config.nu -c "nx flake check"`
+
 | Command | Description |
 |---------|-------------|
 | `nx config` | Open NixOS configuration in editor |

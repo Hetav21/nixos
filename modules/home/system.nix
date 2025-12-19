@@ -13,7 +13,7 @@
       btop
       killall
       most
-      vim
+      # vim - replaced by neovim via nixCats (provides vim/vi/nvim aliases)
       wget
 
       # System information tools

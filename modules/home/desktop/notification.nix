@@ -7,13 +7,16 @@
 } @ args:
 (extraLib.modules.mkModule {
   name = "home.desktop.notification";
-  hasCli = false;
+  hasCli = true;
   hasGui = true;
+
+  cliConfig = _: {
+    home.packages = with pkgs; [libnotify];
+  };
+
   guiConfig = _: let
     hypr_border = 5; # adjust as per hyprland config
   in {
-    home.packages = with pkgs; [libnotify];
-
     services.dunst = {
       enable = true;
       package = pkgs.dunst;

@@ -46,6 +46,10 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixCats = {
+      url = "github:BirdeeHub/nixCats-nvim";
+    };
   };
 
   # Passing extra nix config

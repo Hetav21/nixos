@@ -17,6 +17,7 @@ with lib; {
     home.shell.enable = true;
     home.system.enable = true;
     home.downloads.enable = true;
+    home.desktop.notification.enable = true;
 
     # Explicitly disable all GUI components
     home.development.enableGui = false;
