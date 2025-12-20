@@ -5,10 +5,10 @@
     "websearch_exa"
   ],
   "agents": {
-    "OmO": {
+    "Sisyphus": {
       "model": "google/opus-4-5-thinking-high"
     },
-    "OmO-Plan": {
+    "Planner-Sisyphus": {
       "model": "google/opus-4-5-thinking-high"
     },
     "librarian": {
