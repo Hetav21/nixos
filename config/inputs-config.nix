@@ -12,7 +12,7 @@
   # Centralized nixpkgs configuration used across all channels
   nixpkgs = {
     allowUnfree = true;
-    allowBroken = true;
+    allowBroken = false;
     permittedInsecurePackages = [
       # Add any insecure packages you absolutely need here
     ];
@@ -30,7 +30,7 @@
         overlays = builtins.attrValues outputs.overlays;
         config = {
           allowUnfree = true;
-          allowBroken = true;
+          allowBroken = false;
           permittedInsecurePackages = [];
         };
       };

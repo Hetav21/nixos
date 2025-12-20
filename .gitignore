@@ -4,3 +4,8 @@
 *.asc
 patch
 *.backup
+
+# Security: Prevent accidental secret commits
+*.pem
+*.key
+.env*
