@@ -1,38 +1,47 @@
 {
-    "mcpServers": {
-        "context7": {
-            "url": "https://mcp.context7.com/mcp",
-            "headers": {
-                "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
-            }
-        },
-        "memory": {
-            "command": "@bunxPath@",
-            "args": ["-y", "@modelcontextprotocol/server-memory"],
-            "env": {
-                "MEMORY_FILE_PATH": "@memoryDir@/memory.jsonl"
-            }
-        },
-        "mcp-compass": {
-            "command": "@bunxPath@",
-            "args": ["-y", "@liuyoshio/mcp-compass"]
-        },
-        "playwright": {
-            "command": "@bunxPath@",
-            "args": ["-y", "@playwright/mcp@latest"]
-        },
-        "serena": {
-            "command": "@uvxPath@",
-            "args": [
-                "--from",
-                "git+https://github.com/oraios/serena",
-                "serena",
-                "start-mcp-server",
-                "--context",
-                "ide",
-                "--enable-web-dashboard",
-                "false"
-            ]
-        }
+  "mcpServers": {
+    "context7": {
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
+      }
+    },
+    "memory": {
+      "command": "@bunxPath@",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "env": {
+        "MEMORY_FILE_PATH": "@memoryDir@/memory.jsonl"
+      }
+    },
+    "mcp-compass": {
+      "command": "@bunxPath@",
+      "args": [
+        "-y",
+        "@liuyoshio/mcp-compass"
+      ]
+    },
+    "playwright": {
+      "command": "@bunxPath@",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest"
+      ]
+    },
+    "serena": {
+      "command": "@uvxPath@",
+      "args": [
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena",
+        "start-mcp-server",
+        "--context",
+        "agent",
+        "--enable-web-dashboard",
+        "false"
+      ]
     }
+  }
 }

@@ -13,7 +13,6 @@
   cliConfig = {config, ...}: let
     memoryDir = "${config.home.homeDirectory}/.memory";
     luaPath = ../../dotfiles/.config/nvim;
-
     nixCatsCategories = {pkgs, ...}: {
       lspsAndRuntimeDeps = {
         general = with pkgs; [
@@ -207,6 +206,10 @@
     # oh-my-opencode plugin configuration
     home.file.".config/opencode/oh-my-opencode.json".source =
       ../../dotfiles/.config/opencode/oh-my-opencode.json;
+
+    # opencode commands
+    home.file.".config/opencode/command".source =
+      ../../dotfiles/.config/opencode/command;
   };
 
   guiConfig = _: {
