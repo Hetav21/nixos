@@ -3,9 +3,12 @@
 return {
   {
     "folke/snacks.nvim",
-    opts = {
-      image = { enabled = false },
-    },
+    opts = function(_, opts)
+      -- Disable snacks features that conflict with other plugins
+      opts.image = { enabled = false }
+      opts.notifier = { enabled = true }
+      return opts
+    end,
   },
 
   -- Lualine - Custom statusline
@@ -74,7 +77,7 @@ return {
           { LazyVim.lualine.pretty_path() },
           {
             macro_recording,
-            color = { fg = "#f38ba8" },
+            color = function() return { fg = Snacks.util.color("DiagnosticError") } end,
           },
         },
         lualine_x = {
@@ -208,12 +211,15 @@ return {
     },
   },
 
-  -- Noice - Modern cmdline/notifications
+  -- Noice - Modern cmdline/notifications (handles vim.notify)
   {
     "folke/noice.nvim",
     event = "VeryLazy",
     dependencies = { "MunifTanjim/nui.nvim" },
     opts = {
+      notify = {
+        enabled = false, -- Disable noice's notify takeover to avoid conflicts
+      },
       cmdline = {
         enabled = true,
         view = "cmdline_popup",
@@ -281,24 +287,6 @@ return {
     },
   },
 
-  -- Nvim-notify
-  {
-    "rcarriga/nvim-notify",
-    keys = {
-      { "<leader>un", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Dismiss Notifications" },
-    },
-    opts = {
-      stages = "fade_in_slide_out",
-      timeout = 3000,
-      max_height = function() return math.floor(vim.o.lines * 0.75) end,
-      max_width = function() return math.floor(vim.o.columns * 0.75) end,
-      on_open = function(win) vim.api.nvim_win_set_config(win, { zindex = 100 }) end,
-      render = "wrapped-compact",
-      fps = 60,
-      top_down = true,
-    },
-  },
-
   -- Smooth scrolling
   {
     "karb94/neoscroll.nvim",
@@ -312,36 +300,15 @@ return {
     },
   },
 
-  -- Mini.animate
+  -- Mini.animate (scroll disabled - neoscroll.nvim handles it)
   {
     "nvim-mini/mini.animate",
     event = "VeryLazy",
     opts = function()
-      local mouse_scrolled = false
-      for _, scroll in ipairs({ "Up", "Down" }) do
-        local key = "<ScrollWheel" .. scroll .. ">"
-        vim.keymap.set({ "", "i" }, key, function()
-          mouse_scrolled = true
-          return key
-        end, { expr = true })
-      end
-
       local animate = require("mini.animate")
       return {
         cursor = { enable = true, timing = animate.gen_timing.linear({ duration = 80, unit = "total" }) },
-        scroll = {
-          enable = true,
-          timing = animate.gen_timing.linear({ duration = 100, unit = "total" }),
-          subscroll = animate.gen_subscroll.equal({
-            predicate = function(total_scroll)
-              if mouse_scrolled then
-                mouse_scrolled = false
-                return false
-              end
-              return total_scroll > 1
-            end,
-          }),
-        },
+        scroll = { enable = false }, -- Disabled: neoscroll.nvim handles scroll animations
         resize = { enable = true, timing = animate.gen_timing.linear({ duration = 50, unit = "total" }) },
         open = { enable = true, timing = animate.gen_timing.linear({ duration = 150, unit = "total" }) },
         close = { enable = true, timing = animate.gen_timing.linear({ duration = 150, unit = "total" }) },
@@ -382,12 +349,6 @@ return {
       options = { try_as_border = true },
       draw = { delay = 50, animation = function() return 5 end, priority = 2 },
     },
-    init = function()
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "dashboard", "fzf", "help", "lazy", "lazyterm", "mason", "neo-tree", "notify", "toggleterm", "Trouble", "trouble", "snacks_dashboard" },
-        callback = function() vim.b.miniindentscope_disable = true end,
-      })
-    end,
   },
 
   -- Dropbar (winbar breadcrumbs)

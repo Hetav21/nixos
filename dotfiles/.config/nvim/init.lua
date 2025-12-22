@@ -81,6 +81,9 @@ require("lazy").setup({
       paths = { configdir },
       disabled_plugins = {
         "gzip",
+        "matchit",      -- LazyVim uses nvim-treesitter for matching
+        "matchparen",   -- LazyVim uses nvim-treesitter for matching
+        "netrwPlugin",  -- Using snacks.explorer / neo-tree
         "tarPlugin",
         "tohtml",
         "tutor",
