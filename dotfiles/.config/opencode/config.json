@@ -4,6 +4,9 @@
         "edit": false,
         "write": false
     },
+    "permission": {
+        "bash": "ask"
+    },
     "plugin": [
         "opencode-google-antigravity-auth",
         "oh-my-opencode"

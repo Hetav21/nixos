@@ -32,13 +32,15 @@
           # System tools for neovim plugins
           lsof # For opencode.nvim
           trash-cli # For snacks.explorer (safe delete)
-          sqlite
           wl-clipboard # Clipboard for Wayland (desktop); WSL uses clip.exe via init.lua
 
           # Node/Python for LSP hosts and mason
           nodejs
           nodePackages.neovim # Node provider
           (python3.withPackages (ps: [ps.pynvim])) # Python provider
+
+          # Nix LSP (not managed by Mason)
+          nil
 
           # Image tools (CLI) - used by snacks.image
           imagemagick

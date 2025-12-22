@@ -20,3 +20,7 @@ end
 if vim.env.NEOVIM_NODE_HOST then
   vim.g.node_host_prog = vim.env.NEOVIM_NODE_HOST
 end
+
+-- Disable unused providers (performance)
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
