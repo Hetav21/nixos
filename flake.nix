@@ -50,6 +50,11 @@
     nixCats = {
       url = "github:BirdeeHub/nixCats-nvim";
     };
+
+    claude-subagents = {
+      url = "github:VoltAgent/awesome-claude-code-subagents";
+      flake = false;
+    };
   };
 
   # Passing extra nix config
@@ -103,13 +108,20 @@
         system = nixbookSettings.system;
         specialArgs =
           {
-            inherit self inputs outputs extraLib;
+            inherit
+              self
+              inputs
+              outputs
+              extraLib
+              ;
             settings = nixbookSettings;
             hardware = hardware_asus;
           }
           // nixpkgsLib.mkChannelsFor nixbookSettings.system;
         modules =
-          [./hosts/nixbook/configuration.nix]
+          [
+            ./hosts/nixbook/configuration.nix
+          ]
           ++ extraLib.modules.common
           ++ extraLib.modules.desktop;
       };
@@ -118,13 +130,20 @@
         system = nixwslbookSettings.system;
         specialArgs =
           {
-            inherit self inputs outputs extraLib;
+            inherit
+              self
+              inputs
+              outputs
+              extraLib
+              ;
             settings = nixwslbookSettings;
             hardware = hardware_wsl;
           }
           // nixpkgsLib.mkChannelsFor nixwslbookSettings.system;
         modules =
-          [./hosts/nixwslbook/configuration.nix]
+          [
+            ./hosts/nixwslbook/configuration.nix
+          ]
           ++ extraLib.modules.common
           ++ extraLib.modules.wsl;
       };

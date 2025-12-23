@@ -68,6 +68,22 @@
         "type": "github"
       }
     },
+    "claude-subagents": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1765960806,
+        "narHash": "sha256-+MDsEdS1gkOJhivCTHrKh8BTBZGMgn4pPMSCYu4YU6o=",
+        "owner": "VoltAgent",
+        "repo": "awesome-claude-code-subagents",
+        "rev": "bb03610a4800c45625e143f2cc3a054cbdf2315e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "VoltAgent",
+        "repo": "awesome-claude-code-subagents",
+        "type": "github"
+      }
+    },
     "crane": {
       "locked": {
         "lastModified": 1763938834,
@@ -503,6 +519,7 @@
     },
     "root": {
       "inputs": {
+        "claude-subagents": "claude-subagents",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "nix-flatpak": "nix-flatpak",
