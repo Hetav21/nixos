@@ -55,6 +55,11 @@
       url = "github:VoltAgent/awesome-claude-code-subagents";
       flake = false;
     };
+
+    superpowers = {
+      url = "github:obra/superpowers";
+      flake = false;
+    };
   };
 
   # Passing extra nix config

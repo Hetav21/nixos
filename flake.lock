@@ -532,6 +532,7 @@
         "nur": "nur",
         "sops-nix": "sops-nix",
         "stylix": "stylix",
+        "superpowers": "superpowers",
         "vicinae": "vicinae",
         "zen-browser": "zen-browser"
       }
@@ -609,6 +610,22 @@
         "owner": "danth",
         "ref": "release-25.11",
         "repo": "stylix",
+        "type": "github"
+      }
+    },
+    "superpowers": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1766442455,
+        "narHash": "sha256-LinvfNu8MQSeXL3uinLDuVcapgWC8tTyuHc5tXnsBss=",
+        "owner": "obra",
+        "repo": "superpowers",
+        "rev": "a7a8c08c02d1f20409048ceafc49ed309d570ebf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "obra",
+        "repo": "superpowers",
         "type": "github"
       }
     },

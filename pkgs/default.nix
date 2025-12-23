@@ -10,4 +10,7 @@
   claude-subagents = pkgs.callPackage ./claude-subagents {
     claude-subagents-src = inputs.claude-subagents or null;
   };
+  superpowers = pkgs.callPackage ./superpowers {
+    superpowers-src = inputs.superpowers or null;
+  };
 }
