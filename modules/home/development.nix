@@ -13,6 +13,7 @@
   cliConfig = {config, ...}: let
     memoryDir = "${config.home.homeDirectory}/.memory";
     luaPath = ../../dotfiles/.config/nvim;
+
     nixCatsCategories = {pkgs, ...}: {
       lspsAndRuntimeDeps = {
         general = with pkgs; [
@@ -212,6 +213,10 @@
     # opencode commands
     home.file.".config/opencode/command".source =
       ../../dotfiles/.config/opencode/command;
+
+    # Claude Code subagents (125+ specialized AI agents)
+    # Source: https://github.com/VoltAgent/awesome-claude-code-subagents
+    home.file.".claude/agents".source = pkgs.custom.claude-subagents;
   };
 
   guiConfig = _: {

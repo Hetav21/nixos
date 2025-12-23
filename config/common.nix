@@ -2,7 +2,7 @@
   # Common settings shared across all hosts
 
   # Upgrade configuration
-  update-standard = "stylix home-manager lanzaboote sops-nix nix-flatpak zen-browser";
+  update-standard = "stylix home-manager lanzaboote sops-nix nix-flatpak zen-browser claude-subagents";
   update-latest = "nixpkgs-unstable nixpkgs-master nur vicinae";
 
   # User configuration

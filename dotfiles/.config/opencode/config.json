@@ -6,7 +6,6 @@
   },
   "plugin": [
     "opencode-google-antigravity-auth",
-    "@tarquinen/opencode-smart-title",
     "@simonwjackson/opencode-direnv",
     "oh-my-opencode"
   ],

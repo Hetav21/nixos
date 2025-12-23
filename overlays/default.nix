@@ -8,6 +8,7 @@
     custom = import ../pkgs {
       pkgs = final;
       settings = settings;
+      inputs = inputs;
     };
   };
 
