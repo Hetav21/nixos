@@ -214,6 +214,27 @@
     home.file.".config/opencode/command".source =
       ../../dotfiles/.config/opencode/command;
 
+    # Superpowers plugin for OpenCode (activation script for mutable copy)
+    # Source: https://github.com/obra/superpowers
+    # Uses activation script to copy to mutable location (required for npm module resolution)
+    # The plugin imports @opencode-ai/plugin which must be resolved from ~/.config/opencode/node_modules
+    home.activation.setupSuperpowers = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      SUPERPOWERS_SRC="${pkgs.custom.superpowers}"
+      SUPERPOWERS_DST="$HOME/.config/opencode/superpowers"
+      PLUGIN_DIR="$HOME/.config/opencode/plugin"
+
+      # Clean up any existing version (symlink or directory)
+      $DRY_RUN_CMD rm -rf "$SUPERPOWERS_DST"
+
+      # Copy superpowers to mutable location (allows npm module resolution to work)
+      $DRY_RUN_CMD cp -r "$SUPERPOWERS_SRC" "$SUPERPOWERS_DST"
+      $DRY_RUN_CMD chmod -R u+w "$SUPERPOWERS_DST"
+
+      # Create plugin symlink pointing to the mutable copy
+      $DRY_RUN_CMD mkdir -p "$PLUGIN_DIR"
+      $DRY_RUN_CMD ln -sf "$SUPERPOWERS_DST/.opencode/plugin/superpowers.js" "$PLUGIN_DIR/superpowers.js"
+    '';
+
     # Claude Code subagents (125+ specialized AI agents)
     # Source: https://github.com/VoltAgent/awesome-claude-code-subagents
     home.file.".claude/agents".source = pkgs.custom.claude-subagents;
