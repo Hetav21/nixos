@@ -5,15 +5,14 @@
   pkgs,
   config,
   ...
-}:
-with lib; {
+}: {
   options.profiles.home.desktop-full = {
-    enable = mkEnableOption "Full desktop home profile with all features";
+    enable = lib.mkEnableOption "Full desktop home profile with all features";
   };
 
-  config = mkIf config.profiles.home.desktop-full.enable {
+  config = lib.mkIf config.profiles.home.desktop-full.enable {
     # Enable categorized modules with both CLI and GUI
-    home.nix-settings.enable = true;
+    home.nixSettings.enable = true;
 
     home.development = {
       enable = true;

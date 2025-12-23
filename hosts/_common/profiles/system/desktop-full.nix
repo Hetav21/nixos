@@ -3,14 +3,14 @@
 {
   lib,
   config,
+  hardware ? {},
   ...
-}:
-with lib; {
+}: {
   options.profiles.system.desktop-full = {
-    enable = mkEnableOption "Full desktop profile with all features";
+    enable = lib.mkEnableOption "Full desktop profile with all features";
   };
 
-  config = mkIf config.profiles.system.desktop-full.enable {
+  config = lib.mkIf config.profiles.system.desktop-full.enable {
     # Core system
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
@@ -43,12 +43,18 @@ with lib; {
       enable = true;
       enableGui = true;
     };
-    system.desktop-environment.enableGui = true;
+    system.desktopEnvironment.enableGui = true;
 
     # Enable base hardware modules (audio, bluetooth, input, etc.)
     system.hardware.base.enable = true;
 
     # Enable misc modules
-    system.misc.disk-decryption.enable = true;
+    system.misc.diskDecryption.enable = true;
+
+    # Enable hardware drivers based on hardware config
+    drivers.nvidia.enable = hardware.nvidia.enable or false;
+    drivers.intel.enable = hardware.intel.enable or false;
+    drivers.amdgpu.enable = hardware.amdgpu.enable or false;
+    drivers.asus.enable = hardware.asus.enable or false;
   };
 }

@@ -49,9 +49,9 @@
           requires = ["network-online.target"];
           serviceConfig = {
             Type = "simple";
-            ExecStartPre = "/run/current-system/sw/bin/mkdir -p ${folder_path}";
+            ExecStartPre = "${lib.getExe' pkgs.coreutils "mkdir"} -p ${folder_path}";
             ExecStart = "${lib.getExe pkgs.rclone} mount --vfs-cache-mode full ${settings.rclone.remote_dir} ${folder_path} --allow-non-empty --config ${homeDirectory}/.config/rclone/rclone.conf";
-            ExecStop = "/run/current-system/sw/bin/fusermount -u ${folder_path}";
+            ExecStop = "${lib.getExe' pkgs.fuse "fusermount"} -u ${folder_path}";
             Restart = "on-failure";
             RestartSec = "10s";
             User = settings.username;

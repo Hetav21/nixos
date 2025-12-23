@@ -5,7 +5,7 @@
   ...
 } @ args:
 (extraLib.modules.mkModule {
-  name = "system.desktop.display-manager";
+  name = "system.desktop.displayManager";
   hasGui = false;
   cliConfig = _: let
     tuigreet = lib.getExe pkgs.tuigreet;

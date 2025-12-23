@@ -1,31 +1,24 @@
 # Base hardware configuration (audio, bluetooth, input, etc.)
 {
-  lib,
+  extraLib,
   pkgs,
   pkgs-unstable,
-  config,
   ...
-}:
-with lib; let
-  cfg = config.system.hardware.base;
-in {
-  options.system.hardware.base = {
-    enable = mkEnableOption "Enable base hardware configuration (audio, bluetooth, input)";
-  };
-
-  config = mkIf cfg.enable {
+} @ args:
+(extraLib.modules.mkModule {
+  name = "system.hardware.base";
+  hasGui = false;
+  cliConfig = _: {
     environment.systemPackages =
-      (with pkgs; [
-        alsa-utils
-        pulseaudio
-
-        brightnessctl
-
-        nvtopPackages.full
-      ])
-      ++ (with pkgs-unstable; [
-        lact
-      ]);
+      [
+        pkgs.alsa-utils
+        pkgs.pulseaudio
+        pkgs.brightnessctl
+        pkgs.nvtopPackages.full
+      ]
+      ++ [
+        pkgs-unstable.lact
+      ];
 
     systemd = {
       packages = [pkgs-unstable.lact];
@@ -67,4 +60,5 @@ in {
       };
     };
   };
-}
+})
+args

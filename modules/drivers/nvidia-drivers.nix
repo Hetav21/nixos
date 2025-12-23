@@ -1,29 +1,25 @@
 {
-  lib,
+  extraLib,
   pkgs,
   config,
   hardware,
   ...
-}:
-with lib; let
-  cfg = hardware.nvidia;
-in {
-  options.drivers.nvidia = {
-    enable = mkEnableOption "Enable Nvidia Drivers";
-  };
-
-  config = mkIf cfg.enable {
+} @ args:
+(extraLib.modules.mkModule {
+  name = "drivers.nvidia";
+  hasGui = false;
+  cliConfig = _: {
     hardware.nvidia-container-toolkit.enable = true;
 
-    environment.systemPackages = with pkgs; [
-      cudaPackages.cudatoolkit
-      # cudaPackages.cudnn
+    environment.systemPackages = [
+      pkgs.cudaPackages.cudatoolkit
+      # pkgs.cudaPackages.cudnn
     ];
 
     hardware.graphics = {
-      extraPackages = with pkgs; [
-        nvidia-vaapi-driver
-        libvdpau-va-gl
+      extraPackages = [
+        pkgs.nvidia-vaapi-driver
+        pkgs.libvdpau-va-gl
       ];
     };
 
@@ -42,7 +38,8 @@ in {
       };
       open = true;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.${cfg.package};
+      package = config.boot.kernelPackages.nvidiaPackages.${hardware.nvidia.package};
     };
   };
-}
+})
+args

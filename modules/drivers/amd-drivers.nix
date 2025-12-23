@@ -1,18 +1,14 @@
 {
-  lib,
+  extraLib,
   pkgs,
-  hardware,
   ...
-}:
-with lib; let
-  cfg = hardware.amdgpu;
-in {
-  options.drivers.amdgpu = {
-    enable = mkEnableOption "Enable AMD Drivers";
-  };
-
-  config = mkIf cfg.enable {
-    systemd.tmpfiles.rules = ["L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"];
+} @ args:
+(extraLib.modules.mkModule {
+  name = "drivers.amdgpu";
+  hasGui = false;
+  cliConfig = _: {
+    systemd.tmpfiles.rules = ["L+ /opt/rocm/hip - - - - ${pkgs.rocmPackages.clr}"];
     services.xserver.videoDrivers = ["amdgpu"];
   };
-}
+})
+args

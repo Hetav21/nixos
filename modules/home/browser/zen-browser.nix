@@ -1,25 +1,23 @@
 {
+  extraLib,
   lib,
   pkgs,
   inputs,
   settings,
-  config,
   ...
-}:
-with lib; let
-  cfg = config.home.browser.zen;
-in {
+} @ args:
+{
   imports = [
     inputs.zen-browser.homeModules.beta
     # or inputs.zen-browser.homeModules.twilight
     # or inputs.zen-browser.homeModules.twilight-official
   ];
-
-  options.home.browser.zen = {
-    enableGui = mkEnableOption "Enable GUI web browser (Zen)";
-  };
-
-  config = mkIf cfg.enableGui {
+}
+// (extraLib.modules.mkModule {
+  name = "home.browser.zen";
+  hasCli = false;
+  hasGui = true;
+  guiConfig = _: {
     stylix.targets.zen-browser = {
       enable = true;
       profileNames = ["${settings.username}"];
@@ -83,4 +81,5 @@ in {
       };
     };
   };
-}
+})
+args

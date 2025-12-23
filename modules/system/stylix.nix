@@ -11,7 +11,7 @@
   hasGui = false;
   cliConfig = _: let
     # Only use wallpaper if desktop environment is enabled (not for WSL)
-    hasDesktop = config.system.desktop-environment.enableGui or false;
+    hasDesktop = config.system.desktopEnvironment.enableGui or false;
   in {
     # Font packages
     fonts = {

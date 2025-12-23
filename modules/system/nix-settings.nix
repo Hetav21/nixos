@@ -1,20 +1,15 @@
 {
-  lib,
+  extraLib,
   pkgs,
-  config,
   settings,
   ...
-}:
-with lib; let
-  cfg = config.system.nix.settings;
-in {
-  options.system.nix.settings = {
-    enable = mkEnableOption "Enable nix settings configuration";
-  };
-
-  config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      nix-update
+} @ args:
+(extraLib.modules.mkModule {
+  name = "system.nix.settings";
+  hasGui = false;
+  cliConfig = _: {
+    environment.systemPackages = [
+      pkgs.nix-update
     ];
 
     nix = {
@@ -38,4 +33,5 @@ in {
       };
     };
   };
-}
+})
+args
