@@ -4,15 +4,14 @@
   lib,
   config,
   ...
-}:
-with lib; {
+}: {
   options.profiles.home.wsl-minimal = {
-    enable = mkEnableOption "Minimal WSL home profile with CLI/TUI tools only";
+    enable = lib.mkEnableOption "Minimal WSL home profile with CLI/TUI tools only";
   };
 
-  config = mkIf config.profiles.home.wsl-minimal.enable {
+  config = lib.mkIf config.profiles.home.wsl-minimal.enable {
     # Enable only CLI/TUI modules
-    home.nix-settings.enable = true;
+    home.nixSettings.enable = true;
     home.development.enable = true;
     home.shell.enable = true;
     home.system.enable = true;

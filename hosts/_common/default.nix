@@ -8,8 +8,7 @@
   pkgs-unstable,
   pkgs-master,
   ...
-}:
-with lib; {
+}: {
   # Common imports
   imports = [
     ./user.nix
@@ -19,8 +18,8 @@ with lib; {
   ];
 
   # Option for host-specific home.nix path
-  options.local.homeConfig = mkOption {
-    type = types.path;
+  options.local.homeConfig = lib.mkOption {
+    type = lib.types.path;
     description = "Path to host-specific home.nix file";
   };
 

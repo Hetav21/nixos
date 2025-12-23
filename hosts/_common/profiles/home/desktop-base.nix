@@ -5,15 +5,14 @@
   pkgs,
   config,
   ...
-}:
-with lib; {
+}: {
   options.profiles.home.desktop-base = {
-    enable = mkEnableOption "Base desktop home profile without heavy applications";
+    enable = lib.mkEnableOption "Base desktop home profile without heavy applications";
   };
 
-  config = mkIf config.profiles.home.desktop-base.enable {
+  config = lib.mkIf config.profiles.home.desktop-base.enable {
     # Enable categorized modules with both CLI and GUI
-    home.nix-settings.enable = true;
+    home.nixSettings.enable = true;
 
     home.development = {
       enable = true;

@@ -47,46 +47,45 @@ in rec {
     pkgs-unstable ? pkgs,
     pkgs-master ? pkgs,
     ...
-  } @ args:
-    with lib; let
-      # Parse the option path (e.g., "system.network" -> ["system" "network"])
-      pathParts = lib.splitString "." name;
-      # Get the config value at the option path
-      cfg = lib.getAttrFromPath pathParts config;
-      # Resolve configs - support both functions and static attrsets for backward compatibility
-      resolvedCliConfig =
-        if builtins.isFunction cliConfig
-        then cliConfig args
-        else cliConfig;
-      resolvedGuiConfig =
-        if builtins.isFunction guiConfig
-        then guiConfig args
-        else guiConfig;
-    in {
-      options = lib.setAttrByPath pathParts (
-        {}
-        // lib.optionalAttrs hasCli {
-          enable = mkEnableOption "Enable CLI/TUI tools for ${name}";
-        }
-        // lib.optionalAttrs hasGui {
-          enableGui = mkEnableOption "Enable GUI tools for ${name}";
-        }
-      );
+  } @ args: let
+    # Parse the option path (e.g., "system.network" -> ["system" "network"])
+    pathParts = lib.splitString "." name;
+    # Get the config value at the option path
+    cfg = lib.getAttrFromPath pathParts config;
+    # Resolve configs - support both functions and static attrsets for backward compatibility
+    resolvedCliConfig =
+      if builtins.isFunction cliConfig
+      then cliConfig args
+      else cliConfig;
+    resolvedGuiConfig =
+      if builtins.isFunction guiConfig
+      then guiConfig args
+      else guiConfig;
+  in {
+    options = lib.setAttrByPath pathParts (
+      {}
+      // lib.optionalAttrs hasCli {
+        enable = lib.mkEnableOption "Enable CLI/TUI tools for ${name}";
+      }
+      // lib.optionalAttrs hasGui {
+        enableGui = lib.mkEnableOption "Enable GUI tools for ${name}";
+      }
+    );
 
-      config = mkMerge [
-        # CLI/TUI configuration
-        (mkIf (hasCli && cfg.enable or false) resolvedCliConfig)
+    config = lib.mkMerge [
+      # CLI/TUI configuration
+      (lib.mkIf (hasCli && cfg.enable or false) resolvedCliConfig)
 
-        # GUI configuration
-        (mkIf (hasGui && cfg.enableGui or false) (
-          mkMerge [
-            # Auto-enable CLI when GUI is enabled (only if hasCli is true)
-            (lib.optionalAttrs (hasCli && guiRequiresCli) (
-              lib.setAttrByPath (pathParts ++ ["enable"]) true
-            ))
-            resolvedGuiConfig
-          ]
-        ))
-      ];
-    };
+      # GUI configuration
+      (lib.mkIf (hasGui && cfg.enableGui or false) (
+        lib.mkMerge [
+          # Auto-enable CLI when GUI is enabled (only if hasCli is true)
+          (lib.optionalAttrs (hasCli && guiRequiresCli) (
+            lib.setAttrByPath (pathParts ++ ["enable"]) true
+          ))
+          resolvedGuiConfig
+        ]
+      ))
+    ];
+  };
 }

@@ -4,13 +4,12 @@
   lib,
   config,
   ...
-}:
-with lib; {
+}: {
   options.profiles.system.wsl-minimal = {
-    enable = mkEnableOption "Minimal WSL profile with CLI/TUI only";
+    enable = lib.mkEnableOption "Minimal WSL profile with CLI/TUI only";
   };
 
-  config = mkIf config.profiles.system.wsl-minimal.enable {
+  config = lib.mkIf config.profiles.system.wsl-minimal.enable {
     # Core system (always needed)
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
@@ -35,7 +34,7 @@ with lib; {
     system.communication.enableGui = false;
     system.baseservices.enableGui = false;
     system.llm.enableGui = false;
-    system.desktop-environment.enableGui = false;
+    system.desktopEnvironment.enableGui = false;
 
     # Disable base hardware modules (not needed for WSL)
     system.hardware.base.enable = false;
@@ -44,6 +43,6 @@ with lib; {
     system.desktop.security.enable = false;
 
     # Disable misc modules (not needed for WSL)
-    system.misc.disk-decryption.enable = false;
+    system.misc.diskDecryption.enable = false;
   };
 }

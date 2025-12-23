@@ -7,7 +7,7 @@
   ...
 } @ args:
 (extraLib.modules.mkModule {
-  name = "system.desktop.xdg-config";
+  name = "system.desktop.xdgConfig";
   hasGui = false;
   cliConfig = _: {
     environment.sessionVariables = lib.mkMerge [

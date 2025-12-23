@@ -1,6 +1,7 @@
 {
   extraLib,
   lib,
+  pkgs,
   settings,
   ...
 } @ args:
@@ -31,7 +32,7 @@
         wantedBy = ["default.target"];
         serviceConfig = {
           Type = "simple";
-          ExecStart = "/run/current-system/sw/bin/pactl set-source-mute @DEFAULT_SOURCE@ 1";
+          ExecStart = "${lib.getExe' pkgs.pulseaudio "pactl"} set-source-mute @DEFAULT_SOURCE@ 1";
           Restart = "on-failure";
           RestartSec = "10s";
         };

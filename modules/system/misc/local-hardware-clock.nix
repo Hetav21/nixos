@@ -1,14 +1,9 @@
-{
-  lib,
-  config,
-  ...
-}:
-with lib; let
-  cfg = config.system.time.local-clock;
-in {
-  options.system.time.local-clock = {
-    enable = mkEnableOption "Change Hardware Clock To Local Time";
+{extraLib, ...} @ args:
+(extraLib.modules.mkModule {
+  name = "system.time.localClock";
+  hasGui = false;
+  cliConfig = _: {
+    time.hardwareClockInLocalTime = true;
   };
-
-  config = mkIf cfg.enable {time.hardwareClockInLocalTime = true;};
-}
+})
+args

@@ -5,7 +5,7 @@
   ...
 } @ args:
 (extraLib.modules.mkModule {
-  name = "home.nix-settings";
+  name = "home.nixSettings";
   hasGui = false;
   cliConfig = _: {
     home.packages = with pkgs; [

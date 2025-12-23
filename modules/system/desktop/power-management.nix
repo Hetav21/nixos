@@ -4,7 +4,7 @@
   ...
 } @ args:
 (extraLib.modules.mkModule {
-  name = "system.desktop.power-management";
+  name = "system.desktop.powerManagement";
   hasGui = false;
   cliConfig = _: {
     services = {

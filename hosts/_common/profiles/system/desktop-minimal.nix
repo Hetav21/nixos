@@ -4,22 +4,21 @@
   lib,
   config,
   ...
-}:
-with lib; {
+}: {
   options.profiles.system.desktop-minimal = {
-    enable = mkEnableOption "Minimal desktop profile with just window manager essentials";
+    enable = lib.mkEnableOption "Minimal desktop profile with just window manager essentials";
   };
 
-  config = mkIf config.profiles.system.desktop-minimal.enable {
+  config = lib.mkIf config.profiles.system.desktop-minimal.enable {
     # Core system
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
 
     # Minimal desktop environment only (individual components)
     system.desktop.environment.enable = true;
-    system.desktop.display-manager.enable = true;
+    system.desktop.displayManager.enable = true;
     system.desktop.security.enable = true;
-    system.desktop.xdg-config.enable = true;
+    system.desktop.xdgConfig.enable = true;
 
     # Enable base hardware modules (audio, bluetooth, input, etc.)
     system.hardware.base.enable = true;
@@ -39,6 +38,6 @@ with lib; {
     system.baseservices.enableGui = false;
     system.llm.enable = false;
     system.llm.enableGui = false;
-    system.desktop-environment.enableGui = false;
+    system.desktopEnvironment.enableGui = false;
   };
 }

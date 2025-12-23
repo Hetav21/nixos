@@ -1,17 +1,9 @@
 # ASUS-specific hardware support (asusd, supergfxd, rog-control-center)
-{
-  lib,
-  hardware,
-  ...
-}:
-with lib; let
-  cfg = hardware.asus;
-in {
-  options.drivers.asus = {
-    enable = mkEnableOption "Enable Asus Specific Features";
-  };
-
-  config = mkIf cfg.enable {
+{extraLib, ...} @ args:
+(extraLib.modules.mkModule {
+  name = "drivers.asus";
+  hasGui = false;
+  cliConfig = _: {
     services = {
       # supergfxd controls GPU switching
       supergfxd.enable = true;
@@ -30,4 +22,5 @@ in {
       };
     };
   };
-}
+})
+args

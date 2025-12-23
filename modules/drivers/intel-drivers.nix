@@ -1,26 +1,22 @@
 {
-  lib,
+  extraLib,
   pkgs,
-  hardware,
   ...
-}:
-with lib; let
-  cfg = hardware.intel;
-in {
-  options.drivers.intel = {
-    enable = mkEnableOption "Enable Intel Graphics Drivers";
-  };
-
-  config = mkIf cfg.enable {
+} @ args:
+(extraLib.modules.mkModule {
+  name = "drivers.intel";
+  hasGui = false;
+  cliConfig = _: {
     hardware.graphics = {
-      extraPackages = with pkgs; [
-        intel-media-driver
-        vpl-gpu-rt
-        libvdpau-va-gl
-        libva-vdpau-driver
+      extraPackages = [
+        pkgs.intel-media-driver
+        pkgs.vpl-gpu-rt
+        pkgs.libvdpau-va-gl
+        pkgs.libva-vdpau-driver
       ];
 
-      extraPackages32 = with pkgs.pkgsi686Linux; [intel-media-driver];
+      extraPackages32 = [pkgs.pkgsi686Linux.intel-media-driver];
     };
   };
-}
+})
+args

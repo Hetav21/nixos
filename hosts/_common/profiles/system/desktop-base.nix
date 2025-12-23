@@ -3,14 +3,14 @@
 {
   lib,
   config,
+  hardware ? {},
   ...
-}:
-with lib; {
+}: {
   options.profiles.system.desktop-base = {
-    enable = mkEnableOption "Base desktop profile without heavy applications";
+    enable = lib.mkEnableOption "Base desktop profile without heavy applications";
   };
 
-  config = mkIf config.profiles.system.desktop-base.enable {
+  config = lib.mkIf config.profiles.system.desktop-base.enable {
     # Core system
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
@@ -33,7 +33,7 @@ with lib; {
       enable = true;
       enableGui = true;
     };
-    system.desktop-environment.enableGui = true;
+    system.desktopEnvironment.enableGui = true;
 
     # Disable heavy applications
     system.virtualisation.enable = false;
@@ -44,5 +44,11 @@ with lib; {
 
     # Enable base hardware modules (audio, bluetooth, input, etc.)
     system.hardware.base.enable = true;
+
+    # Enable hardware drivers based on hardware config
+    drivers.nvidia.enable = hardware.nvidia.enable or false;
+    drivers.intel.enable = hardware.intel.enable or false;
+    drivers.amdgpu.enable = hardware.amdgpu.enable or false;
+    drivers.asus.enable = hardware.asus.enable or false;
   };
 }
