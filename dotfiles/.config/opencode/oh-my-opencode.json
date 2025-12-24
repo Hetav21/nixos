@@ -4,27 +4,31 @@
   "disabled_mcps": [
     "websearch_exa"
   ],
+  "disabled_hooks": [
+    "todo-continuation-enforcer",
+    "startup-toast"
+  ],
   "agents": {
     "Sisyphus": {
-      "model": "google/opus-4-5-thinking-high"
+      "model": "google/gemini-3-pro-high"
     },
     "Planner-Sisyphus": {
-      "model": "google/opus-4-5-thinking-high"
+      "model": "google/gemini-3-pro-high"
     },
     "librarian": {
-      "model": "google/sonnet-4-5-thinking-medium"
-    },
-    "oracle": {
-      "model": "github-copilot/gpt-5.2"
+      "model": "google/gemini-3-flash-medium"
     },
     "frontend-ui-ux-engineer": {
-      "model": "google/gemini-3-pro-medium"
+      "model": "google/gemini-3-flash-medium"
     },
     "document-writer": {
-      "model": "google/gemini-3-flash-medium"
+      "model": "google/gemini-3-flash"
     },
     "multimodal-looker": {
       "model": "google/gemini-3-flash"
+    },
+    "oracle": {
+      "model": "github-copilot/gpt-5.2"
     },
     "explore": {
       "model": "opencode/grok-code"
