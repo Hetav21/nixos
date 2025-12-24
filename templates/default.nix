@@ -35,4 +35,8 @@
     path = ./uv;
     description = "Python development environment with uv package manager";
   };
+  playwright = {
+    path = ./playwright;
+    description = "Playwright testing environment with Nix-native browsers";
+  };
 }
