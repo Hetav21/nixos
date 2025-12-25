@@ -10,6 +10,8 @@
     "oh-my-opencode"
   ],
   "theme": "rosepine",
+  "model": "google/gemini-3-pro-preview",
+  "small_model": "google/gemini-3-flash",
   "provider": {
     "google": {
       "npm": "@ai-sdk/google",
