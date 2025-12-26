@@ -3,6 +3,7 @@
     # Core system (always enabled)
     ./nix-settings.nix
     ./nix-ld.nix
+    ./locale.nix
 
     # Theming and fonts (can be enabled independently)
     ./stylix.nix

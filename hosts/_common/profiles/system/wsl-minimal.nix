@@ -13,6 +13,7 @@
     # Core system (always needed)
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
+    system.locale.enable = true;
 
     # Enable Stylix for fonts and TUI theming
     system.stylix.enable = true;
