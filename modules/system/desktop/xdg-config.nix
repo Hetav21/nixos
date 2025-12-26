@@ -111,25 +111,6 @@
       sounds.enable = true;
     };
 
-    time.timeZone = settings.timeZone;
-
-    i18n = {
-      defaultLocale = settings.locale;
-      extraLocaleSettings = {
-        LC_ADDRESS = settings.extraLocale;
-        LC_IDENTIFICATION = settings.extraLocale;
-        LC_MEASUREMENT = settings.extraLocale;
-        LC_MONETARY = settings.extraLocale;
-        LC_NAME = settings.extraLocale;
-        LC_NUMERIC = settings.extraLocale;
-        LC_PAPER = settings.extraLocale;
-        LC_TELEPHONE = settings.extraLocale;
-        LC_TIME = settings.extraLocale;
-      };
-    };
-
-    console.keyMap = settings.consoleKeymap;
-
     services.xserver = {
       enable = true;
       exportConfiguration = true; # Make sure /etc/X11/xkb is populated so localectl works correctly

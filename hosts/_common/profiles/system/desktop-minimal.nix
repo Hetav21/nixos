@@ -13,6 +13,7 @@
     # Core system
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
+    system.locale.enable = true;
 
     # Minimal desktop environment only (individual components)
     system.desktop.environment.enable = true;

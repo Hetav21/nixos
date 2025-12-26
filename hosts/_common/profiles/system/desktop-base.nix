@@ -14,6 +14,7 @@
     # Core system
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
+    system.locale.enable = true;
 
     # Enable essential modules with both CLI and GUI (but not heavy apps)
     system.network = {

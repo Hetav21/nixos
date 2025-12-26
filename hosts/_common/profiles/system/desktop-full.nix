@@ -14,6 +14,7 @@
     # Core system
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
+    system.locale.enable = true;
 
     # Enable all categorized modules with both CLI and GUI
     system.virtualisation = {
