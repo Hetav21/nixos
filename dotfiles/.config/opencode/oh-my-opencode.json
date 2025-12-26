@@ -1,32 +1,42 @@
 {
-    "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
-    "google_auth": false,
-    "disabled_mcps": ["websearch_exa"],
-    "disabled_hooks": ["todo-continuation-enforcer"],
-    "agents": {
-        "Sisyphus": {
-            "model": "google/opus-4-5-thinking-high"
-        },
-        "Planner-Sisyphus": {
-            "model": "google/opus-4-5-thinking-high"
-        },
-        "librarian": {
-            "model": "google/gemini-3-flash-medium"
-        },
-        "frontend-ui-ux-engineer": {
-            "model": "google/gemini-3-flash-medium"
-        },
-        "document-writer": {
-            "model": "google/gemini-3-flash"
-        },
-        "multimodal-looker": {
-            "model": "google/gemini-3-flash"
-        },
-        "oracle": {
-            "model": "github-copilot/gpt-5.2"
-        },
-        "explore": {
-            "model": "opencode/grok-code"
-        }
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
+  "google_auth": false,
+  "disabled_mcps": [
+    "websearch_exa"
+  ],
+  "disabled_hooks": [
+    "todo-continuation-enforcer"
+  ],
+  "sisyphus_agent": {
+    "disabled": false,
+    "default_builder_enabled": false,
+    "planner_enabled": true,
+    "replace_plan": true
+  },
+  "agents": {
+    "Sisyphus": {
+      "model": "google/opus-4-5-thinking-high"
+    },
+    "Planner-Sisyphus": {
+      "model": "google/opus-4-5-thinking-high"
+    },
+    "librarian": {
+      "model": "google/gemini-3-flash-medium"
+    },
+    "frontend-ui-ux-engineer": {
+      "model": "google/gemini-3-flash-medium"
+    },
+    "document-writer": {
+      "model": "google/gemini-3-flash"
+    },
+    "multimodal-looker": {
+      "model": "google/gemini-3-flash"
+    },
+    "oracle": {
+      "model": "github-copilot/gpt-5.2"
+    },
+    "explore": {
+      "model": "opencode/grok-code"
     }
+  }
 }
