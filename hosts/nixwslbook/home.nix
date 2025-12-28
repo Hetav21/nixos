@@ -10,6 +10,9 @@
   # Enable WSL minimal profile
   profiles.home.wsl-minimal.enable = true;
 
+  # Host-specific stateVersion (override common 25.11)
+  home.stateVersion = lib.mkForce "24.11";
+
   # WSL-specific configuration: Copy Alacritty config to Windows filesystem
   # Note: Windows applications cannot read Unix symlinks, so we must copy the file
   home.activation.copyAlacrittyConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''

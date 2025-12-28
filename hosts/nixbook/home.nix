@@ -1,7 +1,14 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ../_common/home-base.nix
   ];
+
+  # Host-specific stateVersion
+  home.stateVersion = lib.mkForce "25.11";
 
   # Enable full desktop profile (includes GTK/Qt configuration)
   profiles.home.desktop-full.enable = true;

@@ -12,6 +12,9 @@
   # Point to host-specific home.nix (centralized home-manager is in _common)
   local.homeConfig = ./home.nix;
 
+  # Host-specific stateVersion
+  system.stateVersion = lib.mkForce "25.11";
+
   # Host-specific boot configuration (secure boot with lanzaboote)
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
