@@ -59,6 +59,9 @@
   # Minimal WSL system profile (CLI/TUI only, no desktop environment)
   profiles.system.wsl-minimal.enable = true;
 
+  # Host-specific stateVersion (override common 25.11)
+  system.stateVersion = lib.mkForce "24.11";
+
   # Override flatpak packages to be empty for WSL (no GUI apps needed)
   services.flatpak.packages = lib.mkForce [];
 }
