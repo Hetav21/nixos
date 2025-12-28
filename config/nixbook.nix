@@ -11,12 +11,13 @@
   };
 
   rclone = {
-    local_dir = "Desktop/University";
-    remote_dir = "Adani:University";
+    enable = false;
+    local_dir = "";
+    remote_dir = "";
   };
 
   mount-partition = {
-    enable = true;
-    partition_id = "a96c2e2f-5a1a-4249-8a3c-283532bb14a9";
+    enable = false;
+    partition_id = "";
   };
 }
