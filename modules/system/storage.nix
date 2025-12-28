@@ -17,9 +17,11 @@
   }: let
     username = settings.username;
     homeDirectory = config.users.users.${username}.home;
-    # Check if rclone settings exist before accessing them
+    # Check if rclone settings exist and are enabled before accessing them
     rcloneEnabled =
       (settings ? rclone)
+      && (settings.rclone ? enable)
+      && settings.rclone.enable
       && (settings.rclone ? local_dir)
       && (settings.rclone ? remote_dir);
     folder_path =

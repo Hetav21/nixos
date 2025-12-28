@@ -7,7 +7,7 @@
   home = {
     username = settings.username;
     homeDirectory = "/home/${settings.username}";
-    stateVersion = "24.11";
+    stateVersion = "25.11";
 
     # Common dotfiles present on all hosts
     file = {

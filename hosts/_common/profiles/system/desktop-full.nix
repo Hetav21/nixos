@@ -50,7 +50,7 @@
     system.hardware.base.enable = true;
 
     # Enable misc modules
-    system.misc.diskDecryption.enable = true;
+    system.misc.diskDecryption.enable = false;
 
     # Enable hardware drivers based on hardware config
     drivers.nvidia.enable = hardware.nvidia.enable or false;
