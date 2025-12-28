@@ -1,9 +1,4 @@
-{
-  extraLib,
-  lib,
-  config,
-  ...
-} @ args:
+{extraLib, ...} @ args:
 (extraLib.modules.mkModule {
   name = "home.desktop.hypridle";
   hasCli = false;
