@@ -1,14 +1,11 @@
 {
-  extraLib,
-  lib,
-  inputs,
+  pkgs,
   config,
+  inputs,
+  extraLib,
   ...
 } @ args:
-{
-  imports = [inputs.vicinae.homeManagerModules.default];
-}
-// (extraLib.modules.mkModule {
+(extraLib.modules.mkModule {
   name = "home.desktop.launcher";
   hasCli = false;
   hasGui = true;
@@ -23,46 +20,47 @@
 
       layerrule = [
         # blur
-        "blur 1,match:class vicinae"
-        "ignore_alpha 1,match:class vicinae"
+        # "blur 1,match:class vicinae"
+        # "ignore_alpha 1,match:class vicinae"
       ];
     };
 
-    services.vicinae = {
+    programs.vicinae = {
       enable = true;
-      autoStart = true;
+      package = pkgs.vicinae;
+
+      systemd = {
+        enable = true;
+        autoStart = true;
+      };
+      useLayerShell = true;
 
       settings = {
-        faviconService = "twenty"; # twenty | google | none
+        close_on_focus_loss = true;
+        consider_preedit = true;
+        pop_to_root_on_close = true;
+        favicon_service = "twenty"; # twenty | google | none
+        search_files_in_root = true;
+
         font = {
           normal = config.stylix.fonts.serif;
           size = config.stylix.fonts.sizes.popups;
         };
-        popToRootOnClose = true;
-        rootSearch.searchFiles = false;
-        closeOnFocusLoss = true;
-        window = {
-          csd = true;
+
+        theme = {
+          name = "rose-pine";
+        };
+
+        launcher_window = {
           opacity = config.stylix.opacity.popups;
-          rounding = 10;
         };
       };
 
-      # Installing (vicinae) extensions declaratively
-      # extensions = [
-      #   (inputs.vicinae.mkVicinaeExtension.${pkgs.system} {
-      #     inherit pkgs;
-      #     name = "extension-name";
-      #     src = pkgs.fetchFromGitHub {
-      #       # You can also specify different sources other than github
-      #       owner = "repo-owner";
-      #       repo = "repo-name";
-      #       rev = "v1.0"; # If the extension has no releases use the latest commit hash
-      #       # You can get the sha256 by rebuilding once and then copying the output hash from the error message
-      #       sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
-      #     }; # If the extension is in a subdirectory you can add ` + "/subdir"` between the brace and the semicolon here
-      #   })
-      # ];
+      extensions = with inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}; [
+        nix
+        bluetooth
+        power-profile
+      ];
     };
   };
 })
