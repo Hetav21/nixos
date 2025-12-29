@@ -21,10 +21,10 @@
       "model": "google/opus-4-5-thinking-high"
     },
     "librarian": {
-      "model": "google/gemini-3-flash-medium"
+      "model": "google/sonnet-4-5-thinking-medium"
     },
     "frontend-ui-ux-engineer": {
-      "model": "google/gemini-3-flash-medium"
+      "model": "google/gemini-3-pro-high"
     },
     "document-writer": {
       "model": "google/gemini-3-flash"
@@ -36,7 +36,7 @@
       "model": "github-copilot/gpt-5.2"
     },
     "explore": {
-      "model": "opencode/grok-code"
+      "model": "google/gemini-3-flash"
     }
   }
 }
