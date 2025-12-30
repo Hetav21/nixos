@@ -1,7 +1,6 @@
 {
-  extraLib,
-  lib,
   pkgs,
+  extraLib,
   ...
 } @ args:
 (extraLib.modules.mkModule {
