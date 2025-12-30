@@ -16,6 +16,12 @@
     remote_dir = "";
   };
 
+  # SSH key configuration
+  ssh = {
+    work.identityFile = "";
+    personal.identityFile = "~/.ssh/id_personal";
+  };
+
   mount-partition = {
     enable = false;
     partition_id = "";
