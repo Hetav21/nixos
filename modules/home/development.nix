@@ -129,30 +129,33 @@
       ssh = {
         enable = true;
         enableDefaultConfig = false;
-        matchBlocks = {
-          "github.com-work" = {
-            hostname = "github.com";
-            identityFile = settings.ssh.work.identityFile;
-            identitiesOnly = true;
+        matchBlocks =
+          {
+            "github.com-personal" = {
+              hostname = "github.com";
+              identityFile = settings.ssh.personal.identityFile;
+              identitiesOnly = true;
+            };
+            "*" = {
+              forwardAgent = false;
+              addKeysToAgent = "yes";
+              compression = false;
+              serverAliveInterval = 0;
+              serverAliveCountMax = 3;
+              hashKnownHosts = false;
+              userKnownHostsFile = "~/.ssh/known_hosts";
+              controlMaster = "auto";
+              controlPath = "~/.ssh/master-%r@%n:%p";
+              controlPersist = "10m";
+            };
+          }
+          // lib.optionalAttrs (settings.ssh.work.identityFile != "") {
+            "github.com-work" = {
+              hostname = "github.com";
+              identityFile = settings.ssh.work.identityFile;
+              identitiesOnly = true;
+            };
           };
-          "github.com-personal" = {
-            hostname = "github.com";
-            identityFile = settings.ssh.personal.identityFile;
-            identitiesOnly = true;
-          };
-          "*" = {
-            forwardAgent = false;
-            addKeysToAgent = "no";
-            compression = false;
-            serverAliveInterval = 0;
-            serverAliveCountMax = 3;
-            hashKnownHosts = false;
-            userKnownHostsFile = "~/.ssh/known_hosts";
-            controlMaster = "no";
-            controlPath = "~/.ssh/master-%r@%n:%p";
-            controlPersist = "no";
-          };
-        };
       };
 
       git = {

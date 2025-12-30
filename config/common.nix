@@ -30,12 +30,6 @@
     cores = 8;
   };
 
-  # SSH key configuration
-  ssh = {
-    work.identityFile = "~/.ssh/id_work";
-    personal.identityFile = "~/.ssh/id_personal";
-  };
-
   # Application common configuration
   wallpaper_directory = "/etc/nixos/wallpapers";
 }
