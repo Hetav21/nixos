@@ -129,33 +129,20 @@
       ssh = {
         enable = true;
         enableDefaultConfig = false;
-        matchBlocks =
-          {
-            "github.com-personal" = {
-              hostname = "github.com";
-              identityFile = settings.ssh.personal.identityFile;
-              identitiesOnly = true;
-            };
-            "*" = {
-              forwardAgent = false;
-              addKeysToAgent = "yes";
-              compression = false;
-              serverAliveInterval = 0;
-              serverAliveCountMax = 3;
-              hashKnownHosts = false;
-              userKnownHostsFile = "~/.ssh/known_hosts";
-              controlMaster = "auto";
-              controlPath = "~/.ssh/master-%r@%n:%p";
-              controlPersist = "10m";
-            };
-          }
-          // lib.optionalAttrs (settings.ssh.work.identityFile != "") {
-            "github.com-work" = {
-              hostname = "github.com";
-              identityFile = settings.ssh.work.identityFile;
-              identitiesOnly = true;
-            };
-          };
+        # Note: github.com-personal/work aliases removed - Git now uses
+        # directory-based SSH key selection via core.sshCommand in git includes
+        matchBlocks."*" = {
+          forwardAgent = false;
+          addKeysToAgent = "yes";
+          compression = false;
+          serverAliveInterval = 0;
+          serverAliveCountMax = 3;
+          hashKnownHosts = false;
+          userKnownHostsFile = "~/.ssh/known_hosts";
+          controlMaster = "auto";
+          controlPath = "~/.ssh/master-%r@%n:%p";
+          controlPersist = "10m";
+        };
       };
 
       git = {
@@ -163,7 +150,22 @@
         package = pkgs-unstable.gitFull;
         lfs.enable = true;
         lfs.package = pkgs-unstable.git-lfs;
-        includes = [{path = "${../../dotfiles/.config/git/config}";}];
+        includes =
+          [
+            # Base config (always included)
+            {path = "${../../dotfiles/.config/git/config}";}
+            # Default: use personal SSH key for all repos
+            {
+              contents.core.sshCommand = "ssh -i ${settings.ssh.personal.identityFile} -o IdentitiesOnly=yes";
+            }
+          ]
+          # Work directory: use work SSH key (only if work identity is configured)
+          ++ lib.optionals (settings.ssh.work.identityFile != "") [
+            {
+              condition = "gitdir:~/work/";
+              contents.core.sshCommand = "ssh -i ${settings.ssh.work.identityFile} -o IdentitiesOnly=yes";
+            }
+          ];
       };
 
       jujutsu = {
