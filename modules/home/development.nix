@@ -215,6 +215,10 @@
     home.file.".config/opencode/oh-my-opencode.json".source =
       ../../dotfiles/.config/opencode/oh-my-opencode.json;
 
+    # antigravity configuration
+    home.file.".config/opencode/antigravity.json".source =
+      ../../dotfiles/.config/opencode/antigravity.json;
+
     # opencode commands
     home.file.".config/opencode/command".source =
       ../../dotfiles/.config/opencode/command;
