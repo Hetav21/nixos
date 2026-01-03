@@ -5,7 +5,8 @@
     "websearch_exa"
   ],
   "disabled_hooks": [
-    "startup-toast"
+    "startup-toast",
+    "todo-continuation-enforcer"
   ],
   "sisyphus_agent": {
     "disabled": false,
