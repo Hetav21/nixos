@@ -247,12 +247,14 @@
 
   guiConfig = _: {
     home.packages =
-      (with pkgs; [mongodb-compass])
+      (with pkgs; [
+        mongodb-compass
+        hoppscotch
+        bruno
+      ])
       ++ (with pkgs-unstable; [
         code-cursor
         antigravity
-        hoppscotch
-        bruno
       ]);
 
     programs = {
