@@ -99,10 +99,11 @@
       };
       portal = {
         enable = true;
-        wlr.enable = true;
+        wlr.enable = false; # Disabled - using hyprland portal instead
         xdgOpenUsePortal = true;
         extraPortals = with pkgs; [
           xdg-desktop-portal-hyprland
+          xdg-desktop-portal-gtk # Provides OpenURI, FileChooser, AppChooser
         ];
         config.common.default = ["hyprland"];
       };
