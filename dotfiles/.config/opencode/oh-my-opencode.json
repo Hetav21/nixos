@@ -5,7 +5,7 @@
     "websearch_exa"
   ],
   "disabled_hooks": [
-    "todo-continuation-enforcer"
+    "startup-toast"
   ],
   "sisyphus_agent": {
     "disabled": false,
@@ -15,28 +15,28 @@
   },
   "agents": {
     "Sisyphus": {
-      "model": "google/opus-4-5-thinking-high"
+      "model": "google/antigravity-claude-opus-4-5-thinking-high"
     },
     "Planner-Sisyphus": {
-      "model": "google/opus-4-5-thinking-high"
+      "model": "google/antigravity-claude-opus-4-5-thinking-high"
     },
     "librarian": {
-      "model": "google/sonnet-4-5-thinking-medium"
+      "model": "google/antigravity-claude-sonnet-4-5-thinking-medium"
     },
     "frontend-ui-ux-engineer": {
-      "model": "google/gemini-3-pro-high"
+      "model": "google/antigravity-gemini-3-pro-high"
     },
     "document-writer": {
-      "model": "google/gemini-3-flash"
+      "model": "google/antigravity-gemini-3-flash"
     },
     "multimodal-looker": {
-      "model": "google/gemini-3-flash"
+      "model": "google/antigravity-gemini-3-flash"
     },
     "oracle": {
       "model": "github-copilot/gpt-5.2"
     },
     "explore": {
-      "model": "google/gemini-3-flash"
+      "model": "google/antigravity-gemini-3-flash"
     }
   }
 }
