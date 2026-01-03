@@ -5,7 +5,8 @@
     "write": false
   },
   "plugin": [
-    "opencode-antigravity-auth@1.2.7",
+    "opencode-antigravity-auth@beta",
+    "@tarquinen/opencode-dcp@latest",
     "@simonwjackson/opencode-direnv",
     "oh-my-opencode"
   ],
