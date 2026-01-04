@@ -13,4 +13,5 @@
   superpowers = pkgs.callPackage ./superpowers {
     superpowers-src = inputs.superpowers or null;
   };
+  wsl-notify-send = pkgs.callPackage ./wsl-notify-send {};
 }
