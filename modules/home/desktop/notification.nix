@@ -3,6 +3,7 @@
   lib,
   pkgs,
   pkgs-unstable,
+  osConfig,
   ...
 } @ args:
 (extraLib.modules.mkModule {
@@ -10,8 +11,13 @@
   hasCli = true;
   hasGui = true;
 
-  cliConfig = _: {
-    home.packages = with pkgs; [libnotify];
+  cliConfig = _: let
+    isWsl = osConfig.wsl.enable or false;
+  in {
+    home.packages =
+      if isWsl
+      then [pkgs.custom.wsl-notify-send]
+      else [pkgs.libnotify];
   };
 
   guiConfig = _: let
