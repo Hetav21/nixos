@@ -64,4 +64,17 @@
 
   # Override flatpak packages to be empty for WSL (no GUI apps needed)
   services.flatpak.packages = lib.mkForce [];
+
+  # WSL dbus fix: Enable user session dbus for headless operation
+  # Without this, apps requiring dbus fail with "Unable to autolaunch a dbus-daemon without a $DISPLAY"
+  users.users.${settings.username}.linger = true;
+  systemd.user.services.dbus.wantedBy = ["default.target"];
+  environment.systemPackages = [pkgs.dbus];
+
+  # Auto-start user systemd service at boot (WSL doesn't do this by default)
+  # This ensures user dbus is available immediately, not just after first login
+  systemd.services."user@1000" = {
+    wantedBy = ["multi-user.target"];
+    overrideStrategy = "asDropin";
+  };
 }
