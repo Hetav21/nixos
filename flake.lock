@@ -71,11 +71,11 @@
     "claude-subagents": {
       "flake": false,
       "locked": {
-        "lastModified": 1767361533,
-        "narHash": "sha256-iI7b9Sh/wj2qIeCe/E5PrWvgld6XSUllujeE8Lbs6vs=",
+        "lastModified": 1767675262,
+        "narHash": "sha256-/fs/af41/9uXrOw6++t4+bfTkmS2y22Qgxy0tu9CxrY=",
         "owner": "VoltAgent",
         "repo": "awesome-claude-code-subagents",
-        "rev": "8c67a2f9c85335a204828e01e5399f357892b6a9",
+        "rev": "950a37966440f3725f00ed45ccfcdfdce7704361",
         "type": "github"
       },
       "original": {
