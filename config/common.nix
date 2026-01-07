@@ -7,7 +7,7 @@
 
   # User configuration
   username = "hetav";
-  editor = "vim";
+  editor = "nvim";
   visual = "zeditor";
   browser = "zen";
   terminal = "ghostty";

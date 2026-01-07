@@ -12,6 +12,12 @@
       pkgs.nix-update
     ];
 
+    # Override NixOS default EDITOR (nano) with user's choice
+    environment.variables = {
+      EDITOR = settings.editor;
+      VISUAL = settings.visual;
+    };
+
     nix = {
       settings = {
         trusted-users = ["root" "${settings.username}"];
