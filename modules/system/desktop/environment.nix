@@ -10,8 +10,6 @@
   hasGui = false;
   cliConfig = _: {
     environment.sessionVariables = {
-      EDITOR = settings.editor;
-      VISUAL = settings.visual;
       TERMINAL = settings.terminal;
       BROWSER = settings.browser;
       SIGNAL_PASSWORD_STORE = "gnome-libsecret";
