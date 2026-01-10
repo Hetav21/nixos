@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
   "google_auth": false,
   "disabled_mcps": [
-    "websearch_exa"
+    "websearch"
   ],
   "disabled_hooks": [
     "startup-toast",
@@ -16,16 +16,16 @@
   },
   "agents": {
     "Sisyphus": {
-      "model": "google/antigravity-claude-opus-4-5-thinking-high"
+      "model": "google/antigravity-claude-opus-4-5-thinking"
     },
     "Planner-Sisyphus": {
-      "model": "google/antigravity-claude-opus-4-5-thinking-high"
+      "model": "google/antigravity-claude-opus-4-5-thinking"
     },
     "librarian": {
-      "model": "google/antigravity-claude-sonnet-4-5-thinking-medium"
+      "model": "google/antigravity-claude-sonnet-4-5-thinking"
     },
     "frontend-ui-ux-engineer": {
-      "model": "google/antigravity-gemini-3-pro-high"
+      "model": "google/antigravity-gemini-3-pro"
     },
     "document-writer": {
       "model": "google/antigravity-gemini-3-flash"
@@ -39,5 +39,9 @@
     "explore": {
       "model": "google/antigravity-gemini-3-flash"
     }
+  },
+  "git_master": {
+    "commit_footer": false,
+    "include_co_authored_by": false
   }
 }
