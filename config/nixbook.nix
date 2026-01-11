@@ -7,15 +7,12 @@
   # Inputs specific to nixbook (desktop)
   inputs = {
     standard = [
-      "lanzaboote"
       "nix-flatpak"
-      "zen-browser"
-      "claude-subagents"
-      "superpowers"
+      "lanzaboote"
     ];
     latest = [
       "vicinae-extensions"
-      "nixCats"
+      "zen-browser"
     ];
   };
 
