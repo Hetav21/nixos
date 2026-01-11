@@ -4,13 +4,18 @@
   # Upgrade configuration
   inputs = {
     standard = [
-      "stylix"
+      "nix-index-database"
+      "claude-subagents"
+      "claude-skills"
+      "superpowers"
       "home-manager"
       "sops-nix"
+      "stylix"
     ];
     latest = [
       "nixpkgs-unstable"
       "nixpkgs-master"
+      "nixCats"
       "nur"
     ];
   };
