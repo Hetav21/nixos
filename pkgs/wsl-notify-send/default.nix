@@ -14,10 +14,44 @@
   };
 
   # Wrapper that mimics libnotify's notify-send interface
+  # notify-send accepts: notify-send [OPTIONS] SUMMARY [BODY]
+  # wsl-notify-send only accepts a single positional arg, so we combine summary + body
   notify-send-wrapper = writeShellScriptBin "notify-send" ''
-    # Parse arguments to extract summary and body
-    # wsl-notify-send.exe expects: wsl-notify-send.exe [options] <summary> [body]
-    exec "${exe}/wsl-notify-send.exe" --category "$0" "$@"
+    # Parse arguments - extract options and positional args
+    POSITIONAL=()
+    while [[ $# -gt 0 ]]; do
+      case $1 in
+        -u|--urgency|-t|--expire-time|-i|--icon|-c|--category|-h|--hint)
+          # Skip these options and their values (wsl-notify-send ignores most)
+          shift 2
+          ;;
+        -*)
+          # Skip unknown options
+          shift
+          ;;
+        *)
+          POSITIONAL+=("$1")
+          shift
+          ;;
+      esac
+    done
+
+    # Combine positional args: first is summary, rest is body
+    if [[ ''${#POSITIONAL[@]} -eq 0 ]]; then
+      MESSAGE=""
+    elif [[ ''${#POSITIONAL[@]} -eq 1 ]]; then
+      MESSAGE="''${POSITIONAL[0]}"
+    else
+      # Combine: "SUMMARY: BODY"
+      MESSAGE="''${POSITIONAL[0]}: ''${POSITIONAL[*]:1}"
+    fi
+
+    if [[ -z "$MESSAGE" ]]; then
+      echo "Usage: notify-send [OPTIONS] SUMMARY [BODY]" >&2
+      exit 1
+    fi
+
+    exec "${exe}/wsl-notify-send.exe" --appId "$WSL_DISTRO_NAME" --category "$WSL_DISTRO_NAME" "$MESSAGE"
   '';
 
   # Direct access to wsl-notify-send
