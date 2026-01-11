@@ -13,5 +13,8 @@
   superpowers = pkgs.callPackage ./superpowers {
     superpowers-src = inputs.superpowers or null;
   };
+  claude-skills = pkgs.callPackage ./claude-skills {
+    claude-skills-src = inputs.claude-skills or null;
+  };
   wsl-notify-send = pkgs.callPackage ./wsl-notify-send {};
 }

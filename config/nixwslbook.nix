@@ -20,9 +20,8 @@
 
   # Inputs specific to WSL
   inputs = {
-    latest = [
-      "claude-subagents"
-      "superpowers"
+    standard = [
+      "nixos-wsl"
     ];
   };
 }
