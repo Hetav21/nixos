@@ -18,16 +18,28 @@ assert lib.assertMsg (claude-skills-src != null) "claude-skills-src is required.
 
       mkdir -p $out
 
-      # Copy each skill directory (each contains a SKILL.md file)
-      for skill_dir in $src/*/; do
-        skill_name=$(basename "$skill_dir")
-        # Skip hidden directories, documentation, and non-skill directories
-        if [[ "$skill_name" != "."* ]] && \
-           [[ -f "$skill_dir/SKILL.md" || -d "$skill_dir" ]]; then
-          # Check if it's a skill directory (has SKILL.md or is a known skill folder)
-          if [ -f "$skill_dir/SKILL.md" ]; then
-            cp -r "$skill_dir" "$out/$skill_name"
-          fi
+      for dir in $src/*/; do
+        [ -d "$dir" ] || continue
+        dirname=$(basename "$dir")
+
+        # Skip hidden directories
+        if [[ "$dirname" == "."* ]]; then
+          continue
+        fi
+
+        if [ -f "$dir/SKILL.md" ]; then
+          # Case 1: Top-level skill
+          cp -r "$dir" "$out/$dirname"
+        else
+          # Case 2: Nested skills - flatten path
+          # Find all SKILL.md files in subdirectories
+          find "$dir" -type f -name "SKILL.md" | while read skill_file; do
+             skill_dir=$(dirname "$skill_file")
+             rel_path="''${skill_dir#$src/}"
+             # Replace slashes with dashes
+             flat_name="''${rel_path//\//-}"
+             cp -r "$skill_dir" "$out/$flat_name"
+          done
         fi
       done
 
