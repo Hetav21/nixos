@@ -18,8 +18,11 @@
     personal.identityFile = "~/.ssh/id_personal";
   };
 
-  # Override update strings to exclude desktop-only inputs
-  # (lanzaboote, nix-flatpak, zen-browser, vicinae are not used in WSL)
-  update-standard = "stylix home-manager sops-nix";
-  update-latest = "nixpkgs-unstable nixpkgs-master nur";
+  # Inputs specific to WSL
+  inputs = {
+    latest = [
+      "claude-subagents"
+      "superpowers"
+    ];
+  };
 }

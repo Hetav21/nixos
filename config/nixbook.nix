@@ -4,6 +4,21 @@
   hostname = "nixbook";
   wallpaper = "China.jpeg";
 
+  # Inputs specific to nixbook (desktop)
+  inputs = {
+    standard = [
+      "lanzaboote"
+      "nix-flatpak"
+      "zen-browser"
+      "claude-subagents"
+      "superpowers"
+    ];
+    latest = [
+      "vicinae-extensions"
+      "nixCats"
+    ];
+  };
+
   # Build configuration for physical hardware
   nix = {
     maxJobs = 4;

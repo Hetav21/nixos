@@ -11,5 +11,21 @@
   #   }
   #
   # This uses recursiveUpdate for deep merging nested attributes
-  mkHostSettings = common: overrides: lib.recursiveUpdate common overrides;
+  mkHostSettings = common: overrides: let
+    merged = lib.recursiveUpdate common overrides;
+    commonInputs = common.inputs or {};
+    overridesInputs = overrides.inputs or {};
+
+    mergeInputs = type: let
+      commonList = commonInputs.${type} or [];
+      hostList = overridesInputs.${type} or [];
+      combined = commonList ++ hostList;
+    in
+      lib.concatStringsSep " " combined;
+  in
+    merged
+    // {
+      update-standard = mergeInputs "standard";
+      update-latest = mergeInputs "latest";
+    };
 }
