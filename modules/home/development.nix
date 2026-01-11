@@ -11,7 +11,6 @@
   hasGui = true;
 
   cliConfig = {config, ...}: let
-    memoryDir = "${config.home.homeDirectory}/.memory";
     luaPath = ../../dotfiles/.config/nvim;
 
     nixCatsCategories = {pkgs, ...}: {
@@ -199,7 +198,6 @@
           extraLib.dotfiles.mkSubstitute {
             "@bunxPath@" = lib.getExe' pkgs.bun "bunx";
             "@uvxPath@" = lib.getExe' pkgs.uv "uvx";
-            "@memoryDir@" = memoryDir;
           }
           (lib.importJSON ../../dotfiles/.config/mcp/mcp.json).mcpServers;
       };
