@@ -2,7 +2,8 @@
   "$schema": "https://opencode.ai/config.json",
   "tools": {
     "edit": false,
-    "write": false
+    "write": false,
+    "bash": false
   },
   "plugin": [
     "opencode-antigravity-auth@beta",
