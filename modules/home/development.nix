@@ -244,6 +244,10 @@
       $DRY_RUN_CMD ln -sf "$SUPERPOWERS_DST/.opencode/plugin/superpowers.js" "$PLUGIN_DIR/superpowers.js"
     '';
 
+    # OpenCode skills (curated Claude Skills collection)
+    # Source: https://github.com/ComposioHQ/awesome-claude-skills
+    home.file.".config/opencode/skills".source = pkgs.custom.claude-skills;
+
     # Claude Code subagents (125+ specialized AI agents)
     # Source: https://github.com/VoltAgent/awesome-claude-code-subagents
     home.file.".claude/agents".source = pkgs.custom.claude-subagents;
