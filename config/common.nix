@@ -2,8 +2,18 @@
   # Common settings shared across all hosts
 
   # Upgrade configuration
-  update-standard = "stylix home-manager lanzaboote sops-nix nix-flatpak zen-browser claude-subagents superpowers";
-  update-latest = "nixpkgs-unstable nixpkgs-master nur vicinae";
+  inputs = {
+    standard = [
+      "stylix"
+      "home-manager"
+      "sops-nix"
+    ];
+    latest = [
+      "nixpkgs-unstable"
+      "nixpkgs-master"
+      "nur"
+    ];
+  };
 
   # User configuration
   username = "hetav";
