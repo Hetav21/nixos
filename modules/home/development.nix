@@ -209,46 +209,35 @@
       $DRY_RUN_CMD ln -sf ~/.config/opencode/node_modules/@opencode-ai/plugin ~/.cache/opencode/node_modules/@opencode-ai/plugin
     '';
 
-    # oh-my-opencode plugin configuration
-    home.file.".config/opencode/oh-my-opencode.json".source =
-      ../../dotfiles/.config/opencode/oh-my-opencode.json;
+    # oh-my-opencode plugin configuration and Claude resources
+    home.file = lib.mkMerge [
+      {
+        ".config/opencode/oh-my-opencode.json".source =
+          ../../dotfiles/.config/opencode/oh-my-opencode.json;
+        ".config/opencode/antigravity.json".source =
+          ../../dotfiles/.config/opencode/antigravity.json;
+        ".config/opencode/command".source =
+          ../../dotfiles/.config/opencode/command;
+      }
 
-    # antigravity configuration
-    home.file.".config/opencode/antigravity.json".source =
-      ../../dotfiles/.config/opencode/antigravity.json;
-
-    # opencode commands
-    home.file.".config/opencode/command".source =
-      ../../dotfiles/.config/opencode/command;
-
-    # Superpowers plugin for OpenCode (activation script for mutable copy)
-    # Source: https://github.com/obra/superpowers
-    # Uses activation script to copy to mutable location (required for npm module resolution)
-    # The plugin imports @opencode-ai/plugin which must be resolved from ~/.config/opencode/node_modules
-    home.activation.setupSuperpowers = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      SUPERPOWERS_SRC="${pkgs.custom.superpowers}"
-      SUPERPOWERS_DST="$HOME/.config/opencode/superpowers"
-      PLUGIN_DIR="$HOME/.config/opencode/plugin"
-
-      # Clean up any existing version (symlink or directory)
-      $DRY_RUN_CMD rm -rf "$SUPERPOWERS_DST"
-
-      # Copy superpowers to mutable location (allows npm module resolution to work)
-      $DRY_RUN_CMD cp -r "$SUPERPOWERS_SRC" "$SUPERPOWERS_DST"
-      $DRY_RUN_CMD chmod -R u+w "$SUPERPOWERS_DST"
-
-      # Create plugin symlink pointing to the mutable copy
-      $DRY_RUN_CMD mkdir -p "$PLUGIN_DIR"
-      $DRY_RUN_CMD ln -sf "$SUPERPOWERS_DST/.opencode/plugin/superpowers.js" "$PLUGIN_DIR/superpowers.js"
-    '';
-
-    # OpenCode skills (curated Claude Skills collection)
-    # Source: https://github.com/ComposioHQ/awesome-claude-skills
-    home.file.".config/opencode/skills".source = pkgs.custom.claude-skills;
-
-    # Claude Code subagents (125+ specialized AI agents)
-    # Source: https://github.com/VoltAgent/awesome-claude-code-subagents
-    home.file.".claude/agents".source = pkgs.custom.claude-subagents;
+      # Claude Configuration (Oh My OpenCode structure)
+      (extraLib.claude.mkEnvironment pkgs {
+        commands = [
+          (extraLib.claude.extract pkgs pkgs.custom.superpowers "commands")
+        ];
+        skills = [
+          pkgs.custom.claude-skills
+          (extraLib.claude.extract pkgs pkgs.custom.superpowers "skills")
+        ];
+        agents = [
+          pkgs.custom.claude-subagents
+          (extraLib.claude.extract pkgs pkgs.custom.superpowers "agents")
+        ];
+        hooks = [
+          (extraLib.claude.extract pkgs pkgs.custom.superpowers "hooks")
+        ];
+      })
+    ];
   };
 
   guiConfig = _: {
