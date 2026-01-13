@@ -16,13 +16,13 @@
   },
   "agents": {
     "Sisyphus": {
-      "model": "google/antigravity-claude-opus-4-5-thinking"
+      "model": "google/antigravity-gemini-3-pro"
     },
     "Planner-Sisyphus": {
-      "model": "google/antigravity-claude-opus-4-5-thinking"
+      "model": "google/antigravity-gemini-3-pro"
     },
     "librarian": {
-      "model": "google/antigravity-claude-sonnet-4-5-thinking"
+      "model": "google/antigravity-gemini-3-pro"
     },
     "frontend-ui-ux-engineer": {
       "model": "google/antigravity-gemini-3-pro"
