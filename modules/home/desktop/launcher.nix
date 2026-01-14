@@ -47,10 +47,6 @@
           size = config.stylix.fonts.sizes.popups;
         };
 
-        theme = {
-          name = "rose-pine";
-        };
-
         launcher_window = {
           opacity = config.stylix.opacity.popups;
         };
