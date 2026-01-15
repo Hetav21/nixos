@@ -205,9 +205,50 @@ nx doctor
 
 ---
 
+## Claude Environment Configuration
+
+The `~/.claude` directory is managed declaratively via `lib/claude.nix` helpers. This ensures a consistent environment for Claude Code and OpenCode.
+
+### Directory Structure
+
+| Path | Description | Strategy |
+|------|-------------|----------|
+| `~/.claude/commands/` | Custom slash commands (`/cmd`) | Flat merge of all inputs |
+| `~/.claude/skills/` | Skill definitions (`skill/SKILL.md`) | Flattened merge (nested dirs -> flat) |
+| `~/.claude/agents/` | Agent definitions (`agent.md`) | Flat merge of all inputs |
+| `~/.claude/hooks/` | Hooks configuration | Flat merge of all inputs |
+
+### Adding Resources
+
+To add new skills, agents, or commands:
+
+1. **Add Flake Input**: Add the repository to `inputs` in `flake.nix`.
+2. **Define Package**: Expose it in `pkgs/default.nix` (create a package definition if needed).
+   - If the source is just skills, you can use `cp -r $src/* $out/` in the package.
+3. **Update Module**: Add the package to the relevant list in `modules/home/development.nix`.
+
+```nix
+(extraLib.claude.mkEnvironment pkgs {
+  skills = [
+    pkgs.custom.claude-skills      # Priority: Low
+    pkgs.custom.agent-skills       # Priority: Medium
+    (extraLib.claude.extract pkgs pkgs.custom.superpowers "skills" {}) # Priority: High
+  ];
+})
+```
+
+### Library Functions (`lib/claude.nix`)
+
+- **`mkEnvironment`**: Main entry point. Merges sources for all categories. Automatically flattens skills.
+- **`extract`**: Extracts a subdirectory from a package. Supports filtering:
+  `extract pkgs src "path" { includes = ["*"]; excludes = ["bad-file"]; }`
+- **`merge`**: Merges directories using `rsync`. **Conflict Resolution**: Last item in the list overwrites previous ones.
+- **`flattenSkills`**: Recursively finds `SKILL.md` files and flattens the directory structure (e.g., `nested/dir/my-skill/SKILL.md` -> `nested-dir-my-skill/SKILL.md`).
+
+---
+
 ## Nested Documentation
 
 - **[modules/AGENTS.md](modules/AGENTS.md)** - Module operations, config conversions
 - **[hosts/AGENTS.md](hosts/AGENTS.md)** - Profile and host operations
 - **[secrets/README.md](secrets/README.md)** - Secret management with sops-nix
-

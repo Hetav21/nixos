@@ -16,5 +16,8 @@
   claude-skills = pkgs.callPackage ./claude-skills {
     claude-skills-src = inputs.claude-skills or null;
   };
+  agent-skills = pkgs.callPackage ./agent-skills {
+    agent-skills-src = inputs.agent-skills or null;
+  };
   wsl-notify-send = pkgs.callPackage ./wsl-notify-send {};
 }
