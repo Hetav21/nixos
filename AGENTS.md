@@ -222,9 +222,11 @@ The `~/.claude` directory is managed declaratively via `lib/claude.nix` helpers.
 
 To add new skills, agents, or commands:
 
-1. **Add Flake Input**: Add the repository to `inputs` in `flake.nix`.
+1. **Add Input**: Update `pkgs/claude-sources/flake.nix` (preferred) or main `flake.nix`.
+   - If using `claude-sources`, ensure the file is git-tracked and run `nx update`.
 2. **Define Package**: Expose it in `pkgs/default.nix` (create a package definition if needed).
-   - If the source is just skills, you can use `cp -r $src/* $out/` in the package.
+   - Use `inputs.claude-sources.<name>` if added to the sub-flake.
+   - If the source is just skills, you can use `cp -r $src/* $out/` (flattening is automatic).
 3. **Update Module**: Add the package to the relevant list in `modules/home/development.nix`.
 
 ```nix
