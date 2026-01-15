@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "agent-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1768441036,
+        "narHash": "sha256-7ZbztoUfWQuMcZ9KN4XrsffYSLCFfL1oQsypi5LBbo0=",
+        "owner": "vercel-labs",
+        "repo": "agent-skills",
+        "rev": "1f0c31b5121cd42f1b2e6da8b7f62ef332e88d58",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vercel-labs",
+        "repo": "agent-skills",
+        "type": "github"
+      }
+    },
     "base16": {
       "inputs": {
         "fromYaml": "fromYaml"
@@ -519,6 +535,7 @@
     },
     "root": {
       "inputs": {
+        "agent-skills": "agent-skills",
         "claude-skills": "claude-skills",
         "claude-subagents": "claude-subagents",
         "home-manager": "home-manager",

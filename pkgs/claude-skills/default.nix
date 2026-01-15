@@ -14,36 +14,9 @@ assert lib.assertMsg (claude-skills-src != null) "claude-skills-src is required.
     dontConfigure = true;
 
     installPhase = ''
-      runHook preInstall
-
       mkdir -p $out
-
-      for dir in $src/*/; do
-        [ -d "$dir" ] || continue
-        dirname=$(basename "$dir")
-
-        # Skip hidden directories
-        if [[ "$dirname" == "."* ]]; then
-          continue
-        fi
-
-        if [ -f "$dir/SKILL.md" ]; then
-          # Case 1: Top-level skill
-          cp -r "$dir" "$out/$dirname"
-        else
-          # Case 2: Nested skills - flatten path
-          # Find all SKILL.md files in subdirectories
-          find "$dir" -type f -name "SKILL.md" | while read skill_file; do
-             skill_dir=$(dirname "$skill_file")
-             rel_path="''${skill_dir#$src/}"
-             # Replace slashes with dashes
-             flat_name="''${rel_path//\//-}"
-             cp -r "$skill_dir" "$out/$flat_name"
-          done
-        fi
-      done
-
-      runHook postInstall
+      # Copy raw source to output. Flattening is handled by lib.claude.flattenSkills
+      cp -r $src/* $out/
     '';
 
     meta = with lib; {

@@ -223,18 +223,19 @@
       # Claude Configuration (Oh My OpenCode structure)
       (extraLib.claude.mkEnvironment pkgs {
         commands = [
-          (extraLib.claude.extract pkgs pkgs.custom.superpowers "commands")
+          (extraLib.claude.extract pkgs pkgs.custom.superpowers "commands" {})
         ];
         skills = [
           pkgs.custom.claude-skills
-          (extraLib.claude.extract pkgs pkgs.custom.superpowers "skills")
+          pkgs.custom.agent-skills
+          (extraLib.claude.extract pkgs pkgs.custom.superpowers "skills" {})
         ];
         agents = [
           pkgs.custom.claude-subagents
-          (extraLib.claude.extract pkgs pkgs.custom.superpowers "agents")
+          (extraLib.claude.extract pkgs pkgs.custom.superpowers "agents" {})
         ];
         hooks = [
-          (extraLib.claude.extract pkgs pkgs.custom.superpowers "hooks")
+          (extraLib.claude.extract pkgs pkgs.custom.superpowers "hooks" {})
         ];
       })
     ];

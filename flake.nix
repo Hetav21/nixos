@@ -68,6 +68,11 @@
       url = "github:obra/superpowers";
       flake = false;
     };
+
+    agent-skills = {
+      url = "github:vercel-labs/agent-skills";
+      flake = false;
+    };
   };
 
   # Passing extra nix config
