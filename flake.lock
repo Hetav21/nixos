@@ -100,6 +100,23 @@
         "type": "github"
       }
     },
+    "claude-sources": {
+      "inputs": {
+        "agent-skills": "agent-skills",
+        "claude-skills": "claude-skills",
+        "claude-subagents": "claude-subagents",
+        "superpowers": "superpowers"
+      },
+      "locked": {
+        "path": "./pkgs/claude-sources",
+        "type": "path"
+      },
+      "original": {
+        "path": "./pkgs/claude-sources",
+        "type": "path"
+      },
+      "parent": []
+    },
     "claude-subagents": {
       "flake": false,
       "locked": {
@@ -535,9 +552,7 @@
     },
     "root": {
       "inputs": {
-        "agent-skills": "agent-skills",
-        "claude-skills": "claude-skills",
-        "claude-subagents": "claude-subagents",
+        "claude-sources": "claude-sources",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "nix-flatpak": "nix-flatpak",
@@ -550,7 +565,6 @@
         "nur": "nur",
         "sops-nix": "sops-nix",
         "stylix": "stylix",
-        "superpowers": "superpowers",
         "vicinae-extensions": "vicinae-extensions",
         "zen-browser": "zen-browser"
       }
