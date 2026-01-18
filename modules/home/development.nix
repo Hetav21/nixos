@@ -38,6 +38,24 @@
           nodejs
           nodePackages.neovim # Node provider
           (python3.withPackages (ps: [ps.pynvim])) # Python provider
+          # Python
+          basedpyright
+          ruff
+          black
+
+          # C/C++
+          clang-tools
+          lldb
+
+          # Go
+          go
+          gopls
+          delve
+
+          # TypeScript/JavaScript
+          nodePackages.typescript-language-server
+          nodePackages.prettier
+          nodePackages.eslint_d
 
           # Nix LSP (not managed by Mason)
           nil
