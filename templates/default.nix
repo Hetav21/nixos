@@ -11,6 +11,10 @@
     path = ./empty;
     description = "Empty dev template that you can customize at will";
   };
+  go = {
+    path = ./go;
+    description = "Golang development environment";
+  };
   jupyter = {
     path = ./jupyter;
     description = "Jupyter development environment";
