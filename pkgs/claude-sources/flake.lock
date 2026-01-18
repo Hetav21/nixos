@@ -1,0 +1,78 @@
+{
+  "nodes": {
+    "agent-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1768700542,
+        "narHash": "sha256-7kRLipylSZy+2VKGWy6xoFnGpsXlHLkLxsykjvafSsQ=",
+        "owner": "vercel-labs",
+        "repo": "agent-skills",
+        "rev": "ac6a79af08f6d32c34ee03c829824990f3de0a6d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vercel-labs",
+        "repo": "agent-skills",
+        "type": "github"
+      }
+    },
+    "claude-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1768454365,
+        "narHash": "sha256-hCn3IoQ0r8rAYOIUfiqY0olZlH2faW0J3e7wnC6Oy3s=",
+        "owner": "ComposioHQ",
+        "repo": "awesome-claude-skills",
+        "rev": "6ecabbb9145cdc3a7582b3bc8b457ba40834c676",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ComposioHQ",
+        "repo": "awesome-claude-skills",
+        "type": "github"
+      }
+    },
+    "claude-subagents": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1768422796,
+        "narHash": "sha256-VX0Ee2d9Vj1EmS8BKp0+unfrTuLDEwu4WzTOhPqlDAY=",
+        "owner": "VoltAgent",
+        "repo": "awesome-claude-code-subagents",
+        "rev": "4462fb6a32f89aa86e86aefff7adcc3c9ce8dfa0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "VoltAgent",
+        "repo": "awesome-claude-code-subagents",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "agent-skills": "agent-skills",
+        "claude-skills": "claude-skills",
+        "claude-subagents": "claude-subagents",
+        "superpowers": "superpowers"
+      }
+    },
+    "superpowers": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1768429282,
+        "narHash": "sha256-hjjqs/fjiapsbfpxsTFe7TW82pD0UNXN4hNMXjnPMvg=",
+        "owner": "obra",
+        "repo": "superpowers",
+        "rev": "a08f088968d0789a44a4f5f5f7d8d6bbe46a0b44",
+        "type": "github"
+      },
+      "original": {
+        "owner": "obra",
+        "repo": "superpowers",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

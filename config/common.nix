@@ -5,9 +5,6 @@
   inputs = {
     standard = [
       "nix-index-database"
-      "claude-subagents"
-      "claude-skills"
-      "superpowers"
       "home-manager"
       "sops-nix"
       "stylix"
