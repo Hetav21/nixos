@@ -244,8 +244,30 @@
           (extraLib.claude.extract pkgs pkgs.custom.superpowers "commands" {})
         ];
         skills = [
-          pkgs.custom.claude-skills
           pkgs.custom.agent-skills
+          (extraLib.claude.extract pkgs pkgs.custom.anthropic-skills "skills" {
+            includes = [
+              "canvas-design"
+              "docx"
+              "frontend-design"
+              "mcp-builder"
+              "pdf"
+              "pptx"
+              "skill-creator"
+              "theme-factory"
+              "webapp-testing"
+              "xlsx"
+            ];
+          })
+          (extraLib.claude.extract pkgs pkgs.custom.neolab-context-kit "plugins/ddd/skills" {
+            includes = ["software-architecture"];
+          })
+          (extraLib.claude.extract pkgs pkgs.custom.neolab-context-kit "plugins/customaize-agent/skills" {
+            includes = ["prompt-engineering"];
+          })
+          (extraLib.claude.extract pkgs pkgs.custom.mhattingpete-skills "engineering-workflow-plugin/skills" {
+            includes = ["test-fixing" "review-implementing"];
+          })
           (extraLib.claude.extract pkgs pkgs.custom.superpowers "skills" {})
         ];
         agents = [

@@ -17,26 +17,28 @@ nx flake check
 
 > **IMPORTANT FOR AI AGENTS**: `nx` is a **nushell function** defined in `dotfiles/.config/nushell/config.nu`.
 > It is NOT available in bash/fish/zsh. When executing from non-nushell environments (e.g., subprocess bash calls), use:
+>
 > ```bash
 > nu --config ~/.config/nushell/config.nu -c "nx <command> [args]"
 > ```
+>
 > Example: `nu --config ~/.config/nushell/config.nu -c "nx flake check"`
 
-| Command | Description |
-|---------|-------------|
-| `nx config` | Open NixOS configuration in editor |
-| `nx rebuild [type]` | Rebuild NixOS (types: `test`, `switch`, `boot`) |
-| `nx rollback` | Rollback to previous generation |
-| `nx update [type]` | Update flake inputs (types: `latest`, `standard`, or all) |
-| `nx clean` | Remove old generations |
-| `nx gc` | Run garbage collection (wipe history >7d) |
-| `nx optimise` | Optimise nix store (deduplicate files) |
-| `nx doctor` | Run all maintenance (gc + clean + optimise) |
-| `nx pull` | Pull latest changes from git |
-| `nx log` | Tail the rebuild log |
-| `nx flake check` | Validate flake syntax |
-| `nx flake build [host]` | Dry-run build for host (default: nixwslbook) |
-| `nx flake eval [host]` | Evaluate config for host (default: nixwslbook) |
+| Command                 | Description                                               |
+| ----------------------- | --------------------------------------------------------- |
+| `nx config`             | Open NixOS configuration in editor                        |
+| `nx rebuild [type]`     | Rebuild NixOS (types: `test`, `switch`, `boot`)           |
+| `nx rollback`           | Rollback to previous generation                           |
+| `nx update [type]`      | Update flake inputs (types: `latest`, `standard`, or all) |
+| `nx clean`              | Remove old generations                                    |
+| `nx gc`                 | Run garbage collection (wipe history >7d)                 |
+| `nx optimise`           | Optimise nix store (deduplicate files)                    |
+| `nx doctor`             | Run all maintenance (gc + clean + optimise)               |
+| `nx pull`               | Pull latest changes from git                              |
+| `nx log`                | Tail the rebuild log                                      |
+| `nx flake check`        | Validate flake syntax                                     |
+| `nx flake build [host]` | Dry-run build for host (default: nixwslbook)              |
+| `nx flake eval [host]`  | Evaluate config for host (default: nixwslbook)            |
 
 ## Testing Changes
 
@@ -84,6 +86,7 @@ nx rebuild switch
 All modules must use `extraLib.modules.mkModule` helper to ensure consistent behavior and auto-generated enable options.
 
 **Requirements:**
+
 1. Destructure `extraLib` and other args (`lib`, `pkgs`, `config`) in the top-level function.
 2. Pass `@ args` to the top-level function.
 3. Call the result of `extraLib.modules.mkModule` with `args`.
@@ -99,9 +102,9 @@ All modules must use `extraLib.modules.mkModule` helper to ensure consistent beh
 (extraLib.modules.mkModule {
   name = "system.category.feature";
   # Optional: set to false if module has no CLI/GUI component
-  hasCli = true; 
-  hasGui = true; 
-  
+  hasCli = true;
+  hasGui = true;
+
   # Configuration for CLI/Server (enabled by cfg.enable)
   cliConfig = _: {
     environment.systemPackages = [ pkgs.tool ];
@@ -117,6 +120,7 @@ All modules must use `extraLib.modules.mkModule` helper to ensure consistent beh
 ### Best Practices
 
 **DO:**
+
 - Use profiles for common configurations
 - Follow namespace hierarchy
 - Create enable options for all modules
@@ -124,6 +128,7 @@ All modules must use `extraLib.modules.mkModule` helper to ensure consistent beh
 - Use `lib.getExe` for package binaries
 
 **DON'T:**
+
 - Use hyphens in option paths (use dots)
 - Mix system and home configurations
 - Hardcode user-specific paths
@@ -211,12 +216,12 @@ The `~/.claude` directory is managed declaratively via `lib/claude.nix` helpers.
 
 ### Directory Structure
 
-| Path | Description | Strategy |
-|------|-------------|----------|
-| `~/.claude/commands/` | Custom slash commands (`/cmd`) | Flat merge of all inputs |
-| `~/.claude/skills/` | Skill definitions (`skill/SKILL.md`) | Flattened merge (nested dirs -> flat) |
-| `~/.claude/agents/` | Agent definitions (`agent.md`) | Flat merge of all inputs |
-| `~/.claude/hooks/` | Hooks configuration | Flat merge of all inputs |
+| Path                  | Description                          | Strategy                              |
+| --------------------- | ------------------------------------ | ------------------------------------- |
+| `~/.claude/commands/` | Custom slash commands (`/cmd`)       | Flat merge of all inputs              |
+| `~/.claude/skills/`   | Skill definitions (`skill/SKILL.md`) | Flattened merge (nested dirs -> flat) |
+| `~/.claude/agents/`   | Agent definitions (`agent.md`)       | Flat merge of all inputs              |
+| `~/.claude/hooks/`    | Hooks configuration                  | Flat merge of all inputs              |
 
 ### Adding Resources
 
@@ -252,5 +257,6 @@ To add new skills, agents, or commands:
 ## Nested Documentation
 
 - **[modules/AGENTS.md](modules/AGENTS.md)** - Module operations, config conversions
+- **[pkgs/AGENTS.md](pkgs/AGENTS.md)** - Custom package definition
 - **[hosts/AGENTS.md](hosts/AGENTS.md)** - Profile and host operations
 - **[secrets/README.md](secrets/README.md)** - Secret management with sops-nix

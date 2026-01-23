@@ -16,7 +16,7 @@
     isSelectMode = inc != [] && inc != ["*"];
 
     excludeArgs = map (x: "--exclude='${x}'") exc;
-    includeArgs = map (x: "--include='${x}'") inc;
+    includeArgs = map (x: "--include='${x}' --include='${x}/**'") inc;
 
     finalArgs =
       excludeArgs
