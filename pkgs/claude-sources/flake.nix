@@ -6,12 +6,20 @@
       url = "github:VoltAgent/awesome-claude-code-subagents";
       flake = false;
     };
-    claude-skills = {
-      url = "github:ComposioHQ/awesome-claude-skills";
-      flake = false;
-    };
     superpowers = {
       url = "github:obra/superpowers";
+      flake = false;
+    };
+    neolab-context-kit = {
+      url = "github:NeoLabHQ/context-engineering-kit";
+      flake = false;
+    };
+    mhattingpete-skills = {
+      url = "github:mhattingpete/claude-skills-marketplace";
+      flake = false;
+    };
+    anthropic-skills = {
+      url = "github:anthropics/skills";
       flake = false;
     };
     agent-skills = {
@@ -21,6 +29,6 @@
   };
 
   outputs = {self, ...} @ inputs: {
-    inherit (inputs) claude-subagents claude-skills superpowers agent-skills;
+    inherit (inputs) claude-subagents superpowers agent-skills anthropic-skills neolab-context-kit mhattingpete-skills;
   };
 }
