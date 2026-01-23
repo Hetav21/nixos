@@ -3,11 +3,11 @@
     "agent-skills": {
       "flake": false,
       "locked": {
-        "lastModified": 1768700542,
-        "narHash": "sha256-7kRLipylSZy+2VKGWy6xoFnGpsXlHLkLxsykjvafSsQ=",
+        "lastModified": 1769098246,
+        "narHash": "sha256-nqIAZW74muTiWAEUfqUEmu8sC/GADIg/pfi11CW98Os=",
         "owner": "vercel-labs",
         "repo": "agent-skills",
-        "rev": "ac6a79af08f6d32c34ee03c829824990f3de0a6d",
+        "rev": "cadecb671fa7743c4e1f238b4672812e49ec0483",
         "type": "github"
       },
       "original": {
@@ -16,19 +16,19 @@
         "type": "github"
       }
     },
-    "claude-skills": {
+    "anthropic-skills": {
       "flake": false,
       "locked": {
-        "lastModified": 1768454365,
-        "narHash": "sha256-hCn3IoQ0r8rAYOIUfiqY0olZlH2faW0J3e7wnC6Oy3s=",
-        "owner": "ComposioHQ",
-        "repo": "awesome-claude-skills",
-        "rev": "6ecabbb9145cdc3a7582b3bc8b457ba40834c676",
+        "lastModified": 1766254184,
+        "narHash": "sha256-pllFZoWRdtLliz/5pLWks0V9nKFMzeWoRcmFgu2UWi8=",
+        "owner": "anthropics",
+        "repo": "skills",
+        "rev": "69c0b1a0674149f27b61b2635f935524b6add202",
         "type": "github"
       },
       "original": {
-        "owner": "ComposioHQ",
-        "repo": "awesome-claude-skills",
+        "owner": "anthropics",
+        "repo": "skills",
         "type": "github"
       }
     },
@@ -48,22 +48,56 @@
         "type": "github"
       }
     },
+    "mhattingpete-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1768489544,
+        "narHash": "sha256-NHVP8u5XVKrLeYe8F6oKeggIUDBoWITAxlIwGrZ1nNk=",
+        "owner": "mhattingpete",
+        "repo": "claude-skills-marketplace",
+        "rev": "004b0ece6e4b207a18c81d9e641eb2c29521a258",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mhattingpete",
+        "repo": "claude-skills-marketplace",
+        "type": "github"
+      }
+    },
+    "neolab-context-kit": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1768599486,
+        "narHash": "sha256-1YqJrO+VZyzicg5AK2IKvuHSF/kqBw7u9OYN8R9jK5o=",
+        "owner": "NeoLabHQ",
+        "repo": "context-engineering-kit",
+        "rev": "8254bb3cf33cd63699235d382a67e7b67df6073a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NeoLabHQ",
+        "repo": "context-engineering-kit",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agent-skills": "agent-skills",
-        "claude-skills": "claude-skills",
+        "anthropic-skills": "anthropic-skills",
         "claude-subagents": "claude-subagents",
+        "mhattingpete-skills": "mhattingpete-skills",
+        "neolab-context-kit": "neolab-context-kit",
         "superpowers": "superpowers"
       }
     },
     "superpowers": {
       "flake": false,
       "locked": {
-        "lastModified": 1768429282,
-        "narHash": "sha256-hjjqs/fjiapsbfpxsTFe7TW82pD0UNXN4hNMXjnPMvg=",
+        "lastModified": 1769141423,
+        "narHash": "sha256-/p7NqgA+cTZTOLD+gn1lOEQpN1wUgYaezB+sJaAVQPo=",
         "owner": "obra",
         "repo": "superpowers",
-        "rev": "a08f088968d0789a44a4f5f5f7d8d6bbe46a0b44",
+        "rev": "35d4fbcd0b31485d9a55f0ba96a51ae7fe78d382",
         "type": "github"
       },
       "original": {
