@@ -17,10 +17,7 @@
   "agents": {
     "Sisyphus": {
       "model": "google/antigravity-gemini-3-pro",
-      "prompt_append": "Strictly use the 'using-superpowers' skill"
-    },
-    "Planner-Sisyphus": {
-      "model": "google/antigravity-gemini-3-pro"
+      "prompt_append": "Strictly use the 'using-superpowers' skill."
     },
     "librarian": {
       "model": "google/antigravity-gemini-3-pro"
