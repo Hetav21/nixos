@@ -25,6 +25,10 @@
         "--enable-web-dashboard",
         "false"
       ]
+    },
+    "skill-seekers": {
+      "command": "@skillSeekersMcpPath@",
+      "args": []
     }
   }
 }

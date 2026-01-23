@@ -26,4 +26,5 @@
     agent-skills-src = inputs.claude-sources.agent-skills or null;
   };
   wsl-notify-send = pkgs.callPackage ./wsl-notify-send {};
+  skill-seekers = pkgs.callPackage ./skill-seekers {};
 }
