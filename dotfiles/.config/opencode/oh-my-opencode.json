@@ -16,7 +16,8 @@
   },
   "agents": {
     "Sisyphus": {
-      "model": "google/antigravity-gemini-3-pro"
+      "model": "google/antigravity-gemini-3-pro",
+      "prompt_append": "Strictly use the 'using-superpowers' skill"
     },
     "Planner-Sisyphus": {
       "model": "google/antigravity-gemini-3-pro"
@@ -37,6 +38,18 @@
       "model": "github-copilot/gpt-5.2"
     },
     "explore": {
+      "model": "google/antigravity-gemini-3-flash"
+    },
+    "Prometheus (Planner)": {
+      "model": "google/antigravity-gemini-3-pro"
+    },
+    "Metis (Plan Consultant)": {
+      "model": "google/antigravity-gemini-3-pro"
+    },
+    "Momus (Plan Reviewer)": {
+      "model": "google/antigravity-gemini-3-pro"
+    },
+    "Sisyphus-Junior": {
       "model": "google/antigravity-gemini-3-flash"
     }
   },
