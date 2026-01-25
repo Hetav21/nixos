@@ -225,6 +225,7 @@
       claude-resources = {
         enable = true;
         commands = [
+          pkgs.custom.subagent-catalog
           (extraLib.claude.extract pkgs pkgs.custom.superpowers "commands" {})
         ];
         skills = [
@@ -255,7 +256,6 @@
           (extraLib.claude.extract pkgs pkgs.custom.superpowers "skills" {})
         ];
         agents = [
-          pkgs.custom.claude-subagents
           (extraLib.claude.extract pkgs pkgs.custom.superpowers "agents" {})
         ];
         hooks = [
