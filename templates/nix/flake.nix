@@ -1,9 +1,17 @@
 {
   description = "A Nix-flake-based Nix development environment";
 
-  inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
+  inputs = {
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
+    # Point this to your NixOS configuration repository
+    dotfiles.url = "git+file:///etc/nixos";
+  };
 
-  outputs = {self, ...} @ inputs: let
+  outputs = {
+    self,
+    dotfiles,
+    ...
+  } @ inputs: let
     supportedSystems = [
       "x86_64-linux"
       "aarch64-linux"
@@ -20,7 +28,8 @@
   in {
     devShells = forEachSupportedSystem (
       {pkgs}: {
-        default = pkgs.mkShellNoCC {
+        default = dotfiles.lib.claude.mkProjectEnv {
+          inherit pkgs inputs;
           packages = with pkgs; [
             nil # LSP
             nixfmt-rfc-style # Formatter
@@ -29,6 +38,10 @@
             vulnix # Security scanner
             cachix # Binary cache
           ];
+
+          # Example: Custom Claude Agents and Skills
+          # agents = [ "https://github.com/org/repo/blob/main/agent.md" ];
+          # skills = [ "https://github.com/org/repo/tree/main/skills" ];
         };
       }
     );
