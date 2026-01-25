@@ -6,7 +6,8 @@
 
     # In your own project, point this to your NixOS configuration repository:
     # dotfiles.url = "github:Hetav21/nixos";
-    dotfiles.url = "path:../../";
+    # For local testing of this template within the repo:
+    dotfiles.url = "git+file:///etc/nixos";
   };
 
   outputs = {
