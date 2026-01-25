@@ -6,7 +6,8 @@
   ],
   "disabled_hooks": [
     "startup-toast",
-    "todo-continuation-enforcer"
+    "todo-continuation-enforcer",
+    "keyword-detector"
   ],
   "sisyphus_agent": {
     "disabled": false,
@@ -44,6 +45,9 @@
       "model": "google/antigravity-gemini-3-pro"
     },
     "Momus (Plan Reviewer)": {
+      "model": "google/antigravity-gemini-3-pro"
+    },
+    "atlas": {
       "model": "google/antigravity-gemini-3-pro"
     },
     "Sisyphus-Junior": {
