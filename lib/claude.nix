@@ -154,16 +154,20 @@
     agents ? [],
     commands ? [],
     hooks ? [],
-  }: let
+    ...
+  } @ args: let
     assets = buildAssets {inherit pkgs inputs skills agents commands hooks;};
+    shellArgs = builtins.removeAttrs args ["pkgs" "inputs" "skills" "agents" "commands" "hooks"];
   in
-    pkgs.mkShell {
-      shellHook = ''
+    pkgs.mkShell (shellArgs // {
+      shellHook = (args.shellHook or "") + ''
+
+        # Claude Project Bootstrap
         mkdir -p .claude
         cp -rn ${assets}/* ./.claude/
         chmod -R u+w ./.claude
       '';
-    };
+    });
 
   # Creates the ~/.claude environment by merging sources
   mkEnvironment = pkgs: {
