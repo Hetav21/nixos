@@ -25,7 +25,7 @@
         then parsed.repo
         else if inputs ? "${parsed.owner}-${parsed.repo}"
         then "${parsed.owner}-${parsed.repo}"
-        else throw "Input not found for ${parsed.owner}/${parsed.repo}. Checked '${parsed.repo}' and '${parsed.owner}-${parsed.repo}'";
+        else throw "Input not found for ${parsed.owner}/${parsed.repo}. Checked '${parsed.repo}' and '${parsed.owner}-${parsed.repo}'. Please add it to your flake inputs: `inputs.${parsed.repo}.url = \"github:${parsed.owner}/${parsed.repo}\";`";
 
       src = inputs.${inputName};
     in
