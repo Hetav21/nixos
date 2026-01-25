@@ -106,24 +106,58 @@
         paths}
     '';
 
-  # Creates the ~/.claude environment by merging sources
-  # Note: You should pass raw sources to 'skills', and this function (via extract/flatten logic in the module)
-  # but here we just merge what is given.
-  # Wait, the user wants "processing is done by the function".
-  # So mkEnvironment should probably CALL flattenSkills for the skills list?
-  # But mkEnvironment takes PRE-PROCESSED paths usually.
-  # If I change mkEnvironment to auto-flatten skills, it's cleaner for the user.
+  buildAssets = {
+    pkgs,
+    skills ? [],
+    agents ? [],
+    commands ? [],
+    hooks ? [],
+  }: let
+    flattenedSkills = map (s: flattenSkills pkgs s) skills;
 
-  # I will update mkEnvironment to apply flattenSkills to each skill input.
+    skillsMerged = merge pkgs "claude-skills" flattenedSkills;
+    agentsMerged = merge pkgs "claude-agents" agents;
+    commandsMerged = merge pkgs "claude-commands" commands;
+    hooksMerged = merge pkgs "claude-hooks" hooks;
+  in
+    pkgs.runCommand "claude-assets" {nativeBuildInputs = [pkgs.rsync];} ''
+      mkdir -p $out/skills $out/agents $out/commands $out/hooks
+
+      rsync -a --copy-links "${skillsMerged}/" "$out/skills/"
+      rsync -a --copy-links "${agentsMerged}/" "$out/agents/"
+      rsync -a --copy-links "${commandsMerged}/" "$out/commands/"
+      rsync -a --copy-links "${hooksMerged}/" "$out/hooks/"
+    '';
+
+  mkProjectEnv = {
+    pkgs,
+    skills ? [],
+    agents ? [],
+    commands ? [],
+    hooks ? [],
+  }: let
+    assets = buildAssets {inherit pkgs skills agents commands hooks;};
+  in
+    pkgs.mkShell {
+      shellHook = ''
+        mkdir -p .claude
+        cp -rn ${assets}/* ./.claude/
+        chmod -R u+w ./.claude
+      '';
+    };
+
+  # Creates the ~/.claude environment by merging sources
   mkEnvironment = pkgs: {
     skills ? [],
     commands ? [],
     agents ? [],
     hooks ? [],
-  }: {
-    ".claude/skills".source = merge pkgs "claude-skills" (map (s: flattenSkills pkgs s) skills);
-    ".claude/commands".source = merge pkgs "claude-commands" commands;
-    ".claude/agents".source = merge pkgs "claude-agents" agents;
-    ".claude/hooks".source = merge pkgs "claude-hooks" hooks;
+  }: let
+    assets = buildAssets {inherit pkgs skills agents commands hooks;};
+  in {
+    ".claude/skills".source = "${assets}/skills";
+    ".claude/commands".source = "${assets}/commands";
+    ".claude/agents".source = "${assets}/agents";
+    ".claude/hooks".source = "${assets}/hooks";
   };
 }
