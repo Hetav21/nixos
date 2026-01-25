@@ -28,67 +28,69 @@
   "categories": {
     "visual-engineering": {
       "model": "google/antigravity-gemini-3-pro",
-      "prompt_append": "Strictly use the 'using-superpowers' skill. Focus on visual fidelity and UI/UX patterns."
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Focus on visual fidelity and UI/UX patterns. Your overall approach MUST emulate the design philosophy of Claude"
     },
     "ultrabrain": {
       "model": "google/antigravity-gemini-3-pro",
-      "prompt_append": "Strictly use the 'using-superpowers' skill. Deep reasoning and architecture analysis."
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Deep reasoning and architecture analysis. Your overall approach MUST emulate the design philosophy of Claude"
     },
     "writing": {
       "model": "google/antigravity-gemini-3-pro",
-      "prompt_append": "Strictly use the 'using-superpowers' skill. Maintain technical accuracy and clear prose."
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Maintain technical accuracy and clear prose. Your overall approach MUST emulate the design philosophy of Claude"
     },
     "quick": {
       "model": "google/antigravity-gemini-3-flash",
-      "prompt_append": "Strictly use the 'using-superpowers' skill. Optimize for speed."
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Optimize for speed. Your overall approach MUST emulate the design philosophy of Claude"
     }
   },
   "agents": {
     "Sisyphus": {
       "model": "google/antigravity-gemini-3-pro",
-      "prompt_append": "Strictly use the 'using-superpowers' skill. Core skills: brainstorming, requesting-code-review, verification-before-completion, dispatching-parallel-agents. Available skills: systematic-debugging, subagent-driven-development, using-git-worktrees, finishing-a-development-branch."
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Core skills: brainstorming, requesting-code-review, verification-before-completion, dispatching-parallel-agents. Available skills: systematic-debugging, subagent-driven-development, using-git-worktrees, finishing-a-development-branch. Your overall approach MUST emulate the design philosophy of Claude"
     },
     "atlas": {
       "model": "google/antigravity-gemini-3-pro",
-      "prompt_append": "Strictly use the 'using-superpowers' skill. Core skills: executing-plans, finishing-a-development-branch, requesting-code-review. Available skills: test-driven-development, subagent-driven-development, using-git-worktrees."
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Core skills: executing-plans, finishing-a-development-branch, requesting-code-review. Available skills: test-driven-development, subagent-driven-development, using-git-worktrees. Your overall approach MUST emulate the design philosophy of Claude"
     },
     "Sisyphus-Junior": {
       "model": "google/antigravity-gemini-3-flash",
-      "prompt_append": "Strictly use the 'using-superpowers' skill. Core skills: receiving-code-review, requesting-code-review."
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Core skills: receiving-code-review, requesting-code-review. Your overall approach MUST emulate the design philosophy of Claude"
     },
     "Prometheus (Planner)": {
       "model": "google/antigravity-gemini-3-pro",
-      "prompt_append": "Strictly use the 'using-superpowers' skill. Core skills: brainstorming, writing-plans, dispatching-parallel-agents."
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Core skills: brainstorming, writing-plans, dispatching-parallel-agents. Your overall approach MUST emulate the design philosophy of Claude"
     },
     "Metis (Plan Consultant)": {
-      "model": "google/antigravity-gemini-3-pro"
+      "model": "google/antigravity-gemini-3-pro",
+      "prompt_append": "Your overall approach MUST emulate the design philosophy of Claude"
     },
     "Momus (Plan Reviewer)": {
-      "model": "google/antigravity-gemini-3-pro"
+      "model": "google/antigravity-gemini-3-pro",
+      "prompt_append": "Your overall approach MUST emulate the design philosophy of Claude"
     },
     "oracle": {
       "model": "github-copilot/gpt-5.2",
-      "prompt_append": "Strictly use the 'using-superpowers' skill. Core skills: systematic-debugging."
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Core skills: systematic-debugging. Your overall approach MUST emulate the design philosophy of Claude"
     },
     "librarian": {
       "model": "google/antigravity-gemini-3-pro",
-      "prompt_append": "Strictly use the 'using-superpowers' skill."
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Your overall approach MUST emulate the design philosophy of Claude"
     },
     "explore": {
       "model": "google/antigravity-gemini-3-flash",
-      "prompt_append": "Strictly use the 'using-superpowers' skill."
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Your overall approach MUST emulate the design philosophy of Claude"
     },
     "frontend-ui-ux-engineer": {
       "model": "google/antigravity-gemini-3-pro",
-      "prompt_append": "Strictly use the 'using-superpowers' skill."
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Your overall approach MUST emulate the design philosophy of Claude"
     },
     "document-writer": {
       "model": "google/antigravity-gemini-3-flash",
-      "prompt_append": "Strictly use the 'using-superpowers' skill."
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Your overall approach MUST emulate the design philosophy of Claude"
     },
     "multimodal-looker": {
       "model": "google/antigravity-gemini-3-flash",
-      "prompt_append": "Strictly use the 'using-superpowers' skill."
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Your overall approach MUST emulate the design philosophy of Claude"
     }
   },
   "git_master": {
