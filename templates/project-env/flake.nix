@@ -25,14 +25,14 @@
   in {
     devShells = forEachSupportedSystem ({pkgs}: {
       default = dotfiles.lib.claude.mkProjectEnv {
-        inherit pkgs;
+        inherit pkgs inputs;
 
         # Define your project-specific Claude resources here.
         # These will be automatically linked into your .claude/ directory.
 
         agents = [
-          # Example: Resolving a remote agent via GitHub URL
-          # (dotfiles.lib.claude.resolveSource pkgs inputs "https://github.com/Hetav21/superpowers/blob/main/agents/coder.md")
+          # Example: Raw GitHub URLs are automatically resolved
+          # "https://github.com/Hetav21/superpowers/blob/main/agents/coder.md"
         ];
 
         skills = [
