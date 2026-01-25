@@ -62,9 +62,9 @@ Enable `programs.claude.sources = [ "https://..." ]` configuration that auto-pop
 
 
 **2. Extraction Logic (Build)**
-- [ ] Run `nx rebuild test`
-- [ ] Check output: `ls -R ~/.claude/skills`
-- [ ] Verify structure matches expected flattening/file-copy.
+- [x] Run `nx rebuild test`
+- [x] Check output: `ls -R ~/.claude/skills`
+- [x] Verify structure matches expected flattening/file-copy.
 
 ---
 
