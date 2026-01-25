@@ -100,6 +100,7 @@
     hardware_asus = import ./config/hardware/asus.nix;
     hardware_wsl = import ./config/hardware/wsl.nix;
   in {
+    lib = extraLib;
     templates = import ./templates;
     overlays = import ./overlays {
       inherit inputs;
