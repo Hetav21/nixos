@@ -5,37 +5,41 @@
   config,
   inputs,
   ...
-} @ args:
-let
+} @ args: let
   name = "programs.claude-resources";
-  module = (extraLib.modules.mkModule {
-    inherit name;
-    hasCli = true;
+  module =
+    (extraLib.modules.mkModule {
+      inherit name;
+      hasCli = true;
 
-    cliConfig = { config, inputs, ... }: let
-      cfg = config.programs.claude-resources;
+      cliConfig = {
+        config,
+        inputs,
+        ...
+      }: let
+        cfg = config.programs.claude-resources;
 
-      # Resolve sources
-      resolvedAgentSources = map (extraLib.claude.resolveSource pkgs inputs) cfg.sources.agents;
-      resolvedSkillSources = map (extraLib.claude.resolveSource pkgs inputs) cfg.sources.skills;
+        # Resolve sources
+        resolvedAgentSources = map (extraLib.claude.resolveSource pkgs inputs) cfg.sources.agents;
+        resolvedSkillSources = map (extraLib.claude.resolveSource pkgs inputs) cfg.sources.skills;
 
-      # Merge
-      finalAgents = cfg.agents ++ resolvedAgentSources;
-      finalSkills = cfg.skills ++ resolvedSkillSources;
-    in {
-      # Call mkEnvironment
-      home.file = lib.mkMerge [
-        (extraLib.claude.mkEnvironment pkgs {
-          agents = finalAgents;
-          skills = finalSkills;
-          commands = cfg.commands;
-          hooks = cfg.hooks;
-        })
-      ];
-    };
-  }) args;
-in
-{
+        # Merge
+        finalAgents = cfg.agents ++ resolvedAgentSources;
+        finalSkills = cfg.skills ++ resolvedSkillSources;
+      in {
+        # Call mkEnvironment
+        home.file = lib.mkMerge [
+          (extraLib.claude.mkEnvironment pkgs {
+            agents = finalAgents;
+            skills = finalSkills;
+            commands = cfg.commands;
+            hooks = cfg.hooks;
+          })
+        ];
+      };
+    })
+    args;
+in {
   inherit (module) config;
 
   options = lib.recursiveUpdate module.options {

@@ -9,37 +9,56 @@
     "todo-continuation-enforcer",
     "keyword-detector"
   ],
+  "background_task": {
+    "defaultConcurrency": 5,
+    "providerConcurrency": {
+      "google": 5,
+      "github-copilot": 3
+    }
+  },
+  "browser_automation_engine": {
+    "provider": "playwright"
+  },
   "sisyphus_agent": {
     "disabled": false,
     "default_builder_enabled": false,
     "planner_enabled": true,
     "replace_plan": true
   },
+  "categories": {
+    "visual-engineering": {
+      "model": "google/antigravity-gemini-3-pro",
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Focus on visual fidelity and UI/UX patterns."
+    },
+    "ultrabrain": {
+      "model": "google/antigravity-gemini-3-pro",
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Deep reasoning and architecture analysis."
+    },
+    "writing": {
+      "model": "google/antigravity-gemini-3-pro",
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Maintain technical accuracy and clear prose."
+    },
+    "quick": {
+      "model": "google/antigravity-gemini-3-flash",
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Optimize for speed."
+    }
+  },
   "agents": {
     "Sisyphus": {
       "model": "google/antigravity-gemini-3-pro",
-      "prompt_append": "Strictly use the 'using-superpowers' skill."
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Core skills: brainstorming, requesting-code-review, verification-before-completion, dispatching-parallel-agents. Available skills: systematic-debugging, subagent-driven-development, using-git-worktrees, finishing-a-development-branch."
     },
-    "librarian": {
-      "model": "google/antigravity-gemini-3-pro"
+    "atlas": {
+      "model": "google/antigravity-gemini-3-pro",
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Core skills: executing-plans, finishing-a-development-branch, requesting-code-review. Available skills: test-driven-development, subagent-driven-development, using-git-worktrees."
     },
-    "frontend-ui-ux-engineer": {
-      "model": "google/antigravity-gemini-3-pro"
-    },
-    "document-writer": {
-      "model": "google/antigravity-gemini-3-flash"
-    },
-    "multimodal-looker": {
-      "model": "google/antigravity-gemini-3-flash"
-    },
-    "oracle": {
-      "model": "github-copilot/gpt-5.2"
-    },
-    "explore": {
-      "model": "google/antigravity-gemini-3-flash"
+    "Sisyphus-Junior": {
+      "model": "google/antigravity-gemini-3-flash",
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Core skills: receiving-code-review, requesting-code-review."
     },
     "Prometheus (Planner)": {
-      "model": "google/antigravity-gemini-3-pro"
+      "model": "google/antigravity-gemini-3-pro",
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Core skills: brainstorming, writing-plans, dispatching-parallel-agents."
     },
     "Metis (Plan Consultant)": {
       "model": "google/antigravity-gemini-3-pro"
@@ -47,11 +66,29 @@
     "Momus (Plan Reviewer)": {
       "model": "google/antigravity-gemini-3-pro"
     },
-    "atlas": {
-      "model": "google/antigravity-gemini-3-pro"
+    "oracle": {
+      "model": "github-copilot/gpt-5.2",
+      "prompt_append": "Strictly use the 'using-superpowers' skill. Core skills: systematic-debugging."
     },
-    "Sisyphus-Junior": {
-      "model": "google/antigravity-gemini-3-flash"
+    "librarian": {
+      "model": "google/antigravity-gemini-3-pro",
+      "prompt_append": "Strictly use the 'using-superpowers' skill."
+    },
+    "explore": {
+      "model": "google/antigravity-gemini-3-flash",
+      "prompt_append": "Strictly use the 'using-superpowers' skill."
+    },
+    "frontend-ui-ux-engineer": {
+      "model": "google/antigravity-gemini-3-pro",
+      "prompt_append": "Strictly use the 'using-superpowers' skill."
+    },
+    "document-writer": {
+      "model": "google/antigravity-gemini-3-flash",
+      "prompt_append": "Strictly use the 'using-superpowers' skill."
+    },
+    "multimodal-looker": {
+      "model": "google/antigravity-gemini-3-flash",
+      "prompt_append": "Strictly use the 'using-superpowers' skill."
     }
   },
   "git_master": {
