@@ -62,7 +62,7 @@ This method ensures reproducibility and stability by locking dependencies in `fl
     ```nix
     inputs = {
       # ... other inputs ...
-      superpowers.url = "github:Hetav21/superpowers";
+      superpowers.url = "github:owner/repo";
     };
     ```
 
@@ -94,7 +94,7 @@ mkProjectEnv {
   inherit pkgs inputs;
   
   agents = [
-    "https://github.com/Hetav21/superpowers/blob/main/agents/coder.md"
+    "https://github.com/owner/repo/blob/main/agents/coder.md"
   ];
 }
 ```

@@ -240,10 +240,10 @@ programs.claude-resources = {
   enable = true;
   sources = {
     agents = [
-      "https://github.com/Hetav21/superpowers/blob/main/agents/coder.md"
+      "https://github.com/owner/repo/blob/main/agents/coder.md"
     ];
     skills = [
-      "https://github.com/Hetav21/superpowers/tree/main/skills"
+      "https://github.com/owner/repo/tree/main/skills"
     ];
   };
 };
