@@ -222,7 +222,7 @@
           (lib.importJSON ../../dotfiles/.config/mcp/mcp.json).mcpServers;
       };
 
-      claude = {
+      claude-resources = {
         enable = true;
         commands = [
           (extraLib.claude.extract pkgs pkgs.custom.superpowers "commands" {})
