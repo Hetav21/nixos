@@ -7,13 +7,13 @@
   ...
 } @ args:
 let
-  name = "programs.claude";
+  name = "programs.claude-resources";
   module = (extraLib.modules.mkModule {
     inherit name;
     hasCli = true;
 
     cliConfig = { config, inputs, ... }: let
-      cfg = config.programs.claude;
+      cfg = config.programs.claude-resources;
 
       # Resolve sources
       resolvedAgentSources = map (extraLib.claude.resolveSource pkgs inputs) cfg.sources.agents;
@@ -39,7 +39,7 @@ in
   inherit (module) config;
 
   options = lib.recursiveUpdate module.options {
-    programs.claude = {
+    programs.claude-resources = {
       agents = lib.mkOption {
         type = lib.types.listOf lib.types.package;
         default = [];
