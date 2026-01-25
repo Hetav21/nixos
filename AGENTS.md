@@ -225,23 +225,44 @@ The `~/.claude` directory is managed declaratively via `lib/claude.nix` helpers.
 
 ### Adding Resources
 
-To add new skills, agents, or commands:
+Resources (skills, agents, commands, hooks) are managed declaratively using `programs.claude-resources`. This system automatically resolves GitHub URLs to Flake inputs and extracts the specified content.
 
-1. **Add Input**: Update `pkgs/claude-sources/flake.nix` (preferred) or main `flake.nix`.
-   - If using `claude-sources`, ensure the file is git-tracked and run `nx update`.
-2. **Define Package**: Expose it in `pkgs/default.nix` (create a package definition if needed).
-   - Use `inputs.claude-sources.<name>` if added to the sub-flake.
-   - If the source is just skills, you can use `cp -r $src/* $out/` (flattening is automatic).
-3. **Update Module**: Add the package to the relevant list in `modules/home/development.nix`.
+#### Declarative Workflow (Source URLs)
+
+1. **Add Flake Input**: Add the resource repository to your `flake.nix` (or `pkgs/claude-sources/flake.nix`).
+   - **Requirement**: The input name MUST match either the **repository name** (e.g., `superpowers`) or **owner-repo** (e.g., `hetav21-superpowers`).
+2. **Configure Sources**: Add the GitHub URLs to `programs.claude-resources.sources`.
+   - `agents`: URLs to `agent.md` files or directories containing agents.
+   - `skills`: URLs to directories containing skills (will be automatically flattened).
 
 ```nix
-(extraLib.claude.mkEnvironment pkgs {
-  skills = [
-    pkgs.custom.claude-skills      # Priority: Low
-    pkgs.custom.agent-skills       # Priority: Medium
-    (extraLib.claude.extract pkgs pkgs.custom.superpowers "skills" {}) # Priority: High
-  ];
-})
+programs.claude-resources = {
+  enable = true;
+  sources = {
+    agents = [
+      "https://github.com/Hetav21/superpowers/blob/main/agents/coder.md"
+    ];
+    skills = [
+      "https://github.com/Hetav21/superpowers/tree/main/skills"
+    ];
+  };
+};
+```
+
+#### Internal Processing (Parse -> Resolve -> Extract)
+
+- **Parse**: The URL is parsed to identify the owner, repo, and path.
+- **Resolve**: The system matches the URL to a Flake input by checking `repo` then `owner-repo`.
+- **Extract**: The specified path is extracted from the resolved input and linked into `~/.claude/`.
+
+#### Manual Packages
+
+Direct package references are still supported for custom or local resources:
+
+```nix
+programs.claude-resources = {
+  skills = [ pkgs.custom.local-skills ];
+};
 ```
 
 ### Library Functions (`lib/claude.nix`)
