@@ -13,19 +13,6 @@
         "@playwright/mcp@latest"
       ]
     },
-    "serena": {
-      "command": "@uvxPath@",
-      "args": [
-        "--from",
-        "git+https://github.com/oraios/serena",
-        "serena",
-        "start-mcp-server",
-        "--context",
-        "agent",
-        "--enable-web-dashboard",
-        "false"
-      ]
-    },
     "skill-seekers": {
       "command": "@skillSeekersMcpPath@",
       "args": []
