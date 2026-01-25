@@ -98,7 +98,7 @@
 
   # Helper to merge directories with priority (Last item in list = Highest Priority)
   merge = pkgs: name: paths:
-    pkgs.runCommand name { } ''
+    pkgs.runCommand name {} ''
       mkdir -p $out
       ${lib.concatMapStringsSep "\n" (p: ''
           echo "Merging ${p}..."
@@ -110,19 +110,30 @@
 
   buildAssets = {
     pkgs,
+    inputs ? null,
     skills ? [],
     agents ? [],
     commands ? [],
     hooks ? [],
   }: let
-    flattenedSkills = map (s: flattenSkills pkgs s) skills;
+    resolveMaybe = item:
+      if (builtins.isString item) && (lib.hasPrefix "http" item) && (inputs != null)
+      then resolveSource pkgs inputs item
+      else item;
+
+    resolvedSkills = map resolveMaybe skills;
+    resolvedAgents = map resolveMaybe agents;
+    resolvedCommands = map resolveMaybe commands;
+    resolvedHooks = map resolveMaybe hooks;
+
+    flattenedSkills = map (s: flattenSkills pkgs s) resolvedSkills;
 
     skillsMerged = merge pkgs "claude-skills" flattenedSkills;
-    agentsMerged = merge pkgs "claude-agents" agents;
-    commandsMerged = merge pkgs "claude-commands" commands;
-    hooksMerged = merge pkgs "claude-hooks" hooks;
+    agentsMerged = merge pkgs "claude-agents" resolvedAgents;
+    commandsMerged = merge pkgs "claude-commands" resolvedCommands;
+    hooksMerged = merge pkgs "claude-hooks" resolvedHooks;
   in
-    pkgs.runCommand "claude-assets" { } ''
+    pkgs.runCommand "claude-assets" {} ''
       mkdir -p $out/skills $out/agents $out/commands $out/hooks
 
       echo "Copying skills..."
@@ -138,12 +149,13 @@
 
   mkProjectEnv = {
     pkgs,
+    inputs ? null,
     skills ? [],
     agents ? [],
     commands ? [],
     hooks ? [],
   }: let
-    assets = buildAssets {inherit pkgs skills agents commands hooks;};
+    assets = buildAssets {inherit pkgs inputs skills agents commands hooks;};
   in
     pkgs.mkShell {
       shellHook = ''
@@ -155,12 +167,13 @@
 
   # Creates the ~/.claude environment by merging sources
   mkEnvironment = pkgs: {
+    inputs ? null,
     skills ? [],
     commands ? [],
     agents ? [],
     hooks ? [],
   }: let
-    assets = buildAssets {inherit pkgs skills agents commands hooks;};
+    assets = buildAssets {inherit pkgs inputs skills agents commands hooks;};
   in {
     ".claude/skills".source = "${assets}/skills";
     ".claude/commands".source = "${assets}/commands";
