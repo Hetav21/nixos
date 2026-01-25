@@ -1,9 +1,0 @@
-{
-  "active_plan": "/etc/nixos/.sisyphus/plans/claude-resource-loader.md",
-  "started_at": "2026-01-25T06:48:34.149Z",
-  "session_ids": [
-    "ses_40c2c37a6ffexZmIEyvZBazrR8",
-    "ses_40c15dbeeffe6iGXK5Jana658O"
-  ],
-  "plan_name": "claude-resource-loader"
-}
