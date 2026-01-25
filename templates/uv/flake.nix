@@ -2,6 +2,8 @@
   description = "A Nix-flake-based Python development environment with uv package manager";
 
   inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
+  # Point this to your NixOS configuration repository
+  inputs.dotfiles.url = "git+file:///etc/nixos";
 
   outputs = {self, ...} @ inputs: let
     supportedSystems = [
@@ -32,7 +34,13 @@
 
         python = pkgs."python${concatMajorMinor version}";
       in {
-        default = pkgs.mkShellNoCC {
+        default = inputs.dotfiles.lib.claude.mkProjectEnv {
+          inherit pkgs inputs;
+
+          # Optional: Add custom agents and skills
+          # agents = [ "https://github.com/user/repo/blob/main/agents/coder.md" ];
+          # skills = [ "https://github.com/user/repo/tree/main/skills" ];
+
           packages = [
             pkgs.uv
             python

@@ -1,9 +1,19 @@
 {
   description = "A Nix-flake-based Jupyter development environment";
 
-  inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
+  inputs = {
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
 
-  outputs = {self, ...} @ inputs: let
+    # Point this to your NixOS configuration repository
+    dotfiles.url = "git+file:///etc/nixos";
+  };
+
+  outputs = {
+    self,
+    nixpkgs,
+    dotfiles,
+    ...
+  } @ inputs: let
     supportedSystems = [
       "x86_64-linux"
       "aarch64-linux"
@@ -11,16 +21,18 @@
       "aarch64-darwin"
     ];
     forEachSupportedSystem = f:
-      inputs.nixpkgs.lib.genAttrs supportedSystems (
+      nixpkgs.lib.genAttrs supportedSystems (
         system:
           f {
-            pkgs = import inputs.nixpkgs {inherit system;};
+            pkgs = import nixpkgs {inherit system;};
           }
       );
   in {
     devShells = forEachSupportedSystem (
       {pkgs}: {
-        default = pkgs.mkShellNoCC {
+        default = dotfiles.lib.claude.mkProjectEnv {
+          inherit pkgs inputs;
+
           venvDir = ".venv";
           packages = with pkgs;
             [
@@ -32,6 +44,14 @@
               pip
               venvShellHook
             ]);
+
+          # Example: Custom Claude Agents and Skills
+          # agents = [
+          #   "https://github.com/Owner/Repo/blob/main/agents/coder.md"
+          # ];
+          # skills = [
+          #   "https://github.com/Owner/Repo/tree/main/skills"
+          # ];
         };
       }
     );
