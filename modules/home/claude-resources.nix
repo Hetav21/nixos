@@ -19,23 +19,20 @@
       }: let
         cfg = config.programs.claude-resources;
 
-        # Resolve sources
-        resolvedAgentSources = map (extraLib.claude.resolveSource pkgs inputs) cfg.sources.agents;
-        resolvedSkillSources = map (extraLib.claude.resolveSource pkgs inputs) cfg.sources.skills;
-
-        # Merge
-        finalAgents = cfg.agents ++ resolvedAgentSources;
-        finalSkills = cfg.skills ++ resolvedSkillSources;
+        assets = extraLib.claude.buildAssets {
+          inherit pkgs;
+          agents = cfg.agents ++ (map (extraLib.claude.resolveSource pkgs inputs) cfg.sources.agents);
+          skills = cfg.skills ++ (map (extraLib.claude.resolveSource pkgs inputs) cfg.sources.skills);
+          commands = cfg.commands;
+          hooks = cfg.hooks;
+        };
       in {
-        # Call mkEnvironment
-        home.file = lib.mkMerge [
-          (extraLib.claude.mkEnvironment pkgs {
-            agents = finalAgents;
-            skills = finalSkills;
-            commands = cfg.commands;
-            hooks = cfg.hooks;
-          })
-        ];
+        home.file = {
+          ".claude/skills".source = "${assets}/skills";
+          ".claude/agents".source = "${assets}/agents";
+          ".claude/commands".source = "${assets}/commands";
+          ".claude/hooks".source = "${assets}/hooks";
+        };
       };
     })
     args;
