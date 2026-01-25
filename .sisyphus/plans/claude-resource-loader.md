@@ -29,10 +29,10 @@ Enable `programs.claude.sources = [ "https://..." ]` configuration that auto-pop
 - `modules/home/development.nix`: Updated to import new module (optional/example).
 
 ### Definition of Done
-- [ ] User can add a GitHub URL string to config and corresponding flake input.
-- [ ] System rebuilds and places files in `~/.claude/{agents,skills}`.
-- [ ] Single file URL copies only that file.
-- [ ] Directory URL copies/flattens directory.
+- [x] User can add a GitHub URL string to config and corresponding flake input.
+- [x] System rebuilds and places files in `~/.claude/{agents,skills}`.
+- [x] Single file URL copies only that file.
+- [x] Directory URL copies/flattens directory.
 
 ### Must Have
 - Support for `blob/branch` and `tree/branch` URL formats.
