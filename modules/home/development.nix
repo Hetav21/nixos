@@ -221,27 +221,9 @@
           }
           (lib.importJSON ../../dotfiles/.config/mcp/mcp.json).mcpServers;
       };
-    };
 
-    # Fix for opencode-google-antigravity-auth plugin: symlink @opencode-ai/plugin from config to cache
-    home.activation.linkOpencodePlugin = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      $DRY_RUN_CMD mkdir -p ~/.cache/opencode/node_modules/@opencode-ai
-      $DRY_RUN_CMD ln -sf ~/.config/opencode/node_modules/@opencode-ai/plugin ~/.cache/opencode/node_modules/@opencode-ai/plugin
-    '';
-
-    # oh-my-opencode plugin configuration and Claude resources
-    home.file = lib.mkMerge [
-      {
-        ".config/opencode/oh-my-opencode.json".source =
-          ../../dotfiles/.config/opencode/oh-my-opencode.json;
-        ".config/opencode/antigravity.json".source =
-          ../../dotfiles/.config/opencode/antigravity.json;
-        ".config/opencode/command".source =
-          ../../dotfiles/.config/opencode/command;
-      }
-
-      # Claude Configuration (Oh My OpenCode structure)
-      (extraLib.claude.mkEnvironment pkgs {
+      claude = {
+        enable = true;
         commands = [
           (extraLib.claude.extract pkgs pkgs.custom.superpowers "commands" {})
         ];
@@ -279,7 +261,25 @@
         hooks = [
           (extraLib.claude.extract pkgs pkgs.custom.superpowers "hooks" {})
         ];
-      })
+      };
+    };
+
+    # Fix for opencode-google-antigravity-auth plugin: symlink @opencode-ai/plugin from config to cache
+    home.activation.linkOpencodePlugin = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      $DRY_RUN_CMD mkdir -p ~/.cache/opencode/node_modules/@opencode-ai
+      $DRY_RUN_CMD ln -sf ~/.config/opencode/node_modules/@opencode-ai/plugin ~/.cache/opencode/node_modules/@opencode-ai/plugin
+    '';
+
+    # oh-my-opencode plugin configuration and Claude resources
+    home.file = lib.mkMerge [
+      {
+        ".config/opencode/oh-my-opencode.json".source =
+          ../../dotfiles/.config/opencode/oh-my-opencode.json;
+        ".config/opencode/antigravity.json".source =
+          ../../dotfiles/.config/opencode/antigravity.json;
+        ".config/opencode/command".source =
+          ../../dotfiles/.config/opencode/command;
+      }
     ];
   };
 
