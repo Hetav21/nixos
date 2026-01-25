@@ -98,10 +98,12 @@
 
   # Helper to merge directories with priority (Last item in list = Highest Priority)
   merge = pkgs: name: paths:
-    pkgs.runCommand name {nativeBuildInputs = [pkgs.rsync];} ''
+    pkgs.runCommand name { } ''
       mkdir -p $out
       ${lib.concatMapStringsSep "\n" (p: ''
-          rsync -a --chmod=u+w "${p}/" "$out/"
+          echo "Merging ${p}..."
+          cp -a "${p}/." "$out/"
+          chmod -R u+w "$out/"
         '')
         paths}
     '';
@@ -120,13 +122,18 @@
     commandsMerged = merge pkgs "claude-commands" commands;
     hooksMerged = merge pkgs "claude-hooks" hooks;
   in
-    pkgs.runCommand "claude-assets" {nativeBuildInputs = [pkgs.rsync];} ''
+    pkgs.runCommand "claude-assets" { } ''
       mkdir -p $out/skills $out/agents $out/commands $out/hooks
 
-      rsync -a --copy-links "${skillsMerged}/" "$out/skills/"
-      rsync -a --copy-links "${agentsMerged}/" "$out/agents/"
-      rsync -a --copy-links "${commandsMerged}/" "$out/commands/"
-      rsync -a --copy-links "${hooksMerged}/" "$out/hooks/"
+      echo "Copying skills..."
+      cp -a "${skillsMerged}/." "$out/skills/"
+      echo "Copying agents..."
+      cp -a "${agentsMerged}/." "$out/agents/"
+      echo "Copying commands..."
+      cp -a "${commandsMerged}/." "$out/commands/"
+      echo "Copying hooks..."
+      cp -a "${hooksMerged}/." "$out/hooks/"
+      chmod -R u+w "$out"
     '';
 
   mkProjectEnv = {
