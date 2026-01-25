@@ -43,8 +43,4 @@
     path = ./playwright;
     description = "Playwright testing environment with Nix-native browsers";
   };
-  project-env = {
-    path = ./project-env;
-    description = "Claude Project Environment with robust logic";
-  };
 }
