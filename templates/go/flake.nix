@@ -1,9 +1,18 @@
 {
   description = "A Nix-flake-based Go development environment";
 
-  inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1"; # unstable Nixpkgs
+  inputs = {
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1"; # unstable Nixpkgs
 
-  outputs = {self, ...} @ inputs: let
+    # Point this to your NixOS configuration repository
+    dotfiles.url = "git+file:///etc/nixos";
+  };
+
+  outputs = {
+    self,
+    dotfiles,
+    ...
+  } @ inputs: let
     goVersion = 24; # Change this to update the whole stack
 
     supportedSystems = [
@@ -29,7 +38,8 @@
 
     devShells = forEachSupportedSystem (
       {pkgs}: {
-        default = pkgs.mkShellNoCC {
+        default = dotfiles.lib.claude.mkProjectEnv {
+          inherit pkgs inputs;
           packages = with pkgs; [
             # go (version is specified by overlay)
             go
@@ -40,6 +50,13 @@
             # https://github.com/golangci/golangci-lint
             golangci-lint
           ];
+
+          # agents = [
+          #   "https://github.com/Hetav21/superpowers/blob/main/agents/coder.md"
+          # ];
+          # skills = [
+          #   "https://github.com/Hetav21/superpowers/tree/main/skills"
+          # ];
         };
       }
     );
