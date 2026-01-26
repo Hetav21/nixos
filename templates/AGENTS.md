@@ -7,96 +7,95 @@ All templates in this repository now come with built-in Claude Code support. The
 Initialize a new project using one of the available templates:
 
 ```bash
-# Initialize a Python project
-nix flake init -t github:Hetav21/nixos#python
+# Initialize a Python AI project
+nix flake init -t github:Hetav21/nixos#ai-uv
 
-# Initialize a Node.js project
-nix flake init -t github:Hetav21/nixos#node
+# Initialize a Node.js Frontend project
+nix flake init -t github:Hetav21/nixos#frontend-node
 
-# Initialize a Go project
-nix flake init -t github:Hetav21/nixos#go
+# Initialize a Go Backend project
+nix flake init -t github:Hetav21/nixos#backend-go
 ```
 
 ## Available Templates
 
-- `bun`: Bun runtime environment
-- `go`: Go development environment
-- `jupyter`: Jupyter notebook environment with Python
-- `nix`: Nix development environment
-- `node`: Node.js development environment
-- `playwright`: Playwright testing environment
-- `python`: Python development environment (with venv)
-- `shell`: Generic shell environment
-- `uv`: Python environment using `uv` package manager
+### Frontend
+- **`frontend-bun`**: Bun environment with Playwright
+- **`frontend-node`**: Node.js environment with Playwright
+
+### Backend
+- **`backend-bun`**: Bun backend environment
+- **`backend-node`**: Node.js backend environment
+- **`backend-go`**: Go backend environment
+
+### AI & Data
+- **`ai-pip`**: Python environment (pip)
+- **`ai-uv`**: Python environment (uv)
+- **`notebook`**: Jupyter Notebook environment
+
+### Testing
+- **`browser`**: Playwright testing environment
+
+### Minimal
+- `empty`: Empty environment
 
 ## How It Works
 
 The magic happens in `mkProjectEnv` (provided by `dotfiles.lib.claude`). This helper:
 
 1.  **Creates the `.claude/` directory** structure automatically when you enter the shell.
-2.  **Installs Skills & Agents**: Fetches resources from the specified sources and links them.
-3.  **Ensures Write Access**: Sets correct permissions so Claude can write to `.claude/config.json` and other files (often an issue with read-only Nix store paths).
+2.  **Installs Skills & Agents**: Fetches resources from the specified flake inputs and links them.
+3.  **Ensures Write Access**: Sets correct permissions so Claude can write to `.claude/config.json`.
 
 Example usage in `flake.nix`:
 
 ```nix
-mkProjectEnv {
-  inherit pkgs inputs;
-  
-  # Optional: Add custom skills or agents
-  agents = [ "https://..." ];
-  skills = [ "https://..." ];
+{
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # 1. Add your skill/agent source here
+    my-skills.url = "github:owner/repo";
+    my-skills.flake = false;
+  };
+
+  outputs = { self, nixpkgs, ... }@inputs: {
+    devShells.x86_64-linux.default = mkProjectEnv {
+      inherit pkgs inputs;
+      
+      # 2. Reference via inputs (Recommended)
+      skills = [
+        "${inputs.my-skills}/path/to/skill"
+      ];
+      
+      agents = [
+        "${inputs.my-skills}/path/to/agent.md"
+      ];
+    };
+  };
 }
 ```
 
-## Adding Skills & Agents
+## Best Practices
 
-You can add skills and agents to your project environment in two ways.
+### Use Flake Inputs (Mandatory)
 
-### Method 1: Robust Inputs (Recommended)
+We strongly recommend defining all external resources as flake inputs.
 
-This method ensures reproducibility and stability by locking dependencies in `flake.lock`.
+**Why?**
+- **Reproducibility**: The exact commit is locked in `flake.lock`.
+- **Stability**: No broken URLs or changing content.
+- **Speed**: Caches the repo in the Nix store.
 
-1.  **Add the source to `inputs`** in your `flake.nix`:
-
-    ```nix
-    inputs = {
-      # ... other inputs ...
-      superpowers.url = "github:owner/repo";
-    };
-    ```
-
-2.  **Reference it in `mkProjectEnv`**:
-
-    ```nix
-    mkProjectEnv {
-      inherit pkgs inputs;
-      
-      agents = [
-        # Reference via inputs
-        inputs.superpowers + "/agents/coder.md"
-      ];
-      
-      skills = [
-        inputs.superpowers + "/skills"
-      ];
-    }
-    ```
-
-### Method 2: Raw URLs (Quick)
-
-For quick experiments, you can use raw URLs directly.
-
-> **⚠️ Warning**: If you paste a URL, verify it is stable. If the content changes, the hash will change, and you may see hash mismatch errors or need to update the lockfile frequently.
+**Do NOT use raw URLs** in the `agents` or `skills` lists. Always map them to an input first.
 
 ```nix
-mkProjectEnv {
-  inherit pkgs inputs;
-  
-  agents = [
-    "https://github.com/owner/repo/blob/main/agents/coder.md"
-  ];
-}
+# ✅ GOOD
+inputs.awesome-skills.url = "github:owner/repo";
+# ...
+skills = [ "${inputs.awesome-skills}/skill-name" ];
+
+# ❌ BAD
+skills = [ "https://github.com/owner/repo/tree/main/skill-name" ];
 ```
 
 ## Troubleshooting

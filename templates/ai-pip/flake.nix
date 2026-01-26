@@ -1,11 +1,26 @@
 {
-  description = "A Nix-flake-based Python development environment";
+  description = "A Nix-flake-based Python AI development environment (pip)";
 
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
-
-    # Point this to your NixOS configuration repository
     dotfiles.url = "git+file:///etc/nixos";
+
+    anthropic-skills = {
+      url = "github:anthropics/skills";
+      flake = false;
+    };
+    pypict-claude-skill = {
+      url = "github:omkamal/pypict-claude-skill";
+      flake = false;
+    };
+    awesome-claude-skills = {
+      url = "github:ComposioHQ/awesome-claude-skills";
+      flake = false;
+    };
+    awesome-claude-code-subagents = {
+      url = "github:VoltAgent/awesome-claude-code-subagents";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -57,13 +72,6 @@
         default = dotfiles.lib.claude.mkProjectEnv {
           inherit pkgs inputs;
 
-          # agents = [
-          #   "https://github.com/owner/repo/blob/main/agents/coder.md"
-          # ];
-          # skills = [
-          #   "https://github.com/owner/repo/tree/main/skills"
-          # ];
-
           venvDir = ".venv";
 
           postShellHook = ''
@@ -103,6 +111,21 @@
             or
             */
             # python.pkgs.ruff
+          ];
+
+          skills = [
+            (dotfiles.lib.claude.extract pkgs inputs.anthropic-skills "skills" {
+              includes = ["mcp-builder"];
+            })
+            "${inputs.pypict-claude-skill}"
+            "${inputs.awesome-claude-skills}/webapp-testing"
+          ];
+
+          agents = [
+            "${inputs.awesome-claude-code-subagents}/categories/02-language-specialists/python-pro.md"
+            "${inputs.awesome-claude-code-subagents}/categories/05-data-ai/ai-engineer.md"
+            "${inputs.awesome-claude-code-subagents}/categories/05-data-ai/llm-architect.md"
+            "${inputs.awesome-claude-code-subagents}/categories/05-data-ai/data-scientist.md"
           ];
         };
       }

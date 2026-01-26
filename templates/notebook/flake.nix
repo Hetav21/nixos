@@ -1,11 +1,14 @@
 {
-  description = "A Nix-flake-based Jupyter development environment";
+  description = "A Nix-flake-based Jupyter Notebook environment";
 
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
-
-    # Point this to your NixOS configuration repository
     dotfiles.url = "git+file:///etc/nixos";
+
+    awesome-claude-code-subagents = {
+      url = "github:VoltAgent/awesome-claude-code-subagents";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -45,13 +48,12 @@
               venvShellHook
             ]);
 
-          # Example: Custom Claude Agents and Skills
-          # agents = [
-          #   "https://github.com/Owner/Repo/blob/main/agents/coder.md"
-          # ];
-          # skills = [
-          #   "https://github.com/Owner/Repo/tree/main/skills"
-          # ];
+          skills = [];
+
+          agents = [
+            "${inputs.awesome-claude-code-subagents}/categories/02-language-specialists/python-pro.md"
+            "${inputs.awesome-claude-code-subagents}/categories/05-data-ai/data-scientist.md"
+          ];
         };
       }
     );

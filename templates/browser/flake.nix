@@ -1,11 +1,36 @@
 {
-  description = "A Nix-flake-based Playwright development environment";
+  description = "A Nix-flake-based Playwright browser testing environment";
 
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
 
     # Point this to your NixOS configuration repository
     dotfiles.url = "git+file:///etc/nixos";
+
+    anthropic-skills = {
+      url = "github:anthropics/skills";
+      flake = false;
+    };
+    playwright-skill = {
+      url = "github:lackeyjb/playwright-skill";
+      flake = false;
+    };
+    awesome-claude-skills = {
+      url = "github:ComposioHQ/awesome-claude-skills";
+      flake = false;
+    };
+    ffuf_claude_skill = {
+      url = "github:jthack/ffuf_claude_skill";
+      flake = false;
+    };
+    ai-skills = {
+      url = "github:sanjay3290/ai-skills";
+      flake = false;
+    };
+    awesome-claude-code-subagents = {
+      url = "github:VoltAgent/awesome-claude-code-subagents";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -55,12 +80,20 @@
             echo "Run: pnpm install && pnpm test"
           '';
 
-          # agents = [
-          #   "https://github.com/owner/repo/blob/main/agents/coder.md"
-          # ];
-          # skills = [
-          #   "https://github.com/owner/repo/tree/main/skills"
-          # ];
+          skills = [
+            (dotfiles.lib.claude.extract pkgs inputs.anthropic-skills "skills" {
+              includes = ["webapp-testing"];
+            })
+            "${inputs.playwright-skill}"
+            "${inputs.awesome-claude-skills}/webapp-testing"
+            "${inputs.ffuf_claude_skill}"
+          ];
+
+          agents = [
+            "${inputs.awesome-claude-code-subagents}/categories/04-quality-security/test-automator.md"
+            "${inputs.awesome-claude-code-subagents}/categories/04-quality-security/qa-expert.md"
+            "${inputs.awesome-claude-code-subagents}/categories/04-quality-security/accessibility-tester.md"
+          ];
         };
       }
     );
