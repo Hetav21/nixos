@@ -229,18 +229,20 @@
           (extraLib.claude.extract pkgs pkgs.custom.superpowers "commands" {})
         ];
         skills = [
-          pkgs.custom.agent-skills
+          (extraLib.claude.extract pkgs pkgs.custom.agent-skills "." {
+            excludes = [
+              "claude.ai-vercel-deploy-claimable"
+              "react-best-practices"
+              "web-design-guidelines"
+            ];
+          })
           (extraLib.claude.extract pkgs pkgs.custom.anthropic-skills "skills" {
             includes = [
               "canvas-design"
               "docx"
-              "frontend-design"
-              "mcp-builder"
               "pdf"
               "pptx"
               "skill-creator"
-              "theme-factory"
-              "webapp-testing"
               "xlsx"
             ];
           })

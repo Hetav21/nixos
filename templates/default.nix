@@ -3,44 +3,44 @@
     path = ./empty;
     description = "Empty development environment";
   };
-  bun = {
-    path = ./bun;
-    description = "Bun development environment";
-  };
   empty = {
     path = ./empty;
-    description = "Empty dev template that you can customize at will";
+    description = "Empty development environment";
   };
-  go = {
-    path = ./go;
-    description = "Golang development environment";
+  frontend-bun = {
+    path = ./frontend-bun;
+    description = "Frontend Bun development environment (Playwright)";
   };
-  jupyter = {
-    path = ./jupyter;
-    description = "Jupyter development environment";
+  frontend-node = {
+    path = ./frontend-node;
+    description = "Frontend Node.js development environment (Playwright)";
   };
-  nix = {
-    path = ./nix;
-    description = "Nix development environment";
+  backend-bun = {
+    path = ./backend-bun;
+    description = "Backend Bun development environment";
   };
-  node = {
-    path = ./node;
-    description = "Node.js development environment";
+  backend-node = {
+    path = ./backend-node;
+    description = "Backend Node.js development environment";
   };
-  python = {
-    path = ./python;
-    description = "Python development environment";
+  backend-go = {
+    path = ./backend-go;
+    description = "Backend Golang development environment";
   };
-  shell = {
-    path = ./shell;
-    description = "Shell script development environment";
+  ai-pip = {
+    path = ./ai-pip;
+    description = "AI Python environment (pip)";
   };
-  uv = {
-    path = ./uv;
-    description = "Python development environment with uv package manager";
+  ai-uv = {
+    path = ./ai-uv;
+    description = "AI Python environment (uv)";
   };
-  playwright = {
-    path = ./playwright;
-    description = "Playwright testing environment with Nix-native browsers";
+  notebook = {
+    path = ./notebook;
+    description = "Jupyter Notebook environment";
+  };
+  browser = {
+    path = ./browser;
+    description = "Playwright Browser testing environment";
   };
 }
