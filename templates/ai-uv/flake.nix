@@ -1,9 +1,21 @@
 {
-  description = "A Nix-flake-based Python development environment with uv package manager";
+  description = "A Nix-flake-based Python AI development environment (uv)";
 
   inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
   # Point this to your NixOS configuration repository
   inputs.dotfiles.url = "git+file:///etc/nixos";
+
+  inputs.anthropic-skills.url = "github:anthropics/skills";
+  inputs.anthropic-skills.flake = false;
+
+  inputs.pypict-claude-skill.url = "github:omkamal/pypict-claude-skill";
+  inputs.pypict-claude-skill.flake = false;
+
+  inputs.awesome-claude-skills.url = "github:ComposioHQ/awesome-claude-skills";
+  inputs.awesome-claude-skills.flake = false;
+
+  inputs.awesome-claude-code-subagents.url = "github:VoltAgent/awesome-claude-code-subagents";
+  inputs.awesome-claude-code-subagents.flake = false;
 
   outputs = {self, ...} @ inputs: let
     supportedSystems = [
@@ -37,14 +49,25 @@
         default = inputs.dotfiles.lib.claude.mkProjectEnv {
           inherit pkgs inputs;
 
-          # Optional: Add custom agents and skills
-          # agents = [ "https://github.com/user/repo/blob/main/agents/coder.md" ];
-          # skills = [ "https://github.com/user/repo/tree/main/skills" ];
-
           packages = [
             pkgs.uv
             python
             pkgs.nodejs
+          ];
+
+          skills = [
+            (inputs.dotfiles.lib.claude.extract pkgs inputs.anthropic-skills "skills" {
+              includes = ["mcp-builder"];
+            })
+            "${inputs.pypict-claude-skill}"
+            "${inputs.awesome-claude-skills}/webapp-testing"
+          ];
+
+          agents = [
+            "${inputs.awesome-claude-code-subagents}/categories/02-language-specialists/python-pro.md"
+            "${inputs.awesome-claude-code-subagents}/categories/05-data-ai/ai-engineer.md"
+            "${inputs.awesome-claude-code-subagents}/categories/05-data-ai/llm-architect.md"
+            "${inputs.awesome-claude-code-subagents}/categories/05-data-ai/data-scientist.md"
           ];
 
           shellHook = ''

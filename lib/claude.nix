@@ -102,7 +102,11 @@
       mkdir -p $out
       ${lib.concatMapStringsSep "\n" (p: ''
           echo "Merging ${p}..."
-          cp -a "${p}/." "$out/"
+          if [ -d "${p}" ]; then
+            cp -a "${p}/." "$out/"
+          else
+            cp -a "${p}" "$out/"
+          fi
           chmod -R u+w "$out/"
         '')
         paths}
