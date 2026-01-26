@@ -255,6 +255,7 @@
           (extraLib.claude.extract pkgs pkgs.custom.mhattingpete-skills "engineering-workflow-plugin/skills" {
             includes = ["test-fixing" "review-implementing"];
           })
+          (extraLib.claude.extract pkgs pkgs.custom.awesome-claude-skills "changelog-generator" {})
           (extraLib.claude.extract pkgs pkgs.custom.superpowers "skills" {})
         ];
         agents = [

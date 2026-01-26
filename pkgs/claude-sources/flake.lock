@@ -3,11 +3,11 @@
     "agent-skills": {
       "flake": false,
       "locked": {
-        "lastModified": 1769098246,
-        "narHash": "sha256-nqIAZW74muTiWAEUfqUEmu8sC/GADIg/pfi11CW98Os=",
+        "lastModified": 1769196412,
+        "narHash": "sha256-WUzBSN6ZwcDOMO2LAipHrv81ZT6gpk8l3LaSmB687qk=",
         "owner": "vercel-labs",
         "repo": "agent-skills",
-        "rev": "cadecb671fa7743c4e1f238b4672812e49ec0483",
+        "rev": "c4399b192588e71fdf0cb507c7b6ad9e9657ce6b",
         "type": "github"
       },
       "original": {
@@ -29,6 +29,22 @@
       "original": {
         "owner": "anthropics",
         "repo": "skills",
+        "type": "github"
+      }
+    },
+    "awesome-claude-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1769307446,
+        "narHash": "sha256-tSEO0h9J3lPVePFoy7A7c1K6umNNE/21/2RbaJD4Abc=",
+        "owner": "ComposioHQ",
+        "repo": "awesome-claude-skills",
+        "rev": "362d35428562ad05d1faa1767abaf39d6e3a8e7a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ComposioHQ",
+        "repo": "awesome-claude-skills",
         "type": "github"
       }
     },
@@ -84,6 +100,7 @@
       "inputs": {
         "agent-skills": "agent-skills",
         "anthropic-skills": "anthropic-skills",
+        "awesome-claude-skills": "awesome-claude-skills",
         "claude-subagents": "claude-subagents",
         "mhattingpete-skills": "mhattingpete-skills",
         "neolab-context-kit": "neolab-context-kit",
@@ -93,11 +110,11 @@
     "superpowers": {
       "flake": false,
       "locked": {
-        "lastModified": 1769141423,
-        "narHash": "sha256-/p7NqgA+cTZTOLD+gn1lOEQpN1wUgYaezB+sJaAVQPo=",
+        "lastModified": 1769198953,
+        "narHash": "sha256-qccVXJuYR4HCHKmcozFxmWtvP4SK7tbVrnoNIpUB/6g=",
         "owner": "obra",
         "repo": "superpowers",
-        "rev": "35d4fbcd0b31485d9a55f0ba96a51ae7fe78d382",
+        "rev": "469a6d81ebb8b827e284d4afb090c6c622d97747",
         "type": "github"
       },
       "original": {

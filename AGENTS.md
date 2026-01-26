@@ -265,6 +265,8 @@ programs.claude-resources = {
 };
 ```
 
+> **Tip**: For detailed instructions on using `extraLib.claude.extract` to cherry-pick specific skills or subdirectories, see **[pkgs/AGENTS.md](pkgs/AGENTS.md)**.
+
 ### Library Functions (`lib/claude.nix`)
 
 - **`mkEnvironment`**: Main entry point. Merges sources for all categories. Automatically flattens skills.

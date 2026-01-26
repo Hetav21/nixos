@@ -54,12 +54,16 @@ outputs = { ... } @ inputs: {
 ```
 
 ### Step 2: Update Lockfile
-**CRITICAL**: You must update the sub-flake lockfile explicitly.
+**CRITICAL**: You must update the sub-flake lockfile explicitly, and then update the root flake to pick up the changes.
 ```bash
+# 1. Update the sub-flake
 cd pkgs/claude-sources
 nix flake update
 cd ../..
-nx update # Sync root lockfile
+
+# 2. Update the root flake's reference to claude-sources
+# This resolves "attribute missing" errors by updating the locked hash
+nix flake update claude-sources
 ```
 
 ### Step 3: Create Wrapper Package
@@ -80,7 +84,24 @@ stdenvNoCC.mkDerivation {
      new-source-src = inputs.claude-sources.new-source or null;
    };
    ```
-2. Use in `modules/home/development.nix` via `pkgs.custom.new-source`.
+
+2. Register in `modules/home/development.nix` under `programs.claude-resources`.
+   Use `extraLib.claude.extract` to target specific directories or skills.
+
+   ```nix
+   programs.claude-resources = {
+     skills = [
+       # Option A: Extract specific subdirectory (e.g., for a single skill in a repo)
+       (extraLib.claude.extract pkgs pkgs.custom.new-source "path/to/skill" {})
+
+       # Option B: Extract root with includes/excludes
+       (extraLib.claude.extract pkgs pkgs.custom.new-source "." {
+         includes = [ "skill-a" "skill-b" ];
+         excludes = [ "broken-skill" ];
+       })
+     ];
+   };
+   ```
 
 ## 4. Updates & Maintenance
 - **Refresh Inputs**: `nx update` (updates root flake and checked-in sub-flake locks).

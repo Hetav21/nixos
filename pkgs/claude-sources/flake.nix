@@ -26,9 +26,13 @@
       url = "github:vercel-labs/agent-skills";
       flake = false;
     };
+    awesome-claude-skills = {
+      url = "github:ComposioHQ/awesome-claude-skills";
+      flake = false;
+    };
   };
 
   outputs = {self, ...} @ inputs: {
-    inherit (inputs) claude-subagents superpowers agent-skills anthropic-skills neolab-context-kit mhattingpete-skills;
+    inherit (inputs) claude-subagents superpowers agent-skills anthropic-skills neolab-context-kit mhattingpete-skills awesome-claude-skills;
   };
 }
