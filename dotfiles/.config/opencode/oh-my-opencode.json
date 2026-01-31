@@ -58,7 +58,7 @@
     },
     "Prometheus (Planner)": {
       "model": "google/antigravity-gemini-3-pro",
-      "prompt_append": "Strictly use the 'using-superpowers' skill. Core skills: brainstorming, writing-plans, dispatching-parallel-agents. Your overall approach MUST emulate the design philosophy of Claude"
+      "prompt_append": "Strictly use the 'using-superpowers' and 'brainstorming' skills. Core skills: writing-plans, dispatching-parallel-agents. Your overall approach MUST emulate the design philosophy of Claude"
     },
     "Metis (Plan Consultant)": {
       "model": "google/antigravity-gemini-3-pro",
