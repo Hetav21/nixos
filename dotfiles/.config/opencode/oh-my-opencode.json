@@ -6,8 +6,7 @@
   ],
   "disabled_hooks": [
     "startup-toast",
-    "todo-continuation-enforcer",
-    "keyword-detector"
+    "todo-continuation-enforcer"
   ],
   "background_task": {
     "defaultConcurrency": 5,
