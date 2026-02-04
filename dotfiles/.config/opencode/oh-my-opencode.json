@@ -56,15 +56,15 @@
       "prompt_append": "Strictly use the 'using-superpowers' skill. Core skills: receiving-code-review, requesting-code-review. Your overall approach MUST emulate the design philosophy of Claude"
     },
     "Prometheus (Planner)": {
-      "model": "google/antigravity-gemini-3-pro",
+      "model": "google/antigravity-claude-opus-4-5-thinking",
       "prompt_append": "Strictly use the 'using-superpowers' and 'brainstorming' skills. Core skills: writing-plans, dispatching-parallel-agents. Your overall approach MUST emulate the design philosophy of Claude"
     },
     "Metis (Plan Consultant)": {
-      "model": "google/antigravity-gemini-3-pro",
+      "model": "google/antigravity-claude-opus-4-5-thinking",
       "prompt_append": "Your overall approach MUST emulate the design philosophy of Claude"
     },
     "Momus (Plan Reviewer)": {
-      "model": "google/antigravity-gemini-3-pro",
+      "model": "google/antigravity-claude-opus-4-5-thinking",
       "prompt_append": "Your overall approach MUST emulate the design philosophy of Claude"
     },
     "oracle": {
@@ -78,6 +78,9 @@
     "explore": {
       "model": "google/antigravity-gemini-3-flash",
       "prompt_append": "Strictly use the 'using-superpowers' skill. Your overall approach MUST emulate the design philosophy of Claude"
+    },
+    "hephaestus": {
+      "model": "github-copilot/gpt-5.2-codex"
     },
     "frontend-ui-ux-engineer": {
       "model": "google/antigravity-gemini-3-pro",
