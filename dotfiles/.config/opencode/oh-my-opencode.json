@@ -18,6 +18,13 @@
   "browser_automation_engine": {
     "provider": "playwright"
   },
+  "sisyphus": {
+    "tasks": {
+      "enabled": true,
+      "storage_path": "docs/tasks",
+      "claude_code_compat": true
+    }
+  },
   "sisyphus_agent": {
     "disabled": false,
     "default_builder_enabled": false,
