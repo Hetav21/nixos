@@ -18,6 +18,7 @@
   in {
     environment.systemPackages = with package; [
       vllm
+      custom.agent-browser
     ];
 
     services.ollama = {
