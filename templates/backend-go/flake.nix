@@ -66,6 +66,7 @@
           packages = with pkgs; [
             # go (version is specified by overlay)
             go
+            air
 
             # goimports, godoc, etc.
             gotools
