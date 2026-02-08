@@ -30,4 +30,5 @@
   };
   wsl-notify-send = pkgs.callPackage ./wsl-notify-send {};
   skill-seekers = pkgs.callPackage ./skill-seekers {};
+  agent-browser = pkgs.callPackage ./agent-browser {};
 }
