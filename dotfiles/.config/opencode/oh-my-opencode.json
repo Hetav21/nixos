@@ -16,7 +16,7 @@
     }
   },
   "browser_automation_engine": {
-    "provider": "playwright"
+    "provider": "agent-browser"
   },
   "sisyphus": {
     "tasks": {
