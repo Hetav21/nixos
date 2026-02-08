@@ -58,6 +58,11 @@
           builtins.readFile ../../dotfiles/.config/nushell/config.nu
           + ''
 
+            # Auto-start tmux
+            if ($env.TMUX? | is-empty) and ($env.ZELLIJ? | is-empty) {
+                exec ${lib.getExe pkgs.tmux}
+            }
+
             # File Manager Alias (requires package path interpolation)
             def --env yz [...args] {
                 let tmp = (mktemp -t "yazi-cwd.XXXXXX")
@@ -72,6 +77,40 @@
             # Download Alias (requires package path interpolation)
             def "dl-yt" [url: string] {
               ${lib.getExe pkgs.yt-dlp} --external-downloader ${lib.getExe pkgs.aria2} --external-downloader-args "-x 16 -s 16 -k 1M" -o $"~/Downloads/%(title)s.%(ext)s" $url
+            }
+
+            # Smart OpenCode Wrapper
+            def --env oc [...args] {
+                let base_name = ($env.PWD | path basename)
+                let path_hash = ($env.PWD | hash md5 | str substring 0..3)
+                let session_name = $"($base_name)-($path_hash)"
+                let opencode_bin = "${lib.getExe config.programs.opencode.package}"
+
+                # Find available port
+                mut port = 4096
+                loop {
+                    if $port >= 5096 { break }
+                    let current_port = $port
+                    if (do -i { ${lib.getExe pkgs.lsof} -i $":($current_port)" } | complete).exit_code != 0 {
+                        break
+                    }
+                    $port = $port + 1
+                }
+
+                $env.OPENCODE_PORT = ($port | into string)
+
+                if ($env.TMUX? | is-not-empty) {
+                    ^$opencode_bin --port $port ...$args
+                } else {
+                    let oc_cmd = $"sh -c 'OPENCODE_PORT=($port) ($opencode_bin) --port ($port) ($args | str join ' '); exec ($env.SHELL)'"
+
+                    if (do -i { ${lib.getExe pkgs.tmux} has-session -t $session_name } | complete).exit_code == 0 {
+                        ${lib.getExe pkgs.tmux} new-window -t $session_name -c $env.PWD $oc_cmd
+                        ${lib.getExe pkgs.tmux} attach-session -t $session_name
+                    } else {
+                        ${lib.getExe pkgs.tmux} new-session -s $session_name -c $env.PWD $oc_cmd
+                    }
+                }
             }
 
             clear
@@ -110,7 +149,6 @@
 
             # Other Aliases
             ff = "${lib.getExe pkgs.fastfetch}";
-            oc = "${lib.getExe config.programs.opencode.package}";
             nv = "${lib.getExe config.nixCats.out.packages.nixCats}";
           }
           // lib.optionalAttrs (pkgs ? wl-clipboard) {
