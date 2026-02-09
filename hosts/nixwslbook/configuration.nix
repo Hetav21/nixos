@@ -56,6 +56,9 @@
     docker-desktop.enable = true;
   };
 
+  # Override default shell to nushell
+  # users.users.${settings.username}.shell = lib.mkForce pkgs.nushell;
+
   # Minimal WSL system profile (CLI/TUI only, no desktop environment)
   profiles.system.wsl-minimal.enable = true;
 
@@ -67,7 +70,10 @@
 
   # WSL dbus fix: Enable user session dbus for headless operation
   # Without this, apps requiring dbus fail with "Unable to autolaunch a dbus-daemon without a $DISPLAY"
-  users.users.${settings.username}.linger = true;
+  users.users.${settings.username} = {
+    linger = true;
+    shell = lib.mkForce pkgs.nushell;
+  };
   systemd.user.services.dbus.wantedBy = ["default.target"];
   environment.systemPackages = [pkgs.dbus];
 
