@@ -70,7 +70,7 @@
       "prompt_append": "Strictly use the 'using-superpowers' skill. Core skills: receiving-code-review, requesting-code-review. Your overall approach MUST emulate the design philosophy of Claude"
     },
     "Prometheus (Planner)": {
-      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "model": "google/antigravity-claude-opus-4-6-thinking",
       "prompt_append": "Strictly use the 'using-superpowers' and 'brainstorming' skills. Core skills: writing-plans, dispatching-parallel-agents. Your overall approach MUST emulate the design philosophy of Claude"
     },
     "Metis (Plan Consultant)": {
