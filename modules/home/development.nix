@@ -65,6 +65,7 @@
           ghostscript
           mermaid-cli
           tectonic
+          postgresql
         ];
       };
 
@@ -119,6 +120,7 @@
         awscli2
         distrobox
         custom.skill-seekers
+        postgresql
       ])
       ++ (with pkgs-unstable; [
         lazygit
