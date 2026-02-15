@@ -140,6 +140,21 @@
         prefix = "M-a";
         extraConfig = ''
           set-option -sa terminal-overrides ",xterm*:Tc"
+          set -as terminal-features ",*:extkeys"
+          set -s extended-keys on
+          set -g xterm-keys on
+          set -g default-terminal "xterm-256color"
+
+          # Fix for Esc key delay
+          set -s escape-time 0
+
+          # Enable focus events (important for vim/neovim/TUIs)
+          set -g focus-events on
+          set -g allow-passthrough on
+
+          # Enable OSC 52 clipboard and set ms caps
+          set -s set-clipboard on
+          set -as terminal-overrides ',*:Ms=\E]52;%p1%s;%p2%s\007'
 
           # Change the prefix key
           unbind C-b

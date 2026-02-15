@@ -26,7 +26,7 @@
       "model": "google/antigravity-gemini-3-flash"
     },
     "compaction": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "google/antigravity-gemini-3-pro"
     },
     "summary": {
       "model": "google/antigravity-gemini-3-flash"
