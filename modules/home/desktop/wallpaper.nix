@@ -1,6 +1,5 @@
 {
   extraLib,
-  lib,
   pkgs,
   ...
 } @ args:

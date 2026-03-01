@@ -1,8 +1,6 @@
 {
   extraLib,
-  lib,
   pkgs,
-  pkgs-unstable,
   config,
   ...
 } @ args:
@@ -35,7 +33,16 @@
         inherit fontFamily;
         baseColor = colors.base;
         textColor = colors.text;
-        inherit (colors) love rose gold iris pine overlay surface;
+        inherit
+          (colors)
+          love
+          rose
+          gold
+          iris
+          pine
+          overlay
+          surface
+          ;
       };
 
     qmlDir = ../../../dotfiles/.config/quickshell;
@@ -57,7 +64,7 @@
 
     programs.quickshell = {
       enable = true;
-      package = pkgs-unstable.quickshell;
+      package = pkgs.quickshell;
       systemd = {
         enable = true;
         target = "hyprland-session.target";
