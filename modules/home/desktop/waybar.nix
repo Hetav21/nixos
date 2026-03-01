@@ -1,9 +1,4 @@
-{
-  extraLib,
-  lib,
-  config,
-  ...
-} @ args:
+{extraLib, ...} @ args:
 (extraLib.modules.mkModule {
   name = "home.desktop.waybar";
   hasCli = false;
@@ -34,8 +29,17 @@
             "battery"
             "custom/right"
           ];
-          modules-center = ["custom/left" "hyprland/workspaces" "custom/right"];
-          modules-right = ["custom/left" "tray" "clock" "custom/right"];
+          modules-center = [
+            "custom/left"
+            "hyprland/workspaces"
+            "custom/right"
+          ];
+          modules-right = [
+            "custom/left"
+            "tray"
+            "clock"
+            "custom/right"
+          ];
 
           "network" = {
             tooltip = true;
@@ -56,7 +60,9 @@
             on-click-right = "~/.config/waybar/network.py";
           };
 
-          "temperature" = {format = "{temperatureC}°C ";};
+          "temperature" = {
+            format = "{temperatureC}°C ";
+          };
 
           "custom/rofi" = {
             format = "  {}";
@@ -79,7 +85,19 @@
             format-charging = " {capacity}%";
             format-plugged = " {capacity}%";
             format-alt = "{time} {icon}";
-            format-icons = ["󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+            format-icons = [
+              "󰂎"
+              "󰁺"
+              "󰁻"
+              "󰁼"
+              "󰁽"
+              "󰁾"
+              "󰁿"
+              "󰂀"
+              "󰂁"
+              "󰂂"
+              "󰁹"
+            ];
           };
 
           "pulseaudio" = {
@@ -95,7 +113,11 @@
               phone = "";
               portable = "";
               car = "";
-              default = ["" "" ""];
+              default = [
+                ""
+                ""
+                ""
+              ];
             };
           };
 
@@ -121,7 +143,18 @@
             on-scroll-up = "light -A 7";
             on-scroll-down = "light -U 7";
             format = "{icon} {percent}%";
-            format-icons = ["󰃞" "󰃟" "󰃠" "󱩎" "󱩏" "󱩐" "󱩑" "󱩒" "󱩓" "󰛨"];
+            format-icons = [
+              "󰃞"
+              "󰃟"
+              "󰃠"
+              "󱩎"
+              "󱩏"
+              "󱩐"
+              "󱩑"
+              "󱩒"
+              "󱩓"
+              "󰛨"
+            ];
           };
 
           "custom/left" = {
