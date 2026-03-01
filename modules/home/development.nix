@@ -10,7 +10,7 @@
   name = "home.development";
   hasGui = true;
 
-  cliConfig = {config, ...}: let
+  cliConfig = {...}: let
     luaPath = ../../dotfiles/.config/nvim;
 
     nixCatsCategories = {pkgs, ...}: {
