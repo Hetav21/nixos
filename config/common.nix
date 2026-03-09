@@ -36,6 +36,10 @@
   };
   consoleKeymap = "us";
 
+  # Host mode: "personal" (default), "work", or custom modes
+  # Controls which dotfile variants are loaded (e.g., config.work.json)
+  mode = "personal";
+
   # Nix build configuration (can be overridden per-host)
   nix = {
     maxJobs = 2;
