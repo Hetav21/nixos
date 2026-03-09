@@ -65,10 +65,10 @@
     # Construct mode-specific path: config.json → config.work.json
     modeVariant = dir + "/${nameWithoutExt}.${mode}${ext}";
   in
-    if mode == "personal" then
-      basePath
-    else if builtins.pathExists modeVariant then
-      modeVariant
+    if mode == "personal"
+    then basePath
+    else if builtins.pathExists modeVariant
+    then modeVariant
     else
       lib.warn "dotfiles.modeFile: No ${mode} variant found at ${toString modeVariant}, falling back to ${baseStr}"
       basePath;
