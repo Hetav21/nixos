@@ -95,6 +95,7 @@
     commonSettings = import ./config/common.nix;
     nixbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./config/nixbook.nix);
     nixwslbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./config/nixwslbook.nix);
+    nixworkbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./config/nixworkbook.nix);
 
     # Import hardware configurations
     hardware_asus = import ./config/hardware/asus.nix;
@@ -146,6 +147,28 @@
         modules =
           [
             ./hosts/nixwslbook/configuration.nix
+          ]
+          ++ extraLib.modules.common
+          ++ extraLib.modules.wsl;
+      };
+
+      nixworkbook = nixpkgs.lib.nixosSystem {
+        system = nixworkbookSettings.system;
+        specialArgs =
+          {
+            inherit
+              self
+              inputs
+              outputs
+              extraLib
+              ;
+            settings = nixworkbookSettings;
+            hardware = hardware_wsl;
+          }
+          // nixpkgsLib.mkChannelsFor nixworkbookSettings.system;
+        modules =
+          [
+            ./hosts/nixworkbook/configuration.nix
           ]
           ++ extraLib.modules.common
           ++ extraLib.modules.wsl;
