@@ -199,5 +199,9 @@ configDir = ../../../dotfiles/.config/app;
 processedConfig = pkgs.replaceVars (configDir + "/template.qml") {
   setting = "value";
 };
+
+# For mode-specific dotfiles (work, personal, etc.)
+# Loads <name>.<mode>.ext if it exists, otherwise falls back to <name>.ext
+settings = lib.importJSON (extraLib.dotfiles.modeFile settings.mode ../../dotfiles/.config/app/config.json);
 ```
 
