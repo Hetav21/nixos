@@ -210,7 +210,7 @@
         package = pkgs-unstable.opencode;
         enableMcpIntegration = true;
         settings =
-          lib.importJSON ../../dotfiles/.config/opencode/config.json;
+          lib.importJSON (extraLib.dotfiles.modeFile settings.mode ../../dotfiles/.config/opencode/config.json);
       };
 
       mcp = {
@@ -221,7 +221,7 @@
             "@uvxPath@" = lib.getExe' pkgs.uv "uvx";
             "@skillSeekersMcpPath@" = lib.getExe' pkgs.custom.skill-seekers "skill-seekers-mcp";
           }
-          (lib.importJSON ../../dotfiles/.config/mcp/mcp.json).mcpServers;
+          (lib.importJSON (extraLib.dotfiles.modeFile settings.mode ../../dotfiles/.config/mcp/mcp.json)).mcpServers;
       };
 
       claude-resources = {
@@ -279,7 +279,7 @@
     home.file = lib.mkMerge [
       {
         ".config/opencode/oh-my-opencode.json".source =
-          ../../dotfiles/.config/opencode/oh-my-opencode.json;
+          extraLib.dotfiles.modeFile settings.mode ../../dotfiles/.config/opencode/oh-my-opencode.json;
         ".config/opencode/antigravity.json".source =
           ../../dotfiles/.config/opencode/antigravity.json;
         ".config/opencode/command".source =
