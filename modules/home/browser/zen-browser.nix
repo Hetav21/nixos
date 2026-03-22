@@ -25,9 +25,12 @@
 
     programs.zen-browser = {
       enable = true;
-      suppressXdgMigrationWarning = true;
       nativeMessagingHosts = [pkgs.firefoxpwa];
-      profiles = {"${settings.username}" = {isDefault = true;};};
+      profiles = {
+        "${settings.username}" = {
+          isDefault = true;
+        };
+      };
       policies = {
         # find more options here: https://mozilla.github.io/policy-templates/
         AutofillAddressEnabled = true;
