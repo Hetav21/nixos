@@ -3,11 +3,11 @@
     "agent-skills": {
       "flake": false,
       "locked": {
-        "lastModified": 1773876631,
-        "narHash": "sha256-xbGSzNWhCEjKguHBHrNfakWrDbLZiT4GZBLoq2Dn17A=",
+        "lastModified": 1775165248,
+        "narHash": "sha256-1l6cthflz36+ihVQJ5PVl2GysLl1NBiKNNl8LUg+U28=",
         "owner": "vercel-labs",
         "repo": "agent-skills",
-        "rev": "9aec8ee6aaf702e49312a071e672f1c1b7b7e948",
+        "rev": "73140fc5b3a214ad3222bcf557b397b3c02d11c1",
         "type": "github"
       },
       "original": {
@@ -19,11 +19,11 @@
     "anthropic-skills": {
       "flake": false,
       "locked": {
-        "lastModified": 1772827583,
-        "narHash": "sha256-GzNpraXV85qUwyGs5XDe0zHYr2AazqFppWtH9JvO3QE=",
+        "lastModified": 1775755206,
+        "narHash": "sha256-H/oorOl5cch7bnziDz7gHNBv5Q0OAwFbk9w1WLku2kk=",
         "owner": "anthropics",
         "repo": "skills",
-        "rev": "b0cbd3df1533b396d281a6886d5132f623393a9c",
+        "rev": "12ab35c2eb5668c95810e6a6066f40f4218adc39",
         "type": "github"
       },
       "original": {
@@ -51,11 +51,11 @@
     "claude-subagents": {
       "flake": false,
       "locked": {
-        "lastModified": 1773908143,
-        "narHash": "sha256-DDvXr3NBu3ut0edtE1IUM2gbNo+nce+kG/CkHkzMLyg=",
+        "lastModified": 1775062809,
+        "narHash": "sha256-Wu67QzP9S3wigI6DWDMqtmb/4l66PgntzbabzVPSf/c=",
         "owner": "VoltAgent",
         "repo": "awesome-claude-code-subagents",
-        "rev": "b8d6c58359dc8dcab9c986bdbc4f8b1dbad90b46",
+        "rev": "2a8fec3c67ee02a3fb56b76844eb8fb601502349",
         "type": "github"
       },
       "original": {
@@ -83,11 +83,11 @@
     "neolab-context-kit": {
       "flake": false,
       "locked": {
-        "lastModified": 1774139230,
-        "narHash": "sha256-OAKrtctIvIBcf5HXYGDuyMCMp1lbrj6Rd4O3U69q+JY=",
+        "lastModified": 1775436484,
+        "narHash": "sha256-89NXtHqMxmOshw90rvVM+dYeT/YhHR2k1zQ7n16cVAM=",
         "owner": "NeoLabHQ",
         "repo": "context-engineering-kit",
-        "rev": "d2bb7a8f1d50557aeca48da8a4371cd69d697c80",
+        "rev": "8b92f5000c7cbd7d1603ca73b7f9ea90b923ad39",
         "type": "github"
       },
       "original": {
@@ -110,11 +110,11 @@
     "superpowers": {
       "flake": false,
       "locked": {
-        "lastModified": 1773951977,
-        "narHash": "sha256-wmOArGgOahJK/mqzYJZW6qcUNaOB6yL57RQMe56S1uw=",
+        "lastModified": 1775515738,
+        "narHash": "sha256-FMaX6VMBC64OPdvXwhXKfHKnkdvdC2R9lZaU3BR/G3o=",
         "owner": "obra",
         "repo": "superpowers",
-        "rev": "8ea39819eed74fe2a0338e71789f06b30e953041",
+        "rev": "917e5f53b16b115b70a3a355ed5f4993b9f8b73d",
         "type": "github"
       },
       "original": {
