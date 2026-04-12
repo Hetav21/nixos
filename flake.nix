@@ -57,6 +57,10 @@
     claude-sources = {
       url = "path:./pkgs/claude-sources";
     };
+
+    nix-skills = {
+      url = "github:Hetav21/nix-skills";
+    };
   };
 
   # Passing extra nix config

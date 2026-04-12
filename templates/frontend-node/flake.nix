@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
-    dotfiles.url = "git+file:///etc/nixos";
+    nix-skills.url = "github:Hetav21/nix-skills";
 
     agent-skills = {
       url = "github:vercel-labs/agent-skills";
@@ -29,7 +29,7 @@
 
   outputs = {
     self,
-    dotfiles,
+    nix-skills,
     ...
   } @ inputs: let
     supportedSystems = [
@@ -56,7 +56,7 @@
 
     devShells = forEachSupportedSystem (
       {pkgs}: {
-        default = dotfiles.lib.claude.mkProjectEnv {
+        default = nix-skills.lib.mkProjectEnv {
           inherit pkgs inputs;
           packages = with pkgs; [
             node2nix
@@ -82,14 +82,14 @@
           '';
 
           skills = [
-            (dotfiles.lib.claude.extract pkgs inputs.agent-skills "." {
+            (nix-skills.lib.extract pkgs inputs.agent-skills "." {
               includes = [
                 "claude.ai-vercel-deploy-claimable"
                 "react-best-practices"
                 "web-design-guidelines"
               ];
             })
-            (dotfiles.lib.claude.extract pkgs inputs.anthropic-skills "skills" {
+            (nix-skills.lib.extract pkgs inputs.anthropic-skills "skills" {
               includes = [
                 "frontend-design"
                 "theme-factory"
