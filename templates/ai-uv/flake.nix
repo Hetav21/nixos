@@ -2,8 +2,7 @@
   description = "A Nix-flake-based Python AI development environment (uv)";
 
   inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
-  # Point this to your NixOS configuration repository
-  inputs.dotfiles.url = "git+file:///etc/nixos";
+  inputs.nix-skills.url = "github:Hetav21/nix-skills";
 
   inputs.anthropic-skills.url = "github:anthropics/skills";
   inputs.anthropic-skills.flake = false;
@@ -46,7 +45,7 @@
 
         python = pkgs."python${concatMajorMinor version}";
       in {
-        default = inputs.dotfiles.lib.claude.mkProjectEnv {
+        default = inputs.nix-skills.lib.mkProjectEnv {
           inherit pkgs inputs;
 
           packages = [
@@ -56,7 +55,7 @@
           ];
 
           skills = [
-            (inputs.dotfiles.lib.claude.extract pkgs inputs.anthropic-skills "skills" {
+            (inputs.nix-skills.lib.extract pkgs inputs.anthropic-skills "skills" {
               includes = ["mcp-builder"];
             })
             "${inputs.pypict-claude-skill}"

@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1"; # unstable Nixpkgs
-    dotfiles.url = "git+file:///etc/nixos";
+    nix-skills.url = "github:Hetav21/nix-skills";
 
     anthropic-skills = {
       url = "github:anthropics/skills";
@@ -33,7 +33,7 @@
 
   outputs = {
     self,
-    dotfiles,
+    nix-skills,
     ...
   } @ inputs: let
     goVersion = 24; # Change this to update the whole stack
@@ -61,7 +61,7 @@
 
     devShells = forEachSupportedSystem (
       {pkgs}: {
-        default = dotfiles.lib.claude.mkProjectEnv {
+        default = nix-skills.lib.mkProjectEnv {
           inherit pkgs inputs;
           packages = with pkgs; [
             # go (version is specified by overlay)

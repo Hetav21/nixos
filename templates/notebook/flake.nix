@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
-    dotfiles.url = "git+file:///etc/nixos";
+    nix-skills.url = "github:Hetav21/nix-skills";
 
     awesome-claude-code-subagents = {
       url = "github:VoltAgent/awesome-claude-code-subagents";
@@ -14,7 +14,7 @@
   outputs = {
     self,
     nixpkgs,
-    dotfiles,
+    nix-skills,
     ...
   } @ inputs: let
     supportedSystems = [
@@ -33,7 +33,7 @@
   in {
     devShells = forEachSupportedSystem (
       {pkgs}: {
-        default = dotfiles.lib.claude.mkProjectEnv {
+        default = nix-skills.lib.mkProjectEnv {
           inherit pkgs inputs;
 
           venvDir = ".venv";

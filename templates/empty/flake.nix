@@ -3,13 +3,12 @@
 
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
-    # Point this to your NixOS configuration repository
-    dotfiles.url = "git+file:///etc/nixos";
+    nix-skills.url = "github:Hetav21/nix-skills";
   };
 
   outputs = {
     self,
-    dotfiles,
+    nix-skills,
     ...
   } @ inputs: let
     supportedSystems = [
@@ -28,7 +27,7 @@
   in {
     devShells = forEachSupportedSystem (
       {pkgs}: {
-        default = dotfiles.lib.claude.mkProjectEnv {
+        default = nix-skills.lib.mkProjectEnv {
           inherit pkgs inputs;
 
           # The Nix packages provided in the environment
