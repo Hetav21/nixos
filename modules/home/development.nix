@@ -258,9 +258,13 @@
             includes = ["test-fixing" "review-implementing"];
           })
           (extraLib.claude.extract pkgs pkgs.custom.awesome-claude-skills "changelog-generator" {})
+          (extraLib.claude.extract pkgs pkgs.custom.agent-config "skills" {
+            excludes = ["skill-creator"];
+          })
           (extraLib.claude.extract pkgs pkgs.custom.superpowers "skills" {})
         ];
         agents = [
+          (extraLib.claude.extract pkgs pkgs.custom.agent-config "agents" {})
           (extraLib.claude.extract pkgs pkgs.custom.superpowers "agents" {})
         ];
         hooks = [
@@ -278,8 +282,8 @@
     # oh-my-opencode plugin configuration and Claude resources
     home.file = lib.mkMerge [
       {
-        ".config/opencode/oh-my-opencode.json".source =
-          extraLib.dotfiles.modeFile settings.mode ../../dotfiles/.config/opencode/oh-my-opencode.json;
+        ".config/opencode/oh-my-opencode-slim.json".source =
+          extraLib.dotfiles.modeFile settings.mode ../../dotfiles/.config/opencode/oh-my-opencode-slim.json;
         ".config/opencode/antigravity.json".source =
           ../../dotfiles/.config/opencode/antigravity.json;
         ".config/opencode/command".source =

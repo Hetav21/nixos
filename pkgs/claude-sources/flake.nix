@@ -30,9 +30,23 @@
       url = "github:ComposioHQ/awesome-claude-skills";
       flake = false;
     };
+    agent-config = {
+      url = "github:brianlovin/agent-config";
+      flake = false;
+    };
   };
 
   outputs = {self, ...} @ inputs: {
-    inherit (inputs) claude-subagents superpowers agent-skills anthropic-skills neolab-context-kit mhattingpete-skills awesome-claude-skills;
+    inherit
+      (inputs)
+      claude-subagents
+      superpowers
+      agent-skills
+      anthropic-skills
+      neolab-context-kit
+      mhattingpete-skills
+      awesome-claude-skills
+      agent-config
+      ;
   };
 }
