@@ -1,5 +1,10 @@
 {
   "mcpServers": {
+    "atlassian": {
+      "type": "remote",
+      "enabled": true,
+      "url": "https://mcp.atlassian.com/v1/mcp"
+    },
     "context7": {
       "url": "https://mcp.context7.com/mcp",
       "headers": {
@@ -16,6 +21,35 @@
     "skill-seekers": {
       "command": "@skillSeekersMcpPath@",
       "args": []
+    },
+    "awslabs.cdk-mcp-server": {
+      "command": "@uvxPath@",
+      "args": [
+        "awslabs.cdk-mcp-server@latest"
+      ],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "awslabs.aws-documentation-mcp-server": {
+      "command": "@uvxPath@",
+      "args": [
+        "awslabs.aws-documentation-mcp-server@latest"
+      ],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR",
+        "AWS_DOCUMENTATION_PARTITION": "aws"
+      }
+    },
+    "azure-devops": {
+      "command": "@bunxPath@",
+      "args": [
+        "-y",
+        "@azure-devops/mcp",
+        "v3e",
+        "--authentication",
+        "azcli"
+      ]
     }
   }
 }

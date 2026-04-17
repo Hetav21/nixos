@@ -28,6 +28,31 @@
   awesome-claude-skills = pkgs.callPackage ./awesome-claude-skills {
     awesome-claude-skills-src = inputs.claude-sources.awesome-claude-skills or null;
   };
+  agent-config = let
+    agent-config-src = inputs.claude-sources.agent-config or null;
+  in
+    assert pkgs.lib.assertMsg (agent-config-src != null) "agent-config-src is required.";
+      pkgs.stdenvNoCC.mkDerivation {
+        pname = "agent-config";
+        version = "devel";
+
+        src = agent-config-src;
+
+        dontBuild = true;
+        dontConfigure = true;
+
+        installPhase = ''
+          mkdir -p $out
+          cp -r $src/. $out/
+        '';
+
+        meta = with pkgs.lib; {
+          description = "Brian Lovin agent configuration resources";
+          homepage = "https://github.com/brianlovin/agent-config";
+          license = licenses.mit;
+          platforms = platforms.all;
+        };
+      };
   wsl-notify-send = pkgs.callPackage ./wsl-notify-send {};
   skill-seekers = pkgs.callPackage ./skill-seekers {};
   agent-browser = pkgs.callPackage ./agent-browser {};

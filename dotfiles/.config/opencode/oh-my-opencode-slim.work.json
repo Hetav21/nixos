@@ -1,0 +1,129 @@
+{
+  "preset": "openai",
+  "presets": {
+    "openai": {
+      "orchestrator": {
+        "model": "openai/gpt-5.4",
+        "skills": [
+          "*"
+        ],
+        "mcps": [
+          "*"
+        ]
+      },
+      "oracle": {
+        "model": "openai/gpt-5.4",
+        "variant": "high",
+        "skills": [
+          "simplify"
+        ],
+        "mcps": []
+      },
+      "librarian": {
+        "model": "openai/gpt-5.4-mini",
+        "variant": "low",
+        "skills": [],
+        "mcps": [
+          "websearch",
+          "context7",
+          "grep_app"
+        ]
+      },
+      "explorer": {
+        "model": "openai/gpt-5.4-mini",
+        "variant": "low",
+        "skills": [],
+        "mcps": []
+      },
+      "designer": {
+        "model": "openai/gpt-5.4-mini",
+        "variant": "medium",
+        "skills": [
+          "agent-browser"
+        ],
+        "mcps": []
+      },
+      "fixer": {
+        "model": "openai/gpt-5.4-mini",
+        "variant": "low",
+        "skills": [],
+        "mcps": []
+      }
+    }
+  },
+  "tmux": {
+    "enabled": true,
+    "layout": "main-vertical",
+    "main_pane_size": 60
+  },
+  "council": {
+    "master": {
+      "model": "openai/gpt-5.4",
+      "variant": "high"
+    },
+    "master_timeout": 300000,
+    "councillors_timeout": 180000,
+    "master_fallback": [
+      "openai/gpt-5.3-codex"
+    ],
+    "councillor_retries": 3,
+    "default_preset": "default",
+    "presets": {
+      "default": {
+        "alpha": {
+          "model": "openai/gpt-5.4",
+          "variant": "high",
+          "prompt": "Prioritize correctness, key trade-offs, and the highest-risk concerns."
+        },
+        "beta": {
+          "model": "openai/gpt-5.3-codex",
+          "variant": "high",
+          "prompt": "Prioritize implementation details, failure modes, and concrete alternatives."
+        },
+        "gamma": {
+          "model": "openai/gpt-5.4-mini",
+          "variant": "medium",
+          "prompt": "Be concise and independent. Challenge assumptions and surface simpler options."
+        }
+      },
+      "fast": {
+        "alpha": {
+          "model": "openai/gpt-5.4-mini",
+          "variant": "medium",
+          "prompt": "Give a fast independent opinion focused on the main risk and best next step."
+        },
+        "beta": {
+          "model": "openai/gpt-5.3-codex",
+          "variant": "medium",
+          "prompt": "Give a fast practical review focused on execution details and likely edge cases."
+        }
+      },
+      "deep": {
+        "master": {
+          "model": "openai/gpt-5.4",
+          "variant": "high"
+        },
+        "alpha": {
+          "model": "openai/gpt-5.4",
+          "variant": "high",
+          "prompt": "Focus on architecture, long-term maintainability, and hidden trade-offs."
+        },
+        "beta": {
+          "model": "openai/gpt-5.3-codex",
+          "variant": "high",
+          "prompt": "Focus on implementation realism, edge cases, and failure modes."
+        },
+        "gamma": {
+          "model": "openai/gpt-5.4-mini",
+          "variant": "medium",
+          "prompt": "Focus on simplicity, unnecessary complexity, and the smallest viable approach."
+        },
+        "delta": {
+          "model": "openai/gpt-5.4",
+          "variant": "medium",
+          "prompt": "Focus on operational risk, reliability, and whether the recommendation is safe to trust."
+        }
+      }
+    }
+  }
+}

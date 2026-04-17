@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "agent-config": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774461170,
+        "narHash": "sha256-yY6xBsrC/0HPp/6bk0h+sQFE2zqXfcLxuGA18Y+9dd0=",
+        "owner": "brianlovin",
+        "repo": "agent-config",
+        "rev": "1a9819ebf3fee811150fc76cbe177ea4e5f747ff",
+        "type": "github"
+      },
+      "original": {
+        "owner": "brianlovin",
+        "repo": "agent-config",
+        "type": "github"
+      }
+    },
     "agent-skills": {
       "flake": false,
       "locked": {
@@ -118,6 +134,7 @@
     },
     "claude-sources": {
       "inputs": {
+        "agent-config": "agent-config",
         "agent-skills": "agent-skills",
         "anthropic-skills": "anthropic-skills",
         "awesome-claude-skills": "awesome-claude-skills",
