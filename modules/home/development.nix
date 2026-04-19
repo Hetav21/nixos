@@ -4,6 +4,7 @@
   settings,
   extraLib,
   pkgs-unstable,
+  inputs,
   ...
 } @ args:
 (extraLib.modules.mkModule {
@@ -224,21 +225,21 @@
           (lib.importJSON (extraLib.dotfiles.modeFile settings.mode ../../dotfiles/.config/mcp/mcp.json)).mcpServers;
       };
 
-      claude-resources = {
+      agent-resources = {
         enable = true;
         commands = [
           pkgs.custom.subagent-catalog
-          (extraLib.claude.extract pkgs pkgs.custom.superpowers "commands" {})
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.superpowers "commands" {})
         ];
         skills = [
-          (extraLib.claude.extract pkgs pkgs.custom.agent-skills "." {
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.agent-skills "." {
             excludes = [
               "claude.ai-vercel-deploy-claimable"
               "react-best-practices"
               "web-design-guidelines"
             ];
           })
-          (extraLib.claude.extract pkgs pkgs.custom.anthropic-skills "skills" {
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.anthropic-skills "skills" {
             includes = [
               "canvas-design"
               "docx"
@@ -248,27 +249,27 @@
               "xlsx"
             ];
           })
-          (extraLib.claude.extract pkgs pkgs.custom.neolab-context-kit "plugins/ddd/skills" {
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.neolab-context-kit "plugins/ddd/skills" {
             includes = ["software-architecture"];
           })
-          (extraLib.claude.extract pkgs pkgs.custom.neolab-context-kit "plugins/customaize-agent/skills" {
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.neolab-context-kit "plugins/customaize-agent/skills" {
             includes = ["prompt-engineering"];
           })
-          (extraLib.claude.extract pkgs pkgs.custom.mhattingpete-skills "engineering-workflow-plugin/skills" {
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.mhattingpete-skills "engineering-workflow-plugin/skills" {
             includes = ["test-fixing" "review-implementing"];
           })
-          (extraLib.claude.extract pkgs pkgs.custom.awesome-claude-skills "changelog-generator" {})
-          (extraLib.claude.extract pkgs pkgs.custom.agent-config "skills" {
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.awesome-claude-skills "changelog-generator" {})
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.agent-config "skills" {
             excludes = ["skill-creator"];
           })
-          (extraLib.claude.extract pkgs pkgs.custom.superpowers "skills" {})
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.superpowers "skills" {})
         ];
         agents = [
-          (extraLib.claude.extract pkgs pkgs.custom.agent-config "agents" {})
-          (extraLib.claude.extract pkgs pkgs.custom.superpowers "agents" {})
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.agent-config "agents" {})
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.superpowers "agents" {})
         ];
         hooks = [
-          (extraLib.claude.extract pkgs pkgs.custom.superpowers "hooks" {})
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.superpowers "hooks" {})
         ];
       };
     };

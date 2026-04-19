@@ -1,9 +1,9 @@
-{...}: {
+{inputs, ...}: {
   imports = [
     # New categorized modules
     ./nix-settings.nix
     ./development.nix
-    ./claude-resources.nix
+    inputs.nix-skills.homeManagerModules.default
     ./shell.nix
     ./system.nix
     ./downloads.nix
