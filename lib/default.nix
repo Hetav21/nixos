@@ -15,5 +15,4 @@
   modules = import ./modules.nix inputs outputs;
   hosts = import ./hosts.nix {inherit lib;};
   dotfiles = import ./manage-dotfiles.nix {inherit lib;};
-  claude = inputs.nix-skills.lib;
 }
