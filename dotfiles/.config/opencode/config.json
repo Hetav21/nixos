@@ -4,6 +4,8 @@
     "@simonwjackson/opencode-direnv",
     "oh-my-opencode-slim"
   ],
+  "autoshare": false,
+  "autoupdate": false,
   "model": "github-copilot/gpt-5-mini",
   "small_model": "github-copilot/gpt-5-mini",
   "agent": {
