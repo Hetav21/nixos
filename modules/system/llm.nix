@@ -1,6 +1,8 @@
 {
   extraLib,
+  lib,
   pkgs,
+  pkgs-unstable,
   hardware,
   ...
 } @ args:
@@ -8,7 +10,9 @@
   name = "system.llm";
   hasGui = true;
   cliConfig = {
+    lib,
     pkgs,
+    pkgs-unstable,
     hardware,
     ...
   }: let
@@ -16,10 +20,15 @@
     isAmdgpuEnabled = hardware.amdgpu.enable;
     package = pkgs;
   in {
-    environment.systemPackages = with package; [
-      vllm
-      custom.agent-browser
-    ];
+    environment.systemPackages = with package;
+      [
+        vllm
+      ]
+      ++ [
+        pkgs-unstable.agent-browser
+      ];
+
+    environment.variables.AGENT_BROWSER_EXECUTABLE_PATH = lib.getExe pkgs-unstable.chromium;
 
     services.ollama = {
       enable = true;
