@@ -21,7 +21,7 @@
   username = "hetav";
   editor = "nvim";
   visual = "zeditor";
-  browser = "zen";
+  browser = "helium";
   terminal = "ghostty";
 
   # System configuration (common)
