@@ -42,18 +42,18 @@
       autostart.enable = true;
       mime.defaultApplications = {
         # Web and HTML
-        "x-scheme-handler/http" = "zen-beta.desktop";
-        "x-scheme-handler/https" = "zen-beta.desktop";
-        "x-scheme-handler/chrome" = "zen-beta.desktop";
-        "text/html" = "zen-beta.desktop";
-        "application/x-extension-htm" = "zen-beta.desktop";
-        "application/x-extension-html" = "zen-beta.desktop";
-        "application/x-extension-shtml" = "zen-beta.desktop";
-        "application/x-extension-xhtml" = "zen-beta.desktop";
-        "application/xhtml+xml" = "zen-beta.desktop";
-        "application/x-extension-xht" = "zen-beta.desktop";
-        "x-scheme-handler/about" = "zen-beta.desktop";
-        "x-scheme-handler/unknown" = "zen-beta.desktop";
+        "x-scheme-handler/http" = "${settings.browser}.desktop";
+        "x-scheme-handler/https" = "${settings.browser}.desktop";
+        "x-scheme-handler/chrome" = "${settings.browser}.desktop";
+        "text/html" = "${settings.browser}.desktop";
+        "application/x-extension-htm" = "${settings.browser}.desktop";
+        "application/x-extension-html" = "${settings.browser}.desktop";
+        "application/x-extension-shtml" = "${settings.browser}.desktop";
+        "application/x-extension-xhtml" = "${settings.browser}.desktop";
+        "application/xhtml+xml" = "${settings.browser}.desktop";
+        "application/x-extension-xht" = "${settings.browser}.desktop";
+        "x-scheme-handler/about" = "${settings.browser}.desktop";
+        "x-scheme-handler/unknown" = "${settings.browser}.desktop";
 
         # File management
         "inode/directory" = "thunar.desktop";
