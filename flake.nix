@@ -50,6 +50,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    helium-flake = {
+      url = "gitlab:ntgn/helium-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixCats = {
       url = "github:BirdeeHub/nixCats-nvim";
     };

@@ -44,6 +44,7 @@
 
     # Enable browser
     home.browser.zen.enableGui = true;
+    home.browser.helium.enableGui = true;
 
     # GTK theming configuration (common for all desktop hosts)
     gtk = {
