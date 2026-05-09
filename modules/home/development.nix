@@ -58,6 +58,9 @@
           nodePackages.prettier
           nodePackages.eslint_d
 
+          # Version Control
+          jujutsu
+
           # Nix LSP (not managed by Mason)
           nil
 
@@ -169,6 +172,8 @@
       git = {
         enable = true;
         package = pkgs-unstable.gitFull;
+        userName = settings.git.personal.name;
+        userEmail = settings.git.personal.email;
         lfs.enable = true;
         lfs.package = pkgs-unstable.git-lfs;
         includes =
@@ -180,11 +185,18 @@
               contents.core.sshCommand = "ssh -i ${settings.ssh.personal.identityFile} -o IdentitiesOnly=yes";
             }
           ]
-          # Work directory: use work SSH key (only if work identity is configured)
-          ++ lib.optionals (settings.ssh.work.identityFile != "") [
+          # Work directory: use work SSH key and identity (only if work mode is true)
+          ++ lib.optionals (settings.mode == "work") [
             {
               condition = "gitdir:~/work/";
-              contents.core.sshCommand = "ssh -i ${settings.ssh.work.identityFile} -o IdentitiesOnly=yes";
+              contents =
+                {
+                  user.name = settings.git.work.name;
+                  user.email = settings.git.work.email;
+                }
+                // lib.optionalAttrs (settings.ssh.work.identityFile != "") {
+                  core.sshCommand = "ssh -i ${settings.ssh.work.identityFile} -o IdentitiesOnly=yes";
+                };
             }
           ];
       };
@@ -192,6 +204,12 @@
       jujutsu = {
         enable = true;
         package = pkgs-unstable.jujutsu;
+        settings = {
+          user = {
+            name = settings.git.personal.name;
+            email = settings.git.personal.email;
+          };
+        };
       };
 
       delta = {
