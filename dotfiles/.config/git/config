@@ -20,11 +20,19 @@
 	helper = libsecret
 
 [alias]
-	st = status
+	aa = add -A
+	st = status -s
+	sta = status
+	ci = commit
 	co = checkout
+	cod = checkout .
+	rh = reset HEAD
+    cdf = clean -df
 	br = branch
-	ci = commit -m
-	aci = commit -am
+	bra = branch -a
+	pr = pull --rebase
+    amend = commit -a --amend --no-edit
+    famend = commit --amend
 	unstage = reset HEAD --
 	last = log -1 HEAD
 	lg = log --graph --oneline --decorate --all
