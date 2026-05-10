@@ -22,10 +22,8 @@
     defaultUser = settings.username;
     wrapBinSh = true;
     extraBin = [
-      {
-        name = "bash";
-        src = config.wsl.binShExe;
-      }
+      # Keep /bin/bash from the nixos-wsl default extraBin.
+      # Overriding it with config.wsl.binShExe makes bash remote install scripts run via the wrapped sh path.
       # Coreutils for remote server compatibility
       {src = "${lib.getExe' pkgs.coreutils "uname"}";}
       {src = "${lib.getExe' pkgs.coreutils "mkdir"}";}
@@ -69,7 +67,6 @@
   # Without this, apps requiring dbus fail with "Unable to autolaunch a dbus-daemon without a $DISPLAY"
   users.users.${settings.username} = {
     linger = true;
-    shell = lib.mkForce pkgs.nushell;
   };
   systemd.user.services.dbus.wantedBy = ["default.target"];
   environment.systemPackages = [pkgs.dbus];
