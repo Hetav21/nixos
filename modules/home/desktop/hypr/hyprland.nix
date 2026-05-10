@@ -101,7 +101,7 @@
 
           windowrulev2 = opacity 0.95 0.95,class:^(firefox-nightly)$
           windowrulev2 = opacity 0.95 0.95,class:^(firefox)$
-          windowrulev2 = opacity 0.95 0.95,class:^(zen)$
+          windowrulev2 = opacity 0.95 0.95,class:^(helium)$
           windowrulev2 = opacity 0.95 0.95,class:^(dev.zed.Zed)$
           windowrulev2 = opacity 0.95 0.95,class:^(obsidian)$
           windowrulev2 = opacity 0.95 0.95,class:^(intellij-idea-ultimate-edition)$
@@ -114,7 +114,7 @@
 
           ## Browser
           $brave = brave
-          $browser = zen-beta
+          $browser = helium
           $browser_alternate = browseros
           bind = $mainMod, F, exec, $browser
           bind = SUPER_SHIFT, F, exec, $browser_alternate

@@ -19,6 +19,20 @@ return {
     },
   },
 
+  -- Jujutsu (jj) VCS
+  {
+    "yannvanhalewyn/jujutsu.nvim",
+    dependencies = { "sindrets/diffview.nvim" },
+    config = function()
+      require("jujutsu-nvim").setup({
+        diff_preset = "diffview",
+      })
+    end,
+    keys = {
+      { "<leader>jj", "<cmd>JJ<cr>", desc = "Jujutsu Log" },
+    },
+  },
+
   -- Trouble (diagnostics)
   {
     "folke/trouble.nvim",
