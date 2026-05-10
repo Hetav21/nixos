@@ -21,8 +21,20 @@
   username = "hetav";
   editor = "nvim";
   visual = "zeditor";
-  browser = "zen";
+  browser = "helium";
   terminal = "ghostty";
+
+  # Git identities
+  git = {
+    personal = {
+      name = "Hetav21";
+      email = "shahhetav2106@gmail.com";
+    };
+    work = {
+      name = "";
+      email = "";
+    };
+  };
 
   # System configuration (common)
   setup_dir = "/etc/nixos/";

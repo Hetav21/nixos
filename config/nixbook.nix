@@ -13,6 +13,7 @@
     latest = [
       "vicinae-extensions"
       "zen-browser"
+      "helium-flake"
     ];
   };
 

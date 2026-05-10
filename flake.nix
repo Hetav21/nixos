@@ -45,8 +45,13 @@
       url = "github:vicinaehq/extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    helium-flake = {
+      url = "gitlab:ntgn/helium-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -99,7 +104,9 @@
     commonSettings = import ./config/common.nix;
     nixbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./config/nixbook.nix);
     nixwslbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./config/nixwslbook.nix);
-    nixworkbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./config/nixworkbook.nix);
+    nixworkbookSettings = extraLib.hosts.mkHostSettings commonSettings (
+      import ./config/nixworkbook.nix
+    );
 
     # Import hardware configurations
     hardware_asus = import ./config/hardware/asus.nix;
