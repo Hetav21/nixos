@@ -66,6 +66,7 @@
     nix-skills = {
       url = "github:Hetav21/nix-skills";
     };
+    llm-agents .url = "github:numtide/llm-agents.nix";
   };
 
   # Passing extra nix config

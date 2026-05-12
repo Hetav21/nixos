@@ -14,6 +14,7 @@
     pkgs,
     pkgs-unstable,
     hardware,
+    inputs,
     ...
   }: let
     isNvidiaEnabled = hardware.nvidia.enable;
@@ -26,6 +27,8 @@
       ]
       ++ [
         pkgs-unstable.agent-browser
+        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.beads
+        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.ralph-tui
       ];
 
     environment.variables.AGENT_BROWSER_EXECUTABLE_PATH = lib.getExe pkgs-unstable.chromium;
