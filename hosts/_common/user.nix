@@ -6,39 +6,46 @@
   ...
 }: let
   isWslEnabled = config.profiles.system.wsl-minimal.enable or false;
-  wslNushellCompat = pkgs.writeShellScriptBin "wsl-nushell-compat" ''
-    # WSL/IDE compatibility wrapper for nushell on NixOS-WSL
-    # Interactive sessions → nushell, everything else → bash
-    #
-    # When WSL or an IDE runs: wsl.exe --distribution NixOS -- bash -c '...'
-    # the user's login shell receives: bash -c '...'
-    # This wrapper intercepts that and routes to real bash.
+  wslNushellCompat =
+    (pkgs.writeShellScriptBin "wsl-nushell-compat" ''
+      # WSL/IDE compatibility wrapper for nushell on NixOS-WSL
+      # Interactive sessions → nushell, everything else → bash
+      #
+      # When WSL or an IDE runs: wsl.exe --distribution NixOS -- bash -c '...'
+      # the user's login shell receives: bash -c '...'
+      # This wrapper intercepts that and routes to real bash.
 
-    if [ "$#" -eq 0 ]; then
-      # No arguments: interactive login → launch nushell
-      exec ${lib.getExe pkgs.nushell}
-    fi
+      if [ "$#" -eq 0 ]; then
+        # No arguments: interactive login → launch nushell
+        exec ${lib.getExe pkgs.nushell}
+      fi
 
-    case "$1" in
-      bash)
-        shift
-        exec ${lib.getExe pkgs.bashInteractive} "$@"
-        ;;
-      sh)
-        shift
-        exec ${lib.getExe' pkgs.bashInteractive "sh"} "$@"
-        ;;
-      -*)
-        # Flags like -c, -l, -i, --login, etc → bash
-        exec ${lib.getExe pkgs.bashInteractive} "$@"
-        ;;
-      *)
-        # Positional command like 'bash -c ...' or 'sh -c ...'
-        # Pass everything through bash
-        exec ${lib.getExe pkgs.bashInteractive} -lc "$*"
-        ;;
-    esac
-  '';
+      case "$1" in
+        bash)
+          shift
+          exec ${lib.getExe pkgs.bashInteractive} "$@"
+          ;;
+        sh)
+          shift
+          exec ${lib.getExe' pkgs.bashInteractive "sh"} "$@"
+          ;;
+        -*)
+          # Flags like -c, -l, -i, --login, etc → bash
+          exec ${lib.getExe pkgs.bashInteractive} "$@"
+          ;;
+        *)
+          # Positional command like 'bash -c ...' or 'sh -c ...'
+          # Pass everything through bash
+          exec ${lib.getExe pkgs.bashInteractive} -lc "$*"
+          ;;
+      esac
+    '').overrideAttrs (old: {
+      passthru =
+        (old.passthru or {})
+        // {
+          shellPath = "/bin/wsl-nushell-compat";
+        };
+    });
 in {
   config = {
     users.users.${settings.username} = {
