@@ -124,7 +124,6 @@
           bind = $mainMod, G, exec, $browser --new-window https://gemini.google.com/
           bind = SUPER_SHIFT, G, exec, $browser --new-window https://chatgpt.com/
           bind = SUPER_SHIFT, C, exec, $browser --new-window https://claude.ai/
-          bind = $mainMod, L, exec, $browser --new-window https://leetcode.com/problemset/
 
           ## Editor and Terminal
           $term = ghostty
@@ -170,11 +169,11 @@
           bind = , XF86AudioPrev, exec, playerctl previous
           bind = ALT, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy # Clipboard Manager
 
-          # Move focus with mainMod + arrow keys
+          # Move focus with mainMod + Vim keys (hjkl)
           bind = $mainMod, h, movefocus, l
           bind = $mainMod, l, movefocus, r
-          bind = $mainMod, j, movefocus, u
-          bind = $mainMod, k, movefocus, d
+          bind = $mainMod, j, movefocus, d
+          bind = $mainMod, k, movefocus, u
 
           # Switch workspaces with mainMod + [0-9]
           bind = $mainMod, 1, workspace, 1
