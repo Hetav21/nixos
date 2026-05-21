@@ -8,6 +8,7 @@
   ];
 
   # Enable WSL minimal profile
+  profiles.home.wsl-common.enable = true;
   profiles.home.wsl-minimal.enable = true;
 
   # Host-specific stateVersion (override common 25.11)
