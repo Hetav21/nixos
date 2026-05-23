@@ -250,16 +250,8 @@
           (inputs.nix-skills.lib.extract pkgs pkgs.custom.superpowers "commands" {})
         ];
         skills = [
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.agent-skills "." {
-            excludes = [
-              "claude.ai-vercel-deploy-claimable"
-              "react-best-practices"
-              "web-design-guidelines"
-            ];
-          })
           (inputs.nix-skills.lib.extract pkgs pkgs.custom.anthropic-skills "skills" {
             includes = [
-              "canvas-design"
               "docx"
               "pdf"
               "pptx"
@@ -267,16 +259,6 @@
               "xlsx"
             ];
           })
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.neolab-context-kit "plugins/ddd/skills" {
-            includes = ["software-architecture"];
-          })
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.neolab-context-kit "plugins/customaize-agent/skills" {
-            includes = ["prompt-engineering"];
-          })
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.mhattingpete-skills "engineering-workflow-plugin/skills" {
-            includes = ["test-fixing" "review-implementing"];
-          })
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.awesome-claude-skills "changelog-generator" {})
           (inputs.nix-skills.lib.extract pkgs pkgs.custom.agent-config "skills" {
             excludes = ["skill-creator"];
           })

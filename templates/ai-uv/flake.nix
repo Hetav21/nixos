@@ -10,9 +10,6 @@
   inputs.pypict-claude-skill.url = "github:omkamal/pypict-claude-skill";
   inputs.pypict-claude-skill.flake = false;
 
-  inputs.awesome-claude-skills.url = "github:ComposioHQ/awesome-claude-skills";
-  inputs.awesome-claude-skills.flake = false;
-
   inputs.awesome-claude-code-subagents.url = "github:VoltAgent/awesome-claude-code-subagents";
   inputs.awesome-claude-code-subagents.flake = false;
 
@@ -59,7 +56,6 @@
               includes = ["mcp-builder"];
             })
             "${inputs.pypict-claude-skill}"
-            "${inputs.awesome-claude-skills}/webapp-testing"
           ];
 
           agents = [

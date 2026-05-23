@@ -5,16 +5,8 @@
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
     nix-skills.url = "github:Hetav21/nix-skills";
 
-    agent-skills = {
-      url = "github:vercel-labs/agent-skills";
-      flake = false;
-    };
     anthropic-skills = {
       url = "github:anthropics/skills";
-      flake = false;
-    };
-    awesome-claude-skills = {
-      url = "github:ComposioHQ/awesome-claude-skills";
       flake = false;
     };
     claude-d3js-skill = {
@@ -82,13 +74,6 @@
           '';
 
           skills = [
-            (nix-skills.lib.extract pkgs inputs.agent-skills "." {
-              includes = [
-                "claude.ai-vercel-deploy-claimable"
-                "react-best-practices"
-                "web-design-guidelines"
-              ];
-            })
             (nix-skills.lib.extract pkgs inputs.anthropic-skills "skills" {
               includes = [
                 "frontend-design"
@@ -97,8 +82,6 @@
               ];
             })
             "${inputs.anthropic-skills}/skills/web-artifacts-builder"
-            "${inputs.awesome-claude-skills}/theme-factory"
-            "${inputs.awesome-claude-skills}/canvas-design"
             "${inputs.claude-d3js-skill}"
           ];
 
