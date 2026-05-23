@@ -14,10 +14,6 @@
       url = "github:lackeyjb/playwright-skill";
       flake = false;
     };
-    awesome-claude-skills = {
-      url = "github:ComposioHQ/awesome-claude-skills";
-      flake = false;
-    };
     ffuf_claude_skill = {
       url = "github:jthack/ffuf_claude_skill";
       flake = false;
@@ -84,7 +80,6 @@
               includes = ["webapp-testing"];
             })
             "${inputs.playwright-skill}"
-            "${inputs.awesome-claude-skills}/webapp-testing"
             "${inputs.ffuf_claude_skill}"
           ];
 

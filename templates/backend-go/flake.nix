@@ -9,10 +9,6 @@
       url = "github:anthropics/skills";
       flake = false;
     };
-    awesome-claude-skills = {
-      url = "github:ComposioHQ/awesome-claude-skills";
-      flake = false;
-    };
     ai-skills = {
       url = "github:sanjay3290/ai-skills";
       flake = false;
@@ -76,7 +72,6 @@
           ];
 
           skills = [
-            "${inputs.awesome-claude-skills}/mcp-builder"
             "${inputs.ai-skills}/skills/postgres"
             "${inputs.aws-skills}"
             "${inputs.n8n-skills}"

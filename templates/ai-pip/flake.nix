@@ -13,10 +13,6 @@
       url = "github:omkamal/pypict-claude-skill";
       flake = false;
     };
-    awesome-claude-skills = {
-      url = "github:ComposioHQ/awesome-claude-skills";
-      flake = false;
-    };
     awesome-claude-code-subagents = {
       url = "github:VoltAgent/awesome-claude-code-subagents";
       flake = false;
@@ -118,7 +114,6 @@
               includes = ["mcp-builder"];
             })
             "${inputs.pypict-claude-skill}"
-            "${inputs.awesome-claude-skills}/webapp-testing"
           ];
 
           agents = [
