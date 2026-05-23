@@ -41,8 +41,8 @@
       enableGui = true;
     };
     system.llm = {
-      enable = true;
-      enableGui = true;
+      enable = false;
+      enableGui = false;
     };
     system.desktopEnvironment.enableGui = true;
 

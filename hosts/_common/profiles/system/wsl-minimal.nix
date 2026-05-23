@@ -23,7 +23,7 @@
     system.network.enable = true;
     system.storage.enable = true;
     system.baseservices.enable = true;
-    system.llm.enable = true;
+    system.llm.enable = false;
 
     # Disable all GUI components
     system.virtualisation.enableGui = false;
