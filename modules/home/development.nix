@@ -130,7 +130,12 @@
         lazygit
         lazydocker
         cursor-cli
-      ]);
+      ])
+      ++ [
+        pkgs-unstable.agent-browser
+        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.beads
+        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.ralph-tui
+      ];
 
     services.ssh-agent.enable = true;
 

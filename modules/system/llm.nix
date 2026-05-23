@@ -1,9 +1,6 @@
 {
   extraLib,
-  lib,
   pkgs,
-  pkgs-unstable,
-  hardware,
   ...
 } @ args:
 (extraLib.modules.mkModule {
@@ -14,22 +11,15 @@
     pkgs,
     pkgs-unstable,
     hardware,
-    inputs,
     ...
   }: let
     isNvidiaEnabled = hardware.nvidia.enable;
     isAmdgpuEnabled = hardware.amdgpu.enable;
     package = pkgs;
   in {
-    environment.systemPackages = with package;
-      [
-        vllm
-      ]
-      ++ [
-        pkgs-unstable.agent-browser
-        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.beads
-        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.ralph-tui
-      ];
+    environment.systemPackages = with package; [
+      vllm
+    ];
 
     environment.variables.AGENT_BROWSER_EXECUTABLE_PATH = lib.getExe pkgs-unstable.chromium;
 
