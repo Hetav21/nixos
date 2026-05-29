@@ -20,6 +20,11 @@
       url = "github:brianlovin/agent-config";
       flake = false;
     };
+
+    oldwinter-skills = {
+      url = "github:oldwinter/skills";
+      flake = false;
+    };
   };
 
   outputs = {self, ...} @ inputs: {
@@ -29,6 +34,7 @@
       superpowers
       anthropic-skills
       agent-config
+      oldwinter-skills
       ;
   };
 }

@@ -16,14 +16,32 @@
         "type": "github"
       }
     },
+    "agent-sources": {
+      "inputs": {
+        "agent-config": "agent-config",
+        "anthropic-skills": "anthropic-skills",
+        "claude-subagents": "claude-subagents",
+        "oldwinter-skills": "oldwinter-skills",
+        "superpowers": "superpowers"
+      },
+      "locked": {
+        "path": "./pkgs/agent-sources",
+        "type": "path"
+      },
+      "original": {
+        "path": "./pkgs/agent-sources",
+        "type": "path"
+      },
+      "parent": []
+    },
     "anthropic-skills": {
       "flake": false,
       "locked": {
-        "lastModified": 1775755206,
-        "narHash": "sha256-H/oorOl5cch7bnziDz7gHNBv5Q0OAwFbk9w1WLku2kk=",
+        "lastModified": 1779199866,
+        "narHash": "sha256-GMXFJSePrpEvhzMQ82YI9Z10BDkuFK/lXUDELclvQ4c=",
         "owner": "anthropics",
         "repo": "skills",
-        "rev": "12ab35c2eb5668c95810e6a6066f40f4218adc39",
+        "rev": "690f15cac7f7b4c055c5ab109c79ed9259934081",
         "type": "github"
       },
       "original": {
@@ -158,31 +176,14 @@
         "type": "github"
       }
     },
-    "claude-sources": {
-      "inputs": {
-        "agent-config": "agent-config",
-        "anthropic-skills": "anthropic-skills",
-        "claude-subagents": "claude-subagents",
-        "superpowers": "superpowers"
-      },
-      "locked": {
-        "path": "./pkgs/claude-sources",
-        "type": "path"
-      },
-      "original": {
-        "path": "./pkgs/claude-sources",
-        "type": "path"
-      },
-      "parent": []
-    },
     "claude-subagents": {
       "flake": false,
       "locked": {
-        "lastModified": 1775062809,
-        "narHash": "sha256-Wu67QzP9S3wigI6DWDMqtmb/4l66PgntzbabzVPSf/c=",
+        "lastModified": 1779878740,
+        "narHash": "sha256-ywObyscvl+/hnZMGJvWnqebS5gHBICMbMl4OabY10ys=",
         "owner": "VoltAgent",
         "repo": "awesome-claude-code-subagents",
-        "rev": "2a8fec3c67ee02a3fb56b76844eb8fb601502349",
+        "rev": "2f9cf8b9562dcc235cc2296bda6df82d60e800be",
         "type": "github"
       },
       "original": {
@@ -749,6 +750,22 @@
         "type": "github"
       }
     },
+    "oldwinter-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1773283563,
+        "narHash": "sha256-OjnxZlK0B7oUMMUIU8t0LKliBaJ2bb6ssqNJzRGLG8E=",
+        "owner": "oldwinter",
+        "repo": "skills",
+        "rev": "1aee324c5283de535836d086357fea56e674c65f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oldwinter",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
     "pre-commit": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -774,7 +791,7 @@
     },
     "root": {
       "inputs": {
-        "claude-sources": "claude-sources",
+        "agent-sources": "agent-sources",
         "helium-flake": "helium-flake",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
@@ -873,11 +890,11 @@
     "superpowers": {
       "flake": false,
       "locked": {
-        "lastModified": 1775515738,
-        "narHash": "sha256-FMaX6VMBC64OPdvXwhXKfHKnkdvdC2R9lZaU3BR/G3o=",
+        "lastModified": 1777932301,
+        "narHash": "sha256-3E3rO6hR87JUfS3XV1Eaoz6SDWOftleWvN9UPNFEMjw=",
         "owner": "obra",
         "repo": "superpowers",
-        "rev": "917e5f53b16b115b70a3a355ed5f4993b9f8b73d",
+        "rev": "f2cbfbefebbfef77321e4c9abc9e949826bea9d7",
         "type": "github"
       },
       "original": {

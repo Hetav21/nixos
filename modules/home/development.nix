@@ -268,6 +268,9 @@
             excludes = ["skill-creator"];
           })
           (inputs.nix-skills.lib.extract pkgs pkgs.custom.superpowers "skills" {})
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.oldwinter-skills "devops-skills" {
+            includes = ["github-cli"];
+          })
         ];
         agents = [
           (inputs.nix-skills.lib.extract pkgs pkgs.custom.agent-config "agents" {})

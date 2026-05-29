@@ -8,10 +8,10 @@ pkgs/
 ├── default.nix          # Overlay entry point (exposes packages to pkgs.custom)
 ├── my-package/          # Custom package definition
 │   └── default.nix
-├── claude-sources/      # Sub-flake for AI resources
+├── agent-sources/      # Sub-flake for AI resources
 │   ├── flake.nix        # Inputs for skills/agents
 │   └── flake.lock
-└── [source-name]/       # Packages wrapping claude-sources inputs
+└── [source-name]/       # Packages wrapping agent-sources inputs
     └── default.nix
 ```
 
@@ -37,10 +37,10 @@ Edit `pkgs/default.nix` to call the package:
 }
 ```
 
-## 3. Managing Claude Sources (Skills/Agents)
+## 3. Managing Agent Sources (Skills/Agents)
 
 ### Step 1: Add Input
-Edit `pkgs/claude-sources/flake.nix`:
+Edit `pkgs/agent-sources/flake.nix`:
 ```nix
 inputs = {
   new-source = {
@@ -57,13 +57,13 @@ outputs = { ... } @ inputs: {
 **CRITICAL**: You must update the sub-flake lockfile explicitly, and then update the root flake to pick up the changes.
 ```bash
 # 1. Update the sub-flake
-cd pkgs/claude-sources
+cd pkgs/agent-sources
 nix flake update
 cd ../..
 
-# 2. Update the root flake's reference to claude-sources
+# 2. Update the root flake's reference to agent-sources
 # This resolves "attribute missing" errors by updating the locked hash
-nix flake update claude-sources
+nix flake update agent-sources
 ```
 
 ### Step 3: Create Wrapper Package
@@ -81,7 +81,7 @@ stdenvNoCC.mkDerivation {
 1. Add to `pkgs/default.nix`:
    ```nix
    new-source = pkgs.callPackage ./new-source {
-     new-source-src = inputs.claude-sources.new-source or null;
+     new-source-src = inputs.agent-sources.new-source or null;
    };
    ```
 
@@ -105,4 +105,4 @@ stdenvNoCC.mkDerivation {
 
 ## 4. Updates & Maintenance
 - **Refresh Inputs**: `nx update` (updates root flake and checked-in sub-flake locks).
-- **Cleanup**: If removing a source, update `pkgs/default.nix`, `pkgs/claude-sources/flake.nix`, and delete the package directory. Then run `nx update`.
+- **Cleanup**: If removing a source, update `pkgs/default.nix`, `pkgs/agent-sources/flake.nix`, and delete the package directory. Then run `nx update`.
