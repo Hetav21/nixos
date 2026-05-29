@@ -8,17 +8,17 @@
   pokego = pkgs.callPackage ./pokego.nix {};
   browseros = pkgs.callPackage ./browseros/package.nix {};
   subagent-catalog = pkgs.callPackage ./subagent-catalog {
-    claude-subagents-src = inputs.claude-sources.claude-subagents or null;
+    claude-subagents-src = inputs.agent-sources.claude-subagents or null;
   };
   superpowers = pkgs.callPackage ./superpowers {
-    superpowers-src = inputs.claude-sources.superpowers or null;
+    superpowers-src = inputs.agent-sources.superpowers or null;
   };
   anthropic-skills = pkgs.callPackage ./anthropic-skills {
-    anthropic-skills-src = inputs.claude-sources.anthropic-skills or null;
+    anthropic-skills-src = inputs.agent-sources.anthropic-skills or null;
   };
 
   agent-config = let
-    agent-config-src = inputs.claude-sources.agent-config or null;
+    agent-config-src = inputs.agent-sources.agent-config or null;
   in
     assert pkgs.lib.assertMsg (agent-config-src != null) "agent-config-src is required.";
       pkgs.stdenvNoCC.mkDerivation {
@@ -44,4 +44,7 @@
       };
   wsl-notify-send = pkgs.callPackage ./wsl-notify-send {};
   skill-seekers = pkgs.callPackage ./skill-seekers {};
+  oldwinter-skills = pkgs.callPackage ./oldwinter-skills {
+    oldwinter-skills-src = inputs.agent-sources.oldwinter-skills or null;
+  };
 }

@@ -59,8 +59,8 @@
       url = "github:BirdeeHub/nixCats-nvim";
     };
 
-    claude-sources = {
-      url = "path:./pkgs/claude-sources";
+    agent-sources = {
+      url = "path:./pkgs/agent-sources";
     };
 
     nix-skills = {

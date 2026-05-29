@@ -35,11 +35,11 @@
     "claude-subagents": {
       "flake": false,
       "locked": {
-        "lastModified": 1779305148,
-        "narHash": "sha256-XBSYxi2qZMbmTOKLTnSmmvSMyrnGzT4WiSeUOcVyYEU=",
+        "lastModified": 1779878740,
+        "narHash": "sha256-ywObyscvl+/hnZMGJvWnqebS5gHBICMbMl4OabY10ys=",
         "owner": "VoltAgent",
         "repo": "awesome-claude-code-subagents",
-        "rev": "945f491f0f453dfd735262d4d98825a5227ac301",
+        "rev": "2f9cf8b9562dcc235cc2296bda6df82d60e800be",
         "type": "github"
       },
       "original": {
@@ -48,11 +48,28 @@
         "type": "github"
       }
     },
+    "oldwinter-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1773283563,
+        "narHash": "sha256-OjnxZlK0B7oUMMUIU8t0LKliBaJ2bb6ssqNJzRGLG8E=",
+        "owner": "oldwinter",
+        "repo": "skills",
+        "rev": "1aee324c5283de535836d086357fea56e674c65f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oldwinter",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agent-config": "agent-config",
         "anthropic-skills": "anthropic-skills",
         "claude-subagents": "claude-subagents",
+        "oldwinter-skills": "oldwinter-skills",
         "superpowers": "superpowers"
       }
     },

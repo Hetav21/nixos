@@ -229,7 +229,7 @@ Resources (skills, agents, commands, hooks) are managed declaratively using `pro
 
 #### Declarative Workflow (Source URLs)
 
-1. **Add Flake Input**: Add the resource repository to your `flake.nix` (or `pkgs/claude-sources/flake.nix`).
+1. **Add Flake Input**: Add the resource repository to your `flake.nix` (or `pkgs/agent-sources/flake.nix`).
    - **Requirement**: The input name MUST match either the **repository name** (e.g., `superpowers`) or **owner-repo** (e.g., `hetav21-superpowers`).
 2. **Configure Sources**: Add the GitHub URLs to `programs.claude-resources.sources`.
    - `agents`: URLs to `agent.md` files or directories containing agents.
