@@ -60,4 +60,22 @@
 
   # Application common configuration
   wallpaper_directory = "/etc/nixos/wallpapers";
+
+  # AI tool configuration (models, providers)
+  opencode = {
+    model = "github-copilot/gpt-5-mini";
+    smallModel = "github-copilot/gpt-5-mini";
+  };
+
+  ohMyOpencode = {
+    preset = "github";
+    models = {
+      orchestrator = "github-copilot/gpt-5-mini";
+      oracle = "github-copilot/gpt-5-mini";
+      librarian = "github-copilot/gpt-5-mini";
+      explorer = "github-copilot/gpt-5-mini";
+      designer = "github-copilot/gpt-5-mini";
+      fixer = "github-copilot/gpt-5-mini";
+    };
+  };
 }
