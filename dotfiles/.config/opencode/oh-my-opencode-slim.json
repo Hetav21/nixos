@@ -1,5 +1,6 @@
 {
   "preset": "@preset@",
+  "disabled_agents": [],
   "presets": {
     "@preset@": {
       "orchestrator": {
@@ -15,38 +16,90 @@
         "model": "@oracleModel@",
         "variant": "high",
         "skills": [
-          "simplify"
+          "simplify",
+          "deslop",
+          "grill-me",
+          "receiving-code-review",
+          "requesting-code-review",
+          "workflow",
+          "knip",
+          "systematic-debugging"
         ],
-        "mcps": []
+        "mcps": [
+          "context7",
+          "awslabs.aws-documentation-mcp-server",
+          "aws-knowledge-mcp-server",
+          "azure-devops",
+          "websearch"
+        ]
       },
       "librarian": {
         "model": "@librarianModel@",
         "variant": "low",
-        "skills": [],
+        "skills": [
+          "find-skills",
+          "using-superpowers"
+        ],
         "mcps": [
-          "websearch",
           "context7",
+          "awslabs.aws-documentation-mcp-server",
+          "aws-knowledge-mcp-server",
+          "atlassian",
+          "azure-devops",
+          "websearch",
           "grep_app"
         ]
       },
       "explorer": {
         "model": "@explorerModel@",
         "variant": "low",
-        "skills": [],
-        "mcps": []
+        "skills": [
+          "find-skills",
+          "sentry",
+          "fix-sentry-issues"
+        ],
+        "mcps": [
+          "atlassian",
+          "grep_app"
+        ]
       },
       "designer": {
         "model": "@designerModel@",
         "variant": "medium",
         "skills": [
-          "agent-browser"
+          "agent-browser",
+          "playwriter",
+          "favicon"
         ],
-        "mcps": []
+        "mcps": [
+          "playwright"
+        ]
       },
       "fixer": {
         "model": "@fixerModel@",
         "variant": "low",
-        "skills": [],
+        "skills": [
+          "sentry",
+          "fix-sentry-issues",
+          "using-git-worktrees",
+          "agent-browser",
+          "playwriter"
+        ],
+        "mcps": [
+          "playwright",
+          "azure-devops",
+          "atlassian"
+        ]
+      },
+      "observer": {
+        "model": "@observerModel@",
+        "variant": "medium",
+        "skills": [
+          "pdf",
+          "docx",
+          "pptx",
+          "xlsx"
+        ],
         "mcps": []
       }
     }
