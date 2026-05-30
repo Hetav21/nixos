@@ -301,6 +301,7 @@
               "@explorerModel@" = settings.ohMyOpencode.models.explorer;
               "@designerModel@" = settings.ohMyOpencode.models.designer;
               "@fixerModel@" = settings.ohMyOpencode.models.fixer;
+              "@observerModel@" = settings.ohMyOpencode.models.observer;
             } (lib.importJSON ../../dotfiles/.config/opencode/oh-my-opencode-slim.json)
           );
         in

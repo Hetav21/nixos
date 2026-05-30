@@ -76,6 +76,7 @@
       explorer = "github-copilot/gpt-5-mini";
       designer = "github-copilot/gpt-5-mini";
       fixer = "github-copilot/gpt-5-mini";
+      observer = "github-copilot/gpt-5-mini";
     };
   };
 }

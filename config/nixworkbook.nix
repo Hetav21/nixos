@@ -41,6 +41,7 @@
       explorer = "openai/gpt-5.4-mini";
       designer = "openai/gpt-5.4-mini";
       fixer = "openai/gpt-5.4-mini";
+      observer = "openai/gpt-5.4";
     };
   };
 }
