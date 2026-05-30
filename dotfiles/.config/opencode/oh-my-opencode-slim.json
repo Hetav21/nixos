@@ -1,9 +1,9 @@
 {
-  "preset": "github",
+  "preset": "@preset@",
   "presets": {
-    "github": {
+    "@preset@": {
       "orchestrator": {
-        "model": "github-copilot/gpt-5-mini",
+        "model": "@orchestratorModel@",
         "skills": [
           "*"
         ],
@@ -12,7 +12,7 @@
         ]
       },
       "oracle": {
-        "model": "github-copilot/gpt-5-mini",
+        "model": "@oracleModel@",
         "variant": "high",
         "skills": [
           "simplify"
@@ -20,7 +20,7 @@
         "mcps": []
       },
       "librarian": {
-        "model": "github-copilot/gpt-5-mini",
+        "model": "@librarianModel@",
         "variant": "low",
         "skills": [],
         "mcps": [
@@ -30,13 +30,13 @@
         ]
       },
       "explorer": {
-        "model": "github-copilot/gpt-5-mini",
+        "model": "@explorerModel@",
         "variant": "low",
         "skills": [],
         "mcps": []
       },
       "designer": {
-        "model": "github-copilot/gpt-5-mini",
+        "model": "@designerModel@",
         "variant": "medium",
         "skills": [
           "agent-browser"
@@ -44,7 +44,7 @@
         "mcps": []
       },
       "fixer": {
-        "model": "github-copilot/gpt-5-mini",
+        "model": "@fixerModel@",
         "variant": "low",
         "skills": [],
         "mcps": []
@@ -55,5 +55,80 @@
     "type": "auto",
     "layout": "main-vertical",
     "main_pane_size": 60
+  },
+  "tmux": {
+    "enabled": true,
+    "layout": "main-vertical",
+    "main_pane_size": 60
+  },
+  "council": {
+    "master": {
+      "model": "@orchestratorModel@",
+      "variant": "high"
+    },
+    "master_timeout": 300000,
+    "councillors_timeout": 180000,
+    "master_fallback": [
+      "@oracleModel@"
+    ],
+    "councillor_retries": 3,
+    "default_preset": "default",
+    "presets": {
+      "default": {
+        "alpha": {
+          "model": "@orchestratorModel@",
+          "variant": "high",
+          "prompt": "Prioritize correctness, key trade-offs, and the highest-risk concerns."
+        },
+        "beta": {
+          "model": "@oracleModel@",
+          "variant": "high",
+          "prompt": "Prioritize implementation details, failure modes, and concrete alternatives."
+        },
+        "gamma": {
+          "model": "@librarianModel@",
+          "variant": "medium",
+          "prompt": "Be concise and independent. Challenge assumptions and surface simpler options."
+        }
+      },
+      "fast": {
+        "alpha": {
+          "model": "@librarianModel@",
+          "variant": "medium",
+          "prompt": "Give a fast independent opinion focused on the main risk and best next step."
+        },
+        "beta": {
+          "model": "@oracleModel@",
+          "variant": "medium",
+          "prompt": "Give a fast practical review focused on execution details and likely edge cases."
+        }
+      },
+      "deep": {
+        "master": {
+          "model": "@orchestratorModel@",
+          "variant": "high"
+        },
+        "alpha": {
+          "model": "@orchestratorModel@",
+          "variant": "high",
+          "prompt": "Focus on architecture, long-term maintainability, and hidden trade-offs."
+        },
+        "beta": {
+          "model": "@oracleModel@",
+          "variant": "high",
+          "prompt": "Focus on implementation realism, edge cases, and failure modes."
+        },
+        "gamma": {
+          "model": "@librarianModel@",
+          "variant": "medium",
+          "prompt": "Focus on simplicity, unnecessary complexity, and the smallest viable approach."
+        },
+        "delta": {
+          "model": "@orchestratorModel@",
+          "variant": "medium",
+          "prompt": "Focus on operational risk, reliability, and whether the recommendation is safe to trust."
+        }
+      }
+    }
   }
 }

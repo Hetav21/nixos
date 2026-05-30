@@ -6,31 +6,34 @@
   ],
   "autoshare": false,
   "autoupdate": false,
-  "model": "github-copilot/gpt-5-mini",
-  "small_model": "github-copilot/gpt-5-mini",
+  "model": "@model@",
+  "small_model": "@smallModel@",
   "agent": {
     "build": {
-      "model": "github-copilot/gpt-5-mini"
+      "disable": true,
+      "model": "@model@"
     },
     "plan": {
-      "model": "github-copilot/gpt-5-mini"
+      "disable": true,
+      "model": "@model@"
     },
     "general": {
       "disable": true,
-      "model": "github-copilot/gpt-5-mini"
+      "model": "@model@"
     },
     "title": {
-      "model": "github-copilot/gpt-5-mini"
+      "model": "@model@"
     },
     "explore": {
       "disable": true,
-      "model": "github-copilot/gpt-5-mini"
+      "model": "@model@"
     },
     "compaction": {
-      "model": "github-copilot/gpt-5-mini"
+      "model": "@model@"
     },
     "summary": {
-      "model": "github-copilot/gpt-5-mini"
+      "disable": true,
+      "model": "@model@"
     }
   }
 }
