@@ -43,7 +43,6 @@
         };
       };
   wsl-notify-send = pkgs.callPackage ./wsl-notify-send {};
-  skill-seekers = pkgs.callPackage ./skill-seekers {};
   oldwinter-skills = pkgs.callPackage ./oldwinter-skills {
     oldwinter-skills-src = inputs.agent-sources.oldwinter-skills or null;
   };
