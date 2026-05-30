@@ -123,7 +123,6 @@
       (with pkgs; [
         awscli2
         distrobox
-        custom.skill-seekers
         postgresql
       ])
       ++ (with pkgs-unstable; [
@@ -245,7 +244,6 @@
           extraLib.dotfiles.mkSubstitute {
             "@bunxPath@" = lib.getExe' pkgs.bun "bunx";
             "@uvxPath@" = lib.getExe' pkgs.uv "uvx";
-            "@skillSeekersMcpPath@" = lib.getExe' pkgs.custom.skill-seekers "skill-seekers-mcp";
           }
           (lib.importJSON ../../dotfiles/.config/mcp/mcp.json).mcpServers;
       };

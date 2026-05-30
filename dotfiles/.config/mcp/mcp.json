@@ -17,10 +17,6 @@
         "@playwright/mcp@latest"
       ]
     },
-    "skill-seekers": {
-      "command": "@skillSeekersMcpPath@",
-      "args": []
-    },
     "awslabs.aws-documentation-mcp-server": {
       "command": "@uvxPath@",
       "args": [
