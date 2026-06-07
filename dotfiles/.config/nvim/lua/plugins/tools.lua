@@ -61,8 +61,10 @@ return {
   {
     "rest-nvim/rest.nvim",
     ft = "http",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {},
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "j-hui/fidget.nvim",
+    },
     keys = {
       { "<leader>rr", "<cmd>Rest run<cr>", desc = "Run HTTP request" },
       { "<leader>rl", "<cmd>Rest run last<cr>", desc = "Run last request" },

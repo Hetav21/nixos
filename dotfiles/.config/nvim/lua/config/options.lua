@@ -24,3 +24,10 @@ end
 -- Disable unused providers (performance)
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
+
+-- Force POSIX shell inside Neovim to avoid issues with plugins executing commands
+if vim.fn.executable("bash") == 1 then
+  vim.o.shell = "bash"
+elseif vim.fn.executable("sh") == 1 then
+  vim.o.shell = "sh"
+end

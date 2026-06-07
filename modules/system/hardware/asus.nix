@@ -11,7 +11,6 @@
       # ASUS specific software. This also installs asusctl.
       asusd = {
         enable = true;
-        enableUserService = true;
       };
     };
 

@@ -48,6 +48,7 @@
   xdg-utils,
   coreutils,
   xorg,
+  libxcb,
   zlib,
   # Darwin dependencies
   unzip,
@@ -124,7 +125,7 @@
       pipewire
       udev
       wayland
-      xorg.libxcb
+      libxcb
       zlib
       snappy
       libkrb5

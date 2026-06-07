@@ -58,8 +58,10 @@
           # Version Control
           jujutsu
 
-          # Nix LSP (not managed by Mason)
+          # Nix LSP (not managed by Mason) and formatters
           nil
+          nixfmt
+          ast-grep
 
           # Image tools (CLI) - used by snacks.image
           imagemagick
@@ -73,6 +75,15 @@
       # No plugins - lazy.nvim will manage them
       startupPlugins = {};
       optionalPlugins = {};
+
+      extraLuaPackages = {
+        general = luaPkgs:
+          with luaPkgs; [
+            xml2lua
+            mimetypes
+          ];
+      };
+
       sharedLibraries = {
         general = with pkgs; [
           # For snacks.picker frecency/history

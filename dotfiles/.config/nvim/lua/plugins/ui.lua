@@ -11,6 +11,13 @@ return {
     end,
   },
 
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    opts = {
+      latex = { enabled = false },
+    },
+  },
+
   -- Lualine - Custom statusline
   {
     "nvim-lualine/lualine.nvim",
@@ -335,6 +342,12 @@ return {
           "RainbowDelimiterViolet",
           "RainbowDelimiterCyan",
         },
+        condition = function(bufnr)
+          local ft = vim.bo[bufnr].ft
+          if not ft or ft == "" then return false end
+          local lang = vim.treesitter.language.get_lang(ft) or ft
+          return pcall(vim.treesitter.language.inspect, lang)
+        end,
       }
     end,
   },

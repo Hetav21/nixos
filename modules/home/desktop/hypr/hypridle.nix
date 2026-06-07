@@ -29,8 +29,6 @@
             on-timeout = "systemctl suspend";
           }
         ];
-
-        windowrulev2 = "idleinhibit fullscreen, class:.*"; # Don't allow idle on fullscreen windows
       };
     };
   };
