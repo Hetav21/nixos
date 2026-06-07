@@ -36,9 +36,19 @@
     };
     system.desktopEnvironment.enableGui = true;
 
-    # Disable heavy applications
-    system.virtualisation.enable = false;
-    system.virtualisation.enableGui = false;
+    # Enable virtualisation engines according to settings
+    system.virtualisation = {
+      docker.enable = false;
+      podman.enable = false;
+      libvirtd.enable = false;
+      virt-manager.enableGui = false;
+      waydroid.enableGui = false;
+      binfmt.enable = false;
+      android.enable = false;
+      guest.enable = false;
+    };
+
+    # Disable other heavy applications
     system.communication.enableGui = false;
     system.llm.enable = false;
     system.llm.enableGui = false;

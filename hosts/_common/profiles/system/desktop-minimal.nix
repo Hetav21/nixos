@@ -24,9 +24,19 @@
     # Enable base hardware modules (audio, bluetooth, input, etc.)
     system.hardware.base.enable = true;
 
-    # Disable all categorized modules
-    system.virtualisation.enable = false;
-    system.virtualisation.enableGui = false;
+    # Enable virtualisation engines according to settings
+    system.virtualisation = {
+      docker.enable = false;
+      podman.enable = false;
+      libvirtd.enable = false;
+      virt-manager.enableGui = false;
+      waydroid.enableGui = false;
+      binfmt.enable = false;
+      android.enable = false;
+      guest.enable = false;
+    };
+
+    # Disable all other categorized modules
     system.network.enable = false;
     system.network.enableGui = false;
     system.storage.enable = false;
