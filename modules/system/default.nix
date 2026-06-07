@@ -9,15 +9,15 @@
     ./stylix.nix
 
     # New categorized modules
-    ./virtualisation.nix
-    ./network.nix
-    ./storage.nix
-    ./media.nix
-    ./productivity.nix
-    ./communication.nix
-    ./browser.nix
-    ./services.nix
-    ./llm.nix
+    ./virtualisation
+    ./network
+    ./storage
+    ./media
+    ./productivity
+    ./communication
+    ./browser
+    ./services
+    ./llm
     ./desktop-environment.nix
 
     # Desktop sub-modules (managed by desktop-environment)

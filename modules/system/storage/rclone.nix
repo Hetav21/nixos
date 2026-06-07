@@ -1,23 +1,20 @@
 {
   extraLib,
-  lib,
   pkgs,
   settings,
   ...
 } @ args:
 (extraLib.modules.mkModule {
-  name = "system.storage";
-  hasGui = true;
+  name = "system.storage.rclone";
+  hasCli = true;
+  hasGui = false;
   cliConfig = {
     lib,
-    pkgs,
-    settings,
     config,
     ...
   }: let
     username = settings.username;
     homeDirectory = config.users.users.${username}.home;
-    # Check if rclone settings exist and are enabled before accessing them
     rcloneEnabled =
       (settings ? rclone)
       && (settings.rclone ? enable)
@@ -31,15 +28,7 @@
   in {
     environment.systemPackages = with pkgs; [
       rclone
-      ntfs3g
     ];
-
-    services.syncthing = {
-      enable = true;
-      user = username;
-      dataDir = homeDirectory;
-      configDir = "${homeDirectory}/.config/syncthing";
-    };
 
     systemd = lib.mkIf rcloneEnabled {
       services = {
@@ -56,25 +45,12 @@
             ExecStop = "${lib.getExe' pkgs.fuse "fusermount"} -u ${folder_path}";
             Restart = "on-failure";
             RestartSec = "10s";
-            User = settings.username;
+            User = username;
             Group = "users";
             Environment = ["PATH=/run/wrappers/bin/:$PATH"];
           };
         };
       };
-    };
-  };
-  guiConfig = {pkgs, ...}: {
-    environment.systemPackages = with pkgs; [
-      localsend
-      megasync
-      megacmd
-      onedrive
-    ];
-
-    programs.localsend = {
-      enable = true;
-      openFirewall = true;
     };
   };
 })
