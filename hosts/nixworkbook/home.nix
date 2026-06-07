@@ -7,9 +7,8 @@
     ../_common/home-base.nix
   ];
 
-  # Enable WSL minimal profile
-  profiles.home.wsl-common.enable = true;
-  profiles.home.wsl-minimal.enable = true;
+  # Enable WSL profile
+  profiles.home.wsl.enable = true;
 
   # Host-specific stateVersion (override common 25.11)
   home.stateVersion = lib.mkForce "24.11";

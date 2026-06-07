@@ -3,13 +3,14 @@
   lib,
   pkgs,
   pkgs-unstable,
-  config,
   settings,
+  config,
   ...
 } @ args:
 (extraLib.modules.mkModule {
-  name = "home.shell";
-  hasGui = true;
+  name = "home.shell.shells";
+  hasCli = true;
+  hasGui = false;
   cliConfig = _: {
     programs = {
       fish = {
@@ -30,7 +31,6 @@
           gstat
           semver
           formats
-          highlight
         ];
 
         extraEnv = ''
@@ -55,7 +55,7 @@
         # Package-dependent functions are kept inline due to Nix interpolation
         extraConfig =
           # Include the custom nushell config from dotfiles
-          builtins.readFile ../../dotfiles/.config/nushell/config.nu
+          builtins.readFile ../../../dotfiles/.config/nushell/config.nu
           + ''
 
             # File Manager Alias (requires package path interpolation)
@@ -118,180 +118,6 @@
             copy = "${lib.getExe' pkgs.wl-clipboard "wl-copy"}";
             paste = "${lib.getExe' pkgs.wl-clipboard "wl-paste"}";
           };
-      };
-
-      # Terminal multiplexer
-      tmux = {
-        enable = true;
-        plugins = with pkgs; [
-          tmuxPlugins.rose-pine
-          tmuxPlugins.vim-tmux-navigator
-          {
-            plugin = tmuxPlugins.yank;
-            extraConfig = ''
-              bind-key -T copy-mode-vi v send-keys -X begin-selection
-              bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
-              bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-            '';
-          }
-        ];
-        sensibleOnTop = true;
-        mouse = true;
-        prefix = "M-a";
-        extraConfig = ''
-          set-option -sa terminal-overrides ",xterm*:Tc"
-          set -as terminal-features ",*:extkeys"
-          set -s extended-keys on
-          set -g xterm-keys on
-          set -g default-terminal "xterm-256color"
-
-          # Fix for Esc key delay
-          set -s escape-time 0
-
-          # Enable focus events (important for vim/neovim/TUIs)
-          set -g focus-events on
-          set -g allow-passthrough on
-
-          # Enable OSC 52 clipboard and set ms caps
-          set -s set-clipboard on
-          set -as terminal-overrides ',*:Ms=\E]52;%p1%s;%p2%s\007'
-
-          # Change the prefix key
-          unbind C-b
-          set -g prefix M-a
-          bind M-a send-prefix
-
-          # Shift Alt vim keys to switch windows
-          bind -n M-H previous-window
-          bind -n M-L next-window
-
-          # Change the base index to 1
-          set -g base-index 1
-          set -g pane-base-index 1
-          set-window-option -g pane-base-index 1
-          set-option -g renumber-windows on
-        '';
-      };
-
-      yazi = {
-        enable = true;
-        package = pkgs-unstable.yazi;
-        enableFishIntegration = true;
-        enableNushellIntegration = true;
-      };
-
-      carapace = {
-        enable = true;
-        package = pkgs-unstable.carapace;
-        enableFishIntegration = true;
-        enableNushellIntegration = true;
-      };
-
-      starship = {
-        enable = true;
-        package = pkgs-unstable.starship;
-        enableFishIntegration = true;
-        enableNushellIntegration = true;
-      };
-
-      zoxide = {
-        enable = true;
-        package = pkgs-unstable.zoxide;
-        enableFishIntegration = true;
-        enableNushellIntegration = true;
-      };
-
-      eza = {
-        enable = true;
-        package = pkgs-unstable.eza;
-        enableFishIntegration = true;
-        enableNushellIntegration = false;
-        git = true;
-        icons = "auto";
-        colors = "auto";
-        extraOptions = [
-          "--group-directories-first"
-          "--header"
-        ];
-      };
-
-      bat = {
-        enable = true;
-        package = pkgs-unstable.bat;
-      };
-
-      ripgrep = {
-        enable = true;
-        package = pkgs-unstable.ripgrep;
-        arguments = [
-          "--max-columns-preview"
-          "--colors=line:style:bold"
-        ];
-      };
-
-      fzf = {
-        enable = true;
-        package = pkgs-unstable.fzf;
-      };
-
-      fd = {
-        enable = true;
-        package = pkgs-unstable.fd;
-      };
-
-      atuin = {
-        enable = true;
-        package = pkgs-unstable.atuin;
-        enableFishIntegration = true;
-        enableNushellIntegration = true;
-        flags = [
-          "--disable-up-arrow"
-        ];
-      };
-
-      nix-your-shell = {
-        enable = true;
-        package = pkgs-unstable.nix-your-shell;
-        enableFishIntegration = true;
-        enableNushellIntegration = true;
-      };
-
-      direnv = {
-        enable = true;
-        package = pkgs-unstable.direnv;
-        # enableFishIntegration = true; # READ ONLY
-        enableNushellIntegration = true;
-        nix-direnv = {
-          enable = true;
-          package = pkgs-unstable.nix-direnv;
-        };
-        mise = {
-          enable = true;
-          package = pkgs-unstable.mise;
-        };
-        silent = true;
-      };
-    };
-
-    # Auto-enable CLI tools when GUI is enabled
-    home.shell = {
-      enableShellIntegration = true;
-
-      # Override individual shell integration
-      # enableFishIntegration = false;
-      # enableNushellIntegration = false;
-    };
-  };
-  guiConfig = _: {
-    programs = {
-      alacritty = {
-        enable = true;
-        package = pkgs-unstable.alacritty;
-      };
-
-      ghostty = {
-        enable = true;
-        package = pkgs-unstable.ghostty;
       };
     };
   };
