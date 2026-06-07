@@ -37,7 +37,7 @@
 
           # Node/Python for LSP hosts and mason
           nodejs
-          nodePackages.neovim # Node provider
+          neovim-node-client # Node provider
           (python3.withPackages (ps: [ps.pynvim])) # Python provider
           # Python
           basedpyright
@@ -54,9 +54,9 @@
           delve
 
           # TypeScript/JavaScript
-          nodePackages.typescript-language-server
-          nodePackages.prettier
-          nodePackages.eslint_d
+          typescript-language-server
+          prettier
+          eslint_d
 
           # Version Control
           jujutsu
@@ -85,8 +85,8 @@
       environmentVariables = {
         general = {
           # Fix: Warning: Missing "neovim" npm package
-          # Explicitly point to the neovim-node-host binary provided by nodePackages.neovim
-          NEOVIM_NODE_HOST = "${lib.getExe pkgs.nodePackages.neovim}";
+          # Explicitly point to the neovim-node-host binary provided by neovim-node-client
+          NEOVIM_NODE_HOST = "${lib.getExe pkgs.neovim-node-client}";
         };
       };
       extraWrapperArgs = {
@@ -136,6 +136,10 @@
         inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.ralph-tui
       ];
 
+    home.sessionVariables = {
+      AGENT_BROWSER_EXECUTABLE_PATH = lib.getExe pkgs-unstable.chromium;
+    };
+
     services.ssh-agent.enable = true;
 
     # nixCats Neovim configuration
@@ -159,25 +163,31 @@
         enableDefaultConfig = false;
         # Note: github.com-personal/work aliases removed - Git now uses
         # directory-based SSH key selection via core.sshCommand in git includes
-        matchBlocks."*" = {
-          forwardAgent = false;
-          addKeysToAgent = "yes";
-          compression = false;
-          serverAliveInterval = 0;
-          serverAliveCountMax = 3;
-          hashKnownHosts = false;
-          userKnownHostsFile = "~/.ssh/known_hosts";
-          controlMaster = "auto";
-          controlPath = "~/.ssh/master-%r@%n:%p";
-          controlPersist = "10m";
+        settings = {
+          "*" = {
+            forwardAgent = false;
+            addKeysToAgent = "yes";
+            compression = false;
+            serverAliveInterval = 0;
+            serverAliveCountMax = 3;
+            hashKnownHosts = false;
+            userKnownHostsFile = "~/.ssh/known_hosts";
+            controlMaster = "auto";
+            controlPath = "~/.ssh/master-%r@%n:%p";
+            controlPersist = "10m";
+          };
         };
       };
 
       git = {
         enable = true;
         package = pkgs-unstable.gitFull;
-        userName = settings.git.personal.name;
-        userEmail = settings.git.personal.email;
+        settings = {
+          user = {
+            name = settings.git.personal.name;
+            email = settings.git.personal.email;
+          };
+        };
         lfs.enable = true;
         lfs.package = pkgs-unstable.git-lfs;
         includes =
