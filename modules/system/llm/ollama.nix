@@ -4,12 +4,12 @@
   ...
 } @ args:
 (extraLib.modules.mkModule {
-  name = "system.llm";
-  hasGui = true;
+  name = "system.llm.ollama";
+  hasCli = true;
+  hasGui = false;
   cliConfig = {
     lib,
     pkgs,
-    pkgs-unstable,
     hardware,
     ...
   }: let
@@ -17,12 +17,6 @@
     isAmdgpuEnabled = hardware.amdgpu.enable;
     package = pkgs;
   in {
-    environment.systemPackages = with package; [
-      vllm
-    ];
-
-    environment.variables.AGENT_BROWSER_EXECUTABLE_PATH = lib.getExe pkgs-unstable.chromium;
-
     services.ollama = {
       enable = true;
       environmentVariables = {
@@ -46,18 +40,6 @@
         else if isAmdgpuEnabled
         then "rocm"
         else null;
-    };
-  };
-  guiConfig = {pkgs, ...}: {
-    services.open-webui = {
-      enable = true;
-      package = pkgs.open-webui;
-      openFirewall = true;
-      environment = {
-        ANONYMIZED_TELEMETRY = "False";
-        DO_NOT_TRACK = "True";
-        SCARF_NO_ANALYTICS = "True";
-      };
     };
   };
 })
