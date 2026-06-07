@@ -112,6 +112,7 @@
             ff = "${lib.getExe pkgs.fastfetch}";
             oc = "${lib.getExe config.programs.opencode.package}";
             nv = "${lib.getExe config.nixCats.out.packages.nixCats}";
+            ag = "${lib.getExe config.programs.antigravity.package}";
           }
           // lib.optionalAttrs (pkgs ? wl-clipboard) {
             # Wayland clipboard aliases (only available on systems with wayland/desktop)
