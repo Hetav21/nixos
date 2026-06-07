@@ -54,8 +54,7 @@
     docker-desktop.enable = true;
   };
 
-  # Minimal WSL system profile (CLI/TUI only, no desktop environment)
-  profiles.system.wsl-minimal.enable = true;
+  profiles.system.wsl.enable = true;
 
   # Host-specific stateVersion (override common 25.11)
   system.stateVersion = lib.mkForce "24.11";
