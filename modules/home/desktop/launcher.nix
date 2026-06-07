@@ -13,9 +13,9 @@
     wayland.windowManager.hyprland.settings = {
       bind = [
         "$mainMod, D, exec, vicinae toggle"
-        "$mainMod, C, exec, vicinae vicinae://extensions/vicinae/clipboard/history"
-        "$mainMod, Space, exec, vicinae vicinae://extensions/vicinae/vicinae/search-emojis"
-        "$mainMod, Q, exec, vicinae vicinae://extensions/vicinae/calculator/history"
+        "$mainMod, V, exec, vicinae vicinae://launch/clipboard/history"
+        "$mainMod, Space, exec, vicinae vicinae://launch/core/search-emojis"
+        "$mainMod, Q, exec, vicinae vicinae://launch/calculator/history"
       ];
 
       layerrule = [

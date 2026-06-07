@@ -97,15 +97,17 @@
           general:allow_tearing = false;
         ''
         + ''
-          windowrulev2 = nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0
-          windowrulev2 = suppressevent maximize, class:.*
+          windowrule = no_focus on, match:class ^$, match:title ^$, match:xwayland true, match:float true, match:fullscreen false, match:pin false
+          windowrule = suppress_event maximize, match:class .*
 
-          windowrulev2 = opacity 0.95 0.95,class:^(firefox-nightly)$
-          windowrulev2 = opacity 0.95 0.95,class:^(firefox)$
-          windowrulev2 = opacity 0.95 0.95,class:^(helium)$
-          windowrulev2 = opacity 0.95 0.95,class:^(dev.zed.Zed)$
-          windowrulev2 = opacity 0.95 0.95,class:^(obsidian)$
-          windowrulev2 = opacity 0.95 0.95,class:^(intellij-idea-ultimate-edition)$
+          windowrule = opacity 0.95 0.95, match:class ^(firefox-nightly)$
+          windowrule = opacity 0.95 0.95, match:class ^(firefox)$
+          windowrule = opacity 0.95 0.95, match:class ^(helium)$
+          windowrule = opacity 0.95 0.95, match:class ^(dev.zed.Zed)$
+          windowrule = opacity 0.95 0.95, match:class ^(obsidian)$
+          windowrule = opacity 0.95 0.95, match:class ^(intellij-idea-ultimate-edition)$
+
+          windowrule = idle_inhibit fullscreen, match:class .*
         ''
         + ''
           # Main modifier
@@ -120,8 +122,6 @@
           bind = $mainMod, F, exec, $browser
           bind = SUPER_SHIFT, F, exec, $browser_alternate
           bind = $mainMod, B, exec, $brave
-          bind = $mainMod, V, exec, $browser --new-window https://chat.deepseek.com/
-          bind = SUPER_SHIFT, V, exec, $browser --new-window http://localhost:8080/
           bind = $mainMod, G, exec, $browser --new-window https://gemini.google.com/
           bind = SUPER_SHIFT, G, exec, $browser --new-window https://chatgpt.com/
           bind = SUPER_SHIFT, C, exec, $browser --new-window https://claude.ai/
