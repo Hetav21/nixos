@@ -57,6 +57,5 @@
     package32 = pkgs.driversi686Linux.mesa;
   };
 
-  # Complete desktop environment with all features (system-level profile)
-  profiles.system.desktop-full.enable = true;
+  profiles.system.desktop.enable = true;
 }
