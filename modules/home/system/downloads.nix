@@ -1,11 +1,11 @@
 {
   extraLib,
-  lib,
   pkgs,
   ...
 } @ args:
 (extraLib.modules.mkModule {
-  name = "home.downloads";
+  name = "home.system.downloads";
+  hasCli = true;
   hasGui = false;
   cliConfig = _: {
     home.packages = with pkgs; [

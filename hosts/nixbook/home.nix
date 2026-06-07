@@ -11,7 +11,7 @@
   home.stateVersion = lib.mkForce "25.11";
 
   # Enable full desktop profile (includes GTK/Qt configuration)
-  profiles.home.desktop-full.enable = true;
+  profiles.home.desktop.enable = true;
 
   # Host-specific dotfiles and packages
   home = {

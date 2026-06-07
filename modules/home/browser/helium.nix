@@ -13,7 +13,7 @@
 
   guiConfig = _: {
     home.packages = [
-      inputs.helium-flake.packages.${pkgs.system}.default
+      inputs.helium-flake.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
 })
