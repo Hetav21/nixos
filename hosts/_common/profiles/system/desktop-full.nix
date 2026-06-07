@@ -18,8 +18,14 @@
 
     # Enable all categorized modules with both CLI and GUI
     system.virtualisation = {
-      enable = true;
-      enableGui = true;
+      docker.enable = true;
+      podman.enable = true;
+      libvirtd.enable = true;
+      virt-manager.enableGui = true;
+      waydroid.enableGui = false;
+      binfmt.enable = false;
+      android.enable = false;
+      guest.enable = false;
     };
     system.network = {
       enable = true;

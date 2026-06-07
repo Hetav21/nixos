@@ -19,14 +19,22 @@
     system.stylix.enable = true;
 
     # CLI/TUI tools only (no GUI)
-    system.virtualisation.enable = true;
+    system.virtualisation = {
+      docker.enable = true;
+      podman.enable = true;
+      libvirtd.enable = false;
+      binfmt.enable = false;
+      android.enable = false;
+      virt-manager.enableGui = false;
+      waydroid.enableGui = false;
+      guest.enable = false;
+    };
     system.network.enable = true;
     system.storage.enable = true;
     system.baseservices.enable = true;
     system.llm.enable = false;
 
     # Disable all GUI components
-    system.virtualisation.enableGui = false;
     system.network.enableGui = false;
     system.storage.enableGui = false;
     system.media.enable = false;
