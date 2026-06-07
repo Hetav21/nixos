@@ -54,7 +54,7 @@
 
     # Browsers enabled individually
     home.browser = {
-      zen.enableGui = true;
+      zen.enableGui = false;
       helium.enableGui = true;
     };
   };
