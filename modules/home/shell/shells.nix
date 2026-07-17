@@ -5,6 +5,7 @@
   pkgs-unstable,
   settings,
   config,
+  inputs,
   ...
 } @ args:
 (extraLib.modules.mkModule {
@@ -113,6 +114,8 @@
             oc = "${lib.getExe config.programs.opencode.package}";
             nv = "${lib.getExe config.nixCats.out.packages.nixCats}";
             ag = "${lib.getExe config.programs.antigravity.package}";
+            cc = "${lib.getExe inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code}";
+            cdx = "${lib.getExe inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex}";
           }
           // lib.optionalAttrs (pkgs ? wl-clipboard) {
             # Wayland clipboard aliases (only available on systems with wayland/desktop)
