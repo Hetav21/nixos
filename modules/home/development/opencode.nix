@@ -17,7 +17,7 @@
     programs = {
       opencode = {
         enable = true;
-        package = pkgs-unstable.opencode;
+        package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
         enableMcpIntegration = true;
         settings = extraLib.dotfiles.mkSubstitute {
           "@model@" = settings.opencode.model;

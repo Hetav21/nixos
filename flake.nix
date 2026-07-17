@@ -66,7 +66,7 @@
     nix-skills = {
       url = "github:Hetav21/nix-skills";
     };
-    llm-agents .url = "github:numtide/llm-agents.nix";
+    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   # Passing extra nix config
@@ -75,16 +75,19 @@
       "https://nix-community.cachix.org"
       "https://cuda-maintainers.cachix.org"
       "https://vicinae.cachix.org"
+      "https://cache.numtide.com"
     ];
     extra-trusted-substituters = [
       "https://nix-community.cachix.org"
       "https://cuda-maintainers.cachix.org"
       "https://vicinae.cachix.org"
+      "https://cache.numtide.com"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
       "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
+      "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
     ];
   };
 
