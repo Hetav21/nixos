@@ -7,7 +7,7 @@
     ./git.nix
     ./neovim.nix
     ./ssh.nix
-    ./opencode.nix
+    ./agents.nix
     ./misc.nix
   ];
 
@@ -30,7 +30,7 @@
     home.development.git.enable = lib.mkDefault config.home.development.enable;
     home.development.neovim.enable = lib.mkDefault config.home.development.enable;
     home.development.ssh.enable = lib.mkDefault config.home.development.enable;
-    home.development.opencode.enable = lib.mkDefault config.home.development.enable;
+    home.development.agents.enable = lib.mkDefault config.home.development.enable;
     home.development.misc.enable = lib.mkDefault config.home.development.enable;
     home.development.misc.enableGui = lib.mkDefault config.home.development.enableGui;
   };

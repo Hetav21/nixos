@@ -67,7 +67,7 @@ in {
       git.enable = true;
       neovim.enable = true;
       ssh.enable = true;
-      opencode.enable = true;
+      agents.enable = true;
       misc.enable = true;
       misc.enableGui = false;
     };
