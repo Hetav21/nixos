@@ -8,11 +8,19 @@
   ...
 } @ args:
 (extraLib.modules.mkModule {
-  name = "home.development.opencode";
+  name = "home.development.agents";
   hasCli = true;
   hasGui = false;
   cliConfig = _: {
     stylix.targets.opencode.enable = false;
+
+    home.packages = [
+      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
+      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex
+    ];
+
+    # Enable Claude Code auto mode (Bedrock, Vertex, Foundry Opus 4.7/4.8 sessions)
+    home.sessionVariables.CLAUDE_CODE_ENABLE_AUTO_MODE = "1";
 
     programs = {
       opencode = {
@@ -101,6 +109,26 @@
           ../../../dotfiles/.config/opencode/antigravity.json;
         ".config/opencode/command".source =
           ../../../dotfiles/.config/opencode/command;
+        ".claude/settings.json".source =
+          ../../../dotfiles/.claude/settings.json;
+        ".claude/.mcp.json".source = let
+          claudeMcpServers = {
+            mcpServers = inputs.nix-skills.lib.toClaudeMcpServers (
+              extraLib.dotfiles.mkSubstitute {
+                "@bunxPath@" = lib.getExe' pkgs.bun "bunx";
+                "@uvxPath@" = lib.getExe' pkgs.uv "uvx";
+              }
+              (lib.importJSON ../../../dotfiles/.config/mcp/mcp.json).mcpServers
+            );
+          };
+
+          unformatted = builtins.toJSON claudeMcpServers;
+        in
+          pkgs.runCommand "pretty-claude-dot-mcp.json" {
+            buildInputs = [pkgs.jq];
+            passAsFile = ["json"];
+            json = unformatted;
+          } "jq . < $jsonPath > $out";
       }
     ];
   };

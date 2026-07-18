@@ -1,0 +1,19 @@
+{
+  "attribution": {
+    "commit": ""
+  },
+  "autoMode": {
+    "allow": ["$defaults"],
+    "soft_deny": ["$defaults"],
+    "hard_deny": []
+  },
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "model": "sonnet",
+  "enableAllProjectMcpServers": true,
+  "theme": "dark",
+  "verbose": true,
+  "autoUpdates": false,
+  "effortLevel": "low"
+}
