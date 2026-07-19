@@ -1,50 +1,49 @@
 # Package Management Guidelines
 
 ## 1. Directory Structure
-The `pkgs/` directory contains custom packages and overlays.
 
-```
-pkgs/
-├── default.nix          # Overlay entry point (exposes packages to pkgs.custom)
-├── my-package/          # Custom package definition
-│   └── default.nix
-├── agent-sources/      # Sub-flake for AI resources
-│   ├── flake.nix        # Inputs for skills/agents
-│   └── flake.lock
-└── [source-name]/       # Packages wrapping agent-sources inputs
-    └── default.nix
-```
+**Source of truth:** `pkgs/default.nix` and `overlays/default.nix`.
+
+- `pkgs/default.nix` is the entry point: everything in the attrset it returns is exposed as `pkgs.custom.<name>` by the overlay in `overlays/default.nix` — you never edit the overlay itself.
+- Each package normally lives in its own directory `pkgs/<name>/`; a few small packages are defined inline in `pkgs/default.nix` (check it before creating a directory).
+- `pkgs/agent-sources/` is a sub-flake pinning external AI-agent resource repositories (skills, agents, commands).
 
 ## 2. Adding Custom Packages
 
 ### Step 1: Create Package Definition
-Create `pkgs/my-package/default.nix`:
+
+Create `pkgs/<name>/default.nix`:
+
 ```nix
 { lib, stdenv, fetchFromGitHub, ... }:
 stdenv.mkDerivation {
-  pname = "my-package";
+  pname = "<name>";
   version = "1.0.0";
   src = fetchFromGitHub { ... };
   # ... build instructions
 }
 ```
 
-### Step 2: Expose in Overlay
-Edit `pkgs/default.nix` to call the package:
+### Step 2: Expose in `pkgs/default.nix`
+
+Add an entry (usually `callPackage`; some entries are inline derivations) so it appears as `pkgs.custom.<name>`:
+
 ```nix
 { pkgs, inputs ? {}, ... }: {
-  my-package = pkgs.callPackage ./my-package {};
+  <name> = pkgs.callPackage ./<name> {};
 }
 ```
 
 ## 3. Managing Agent Sources (Skills/Agents)
 
 ### Step 1: Add Input
+
 Edit `pkgs/agent-sources/flake.nix`:
+
 ```nix
 inputs = {
   new-source = {
-    url = "github:owner/repo";
+    url = "github:<owner>/<repo>";
     flake = false;
   };
 };
@@ -54,7 +53,9 @@ outputs = { ... } @ inputs: {
 ```
 
 ### Step 2: Update Lockfile
+
 **CRITICAL**: You must update the sub-flake lockfile explicitly, and then update the root flake to pick up the changes.
+
 ```bash
 # 1. Update the sub-flake
 cd pkgs/agent-sources
@@ -67,7 +68,9 @@ nix flake update agent-sources
 ```
 
 ### Step 3: Create Wrapper Package
-Create `pkgs/new-source/default.nix` to expose the source:
+
+Create `pkgs/<source-name>/default.nix` to expose the source:
+
 ```nix
 { lib, stdenvNoCC, new-source-src }:
 stdenvNoCC.mkDerivation {
@@ -77,32 +80,19 @@ stdenvNoCC.mkDerivation {
 }
 ```
 
-### Step 4: Expose & Use
+### Step 4: Expose & Wire In
+
 1. Add to `pkgs/default.nix`:
+
    ```nix
    new-source = pkgs.callPackage ./new-source {
      new-source-src = inputs.agent-sources.new-source or null;
    };
    ```
 
-2. Register in `modules/home/development.nix` under `programs.claude-resources`.
-   Use `extraLib.claude.extract` to target specific directories or skills.
-
-   ```nix
-   programs.claude-resources = {
-     skills = [
-       # Option A: Extract specific subdirectory (e.g., for a single skill in a repo)
-       (extraLib.claude.extract pkgs pkgs.custom.new-source "path/to/skill" {})
-
-       # Option B: Extract root with includes/excludes
-       (extraLib.claude.extract pkgs pkgs.custom.new-source "." {
-         includes = [ "skill-a" "skill-b" ];
-         excludes = [ "broken-skill" ];
-       })
-     ];
-   };
-   ```
+2. Wire the package into `programs.agent-resources` — that mechanism is owned by **[docs/agent-environment.md](../docs/agent-environment.md)**.
 
 ## 4. Updates & Maintenance
-- **Refresh Inputs**: `nx update` (updates root flake and checked-in sub-flake locks).
-- **Cleanup**: If removing a source, update `pkgs/default.nix`, `pkgs/agent-sources/flake.nix`, and delete the package directory. Then run `nx update`.
+
+- **Refresh inputs**: `nx update` refreshes **root** flake inputs only — it re-locks the root's reference to `agent-sources` but does not regenerate `pkgs/agent-sources/flake.lock`. To pull new upstream commits into the sub-flake, use the two-step in §3 Step 2.
+- **Cleanup**: If removing a source, update `pkgs/default.nix`, `pkgs/agent-sources/flake.nix`, and delete the package directory. Then re-lock via the same two-step.

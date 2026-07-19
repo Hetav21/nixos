@@ -4,9 +4,11 @@ This directory contains encrypted secrets managed with [sops-nix](https://github
 
 ## Contents
 
-- `keys.asc` - GPG/age keys for decrypting secrets
-- `openai_api_key.yaml` - Encrypted OpenAI API key
-- `default.nix` - sops-nix configuration module
+- One encrypted `<secret>.yaml` file per secret
+- `keys.asc` - GPG/age keys for decrypting secrets (gitignored — never committed)
+- `secrets/default.nix` - sops-nix module declaring every secret
+
+**Source of truth for the current inventory:** `secrets/default.nix`.
 
 ## How Secrets Work
 
@@ -16,7 +18,7 @@ All secrets are encrypted using sops (Secrets OPerationS). The encryption keys a
 
 1. **Create the secret file** (if it doesn't exist):
    ```bash
-   sops secrets/my-secret.yaml
+   sops secrets/<name>.yaml
    ```
    
 2. **Edit the secret**:
@@ -25,20 +27,22 @@ All secrets are encrypted using sops (Secrets OPerationS). The encryption keys a
    my_password: "another-secret"
    ```
 
-3. **Add to default.nix**:
+3. **Add to `secrets/default.nix`** — mirror an existing entry (it is the source of truth):
    ```nix
-   sops.secrets.my-api-key = {
-     sopsFile = ./my-secret.yaml;
-     # Optional: specify which user can access
-     owner = settings.username;
+   sops.secrets.<name> = {
+     sopsFile = ./<name>.yaml;
+
+     mode = "0440";
+     owner = config.users.users.${settings.username}.name;
+     group = config.users.users.${settings.username}.group;
    };
    ```
 
 4. **Use in your configuration**:
    ```nix
    # The secret will be available at:
-   config.sops.secrets.my-api-key.path
-   # Usually: /run/secrets/my-api-key
+   config.sops.secrets.<name>.path
+   # Usually: /run/secrets/<name>
    ```
 
 ## Editing Existing Secrets
@@ -46,7 +50,7 @@ All secrets are encrypted using sops (Secrets OPerationS). The encryption keys a
 To edit an existing secret:
 
 ```bash
-sops secrets/openai_api_key.yaml
+sops secrets/<secret>.yaml
 ```
 
 This will decrypt, open your editor, then re-encrypt the file.
@@ -92,7 +96,7 @@ Store it in:
 
 - Check that `keys.asc` exists and has the correct key
 - Verify sops is installed: `nix-shell -p sops`
-- Try decrypting manually: `sops -d secrets/openai_api_key.yaml`
+- Try decrypting manually: `sops -d secrets/<secret>.yaml`
 
 ### Permission denied accessing secrets
 

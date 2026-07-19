@@ -57,17 +57,11 @@ Delete the override from host config. The profile default will apply.
 
 ### Add New Host
 
-```
-1. Create hosts/<hostname>/configuration.nix and home.nix
-2. Create config/<hostname>.nix with host settings
-3. Add nixosConfigurations.<hostname> in flake.nix:
+1. Create `hosts/<hostname>/configuration.nix` and `home.nix`
+2. Create `config/<hostname>.nix` with host settings
+3. Register `nixosConfigurations.<hostname>` in `flake.nix` — duplicate the block of the most similar existing host. Invariant shape: settings built with `extraLib.hosts.mkHostSettings` from the host's config file, hardware preset passed via `specialArgs.hardware`, and modules = the host's `configuration.nix` ++ `extraLib.modules.common` ++ `extraLib.modules.desktop` (desktop hosts) or `extraLib.modules.wsl` (WSL hosts).
 
-nixosConfigurations.<hostname> = nixpkgs.lib.nixosSystem {
-  system = <settings>.system;
-  specialArgs = { ... };
-  modules = [./hosts/<hostname>/configuration.nix] ++ extraLib.modules.common;
-};
-```
+**Source of truth:** `flake.nix`.
 
 ### Configure Hardware
 

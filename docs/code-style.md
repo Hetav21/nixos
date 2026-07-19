@@ -6,10 +6,15 @@
 - System modules: `system.<category>.*`
 - Home modules: `home.<category>.*`
 - Hardware drivers: `drivers.<vendor>.*`
+- Profiles (module bundles): `profiles.<scope>.*`
+
+A few pre-convention modules sit flat under `system.` with no category — when editing an existing module, match the file you're editing; use the hierarchy above for new modules.
 
 ## Module Pattern
 
-All modules must use `extraLib.modules.mkModule` helper to ensure consistent behavior and auto-generated enable options.
+All modules use the `extraLib.modules.mkModule` helper for consistent behavior and auto-generated enable options.
+
+**Source of truth:** `lib/modules.nix`. The full API is exactly six attrs — `name`, `hasCli` (default `true`), `hasGui` (default `false`), `guiRequiresCli` (default `true`), `cliConfig`, `guiConfig` (each may be a function of module args or a plain attrset). There is no `imports`/`extraOptions` passthrough — if a module needs more than these six, write it as a plain module.
 
 **Requirements:**
 
@@ -26,10 +31,9 @@ All modules must use `extraLib.modules.mkModule` helper to ensure consistent beh
   ...
 } @ args:
 (extraLib.modules.mkModule {
-  name = "system.category.feature";
-  # Optional: set to false if module has no CLI/GUI component
-  hasCli = true;
-  hasGui = true;
+  name = "system.<category>.<feature>";
+  hasCli = true; # default true  -> generates <name>.enable
+  hasGui = true; # default false -> generates <name>.enableGui
 
   # Configuration for CLI/Server (enabled by cfg.enable)
   cliConfig = _: {

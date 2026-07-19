@@ -4,44 +4,19 @@ All templates in this repository now come with built-in Claude Code support. The
 
 ## Quick Start
 
-Initialize a new project using one of the available templates:
+One template per directory under `templates/`, registered in `templates/default.nix` (**Source of truth** — read it for the current list).
 
 ```bash
-# Initialize a Python AI project
+# Initialize a project from a template
+nix flake init -t github:Hetav21/nixos#<template>
+
+# Example: Python AI project using uv
 nix flake init -t github:Hetav21/nixos#ai-uv
-
-# Initialize a Node.js Frontend project
-nix flake init -t github:Hetav21/nixos#frontend-node
-
-# Initialize a Go Backend project
-nix flake init -t github:Hetav21/nixos#backend-go
 ```
-
-## Available Templates
-
-### Frontend
-- **`frontend-bun`**: Bun environment with Playwright
-- **`frontend-node`**: Node.js environment with Playwright
-
-### Backend
-- **`backend-bun`**: Bun backend environment
-- **`backend-node`**: Node.js backend environment
-- **`backend-go`**: Go backend environment
-
-### AI & Data
-- **`ai-pip`**: Python environment (pip)
-- **`ai-uv`**: Python environment (uv)
-- **`notebook`**: Jupyter Notebook environment
-
-### Testing
-- **`browser`**: Playwright testing environment
-
-### Minimal
-- `empty`: Empty environment
 
 ## How It Works
 
-The magic happens in `mkProjectEnv` (provided by `dotfiles.lib.claude`). This helper:
+The magic happens in `mkProjectEnv` (provided by the [nix-skills](https://github.com/Hetav21/nix-skills) flake as `nix-skills.lib.mkProjectEnv`). This helper:
 
 1.  **Creates the `.claude/` directory** structure automatically when you enter the shell.
 2.  **Installs Skills & Agents**: Fetches resources from the specified flake inputs and links them.
@@ -108,4 +83,4 @@ If you see an error like `error: input 'foo' not found`, it means you tried to u
 
 ### ".claude directory is read-only"
 
-`mkProjectEnv` handles this automatically by copying files instead of symlinking strictly, and running `chmod` operations in the shell hook. If you still face issues, ensure you are using the latest version of the template/dotfiles library.
+`mkProjectEnv` handles this automatically by copying files instead of symlinking strictly, and running `chmod` operations in the shell hook. If you still face issues, ensure you are using the latest version of the template / nix-skills flake.
