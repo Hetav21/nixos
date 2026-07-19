@@ -78,3 +78,16 @@ Load these on demand — only when the task touches their domain:
 - **[pkgs/AGENTS.md](pkgs/AGENTS.md)** — custom package definition.
 - **[hosts/AGENTS.md](hosts/AGENTS.md)** — profile and host operations.
 - **[secrets/README.md](secrets/README.md)** — secret management with sops-nix.
+- **[templates/AGENTS.md](templates/AGENTS.md)** — project templates and `mkProjectEnv` dev shells. Read when creating or editing `templates/`.
+
+## Docs Maintenance
+
+- Docs carry stable contracts, workflows, and gotchas only. Never copy volatile
+  facts (host lists, input lists, command tables, config snippets) — point to
+  the owning file on a `Source of truth:` line. Fenced examples are illustrative.
+- One owning doc per topic; other docs link to it instead of restating.
+- If your change touches a file named on a `Source of truth:` line, update that
+  doc's owning section in the same commit (grep `*.md` for the path).
+- On doc-vs-code conflict, code wins — fix the doc.
+- Write illustrative paths as `<placeholders>` (e.g. `pkgs/<name>/default.nix`);
+  real backticked repo paths and links are validated by `nix flake check`.

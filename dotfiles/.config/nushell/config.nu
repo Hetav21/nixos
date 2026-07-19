@@ -20,7 +20,7 @@ def nx [
         print "\t\t\t  Types: latest, standard"
         print "  nx flake [cmd] [host]\t- Flake operations"
         print "\t\t\t  Commands: check, build, eval"
-        print "\t\t\t  Hosts: nixbook, nixwslbook"
+        print $"\t\t\t  Hosts: (host-completions | str join ', ')"
         print "  nx clean\t\t- Remove old generations"
         print "  nx gc\t\t\t- Run garbage collection"
         print "  nx optimise\t\t- Optimise nix store (deduplicate identical files)"
@@ -153,9 +153,18 @@ def flake-cmd-completions [] {
     ["check" "build" "eval"]
 }
 
-# Completion function for hosts
+# Completion function for hosts (derived from hosts/, so it cannot go stale)
 def host-completions [] {
-    ["nixbook" "nixwslbook"]
+    let setup_dir = ($env.NIXOS_SETUP_DIR? | default "/etc/nixos" | str trim -r -c '/')
+    try {
+        ls ($setup_dir | path join "hosts")
+        | where type == dir
+        | get name
+        | path basename
+        | where $it != "_common"
+    } catch {
+        ["nixbook" "nixwslbook" "nixworkbook"]
+    }
 }
 
 # Completion function for rebuild types

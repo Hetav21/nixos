@@ -7,7 +7,7 @@
 ```
 Is it user-specific (dotfiles, user apps)?
 ├─ YES → modules/home/
-│   ├─ Terminal app? → modules/home/shell.nix
+│   ├─ Terminal app? → modules/home/shell/
 │   ├─ Desktop app? → modules/home/desktop/
 │   └─ Browser? → modules/home/browser/
 │
@@ -111,6 +111,8 @@ home.packages =
   (with pkgs; [ stable-package ])
   ++ (with pkgs-unstable; [ unstable-package ]);
 ```
+
+Defining a **new custom** package (exposed as `pkgs.custom.<name>`) is owned by **[pkgs/AGENTS.md](../pkgs/AGENTS.md)**.
 
 ### Add/Modify Service
 

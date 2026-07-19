@@ -122,6 +122,10 @@
       inherit inputs;
       settings = commonSettings;
     };
+    checks.x86_64-linux = import ./checks {
+      inherit self;
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    };
     nixosConfigurations = {
       nixbook = nixpkgs.lib.nixosSystem {
         system = nixbookSettings.system;
