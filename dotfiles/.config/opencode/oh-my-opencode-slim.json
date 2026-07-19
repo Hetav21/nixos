@@ -1,10 +1,10 @@
 {
-  "preset": "@preset@",
+  "preset": "openai",
   "disabled_agents": [],
   "presets": {
-    "@preset@": {
+    "openai": {
       "orchestrator": {
-        "model": "@orchestratorModel@",
+        "model": "openai/gpt-5.4",
         "skills": [
           "*"
         ],
@@ -13,7 +13,7 @@
         ]
       },
       "oracle": {
-        "model": "@oracleModel@",
+        "model": "openai/gpt-5.4",
         "variant": "high",
         "skills": [
           "simplify",
@@ -35,7 +35,7 @@
         ]
       },
       "librarian": {
-        "model": "@librarianModel@",
+        "model": "openai/gpt-5.4-mini",
         "variant": "low",
         "skills": [
           "find-skills",
@@ -53,7 +53,7 @@
         ]
       },
       "explorer": {
-        "model": "@explorerModel@",
+        "model": "openai/gpt-5.4-mini",
         "variant": "low",
         "skills": [
           "find-skills",
@@ -66,7 +66,7 @@
         ]
       },
       "designer": {
-        "model": "@designerModel@",
+        "model": "openai/gpt-5.4-mini",
         "variant": "medium",
         "skills": [
           "agent-browser",
@@ -77,7 +77,7 @@
         ]
       },
       "fixer": {
-        "model": "@fixerModel@",
+        "model": "openai/gpt-5.4-mini",
         "variant": "low",
         "skills": [
           "using-git-worktrees",
@@ -96,7 +96,7 @@
         ]
       },
       "observer": {
-        "model": "@observerModel@",
+        "model": "openai/gpt-5.4",
         "variant": "medium",
         "skills": [
           "pdf",
@@ -120,68 +120,68 @@
   },
   "council": {
     "master": {
-      "model": "@orchestratorModel@",
+      "model": "openai/gpt-5.4",
       "variant": "high"
     },
     "master_timeout": 300000,
     "councillors_timeout": 180000,
     "master_fallback": [
-      "@oracleModel@"
+      "openai/gpt-5.4"
     ],
     "councillor_retries": 3,
     "default_preset": "default",
     "presets": {
       "default": {
         "alpha": {
-          "model": "@orchestratorModel@",
+          "model": "openai/gpt-5.4",
           "variant": "high",
           "prompt": "Prioritize correctness, key trade-offs, and the highest-risk concerns."
         },
         "beta": {
-          "model": "@oracleModel@",
+          "model": "openai/gpt-5.4",
           "variant": "high",
           "prompt": "Prioritize implementation details, failure modes, and concrete alternatives."
         },
         "gamma": {
-          "model": "@librarianModel@",
+          "model": "openai/gpt-5.4-mini",
           "variant": "medium",
           "prompt": "Be concise and independent. Challenge assumptions and surface simpler options."
         }
       },
       "fast": {
         "alpha": {
-          "model": "@librarianModel@",
+          "model": "openai/gpt-5.4-mini",
           "variant": "medium",
           "prompt": "Give a fast independent opinion focused on the main risk and best next step."
         },
         "beta": {
-          "model": "@oracleModel@",
+          "model": "openai/gpt-5.4",
           "variant": "medium",
           "prompt": "Give a fast practical review focused on execution details and likely edge cases."
         }
       },
       "deep": {
         "master": {
-          "model": "@orchestratorModel@",
+          "model": "openai/gpt-5.4",
           "variant": "high"
         },
         "alpha": {
-          "model": "@orchestratorModel@",
+          "model": "openai/gpt-5.4",
           "variant": "high",
           "prompt": "Focus on architecture, long-term maintainability, and hidden trade-offs."
         },
         "beta": {
-          "model": "@oracleModel@",
+          "model": "openai/gpt-5.4",
           "variant": "high",
           "prompt": "Focus on implementation realism, edge cases, and failure modes."
         },
         "gamma": {
-          "model": "@librarianModel@",
+          "model": "openai/gpt-5.4-mini",
           "variant": "medium",
           "prompt": "Focus on simplicity, unnecessary complexity, and the smallest viable approach."
         },
         "delta": {
-          "model": "@orchestratorModel@",
+          "model": "openai/gpt-5.4",
           "variant": "medium",
           "prompt": "Focus on operational risk, reliability, and whether the recommendation is safe to trust."
         }
