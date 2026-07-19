@@ -21,7 +21,7 @@
         "agent-config": "agent-config",
         "anthropic-skills": "anthropic-skills",
         "claude-subagents": "claude-subagents",
-        "oldwinter-skills": "oldwinter-skills",
+        "mattpocock-skills": "mattpocock-skills",
         "superpowers": "superpowers"
       },
       "locked": {
@@ -490,6 +490,22 @@
         "type": "github"
       }
     },
+    "mattpocock-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1784192592,
+        "narHash": "sha256-S6pARK99oGGSi6XdFm6zYKHT4gjOCN0wIPZFcl1hREE=",
+        "owner": "mattpocock",
+        "repo": "skills",
+        "rev": "9603c1cc8118d08bc1b3bf34cf714f62178dea3b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mattpocock",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
     "nix-flatpak": {
       "locked": {
         "lastModified": 1767983141,
@@ -719,22 +735,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "NUR",
-        "type": "github"
-      }
-    },
-    "oldwinter-skills": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1773283563,
-        "narHash": "sha256-OjnxZlK0B7oUMMUIU8t0LKliBaJ2bb6ssqNJzRGLG8E=",
-        "owner": "oldwinter",
-        "repo": "skills",
-        "rev": "1aee324c5283de535836d086357fea56e674c65f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oldwinter",
-        "repo": "skills",
         "type": "github"
       }
     },
