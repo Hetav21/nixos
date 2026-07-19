@@ -9,6 +9,7 @@
     ./ssh.nix
     ./agents.nix
     ./misc.nix
+    ./editors.nix
   ];
 
   options = {
@@ -33,5 +34,6 @@
     home.development.agents.enable = lib.mkDefault config.home.development.enable;
     home.development.misc.enable = lib.mkDefault config.home.development.enable;
     home.development.misc.enableGui = lib.mkDefault config.home.development.enableGui;
+    home.development.editors.enableGui = lib.mkDefault config.home.development.enableGui;
   };
 }
