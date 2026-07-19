@@ -21,8 +21,8 @@
       flake = false;
     };
 
-    oldwinter-skills = {
-      url = "github:oldwinter/skills";
+    mattpocock-skills = {
+      url = "github:mattpocock/skills";
       flake = false;
     };
   };
@@ -34,7 +34,7 @@
       superpowers
       anthropic-skills
       agent-config
-      oldwinter-skills
+      mattpocock-skills
       ;
   };
 }

@@ -60,16 +60,31 @@
               "docx"
               "pdf"
               "pptx"
-              "skill-creator"
               "xlsx"
             ];
           })
           (inputs.nix-skills.lib.extract pkgs pkgs.custom.agent-config "skills" {
-            excludes = ["skill-creator"];
+            includes = [
+              "agent-browser"
+              "deslop"
+              "simplify"
+              "workflow"
+              "find-skills"
+              "reclaude"
+            ];
           })
           (inputs.nix-skills.lib.extract pkgs pkgs.custom.superpowers "skills" {})
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.oldwinter-skills "devops-skills" {
-            includes = ["github-cli"];
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.mattpocock-skills "skills/engineering" {
+            includes = [
+              "resolving-merge-conflicts"
+              "wayfinder"
+              "triage"
+              "domain-modeling"
+              "codebase-design"
+              "improve-codebase-architecture"
+              "research"
+              "prototype"
+            ];
           })
         ];
         agents = [

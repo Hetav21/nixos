@@ -18,11 +18,9 @@
         "skills": [
           "simplify",
           "deslop",
-          "grill-me",
           "receiving-code-review",
           "requesting-code-review",
           "workflow",
-          "knip",
           "systematic-debugging"
         ],
         "mcps": [
@@ -54,9 +52,7 @@
         "model": "@explorerModel@",
         "variant": "low",
         "skills": [
-          "find-skills",
-          "sentry",
-          "fix-sentry-issues"
+          "find-skills"
         ],
         "mcps": [
           "atlassian",
@@ -67,9 +63,7 @@
         "model": "@designerModel@",
         "variant": "medium",
         "skills": [
-          "agent-browser",
-          "playwriter",
-          "favicon"
+          "agent-browser"
         ],
         "mcps": [
           "playwright"
@@ -79,11 +73,8 @@
         "model": "@fixerModel@",
         "variant": "low",
         "skills": [
-          "sentry",
-          "fix-sentry-issues",
           "using-git-worktrees",
-          "agent-browser",
-          "playwriter"
+          "agent-browser"
         ],
         "mcps": [
           "playwright",

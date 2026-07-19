@@ -1,14 +1,14 @@
 {
   lib,
   stdenvNoCC,
-  oldwinter-skills-src,
+  mattpocock-skills-src,
 }:
-assert lib.assertMsg (oldwinter-skills-src != null) "oldwinter-skills-src is required.";
+assert lib.assertMsg (mattpocock-skills-src != null) "mattpocock-skills-src is required.";
   stdenvNoCC.mkDerivation {
-    pname = "oldwinter-skills";
+    pname = "mattpocock-skills";
     version = "devel";
 
-    src = oldwinter-skills-src;
+    src = mattpocock-skills-src;
 
     dontBuild = true;
     dontConfigure = true;
@@ -19,8 +19,8 @@ assert lib.assertMsg (oldwinter-skills-src != null) "oldwinter-skills-src is req
     '';
 
     meta = with lib; {
-      description = "Oldwinter's Agent Skills";
-      homepage = "https://github.com/oldwinter/skills";
+      description = "Matt Pocock's agent skills";
+      homepage = "https://github.com/mattpocock/skills";
       license = licenses.mit;
       platforms = platforms.all;
     };

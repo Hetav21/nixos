@@ -43,7 +43,7 @@
         };
       };
   wsl-notify-send = pkgs.callPackage ./wsl-notify-send {};
-  oldwinter-skills = pkgs.callPackage ./oldwinter-skills {
-    oldwinter-skills-src = inputs.agent-sources.oldwinter-skills or null;
+  mattpocock-skills = pkgs.callPackage ./mattpocock-skills {
+    mattpocock-skills-src = inputs.agent-sources.mattpocock-skills or null;
   };
 }
