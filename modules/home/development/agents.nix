@@ -32,10 +32,7 @@
         enable = true;
         package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
         enableMcpIntegration = true;
-        settings = extraLib.dotfiles.mkSubstitute {
-          "@model@" = settings.opencode.model;
-          "@smallModel@" = settings.opencode.smallModel;
-        } (lib.importJSON ../../../dotfiles/.config/opencode/config.json);
+        settings = lib.importJSON ../../../dotfiles/.config/opencode/config.json;
       };
 
       mcp = {
@@ -106,25 +103,8 @@
     # oh-my-opencode plugin configuration and Claude resources
     home.file = lib.mkMerge [
       {
-        ".config/opencode/oh-my-opencode-slim.json".source = let
-          unformatted = builtins.toJSON (
-            extraLib.dotfiles.mkSubstitute {
-              "@preset@" = settings.ohMyOpencode.preset;
-              "@orchestratorModel@" = settings.ohMyOpencode.models.orchestrator;
-              "@oracleModel@" = settings.ohMyOpencode.models.oracle;
-              "@librarianModel@" = settings.ohMyOpencode.models.librarian;
-              "@explorerModel@" = settings.ohMyOpencode.models.explorer;
-              "@designerModel@" = settings.ohMyOpencode.models.designer;
-              "@fixerModel@" = settings.ohMyOpencode.models.fixer;
-              "@observerModel@" = settings.ohMyOpencode.models.observer;
-            } (lib.importJSON ../../../dotfiles/.config/opencode/oh-my-opencode-slim.json)
-          );
-        in
-          pkgs.runCommand "pretty-oh-my-opencode-slim.json" {
-            buildInputs = [pkgs.jq];
-            passAsFile = ["json"];
-            json = unformatted;
-          } "jq . < $jsonPath > $out";
+        ".config/opencode/oh-my-opencode-slim.json".source =
+          ../../../dotfiles/.config/opencode/oh-my-opencode-slim.json;
         ".config/opencode/antigravity.json".source =
           ../../../dotfiles/.config/opencode/antigravity.json;
         ".config/opencode/command".source =
