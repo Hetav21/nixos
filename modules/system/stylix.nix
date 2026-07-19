@@ -30,7 +30,7 @@
         };
       };
 
-      packages = with pkgs; [nerd-fonts.jetbrains-mono nerd-fonts.fira-code font-awesome dejavu_fonts];
+      packages = with pkgs; [nerd-fonts.jetbrains-mono nerd-fonts.fira-code font-awesome dejavu_fonts ubuntu-classic noto-fonts noto-fonts-color-emoji];
     };
 
     # Stylix configuration
@@ -82,9 +82,20 @@
             name = "JetBrainsMono Nerd Font Mono";
           };
 
-          serif = config.stylix.fonts.monospace;
-          sansSerif = config.stylix.fonts.monospace;
-          emoji = config.stylix.fonts.monospace;
+          serif = {
+            package = pkgs.noto-fonts;
+            name = "Noto Serif";
+          };
+
+          sansSerif = {
+            package = pkgs.ubuntu-classic;
+            name = "Ubuntu";
+          };
+
+          emoji = {
+            package = pkgs.noto-fonts-color-emoji;
+            name = "Noto Color Emoji";
+          };
 
           sizes = {
             applications = 12;
