@@ -21,7 +21,10 @@
           "receiving-code-review",
           "requesting-code-review",
           "workflow",
-          "systematic-debugging"
+          "systematic-debugging",
+          "codebase-design",
+          "domain-modeling",
+          "improve-codebase-architecture"
         ],
         "mcps": [
           "context7",
@@ -36,7 +39,8 @@
         "variant": "low",
         "skills": [
           "find-skills",
-          "using-superpowers"
+          "using-superpowers",
+          "research"
         ],
         "mcps": [
           "context7",
@@ -52,7 +56,9 @@
         "model": "@explorerModel@",
         "variant": "low",
         "skills": [
-          "find-skills"
+          "find-skills",
+          "wayfinder",
+          "triage"
         ],
         "mcps": [
           "atlassian",
@@ -63,7 +69,8 @@
         "model": "@designerModel@",
         "variant": "medium",
         "skills": [
-          "agent-browser"
+          "agent-browser",
+          "prototype"
         ],
         "mcps": [
           "playwright"
@@ -74,7 +81,13 @@
         "variant": "low",
         "skills": [
           "using-git-worktrees",
-          "agent-browser"
+          "agent-browser",
+          "test-driven-development",
+          "executing-plans",
+          "verification-before-completion",
+          "resolving-merge-conflicts",
+          "finishing-a-development-branch",
+          "systematic-debugging"
         ],
         "mcps": [
           "playwright",
