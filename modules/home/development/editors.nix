@@ -19,10 +19,6 @@
       vscode = {
         enable = true;
         package = pkgs-unstable.vscode;
-        profiles.${settings.username} = {
-          extensions = with pkgs-unstable.vscode-extensions; [vscodevim.vim];
-          userSettings = lib.importJSON ../../../dotfiles/.config/Code/User/settings.json;
-        };
       };
 
       zed-editor = {
