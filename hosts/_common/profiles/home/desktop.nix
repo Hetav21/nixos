@@ -24,6 +24,7 @@
       agents.enable = true;
       misc.enable = true;
       misc.enableGui = true;
+      editors.enableGui = true;
     };
 
     # Shell and CLI tools
