@@ -1,6 +1,12 @@
 {
   "preset": "openai",
   "disabled_agents": [],
+  "disabled_mcps": [
+    "websearch",
+    "context7",
+    "grep_app",
+    "gh_grep"
+  ],
   "presets": {
     "openai": {
       "orchestrator": {
@@ -31,7 +37,7 @@
           "awslabs.aws-documentation-mcp-server",
           "aws-knowledge-mcp-server",
           "azure-devops",
-          "websearch"
+          "exa"
         ]
       },
       "librarian": {
@@ -48,8 +54,8 @@
           "aws-knowledge-mcp-server",
           "atlassian",
           "azure-devops",
-          "websearch",
-          "grep_app"
+          "exa",
+          "grep"
         ]
       },
       "explorer": {
@@ -62,7 +68,7 @@
         ],
         "mcps": [
           "atlassian",
-          "grep_app"
+          "grep"
         ]
       },
       "designer": {
