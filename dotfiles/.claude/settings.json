@@ -8,7 +8,7 @@
   "model": "sonnet",
   "enableAllProjectMcpServers": true,
   "enabledPlugins": {
-    "superpowers@claude-plugins-official": true
+    "mattpocock-skills@mattpocock-skills": true
   },
   "effortLevel": "medium",
   "theme": "dark",
