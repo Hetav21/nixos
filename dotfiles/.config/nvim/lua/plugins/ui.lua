@@ -7,6 +7,13 @@ return {
       -- Disable snacks features that conflict with other plugins
       opts.image = { enabled = false }
       opts.notifier = { enabled = true }
+      opts.picker = vim.tbl_deep_extend("force", opts.picker or {}, {
+        sources = {
+          explorer = {
+            hidden = true, -- Show hidden files (dotfiles) by default
+          },
+        },
+      })
       return opts
     end,
   },
