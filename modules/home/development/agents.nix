@@ -112,6 +112,8 @@
           ../../../dotfiles/.config/opencode/command;
         ".claude/settings.json".source =
           ../../../dotfiles/.claude/settings.json;
+        ".claude/plugins/known_marketplaces.json".source =
+          ../../../dotfiles/.claude/plugins/known_marketplaces.json;
         ".claude/.mcp.json".source = let
           claudeMcpServers = {
             mcpServers = inputs.nix-skills.lib.toClaudeMcpServers (
