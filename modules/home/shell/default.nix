@@ -8,6 +8,7 @@
     ./tmux.nix
     ./tools.nix
     ./terminals.nix
+    ./newsboat.nix
   ];
 
   options = {
@@ -30,6 +31,7 @@
       home.shell.shells.enable = lib.mkDefault config.home.shell.enable;
       home.shell.tmux.enable = lib.mkDefault config.home.shell.enable;
       home.shell.tools.enable = lib.mkDefault config.home.shell.enable;
+      home.shell.newsboat.enable = lib.mkDefault config.home.shell.enable;
       home.shell.terminals.enableGui = lib.mkDefault config.home.shell.enableGui;
     }
     (lib.mkIf config.home.shell.enable {
