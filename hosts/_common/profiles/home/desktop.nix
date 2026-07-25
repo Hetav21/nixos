@@ -32,6 +32,7 @@
       shells.enable = true;
       tmux.enable = true;
       tools.enable = true;
+      newsboat.enable = true;
       terminals.enableGui = true;
     };
 
