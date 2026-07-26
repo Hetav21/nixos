@@ -25,6 +25,13 @@
             "tech"
           ];
         }
+        {
+          url = "https://tdd.cat/rss.xml";
+          title = "The Daily Diff";
+          tags = [
+            "tech"
+          ];
+        }
       ];
       extraConfig = ''
         bind-key j down
