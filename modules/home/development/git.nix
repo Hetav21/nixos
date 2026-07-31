@@ -10,7 +10,23 @@
   hasCli = true;
   hasGui = false;
   cliConfig = _: {
+    home.shellAliases = {
+      gs = "git status";
+      gpush = "git push origin";
+      gpull = "git pull origin";
+      grestore = "git restore";
+      lzg = "${lib.getExe pkgs-unstable.lazygit}";
+      lzjj = "${lib.getExe pkgs-unstable.lazyjj}";
+    };
+
     programs = {
+      nushell.extraConfig = ''
+        def "gac" [message: string] {
+          git add .
+          git commit -m $"($message)"
+        }
+      '';
+
       git = {
         enable = true;
         package = pkgs-unstable.gitFull;

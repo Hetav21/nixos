@@ -1,6 +1,6 @@
 # nx Command Reference
 
-`nx` is a **nushell function**. **Source of truth:** `dotfiles/.config/nushell/config.nu` — if this doc and the function disagree, the function wins.
+`nx` is a **nushell function**. **Source of truth:** `modules/home/system/nix.nix` — if this doc and the function disagree, the function wins.
 
 ## Invocation
 

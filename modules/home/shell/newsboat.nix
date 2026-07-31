@@ -1,9 +1,18 @@
-{extraLib, ...} @ args:
+{
+  extraLib,
+  lib,
+  pkgs,
+  ...
+} @ args:
 (extraLib.modules.mkModule {
   name = "home.shell.newsboat";
   hasCli = true;
   hasGui = false;
   cliConfig = _: {
+    home.shellAliases = {
+      nb = "${lib.getExe pkgs.newsboat}";
+    };
+
     programs.newsboat = {
       enable = true;
       autoFetchArticles = {
