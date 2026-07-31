@@ -1,5 +1,6 @@
 {
   extraLib,
+  lib,
   pkgs,
   ...
 } @ args:
@@ -8,6 +9,13 @@
   hasCli = true;
   hasGui = false;
   cliConfig = _: {
+    programs.nushell.extraConfig = ''
+      # Download Alias (requires package path interpolation)
+      def "dl-yt" [url: string] {
+        ${lib.getExe pkgs.yt-dlp} --external-downloader ${lib.getExe pkgs.aria2} --external-downloader-args "-x 16 -s 16 -k 1M" -o $"~/Downloads/%(title)s.%(ext)s" $url
+      }
+    '';
+
     home.packages = with pkgs; [
       # Download managers
       aria2

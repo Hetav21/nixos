@@ -1,6 +1,9 @@
 {
   extraLib,
+  lib,
+  pkgs,
   pkgs-unstable,
+  config,
   ...
 } @ args:
 (extraLib.modules.mkModule {
@@ -8,7 +11,28 @@
   hasCli = true;
   hasGui = false;
   cliConfig = _: {
+    home.shellAliases = {
+      tree = "${lib.getExe pkgs.tree} -a -I .git";
+      cat = "${lib.getExe config.programs.bat.package}";
+      grep = "${lib.getExe pkgs-unstable.ripgrep} --color=auto";
+      ff = "${lib.getExe pkgs.fastfetch}";
+      lzd = "${lib.getExe pkgs.lazydocker}";
+    };
+
     programs = {
+      nushell.extraConfig = ''
+        # File Manager Alias (requires package path interpolation)
+        def --env yz [...args] {
+            let tmp = (mktemp -t "yazi-cwd.XXXXXX")
+            ${lib.getExe pkgs-unstable.yazi} ...$args --cwd-file $tmp
+            let cwd = (open $tmp)
+            if $cwd != "" and $cwd != $env.PWD {
+                cd $cwd
+            }
+            rm -fp $tmp
+        }
+      '';
+
       yazi = {
         enable = true;
         package = pkgs-unstable.yazi;

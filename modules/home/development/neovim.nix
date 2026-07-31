@@ -2,6 +2,7 @@
   extraLib,
   lib,
   pkgs,
+  config,
   ...
 } @ args:
 (extraLib.modules.mkModule {
@@ -125,6 +126,10 @@
       extra = {};
     };
   in {
+    home.shellAliases = {
+      nv = "${lib.getExe config.nixCats.out.packages.nixCats}";
+    };
+
     # nixCats Neovim configuration
     # Nix handles: neovim installation + config bundling + essential build tools
     # Lua handles: plugin management (lazy.nvim) + LSP installation (mason.nvim)

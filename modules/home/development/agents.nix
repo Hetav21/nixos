@@ -5,6 +5,7 @@
   pkgs-unstable,
   inputs,
   settings,
+  config,
   ...
 } @ args:
 (extraLib.modules.mkModule {
@@ -13,6 +14,13 @@
   hasGui = false;
   cliConfig = _: {
     stylix.targets.opencode.enable = false;
+
+    home.shellAliases = {
+      oc = "${lib.getExe config.programs.opencode.package}";
+      ag = "${lib.getExe config.programs.antigravity.package}";
+      cc = "${lib.getExe inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code}";
+      cdx = "${lib.getExe inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex}";
+    };
 
     home.packages = [
       inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.antigravity-cli
