@@ -136,7 +136,7 @@
         ] {
             let setup_dir = ($env.NIXOS_SETUP_DIR? | default "/etc/nixos" | str trim -r -c '/')
             let flake_cmd = (if ($flake_cmd | is-empty) { "check" } else { $flake_cmd })
-            
+
             match $flake_cmd {
                 "check" => {
                     print "\n-> Validating flake syntax..."
