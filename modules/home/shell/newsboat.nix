@@ -8,41 +8,22 @@
   name = "home.shell.newsboat";
   hasCli = true;
   hasGui = false;
-  cliConfig = _: {
+  cliConfig = {config, ...}: {
     home.shellAliases = {
       nb = "${lib.getExe pkgs.newsboat}";
     };
+
+    home.file.".config/newsboat/feeds.opml".source = ./../../../dotfiles/.config/newsboat/feeds.opml;
 
     programs.newsboat = {
       enable = true;
       autoFetchArticles = {
         enable = true;
       };
-      urls = [
-        {
-          url = "https://blog.hetav.dev/rss";
-          title = "Hetav's Blog";
-          tags = [
-            "personal"
-            "tech"
-          ];
-        }
-        {
-          url = "https://news.ycombinator.com/rss";
-          title = "Hacker News";
-          tags = [
-            "tech"
-          ];
-        }
-        {
-          url = "https://tdd.cat/rss.xml";
-          title = "The Daily Diff";
-          tags = [
-            "tech"
-          ];
-        }
-      ];
       extraConfig = ''
+        urls-source "opml"
+        opml-url "file://${config.home.homeDirectory}/.config/newsboat/feeds.opml"
+
         bind-key j down
         bind-key k up
         bind-key j next articlelist

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="2.0">
+  <head>
+    <title>RSS Feeds</title>
+  </head>
+  <body>
+    <outline type="rss" text="Hetav's Blog" title="Hetav's Blog" xmlUrl="https://blog.hetav.dev/rss" htmlUrl="https://blog.hetav.dev" category="personal,tech"/>
+    <outline type="rss" text="Hacker News" title="Hacker News" xmlUrl="https://news.ycombinator.com/rss" htmlUrl="https://news.ycombinator.com" category="tech"/>
+    <outline type="rss" text="The Daily Diff" title="The Daily Diff" xmlUrl="https://tdd.cat/rss.xml" htmlUrl="https://tdd.cat" category="tech"/>
+  </body>
+</opml>
