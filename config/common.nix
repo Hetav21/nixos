@@ -14,6 +14,7 @@
       "nixpkgs-master"
       "nixCats"
       "nur"
+      "llm-agents"
     ];
   };
 
