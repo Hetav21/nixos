@@ -17,6 +17,7 @@
 
     home.shellAliases = {
       oc = "${lib.getExe config.programs.opencode.package}";
+      oc2 = "${lib.getExe inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode2}";
       ag = "${lib.getExe config.programs.antigravity.package}";
       cc = "${lib.getExe inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code}";
       cdx = "${lib.getExe inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex}";
@@ -114,12 +115,9 @@
       {
         ".config/opencode/oh-my-opencode-slim.json".source =
           ../../../dotfiles/.config/opencode/oh-my-opencode-slim.json;
-        ".config/opencode/antigravity.json".source =
-          ../../../dotfiles/.config/opencode/antigravity.json;
-        ".config/opencode/command".source =
-          ../../../dotfiles/.config/opencode/command;
-        ".claude/settings.json".source =
-          ../../../dotfiles/.claude/settings.json;
+        ".config/opencode/antigravity.json".source = ../../../dotfiles/.config/opencode/antigravity.json;
+        ".config/opencode/command".source = ../../../dotfiles/.config/opencode/command;
+        ".claude/settings.json".source = ../../../dotfiles/.claude/settings.json;
         ".claude/plugins/known_marketplaces.json".source =
           ../../../dotfiles/.claude/plugins/known_marketplaces.json;
         ".claude/.mcp.json".source = let
