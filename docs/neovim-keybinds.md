@@ -11,7 +11,7 @@ Declarative Neovim configuration is managed via [Nixvim](https://github.com/nix-
 * **`<leader>`**: `Space`
 * **`<localleader>`**: `\`
 
-Pressing `<leader>` opens the **which-key** popup menu with categorized groups (Buffer, Code, Find, Git, Session, Undotree, Diagnostics/Trouble).
+Pressing `<leader>` opens the **which-key** popup menu with categorized groups (Buffer, Code, Find, Git, Session, Diagnostics/Trouble).
 
 ---
 
@@ -57,6 +57,7 @@ Managed by `bufferline.nvim` and `snacks.bufdelete`.
 | `<leader>br` | Close all buffers to the right | `bufferline.nvim` |
 | `<leader>bl` | Close all buffers to the left | `bufferline.nvim` |
 | `<leader>bd` | Safely delete current buffer (preserves layout) | `snacks.bufdelete` |
+| `<leader>bs` | Toggle persistent scratchpad buffer | `snacks.scratch` |
 
 ---
 
@@ -78,6 +79,9 @@ Managed by `snacks.nvim`.
 | `<leader>f.` | Resume previous picker query | `snacks.picker` |
 | `<leader>ft` | Search TODO / FIX / NOTE comments | `snacks.picker` |
 | `<leader>fp` | Interactive yank history picker | `snacks.picker` / `yanky.nvim` |
+| `<leader>fR` | Interactive Vim registers picker | `snacks.picker` |
+| `<leader>fm` | Jump to marks across buffers | `snacks.picker` |
+| `<leader>fc` | Search and execute command history | `snacks.picker` |
 | `<leader>fn` | Show notification popup history | `snacks.notifier` |
 | `<leader>e` | Toggle file tree explorer sidebar | `snacks.explorer` |
 | `<C-\>` | Toggle floating / split terminal (Normal & Terminal) | `snacks.terminal` |
@@ -91,15 +95,16 @@ Managed by `diffview.nvim`, `gitsigns.nvim`, and `snacks.picker`.
 | Keybinding | Mode | Action | Plugin / Handler |
 | :--- | :---: | :--- | :--- |
 | `<leader>gd` | Normal | Open full side-by-side git diff view | `diffview.nvim` |
-| `<leader>gh` | Normal | View git commit history for current file | `diffview.nvim` |
+| `<leader>gf` | Normal | View git commit history for current file | `diffview.nvim` |
 | `<leader>gH` | Normal | View git commit history for current branch | `diffview.nvim` |
 | `<leader>gs` | Normal | Interactive git status picker | `snacks.picker` |
 | `<leader>gl` | Normal | Interactive git commit log picker | `snacks.picker` |
 | `<leader>gb` | Normal | Show git blame for current line | `gitsigns.nvim` |
-| `<leader>gp` | Normal | Preview git hunk inline | `gitsigns.nvim` |
+| `<leader>gp` / `<leader>ghp` | Normal | Preview git hunk inline | `gitsigns.nvim` |
 | `]c` / `[c` | Normal | Jump to next / previous git change hunk | `gitsigns.nvim` |
 | `<leader>ghs` | Normal, Visual | Stage git hunk (or visual selection) | `gitsigns.nvim` |
 | `<leader>ghr` | Normal, Visual | Reset git hunk (or visual selection) | `gitsigns.nvim` |
+| `<leader>ghu` | Normal | Undo last staged hunk | `gitsigns.nvim` |
 
 ---
 
@@ -141,15 +146,18 @@ Managed by `trouble.nvim`, `todo-comments.nvim`, and Vim unimpaired navigation.
 
 ---
 
-## 8. Editing, Surround & Yank History
+## 8. Editing, Surround, Textobjects & Yank History
 
-Managed by `mini.surround` and `yanky.nvim`.
+Managed by `mini.surround`, `nvim-treesitter-textobjects`, and `yanky.nvim`.
 
 | Keybinding | Mode | Action | Plugin / Handler |
 | :--- | :---: | :--- | :--- |
-| `sa<motion><char>` | Normal | Add surrounding characters (e.g. `saiw"` surrounds word with `"`) | `mini.surround` |
+| `sa<motion><char>` | Normal, Visual | Add surrounding characters (e.g. `saiw"` surrounds word with `"`) | `mini.surround` |
 | `sd<char>` | Normal | Delete surrounding characters (e.g. `sd"` removes `"`) | `mini.surround` |
 | `sr<old><new>` | Normal | Replace surrounding characters (e.g. `sr"'` replaces `"` with `'`) | `mini.surround` |
+| `af` / `if` | Visual, Operator | Outer / Inner function textobject motion | `treesitter-textobjects` |
+| `ac` / `ic` | Visual, Operator | Outer / Inner class textobject motion | `treesitter-textobjects` |
+| `aa` / `ia` | Visual, Operator | Outer / Inner parameter/argument textobject motion | `treesitter-textobjects` |
 | `p` / `P` | Normal, Visual | Put after / before with clipboard history registration | `yanky.nvim` |
 | `[y` / `]y` | Normal | Cycle backward / forward through yank history ring | `yanky.nvim` |
 
@@ -161,7 +169,7 @@ Managed by `undotree` and `persistence.nvim`.
 
 | Keybinding | Action | Plugin / Handler |
 | :--- | :--- | :--- |
-| `<leader>u` / `<leader>uu` | Toggle branching undo history tree sidebar | `undotree` |
+| `<leader>u` | Toggle branching undo history tree sidebar | `undotree` |
 | `<leader>ss` | Restore session for the current workspace directory | `persistence.nvim` |
 | `<leader>sl` | Restore last active session | `persistence.nvim` |
 | `<leader>sd` | Do not save session on editor exit | `persistence.nvim` |
@@ -171,7 +179,7 @@ Managed by `undotree` and `persistence.nvim`.
 
 ## 10. Autocompletion
 
-Managed by `blink.cmp`.
+Managed by `blink-cmp` with `luasnip`.
 
 | Keybinding | Action | Plugin / Handler |
 | :--- | :--- | :--- |
@@ -192,5 +200,5 @@ Managed by `conform-nvim`. Automatically formats on `:w` or on `<leader>cf`:
 * **Nix**: `alejandra`
 * **Python**: `ruff_format`
 * **Go**: `gofmt`, `goimports`
-* **JavaScript / TypeScript / JSON / YAML / Markdown**: `prettier`
+* **JavaScript / TypeScript / React / HTML / CSS / SCSS / JSON / JSONC / YAML / Markdown**: `prettier`
 * **Shell**: `shfmt`
