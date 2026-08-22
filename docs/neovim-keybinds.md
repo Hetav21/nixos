@@ -56,7 +56,7 @@ Managed by `bufferline.nvim` and `snacks.bufdelete`.
 | `<leader>bo` | Close all other buffers (preserves layout) | `snacks.bufdelete` |
 | `<leader>br` | Close all buffers to the right | `bufferline.nvim` |
 | `<leader>bl` | Close all buffers to the left | `bufferline.nvim` |
-| `<leader>bd` | Safely delete current buffer (preserves layout) | `snacks.bufdelete` |
+| `<leader>bd` | Open startup dashboard | `snacks.dashboard` |
 | `<leader>bs` | Toggle persistent scratchpad buffer | `snacks.scratch` |
 
 ---
