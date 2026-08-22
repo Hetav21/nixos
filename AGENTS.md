@@ -74,6 +74,7 @@ Load these on demand — only when the task touches their domain:
 - **[docs/code-style.md](docs/code-style.md)** — naming conventions, the `mkModule` pattern, best practices. Read before writing or editing any module.
 - **[docs/operations.md](docs/operations.md)** — security rules and workflows: namespaces, flake inputs, overlays, packages, secrets.
 - **[docs/agent-environment.md](docs/agent-environment.md)** — declarative agent tooling (`~/.claude`, OpenCode, MCP) via `programs.agent-resources` and the nix-skills flake.
+- **[docs/neovim-keybinds.md](docs/neovim-keybinds.md)** — declarative Neovim keybindings and plugin reference.
 - **[modules/AGENTS.md](modules/AGENTS.md)** — module operations, config conversions.
 - **[pkgs/AGENTS.md](pkgs/AGENTS.md)** — custom package definition.
 - **[hosts/AGENTS.md](hosts/AGENTS.md)** — profile and host operations.
