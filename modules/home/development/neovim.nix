@@ -248,7 +248,7 @@
               }
               {
                 __unkeyed-1 = "<leader>f";
-                group = "File/Find";
+                group = "Find";
                 icon = "󰈞 ";
               }
               {
@@ -257,29 +257,14 @@
                 icon = "󰊢 ";
               }
               {
-                __unkeyed-1 = "<leader>h";
-                group = "Hunk";
-                icon = "󰊢 ";
-              }
-              {
-                __unkeyed-1 = "<leader>q";
-                group = "Quit/Session";
+                __unkeyed-1 = "<leader>s";
+                group = "Session";
                 icon = "󰗼 ";
               }
               {
-                __unkeyed-1 = "<leader>s";
-                group = "Search";
-                icon = "󰍉 ";
-              }
-              {
                 __unkeyed-1 = "<leader>u";
-                group = "UI/Toggles";
+                group = "Undotree";
                 icon = "󰔡 ";
-              }
-              {
-                __unkeyed-1 = "<leader>w";
-                group = "Windows";
-                icon = "󰖲 ";
               }
               {
                 __unkeyed-1 = "<leader>x";
@@ -457,42 +442,6 @@
           action = "<C-w>l";
           options.desc = "Go to Right Window";
         }
-        {
-          mode = "n";
-          key = "<leader>ws";
-          action = "<C-w>s";
-          options.desc = "Split Window Horizontally";
-        }
-        {
-          mode = "n";
-          key = "<leader>w-";
-          action = "<C-w>s";
-          options.desc = "Split Window Horizontally";
-        }
-        {
-          mode = "n";
-          key = "<leader>wv";
-          action = "<C-w>v";
-          options.desc = "Split Window Vertically";
-        }
-        {
-          mode = "n";
-          key = "<leader>w|";
-          action = "<C-w>v";
-          options.desc = "Split Window Vertically";
-        }
-        {
-          mode = "n";
-          key = "<leader>wd";
-          action = "<C-w>c";
-          options.desc = "Close Window";
-        }
-        {
-          mode = "n";
-          key = "<leader>w=";
-          action = "<C-w>=";
-          options.desc = "Balance Window Sizes";
-        }
 
         # --- Visual Mode & Text Manipulation ---
         {
@@ -598,7 +547,7 @@
           options.desc = "Delete Buffer";
         }
 
-        # --- Snacks Picker, Explorer & Terminal ---
+        # --- Find, Pickers & Terminal ---
         {
           key = "<leader><space>";
           action.__raw = "function() Snacks.picker.files() end";
@@ -617,7 +566,12 @@
         {
           key = "<leader>/";
           action.__raw = "function() Snacks.picker.grep() end";
-          options.desc = "Grep";
+          options.desc = "Grep Search";
+        }
+        {
+          key = "<leader>fg";
+          action.__raw = "function() Snacks.picker.grep() end";
+          options.desc = "Grep Search";
         }
         {
           key = "<leader>fb";
@@ -625,52 +579,47 @@
           options.desc = "Buffers";
         }
         {
-          key = "<leader>bb";
-          action.__raw = "function() Snacks.picker.buffers() end";
-          options.desc = "Switch Buffer";
-        }
-        {
-          key = "<leader>sw";
+          key = "<leader>fw";
           action.__raw = "function() Snacks.picker.grep_word() end";
           options.desc = "Search Word Under Cursor";
         }
         {
-          key = "<leader>sb";
+          key = "<leader>fl";
           action.__raw = "function() Snacks.picker.lines() end";
           options.desc = "Search Buffer Lines";
         }
         {
-          key = "<leader>sk";
+          key = "<leader>fk";
           action.__raw = "function() Snacks.picker.keymaps() end";
           options.desc = "Search Keymaps";
         }
         {
-          key = "<leader>sh";
+          key = "<leader>fh";
           action.__raw = "function() Snacks.picker.help() end";
           options.desc = "Search Help Tags";
         }
         {
-          key = "<leader>sq";
+          key = "<leader>fq";
           action.__raw = "function() Snacks.picker.qflist() end";
           options.desc = "Search Quickfix";
         }
         {
-          key = "<leader>sr";
+          key = "<leader>f.";
           action.__raw = "function() Snacks.picker.resume() end";
           options.desc = "Resume Last Picker";
         }
         {
-          key = "<leader>st";
+          key = "<leader>ft";
           action.__raw = "function() Snacks.picker.todo_comments() end";
           options.desc = "Search TODOs";
         }
         {
-          key = "<leader>p";
-          action.__raw = "function() Snacks.picker.yanks() end";
+          key = "<leader>fp";
+          action.__raw = "function() if Snacks.picker.yanky then Snacks.picker.yanky() else Snacks.picker.registers() end end";
           options.desc = "Yank History Picker";
         }
         {
-          key = "<leader>un";
+          key = "<leader>fn";
           action.__raw = "function() Snacks.notifier.show_history() end";
           options.desc = "Notification History";
         }
@@ -767,15 +716,6 @@
             "n"
             "v"
           ];
-          key = "<leader>hs";
-          action = "<cmd>Gitsigns stage_hunk<cr>";
-          options.desc = "Stage Hunk";
-        }
-        {
-          mode = [
-            "n"
-            "v"
-          ];
           key = "<leader>ghs";
           action = "<cmd>Gitsigns stage_hunk<cr>";
           options.desc = "Stage Hunk";
@@ -785,28 +725,9 @@
             "n"
             "v"
           ];
-          key = "<leader>hr";
-          action = "<cmd>Gitsigns reset_hunk<cr>";
-          options.desc = "Reset Hunk";
-        }
-        {
-          mode = [
-            "n"
-            "v"
-          ];
           key = "<leader>ghr";
           action = "<cmd>Gitsigns reset_hunk<cr>";
           options.desc = "Reset Hunk";
-        }
-        {
-          key = "<leader>hp";
-          action = "<cmd>Gitsigns preview_hunk<cr>";
-          options.desc = "Preview Hunk Inline";
-        }
-        {
-          key = "<leader>hb";
-          action = "<cmd>Gitsigns blame_line<cr>";
-          options.desc = "Git Blame Line";
         }
 
         # --- Todo Comments ---
@@ -932,46 +853,36 @@
           options.desc = "Next Location Entry";
         }
 
-        # --- UI Toggles & Undotree ---
+        # --- Undotree ---
+        {
+          key = "<leader>u";
+          action = "<cmd>UndotreeToggle<cr>";
+          options.desc = "Toggle Undotree";
+        }
         {
           key = "<leader>uu";
           action = "<cmd>UndotreeToggle<cr>";
           options.desc = "Toggle Undotree";
         }
-        {
-          key = "<leader>uw";
-          action = "<cmd>set wrap!<cr>";
-          options.desc = "Toggle Line Wrap";
-        }
-        {
-          key = "<leader>ul";
-          action = "<cmd>set relativenumber!<cr>";
-          options.desc = "Toggle Relative Numbers";
-        }
-        {
-          key = "<leader>ud";
-          action.__raw = "function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end";
-          options.desc = "Toggle Inline Diagnostics";
-        }
 
         # --- Session Persistence & Quit ---
         {
-          key = "<leader>qs";
+          key = "<leader>ss";
           action.__raw = ''function() require("persistence").load() end'';
           options.desc = "Restore Session";
         }
         {
-          key = "<leader>ql";
+          key = "<leader>sl";
           action.__raw = ''function() require("persistence").load({ last = true }) end'';
           options.desc = "Restore Last Session";
         }
         {
-          key = "<leader>qd";
+          key = "<leader>sd";
           action.__raw = ''function() require("persistence").stop() end'';
           options.desc = "Don't Save Current Session";
         }
         {
-          key = "<leader>qq";
+          key = "<leader>sq";
           action = "<cmd>qa<cr>";
           options.desc = "Quit Neovim (All)";
         }
