@@ -1,6 +1,7 @@
 {
   extraLib,
   lib,
+  pkgs,
   pkgs-unstable,
   settings,
   ...
@@ -10,6 +11,8 @@
   hasCli = true;
   hasGui = false;
   cliConfig = _: {
+    home.packages = [pkgs.custom.gitignore];
+
     home.shellAliases = {
       gs = "git status";
       gpush = "git push origin";
@@ -24,6 +27,38 @@
         def "gac" [message: string] {
           git add .
           git commit -m $"($message)"
+        }
+
+        def "nu-complete gitignore-subcommands" [] {
+          [
+            { value: "copy", description: "Copy or append a gitignore template" }
+            { value: "search", description: "Search available gitignore templates" }
+            { value: "list", description: "List all available gitignore templates" }
+            { value: "help", description: "Show help message" }
+          ]
+        }
+
+        def "nu-complete gitignore-templates" [] {
+          try {
+            ^${lib.getExe pkgs.custom.gitignore} list | lines
+          } catch {
+            []
+          }
+        }
+
+        # Search and copy .gitignore templates from github/gitignore
+        def --env gi [
+          subcommand?: string@"nu-complete gitignore-subcommands"
+          template?: string@"nu-complete gitignore-templates"
+        ] {
+          let sub = ($subcommand | default "help")
+          if $sub == "help" or $sub == "--help" or $sub == "-h" {
+            ^${lib.getExe pkgs.custom.gitignore} help
+          } else if ($template | is-empty) {
+            ^${lib.getExe pkgs.custom.gitignore} $sub
+          } else {
+            ^${lib.getExe pkgs.custom.gitignore} $sub $template
+          }
         }
       '';
 

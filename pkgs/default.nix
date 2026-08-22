@@ -7,6 +7,7 @@
   # for example: environment.systemPackages = with pkgs; [pokego];
   pokego = pkgs.callPackage ./pokego.nix {};
   browseros = pkgs.callPackage ./browseros/package.nix {};
+  gitignore = pkgs.callPackage ./gitignore {};
   subagent-catalog = pkgs.callPackage ./subagent-catalog {
     claude-subagents-src = inputs.agent-sources.claude-subagents or null;
   };
