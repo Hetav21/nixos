@@ -63,6 +63,29 @@
         scrolloff = 8;
         sidescrolloff = 8;
         wrap = false;
+        confirm = true;
+        virtualedit = "block";
+        inccommand = "split";
+        smoothscroll = true;
+        list = true;
+        listchars = {
+          tab = "» ";
+          trail = "·";
+          nbsp = "␣";
+        };
+        fillchars = {
+          eob = " ";
+        };
+        sessionoptions = [
+          "buffers"
+          "curdir"
+          "tabpages"
+          "winsize"
+          "help"
+          "globals"
+          "skiprtp"
+          "folds"
+        ];
       };
 
       globals = {
@@ -80,7 +103,7 @@
         # Formatters & Linters
         alejandra
         ruff
-        black
+        shellcheck
         prettier
         shfmt
       ];
@@ -98,8 +121,8 @@
               ["*"] = "clip.exe",
             },
             paste = {
-              ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-              ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+              ["+"] = [[powershell.exe -NoProfile -NonInteractive -Command '[Console]::Out.Write($(Get-Clipboard -Raw) -replace "\r", "")']],
+              ["*"] = [[powershell.exe -NoProfile -NonInteractive -Command '[Console]::Out.Write($(Get-Clipboard -Raw) -replace "\r", "")']],
             },
             cache_enabled = 0,
           }
@@ -111,6 +134,11 @@
         snacks = {
           enable = true;
           settings = {
+            bigfile.enabled = true;
+            quickfile.enabled = true;
+            input.enabled = true;
+            scope.enabled = true;
+            scratch.enabled = true;
             picker = {
               enabled = true;
               hidden = true;
@@ -141,6 +169,9 @@
         blink-cmp = {
           enable = true;
           settings = {
+            snippets = {
+              preset = "luasnip";
+            };
             keymap = {
               "<Tab>" = [
                 "select_and_accept"
@@ -258,14 +289,14 @@
                 icon = "󰊢 ";
               }
               {
+                __unkeyed-1 = "<leader>gh";
+                group = "Hunks";
+                icon = "󰊢 ";
+              }
+              {
                 __unkeyed-1 = "<leader>s";
                 group = "Session";
                 icon = "󰗼 ";
-              }
-              {
-                __unkeyed-1 = "<leader>u";
-                group = "Undotree";
-                icon = "󰔡 ";
               }
               {
                 __unkeyed-1 = "<leader>x";
@@ -317,6 +348,20 @@
               mode = "buffers";
               always_show_bufferline = true;
               diagnostics = "nvim_lsp";
+              offsets = [
+                {
+                  filetype = "snacks_layout_box";
+                  text = "File Explorer";
+                  text_align = "center";
+                  separator = true;
+                }
+                {
+                  filetype = "undotree";
+                  text = "Undo Tree";
+                  text_align = "center";
+                  separator = true;
+                }
+              ];
             };
           };
         };
@@ -347,6 +392,23 @@
           };
         };
         treesitter-context.enable = true;
+        treesitter-textobjects = {
+          enable = true;
+          settings = {
+            select = {
+              enable = true;
+              lookahead = true;
+              keymaps = {
+                "af" = "@function.outer";
+                "if" = "@function.inner";
+                "ac" = "@class.outer";
+                "ic" = "@class.inner";
+                "aa" = "@parameter.outer";
+                "ia" = "@parameter.inner";
+              };
+            };
+          };
+        };
 
         # Language Server Protocol (LSP)
         lsp = {
@@ -370,13 +432,29 @@
             };
           };
           servers = {
-            basedpyright.enable = true;
-            ruff.enable = true;
+            basedpyright = {
+              enable = true;
+              settings.basedpyright.analysis = {
+                autoImportCompletions = true;
+                typeCheckingMode = "standard";
+                diagnosticSeverityOverrides.reportUnusedImport = "none";
+              };
+            };
+            ruff = {
+              enable = true;
+              onAttach.function = "client.server_capabilities.hoverProvider = false";
+            };
             gopls.enable = true;
             clangd.enable = true;
             ts_ls.enable = true;
             tailwindcss.enable = true;
-            nil_ls.enable = true;
+            nil_ls = {
+              enable = true;
+              settings.nil = {
+                formatting.command = ["alejandra"];
+                nix.flake.autoArchive = true;
+              };
+            };
             bashls.enable = true;
             jsonls.enable = true;
             yamlls.enable = true;
@@ -404,7 +482,11 @@
               typescript = ["prettier"];
               javascriptreact = ["prettier"];
               typescriptreact = ["prettier"];
+              html = ["prettier"];
+              css = ["prettier"];
+              scss = ["prettier"];
               json = ["prettier"];
+              jsonc = ["prettier"];
               yaml = ["prettier"];
               markdown = ["prettier"];
               sh = ["shfmt"];
@@ -620,9 +702,29 @@
           options.desc = "Yank History Picker";
         }
         {
+          key = "<leader>fR";
+          action.__raw = "function() Snacks.picker.registers() end";
+          options.desc = "Registers Picker";
+        }
+        {
+          key = "<leader>fm";
+          action.__raw = "function() Snacks.picker.marks() end";
+          options.desc = "Marks Picker";
+        }
+        {
+          key = "<leader>fc";
+          action.__raw = "function() Snacks.picker.command_history() end";
+          options.desc = "Command History";
+        }
+        {
           key = "<leader>fn";
           action.__raw = "function() Snacks.notifier.show_history() end";
           options.desc = "Notification History";
+        }
+        {
+          key = "<leader>bs";
+          action.__raw = "function() Snacks.scratch() end";
+          options.desc = "Toggle Scratchpad";
         }
         {
           key = "<leader>e";
@@ -673,7 +775,7 @@
           options.desc = "Diffview Open";
         }
         {
-          key = "<leader>gh";
+          key = "<leader>gf";
           action = "<cmd>DiffviewFileHistory %<cr>";
           options.desc = "File History";
         }
@@ -729,6 +831,16 @@
           key = "<leader>ghr";
           action = "<cmd>Gitsigns reset_hunk<cr>";
           options.desc = "Reset Hunk";
+        }
+        {
+          key = "<leader>ghp";
+          action = "<cmd>Gitsigns preview_hunk<cr>";
+          options.desc = "Preview Hunk Inline";
+        }
+        {
+          key = "<leader>ghu";
+          action = "<cmd>Gitsigns undo_stage_hunk<cr>";
+          options.desc = "Undo Stage Hunk";
         }
 
         # --- Todo Comments ---
@@ -857,11 +969,6 @@
         # --- Undotree ---
         {
           key = "<leader>u";
-          action = "<cmd>UndotreeToggle<cr>";
-          options.desc = "Toggle Undotree";
-        }
-        {
-          key = "<leader>uu";
           action = "<cmd>UndotreeToggle<cr>";
           options.desc = "Toggle Undotree";
         }
