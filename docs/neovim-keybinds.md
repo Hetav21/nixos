@@ -11,13 +11,13 @@ Declarative Neovim configuration is managed via [Nixvim](https://github.com/nix-
 * **`<leader>`**: `Space`
 * **`<localleader>`**: `\`
 
-Pressing `<leader>` opens the **which-key** popup menu with categorized groups (Buffer, Code, File/Find, Git, Hunk, Quit/Session, Search, UI/Toggles, Windows, Diagnostics/Trouble).
+Pressing `<leader>` opens the **which-key** popup menu with categorized groups (Buffer, Code, Find, Git, Session, Undotree, Diagnostics/Trouble).
 
 ---
 
-## 1. Navigation, Windows & Splits
+## 1. Navigation & Windows
 
-Zero `<C-w>` friction directional split movement and split controls.
+Direct split navigation across windows without `<C-w>` prefix overhead.
 
 | Keybinding | Mode | Action | Plugin / Handler |
 | :--- | :---: | :--- | :--- |
@@ -25,10 +25,6 @@ Zero `<C-w>` friction directional split movement and split controls.
 | `<C-j>` | Normal | Move focus to lower window split | Built-in (`<C-w>j`) |
 | `<C-k>` | Normal | Move focus to upper window split | Built-in (`<C-w>k`) |
 | `<C-l>` | Normal | Move focus to right window split | Built-in (`<C-w>l`) |
-| `<leader>ws` / `<leader>w-` | Normal | Split window horizontally | Built-in (`<C-w>s`) |
-| `<leader>wv` / `<leader>w\|` | Normal | Split window vertically | Built-in (`<C-w>v`) |
-| `<leader>wd` | Normal | Close current window / split | Built-in (`<C-w>c`) |
-| `<leader>w=` | Normal | Balance window split sizes | Built-in (`<C-w>=`) |
 
 ---
 
@@ -64,7 +60,7 @@ Managed by `bufferline.nvim` and `snacks.bufdelete`.
 
 ---
 
-## 4. File Finding, Pickers & Terminal
+## 4. Find, Pickers & Terminal
 
 Managed by `snacks.nvim`.
 
@@ -72,17 +68,17 @@ Managed by `snacks.nvim`.
 | :--- | :--- | :--- |
 | `<leader><space>` / `<leader>ff` | Fuzzy search files in workspace | `snacks.picker` |
 | `<leader>fr` | Fuzzy search recent / old files | `snacks.picker` |
-| `<leader>/` | Live grep workspace search | `snacks.picker` |
-| `<leader>fb` / `<leader>bb` | Fuzzy search and switch open buffers | `snacks.picker` |
-| `<leader>sw` | Search word under cursor across workspace | `snacks.picker` |
-| `<leader>sb` | Search lines in current buffer | `snacks.picker` |
-| `<leader>sk` | Interactive keymaps picker | `snacks.picker` |
-| `<leader>sh` | Search Vim help documentation | `snacks.picker` |
-| `<leader>sq` | Search quickfix list items | `snacks.picker` |
-| `<leader>sr` | Resume previous picker query | `snacks.picker` |
-| `<leader>st` | Search TODO / FIX / NOTE comments | `snacks.picker` |
-| `<leader>p` | Interactive clipboard & yank history picker | `snacks.picker` |
-| `<leader>un` | Show notification popup history | `snacks.notifier` |
+| `<leader>/` / `<leader>fg` | Live grep workspace search | `snacks.picker` |
+| `<leader>fb` | Fuzzy search and switch open buffers | `snacks.picker` |
+| `<leader>fw` | Search word under cursor across workspace | `snacks.picker` |
+| `<leader>fl` | Search lines in current buffer | `snacks.picker` |
+| `<leader>fk` | Interactive keymaps picker | `snacks.picker` |
+| `<leader>fh` | Search Vim help documentation | `snacks.picker` |
+| `<leader>fq` | Search quickfix list items | `snacks.picker` |
+| `<leader>f.` | Resume previous picker query | `snacks.picker` |
+| `<leader>ft` | Search TODO / FIX / NOTE comments | `snacks.picker` |
+| `<leader>fp` | Interactive yank history picker | `snacks.picker` / `yanky.nvim` |
+| `<leader>fn` | Show notification popup history | `snacks.notifier` |
 | `<leader>e` | Toggle file tree explorer sidebar | `snacks.explorer` |
 | `<C-\>` | Toggle floating / split terminal (Normal & Terminal) | `snacks.terminal` |
 
@@ -100,10 +96,10 @@ Managed by `diffview.nvim`, `gitsigns.nvim`, and `snacks.picker`.
 | `<leader>gs` | Normal | Interactive git status picker | `snacks.picker` |
 | `<leader>gl` | Normal | Interactive git commit log picker | `snacks.picker` |
 | `<leader>gb` | Normal | Show git blame for current line | `gitsigns.nvim` |
-| `<leader>gp` / `<leader>hp` | Normal | Preview git hunk inline | `gitsigns.nvim` |
+| `<leader>gp` | Normal | Preview git hunk inline | `gitsigns.nvim` |
 | `]c` / `[c` | Normal | Jump to next / previous git change hunk | `gitsigns.nvim` |
-| `<leader>hs` / `<leader>ghs` | Normal, Visual | Stage git hunk (or visual selection) | `gitsigns.nvim` |
-| `<leader>hr` / `<leader>ghr` | Normal, Visual | Reset git hunk (or visual selection) | `gitsigns.nvim` |
+| `<leader>ghs` | Normal, Visual | Stage git hunk (or visual selection) | `gitsigns.nvim` |
+| `<leader>ghr` | Normal, Visual | Reset git hunk (or visual selection) | `gitsigns.nvim` |
 
 ---
 
@@ -159,20 +155,17 @@ Managed by `mini.surround` and `yanky.nvim`.
 
 ---
 
-## 9. UI Toggles & Session Recovery
+## 9. Undotree & Session Recovery
 
 Managed by `undotree` and `persistence.nvim`.
 
 | Keybinding | Action | Plugin / Handler |
 | :--- | :--- | :--- |
-| `<leader>uu` | Toggle branching undo history tree sidebar | `undotree` |
-| `<leader>uw` | Toggle line wrapping on/off | Built-in (`:set wrap!`) |
-| `<leader>ul` | Toggle relative line numbers on/off | Built-in (`:set relativenumber!`) |
-| `<leader>ud` | Toggle inline diagnostic virtual text | `vim.diagnostic` |
-| `<leader>qs` | Restore session for the current workspace directory | `persistence.nvim` |
-| `<leader>ql` | Restore last active session | `persistence.nvim` |
-| `<leader>qd` | Do not save session on editor exit | `persistence.nvim` |
-| `<leader>qq` | Quit Neovim (all windows & buffers) | Built-in (`:qa`) |
+| `<leader>u` / `<leader>uu` | Toggle branching undo history tree sidebar | `undotree` |
+| `<leader>ss` | Restore session for the current workspace directory | `persistence.nvim` |
+| `<leader>sl` | Restore last active session | `persistence.nvim` |
+| `<leader>sd` | Do not save session on editor exit | `persistence.nvim` |
+| `<leader>sq` | Quit Neovim (all windows & buffers) | Built-in (`:qa`) |
 
 ---
 
