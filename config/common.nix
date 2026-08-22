@@ -12,7 +12,7 @@
     latest = [
       "nixpkgs-unstable"
       "nixpkgs-master"
-      "nixCats"
+      "nixvim"
       "nur"
       "llm-agents"
     ];

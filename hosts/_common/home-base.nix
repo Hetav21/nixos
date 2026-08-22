@@ -24,7 +24,7 @@
     ../../modules/home
     ./profiles/home
     inputs.nix-index-database.homeModules.nix-index
-    inputs.nixCats.homeModules.default
+    inputs.nixvim.homeModules.nixvim
   ];
 
   # Enable home-manager
