@@ -8,6 +8,8 @@
   hasCli = true;
   hasGui = false;
   cliConfig = _: {
+    stylix.targets.nixvim.enable = false;
+
     home.shellAliases = {
       nv = "nvim";
     };
@@ -20,6 +22,22 @@
 
       # Use system/home-manager pkgs instance (reusing overlays and suppressing follows warning)
       nixpkgs.useGlobalPackages = true;
+
+      # Rosé Pine Colorscheme
+      colorschemes.rose-pine = {
+        enable = true;
+        settings = {
+          variant = "main";
+          dark_variant = "main";
+          dim_inactive_windows = false;
+          extend_background_behind_borders = true;
+          styles = {
+            bold = true;
+            italic = true;
+            transparency = false;
+          };
+        };
+      };
 
       # Editor Options
       opts = {
