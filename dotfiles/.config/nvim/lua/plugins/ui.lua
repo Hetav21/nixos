@@ -248,6 +248,14 @@ return {
         },
       },
       lsp = {
+        signature = {
+          enabled = true,
+          auto_open = {
+            enabled = false,
+            trigger = false,
+            luasnip = false,
+          },
+        },
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
@@ -298,6 +306,8 @@ return {
       { "<leader>snd", function() require("noice").cmd("dismiss") end, desc = "Dismiss All" },
       { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
       { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
+      { "<C-k>", function() require("noice.lsp").signature() end, mode = "i", desc = "Signature Help" },
+      { "<leader>k", function() require("noice.lsp").signature() end, mode = "n", desc = "Signature Help" },
     },
   },
 
@@ -399,20 +409,6 @@ return {
           menu = { separator = " ", indicator = " " },
         },
       },
-    },
-  },
-
-  -- LSP signature help
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
-    opts = {
-      bind = true,
-      handler_opts = { border = "rounded" },
-      floating_window = true,
-      hint_enable = true,
-      hint_prefix = "󰏚 ",
-      hi_parameter = "LspSignatureActiveParameter",
     },
   },
 }
