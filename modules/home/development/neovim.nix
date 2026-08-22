@@ -93,6 +93,8 @@
         maplocalleader = "\\";
         loaded_ruby_provider = 0;
         loaded_perl_provider = 0;
+        loaded_netrw = 1;
+        loaded_netrwPlugin = 1;
       };
 
       # System and CLI packages needed at runtime
@@ -139,6 +141,87 @@
             input.enabled = true;
             scope.enabled = true;
             scratch.enabled = true;
+            dashboard = {
+              enabled = true;
+              preset = {
+                header = ''
+                  ╭─────────────────────────────────────────────────────────╮
+                  │  ● ● ●                                                  │
+                  │                                                         │
+                  │     ██╗                                                 │
+                  │     ╚██╗                                                │
+                  │      ╚██╗                                               │
+                  │       ╚██╗                                              │
+                  │       ██╔╝   ██████████████████████████████╗            │
+                  │      ██╔╝    ╚═════════════════════════════╝            │
+                  │     ██╔╝                                                │
+                  │     ╚═╝                                                 │
+                  │                                                         │
+                  │               >_ build something awesome                │
+                  ╰─────────────────────────────────────────────────────────╯
+                '';
+                keys = [
+                  {
+                    icon = " ";
+                    key = "f";
+                    desc = "Find File";
+                    action = ":lua Snacks.dashboard.pick('files')";
+                  }
+                  {
+                    icon = " ";
+                    key = "g";
+                    desc = "Find Text";
+                    action = ":lua Snacks.dashboard.pick('live_grep')";
+                  }
+                  {
+                    icon = "󰄱 ";
+                    key = "t";
+                    desc = "Find TODOs";
+                    action = ":lua Snacks.dashboard.pick('todo_comments')";
+                  }
+                  {
+                    icon = " ";
+                    key = "e";
+                    desc = "File Explorer";
+                    action = ":lua Snacks.explorer()";
+                  }
+                  {
+                    icon = "󰊢 ";
+                    key = "gs";
+                    desc = "Git Status";
+                    action = ":lua Snacks.dashboard.pick('git_status')";
+                  }
+                  {
+                    icon = " ";
+                    key = "gd";
+                    desc = "Git Diff Viewer";
+                    action = ":DiffviewOpen";
+                  }
+                  {
+                    icon = " ";
+                    key = "S";
+                    desc = "Restore Session";
+                    action = ":lua require('persistence').load()";
+                  }
+                  {
+                    icon = " ";
+                    key = "q";
+                    desc = "Quit";
+                    action = ":qa";
+                  }
+                ];
+              };
+              sections = [
+                {
+                  section = "header";
+                }
+                {
+                  section = "keys";
+                  gap = 1;
+                  padding = 1;
+                }
+              ];
+            };
             picker = {
               enabled = true;
               hidden = true;
@@ -154,7 +237,10 @@
                 };
               };
             };
-            explorer.enabled = true;
+            explorer = {
+              enabled = true;
+              replace_netrw = false;
+            };
             notifier.enabled = true;
             bufdelete.enabled = true;
             indent.enabled = true;
@@ -626,8 +712,8 @@
         }
         {
           key = "<leader>bd";
-          action.__raw = "function() Snacks.bufdelete() end";
-          options.desc = "Delete Buffer";
+          action.__raw = "function() Snacks.dashboard() end";
+          options.desc = "Open Dashboard";
         }
 
         # --- Find, Pickers & Terminal ---
