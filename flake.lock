@@ -25,11 +25,11 @@
         "superpowers": "superpowers"
       },
       "locked": {
-        "path": "./pkgs/agent-sources",
+        "path": "./src/pkgs/agent-sources",
         "type": "path"
       },
       "original": {
-        "path": "./pkgs/agent-sources",
+        "path": "./src/pkgs/agent-sources",
         "type": "path"
       },
       "parent": []

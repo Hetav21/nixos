@@ -5,7 +5,7 @@ Thin index of cross-cutting workflows. Where a topic has an owning doc, the link
 ## Security Considerations
 
 - **Never commit decrypted secrets**
-- Use `sops-nix` for secret management (see [secrets/README.md](../secrets/README.md))
+- Use `sops-nix` for secret management
 - Keep SSH keys and API tokens in `secrets/` only
 
 ## Change Namespace
@@ -19,13 +19,13 @@ Thin index of cross-cutting workflows. Where a topic has an owning doc, the link
 
 ## Update Flake Input
 
-- Routine updates: `nx update` — categories and semantics are owned by [docs/nx-commands.md](nx-commands.md).
+- Routine updates: `nx update` — categories and semantics are owned by [docs/commands.md](commands.md).
 - One-off single input: `nix flake update <input>`
 
 ## Add Custom Package
 
-Owned by **[pkgs/AGENTS.md](../pkgs/AGENTS.md)** — package definition, overlay exposure as `pkgs.custom.<name>`, and the agent-sources sub-flake workflow.
+Package definitions live in `src/pkgs/`, exposed via overlay as `pkgs.custom.<name>`, and the agent-sources sub-flake workflow.
 
 ## Add/Modify Secret
 
-Owned by **[secrets/README.md](../secrets/README.md)** — sops workflow, the secret entry shape in `secrets/default.nix`, and key management.
+sops workflow: secrets defined in `src/secrets/default.nix`, encrypted payloads stored in `secrets/` with `.sops.yaml`.

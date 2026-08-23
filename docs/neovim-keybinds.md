@@ -1,8 +1,8 @@
 # Neovim Keybindings Guide
 
-Declarative Neovim configuration is managed via [Nixvim](https://github.com/nix-community/nixvim) in `modules/home/development/neovim.nix` (module `home.development.neovim`).
+Declarative Neovim configuration is managed via [Nixvim](https://github.com/nix-community/nixvim) in `src/modules/home/development/neovim.nix` (module `home.development.neovim`).
 
-**Source of truth:** `modules/home/development/neovim.nix` — the single site configuring all options, plugins, language servers, formatters, and keybindings.
+**Source of truth:** `src/modules/home/development/neovim.nix` — the single site configuring all options, plugins, language servers, formatters, and keybindings.
 
 ---
 

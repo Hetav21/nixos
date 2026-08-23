@@ -60,7 +60,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    agent-sources.url = "path:./pkgs/agent-sources";
+    agent-sources.url = "path:./src/pkgs/agent-sources";
     nix-skills.url = "github:Hetav21/nix-skills";
     llm-agents.url = "github:numtide/llm-agents.nix";
   };
@@ -96,18 +96,18 @@
     inherit (self) outputs;
     inherit (nixpkgs) lib;
 
-    extraLib = import ./lib {inherit lib inputs outputs;};
-    nixpkgsLib = import ./lib/nixpkgs.nix inputs;
+    extraLib = import ./src/lib {inherit lib inputs outputs;};
+    nixpkgsLib = import ./src/lib/nixpkgs.nix inputs;
 
     # Host settings
-    commonSettings = import ./config/common.nix;
-    nixbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./config/nixbook.nix);
-    nixwslbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./config/nixwslbook.nix);
-    nixworkbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./config/nixworkbook.nix);
+    commonSettings = import ./src/config/common.nix;
+    nixbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./src/config/nixbook.nix);
+    nixwslbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./src/config/nixwslbook.nix);
+    nixworkbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./src/config/nixworkbook.nix);
 
     # Hardware profiles
-    hardware_asus = import ./config/hardware/asus.nix;
-    hardware_wsl = import ./config/hardware/wsl.nix;
+    hardware_asus = import ./src/config/hardware/asus.nix;
+    hardware_wsl = import ./src/config/hardware/wsl.nix;
 
     # System builder helper
     mkSystem = {
@@ -131,7 +131,7 @@
           // nixpkgsLib.mkChannelsFor settings.system;
         modules =
           [
-            ./hosts/${settings.hostname}/configuration.nix
+            ./src/hosts/${settings.hostname}/configuration.nix
           ]
           ++ extraLib.modules.common
           ++ extraModules;
@@ -139,11 +139,11 @@
   in {
     lib = extraLib;
     templates = import ./templates;
-    overlays = import ./overlays {
+    overlays = import ./src/overlays {
       inherit inputs;
       settings = commonSettings;
     };
-    checks.x86_64-linux = import ./checks {
+    checks.x86_64-linux = import ./src/checks {
       inherit self;
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
     };
