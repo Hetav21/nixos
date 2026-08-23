@@ -1,15 +1,17 @@
 {
+  extraLib,
   pkgs,
   config,
   inputs,
-  extraLib,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.desktop.launcher";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
+
+  guiConfig = {
+    # --- Hyprland Keybindings ---
     wayland.windowManager.hyprland.settings = {
       bind = [
         "$mainMod, D, exec, vicinae toggle"
@@ -17,29 +19,24 @@
         "$mainMod, Space, exec, vicinae vicinae://launch/core/search-emojis"
         "$mainMod, Q, exec, vicinae vicinae://launch/calculator/history"
       ];
-
-      layerrule = [
-        # blur
-        # "blur 1,match:class vicinae"
-        # "ignore_alpha 1,match:class vicinae"
-      ];
     };
 
+    # --- Vicinae Application Launcher ---
     programs.vicinae = {
       enable = true;
       package = pkgs.vicinae;
+      useLayerShell = true;
 
       systemd = {
         enable = true;
         autoStart = true;
       };
-      useLayerShell = true;
 
       settings = {
         close_on_focus_loss = true;
         consider_preedit = true;
         pop_to_root_on_close = true;
-        favicon_service = "twenty"; # twenty | google | none
+        favicon_service = "twenty";
         search_files_in_root = true;
 
         font = {
@@ -52,11 +49,12 @@
         };
       };
 
-      extensions = with inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}; [
-        nix
-        power-profile
+      extensions = let
+        vicinaePkgs = inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system};
+      in [
+        vicinaePkgs.nix
+        vicinaePkgs.power-profile
       ];
     };
   };
-})
-args
+}

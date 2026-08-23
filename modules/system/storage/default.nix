@@ -3,34 +3,35 @@
   config,
   ...
 }: {
+  # --- Submodules ---
   imports = [
-    ./ntfs.nix
-    ./syncthing.nix
-    ./rclone.nix
     ./localsend.nix
     ./megasync.nix
+    ./ntfs.nix
     ./onedrive.nix
+    ./rclone.nix
+    ./syncthing.nix
   ];
 
-  options = {
-    system.storage = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Enable essential storage tools and sync services (CLI)";
-      };
-      enableGui = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Enable all GUI cloud/sync agents";
-      };
+  # --- Options ---
+  options.system.storage = {
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable essential storage tools and sync services (CLI)";
+    };
+    enableGui = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable GUI cloud and sync clients";
     };
   };
 
+  # --- Configuration ---
   config = {
     system.storage.ntfs.enable = lib.mkDefault config.system.storage.enable;
-    system.storage.syncthing.enable = lib.mkDefault config.system.storage.enable;
     system.storage.rclone.enable = lib.mkDefault config.system.storage.enable;
+    system.storage.syncthing.enable = lib.mkDefault config.system.storage.enable;
 
     system.storage.localsend.enableGui = lib.mkDefault config.system.storage.enableGui;
     system.storage.megasync.enableGui = lib.mkDefault config.system.storage.enableGui;

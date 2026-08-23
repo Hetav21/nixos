@@ -4,12 +4,13 @@
   config,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.desktop.panel";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: let
-    # Stylix colors (base16 scheme)
+
+  guiConfig = let
+    # --- Theme & Colors ---
     colors = {
       base = "#${config.stylix.base16Scheme.base00}";
       text = "#${config.stylix.base16Scheme.base05}";
@@ -22,11 +23,10 @@
       surface = "#${config.stylix.base16Scheme.base01}";
     };
 
-    # Font and theme
     fontFamily = config.stylix.fonts.monospace.name;
     iconThemeName = config.gtk.iconTheme.name or "Papirus-Dark";
 
-    # Process QML files with variable substitution
+    # --- QML Template Processing ---
     processQml = file:
       pkgs.replaceVars file {
         iconTheme = iconThemeName;
@@ -55,6 +55,7 @@
       cp ${qmlDir}/IconValueDisplay.qml $out/IconValueDisplay.qml
     '';
   in {
+    # --- Assertions ---
     assertions = [
       {
         assertion = config.stylix.enable or false;
@@ -62,6 +63,7 @@
       }
     ];
 
+    # --- Quickshell Configuration ---
     programs.quickshell = {
       enable = true;
       package = pkgs.quickshell;
@@ -73,5 +75,4 @@
       configs.panel = panelConfigDir;
     };
   };
-})
-args
+}

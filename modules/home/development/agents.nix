@@ -4,15 +4,15 @@
   pkgs,
   pkgs-unstable,
   inputs,
-  settings,
   config,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.development.agents";
   hasCli = true;
   hasGui = false;
-  cliConfig = _: {
+  cliConfig = {
+    # --- Stylix & Aliases ---
     stylix.targets.opencode.enable = false;
 
     home.shellAliases = {
@@ -23,6 +23,7 @@
       cdx = "${lib.getExe inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex}";
     };
 
+    # --- Packages & Environment ---
     home.packages = [
       inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.antigravity-cli
       inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
@@ -38,6 +39,7 @@
     };
 
     programs = {
+      # --- OpenCode & MCP ---
       opencode = {
         enable = true;
         package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
@@ -55,6 +57,7 @@
           (lib.importJSON ../../../dotfiles/.config/mcp/mcp.json).mcpServers;
       };
 
+      # --- Agent Resources (Skills & Commands) ---
       agent-resources = {
         enable = true;
         commands = [
@@ -104,13 +107,14 @@
       };
     };
 
+    # --- Activation Hooks ---
     # Fix for opencode-google-antigravity-auth plugin: symlink @opencode-ai/plugin from config to cache
     home.activation.linkOpencodePlugin = lib.hm.dag.entryAfter ["writeBoundary"] ''
       $DRY_RUN_CMD mkdir -p ~/.cache/opencode/node_modules/@opencode-ai
       $DRY_RUN_CMD ln -sf ~/.config/opencode/node_modules/@opencode-ai/plugin ~/.cache/opencode/node_modules/@opencode-ai/plugin
     '';
 
-    # oh-my-opencode plugin configuration and Claude resources
+    # --- Dotfiles & Claude Configuration ---
     home.file = lib.mkMerge [
       {
         ".config/opencode/oh-my-opencode-slim.json".source =
@@ -141,5 +145,4 @@
       }
     ];
   };
-})
-args
+}

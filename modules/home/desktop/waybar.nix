@@ -1,16 +1,20 @@
 {extraLib, ...} @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.desktop.waybar";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
+
+  guiConfig = {
     stylix.targets.waybar.enable = false;
+
+    # --- Waybar Bar Configuration ---
     programs.waybar = {
       enable = true;
       systemd = {
         enable = true;
         target = "hyprland-session.target";
       };
+
       settings = [
         {
           layer = "top";
@@ -170,6 +174,8 @@
           };
         }
       ];
+
+      # --- Waybar Styling ---
       style = ''
         * {
           border: none;
@@ -314,5 +320,4 @@
       '';
     };
   };
-})
-args
+}

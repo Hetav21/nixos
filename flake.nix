@@ -1,7 +1,7 @@
 {
-  description = "Hetav's flake";
+  description = "Hetav's NixOS flake";
 
-  # Flake Inputs
+  # --- Flake Inputs ---
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?shallow=1&ref=nixos-unstable";
@@ -60,17 +60,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    agent-sources = {
-      url = "path:./pkgs/agent-sources";
-    };
-
-    nix-skills = {
-      url = "github:Hetav21/nix-skills";
-    };
+    agent-sources.url = "path:./pkgs/agent-sources";
+    nix-skills.url = "github:Hetav21/nix-skills";
     llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
-  # Passing extra nix config
+  # --- Binary Caches ---
   nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org"
@@ -92,7 +87,7 @@
     ];
   };
 
-  # Flake Outputs
+  # --- Flake Outputs ---
   outputs = {
     self,
     nixpkgs,
@@ -101,21 +96,46 @@
     inherit (self) outputs;
     inherit (nixpkgs) lib;
 
-    # Import unified library helpers (includes mkModule, mkSubstitute, mkProcessFile, mkHostSettings)
     extraLib = import ./lib {inherit lib inputs outputs;};
     nixpkgsLib = import ./lib/nixpkgs.nix inputs;
 
-    # Import modular configurations using extraLib.hosts.mkHostSettings
+    # Host settings
     commonSettings = import ./config/common.nix;
     nixbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./config/nixbook.nix);
     nixwslbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./config/nixwslbook.nix);
-    nixworkbookSettings = extraLib.hosts.mkHostSettings commonSettings (
-      import ./config/nixworkbook.nix
-    );
+    nixworkbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./config/nixworkbook.nix);
 
-    # Import hardware configurations
+    # Hardware profiles
     hardware_asus = import ./config/hardware/asus.nix;
     hardware_wsl = import ./config/hardware/wsl.nix;
+
+    # System builder helper
+    mkSystem = {
+      settings,
+      hardware,
+      extraModules ? [],
+    }:
+      lib.nixosSystem {
+        system = settings.system;
+        specialArgs =
+          {
+            inherit
+              self
+              inputs
+              outputs
+              extraLib
+              settings
+              hardware
+              ;
+          }
+          // nixpkgsLib.mkChannelsFor settings.system;
+        modules =
+          [
+            ./hosts/${settings.hostname}/configuration.nix
+          ]
+          ++ extraLib.modules.common
+          ++ extraModules;
+      };
   in {
     lib = extraLib;
     templates = import ./templates;
@@ -127,71 +147,25 @@
       inherit self;
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
     };
+
+    # --- System Configurations ---
     nixosConfigurations = {
-      nixbook = nixpkgs.lib.nixosSystem {
-        system = nixbookSettings.system;
-        specialArgs =
-          {
-            inherit
-              self
-              inputs
-              outputs
-              extraLib
-              ;
-            settings = nixbookSettings;
-            hardware = hardware_asus;
-          }
-          // nixpkgsLib.mkChannelsFor nixbookSettings.system;
-        modules =
-          [
-            ./hosts/nixbook/configuration.nix
-          ]
-          ++ extraLib.modules.common
-          ++ extraLib.modules.desktop;
+      nixbook = mkSystem {
+        settings = nixbookSettings;
+        hardware = hardware_asus;
+        extraModules = extraLib.modules.desktop;
       };
 
-      nixwslbook = nixpkgs.lib.nixosSystem {
-        system = nixwslbookSettings.system;
-        specialArgs =
-          {
-            inherit
-              self
-              inputs
-              outputs
-              extraLib
-              ;
-            settings = nixwslbookSettings;
-            hardware = hardware_wsl;
-          }
-          // nixpkgsLib.mkChannelsFor nixwslbookSettings.system;
-        modules =
-          [
-            ./hosts/nixwslbook/configuration.nix
-          ]
-          ++ extraLib.modules.common
-          ++ extraLib.modules.wsl;
+      nixwslbook = mkSystem {
+        settings = nixwslbookSettings;
+        hardware = hardware_wsl;
+        extraModules = extraLib.modules.wsl;
       };
 
-      nixworkbook = nixpkgs.lib.nixosSystem {
-        system = nixworkbookSettings.system;
-        specialArgs =
-          {
-            inherit
-              self
-              inputs
-              outputs
-              extraLib
-              ;
-            settings = nixworkbookSettings;
-            hardware = hardware_wsl;
-          }
-          // nixpkgsLib.mkChannelsFor nixworkbookSettings.system;
-        modules =
-          [
-            ./hosts/nixworkbook/configuration.nix
-          ]
-          ++ extraLib.modules.common
-          ++ extraLib.modules.wsl;
+      nixworkbook = mkSystem {
+        settings = nixworkbookSettings;
+        hardware = hardware_wsl;
+        extraModules = extraLib.modules.wsl;
       };
     };
   };

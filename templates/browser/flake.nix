@@ -1,9 +1,9 @@
 {
   description = "A Nix-flake-based Playwright browser testing environment";
 
+  # --- Flake Inputs ---
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
-
     nix-skills.url = "github:Hetav21/nix-skills";
 
     anthropic-skills = {
@@ -28,6 +28,7 @@
     };
   };
 
+  # --- Flake Outputs ---
   outputs = {
     self,
     nix-skills,

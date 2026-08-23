@@ -3,14 +3,14 @@
   pkgs-unstable,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.browser.chrome";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
+  guiConfig = {
+    # --- Google Chrome ---
     environment.systemPackages = [
       pkgs-unstable.google-chrome
     ];
   };
-})
-args
+}

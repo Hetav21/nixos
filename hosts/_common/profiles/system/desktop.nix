@@ -1,22 +1,22 @@
-# Desktop system profile with all features enabled
-# Includes: all system modules, desktop environment, applications, hardware support
 {
   lib,
   config,
   hardware ? {},
   ...
 }: {
+  # --- Profile Options ---
   options.profiles.system.desktop = {
     enable = lib.mkEnableOption "Desktop profile with all features";
   };
 
+  # --- Profile Configuration ---
   config = lib.mkIf config.profiles.system.desktop.enable {
-    # Core system
+    # --- Core System ---
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
     system.locale.enable = true;
 
-    # Enable all categorized modules with both CLI and GUI
+    # --- Virtualisation ---
     system.virtualisation = {
       docker.enable = true;
       podman.enable = true;
@@ -27,11 +27,15 @@
       android.enable = false;
       guest.enable = false;
     };
+
+    # --- Networking ---
     system.network = {
       base.enable = true;
       applet.enableGui = true;
       wireshark.enableGui = false;
     };
+
+    # --- Storage & File Sharing ---
     system.storage = {
       ntfs.enable = false;
       syncthing.enable = false;
@@ -40,6 +44,8 @@
       megasync.enableGui = true;
       onedrive.enableGui = false;
     };
+
+    # --- Media & Graphics ---
     system.media = {
       mpv.enable = true;
       pavucontrol.enableGui = true;
@@ -49,6 +55,8 @@
       spotify.enableGui = true;
       stremio.enableGui = true;
     };
+
+    # --- Productivity ---
     system.productivity = {
       thunar.enableGui = true;
       office.enableGui = true;
@@ -56,37 +64,43 @@
       teams.enableGui = false;
       latex.enableGui = true;
     };
+
+    # --- Communication ---
     system.communication = {
       zoom.enableGui = false;
       thunderbird.enableGui = true;
       discord.enableGui = true;
     };
+
+    # --- Web Browsers ---
     system.browser = {
       browseros.enableGui = true;
       brave.enableGui = true;
       chrome.enableGui = true;
       edge.enableGui = true;
     };
+
+    # --- Base Services ---
     system.baseservices = {
       locate.enable = true;
       cron.enable = true;
       gnupg.enable = true;
       flatpak.enableGui = true;
     };
+
+    # --- Local LLM & AI ---
     system.llm = {
       ollama.enable = false;
       vllm.enable = false;
       open-webui.enableGui = false;
     };
+
+    # --- Desktop Environment & Hardware ---
     system.desktopEnvironment.enableGui = true;
-
-    # Enable base hardware modules (audio, bluetooth, input, etc.)
     system.hardware.base.enable = true;
-
-    # Enable misc modules
     system.misc.diskDecryption.enable = false;
 
-    # Enable hardware drivers based on hardware config
+    # --- Hardware Drivers ---
     drivers.nvidia.enable = hardware.nvidia.enable or false;
     drivers.intel.enable = hardware.intel.enable or false;
     drivers.amdgpu.enable = hardware.amdgpu.enable or false;

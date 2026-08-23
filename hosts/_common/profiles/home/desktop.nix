@@ -1,22 +1,23 @@
-# Consolidated desktop home profile
 {
   lib,
   config,
   ...
 }: {
+  # --- Profile Options ---
   options.profiles.home.desktop = {
     enable = lib.mkEnableOption "Consolidated desktop home profile";
   };
 
+  # --- Profile Configuration ---
   config = lib.mkIf config.profiles.home.desktop.enable {
-    # System settings and utilities
+    # --- System Settings & Utilities ---
     home.system = {
       packages.enable = true;
       downloads.enable = true;
       nix.enable = true;
     };
 
-    # Development tools
+    # --- Development Tools ---
     home.development = {
       git.enable = true;
       neovim.enable = true;
@@ -27,7 +28,7 @@
       editors.enableGui = true;
     };
 
-    # Shell and CLI tools
+    # --- Shell & CLI Tools ---
     home.shell = {
       shells.enable = true;
       tmux.enable = true;
@@ -36,7 +37,7 @@
       terminals.enableGui = true;
     };
 
-    # Desktop components
+    # --- Desktop Components ---
     home.desktop = {
       hyprland.enableGui = true;
       hypridle.enableGui = true;
@@ -46,15 +47,15 @@
       clipboard.enableGui = true;
       launcher.enableGui = true;
       notification.enableGui = true;
-      rofi.enableGui = false; # Using launcher instead
+      rofi.enableGui = false;
       wallpaper.enableGui = true;
       panel.enableGui = true;
-      waybar.enableGui = false; # Using panel instead
+      waybar.enableGui = false;
       wlogout.enableGui = true;
       theme.enableGui = true;
     };
 
-    # Browsers enabled individually
+    # --- Web Browsers ---
     home.browser = {
       zen.enableGui = false;
       helium.enableGui = true;

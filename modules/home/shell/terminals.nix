@@ -3,11 +3,12 @@
   pkgs-unstable,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.shell.terminals";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
+  guiConfig = {
+    # --- Terminal Emulators ---
     programs = {
       alacritty = {
         enable = true;
@@ -20,5 +21,4 @@
       };
     };
   };
-})
-args
+}

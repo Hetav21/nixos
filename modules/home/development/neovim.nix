@@ -4,7 +4,7 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.development.neovim";
   hasCli = true;
   hasGui = false;
@@ -1660,5 +1660,4 @@
       ];
     };
   };
-})
-args
+}

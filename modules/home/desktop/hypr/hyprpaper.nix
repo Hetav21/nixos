@@ -1,23 +1,22 @@
 {
-  pkgs,
   extraLib,
+  pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.desktop.hyprpaper";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
-    services = {
-      hyprpaper = {
-        enable = true;
-        package = pkgs.hyprpaper;
-        settings = {
-          ipc = true;
-          splash = false;
-        };
+
+  guiConfig = {
+    # --- Hyprpaper Wallpaper Daemon ---
+    services.hyprpaper = {
+      enable = true;
+      package = pkgs.hyprpaper;
+      settings = {
+        ipc = true;
+        splash = false;
       };
     };
   };
-})
-args
+}

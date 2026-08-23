@@ -1,25 +1,16 @@
-# ASUS-specific hardware support (asusd, supergfxd, rog-control-center)
 {extraLib, ...} @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "drivers.asus";
   hasGui = false;
-  cliConfig = _: {
-    services = {
-      # supergfxd controls GPU switching
-      supergfxd.enable = true;
+  cliConfig = {
+    # --- ASUS Hardware Services ---
+    services.supergfxd.enable = true;
+    services.asusd.enable = true;
 
-      # ASUS specific software. This also installs asusctl.
-      asusd = {
-        enable = true;
-      };
-    };
-
-    programs = {
-      rog-control-center = {
-        enable = true;
-        autoStart = true;
-      };
+    # --- ROG Control Center ---
+    programs.rog-control-center = {
+      enable = true;
+      autoStart = true;
     };
   };
-})
-args
+}

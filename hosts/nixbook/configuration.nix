@@ -4,18 +4,15 @@
   config,
   ...
 }: {
+  # --- Host Imports & Path Setup ---
   imports = [
     ./hardware-configuration.nix
     ../_common
   ];
 
-  # Point to host-specific home.nix (centralized home-manager is in _common)
   local.homeConfig = ./home.nix;
 
-  # Host-specific stateVersion
-  system.stateVersion = lib.mkForce "25.11";
-
-  # Host-specific boot configuration (secure boot with lanzaboote)
+  # --- Boot & Kernel Configuration ---
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
     kernelModules = ["v4l2loopback"];
@@ -41,7 +38,7 @@
     };
   };
 
-  # Swap configuration for memory management
+  # --- Swap & Memory Management ---
   swapDevices = [
     {
       device = "/var/lib/swapfile";
@@ -49,7 +46,7 @@
     }
   ];
 
-  # Enable drivers
+  # --- Hardware & Graphics Drivers ---
   hardware.graphics = {
     enable = true;
     package = pkgs.mesa;
@@ -57,5 +54,7 @@
     package32 = pkgs.driversi686Linux.mesa;
   };
 
+  # --- Profiles & State Version ---
   profiles.system.desktop.enable = true;
+  system.stateVersion = lib.mkForce "25.11";
 }

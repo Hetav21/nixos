@@ -3,19 +3,21 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.desktop.wallpaper";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
-    home.packages = with pkgs; [
-      waypaper
+
+  guiConfig = {
+    # --- Packages ---
+    home.packages = [
+      pkgs.waypaper
     ];
 
+    # --- Wallpaper Daemon ---
     services.awww = {
       enable = true;
       package = pkgs.awww;
     };
   };
-})
-args
+}

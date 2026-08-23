@@ -3,19 +3,18 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.storage.localsend";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
-    environment.systemPackages = with pkgs; [
-      localsend
-    ];
+  guiConfig = {
+    # --- Packages ---
+    environment.systemPackages = [pkgs.localsend];
 
+    # --- Programs ---
     programs.localsend = {
       enable = true;
       openFirewall = true;
     };
   };
-})
-args
+}

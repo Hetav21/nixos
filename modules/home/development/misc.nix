@@ -1,15 +1,15 @@
 {
   extraLib,
-  lib,
   pkgs,
   pkgs-unstable,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.development.misc";
   hasCli = true;
   hasGui = true;
-  cliConfig = _: {
+  cliConfig = {
+    # --- Nushell Docker Helpers ---
     programs.nushell.extraConfig = ''
       def "docker-clean" [] {
         print "Cleaning Docker..."
@@ -31,6 +31,7 @@
       }
     '';
 
+    # --- CLI Packages ---
     home.packages =
       (with pkgs; [
         awscli2
@@ -42,12 +43,12 @@
       ]);
   };
 
-  guiConfig = _: {
+  guiConfig = {
+    # --- GUI Packages ---
     home.packages = with pkgs; [
       mongodb-compass
       hoppscotch
       bruno
     ];
   };
-})
-args
+}

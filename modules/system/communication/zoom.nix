@@ -3,14 +3,14 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.communication.zoom";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
+  guiConfig = {
+    # --- Zoom Video Conferencing ---
     environment.systemPackages = [
       pkgs.zoom-us
     ];
   };
-})
-args
+}

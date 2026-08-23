@@ -1,4 +1,5 @@
 {...}: {
+  # --- Submodule Imports ---
   imports = [
     ./hyprland.nix
     ./hypridle.nix

@@ -3,11 +3,12 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.shell.tmux";
   hasCli = true;
   hasGui = false;
-  cliConfig = _: {
+  cliConfig = {
+    # --- Tmux Configuration ---
     programs.tmux = {
       enable = true;
       plugins = with pkgs; [
@@ -60,5 +61,4 @@
       '';
     };
   };
-})
-args
+}

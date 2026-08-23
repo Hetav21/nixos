@@ -3,14 +3,14 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.browser.browseros";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
+  guiConfig = {
+    # --- BrowserOS ---
     environment.systemPackages = [
       pkgs.custom.browseros
     ];
   };
-})
-args
+}

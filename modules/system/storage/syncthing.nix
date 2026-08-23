@@ -1,10 +1,9 @@
 {
   extraLib,
-  pkgs,
   settings,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.storage.syncthing";
   hasCli = true;
   hasGui = false;
@@ -12,6 +11,7 @@
     username = settings.username;
     homeDirectory = config.users.users.${username}.home;
   in {
+    # --- Syncthing Service ---
     services.syncthing = {
       enable = true;
       user = username;
@@ -19,5 +19,4 @@
       configDir = "${homeDirectory}/.config/syncthing";
     };
   };
-})
-args
+}

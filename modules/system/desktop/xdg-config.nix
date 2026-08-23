@@ -6,12 +6,12 @@
   hardware ? {},
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.desktop.xdgConfig";
   hasGui = false;
-  cliConfig = _: {
+  cliConfig = {
+    # --- Session Variables ---
     environment.sessionVariables = lib.mkMerge [
-      # Common XDG environment variables
       {
         XDG_CONFIG_HOME = "$HOME/.config";
         XDG_DATA_HOME = "$HOME/.local/share";
@@ -23,13 +23,13 @@
         XDG_SESSION_DESKTOP = "Hyprland";
       }
 
-      # Intel-specific variables
+      # Intel hardware acceleration
       (lib.mkIf (hardware ? intel && hardware.intel.enable) {
         ANV_VIDEO_DECODE = "1";
         LIBVA_DRIVER_NAME = "iHD";
       })
 
-      # Nvidia-specific variables
+      # Nvidia hardware acceleration
       (lib.mkIf (hardware ? nvidia && hardware.nvidia.enable) {
         VDPAU_DRIVER = "nvidia";
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
@@ -38,10 +38,11 @@
       })
     ];
 
+    # --- XDG User & MIME Configuration ---
     xdg = {
       autostart.enable = true;
       mime.defaultApplications = {
-        # Web and HTML
+        # Web & HTML
         "x-scheme-handler/http" = "${settings.browser}.desktop";
         "x-scheme-handler/https" = "${settings.browser}.desktop";
         "x-scheme-handler/chrome" = "${settings.browser}.desktop";
@@ -55,25 +56,25 @@
         "x-scheme-handler/about" = "${settings.browser}.desktop";
         "x-scheme-handler/unknown" = "${settings.browser}.desktop";
 
-        # File management
+        # File Management
         "inode/directory" = "thunar.desktop";
 
-        # Text editor
+        # Text Editors
         "text/plain" = "dev.zed.Zed.desktop";
-        "text/markdown" = "obsidian.desktop;";
+        "text/markdown" = "obsidian.desktop";
         "application/x-zerosize" = "dev.zed.Zed.desktop";
         "application/x-ipynb+json" = "code.desktop";
 
         # Terminal
         "x-scheme-handler/terminal" = "ghostty.desktop";
 
-        # Image and Videos
+        # Media & Documents
         "video/quicktime" = "mpv.desktop";
         "video/x-matroska" = "mpv.desktop";
         "image/png" = "org.gnome.Papers.desktop";
         "image/jpeg" = "org.gnome.Papers.desktop";
 
-        # LibreOffice formats
+        # Office Formats
         "application/vnd.oasis.opendocument.text" = "org.libreoffice.LibreOffice.writer.desktop";
         "application/vnd.oasis.opendocument.spreadsheet" = "org.libreoffice.LibreOffice.calc.desktop";
         "application/vnd.oasis.opendocument.presentation" = "org.libreoffice.LibreOffice.impress.desktop";
@@ -84,26 +85,25 @@
         "application/vnd.ms-powerpoint" = "org.libreoffice.LibreOffice.impress.desktop";
         "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "org.libreoffice.LibreOffice.impress.desktop";
 
-        # PDF
+        # PDF & Torrents
         "application/pdf" = "microsoft-edge.desktop";
-
-        # Torrents
         "application/x-bittorrent" = "org.qbittorrent.qBittorrent.desktop";
         "x-scheme-handler/magnet" = "org.qbittorrent.qBittorrent.desktop";
 
-        # Other handlers
+        # URL Handlers
         "x-scheme-handler/discord" = "vesktop.desktop";
         "hoppscotch" = "hoppscotch-handler.desktop";
-        # "x-scheme-handler/postman" = "Postman.desktop";
         "x-scheme-handler/tonsite" = "org.telegram.desktop.desktop";
       };
+
+      # --- Portals ---
       portal = {
         enable = true;
-        wlr.enable = false; # Disabled - using hyprland portal instead
+        wlr.enable = false;
         xdgOpenUsePortal = true;
-        extraPortals = with pkgs; [
-          xdg-desktop-portal-hyprland
-          xdg-desktop-portal-gtk # Provides OpenURI, FileChooser, AppChooser
+        extraPortals = [
+          pkgs.xdg-desktop-portal-hyprland
+          pkgs.xdg-desktop-portal-gtk
         ];
         config.common.default = ["hyprland"];
       };
@@ -112,9 +112,10 @@
       sounds.enable = true;
     };
 
+    # --- XServer Keyboard Configuration ---
     services.xserver = {
       enable = true;
-      exportConfiguration = true; # Make sure /etc/X11/xkb is populated so localectl works correctly
+      exportConfiguration = true;
       xkb = {
         layout = settings.keyboard.layout;
         variant = settings.keyboard.variant;
@@ -122,5 +123,4 @@
       videoDrivers = ["modesetting"];
     };
   };
-})
-args
+}

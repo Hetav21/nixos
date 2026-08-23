@@ -1,28 +1,25 @@
 {
   extraLib,
-  lib,
   pkgs,
   inputs,
   settings,
   ...
 } @ args:
-{
-  imports = [
-    inputs.zen-browser.homeModules.beta
-    # or inputs.zen-browser.homeModules.twilight
-    # or inputs.zen-browser.homeModules.twilight-official
-  ];
-}
-// (extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.browser.zen";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
+  imports = [
+    inputs.zen-browser.homeModules.beta
+  ];
+  guiConfig = {
+    # --- Stylix Theming ---
     stylix.targets.zen-browser = {
       enable = true;
       profileNames = ["${settings.username}"];
     };
 
+    # --- Zen Browser Configuration ---
     programs.zen-browser = {
       enable = true;
       nativeMessagingHosts = [pkgs.firefoxpwa];
@@ -31,8 +28,9 @@
           isDefault = true;
         };
       };
+
+      # --- Browser Policies (https://mozilla.github.io/policy-templates/) ---
       policies = {
-        # find more options here: https://mozilla.github.io/policy-templates/
         AutofillAddressEnabled = true;
         AutofillCreditCardEnabled = false;
         DisableAppUpdate = true;
@@ -49,22 +47,21 @@
           Cryptomining = true;
           Fingerprinting = true;
         };
+
+        # --- Preferences ---
         Preferences = let
           locked = value: {
             "Value" = value;
             "Status" = "locked";
           };
         in {
-          # Nebula Preferences
           "nebula-tab-switch-animation" = locked 4;
           "nebula-tab-loading-animation" = locked 0;
-
-          # Zen Preferences
           "zen.view.grey-out-inactive-windows" = locked false;
-
-          # Firefox Preferences
           "browser.tabs.warnOnClose" = locked false;
         };
+
+        # --- Search Engines ---
         SearchEngines = {
           Default = "Unduck";
           Add = [
@@ -85,5 +82,4 @@
       };
     };
   };
-})
-args
+}

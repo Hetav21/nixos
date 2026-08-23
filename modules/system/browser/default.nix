@@ -3,6 +3,7 @@
   config,
   ...
 }: {
+  # --- Browser Submodules ---
   imports = [
     ./browseros.nix
     ./brave.nix
@@ -10,16 +11,16 @@
     ./edge.nix
   ];
 
-  options = {
-    system.browser = {
-      enableGui = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Enable all GUI web browsers";
-      };
+  # --- Options ---
+  options.system.browser = {
+    enableGui = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable all GUI web browsers";
     };
   };
 
+  # --- Default Propagations ---
   config = {
     system.browser.browseros.enableGui = lib.mkDefault config.system.browser.enableGui;
     system.browser.brave.enableGui = lib.mkDefault config.system.browser.enableGui;

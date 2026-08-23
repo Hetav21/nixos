@@ -1,32 +1,28 @@
 {
   lib,
-  stdenvNoCC,
   fetchzip,
   writeShellScriptBin,
   symlinkJoin,
 }: let
   version = "0.1.871612270";
 
+  # --- Source Binary ---
   exe = fetchzip {
     url = "https://github.com/stuartleeks/wsl-notify-send/releases/download/v${version}/wsl-notify-send_windows_amd64.zip";
     sha256 = "1023i80xmkm04jl75l0nzw8zg907kwll9g8280vxdhqj35pwj6rr";
     stripRoot = false;
   };
 
-  # Wrapper that mimics libnotify's notify-send interface
-  # notify-send accepts: notify-send [OPTIONS] SUMMARY [BODY]
-  # wsl-notify-send only accepts a single positional arg, so we combine summary + body
+  # --- Wrappers ---
+  # notify-send compatibility wrapper combining SUMMARY and BODY
   notify-send-wrapper = writeShellScriptBin "notify-send" ''
-    # Parse arguments - extract options and positional args
     POSITIONAL=()
     while [[ $# -gt 0 ]]; do
       case $1 in
         -u|--urgency|-t|--expire-time|-i|--icon|-c|--category|-h|--hint)
-          # Skip these options and their values (wsl-notify-send ignores most)
           shift 2
           ;;
         -*)
-          # Skip unknown options
           shift
           ;;
         *)
@@ -36,13 +32,11 @@
       esac
     done
 
-    # Combine positional args: first is summary, rest is body
     if [[ ''${#POSITIONAL[@]} -eq 0 ]]; then
       MESSAGE=""
     elif [[ ''${#POSITIONAL[@]} -eq 1 ]]; then
       MESSAGE="''${POSITIONAL[0]}"
     else
-      # Combine: "SUMMARY: BODY"
       MESSAGE="''${POSITIONAL[0]}: ''${POSITIONAL[*]:1}"
     fi
 
@@ -54,11 +48,12 @@
     exec "${exe}/wsl-notify-send.exe" --appId "$WSL_DISTRO_NAME" --category "$WSL_DISTRO_NAME" "$MESSAGE"
   '';
 
-  # Direct access to wsl-notify-send
+  # Native wsl-notify-send executable wrapper
   wsl-notify-send = writeShellScriptBin "wsl-notify-send" ''
     exec "${exe}/wsl-notify-send.exe" "$@"
   '';
 in
+  # --- Package Output ---
   symlinkJoin {
     name = "wsl-notify-send-${version}";
     paths = [

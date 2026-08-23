@@ -18,33 +18,31 @@ All modules use the `extraLib.modules.mkModule` helper for consistent behavior a
 
 **Requirements:**
 
-1. Destructure `extraLib` and other args (`lib`, `pkgs`, `config`) in the top-level function.
-2. Pass `@ args` to the top-level function.
-3. Call the result of `extraLib.modules.mkModule` with `args`.
+1. Destructure `extraLib` and required args in the top-level function.
+2. Pass `@ args` to `extraLib.modules.mkModule args { ... }`.
+3. Use section boundary comments (`# --- Section Name ---`) to demarcate logical blocks.
 
 ```nix
 {
   extraLib,
-  lib,
   pkgs,
-  config,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.<category>.<feature>";
   hasCli = true; # default true  -> generates <name>.enable
   hasGui = true; # default false -> generates <name>.enableGui
 
-  # Configuration for CLI/Server (enabled by cfg.enable)
-  cliConfig = _: {
+  # --- CLI / Server Configuration ---
+  cliConfig = {
     environment.systemPackages = [ pkgs.tool ];
   };
 
-  # Configuration for GUI (enabled by cfg.enableGui)
-  guiConfig = _: {
+  # --- GUI Configuration ---
+  guiConfig = {
     programs.gui-tool.enable = true;
   };
-}) args
+}
 ```
 
 ## Best Practices

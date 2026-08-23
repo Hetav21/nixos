@@ -1,27 +1,28 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-# Define variables for directories and files
-USER_HOME=$(eval echo ~$SUDO_USER)
+# --- Paths & Configuration ---
+USER_HOME="$(eval echo "~$SUDO_USER")"
 FLAKE_DIR="$USER_HOME/nix"
 
-# Run nixos-generate-config command
-sudo nixos-generate-config --show-hardware-config > "$FLAKE_DIR/hosts/default/hardware-configuration.nix" || { echo "Failed to generate hardware configuration"; exit 1; }
+# --- Hardware Configuration ---
+sudo nixos-generate-config --show-hardware-config > "$FLAKE_DIR/hosts/default/hardware-configuration.nix" || {
+  echo "Error: Failed to generate hardware configuration" >&2
+  exit 1
+}
 
-# Navigate to home directory
-cd "$USER_HOME" || { echo "Failed to cd to home directory"; exit 1; }
+# --- System Build ---
+cd "$FLAKE_DIR" || {
+  echo "Error: Failed to cd to $FLAKE_DIR" >&2
+  exit 1
+}
 
-# Navigate back to ~/nix
-cd "$FLAKE_DIR" || { echo "Failed to cd to $FLAKE_DIR"; exit 1; }
+sudo nixos-rebuild switch --flake .#default || {
+  echo "Error: Failed to rebuild NixOS configuration" >&2
+  exit 1
+}
 
-# Rebuild NixOS configuration
-sudo nixos-rebuild switch --flake .#default || { echo "Failed to rebuild NixOS configuration"; exit 1; }
+# --- Post-Install Steps ---
+sudo virsh net-autostart default || true
 
-# Post Install
-## Auto Start virt network bridge
-sudo virsh net-autostart default
-## Copy zed dotfiles
-## Copy vscode settings
-## Copy npm config
-## Copy sublime text
-
-echo "Script completed successfully."
+echo "Installation completed successfully."

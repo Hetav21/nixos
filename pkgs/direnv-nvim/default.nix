@@ -7,6 +7,7 @@ vimUtils.buildVimPlugin {
   pname = "direnv.nvim";
   version = "2026-06-29";
 
+  # --- Source ---
   src = fetchFromGitHub {
     owner = "NotAShelf";
     repo = "direnv.nvim";
@@ -14,10 +15,10 @@ vimUtils.buildVimPlugin {
     hash = "sha256-b5PpmkYWaDGLNcu+36tRR5ycATHYBjs9WrV8/jfmooQ=";
   };
 
+  # --- Metadata ---
   meta = with lib; {
     description = "Direnv integration for Neovim written in Lua";
     homepage = "https://github.com/NotAShelf/direnv.nvim";
     license = licenses.mpl20;
-    maintainers = [];
   };
 }

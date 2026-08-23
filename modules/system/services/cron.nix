@@ -1,12 +1,10 @@
 {extraLib, ...} @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.baseservices.cron";
   hasCli = true;
   hasGui = false;
-  cliConfig = _: {
-    services.cron = {
-      enable = true;
-    };
+  cliConfig = {
+    # --- Cron Service ---
+    services.cron.enable = true;
   };
-})
-args
+}

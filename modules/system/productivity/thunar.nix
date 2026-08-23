@@ -3,20 +3,24 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.productivity.thunar";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
-    environment.systemPackages = with pkgs; [
-      thunar
-      file-roller
+  guiConfig = {
+    # --- Packages ---
+    environment.systemPackages = [
+      pkgs.thunar
+      pkgs.file-roller
     ];
 
+    # --- Programs ---
     programs.thunar = {
       enable = true;
-      plugins = with pkgs; [thunar-archive-plugin thunar-volman];
+      plugins = [
+        pkgs.thunar-archive-plugin
+        pkgs.thunar-volman
+      ];
     };
   };
-})
-args
+}

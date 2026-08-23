@@ -2,23 +2,22 @@
   extraLib,
   lib,
   pkgs,
-  pkgs-unstable,
   settings,
-  config,
-  inputs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.shell.shells";
   hasCli = true;
   hasGui = false;
-  cliConfig = _: {
+  cliConfig = {
+    # --- Aliases ---
     home.shellAliases = {
       cls = "clear";
       e = "exit";
     };
 
     programs = {
+      # --- Fish Shell ---
       fish = {
         enable = true;
         package = pkgs.fish;
@@ -28,6 +27,7 @@
         '';
       };
 
+      # --- Nushell ---
       nushell = {
         enable = true;
         package = pkgs.nushell;
@@ -57,19 +57,17 @@
           }
         '';
 
-        extraConfig =
-          # Include the custom nushell config from dotfiles
-          builtins.readFile ../../../dotfiles/.config/nushell/config.nu
-          + ''
-            clear
-            if ('.git' | path exists) {
-              ${lib.getExe pkgs.onefetch}
-            } else {
-              ${lib.getExe pkgs.microfetch}
-            }
-          '';
+        extraConfig = ''
+          ${builtins.readFile ../../../dotfiles/.config/nushell/config.nu}
+
+          clear
+          if ('.git' | path exists) {
+            ${lib.getExe pkgs.onefetch}
+          } else {
+            ${lib.getExe pkgs.microfetch}
+          }
+        '';
       };
     };
   };
-})
-args
+}

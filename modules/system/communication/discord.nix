@@ -3,15 +3,15 @@
   pkgs-unstable,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.communication.discord";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
-    environment.systemPackages = with pkgs-unstable; [
-      discord
-      vesktop
+  guiConfig = {
+    # --- Discord Clients ---
+    environment.systemPackages = [
+      pkgs-unstable.discord
+      pkgs-unstable.vesktop
     ];
   };
-})
-args
+}

@@ -1,6 +1,7 @@
 {
   description = "A Nix-flake-based Jupyter Notebook environment";
 
+  # --- Flake Inputs ---
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
     nix-skills.url = "github:Hetav21/nix-skills";
@@ -11,9 +12,9 @@
     };
   };
 
+  # --- Flake Outputs ---
   outputs = {
     self,
-    nixpkgs,
     nix-skills,
     ...
   } @ inputs: let
@@ -24,10 +25,10 @@
       "aarch64-darwin"
     ];
     forEachSupportedSystem = f:
-      nixpkgs.lib.genAttrs supportedSystems (
+      inputs.nixpkgs.lib.genAttrs supportedSystems (
         system:
           f {
-            pkgs = import nixpkgs {inherit system;};
+            pkgs = import inputs.nixpkgs {inherit system;};
           }
       );
   in {

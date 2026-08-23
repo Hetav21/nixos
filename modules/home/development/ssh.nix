@@ -1,11 +1,13 @@
 {extraLib, ...} @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.development.ssh";
   hasCli = true;
   hasGui = false;
-  cliConfig = _: {
+  cliConfig = {
+    # --- SSH Agent Service ---
     services.ssh-agent.enable = true;
 
+    # --- SSH Client Configuration ---
     programs.ssh = {
       enable = true;
       enableDefaultConfig = false;
@@ -27,5 +29,4 @@
       };
     };
   };
-})
-args
+}

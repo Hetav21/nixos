@@ -3,14 +3,14 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.media.pavucontrol";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
-    environment.systemPackages = with pkgs; [
-      pavucontrol
+  guiConfig = {
+    # --- Volume Control ---
+    environment.systemPackages = [
+      pkgs.pavucontrol
     ];
   };
-})
-args
+}

@@ -1,30 +1,29 @@
-# Base hardware configuration (audio, bluetooth, input, etc.)
 {
   extraLib,
   pkgs,
   pkgs-unstable,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.hardware.base";
   hasGui = false;
-  cliConfig = _: {
-    environment.systemPackages =
-      [
-        pkgs.alsa-utils
-        pkgs.pulseaudio
-        pkgs.brightnessctl
-        pkgs.nvtopPackages.full
-      ]
-      ++ [
-        pkgs-unstable.lact
-      ];
+  cliConfig = {
+    # --- Hardware Management Packages ---
+    environment.systemPackages = [
+      pkgs.alsa-utils
+      pkgs.pulseaudio
+      pkgs.brightnessctl
+      pkgs.nvtopPackages.full
+      pkgs-unstable.lact
+    ];
 
+    # --- Systemd Services ---
     systemd = {
       packages = [pkgs-unstable.lact];
       services.lactd.wantedBy = ["multi-user.target"];
     };
 
+    # --- System & Audio Services ---
     services = {
       blueman.enable = true;
       pulseaudio.enable = false;
@@ -49,6 +48,7 @@
       };
     };
 
+    # --- Hardware Integration ---
     hardware = {
       logitech.wireless = {
         enable = true;
@@ -60,5 +60,4 @@
       };
     };
   };
-})
-args
+}

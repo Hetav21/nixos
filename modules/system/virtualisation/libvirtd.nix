@@ -4,11 +4,12 @@
   settings,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.virtualisation.libvirtd";
   hasCli = true;
   hasGui = false;
   cliConfig = {
+    # --- Libvirtd Service ---
     virtualisation.libvirtd = {
       enable = true;
       qemu = {
@@ -19,11 +20,12 @@
       extraConfig = ''firewall_backend = "nftables"'';
     };
 
+    # --- User Groups ---
     users.users.${settings.username}.extraGroups = ["libvirtd" "kvm"];
 
+    # --- Firmware Symlinks ---
     systemd.tmpfiles.rules = [
       "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware"
     ];
   };
-})
-args
+}

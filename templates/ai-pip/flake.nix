@@ -1,6 +1,7 @@
 {
   description = "A Nix-flake-based Python AI development environment (pip)";
 
+  # --- Flake Inputs ---
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
     nix-skills.url = "github:Hetav21/nix-skills";
@@ -19,6 +20,7 @@
     };
   };
 
+  # --- Flake Outputs ---
   outputs = {
     self,
     nix-skills,
@@ -38,20 +40,7 @@
           }
       );
 
-    /*
-    * Change this value ({major}.{min}) to
-    * update the Python virtual-environment
-    * version. When you do this, make sure
-    * to delete the `.venv` directory to
-    * have the hook rebuild it for the new
-    * version, since it won't overwrite an
-    * existing one. After this, reload the
-    * development shell to rebuild it.
-    * You'll see a warning asking you to
-    * do this when version mismatches are
-    * present. For safety, removal should
-    * be a manual step, even if trivial.
-    */
+    # Target Python version (delete .venv/ when changing to trigger environment rebuild)
     version = "3.13";
   in {
     devShells = forEachSupportedSystem (
@@ -72,12 +61,12 @@
 
           postShellHook = ''
             venvVersionWarn() {
-            	local venvVersion
-            	venvVersion="$("$venvDir/bin/python" -c 'import platform; print(platform.python_version())')"
+              local venvVersion
+              venvVersion="$("$venvDir/bin/python" -c 'import platform; print(platform.python_version())')"
 
-            	[[ "$venvVersion" == "${python.version}" ]] && return
+              [[ "$venvVersion" == "${python.version}" ]] && return
 
-            	cat <<EOF
+              cat <<EOF
             Warning: Python version mismatch: [$venvVersion (venv)] != [${python.version}]
                      Delete '$venvDir' and reload to rebuild for version ${python.version}
             EOF
@@ -90,23 +79,6 @@
             python.pkgs.venvShellHook
             python.pkgs.pip
             python.pkgs.uv
-
-            /*
-            Add whatever else you'd like here.
-            */
-            # pkgs.basedpyright
-
-            # pkgs.black
-            /*
-            or
-            */
-            # python.pkgs.black
-
-            # pkgs.ruff
-            /*
-            or
-            */
-            # python.pkgs.ruff
           ];
 
           skills = [

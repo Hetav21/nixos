@@ -4,16 +4,18 @@
   settings,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.baseservices.locate";
   hasCli = true;
   hasGui = false;
-  cliConfig = _: {
+  cliConfig = {
+    # --- Locate Service ---
     services.locate = {
       enable = true;
       package = pkgs.mlocate;
     };
+
+    # --- User Groups ---
     users.users.${settings.username}.extraGroups = ["mlocate"];
   };
-})
-args
+}

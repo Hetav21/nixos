@@ -3,7 +3,7 @@
   settings,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.network.base";
   hasCli = true;
   hasGui = false;
@@ -12,18 +12,19 @@
     config,
     ...
   }: {
+    # --- Network Configuration ---
     networking = {
       hostName = settings.hostname;
       networkmanager.enable = true;
-      # Only set custom nameservers on non-WSL systems (WSL manages resolv.conf)
-      nameservers = lib.mkIf (!(config.wsl.enable or false)) ["1.1.1.1" "8.8.8.8"];
-      # Firewall configuration
-      firewall = {
-        enable = true;
-      };
+      # Custom nameservers are skipped on WSL because WSL dynamically manages /etc/resolv.conf
+      nameservers = lib.mkIf (!(config.wsl.enable or false)) [
+        "1.1.1.1"
+        "8.8.8.8"
+      ];
+      firewall.enable = true;
     };
 
+    # --- User Groups ---
     users.users.${settings.username}.extraGroups = ["networkmanager"];
   };
-})
-args
+}

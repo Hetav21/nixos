@@ -4,25 +4,28 @@
   settings,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.nix.settings";
   hasGui = false;
-  cliConfig = _: {
-    environment.systemPackages = [
-      pkgs.nix-update
-    ];
+  cliConfig = {
+    # --- System Packages ---
+    environment.systemPackages = [pkgs.nix-update];
 
-    # Override NixOS default EDITOR (nano) with user's choice
+    # --- Environment Variables ---
     environment.variables = {
       EDITOR = settings.editor;
       VISUAL = settings.visual;
     };
 
+    # --- Nix Daemon Settings ---
     nix = {
       settings = {
-        trusted-users = ["root" "${settings.username}"];
+        trusted-users = ["root" settings.username];
         auto-optimise-store = true;
-        experimental-features = ["nix-command" "flakes"];
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
         stalled-download-timeout = 99999999;
         max-jobs = settings.nix.maxJobs or 2;
         cores = settings.nix.cores or 8;
@@ -39,5 +42,4 @@
       };
     };
   };
-})
-args
+}

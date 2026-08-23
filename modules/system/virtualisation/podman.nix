@@ -3,13 +3,13 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.virtualisation.podman";
   cliConfig = {
-    environment.systemPackages = with pkgs; [
-      podman-compose
-    ];
+    # --- Packages ---
+    environment.systemPackages = [pkgs.podman-compose];
 
+    # --- Container Runtime ---
     virtualisation = {
       containers.enable = true;
       podman = {
@@ -19,5 +19,4 @@
       };
     };
   };
-})
-args
+}

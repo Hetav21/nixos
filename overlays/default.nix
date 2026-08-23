@@ -3,18 +3,14 @@
   settings,
   ...
 }: {
-  # Overlay custom derivations into nixpkgs so you can use pkgs.custom.<name>
+  # --- Custom Packages Overlay (pkgs.custom.*) ---
   additions = final: _prev: {
     custom = import ../pkgs {
       pkgs = final;
-      settings = settings;
-      inputs = inputs;
+      inherit settings inputs;
     };
   };
 
-  # NUR overlay - provides pkgs.nur-packages
-  # https://wiki.nixos.org/wiki/Overlays
-  modifications = _final: _prev: {
-    nur = inputs.nur.overlays.default;
-  };
+  # --- NUR (Nix User Repository) Overlay ---
+  nur = inputs.nur.overlays.default;
 }

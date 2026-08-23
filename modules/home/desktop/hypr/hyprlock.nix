@@ -6,11 +6,13 @@
   settings,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.desktop.hyprlock";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
+
+  guiConfig = {
+    # --- Hyprland Keybindings ---
     wayland.windowManager.hyprland.settings = {
       "$lock" = "hyprlock";
 
@@ -19,11 +21,12 @@
       ];
     };
 
+    # --- Hyprlock Configuration ---
     programs.hyprlock = {
       enable = true;
       package = pkgs.hyprlock;
-
       sourceFirst = true;
+
       settings = {
         general = {
           no_fade_in = false;
@@ -90,5 +93,4 @@
       };
     };
   };
-})
-args
+}

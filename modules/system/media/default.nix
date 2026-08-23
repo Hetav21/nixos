@@ -3,6 +3,7 @@
   config,
   ...
 }: {
+  # --- Media Submodules ---
   imports = [
     ./mpv.nix
     ./pavucontrol.nix
@@ -13,21 +14,21 @@
     ./stremio.nix
   ];
 
-  options = {
-    system.media = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Enable media command-line players (CLI)";
-      };
-      enableGui = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Enable all GUI media creation, editing and playback apps";
-      };
+  # --- Options ---
+  options.system.media = {
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable media command-line players (CLI)";
+    };
+    enableGui = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable all GUI media creation, editing and playback apps";
     };
   };
 
+  # --- Default Propagations ---
   config = {
     system.media.mpv.enable = lib.mkDefault config.system.media.enable;
 

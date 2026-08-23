@@ -3,14 +3,12 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.network.applet";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
-    environment.systemPackages = [
-      pkgs.networkmanagerapplet
-    ];
+  guiConfig = {
+    # --- Packages ---
+    environment.systemPackages = [pkgs.networkmanagerapplet];
   };
-})
-args
+}

@@ -5,10 +5,11 @@
   settings,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.desktop.environment";
   hasGui = false;
-  cliConfig = _: {
+  cliConfig = {
+    # --- Desktop Session Variables ---
     environment.sessionVariables = {
       TERMINAL = settings.terminal;
       BROWSER = settings.browser;
@@ -23,6 +24,7 @@
       ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     };
 
+    # --- User Background Services ---
     systemd.user.services = {
       mute-on-boot = {
         enable = true;
@@ -37,8 +39,7 @@
       };
     };
 
-    # Enable Stylix theming for desktop environments
+    # --- System Theming ---
     system.stylix.enable = true;
   };
-})
-args
+}

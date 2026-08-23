@@ -1,4 +1,5 @@
 {
+  # --- Base Templates ---
   default = {
     path = ./empty;
     description = "Empty development environment";
@@ -7,6 +8,8 @@
     path = ./empty;
     description = "Empty development environment";
   };
+
+  # --- Frontend Templates ---
   frontend-bun = {
     path = ./frontend-bun;
     description = "Frontend Bun development environment (Playwright)";
@@ -15,6 +18,8 @@
     path = ./frontend-node;
     description = "Frontend Node.js development environment (Playwright)";
   };
+
+  # --- Backend Templates ---
   backend-bun = {
     path = ./backend-bun;
     description = "Backend Bun development environment";
@@ -27,6 +32,8 @@
     path = ./backend-go;
     description = "Backend Golang development environment";
   };
+
+  # --- AI & Data Templates ---
   ai-pip = {
     path = ./ai-pip;
     description = "AI Python environment (pip)";
@@ -39,6 +46,8 @@
     path = ./notebook;
     description = "Jupyter Notebook environment";
   };
+
+  # --- Testing Templates ---
   browser = {
     path = ./browser;
     description = "Playwright Browser testing environment";

@@ -3,6 +3,7 @@
   config,
   ...
 }: {
+  # --- Module Imports ---
   imports = [
     ./git.nix
     ./neovim.nix
@@ -12,6 +13,7 @@
     ./editors.nix
   ];
 
+  # --- Options ---
   options = {
     home.development = {
       enable = lib.mkOption {
@@ -27,6 +29,7 @@
     };
   };
 
+  # --- Configuration ---
   config = {
     home.development.git.enable = lib.mkDefault config.home.development.enable;
     home.development.neovim.enable = lib.mkDefault config.home.development.enable;

@@ -3,14 +3,12 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.productivity.obsidian";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
-    environment.systemPackages = [
-      pkgs.obsidian
-    ];
+  guiConfig = {
+    # --- Packages ---
+    environment.systemPackages = [pkgs.obsidian];
   };
-})
-args
+}

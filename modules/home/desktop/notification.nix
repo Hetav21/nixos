@@ -6,12 +6,13 @@
   osConfig,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.desktop.notification";
   hasCli = true;
   hasGui = true;
 
-  cliConfig = _: let
+  # --- CLI Notification Utilities ---
+  cliConfig = let
     isWsl = osConfig.wsl.enable or false;
   in {
     home.packages =
@@ -20,8 +21,9 @@
       else [pkgs.libnotify];
   };
 
-  guiConfig = _: let
-    hypr_border = 5; # adjust as per hyprland config
+  # --- Dunst Notification Daemon ---
+  guiConfig = let
+    hypr_border = 5;
   in {
     services.dunst = {
       enable = true;
@@ -126,5 +128,4 @@
       };
     };
   };
-})
-args
+}

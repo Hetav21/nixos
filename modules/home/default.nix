@@ -1,13 +1,12 @@
 {inputs, ...}: {
+  # --- Submodule Imports ---
   imports = [
     inputs.nix-skills.homeManagerModules.default
 
-    # Decoupled subdirectory submodules
+    # Submodules
     ./development
     ./shell
     ./system
-
-    # GUI modules
     ./desktop
     ./browser
   ];

@@ -1,49 +1,30 @@
 {extraLib, ...} @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.nix.ld";
   hasGui = false;
-  cliConfig = _: {
+  cliConfig = {
+    # --- Nix-LD Dynamic Linker Support ---
     programs.nix-ld = {
       enable = true;
-      ## find the name of the package from the error message, like:
-      ## $ nix run github:mic92/nix-index-database missinglib.so
-      ## More details: https://github.com/nix-community/nix-index-database, you might like
 
+      # Find missing libraries from binary error messages using:
+      #   nix run github:nix-community/nix-index-database <missinglib.so>
+      #
+      # Reference library list (uncomment packages as needed):
       # libraries = with pkgs; [
-      #   ### put here missing libraries
       #   stdenv.cc.cc
       #   openssl
-      #   xorg.libXcomposite
-      #   xorg.libXtst
-      #   xorg.libXrandr
-      #   xorg.libXext
-      #   xorg.libX11
-      #   xorg.libXfixes
       #   libGL
       #   libva
       #   pipewire
-      #   xorg.libxcb
-      #   xorg.libXdamage
-      #   xorg.libxshmfence
-      #   xorg.libXxf86vm
       #   libelf
-
-      #   # Required
+      #
+      #   # Common Desktop / GTK
       #   glib
       #   gtk2
       #   gtk3
       #   bzip2
       #   libgbm
-
-      #   # Without these it silently fails
-      #   xorg.libXinerama
-      #   xorg.libXcursor
-      #   xorg.libXrender
-      #   xorg.libXScrnSaver
-      #   xorg.libXi
-      #   xorg.libSM
-      #   xorg.libICE
-      #   # gnome2.GConf
       #   nspr
       #   nss
       #   cups
@@ -52,62 +33,76 @@
       #   libusb1
       #   dbus-glib
       #   ffmpeg
-      #   # Only libraries are needed from those two
       #   libudev0-shim
-
-      #   # Verified games requirements
-      #   xorg.libXt
+      #
+      #   # X11 / Wayland
+      #   xorg.libX11
+      #   xorg.libXcomposite
+      #   xorg.libXcursor
+      #   xorg.libXdamage
+      #   xorg.libXext
+      #   xorg.libXfixes
+      #   xorg.libXft
+      #   xorg.libXi
+      #   xorg.libXinerama
       #   xorg.libXmu
-      #   libogg
-      #   libvorbis
-      #   SDL
-      #   SDL2_image
-      #   glew110
-      #   libidn
-      #   tbb
-
-      #   # Other things from runtime
+      #   xorg.libXrandr
+      #   xorg.libXrender
+      #   xorg.libXScrnSaver
+      #   xorg.libXt
+      #   xorg.libXtst
+      #   xorg.libXxf86vm
+      #   xorg.libxcb
+      #   xorg.libxshmfence
+      #   xorg.libSM
+      #   xorg.libICE
+      #
+      #   # Media, Graphics & Audio
+      #   alsa-lib
+      #   atk
+      #   cairo
+      #   dbus
+      #   expat
       #   flac
+      #   fontconfig
       #   freeglut
-      #   libjpeg
-      #   libpng
-      #   libpng12
-      #   libsamplerate
-      #   libmikmod
-      #   libtheora
-      #   libtiff
-      #   pixman
-      #   speex
-      #   SDL_image
-      #   SDL_ttf
-      #   SDL_mixer
-      #   SDL2_ttf
-      #   SDL2_mixer
-      #   libappindicator-gtk2
-      #   libdbusmenu-gtk2
-      #   libindicator-gtk2
+      #   freetype
+      #   gdk-pixbuf
+      #   glew110
       #   libcaca
       #   libcanberra
+      #   libdbusmenu-gtk2
       #   libgcrypt
-      #   libvpx
+      #   libidn
+      #   libjpeg
+      #   libmikmod
+      #   libogg
+      #   libpng
+      #   libpng12
       #   librsvg
-      #   xorg.libXft
+      #   libsamplerate
+      #   libtheora
+      #   libtiff
       #   libvdpau
+      #   libvorbis
+      #   libvpx
       #   pango
-      #   cairo
-      #   atk
-      #   gdk-pixbuf
-      #   fontconfig
-      #   freetype
-      #   dbus
-      #   alsa-lib
-      #   expat
-      #   # Needed for electron
+      #   pixman
+      #   speex
+      #   tbb
+      #   SDL
+      #   SDL2_image
+      #   SDL2_mixer
+      #   SDL2_ttf
+      #   SDL_image
+      #   SDL_mixer
+      #   SDL_ttf
+      #
+      #   # Electron / Chromium dependencies
       #   libdrm
       #   mesa
       #   libxkbcommon
       # ];
     };
   };
-})
-args
+}

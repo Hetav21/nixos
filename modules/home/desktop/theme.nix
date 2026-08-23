@@ -1,16 +1,16 @@
 {
   extraLib,
-  lib,
   pkgs,
   config,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.desktop.theme";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
-    # GTK theming configuration (common for all desktop hosts)
+
+  guiConfig = {
+    # --- GTK Theming ---
     gtk = {
       enable = true;
       gtk3.extraConfig = {gtk-application-prefer-dark-theme = 1;};
@@ -27,8 +27,7 @@
       };
     };
 
-    # Qt configuration (common for all desktop hosts)
+    # --- Qt Theming ---
     qt.enable = true;
   };
-})
-args
+}

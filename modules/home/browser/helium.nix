@@ -1,20 +1,18 @@
 {
   extraLib,
-  lib,
   pkgs,
   inputs,
-  config,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.browser.helium";
   hasCli = false;
   hasGui = true;
 
-  guiConfig = _: {
+  guiConfig = {
+    # --- Packages ---
     home.packages = [
       inputs.helium-flake.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
-})
-args
+}

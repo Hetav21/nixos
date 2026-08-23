@@ -3,11 +3,12 @@
   inputs ? {},
   ...
 }: {
-  # these will be overlayed in nixpkgs automatically.
-  # for example: environment.systemPackages = with pkgs; [pokego];
+  # --- Standalone Tools ---
   pokego = pkgs.callPackage ./pokego.nix {};
   browseros = pkgs.callPackage ./browseros/package.nix {};
   gitignore = pkgs.callPackage ./gitignore {};
+
+  # --- Agent & AI Resources ---
   subagent-catalog = pkgs.callPackage ./subagent-catalog {
     claude-subagents-src = inputs.agent-sources.claude-subagents or null;
   };
@@ -17,7 +18,9 @@
   anthropic-skills = pkgs.callPackage ./anthropic-skills {
     anthropic-skills-src = inputs.agent-sources.anthropic-skills or null;
   };
-
+  mattpocock-skills = pkgs.callPackage ./mattpocock-skills {
+    mattpocock-skills-src = inputs.agent-sources.mattpocock-skills or null;
+  };
   agent-config = let
     agent-config-src = inputs.agent-sources.agent-config or null;
   in
@@ -43,9 +46,8 @@
           platforms = platforms.all;
         };
       };
+
+  # --- System & Editor Integrations ---
   wsl-notify-send = pkgs.callPackage ./wsl-notify-send {};
-  mattpocock-skills = pkgs.callPackage ./mattpocock-skills {
-    mattpocock-skills-src = inputs.agent-sources.mattpocock-skills or null;
-  };
   direnv-nvim = pkgs.callPackage ./direnv-nvim {};
 }
