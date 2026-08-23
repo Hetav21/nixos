@@ -1,5 +1,6 @@
 {
   extraLib,
+  lib,
   pkgs,
   ...
 } @ args:
@@ -7,7 +8,7 @@
   name = "home.development.neovim";
   hasCli = true;
   hasGui = false;
-  cliConfig = _: {
+  cliConfig = {config, ...}: {
     stylix.targets.nixvim.enable = false;
 
     home.shellAliases = {
@@ -247,7 +248,10 @@
             indent.enabled = true;
             scroll.enabled = true;
             words.enabled = true;
-            terminal.enabled = true;
+            terminal = {
+              enabled = true;
+              shell = lib.getExe config.programs.nushell.package;
+            };
             statuscolumn.enabled = true;
           };
         };
