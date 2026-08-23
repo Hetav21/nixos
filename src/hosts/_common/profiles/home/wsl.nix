@@ -103,7 +103,6 @@ in {
 
     # --- Web Browsers (Disabled) ---
     home.browser = {
-      zen.enableGui = false;
       helium.enableGui = false;
     };
 

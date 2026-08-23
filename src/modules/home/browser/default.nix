@@ -5,7 +5,6 @@
 }: {
   # --- Submodule Imports ---
   imports = [
-    ./zen-browser.nix
     ./helium.nix
   ];
 
@@ -20,7 +19,6 @@
 
   # --- Module Wiring ---
   config = {
-    home.browser.zen.enableGui = lib.mkDefault config.home.browser.enableGui;
     home.browser.helium.enableGui = lib.mkDefault config.home.browser.enableGui;
   };
 }

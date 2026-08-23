@@ -57,7 +57,6 @@
 
     # --- Web Browsers ---
     home.browser = {
-      zen.enableGui = false;
       helium.enableGui = true;
     };
   };

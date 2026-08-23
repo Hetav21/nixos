@@ -15,7 +15,7 @@ main() {
   if [ -z "$inputs" ] || [ -z "$setup_dir" ]; then
     print_error "Missing required arguments for standard update"
     print_info "Usage: $0 <inputs> <setup_dir>"
-    print_info "Example: $0 'stylix home-manager lanzaboote sops-nix nix-flatpak zen-browser' '/etc/nixos'"
+    print_info "Example: $0 'stylix home-manager lanzaboote sops-nix nix-flatpak' '/etc/nixos'"
     exit 1
   fi
 
