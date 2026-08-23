@@ -1,4 +1,4 @@
-#!/run/current-system/sw/bin/sh
+#!/usr/bin/env bash
 set -e
 
 # --- Initialization ---
@@ -22,14 +22,23 @@ show_diff() {
 # --- Rebuild Execution & Cleanup ---
 run_rebuild() {
   local rebuild_type="$1"
+  local setup_dir="$2"
   local log_file="build.log"
 
-  print_info "NixOS rebuilding with '$rebuild_type'..."
-  sudo nixos-rebuild "$rebuild_type" --sudo --accept-flake-config &> "$log_file" || {
-    print_error "Rebuild failed. Showing errors:"
+  print_info "NixOS rebuilding with '$rebuild_type' using nh..."
+  if [ -n "$setup_dir" ]; then
+    nh os "$rebuild_type" "$setup_dir" 2>&1 | tee "$log_file"
+  else
+    nh os "$rebuild_type" 2>&1 | tee "$log_file"
+  fi
+  local exit_code="${PIPESTATUS[0]}"
+
+  if [ "$exit_code" -ne 0 ]; then
+    print_error "Rebuild failed with exit code $exit_code. Showing errors from $log_file:"
     grep --color error "$log_file" || cat "$log_file"
-    return 1
-  }
+    return "$exit_code"
+  fi
+
   print_success "Rebuild completed successfully"
 }
 

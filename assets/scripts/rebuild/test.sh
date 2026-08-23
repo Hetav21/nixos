@@ -1,4 +1,4 @@
-#!/run/current-system/sw/bin/sh
+#!/usr/bin/env bash
 set -e
 
 # --- Initialization ---
@@ -12,7 +12,7 @@ main() {
 
   setup_environment "$setup_dir"
   show_diff
-  run_rebuild "test"
+  run_rebuild "test" "$setup_dir"
   cleanup
 
   print_success "Test rebuild completed successfully!"
