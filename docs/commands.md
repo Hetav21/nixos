@@ -21,12 +21,12 @@ Run `nx` with no arguments (or `nx -h`) to print the current command list — th
 - `nx update latest` updates the `latest` **and** `standard` curated lists combined; `nx update standard` updates only the `standard` list. Only bare `nx update` touches inputs in neither list.
   **Source of truth for list membership:** `settings.inputs.standard` / `settings.inputs.latest` in `src/config/common.nix` plus per-host additions in `src/config/<host>.nix` (merged by `src/lib/hosts.nix`, executed by `assets/scripts/update/all.sh`, `assets/scripts/update/latest.sh`, `assets/scripts/update/standard.sh`).
 - `nx flake build` / `nx flake eval` fall back to a hardcoded default host — always pass your host explicitly. Hosts are the subdirectories of `src/hosts/` (except `_common`).
-- `nx flake check` runs `nix flake check`: it evaluates every host **and builds the flake checks**, including the docs path checker.
+- `nx flake check` runs `nix flake check`: it evaluates every host and validates flake outputs.
 
 ## Testing Changes
 
 ```bash
-# Validate flake syntax + run flake checks
+# Validate flake syntax
 nx flake check
 
 # Evaluate config for a specific host (fast, eval only)

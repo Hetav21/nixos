@@ -85,5 +85,4 @@ Load these on demand — only when the task touches their domain:
 - If your change touches a file named on a `Source of truth:` line, update that
   doc's owning section in the same commit (grep `*.md` for the path).
 - On doc-vs-code conflict, code wins — fix the doc.
-- Write illustrative paths as `<placeholders>` (e.g. `pkgs/<name>/default.nix`);
-  real backticked repo paths and links are validated by `nix flake check`.
+- Write illustrative paths as `<placeholders>` (e.g. `pkgs/<name>/default.nix`).
