@@ -14,6 +14,7 @@ extraLib.modules.mkModule args {
       pkgs.alejandra
       pkgs.nixd
       pkgs.nil
+      pkgs.nh
     ];
 
     # --- Nix Index & Database ---
@@ -32,18 +33,19 @@ extraLib.modules.mkModule args {
           if $help or ($subcommand | is-empty) or ($subcommand == "help") {
               print "\nNixOS management commands:"
               print "  nx config\t\t- Open NixOS configuration directory"
-              print "  nx rebuild [type]\t- Rebuild NixOS (default: test)"
+              print "  nx rebuild [type]\t- Rebuild NixOS with nh (default: test)"
               print "\t\t\t  Types: test, switch, boot"
-              print "  nx rollback\t\t- Rollback to previous generation"
+              print "  nx rollback [gen]\t- Rollback to previous generation with nh"
+              print "  nx search <query>\t- Search Nix packages (via nh search)"
               print "  nx update [type]\t- Update flake inputs (default: all)"
               print "\t\t\t  Types: latest, standard"
               print "  nx flake [cmd] [host]\t- Flake operations"
               print "\t\t\t  Commands: check, build, eval"
               print $"\t\t\t  Hosts: (host-completions | str join ', ')"
-              print "  nx clean\t\t- Remove old generations"
-              print "  nx gc\t\t\t- Run garbage collection"
+              print "  nx clean [keep]\t- Remove old generations with nh (default: keep 1)"
+              print "  nx gc [keep_since]\t- Run garbage collection with nh (default: 7d)"
               print "  nx optimise\t\t- Optimise nix store (deduplicate identical files)"
-              print "  nx doctor\t\t- Run maintenance tasks (gc + clean + optimise)"
+              print "  nx doctor\t\t- Run maintenance tasks with nh (clean + gc + optimise)"
               print "  nx pull\t\t- Pull latest changes from git"
               print "  nx log\t\t- View rebuild log\n"
               return
@@ -55,11 +57,12 @@ extraLib.modules.mkModule args {
           match $subcommand {
               "config" => { nx-config }
               "rebuild" => { nx-rebuild $type_arg }
-              "rollback" => { nx-rollback }
+              "rollback" => { nx-rollback $type_arg }
+              "search" => { nx-search ...$rest }
               "update" => { nx-update $type_arg }
               "flake" => { nx-flake $type_arg $second_arg }
-              "clean" => { nx-clean }
-              "gc" => { nx-gc }
+              "clean" => { nx-clean $type_arg }
+              "gc" => { nx-gc $type_arg }
               "optimise" => { nx-optimise }
               "doctor" => { nx-doctor }
               "pull" => { nx-pull }
@@ -74,6 +77,7 @@ extraLib.modules.mkModule args {
               "config"
               "rebuild"
               "rollback"
+              "search"
               "update"
               "flake"
               "clean"
@@ -96,6 +100,16 @@ extraLib.modules.mkModule args {
           run-external $editor $setup_dir
       }
 
+      # Search Nix packages via nh
+      def nx-search [...query: string] {
+          if ($query | is-empty) {
+              print "Error: Please specify a search query"
+              print "Usage: nx search <query...>"
+              return 1
+          }
+          ^nh search ...$query
+      }
+
       # Rebuild NixOS configuration
       def nx-rebuild [
           rebuild_type?: string@rebuild-completions  # Optional rebuild type: test, switch, boot
@@ -105,13 +119,13 @@ extraLib.modules.mkModule args {
 
           match $rebuild_type {
               "test" => {
-                  run-external sh $"($setup_dir)/assets/scripts/rebuild/test.sh" $setup_dir
+                  run-external bash $"($setup_dir)/assets/scripts/rebuild/test.sh" $setup_dir
               }
               "switch" => {
-                  run-external sh $"($setup_dir)/assets/scripts/rebuild/live.sh" $setup_dir
+                  run-external bash $"($setup_dir)/assets/scripts/rebuild/live.sh" $setup_dir
               }
               "boot" => {
-                  run-external sh $"($setup_dir)/assets/scripts/rebuild/boot.sh" $setup_dir
+                  run-external bash $"($setup_dir)/assets/scripts/rebuild/boot.sh" $setup_dir
               }
               _ => {
                   print $"Unknown rebuild type: ($rebuild_type)"
@@ -121,10 +135,14 @@ extraLib.modules.mkModule args {
           }
       }
 
-      # Rollback to previous NixOS generation
-      def nx-rollback [] {
-          print "\n-> Rolling back to previous generation..."
-          ^sudo nixos-rebuild switch --rollback
+      # Rollback to previous NixOS generation with nh
+      def nx-rollback [to_gen?: string] {
+          print "\n-> Rolling back NixOS generation with nh..."
+          if ($to_gen | is-empty) {
+              ^nh os rollback
+          } else {
+              ^nh os rollback --to $to_gen
+          }
           print "\n-> Rollback completed."
       }
 
@@ -145,10 +163,10 @@ extraLib.modules.mkModule args {
               }
               "build" => {
                   let target_host = (if ($host | is-empty) { "nixwslbook" } else { $host })
-                  print $"\n-> Dry-run build for ($target_host)..."
+                  print $"\n-> Dry-run build for ($target_host) with nh..."
                   print "   [Checks: full evaluation + derivation validity]"
                   print "   [Catches: missing packages, broken derivations, build errors]\n"
-                  ^nix build $"($setup_dir)#nixosConfigurations.($target_host).config.system.build.toplevel" --dry-run
+                  ^nh os build $setup_dir -H $target_host --dry
                   print $"\n-> Build check for ($target_host) completed."
               }
               "eval" => {
@@ -229,18 +247,22 @@ extraLib.modules.mkModule args {
           ["latest" "standard"]
       }
 
-      # Remove old generations
-      def nx-clean [] {
-          print "\n-> Removing old generations..."
-          ^sudo nix-collect-garbage -d
-          nix-collect-garbage -d
+      # Remove old generations with nh
+      def nx-clean [keep?: string] {
+          print "\n-> Removing old generations with nh..."
+          if ($keep | is-empty) {
+              ^nh clean all
+          } else {
+              ^nh clean all --keep $keep
+          }
           print "\n-> Cleanup completed."
       }
 
-      # Run garbage collection
-      def nx-gc [] {
-          print "\n-> Running garbage collection..."
-          ^sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than 7d
+      # Run garbage collection with nh
+      def nx-gc [keep_since?: string] {
+          let duration = (if ($keep_since | is-empty) { "7d" } else { $keep_since })
+          print $"\n-> Running garbage collection [keeping last ($duration)] with nh..."
+          ^nh clean all --keep-since $duration
           print "\n-> Garbage collection completed."
       }
 
@@ -251,12 +273,10 @@ extraLib.modules.mkModule args {
           print "\n-> Store optimisation completed."
       }
 
-      # Run maintenance tasks
+      # Run maintenance tasks (clean + gc + optimise) with nh
       def nx-doctor [] {
-          print "\n-> Running maintenance tasks..."
-          nx-gc
-          nx-clean
-          nx-optimise
+          print "\n-> Running maintenance tasks (clean + gc + optimise) with nh..."
+          ^nh clean all --optimise
           print "\n-> All maintenance tasks completed."
       }
 
