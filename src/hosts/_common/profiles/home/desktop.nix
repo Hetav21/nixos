@@ -14,7 +14,7 @@
     home.system = {
       packages.enable = true;
       downloads.enable = true;
-      nix.enable = true;
+      settings.enable = true;
     };
 
     # --- Development Tools ---

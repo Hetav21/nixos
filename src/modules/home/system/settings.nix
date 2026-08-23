@@ -4,7 +4,7 @@
   ...
 } @ args:
 extraLib.modules.mkModule args {
-  name = "home.system.nix";
+  name = "home.system.settings";
   hasCli = true;
   hasGui = false;
 
