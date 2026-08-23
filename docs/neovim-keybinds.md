@@ -51,6 +51,7 @@ Managed by `bufferline.nvim` and `snacks.bufdelete`.
 | `<S-l>` / `]b` | Switch to next buffer tab | `bufferline.nvim` |
 | `[B` | Move current buffer left in tabline | `bufferline.nvim` |
 | `]B` | Move current buffer right in tabline | `bufferline.nvim` |
+| `<leader>bc` | Close current buffer (preserves layout) | `snacks.bufdelete` |
 | `<leader>bp` | Toggle pin status on current buffer | `bufferline.nvim` |
 | `<leader>bP` | Close all unpinned buffers | `bufferline.nvim` |
 | `<leader>bo` | Close all other buffers (preserves layout) | `snacks.bufdelete` |
