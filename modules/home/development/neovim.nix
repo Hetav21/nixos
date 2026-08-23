@@ -234,6 +234,7 @@
                 };
                 explorer = {
                   hidden = true;
+                  focus = "input";
                 };
               };
             };
