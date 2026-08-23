@@ -955,6 +955,11 @@
 
         # --- Bufferline & Buffer Management ---
         {
+          key = "<leader>bc";
+          action.__raw = "function() Snacks.bufdelete() end";
+          options.desc = "Close Buffer";
+        }
+        {
           key = "<leader>bp";
           action = "<cmd>BufferLineTogglePin<cr>";
           options.desc = "Toggle Pin";
