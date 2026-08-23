@@ -15,7 +15,7 @@ main() {
   if [ -z "$inputs" ] || [ -z "$setup_dir" ]; then
     print_error "Missing required arguments for latest update"
     print_info "Usage: $0 <inputs> <setup_dir>"
-    print_info "Example: $0 'nixpkgs-unstable nixpkgs-master chaotic nur' '/etc/nixos'"
+    print_info "Example: $0 'nixpkgs-unstable nixpkgs-master chaotic' '/etc/nixos'"
     exit 1
   fi
 
