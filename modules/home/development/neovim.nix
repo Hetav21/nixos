@@ -120,6 +120,14 @@
         pkgs.custom.direnv-nvim
       ];
 
+      # Safe wrapper for autocommand group deletion (prevents E367 error on BufWipeout in plugins like snacks.nvim dashboard)
+      extraConfigLuaPre = ''
+        local orig_del_augroup_by_id = vim.api.nvim_del_augroup_by_id
+        vim.api.nvim_del_augroup_by_id = function(...)
+          pcall(orig_del_augroup_by_id, ...)
+        end
+      '';
+
       # WSL Clipboard integration & performance options
       extraConfigLua = ''
         if vim.fn.has("wsl") == 1 then
