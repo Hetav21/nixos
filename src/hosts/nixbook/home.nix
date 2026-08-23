@@ -23,7 +23,7 @@
     };
 
     packages = [
-      pkgs.custom.scripts.rofi-launcher
+      pkgs.custom.rofi-launcher
     ];
   };
 }

@@ -7,16 +7,7 @@
   pokego = pkgs.callPackage ./pokego.nix {};
   browseros = pkgs.callPackage ./browseros/package.nix {};
   gitignore = pkgs.callPackage ./gitignore {};
-
-  # --- Custom Scripts ---
-  scripts = {
-    rofi-launcher = pkgs.callPackage ./scripts/rofi-launcher.nix {};
-    nvidia-offload = pkgs.callPackage ./scripts/nvidia-offload.nix {};
-    wallsetter = pkgs.callPackage ./scripts/wallsetter.nix {};
-    web-search = pkgs.callPackage ./scripts/web-search.nix {};
-    screenshootin = pkgs.callPackage ./scripts/screenshootin.nix {};
-    task-waybar = pkgs.callPackage ./scripts/task-waybar.nix {};
-  };
+  rofi-launcher = pkgs.callPackage ./rofi-launcher.nix {};
 
   # --- Agent & AI Resources ---
   subagent-catalog = pkgs.callPackage ./subagent-catalog {
