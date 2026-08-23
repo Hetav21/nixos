@@ -103,6 +103,7 @@
         ripgrep
         fd
         wl-clipboard
+        direnv
         # Formatters & Linters
         alejandra
         ruff
@@ -113,6 +114,10 @@
 
       # Native Wayland clipboard
       clipboard.providers.wl-copy.enable = true;
+
+      extraPlugins = [
+        pkgs.custom.direnv-nvim
+      ];
 
       # WSL Clipboard integration & performance options
       extraConfigLua = ''
@@ -130,6 +135,18 @@
             cache_enabled = 0,
           }
         end
+
+        require("direnv").setup({
+          autoload_direnv = true,
+          auto_restart_lsp = true,
+          statusline = {
+            enabled = true,
+          },
+          keybindings = false,
+          notifications = {
+            silent_autoload = false,
+          },
+        })
       '';
 
       plugins = {
@@ -427,6 +444,16 @@
             options = {
               globalstatus = true;
               theme = "auto";
+            };
+            sections = {
+              lualine_x = [
+                {
+                  __unkeyed-1.__raw = ''function() return require("direnv").statusline() end'';
+                }
+                "encoding"
+                "fileformat"
+                "filetype"
+              ];
             };
           };
         };

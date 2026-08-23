@@ -47,4 +47,5 @@
   mattpocock-skills = pkgs.callPackage ./mattpocock-skills {
     mattpocock-skills-src = inputs.agent-sources.mattpocock-skills or null;
   };
+  direnv-nvim = pkgs.callPackage ./direnv-nvim {};
 }
