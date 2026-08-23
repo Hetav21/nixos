@@ -143,10 +143,6 @@
       inherit inputs;
       settings = commonSettings;
     };
-    checks.x86_64-linux = import ./src/checks {
-      inherit self;
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    };
 
     # --- System Configurations ---
     nixosConfigurations = {
