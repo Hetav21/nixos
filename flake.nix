@@ -41,10 +41,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     helium-flake = {
       url = "gitlab:ntgn/helium-flake";
       inputs.nixpkgs.follows = "nixpkgs";
