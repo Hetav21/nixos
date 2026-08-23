@@ -11,7 +11,6 @@
       "nixpkgs-unstable"
       "nixpkgs-master"
       "nixvim"
-      "nur"
       "llm-agents"
     ];
   };

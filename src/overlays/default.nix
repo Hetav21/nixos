@@ -10,7 +10,4 @@
       inherit settings inputs;
     };
   };
-
-  # --- NUR (Nix User Repository) Overlay ---
-  nur = inputs.nur.overlays.default;
 }
