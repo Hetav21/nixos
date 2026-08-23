@@ -881,10 +881,6 @@
                   cmd = ["agy"];
                   is_proc = "\\<agy\\>";
                 };
-                antigravity = {
-                  cmd = ["agy"];
-                  is_proc = "\\<agy\\>";
-                };
               };
             };
           };
