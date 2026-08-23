@@ -104,6 +104,7 @@
         fd
         wl-clipboard
         direnv
+        lsof
         # Formatters & Linters
         alejandra
         ruff
@@ -377,6 +378,11 @@
             preset = "helix";
             spec = [
               {
+                __unkeyed-1 = "<leader>a";
+                group = "AI / Sidekick";
+                icon = "🤖 ";
+              }
+              {
                 __unkeyed-1 = "<leader>b";
                 group = "Buffer";
                 icon = "󰓩 ";
@@ -614,6 +620,28 @@
 
         # Debug Adapter Protocol
         dap.enable = true;
+
+        # AI CLI & Assistant Sidekick
+        sidekick = {
+          enable = true;
+          settings = {
+            nes.enabled = false;
+            cli = {
+              tools = {
+                opencode = {};
+                claude = {};
+                agy = {
+                  cmd = ["agy"];
+                  is_proc = "\\<agy\\>";
+                };
+                antigravity = {
+                  cmd = ["agy"];
+                  is_proc = "\\<agy\\>";
+                };
+              };
+            };
+          };
+        };
       };
 
       # Clean, Ergonomic Keybindings
@@ -1111,6 +1139,76 @@
           key = "<leader>sq";
           action = "<cmd>qa<cr>";
           options.desc = "Quit Neovim (All)";
+        }
+
+        # --- AI / Sidekick CLI ---
+        {
+          mode = [
+            "n"
+            "t"
+            "i"
+            "x"
+          ];
+          key = "<C-.>";
+          action.__raw = ''function() require("sidekick.cli").focus() end'';
+          options.desc = "Sidekick Focus / Defocus";
+        }
+        {
+          key = "<leader>aa";
+          action.__raw = ''function() require("sidekick.cli").toggle() end'';
+          options.desc = "Toggle Sidekick CLI";
+        }
+        {
+          key = "<leader>as";
+          action.__raw = ''function() require("sidekick.cli").select() end'';
+          options.desc = "Select AI CLI Tool";
+        }
+        {
+          key = "<leader>ac";
+          action.__raw = ''function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end'';
+          options.desc = "Toggle Claude Code CLI";
+        }
+        {
+          key = "<leader>ao";
+          action.__raw = ''function() require("sidekick.cli").toggle({ name = "opencode", focus = true }) end'';
+          options.desc = "Toggle OpenCode CLI";
+        }
+        {
+          key = "<leader>ag";
+          action.__raw = ''function() require("sidekick.cli").toggle({ name = "agy", focus = true }) end'';
+          options.desc = "Toggle Antigravity (agy) CLI";
+        }
+        {
+          key = "<leader>ap";
+          action.__raw = ''function() require("sidekick.cli").prompt() end'';
+          options.desc = "Sidekick Prompt Library";
+        }
+        {
+          key = "<leader>af";
+          action.__raw = ''function() require("sidekick.cli").send({ msg = "{file}", focus = false }) end'';
+          options.desc = "Send Current File to AI CLI (No Focus)";
+        }
+        {
+          key = "<leader>aF";
+          action.__raw = ''function() require("sidekick.cli").send({ msg = "{file}", focus = true }) end'';
+          options.desc = "Send Current File to AI CLI & Focus";
+        }
+        {
+          mode = "x";
+          key = "<leader>av";
+          action.__raw = ''function() require("sidekick.cli").send({ msg = "{selection}", focus = false }) end'';
+          options.desc = "Send Visual Selection to AI CLI (No Focus)";
+        }
+        {
+          mode = "x";
+          key = "<leader>aV";
+          action.__raw = ''function() require("sidekick.cli").send({ msg = "{selection}", focus = true }) end'';
+          options.desc = "Send Visual Selection to AI CLI & Focus";
+        }
+        {
+          key = "<leader>ad";
+          action.__raw = ''function() require("sidekick.cli").close() end'';
+          options.desc = "Close/Detach AI CLI Session";
         }
       ];
     };

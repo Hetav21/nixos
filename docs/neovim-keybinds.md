@@ -11,7 +11,7 @@ Declarative Neovim configuration is managed via [Nixvim](https://github.com/nix-
 * **`<leader>`**: `Space`
 * **`<localleader>`**: `\`
 
-Pressing `<leader>` opens the **which-key** popup menu with categorized groups (Buffer, Code, Find, Git, Session, Diagnostics/Trouble).
+Pressing `<leader>` opens the **which-key** popup menu with categorized groups (AI / Sidekick, Buffer, Code, Find, Git, Session, Diagnostics/Trouble).
 
 ---
 
@@ -202,3 +202,25 @@ Managed by `conform-nvim`. Automatically formats on `:w` or on `<leader>cf`:
 * **Go**: `gofmt`, `goimports`
 * **JavaScript / TypeScript / React / HTML / CSS / SCSS / JSON / JSONC / YAML / Markdown**: `prettier`
 * **Shell**: `shfmt`
+
+---
+
+## 12. AI & CLI Sidekick (Claude Code, OpenCode, Antigravity)
+
+Managed by `sidekick.nvim`.
+
+| Keybinding | Mode | Action | Plugin / Handler |
+| :--- | :---: | :--- | :--- |
+| `<C-.>` | Normal, Terminal, Insert, Visual | Focus / Defocus active AI Sidekick CLI window | `sidekick.cli` |
+| `<leader>aa` | Normal | Toggle Sidekick CLI (active/last session) | `sidekick.cli` |
+| `<leader>as` | Normal | Select AI CLI tool from interactive picker | `sidekick.cli` |
+| `<leader>ac` | Normal | Toggle Claude Code CLI directly | `sidekick.cli` |
+| `<leader>ao` | Normal | Toggle OpenCode CLI directly | `sidekick.cli` |
+| `<leader>ag` | Normal | Toggle Antigravity (`agy`) CLI directly | `sidekick.cli` |
+| `<leader>ap` | Normal | Open interactive AI prompt library | `sidekick.cli` |
+| `<leader>af` | Normal | Send current file to active AI CLI (keep editor focus) | `sidekick.cli` |
+| `<leader>aF` | Normal | Send current file to active AI CLI & focus terminal | `sidekick.cli` |
+| `<leader>av` | Visual | Send visual selection to active AI CLI (keep editor focus) | `sidekick.cli` |
+| `<leader>aV` | Visual | Send visual selection to active AI CLI & focus terminal | `sidekick.cli` |
+| `<leader>ad` | Normal | Close / detach current AI CLI session | `sidekick.cli` |
+
