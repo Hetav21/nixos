@@ -7,7 +7,7 @@
   imports = [
     ./packages.nix
     ./downloads.nix
-    ./nix.nix
+    ./settings.nix
   ];
 
   # --- Options ---
@@ -32,12 +32,18 @@
       default = false;
       description = "Enable Nix development settings";
     };
+
+    home.system.nix.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Alias for home.system.settings.enable";
+    };
   };
 
   # --- Module Wiring ---
   config = {
     home.system.packages.enable = lib.mkDefault config.home.system.enable;
     home.system.downloads.enable = lib.mkDefault (config.home.system.enable || config.home.downloads.enable);
-    home.system.nix.enable = lib.mkDefault (config.home.system.enable || config.home.nixSettings.enable);
+    home.system.settings.enable = lib.mkDefault (config.home.system.enable || config.home.nixSettings.enable || config.home.system.nix.enable);
   };
 }
