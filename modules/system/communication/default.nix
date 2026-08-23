@@ -3,22 +3,23 @@
   config,
   ...
 }: {
+  # --- Communication Submodules ---
   imports = [
     ./zoom.nix
     ./thunderbird.nix
     ./discord.nix
   ];
 
-  options = {
-    system.communication = {
-      enableGui = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Enable all GUI communication applications";
-      };
+  # --- Options ---
+  options.system.communication = {
+    enableGui = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable all GUI communication applications";
     };
   };
 
+  # --- Default Propagations ---
   config = {
     system.communication.zoom.enableGui = lib.mkDefault config.system.communication.enableGui;
     system.communication.thunderbird.enableGui = lib.mkDefault config.system.communication.enableGui;

@@ -6,11 +6,12 @@
   settings,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.development.git";
   hasCli = true;
   hasGui = false;
-  cliConfig = _: {
+  cliConfig = {
+    # --- Packages & Aliases ---
     home.packages = [pkgs.custom.gitignore];
 
     home.shellAliases = {
@@ -23,6 +24,7 @@
     };
 
     programs = {
+      # --- Nushell Functions ---
       nushell.extraConfig = ''
         def "gac" [message: string] {
           git add .
@@ -62,6 +64,7 @@
         }
       '';
 
+      # --- Git & LFS ---
       git = {
         enable = true;
         package = pkgs-unstable.gitFull;
@@ -98,6 +101,7 @@
           ];
       };
 
+      # --- Jujutsu (jj) ---
       jujutsu = {
         enable = true;
         package = pkgs-unstable.jujutsu;
@@ -109,6 +113,7 @@
         };
       };
 
+      # --- Delta ---
       delta = {
         enable = true;
         enableGitIntegration = true;
@@ -122,5 +127,4 @@
       };
     };
   };
-})
-args
+}

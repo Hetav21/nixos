@@ -1,4 +1,3 @@
-# Common system configuration shared across all hosts
 {
   lib,
   config,
@@ -9,7 +8,7 @@
   pkgs-master,
   ...
 }: {
-  # Common imports
+  # --- Imports ---
   imports = [
     ./user.nix
     ../../modules
@@ -17,14 +16,14 @@
     ../../secrets
   ];
 
-  # Option for host-specific home.nix path
+  # --- Host Options ---
   options.local.homeConfig = lib.mkOption {
     type = lib.types.path;
     description = "Path to host-specific home.nix file";
   };
 
+  # --- Centralized Home Manager Configuration ---
   config = {
-    # Centralized Home Manager configuration
     home-manager = {
       extraSpecialArgs = {inherit inputs settings extraLib pkgs-unstable pkgs-master;};
       users.${settings.username} = import config.local.homeConfig;
@@ -33,7 +32,7 @@
       backupFileExtension = "backup";
     };
 
-    # State version
+    # --- System State Version ---
     system.stateVersion = "25.11";
   };
 }

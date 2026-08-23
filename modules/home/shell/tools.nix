@@ -6,11 +6,12 @@
   config,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.shell.tools";
   hasCli = true;
   hasGui = false;
-  cliConfig = _: {
+  cliConfig = {
+    # --- Shell Aliases ---
     home.shellAliases = {
       tree = "${lib.getExe pkgs.tree} -a -I .git";
       cat = "${lib.getExe config.programs.bat.package}";
@@ -20,8 +21,8 @@
     };
 
     programs = {
+      # --- Nushell Helper Functions ---
       nushell.extraConfig = ''
-        # File Manager Alias (requires package path interpolation)
         def --env yz [...args] {
             let tmp = (mktemp -t "yazi-cwd.XXXXXX")
             ${lib.getExe pkgs-unstable.yazi} ...$args --cwd-file $tmp
@@ -33,33 +34,13 @@
         }
       '';
 
+      # --- File Management & Navigation ---
       yazi = {
         enable = true;
         package = pkgs-unstable.yazi;
         enableFishIntegration = true;
         enableNushellIntegration = true;
         shellWrapperName = "y";
-      };
-
-      carapace = {
-        enable = true;
-        package = pkgs-unstable.carapace;
-        enableFishIntegration = true;
-        enableNushellIntegration = true;
-      };
-
-      starship = {
-        enable = true;
-        package = pkgs-unstable.starship;
-        enableFishIntegration = true;
-        enableNushellIntegration = true;
-      };
-
-      zoxide = {
-        enable = true;
-        package = pkgs-unstable.zoxide;
-        enableFishIntegration = true;
-        enableNushellIntegration = true;
       };
 
       eza = {
@@ -76,11 +57,19 @@
         ];
       };
 
-      bat = {
+      zoxide = {
         enable = true;
-        package = pkgs-unstable.bat;
+        package = pkgs-unstable.zoxide;
+        enableFishIntegration = true;
+        enableNushellIntegration = true;
       };
 
+      fd = {
+        enable = true;
+        package = pkgs-unstable.fd;
+      };
+
+      # --- Search & Preview ---
       ripgrep = {
         enable = true;
         package = pkgs-unstable.ripgrep;
@@ -95,9 +84,24 @@
         package = pkgs-unstable.fzf;
       };
 
-      fd = {
+      bat = {
         enable = true;
-        package = pkgs-unstable.fd;
+        package = pkgs-unstable.bat;
+      };
+
+      # --- Shell Prompt & Autocomplete ---
+      starship = {
+        enable = true;
+        package = pkgs-unstable.starship;
+        enableFishIntegration = true;
+        enableNushellIntegration = true;
+      };
+
+      carapace = {
+        enable = true;
+        package = pkgs-unstable.carapace;
+        enableFishIntegration = true;
+        enableNushellIntegration = true;
       };
 
       atuin = {
@@ -117,6 +121,7 @@
         enableNushellIntegration = true;
       };
 
+      # --- Environment Management ---
       direnv = {
         enable = true;
         package = pkgs-unstable.direnv;
@@ -133,5 +138,4 @@
       };
     };
   };
-})
-args
+}

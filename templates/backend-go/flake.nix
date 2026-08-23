@@ -1,8 +1,9 @@
 {
   description = "A Nix-flake-based Golang backend development environment";
 
+  # --- Flake Inputs ---
   inputs = {
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1"; # unstable Nixpkgs
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
     nix-skills.url = "github:Hetav21/nix-skills";
 
     anthropic-skills = {
@@ -27,12 +28,13 @@
     };
   };
 
+  # --- Flake Outputs ---
   outputs = {
     self,
     nix-skills,
     ...
   } @ inputs: let
-    goVersion = 24; # Change this to update the whole stack
+    goVersion = 24;
 
     supportedSystems = [
       "x86_64-linux"
@@ -60,14 +62,9 @@
         default = nix-skills.lib.mkProjectEnv {
           inherit pkgs inputs;
           packages = with pkgs; [
-            # go (version is specified by overlay)
             go
             air
-
-            # goimports, godoc, etc.
             gotools
-
-            # https://github.com/golangci/golangci-lint
             golangci-lint
           ];
 

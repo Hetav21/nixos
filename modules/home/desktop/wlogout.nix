@@ -3,11 +3,13 @@
   config,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.desktop.wlogout";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
+
+  guiConfig = {
+    # --- Hyprland Keybindings ---
     wayland.windowManager.hyprland.settings = {
       "$mainMod" = "SUPER";
 
@@ -16,6 +18,7 @@
       ];
     };
 
+    # --- Wlogout Configuration ---
     programs.wlogout = {
       enable = true;
       layout = [
@@ -116,5 +119,4 @@
       '';
     };
   };
-})
-args
+}

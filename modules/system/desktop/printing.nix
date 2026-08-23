@@ -1,29 +1,26 @@
 {
   extraLib,
-  lib,
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.desktop.printing";
   hasGui = false;
-  cliConfig = _: {
+  cliConfig = {
+    # --- Printing Services ---
+    # NIXPKGS_ALLOW_UNFREE=1 nix-shell -p hplipWithPlugin --run 'sudo -E hp-setup'
     services.printing = {
       enable = true;
-      drivers = [
-        pkgs.hplipWithPlugin
-      ]; # NIXPKGS_ALLOW_UNFREE=1 nix-shell -p hplipWithPlugin --run 'sudo -E hp-setup'
+      drivers = [pkgs.hplipWithPlugin];
     };
 
-    hardware = {
-      sane = {
-        enable = true;
-        extraBackends = [pkgs.sane-airscan];
-        disabledDefaultBackends = ["escl"];
-      };
+    # --- Scanner (SANE) Support ---
+    hardware.sane = {
+      enable = true;
+      extraBackends = [pkgs.sane-airscan];
+      disabledDefaultBackends = ["escl"];
     };
 
-    environment.systemPackages = with pkgs; [hplip];
+    environment.systemPackages = [pkgs.hplip];
   };
-})
-args
+}

@@ -5,7 +5,8 @@
   settings,
   ...
 }: let
-  isWslEnabled = config.profiles.system.wsl-minimal.enable or false;
+  # --- WSL Nushell Compatibility Wrapper ---
+  isWslEnabled = (config.profiles.system.wsl.enable or false) || (config.wsl.enable or false);
   wslNushellCompat =
     (pkgs.writeShellScriptBin "wsl-nushell-compat" ''
       # WSL/IDE compatibility wrapper for nushell on NixOS-WSL
@@ -47,6 +48,7 @@
         };
     });
 in {
+  # --- User Account Configuration ---
   config = {
     users.users.${settings.username} = {
       isNormalUser = true;
@@ -57,7 +59,6 @@ in {
         if isWslEnabled
         then wslNushellCompat
         else pkgs.nushell;
-      # Make sure shell's defined using home-manager
       ignoreShellProgramCheck = true;
       extraGroups = [
         "wheel"

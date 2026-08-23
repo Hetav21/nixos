@@ -3,17 +3,15 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.productivity.latex";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
-    environment.systemPackages = [
-      pkgs.texliveMinimal
-    ];
-    services.flatpak.packages = [
-      "org.texstudio.TeXstudio"
-    ];
+  guiConfig = {
+    # --- Packages ---
+    environment.systemPackages = [pkgs.texliveMinimal];
+
+    # --- Flatpak Applications ---
+    services.flatpak.packages = ["org.texstudio.TeXstudio"];
   };
-})
-args
+}

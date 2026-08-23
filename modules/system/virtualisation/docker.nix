@@ -4,16 +4,19 @@
   settings,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.virtualisation.docker";
   cliConfig = {
-    environment.systemPackages = with pkgs; [
-      dive
-      docker-compose
+    # --- Packages ---
+    environment.systemPackages = [
+      pkgs.dive
+      pkgs.docker-compose
     ];
 
+    # --- User Groups ---
     users.users.${settings.username}.extraGroups = ["docker"];
 
+    # --- Docker Daemon ---
     virtualisation.docker = {
       enable = true;
       rootless = {
@@ -22,5 +25,4 @@
       };
     };
   };
-})
-args
+}

@@ -7,6 +7,7 @@
   pname = "browseros";
   version = "0.30.0";
 
+  # --- Platform Archives ---
   allArchives = {
     aarch64-linux = {
       url = "https://github.com/browseros-ai/BrowserOS/releases/download/v${version}/BrowserOS_v${version}_arm64.dmg";
@@ -26,11 +27,13 @@
     };
   };
 
+  # --- Architecture Resolution ---
   archive =
     if builtins.hasAttr stdenv.system allArchives
     then allArchives.${stdenv.system}
     else throw "Unsupported platform.";
 in
+  # --- Package Invocation ---
   callPackage ./browseros.nix (removeAttrs args ["callPackage"]) (
     archive
     // {

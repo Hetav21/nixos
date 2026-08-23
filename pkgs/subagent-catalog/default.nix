@@ -4,6 +4,7 @@
   claude-subagents-src,
 }:
 assert lib.assertMsg (claude-subagents-src != null) "claude-subagents-src is required.";
+# --- Derivation ---
   stdenvNoCC.mkDerivation {
     pname = "subagent-catalog";
     version = "unstable";
@@ -13,6 +14,7 @@ assert lib.assertMsg (claude-subagents-src != null) "claude-subagents-src is req
     dontBuild = true;
     dontConfigure = true;
 
+    # --- Installation ---
     installPhase = ''
       runHook preInstall
       mkdir -p $out
@@ -20,6 +22,7 @@ assert lib.assertMsg (claude-subagents-src != null) "claude-subagents-src is req
       runHook postInstall
     '';
 
+    # --- Metadata ---
     meta = with lib; {
       description = "Subagent Catalog tool from awesome-claude-code-subagents";
       homepage = "https://github.com/VoltAgent/awesome-claude-code-subagents";

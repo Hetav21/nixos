@@ -1,9 +1,10 @@
 {extraLib, ...} @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.baseservices.flatpak";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
+  guiConfig = {
+    # --- Flatpak Service ---
     services.flatpak = {
       enable = true;
       uninstallUnmanaged = true;
@@ -17,5 +18,4 @@
       ];
     };
   };
-})
-args
+}

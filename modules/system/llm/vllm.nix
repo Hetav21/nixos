@@ -3,19 +3,14 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.llm.vllm";
   hasCli = true;
   hasGui = false;
   cliConfig = {
-    lib,
-    pkgs,
-    pkgs-unstable,
-    ...
-  }: {
-    environment.systemPackages = with pkgs; [
-      vllm
+    # --- vLLM ---
+    environment.systemPackages = [
+      pkgs.vllm
     ];
   };
-})
-args
+}

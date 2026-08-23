@@ -1,12 +1,12 @@
 {extraLib, ...} @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.browser.edge";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
+  guiConfig = {
+    # --- Microsoft Edge Flatpak ---
     services.flatpak.packages = [
       "com.microsoft.Edge"
     ];
   };
-})
-args
+}

@@ -1,14 +1,14 @@
 {extraLib, ...} @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.media.graphics";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
+  guiConfig = {
+    # --- Graphics & Video Flatpaks ---
     services.flatpak.packages = [
-      "org.gnome.Loupe" # Image viewer
-      "com.github.PintaProject.Pinta" # Image editor
-      "org.kde.kdenlive" # Video editor
+      "org.gnome.Loupe"
+      "com.github.PintaProject.Pinta"
+      "org.kde.kdenlive"
     ];
   };
-})
-args
+}

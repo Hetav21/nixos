@@ -5,17 +5,18 @@
   hardware,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "drivers.nvidia";
   hasGui = false;
-  cliConfig = _: {
+  cliConfig = {
+    # --- Nvidia Packages & Containers ---
     hardware.nvidia-container-toolkit.enable = true;
 
     environment.systemPackages = [
       pkgs.cudaPackages.cudatoolkit
-      # pkgs.cudaPackages.cudnn
     ];
 
+    # --- Video Acceleration & Display Server ---
     hardware.graphics = {
       extraPackages = [
         pkgs.nvidia-vaapi-driver
@@ -25,6 +26,7 @@
 
     services.xserver.videoDrivers = ["nvidia"];
 
+    # --- Kernel Parameters & Nvidia Settings ---
     boot.kernelParams = [
       "nvidia-drm.modeset=1"
       "nvidia-drm.fbdev=1"
@@ -41,5 +43,4 @@
       package = config.boot.kernelPackages.nvidiaPackages.${hardware.nvidia.package};
     };
   };
-})
-args
+}

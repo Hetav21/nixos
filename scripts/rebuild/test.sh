@@ -1,24 +1,22 @@
 #!/run/current-system/sw/bin/sh
-# NixOS Test Rebuild Script
-# This script tests the NixOS configuration without applying changes
+set -e
 
-# Source common functions
+# --- Initialization ---
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-source "$SCRIPT_DIR/common.sh"
+. "$SCRIPT_DIR/common.sh"
 
-# Main execution
+# --- Main Execution ---
 main() {
-    local setup_dir="$1"
-    print_info "Starting NixOS test rebuild..."
+  local setup_dir="$1"
+  print_info "Starting NixOS test rebuild..."
 
-    setup_environment "$setup_dir"
-    show_diff
-    run_rebuild "test"
-    cleanup
+  setup_environment "$setup_dir"
+  show_diff
+  run_rebuild "test"
+  cleanup
 
-    print_success "Test rebuild completed successfully!"
-    print_info "Configuration is valid and ready to apply"
+  print_success "Test rebuild completed successfully!"
+  print_info "Configuration is valid and ready to apply"
 }
 
-# Run main function
 main "$@"

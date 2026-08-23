@@ -1,39 +1,29 @@
 {
   extraLib,
   pkgs,
+  hardware ? {},
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.llm.ollama";
   hasCli = true;
   hasGui = false;
-  cliConfig = {
-    lib,
-    pkgs,
-    hardware,
-    ...
-  }: let
-    isNvidiaEnabled = hardware.nvidia.enable;
-    isAmdgpuEnabled = hardware.amdgpu.enable;
-    package = pkgs;
+  cliConfig = let
+    isNvidiaEnabled = (hardware ? nvidia) && hardware.nvidia.enable;
+    isAmdgpuEnabled = (hardware ? amdgpu) && hardware.amdgpu.enable;
   in {
+    # --- Ollama Service ---
     services.ollama = {
       enable = true;
       environmentVariables = {
-        ## Enable debug logging
-        # OLLAMA_DEBUG = "1";
-        ## Allowing connections from web browsers
         OLLAMA_ORIGINS = "chrome-extension://*,moz-extension://*,safari-web-extension://*";
       };
-      ## Preload models, see https://ollama.com/library
-      # loadModels = ["qwen3:8b"];
-      ## Use GPU acceleration if available
       package =
         if isNvidiaEnabled
-        then package.ollama-cuda
+        then pkgs.ollama-cuda
         else if isAmdgpuEnabled
-        then package.ollama-rocm
-        else package.ollama;
+        then pkgs.ollama-rocm
+        else pkgs.ollama;
       acceleration =
         if isNvidiaEnabled
         then "cuda"
@@ -42,5 +32,4 @@
         else null;
     };
   };
-})
-args
+}

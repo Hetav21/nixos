@@ -3,11 +3,11 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.desktop.hyprland";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
+  guiConfig = {
     wayland.windowManager.hyprland = {
       enable = true;
       configType = "hyprlang";
@@ -15,25 +15,25 @@
       portalPackage = pkgs.xdg-desktop-portal-hyprland;
       sourceFirst = true;
       xwayland.enable = true;
+
       systemd = {
         enable = true;
         enableXdgAutostart = true;
         variables = ["--all"];
       };
 
+      # --- Hyprland Settings ---
       settings = {
-        debug = {disable_logs = true;};
-
-        ecosystem = {no_update_news = true;};
-
-        cursor = {no_hardware_cursors = true;};
+        debug.disable_logs = true;
+        ecosystem.no_update_news = true;
+        cursor.no_hardware_cursors = true;
 
         xwayland = {
           force_zero_scaling = true;
           use_nearest_neighbor = true;
         };
 
-        input = {kb_options = "ctrl:nocaps";};
+        input.kb_options = "ctrl:nocaps";
 
         general = {
           border_size = 1;
@@ -43,7 +43,6 @@
 
         animations = {
           enabled = "yes";
-
           bezier = [
             "easeOutQuint,0.23,1,0.32,1"
             "easeInOutCubic,0.65,0.05,0.36,1"
@@ -51,7 +50,6 @@
             "almostLinear,0.5,0.5,0.75,1.0"
             "quick,0.15,0,0.1,1"
           ];
-
           animation = [
             "global, 1, 10, default"
             "border, 1, 5.39, easeOutQuint"
@@ -88,141 +86,121 @@
           disable_hyprland_logo = true;
         };
       };
-      extraConfig =
-        ''
-          env = HYPRCURSOR_SIZE,24
-        ''
-        + ''
-          general:resize_on_border = true;
-          general:allow_tearing = false;
-        ''
-        + ''
-          windowrule = no_focus on, match:class ^$, match:title ^$, match:xwayland true, match:float true, match:fullscreen false, match:pin false
-          windowrule = suppress_event maximize, match:class .*
 
-          windowrule = opacity 0.95 0.95, match:class ^(firefox-nightly)$
-          windowrule = opacity 0.95 0.95, match:class ^(firefox)$
-          windowrule = opacity 0.95 0.95, match:class ^(helium)$
-          windowrule = opacity 0.95 0.95, match:class ^(dev.zed.Zed)$
-          windowrule = opacity 0.95 0.95, match:class ^(obsidian)$
-          windowrule = opacity 0.95 0.95, match:class ^(intellij-idea-ultimate-edition)$
+      # --- Extra Rules & Keybinds ---
+      extraConfig = ''
+        env = HYPRCURSOR_SIZE,24
+        monitor = ,preferred,auto,1
 
-          windowrule = idle_inhibit fullscreen, match:class .*
-        ''
-        + ''
-          # Main modifier
-          $mainMod = SUPER # windows key
+        # --- Window Rules ---
+        windowrule = no_focus on, match:class ^$, match:title ^$, match:xwayland true, match:float true, match:fullscreen false, match:pin false
+        windowrule = suppress_event maximize, match:class .*
+        windowrule = opacity 0.95 0.95, match:class ^(firefox-nightly)$
+        windowrule = opacity 0.95 0.95, match:class ^(firefox)$
+        windowrule = opacity 0.95 0.95, match:class ^(helium)$
+        windowrule = opacity 0.95 0.95, match:class ^(dev.zed.Zed)$
+        windowrule = opacity 0.95 0.95, match:class ^(obsidian)$
+        windowrule = opacity 0.95 0.95, match:class ^(intellij-idea-ultimate-edition)$
+        windowrule = idle_inhibit fullscreen, match:class .*
 
-          # Binds
+        # --- Application Variables ---
+        $mainMod = SUPER
+        $brave = brave
+        $browser = helium
+        $browser_alternate = browseros
+        $term = ghostty
+        $termNew = $term -e
+        $code = code
+        $zeditor = zeditor
+        $fileManager = $termNew yazi
+        $fileManager2 = thunar
 
-          ## Browser
-          $brave = brave
-          $browser = helium
-          $browser_alternate = browseros
-          bind = $mainMod, F, exec, $browser
-          bind = SUPER_SHIFT, F, exec, $browser_alternate
-          bind = $mainMod, B, exec, $brave
-          bind = $mainMod, G, exec, $browser --new-window https://gemini.google.com/
-          bind = SUPER_SHIFT, G, exec, $browser --new-window https://chatgpt.com/
-          bind = SUPER_SHIFT, C, exec, $browser --new-window https://claude.ai/
+        # --- Application Keybinds ---
+        bind = $mainMod, F, exec, $browser
+        bind = SUPER_SHIFT, F, exec, $browser_alternate
+        bind = $mainMod, B, exec, $brave
+        bind = $mainMod, G, exec, $browser --new-window https://gemini.google.com/
+        bind = SUPER_SHIFT, G, exec, $browser --new-window https://chatgpt.com/
+        bind = SUPER_SHIFT, C, exec, $browser --new-window https://claude.ai/
+        bind = $mainMod, Z, exec, $zeditor
+        bind = $mainMod, X, exec, $code
+        bind = $mainMod, T, exec, $term
+        bind = SUPER_SHIFT, T, exec, $termNew tmux attach
+        bind = $mainMod, N, exec, $fileManager
+        bind = SUPER_SHIFT, N, exec, $fileManager2
 
-          ## Editor and Terminal
-          $term = ghostty
-          $termNew = $term -e
-          $code = code
-          $zeditor = zeditor
-          bind = $mainMod, Z, exec, $zeditor
-          bind = $mainMod, X, exec, $code
-          bind = $mainMod, T, exec, $term
-          bind = SUPER_SHIFT, T, exec, $termNew tmux attach
+        # --- Window & Session Management ---
+        bind = $mainMod, W, togglefloating,
+        bind = SUPER_SHIFT, Q, killactive,
+        bind = SUPER_SHIFT, M, exit,
+        bind = Alt, Return, fullscreen,
 
-          ## Misc
-          $fileManager = $termNew yazi
-          $fileManager2 = thunar
-          bind = $mainMod, N, exec, $fileManager
-          bind = SUPER_SHIFT, N, exec, $fileManager2
+        # --- VM Passthrough Mode ---
+        bind = $mainMod, P, submap, passthru
+        submap = passthru
+        bind = SUPER, Escape, submap, reset
+        submap = reset
 
-          ## Functionality
-          bind = $mainMod, W, togglefloating,
-          bind = SUPER_SHIFT, Q, killactive,
-          bind = SUPER_SHIFT, M, exit,
-          bind = Alt, Return, fullscreen,
-          # bind = $mainMod, P, pseudo, # dwindle
-          # bind = $mainMod, J, togglesplit, # dwindle
+        # --- Media & Function Keys ---
+        bind = , XF86Launch3, exec, $browser_alternate
+        bind = , XF86MonBrightnessUp, exec, brightnessctl -q s +10%
+        bind = , XF86MonBrightnessDown, exec, brightnessctl -q s 10%-
+        bind = , XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%
+        bind = , XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5%
+        bind = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+        bind = , XF86AudioMicMute, exec, pactl set-source-mute @DEFAULT_SOURCE@ toggle
+        bind = , XF86AudioPlay, exec, playerctl play-pause
+        bind = , XF86AudioPause, exec, playerctl pause
+        bind = , XF86AudioNext, exec, playerctl next
+        bind = , XF86AudioPrev, exec, playerctl previous
+        bind = ALT, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy
 
-          ## Passthrough SUPER KEY to Virtual Machine
-          bind = $mainMod, P, submap, passthru
-          submap = passthru
-          bind = SUPER, Escape, submap, reset
-          submap = reset
+        # --- Navigation & Focus (Vim keys) ---
+        bind = $mainMod, h, movefocus, l
+        bind = $mainMod, l, movefocus, r
+        bind = $mainMod, j, movefocus, d
+        bind = $mainMod, k, movefocus, u
 
-          # Fn keys
-          bind = , XF86Launch3, exec, $browser_alternate
-          bind = , XF86MonBrightnessUp, exec, brightnessctl -q s +10%
-          bind = , XF86MonBrightnessDown, exec, brightnessctl -q s 10%-
-          bind = , XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%
-          bind = , XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5%
-          bind = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-          bind = , XF86AudioMicMute, exec, pactl set-source-mute @DEFAULT_SOURCE@ toggle
-          bind = , XF86AudioPlay, exec, playerctl play-pause
-          bind = , XF86AudioPause, exec, playerctl pause
-          bind = , XF86AudioNext, exec, playerctl next
-          bind = , XF86AudioPrev, exec, playerctl previous
-          bind = ALT, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy # Clipboard Manager
+        # --- Workspaces ---
+        bind = $mainMod, 1, workspace, 1
+        bind = $mainMod, 2, workspace, 2
+        bind = $mainMod, 3, workspace, 3
+        bind = $mainMod, 4, workspace, 4
+        bind = $mainMod, 5, workspace, 5
+        bind = $mainMod, 6, workspace, 6
+        bind = $mainMod, 7, workspace, 7
+        bind = $mainMod, 8, workspace, 8
+        bind = $mainMod, 9, workspace, 9
+        bind = $mainMod, 0, workspace, 10
 
-          # Move focus with mainMod + Vim keys (hjkl)
-          bind = $mainMod, h, movefocus, l
-          bind = $mainMod, l, movefocus, r
-          bind = $mainMod, j, movefocus, d
-          bind = $mainMod, k, movefocus, u
+        # --- Move Window to Workspace ---
+        bind = $mainMod SHIFT, 1, movetoworkspace, 1
+        bind = $mainMod SHIFT, 2, movetoworkspace, 2
+        bind = $mainMod SHIFT, 3, movetoworkspace, 3
+        bind = $mainMod SHIFT, 4, movetoworkspace, 4
+        bind = $mainMod SHIFT, 5, movetoworkspace, 5
+        bind = $mainMod SHIFT, 6, movetoworkspace, 6
+        bind = $mainMod SHIFT, 7, movetoworkspace, 7
+        bind = $mainMod SHIFT, 8, movetoworkspace, 8
+        bind = $mainMod SHIFT, 9, movetoworkspace, 9
+        bind = $mainMod SHIFT, 0, movetoworkspace, 10
 
-          # Switch workspaces with mainMod + [0-9]
-          bind = $mainMod, 1, workspace, 1
-          bind = $mainMod, 2, workspace, 2
-          bind = $mainMod, 3, workspace, 3
-          bind = $mainMod, 4, workspace, 4
-          bind = $mainMod, 5, workspace, 5
-          bind = $mainMod, 6, workspace, 6
-          bind = $mainMod, 7, workspace, 7
-          bind = $mainMod, 8, workspace, 8
-          bind = $mainMod, 9, workspace, 9
-          bind = $mainMod, 0, workspace, 10
+        # --- Special Workspace & Mouse Bindings ---
+        bind = $mainMod, S, togglespecialworkspace, magic
+        bind = $mainMod SHIFT, S, movetoworkspace, special:magic
+        bind = $mainMod, mouse_down, workspace, e+1
+        bind = $mainMod, mouse_up, workspace, e-1
+        bindm = $mainMod, mouse:272, movewindow
+        bindm = $mainMod, mouse:273, resizewindow
+        bindm = $mainMod ALT, mouse:272, resizewindow
 
-          # Move active window to a workspace with mainMod + SHIFT + [0-9]
-          bind = $mainMod SHIFT, 1, movetoworkspace, 1
-          bind = $mainMod SHIFT, 2, movetoworkspace, 2
-          bind = $mainMod SHIFT, 3, movetoworkspace, 3
-          bind = $mainMod SHIFT, 4, movetoworkspace, 4
-          bind = $mainMod SHIFT, 5, movetoworkspace, 5
-          bind = $mainMod SHIFT, 6, movetoworkspace, 6
-          bind = $mainMod SHIFT, 7, movetoworkspace, 7
-          bind = $mainMod SHIFT, 8, movetoworkspace, 8
-          bind = $mainMod SHIFT, 9, movetoworkspace, 9
-          bind = $mainMod SHIFT, 0, movetoworkspace, 10
-
-          # Example special workspace (scratchpad)
-          bind = $mainMod, S, togglespecialworkspace, magic
-          bind = $mainMod SHIFT, S, movetoworkspace, special:magic
-
-          # Scroll through existing workspaces with mainMod + scroll
-          bind = $mainMod, mouse_down, workspace, e+1
-          bind = $mainMod, mouse_up, workspace, e-1
-
-          # Move/resize windows with mainMod + LMB/RMB and dragging
-          bindm = $mainMod, mouse:272, movewindow
-          bindm = $mainMod, mouse:273, resizewindow
-          bindm = $mainMod ALT, mouse:272, resizewindow
-        ''
-        + ''
-          monitor=,preferred,auto,1
-
-          exec-once = nm-applet &
-          exec-once = blueman-applet &
-          exec-once = localsend_app --hidden
-          exec-once = wl-paste --type text --watch cliphist store # clipboard store text data
-          exec-once = wl-paste --type image --watch cliphist store # clipboard store image data
-        '';
+        # --- Autostart Daemons ---
+        exec-once = nm-applet &
+        exec-once = blueman-applet &
+        exec-once = localsend_app --hidden
+        exec-once = wl-paste --type text --watch cliphist store
+        exec-once = wl-paste --type image --watch cliphist store
+      '';
     };
   };
-})
-args
+}

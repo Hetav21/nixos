@@ -3,14 +3,14 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.media.upscayl";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
-    environment.systemPackages = with pkgs; [
-      upscayl
+  guiConfig = {
+    # --- Upscayl Image Upscaler ---
+    environment.systemPackages = [
+      pkgs.upscayl
     ];
   };
-})
-args
+}

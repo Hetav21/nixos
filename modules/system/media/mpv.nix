@@ -3,14 +3,14 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.media.mpv";
   hasCli = true;
   hasGui = false;
-  cliConfig = _: {
-    environment.systemPackages = with pkgs; [
-      mpv
+  cliConfig = {
+    # --- MPV Media Player ---
+    environment.systemPackages = [
+      pkgs.mpv
     ];
   };
-})
-args
+}

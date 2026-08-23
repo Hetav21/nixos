@@ -1,27 +1,15 @@
-# Host configuration helpers
-#
-# Provides utilities for creating and merging host-specific settings
+# Host Settings Helpers
 {lib}: {
-  # mkHostSettings: Deep merge common settings with host-specific overrides
-  #
-  # Usage:
-  #   mkHostSettings commonSettings {
-  #     hostname = "nixbook";
-  #     nix.maxJobs = 4;
-  #   }
-  #
-  # This uses recursiveUpdate for deep merging nested attributes
+  # Merges common settings with host overrides and aggregates input upgrade groups
   mkHostSettings = common: overrides: let
     merged = lib.recursiveUpdate common overrides;
     commonInputs = common.inputs or {};
     overridesInputs = overrides.inputs or {};
 
-    mergeInputs = type: let
-      commonList = commonInputs.${type} or [];
-      hostList = overridesInputs.${type} or [];
-      combined = commonList ++ hostList;
-    in
-      lib.concatStringsSep " " combined;
+    mergeInputs = type:
+      lib.concatStringsSep " " (
+        (commonInputs.${type} or []) ++ (overridesInputs.${type} or [])
+      );
   in
     merged
     // {

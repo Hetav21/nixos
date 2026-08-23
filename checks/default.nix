@@ -6,6 +6,7 @@
   pkgs,
   self,
 }: {
+  # --- Documentation Path Validation ---
   doc-paths = pkgs.runCommand "doc-paths" {src = self;} ''
     cd "$src"
     errors="$TMPDIR/errors"

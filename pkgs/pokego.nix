@@ -6,6 +6,8 @@
 buildGoModule {
   pname = "pokego";
   version = "v0.5.2";
+
+  # --- Source & Build ---
   src = fetchFromGitHub {
     owner = "rubiin";
     repo = "pokego";
@@ -22,11 +24,12 @@ buildGoModule {
     "-extldflags -static"
   ];
 
+  # --- Metadata ---
   meta = with lib; {
-    description = "Command-line tool that lets you display Pokémon sprites in color directly in your terminal.";
+    description = "Command-line tool that lets you display Pokémon sprites in color directly in your terminal";
     homepage = "https://github.com/rubiin/pokego";
     mainProgram = "pokego";
-    license = licenses.gpl3;
+    license = licenses.gpl3Only;
     maintainers = with maintainers; [rubiin];
   };
 }

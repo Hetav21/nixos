@@ -3,12 +3,10 @@
   lib,
   ...
 }: let
-  mountPartitionEnabled =
-    (settings ? mount-partition && settings.mount-partition ? enable)
-    && settings.mount-partition.enable;
+  mountPartitionEnabled = settings.mount-partition.enable or false;
 in {
+  # --- Storage Drivers ---
   boot.initrd.availableKernelModules = [
-    # "xhci_pci"
     "thunderbolt"
     "vmd"
     "nvme"
@@ -16,6 +14,7 @@ in {
     "sd_mod"
   ];
 
+  # --- Filesystem Mounts ---
   fileSystems = lib.mkIf mountPartitionEnabled {
     "/virt" = {
       device = "/dev/disk/by-uuid/${settings.mount-partition.partition_id}";

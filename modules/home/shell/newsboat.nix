@@ -4,17 +4,20 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.shell.newsboat";
   hasCli = true;
   hasGui = false;
   cliConfig = {config, ...}: {
+    # --- Shell Aliases ---
     home.shellAliases = {
       nb = "${lib.getExe pkgs.newsboat}";
     };
 
+    # --- OPML Feeds ---
     home.file.".config/newsboat/feeds.opml".source = ./../../../dotfiles/.config/newsboat/feeds.opml;
 
+    # --- Newsboat Configuration ---
     programs.newsboat = {
       enable = true;
       autoFetchArticles = {
@@ -49,5 +52,4 @@
       '';
     };
   };
-})
-args
+}

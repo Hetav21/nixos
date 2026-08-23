@@ -1,19 +1,31 @@
 {
   description = "A Nix-flake-based Python AI development environment (uv)";
 
-  inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
-  inputs.nix-skills.url = "github:Hetav21/nix-skills";
+  # --- Flake Inputs ---
+  inputs = {
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
+    nix-skills.url = "github:Hetav21/nix-skills";
 
-  inputs.anthropic-skills.url = "github:anthropics/skills";
-  inputs.anthropic-skills.flake = false;
+    anthropic-skills = {
+      url = "github:anthropics/skills";
+      flake = false;
+    };
+    pypict-claude-skill = {
+      url = "github:omkamal/pypict-claude-skill";
+      flake = false;
+    };
+    awesome-claude-code-subagents = {
+      url = "github:VoltAgent/awesome-claude-code-subagents";
+      flake = false;
+    };
+  };
 
-  inputs.pypict-claude-skill.url = "github:omkamal/pypict-claude-skill";
-  inputs.pypict-claude-skill.flake = false;
-
-  inputs.awesome-claude-code-subagents.url = "github:VoltAgent/awesome-claude-code-subagents";
-  inputs.awesome-claude-code-subagents.flake = false;
-
-  outputs = {self, ...} @ inputs: let
+  # --- Flake Outputs ---
+  outputs = {
+    self,
+    nix-skills,
+    ...
+  } @ inputs: let
     supportedSystems = [
       "x86_64-linux"
       "aarch64-linux"
@@ -28,7 +40,6 @@
           }
       );
 
-    # Change this value ({major}.{minor}) to update the Python version
     version = "3.13";
   in {
     devShells = forEachSupportedSystem (
@@ -42,7 +53,7 @@
 
         python = pkgs."python${concatMajorMinor version}";
       in {
-        default = inputs.nix-skills.lib.mkProjectEnv {
+        default = nix-skills.lib.mkProjectEnv {
           inherit pkgs inputs;
 
           packages = [
@@ -52,7 +63,7 @@
           ];
 
           skills = [
-            (inputs.nix-skills.lib.extract pkgs inputs.anthropic-skills "skills" {
+            (nix-skills.lib.extract pkgs inputs.anthropic-skills "skills" {
               includes = ["mcp-builder"];
             })
             "${inputs.pypict-claude-skill}"

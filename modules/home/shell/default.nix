@@ -3,6 +3,7 @@
   config,
   ...
 }: {
+  # --- Module Imports ---
   imports = [
     ./shells.nix
     ./tmux.nix
@@ -11,6 +12,7 @@
     ./newsboat.nix
   ];
 
+  # --- Options ---
   options = {
     home.shell = {
       enable = lib.mkOption {
@@ -26,6 +28,7 @@
     };
   };
 
+  # --- Configuration ---
   config = lib.mkMerge [
     {
       home.shell.shells.enable = lib.mkDefault config.home.shell.enable;

@@ -3,29 +3,31 @@
   lib,
   pkgs,
   pkgs-unstable,
-  settings,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.development.editors";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
-    home.packages = with pkgs-unstable; [
-      antigravity
+  guiConfig = {
+    # --- Standalone GUI Editors ---
+    home.packages = [
+      pkgs-unstable.antigravity-ide
     ];
 
     programs = {
+      # --- VS Code ---
       vscode = {
         enable = true;
         package = pkgs-unstable.vscode;
       };
 
+      # --- Zed Editor ---
       zed-editor = {
         enable = true;
         package = pkgs-unstable.zed-editor;
         installRemoteServer = true;
-        extraPackages = with pkgs; [alejandra];
+        extraPackages = [pkgs.alejandra];
         extensions = [
           "nix"
           "CSV"
@@ -50,5 +52,4 @@
       };
     };
   };
-})
-args
+}

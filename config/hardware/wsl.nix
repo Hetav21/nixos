@@ -1,8 +1,12 @@
 {
-  # Minimal hardware configuration for WSL (no physical hardware)
+  # --- OEM / Vendor Hardware ---
   asus.enable = false;
+
+  # --- CPU / Integrated GPU ---
   intel.enable = false;
   amdgpu.enable = false;
+
+  # --- Dedicated GPU ---
   nvidia = {
     enable = false;
     package = "stable";

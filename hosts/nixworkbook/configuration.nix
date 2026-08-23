@@ -1,29 +1,25 @@
 {
   lib,
   pkgs,
-  config,
-  inputs,
   settings,
   ...
 }: {
+  # --- Host Imports & Path Setup ---
   imports = [
     ../_common
   ];
 
-  # Point to host-specific home.nix (centralized home-manager is in _common)
   local.homeConfig = ./home.nix;
 
-  # Set hostname for WSL
+  # --- Network & Hostname ---
   networking.hostName = settings.hostname;
 
-  # WSL-specific configuration
+  # --- NixOS WSL Configuration ---
   wsl = {
     enable = true;
     defaultUser = settings.username;
     wrapBinSh = true;
     extraBin = [
-      # Keep /bin/bash from the nixos-wsl default extraBin.
-      # Overriding it with config.wsl.binShExe makes bash remote install scripts run via the wrapped sh path.
       # Coreutils for remote server compatibility
       {src = "${lib.getExe' pkgs.coreutils "uname"}";}
       {src = "${lib.getExe' pkgs.coreutils "mkdir"}";}
@@ -40,7 +36,7 @@
       {src = "${lib.getExe' pkgs.coreutils "head"}";}
       {src = "${lib.getExe' pkgs.coreutils "tail"}";}
       {src = "${lib.getExe' pkgs.coreutils "tr"}";}
-      # Additional common tools
+      # Additional CLI tools
       {src = "${lib.getExe pkgs.gnused}";}
       {src = "${lib.getExe pkgs.gnugrep}";}
       {src = "${lib.getExe pkgs.gnutar}";}
@@ -49,29 +45,24 @@
       {src = "${lib.getExe pkgs.wget}";}
       {src = "${lib.getExe pkgs.curl}";}
     ];
-    # Re-register WSLInterop to allow running .exe files alongside other binfmt registrations
+    # Re-register WSLInterop to allow executing Windows .exe binaries alongside other binfmt registrations
     interop.register = true;
     docker-desktop.enable = true;
   };
 
+  # --- Profiles & State Version ---
   profiles.system.wsl.enable = true;
-
-  # Host-specific stateVersion (override common 25.11)
   system.stateVersion = lib.mkForce "24.11";
-
-  # Override flatpak packages to be empty for WSL (no GUI apps needed)
   services.flatpak.packages = lib.mkForce [];
 
-  # WSL dbus fix: Enable user session dbus for headless operation
-  # Without this, apps requiring dbus fail with "Unable to autolaunch a dbus-daemon without a $DISPLAY"
+  # --- Headless DBus & User Services ---
   users.users.${settings.username} = {
     linger = true;
   };
   systemd.user.services.dbus.wantedBy = ["default.target"];
   environment.systemPackages = [pkgs.dbus];
 
-  # Auto-start user systemd service at boot (WSL doesn't do this by default)
-  # This ensures user dbus is available immediately, not just after first login
+  # Auto-start user systemd service at boot (ensures dbus is ready for remote/IDE sessions)
   systemd.services."user@1000" = {
     wantedBy = ["multi-user.target"];
     overrideStrategy = "asDropin";

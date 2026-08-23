@@ -1,9 +1,8 @@
 {extraLib, ...} @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.time.localClock";
   hasGui = false;
-  cliConfig = _: {
+  cliConfig = {
     time.hardwareClockInLocalTime = true;
   };
-})
-args
+}

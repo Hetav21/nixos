@@ -3,14 +3,12 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.storage.ntfs";
   hasCli = true;
   hasGui = false;
-  cliConfig = _: {
-    environment.systemPackages = with pkgs; [
-      ntfs3g
-    ];
+  cliConfig = {
+    # --- Packages ---
+    environment.systemPackages = [pkgs.ntfs3g];
   };
-})
-args
+}

@@ -3,14 +3,14 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.media.obs";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
-    environment.systemPackages = with pkgs; [
-      obs-studio
+  guiConfig = {
+    # --- OBS Studio ---
+    environment.systemPackages = [
+      pkgs.obs-studio
     ];
   };
-})
-args
+}

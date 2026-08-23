@@ -1,4 +1,3 @@
-# Consolidated WSL home profile (CLI/TUI only + WSL shims)
 {
   lib,
   config,
@@ -6,6 +5,7 @@
   pkgs-unstable,
   ...
 }: let
+  # --- WSL Host Compatibility Shims ---
   antigravityWslShim = lib.hiPrio (pkgs.writeShellScriptBin "antigravity" ''
     set -euo pipefail
 
@@ -47,22 +47,24 @@
       exec "$app" "''${args[@]}"
     fi
 
-    exec ${lib.getExe pkgs-unstable.antigravity} "$@"
+    exec ${lib.getExe pkgs-unstable.antigravity-ide} "$@"
   '');
 in {
+  # --- Profile Options ---
   options.profiles.home.wsl = {
     enable = lib.mkEnableOption "Consolidated WSL home profile";
   };
 
+  # --- Profile Configuration ---
   config = lib.mkIf config.profiles.home.wsl.enable {
-    # System settings and utilities
+    # --- System Settings & Utilities ---
     home.system = {
       packages.enable = true;
       downloads.enable = true;
       nix.enable = true;
     };
 
-    # Development tools (CLI only)
+    # --- Development Tools ---
     home.development = {
       git.enable = true;
       neovim.enable = true;
@@ -72,7 +74,7 @@ in {
       misc.enableGui = false;
     };
 
-    # Shell and CLI tools
+    # --- Shell & CLI Tools ---
     home.shell = {
       shells.enable = true;
       tmux.enable = true;
@@ -81,7 +83,7 @@ in {
       terminals.enableGui = false;
     };
 
-    # Desktop components (disabled)
+    # --- Desktop Components (Disabled) ---
     home.desktop = {
       hyprland.enableGui = false;
       hypridle.enableGui = false;
@@ -99,13 +101,13 @@ in {
       theme.enableGui = false;
     };
 
-    # Browsers (disabled)
+    # --- Web Browsers (Disabled) ---
     home.browser = {
       zen.enableGui = false;
       helium.enableGui = false;
     };
 
-    # WSL specific packages/shims
+    # --- WSL Packages ---
     home.packages = [antigravityWslShim];
   };
 }

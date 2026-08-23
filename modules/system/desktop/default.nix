@@ -1,6 +1,6 @@
 {...}: {
+  # --- Desktop Submodules ---
   imports = [
-    # Desktop environment components (managed by system.desktop-environment)
     ./appimage.nix
     ./environment.nix
     ./display-manager.nix

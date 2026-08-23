@@ -1,30 +1,27 @@
 {...}: {
+  # --- System Module Imports ---
   imports = [
-    # Core system (always enabled)
-    ./nix-settings.nix
-    ./nix-ld.nix
+    # Core System
     ./locale.nix
+    ./nix-ld.nix
+    ./nix-settings.nix
 
-    # Theming and fonts (can be enabled independently)
+    # Styling & Theming
     ./stylix.nix
 
-    # New categorized modules
-    ./virtualisation
-    ./network
-    ./storage
-    ./media
-    ./productivity
-    ./communication
+    # Categorized System Modules
     ./browser
-    ./services
-    ./llm
+    ./communication
     ./desktop-environment.nix
-
-    # Desktop sub-modules (managed by desktop-environment)
     ./desktop
-
-    # Hardware and misc (unchanged)
     ./hardware
+    ./llm
+    ./media
     ./misc
+    ./network
+    ./productivity
+    ./services
+    ./storage
+    ./virtualisation
   ];
 }

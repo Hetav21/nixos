@@ -6,14 +6,13 @@
   settings,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.stylix";
   hasGui = false;
-  cliConfig = _: let
-    # Only use wallpaper if desktop environment is enabled (not for WSL)
+  cliConfig = let
     hasDesktop = config.system.desktopEnvironment.enableGui or false;
   in {
-    # Font packages
+    # --- Fonts ---
     fonts = {
       enableDefaultPackages = true;
 
@@ -30,10 +29,18 @@
         };
       };
 
-      packages = with pkgs; [nerd-fonts.jetbrains-mono nerd-fonts.fira-code font-awesome dejavu_fonts ubuntu-classic noto-fonts noto-fonts-color-emoji];
+      packages = [
+        pkgs.nerd-fonts.jetbrains-mono
+        pkgs.nerd-fonts.fira-code
+        pkgs.font-awesome
+        pkgs.dejavu_fonts
+        pkgs.ubuntu-classic
+        pkgs.noto-fonts
+        pkgs.noto-fonts-color-emoji
+      ];
     };
 
-    # Stylix configuration
+    # --- Stylix Theme Configuration ---
     stylix = lib.mkMerge [
       {
         enable = true;
@@ -106,11 +113,10 @@
         };
       }
 
-      # Only set wallpaper image for desktop environments (not WSL)
+      # Only apply wallpaper image on desktop graphical environments (skipped on headless WSL)
       (lib.mkIf hasDesktop {
         image = ../../wallpapers/${settings.wallpaper};
       })
     ];
   };
-})
-args
+}

@@ -1,7 +1,5 @@
 {
-  # Common settings shared across all hosts
-
-  # Upgrade configuration
+  # --- Input Upgrade Channels ---
   inputs = {
     standard = [
       "nix-index-database"
@@ -18,14 +16,14 @@
     ];
   };
 
-  # User configuration
+  # --- User Defaults ---
   username = "hetav";
   editor = "nvim";
   visual = "zeditor";
   browser = "helium";
   terminal = "ghostty";
 
-  # Git identities
+  # --- Git Identities ---
   git = {
     personal = {
       name = "Hetav21";
@@ -37,7 +35,7 @@
     };
   };
 
-  # System configuration (common)
+  # --- Locale & Keyboard ---
   setup_dir = "/etc/nixos/";
   system = "x86_64-linux";
   locale = "en_US.UTF-8";
@@ -49,16 +47,15 @@
   };
   consoleKeymap = "us";
 
-  # Host mode: "personal" (default), "work", or custom modes
-  # Controls which dotfile variants are loaded (e.g., config.work.json)
+  # --- Host Mode ---
   mode = "personal";
 
-  # Nix build configuration (can be overridden per-host)
+  # --- Nix Build Configuration ---
   nix = {
     maxJobs = 2;
     cores = 8;
   };
 
-  # Application common configuration
+  # --- Assets ---
   wallpaper_directory = "/etc/nixos/wallpapers";
 }

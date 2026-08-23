@@ -1,9 +1,17 @@
-# Common home-manager base configuration shared across all hosts
 {
   inputs,
   settings,
   ...
 }: {
+  # --- Imports ---
+  imports = [
+    ../../modules/home
+    ./profiles/home
+    inputs.nix-index-database.homeModules.nix-index
+    inputs.nixvim.homeModules.nixvim
+  ];
+
+  # --- Home Manager Base Configuration ---
   home = {
     username = settings.username;
     homeDirectory = "/home/${settings.username}";
@@ -19,14 +27,6 @@
     sessionPath = ["$HOME/.local/bin" "$HOME/go/bin"];
   };
 
-  # Import home modules and profiles
-  imports = [
-    ../../modules/home
-    ./profiles/home
-    inputs.nix-index-database.homeModules.nix-index
-    inputs.nixvim.homeModules.nixvim
-  ];
-
-  # Enable home-manager
+  # --- Home Manager Program Enablement ---
   programs.home-manager.enable = true;
 }

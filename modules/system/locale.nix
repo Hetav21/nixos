@@ -3,12 +3,14 @@
   settings,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.locale";
   hasGui = false;
-  cliConfig = _: {
+  cliConfig = {
+    # --- Timezone ---
     time.timeZone = settings.timeZone;
 
+    # --- Internationalisation ---
     i18n = {
       defaultLocale = settings.locale;
       extraLocaleSettings = {
@@ -24,7 +26,7 @@
       };
     };
 
+    # --- Console ---
     console.keyMap = settings.consoleKeymap;
   };
-})
-args
+}

@@ -3,11 +3,12 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.llm.open-webui";
   hasCli = false;
   hasGui = true;
-  guiConfig = {pkgs, ...}: {
+  guiConfig = {
+    # --- Open WebUI Service ---
     services.open-webui = {
       enable = true;
       package = pkgs.open-webui;
@@ -19,5 +20,4 @@
       };
     };
   };
-})
-args
+}

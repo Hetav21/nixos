@@ -1,6 +1,7 @@
 {
   description = "A Nix-flake-based Bun backend development environment";
 
+  # --- Flake Inputs ---
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
     nix-skills.url = "github:Hetav21/nix-skills";
@@ -27,6 +28,7 @@
     };
   };
 
+  # --- Flake Outputs ---
   outputs = {
     self,
     nix-skills,

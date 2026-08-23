@@ -1,24 +1,24 @@
-# WSL system profile (CLI/TUI only, no GUI)
-# Includes: core system modules only, all desktop features disabled
 {
   lib,
   config,
   ...
 }: {
+  # --- Profile Options ---
   options.profiles.system.wsl = {
     enable = lib.mkEnableOption "WSL profile with CLI/TUI only";
   };
 
+  # --- Profile Configuration ---
   config = lib.mkIf config.profiles.system.wsl.enable {
-    # Core system (always needed)
+    # --- Core System ---
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
     system.locale.enable = true;
 
-    # Enable Stylix for fonts and TUI theming
+    # --- Theming ---
     system.stylix.enable = true;
 
-    # CLI/TUI tools only (no GUI)
+    # --- CLI/TUI Tools & Virtualisation ---
     system.virtualisation = {
       docker.enable = true;
       podman.enable = true;
@@ -29,6 +29,8 @@
       waydroid.enableGui = false;
       guest.enable = false;
     };
+
+    # --- Storage & Base Services ---
     system.network = {
       base.enable = false;
       applet.enableGui = false;
@@ -54,7 +56,7 @@
       open-webui.enableGui = false;
     };
 
-    # Disable all GUI components
+    # --- Disabled Desktop & Hardware Components ---
     system.media = {
       mpv.enable = false;
       pavucontrol.enableGui = false;
@@ -83,14 +85,8 @@
       edge.enableGui = false;
     };
     system.desktopEnvironment.enableGui = false;
-
-    # Disable base hardware modules (not needed for WSL)
     system.hardware.base.enable = false;
-
-    # Disable desktop sub-modules (not needed for WSL)
     system.desktop.security.enable = false;
-
-    # Disable misc modules (not needed for WSL)
     system.misc.diskDecryption.enable = false;
   };
 }

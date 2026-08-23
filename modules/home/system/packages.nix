@@ -3,31 +3,31 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "home.system.packages";
   hasCli = true;
   hasGui = false;
-  cliConfig = _: {
-    home.packages = with pkgs; [
+
+  cliConfig = {
+    # --- System Packages ---
+    home.packages = [
       # System monitoring and utilities
-      btop
-      killall
-      most
-      # vim - replaced by neovim via nixvim (provides vim/vi/nvim aliases)
-      wget
+      pkgs.btop
+      pkgs.killall
+      pkgs.most
+      pkgs.wget
 
       # System information tools
-      tree
-      fastfetch
-      microfetch
-      onefetch
+      pkgs.tree
+      pkgs.fastfetch
+      pkgs.microfetch
+      pkgs.onefetch
 
       # Filesystem support
-      ntfs3g
+      pkgs.ntfs3g
 
-      # Misc
-      typioca
+      # Miscellaneous
+      pkgs.typioca
     ];
   };
-})
-args
+}

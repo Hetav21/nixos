@@ -3,14 +3,12 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.storage.onedrive";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
-    environment.systemPackages = with pkgs; [
-      onedrive
-    ];
+  guiConfig = {
+    # --- Packages ---
+    environment.systemPackages = [pkgs.onedrive];
   };
-})
-args
+}

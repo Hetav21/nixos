@@ -1,16 +1,20 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+# --- Patch Application ---
 if [[ -d "patch" && "$(ls -A patch)" ]]; then
-    git apply patch/* --allow-empty
-    echo "Patch Applied"
+  git apply patch/* --allow-empty
+  echo "Patch applied successfully."
 
-    read -p "Do you want to delete all patches in the 'patch' directory? (y/N): " confirmation
+  # --- Cleanup Prompt ---
+  read -rp "Do you want to delete all patches in the 'patch' directory? (y/N): " confirmation
 
-    if [[ "$confirmation" == "y" || "$confirmation" == "Y" ]]; then
-        rm -rf ./patch/*
-        echo "All patches in 'patch' have been deleted."
-    else
-        echo "No patches were deleted."
-    fi
+  if [[ "$confirmation" =~ ^[Yy]$ ]]; then
+    rm -rf ./patch/*
+    echo "All patches in 'patch' have been deleted."
+  else
+    echo "No patches were deleted."
+  fi
 else
-    echo "The 'patch' directory is empty or it does not exists"
+  echo "The 'patch' directory is empty or does not exist."
 fi

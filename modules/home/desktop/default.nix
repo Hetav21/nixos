@@ -3,6 +3,7 @@
   config,
   ...
 }: {
+  # --- Submodule Imports ---
   imports = [
     ./hypr
     ./clipboard.nix
@@ -16,16 +17,16 @@
     ./wlogout.nix
   ];
 
-  options = {
-    home.desktop = {
-      enableGui = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Enable all desktop GUI components";
-      };
+  # --- Options ---
+  options.home.desktop = {
+    enableGui = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable all desktop GUI components";
     };
   };
 
+  # --- Module Wiring ---
   config = {
     home.desktop.hyprland.enableGui = lib.mkDefault config.home.desktop.enableGui;
     home.desktop.hypridle.enableGui = lib.mkDefault config.home.desktop.enableGui;

@@ -1,11 +1,13 @@
 {
   description = "An empty flake template that you can adapt to your own environment";
 
+  # --- Flake Inputs ---
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
     nix-skills.url = "github:Hetav21/nix-skills";
   };
 
+  # --- Flake Outputs ---
   outputs = {
     self,
     nix-skills,
@@ -29,21 +31,9 @@
       {pkgs}: {
         default = nix-skills.lib.mkProjectEnv {
           inherit pkgs inputs;
-
-          # The Nix packages provided in the environment
-          # Add any you need here
           packages = with pkgs; [];
-
-          # Set any environment variables for your dev shell
           env = {};
-
-          # Add any shell logic you want executed any time the environment is activated
-          shellHook = ''
-          '';
-
-          # Example: Custom Claude Agents and Skills
-          # agents = [ "https://github.com/org/repo/blob/main/agent.md" ];
-          # skills = [ "https://github.com/org/repo/tree/main/skills" ];
+          shellHook = "";
         };
       }
     );

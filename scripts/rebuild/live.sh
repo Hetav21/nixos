@@ -1,23 +1,21 @@
 #!/run/current-system/sw/bin/sh
-# NixOS Live Rebuild Script
-# This script rebuilds NixOS and applies changes immediately
+set -e
 
-# Source common functions
+# --- Initialization ---
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-source "$SCRIPT_DIR/common.sh"
+. "$SCRIPT_DIR/common.sh"
 
-# Main execution
+# --- Main Execution ---
 main() {
-    local setup_dir="$1"
-    print_info "Starting NixOS live rebuild..."
+  local setup_dir="$1"
+  print_info "Starting NixOS live rebuild..."
 
-    setup_environment "$setup_dir"
-    show_diff
-    run_rebuild "switch"
-    cleanup
+  setup_environment "$setup_dir"
+  show_diff
+  run_rebuild "switch"
+  cleanup
 
-    print_success "Live rebuild completed successfully!"
+  print_success "Live rebuild completed successfully!"
 }
 
-# Run main function
 main "$@"

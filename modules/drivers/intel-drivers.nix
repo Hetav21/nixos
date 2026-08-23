@@ -3,10 +3,11 @@
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "drivers.intel";
   hasGui = false;
-  cliConfig = _: {
+  cliConfig = {
+    # --- Intel Graphics Acceleration ---
     hardware.graphics = {
       extraPackages = [
         pkgs.intel-media-driver
@@ -18,5 +19,4 @@
       extraPackages32 = [pkgs.pkgsi686Linux.intel-media-driver];
     };
   };
-})
-args
+}

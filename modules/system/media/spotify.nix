@@ -1,12 +1,12 @@
 {extraLib, ...} @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.media.spotify";
   hasCli = false;
   hasGui = true;
-  guiConfig = _: {
+  guiConfig = {
+    # --- Spotify Flatpak ---
     services.flatpak.packages = [
-      "com.spotify.Client" # Music streaming
+      "com.spotify.Client"
     ];
   };
-})
-args
+}

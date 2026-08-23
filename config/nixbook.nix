@@ -1,10 +1,9 @@
-# nixbook host-specific settings
-# These are merged with common.nix using hostLib.mkHostSettings
 {
+  # --- Host Identity ---
   hostname = "nixbook";
   wallpaper = "China.jpeg";
 
-  # Inputs specific to nixbook (desktop)
+  # --- Input Upgrade Channels ---
   inputs = {
     standard = [
       "nix-flatpak"
@@ -17,26 +16,27 @@
     ];
   };
 
-  # Build configuration for physical hardware
+  # --- Nix Build Configuration ---
   nix = {
     maxJobs = 4;
     cores = 8;
+  };
+
+  # --- SSH Identities ---
+  ssh = {
+    work.identityFile = "";
+    personal.identityFile = "~/.ssh/id_personal";
+  };
+
+  # --- Storage & Mounts ---
+  mount-partition = {
+    enable = false;
+    partition_id = "";
   };
 
   rclone = {
     enable = false;
     local_dir = "";
     remote_dir = "";
-  };
-
-  # SSH key configuration
-  ssh = {
-    work.identityFile = "";
-    personal.identityFile = "~/.ssh/id_personal";
-  };
-
-  mount-partition = {
-    enable = false;
-    partition_id = "";
   };
 }

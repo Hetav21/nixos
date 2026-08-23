@@ -1,14 +1,14 @@
 {
   extraLib,
-  lib,
   pkgs,
   ...
 } @ args:
-(extraLib.modules.mkModule {
+extraLib.modules.mkModule args {
   name = "system.desktop.appimage";
   hasGui = false;
-  cliConfig = _: {
-    environment.systemPackages = with pkgs; [appimage-run];
+  cliConfig = {
+    # --- AppImage & FUSE Support ---
+    environment.systemPackages = [pkgs.appimage-run];
 
     programs.fuse.userAllowOther = true;
 
@@ -17,5 +17,4 @@
       binfmt = true;
     };
   };
-})
-args
+}
