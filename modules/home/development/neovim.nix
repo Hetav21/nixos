@@ -450,17 +450,256 @@
             options = {
               globalstatus = true;
               theme = "auto";
+              disabled_filetypes = {
+                statusline = [
+                  "snacks_dashboard"
+                  "snacks_picker_input"
+                ];
+              };
             };
             sections = {
-              lualine_x = [
+              lualine_a = [
+                "mode"
+                # Visual Selection Count (only active in visual modes)
                 {
-                  __unkeyed-1.__raw = ''function() return require("direnv").statusline() end'';
+                  __unkeyed-1.__raw = ''
+                    function()
+                      local mode = vim.fn.mode()
+                      if mode:match("[vV\22]") then
+                        local starts = vim.fn.line("v")
+                        local ends = vim.fn.line(".")
+                        local lines = math.abs(ends - starts) + 1
+                        local chars = vim.fn.wordcount().visual_chars
+                        if chars and chars > 0 then
+                          return string.format("󰒅 %dL %dC", lines, chars)
+                        else
+                          return string.format("󰒅 %dL", lines)
+                        end
+                      end
+                      return ""
+                    end
+                  '';
+                  color = {
+                    fg = "#ea9a97";
+                    gui = "bold";
+                  };
                 }
-                "encoding"
-                "fileformat"
-                "filetype"
+              ];
+              lualine_b = [
+                # Git Repo Root
+                {
+                  __unkeyed-1.__raw = ''
+                    function()
+                      local root = vim.fs.root(0, { ".git" })
+                      if not root then return "" end
+                      return " " .. vim.fs.basename(root)
+                    end
+                  '';
+                }
+                {
+                  __unkeyed-1 = "branch";
+                  icon = "";
+                }
+                # Git Ahead / Behind Commits
+                {
+                  __unkeyed-1.__raw = ''
+                    function()
+                      local gs = vim.b.gitsigns_status_dict
+                      if not gs then return "" end
+                      local parts = {}
+                      if gs.ahead and gs.ahead > 0 then
+                        table.insert(parts, "⇡" .. gs.ahead)
+                      end
+                      if gs.behind and gs.behind > 0 then
+                        table.insert(parts, "⇣" .. gs.behind)
+                      end
+                      return table.concat(parts, " ")
+                    end
+                  '';
+                  color = {
+                    fg = "#f6c177";
+                  };
+                }
+                {
+                  __unkeyed-1 = "diff";
+                  symbols = {
+                    added = " ";
+                    modified = " ";
+                    removed = " ";
+                  };
+                  source.__raw = ''
+                    function()
+                      local gitsigns = vim.b.gitsigns_status_dict
+                      if gitsigns then
+                        return {
+                          added = gitsigns.added,
+                          modified = gitsigns.changed,
+                          removed = gitsigns.removed,
+                        }
+                      end
+                    end
+                  '';
+                }
+                # Conflict Count in buffer
+                {
+                  __unkeyed-1.__raw = ''
+                    function()
+                      local line_count = vim.api.nvim_buf_line_count(0)
+                      if line_count > 5000 or vim.bo.buftype ~= "" then return "" end
+                      local lines = vim.api.nvim_buf_get_lines(0, 0, line_count, false)
+                      local count = 0
+                      for _, line in ipairs(lines) do
+                        if line:sub(1, 7) == "<<<<<<<" then
+                          count = count + 1
+                        end
+                      end
+                      if count > 0 then
+                        return "󰞇 " .. count .. (count == 1 and " conflict" or " conflicts")
+                      end
+                      return ""
+                    end
+                  '';
+                  color = {
+                    fg = "#eb6f92";
+                    gui = "bold";
+                  };
+                }
+              ];
+              lualine_c = [
+                {
+                  __unkeyed-1 = "diagnostics";
+                  sources = ["nvim_lsp"];
+                  symbols = {
+                    error = " ";
+                    warn = " ";
+                    info = " ";
+                    hint = " ";
+                  };
+                }
+                {
+                  __unkeyed-1 = "filename";
+                  file_status = true;
+                  path = 1; # Relative path
+                  symbols = {
+                    modified = " ●";
+                    readonly = " 󰌾";
+                    unnamed = "[No Name]";
+                    newfile = "[New]";
+                  };
+                }
+              ];
+              lualine_x = [
+                # Search Match Counter
+                {
+                  __unkeyed-1.__raw = ''
+                    function()
+                      if package.loaded["noice"] and require("noice").api.status.search.has() then
+                        return " " .. require("noice").api.status.search.get()
+                      end
+                      if vim.v.hlsearch == 1 then
+                        local s = vim.fn.searchcount({ maxcount = 999, timeout = 100 })
+                        if s.total > 0 then
+                          return string.format(" %d/%d", s.current, s.total)
+                        end
+                      end
+                      return ""
+                    end
+                  '';
+                  color = {
+                    fg = "#f6c177";
+                  };
+                }
+                # Macro Recording indicator (active when recording)
+                {
+                  __unkeyed-1.__raw = ''
+                    function()
+                      local reg = vim.fn.reg_recording()
+                      if reg ~= "" then
+                        return "󰑋 @" .. reg
+                      end
+                      return ""
+                    end
+                  '';
+                  color = {
+                    fg = "#eb6f92";
+                    gui = "bold";
+                  };
+                }
+                # Markdown Word Count & Reading Time
+                {
+                  __unkeyed-1.__raw = ''
+                    function()
+                      local ft = vim.bo.filetype
+                      if ft == "markdown" or ft == "text" or ft == "asciidoc" then
+                        local words = vim.fn.wordcount().words or 0
+                        if words > 0 then
+                          local reading_time = math.ceil(words / 200)
+                          return string.format("󰚂 %d w (%dm)", words, reading_time)
+                        end
+                      end
+                      return ""
+                    end
+                  '';
+                  color = {
+                    fg = "#9ccfd8";
+                  };
+                }
+                # Active LSP Clients
+                {
+                  __unkeyed-1.__raw = ''
+                    function()
+                      local clients = vim.lsp.get_clients({ bufnr = 0 })
+                      if #clients == 0 then
+                        return ""
+                      end
+                      local names = {}
+                      for _, c in ipairs(clients) do
+                        if c.name ~= "copilot" then
+                          table.insert(names, c.name)
+                        end
+                      end
+                      return "󰒋 " .. table.concat(names, ", ")
+                    end
+                  '';
+                  color = {
+                    fg = "#c4a7e7";
+                  };
+                }
+                # Active Conform Formatters
+                {
+                  __unkeyed-1.__raw = ''
+                    function()
+                      local conform = package.loaded["conform"]
+                      if not conform then return "" end
+                      local formatters = conform.list_formatters(0)
+                      if #formatters == 0 then return "" end
+                      local names = {}
+                      for _, f in ipairs(formatters) do
+                        table.insert(names, f.name)
+                      end
+                      return "󰉼 " .. table.concat(names, ", ")
+                    end
+                  '';
+                  color = {
+                    fg = "#3e8fb0";
+                  };
+                }
+                {
+                  __unkeyed-1 = "filetype";
+                  icon_only = false;
+                }
+              ];
+              lualine_y = [
+                "progress"
+              ];
+              lualine_z = [
+                "location"
               ];
             };
+            extensions = [
+              "trouble"
+              "quickfix"
+            ];
           };
         };
 
