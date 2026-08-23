@@ -106,6 +106,21 @@ Managed by `diffview.nvim`, `gitsigns.nvim`, and `snacks.picker`.
 | `<leader>ghr` | Normal, Visual | Reset git hunk (or visual selection) | `gitsigns.nvim` |
 | `<leader>ghu` | Normal | Undo last staged hunk | `gitsigns.nvim` |
 
+### Merge Conflict Resolution (`diffview.nvim`)
+
+When merge or rebase conflicts occur, opening Diffview (`<leader>gd` or `:DiffviewOpen`) provides a 3-way split interface (`LOCAL`, `BASE`, `REMOTE` alongside the working buffer).
+
+| Keybinding / Command | Mode | Action | Description |
+| :--- | :---: | :--- | :--- |
+| `]x` / `[x` | Normal | Next / Previous conflict | Jump between conflict markers across unmerged files |
+| `]c` / `[c` | Normal | Next / Previous diff change | Jump between diff hunks |
+| `<leader>co` | Normal | Choose **Ours** (`LOCAL`) | Accept current branch version |
+| `<leader>ct` | Normal | Choose **Theirs** (`REMOTE`) | Accept incoming branch version |
+| `<leader>cb` | Normal | Choose **Base** (`BASE`) | Accept common ancestor version |
+| `<leader>ca` | Normal | Choose **All** | Keep both incoming and local changes |
+| `<leader>c0` | Normal | Choose **None** | Discard both conflict regions |
+| `:DiffviewClose` | Command | Close Diffview | Exit the conflict resolution interface after saving (`<C-s>`) |
+
 ---
 
 ## 6. LSP & Code Intelligence
