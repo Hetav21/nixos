@@ -1,11 +1,26 @@
+# Log files
 *.log
-*.bak*
-*.swp
-*.asc
-patch
-*.backup
 
-# Security: Prevent accidental secret commits
+# Backup and editor swap files
+*.bak*
+*.backup
+*.swp
+
+# Patch files
+patch
+
+# Security: Prevent accidental secret commits (keys, certs, env files)
+*.asc
 *.pem
 *.key
 .env*
+
+# Ignore build outputs from performing a nix-build or `nix build` command
+result
+result-*
+
+# Ignore automatically generated direnv output
+.direnv
+
+# Ignore NixOS interactive test driver history
+**/.nixos-test-history
