@@ -742,7 +742,10 @@
           enable = true;
           settings = {
             notify.enabled = false; # Let snacks.notifier handle notifications
-            lsp.signature.enabled = true;
+            lsp.signature = {
+              enabled = true;
+              auto_open.enabled = false;
+            };
             presets = {
               bottom_search = false;
               command_palette = true;
