@@ -9,12 +9,14 @@
   hasCli = true;
   hasGui = false;
   cliConfig = {config, ...}: {
+    # --- Stylix & Aliases ---
     stylix.targets.nixvim.enable = false;
 
     home.shellAliases = {
       nv = "nvim";
     };
 
+    # --- Nixvim Configuration ---
     programs.nixvim = {
       enable = true;
       defaultEditor = true;
@@ -24,7 +26,7 @@
       # Use system/home-manager pkgs instance (reusing overlays and suppressing follows warning)
       nixpkgs.useGlobalPackages = true;
 
-      # Rosé Pine Colorscheme
+      # --- Colorscheme ---
       colorschemes.rose-pine = {
         enable = true;
         settings = {
@@ -40,7 +42,7 @@
         };
       };
 
-      # Editor Options
+      # --- Editor Options ---
       opts = {
         number = true;
         relativenumber = true;
@@ -89,6 +91,7 @@
         ];
       };
 
+      # --- Global Variables ---
       globals = {
         mapleader = " ";
         maplocalleader = "\\";
@@ -98,7 +101,7 @@
         loaded_netrwPlugin = 1;
       };
 
-      # System and CLI packages needed at runtime
+      # --- Runtime Packages & Tools ---
       extraPackages = with pkgs; [
         ripgrep
         fd
@@ -109,18 +112,22 @@
         alejandra
         ruff
         shellcheck
+        statix
+        markdownlint-cli2
         prettier
         shfmt
+        # Tools, Debuggers & Language Servers
+        lazygit
       ];
 
-      # Native Wayland clipboard
+      # --- Clipboard & Runtime Plugins ---
       clipboard.providers.wl-copy.enable = true;
 
       extraPlugins = [
         pkgs.custom.direnv-nvim
       ];
 
-      # Safe wrapper for autocommand group deletion (prevents E367 error on BufWipeout in plugins like snacks.nvim dashboard)
+      # --- Lua Hooks & WSL Integration ---
       extraConfigLuaPre = ''
         local orig_del_augroup_by_id = vim.api.nvim_del_augroup_by_id
         vim.api.nvim_del_augroup_by_id = function(...)
@@ -128,7 +135,6 @@
         end
       '';
 
-      # WSL Clipboard integration & performance options
       extraConfigLua = ''
         if vim.fn.has("wsl") == 1 then
           vim.g.clipboard = {
@@ -158,6 +164,7 @@
         })
       '';
 
+      # --- Plugins ---
       plugins = {
         # Modern QoL Suite (replaces telescope, neo-tree, illuminate, toggleterm, etc.)
         snacks = {
@@ -274,6 +281,8 @@
             indent.enabled = true;
             scroll.enabled = true;
             words.enabled = true;
+            lazygit.enabled = true;
+            gitbrowse.enabled = true;
             terminal = {
               enabled = true;
               shell = lib.getExe config.programs.nushell.package;
@@ -301,6 +310,10 @@
               ];
               "<CR>" = [
                 "accept"
+                "fallback"
+              ];
+              "<C-e>" = [
+                "hide"
                 "fallback"
               ];
               "<C-Space>" = [
@@ -334,6 +347,7 @@
               ];
             };
             completion = {
+              accept.auto_brackets.enabled = true;
               list.selection = {
                 preselect = true;
                 auto_insert = true;
@@ -350,16 +364,35 @@
         };
 
         # Snippets
-        luasnip.enable = true;
+        luasnip = {
+          enable = true;
+          fromVscode = [{}];
+        };
+        friendly-snippets.enable = true;
 
-        # Surround motions (sa, sd, sr)
+        # Surround motions (sa, sd, sr) & Auto-pairs
         mini = {
           enable = true;
           mockDevIcons = false;
           modules = {
             surround = {};
+            pairs = {};
           };
         };
+        ts-autotag.enable = true;
+
+        # Context-aware Commenting & Colorizer
+        ts-comments.enable = true;
+        colorizer = {
+          enable = true;
+          settings.user_default_options = {
+            names = false;
+            tailwind = true;
+          };
+        };
+
+        # JSON & YAML Schemas
+        schemastore.enable = true;
 
         # Yank history & clipboard ring
         yanky.enable = true;
@@ -419,6 +452,11 @@
                 __unkeyed-1 = "<leader>s";
                 group = "Session";
                 icon = "󰗼 ";
+              }
+              {
+                __unkeyed-1 = "<leader>u";
+                group = "UI / Toggle";
+                icon = "󰔡 ";
               }
               {
                 __unkeyed-1 = "<leader>x";
@@ -662,9 +700,7 @@
                       end
                       local names = {}
                       for _, c in ipairs(clients) do
-                        if c.name ~= "copilot" then
-                          table.insert(names, c.name)
-                        end
+                        table.insert(names, c.name)
                       end
                       return "󰒋 " .. table.concat(names, ", ")
                     end
@@ -787,7 +823,7 @@
         # Language Server Protocol (LSP)
         lsp = {
           enable = true;
-          inlayHints = false;
+          inlayHints = true;
           keymaps = {
             silent = true;
             diagnostic = {
@@ -818,10 +854,79 @@
               enable = true;
               onAttach.function = "client.server_capabilities.hoverProvider = false";
             };
-            gopls.enable = true;
-            clangd.enable = true;
-            ts_ls.enable = true;
-            tailwindcss.enable = true;
+            gopls = {
+              enable = true;
+              settings.gopls = {
+                hints = {
+                  assignVariableTypes = true;
+                  compositeLiteralFields = true;
+                  constantValues = true;
+                  functionTypeParameters = true;
+                  parameterNames = true;
+                  rangeVariableTypes = true;
+                };
+                analyses = {
+                  unusedparams = true;
+                  shadow = true;
+                };
+                staticcheck = true;
+              };
+            };
+            ts_ls = {
+              enable = true;
+              settings = {
+                javascript.inlayHints = {
+                  includeInlayParameterNameHints = "all";
+                  includeInlayVariableTypeHints = true;
+                };
+                typescript.inlayHints = {
+                  includeInlayParameterNameHints = "all";
+                  includeInlayVariableTypeHints = true;
+                };
+              };
+            };
+            tailwindcss = {
+              enable = true;
+              settings.tailwindCSS = {
+                experimental.classRegex = [
+                  [
+                    "cva\\(([^)]*)\\)"
+                    "[\"'`]([^\"'`]*).*?[\"'`]"
+                  ]
+                  [
+                    "cx\\(([^)]*)\\)"
+                    "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"
+                  ]
+                  [
+                    "cn\\(([^)]*)\\)"
+                    "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"
+                  ]
+                  [
+                    "clsx\\(([^)]*)\\)"
+                    "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"
+                  ]
+                  [
+                    "twMerge\\(([^)]*)\\)"
+                    "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"
+                  ]
+                ];
+              };
+            };
+            emmet_language_server = {
+              enable = true;
+              filetypes = [
+                "css"
+                "eruby"
+                "html"
+                "javascript"
+                "javascriptreact"
+                "less"
+                "sass"
+                "scss"
+                "pug"
+                "typescriptreact"
+              ];
+            };
             nil_ls = {
               enable = true;
               settings.nil = {
@@ -830,6 +935,7 @@
               };
             };
             bashls.enable = true;
+            marksman.enable = true;
             jsonls.enable = true;
             yamlls.enable = true;
             taplo.enable = true;
@@ -841,13 +947,20 @@
         conform-nvim = {
           enable = true;
           settings = {
-            format_on_save = {
-              lsp_format = "fallback";
-              timeout_ms = 1000;
-            };
+            format_on_save.__raw = ''
+              function(bufnr)
+                if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+                  return
+                end
+                return { timeout_ms = 1000, lsp_format = "fallback" }
+              end
+            '';
             formatters_by_ft = {
               nix = ["alejandra"];
-              python = ["ruff_format"];
+              python = [
+                "ruff_organize_imports"
+                "ruff_format"
+              ];
               go = [
                 "gofmt"
                 "goimports"
@@ -863,13 +976,31 @@
               jsonc = ["prettier"];
               yaml = ["prettier"];
               markdown = ["prettier"];
+              toml = ["taplo"];
               sh = ["shfmt"];
+              bash = ["shfmt"];
+            };
+            formatters = {
+              shfmt = {
+                prepend_args = [
+                  "-i"
+                  "2"
+                ];
+              };
             };
           };
         };
 
-        # Debug Adapter Protocol
-        dap.enable = true;
+        # Linter Diagnostics
+        lint = {
+          enable = true;
+          lintersByFt = {
+            bash = ["shellcheck"];
+            sh = ["shellcheck"];
+            nix = ["statix"];
+            markdown = ["markdownlint-cli2"];
+          };
+        };
 
         # AI CLI & Assistant Sidekick
         sidekick = {
@@ -890,7 +1021,20 @@
         };
       };
 
-      # Clean, Ergonomic Keybindings
+      # --- Autocommands ---
+      autoCmd = [
+        # Automatic linter execution on buffer save/read
+        {
+          event = [
+            "BufWritePost"
+            "BufEnter"
+            "InsertLeave"
+          ];
+          callback.__raw = "function() require('lint').try_lint() end";
+        }
+      ];
+
+      # --- Keymaps ---
       keymaps = [
         # --- Navigation & Window Management ---
         {
@@ -1119,6 +1263,16 @@
           options.desc = "Notification History";
         }
         {
+          key = "<leader>fs";
+          action.__raw = "function() Snacks.picker.lsp_symbols() end";
+          options.desc = "LSP Symbols (Buffer)";
+        }
+        {
+          key = "<leader>fS";
+          action.__raw = "function() Snacks.picker.lsp_workspace_symbols() end";
+          options.desc = "LSP Symbols (Workspace)";
+        }
+        {
           key = "<leader>bs";
           action.__raw = "function() Snacks.scratch() end";
           options.desc = "Toggle Scratchpad";
@@ -1149,6 +1303,11 @@
           options.desc = "Format Document / Selection";
         }
         {
+          key = "<leader>cl";
+          action.__raw = "function() require('lint').try_lint() end";
+          options.desc = "Lint Document";
+        }
+        {
           key = "<leader>cr";
           action.__raw = ''function() return ":IncRename " .. vim.fn.expand("<cword>") end'';
           options = {
@@ -1166,6 +1325,16 @@
         }
 
         # --- Git & Diffview ---
+        {
+          key = "<leader>gg";
+          action.__raw = "function() Snacks.lazygit() end";
+          options.desc = "Lazygit";
+        }
+        {
+          key = "<leader>gB";
+          action.__raw = "function() Snacks.gitbrowse() end";
+          options.desc = "Git Browse (Web)";
+        }
         {
           key = "<leader>gd";
           action = "<cmd>DiffviewOpen<cr>";
@@ -1363,11 +1532,38 @@
           options.desc = "Next Location Entry";
         }
 
-        # --- Undotree ---
+        # --- UI & Toggles ---
         {
-          key = "<leader>u";
+          key = "<leader>uu";
           action = "<cmd>UndotreeToggle<cr>";
           options.desc = "Toggle Undotree";
+        }
+        {
+          key = "<leader>ui";
+          action.__raw = "function() Snacks.toggle.inlay_hints():toggle() end";
+          options.desc = "Toggle Inlay Hints";
+        }
+        {
+          key = "<leader>ud";
+          action.__raw = "function() Snacks.toggle.diagnostics():toggle() end";
+          options.desc = "Toggle Diagnostics";
+        }
+        {
+          key = "<leader>uf";
+          action.__raw = ''
+            function()
+              Snacks.toggle({
+                name = "Auto Format (Global)",
+                get = function()
+                  return not vim.g.disable_autoformat
+                end,
+                set = function(state)
+                  vim.g.disable_autoformat = not state
+                end,
+              }):toggle()
+            end
+          '';
+          options.desc = "Toggle Auto Format (Global)";
         }
 
         # --- Session Persistence & Quit ---
