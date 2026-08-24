@@ -11,7 +11,7 @@ Declarative Neovim configuration is managed via [Nixvim](https://github.com/nix-
 * **`<leader>`**: `Space`
 * **`<localleader>`**: `\`
 
-Pressing `<leader>` opens the **which-key** popup menu with categorized groups (AI / Sidekick, Buffer, Code, Find, Git, Session, Diagnostics/Trouble).
+Pressing `<leader>` opens the **which-key** popup menu with categorized groups (AI / Sidekick, Buffer, Code, Find, Git, Session, UI / Toggle, Diagnostics/Trouble).
 
 ---
 
@@ -74,6 +74,8 @@ Managed by `snacks.nvim`.
 | `<leader>fb` | Fuzzy search and switch open buffers | `snacks.picker` |
 | `<leader>fw` | Search word under cursor across workspace | `snacks.picker` |
 | `<leader>fl` | Search lines in current buffer | `snacks.picker` |
+| `<leader>fs` | Search LSP symbols in current buffer | `snacks.picker` |
+| `<leader>fS` | Search LSP symbols across workspace | `snacks.picker` |
 | `<leader>fk` | Interactive keymaps picker | `snacks.picker` |
 | `<leader>fh` | Search Vim help documentation | `snacks.picker` |
 | `<leader>fq` | Search quickfix list items | `snacks.picker` |
@@ -95,6 +97,8 @@ Managed by `diffview.nvim`, `gitsigns.nvim`, and `snacks.picker`.
 
 | Keybinding | Mode | Action | Plugin / Handler |
 | :--- | :---: | :--- | :--- |
+| `<leader>gg` | Normal | Open interactive Lazygit floating window | `snacks.lazygit` |
+| `<leader>gB` | Normal | Open current file / repo in GitHub/browser | `snacks.gitbrowse` |
 | `<leader>gd` | Normal | Open full side-by-side git diff view | `diffview.nvim` |
 | `<leader>gf` | Normal | View git commit history for current file | `diffview.nvim` |
 | `<leader>gH` | Normal | View git commit history for current branch | `diffview.nvim` |
@@ -138,6 +142,7 @@ Managed by `nvim-lspconfig`, `inc-rename.nvim`, and `conform-nvim`.
 | `K` | Normal | Display hover documentation / signature | `plugins.lsp` (`vim.lsp.buf.hover`) |
 | `<leader>ca` | Normal | Open LSP code actions menu | `plugins.lsp` (`vim.lsp.buf.code_action`) |
 | `<leader>cf` | Normal, Visual | Manually format buffer or visual selection | `conform-nvim` |
+| `<leader>cl` | Normal | Trigger manual linter diagnostics run | `nvim-lint` |
 | `<leader>cr` / `<leader>rn` | Normal | Incremental LSP symbol rename with live preview | `inc-rename.nvim` |
 | `[d` / `]d` | Normal | Jump to previous / next LSP diagnostic in file | `plugins.lsp` (`vim.diagnostic.goto_prev` / `vim.diagnostic.goto_next`) |
 | `<leader>cd` | Normal | Open floating diagnostic details for current line | `plugins.lsp` (`vim.diagnostic.open_float`) |
@@ -162,9 +167,9 @@ Managed by `trouble.nvim`, `todo-comments.nvim`, and Vim unimpaired navigation.
 
 ---
 
-## 8. Editing, Surround, Textobjects & Yank History
+## 8. Editing, Surround, Auto-pairs & Yank History
 
-Managed by `mini.surround`, `nvim-treesitter-textobjects`, and `yanky.nvim`.
+Managed by `mini.surround`, `mini.pairs`, `nvim-ts-autotag`, `ts-comments.nvim`, `nvim-colorizer`, `nvim-treesitter-textobjects`, and `yanky.nvim`.
 
 | Keybinding | Mode | Action | Plugin / Handler |
 | :--- | :---: | :--- | :--- |
@@ -177,15 +182,23 @@ Managed by `mini.surround`, `nvim-treesitter-textobjects`, and `yanky.nvim`.
 | `p` / `P` | Normal, Visual | Put after / before with clipboard history registration | `yanky.nvim` |
 | `[y` / `]y` | Normal | Cycle backward / forward through yank history ring | `yanky.nvim` |
 
+* **Auto-closing pairs**: Automatically inserts matching brackets (`(`, `[`, `{`) and quotes (`"`, `'`) via `mini.pairs`.
+* **HTML/JSX autotag**: Automatically closes and renames paired HTML/JSX tags via `nvim-ts-autotag`.
+* **Context-aware comments**: Automatically uses the right comment syntax in embedded language contexts (JSX, template strings) via `ts-comments.nvim`.
+* **Color swatches**: Color codes (hex `#ea9a97`, RGB, Tailwind) rendered inline via `nvim-colorizer`.
+
 ---
 
-## 9. Undotree & Session Recovery
+## 9. Undotree, UI Toggles & Session Recovery
 
-Managed by `undotree` and `persistence.nvim`.
+Managed by `undotree`, `snacks.toggle`, and `persistence.nvim`.
 
 | Keybinding | Action | Plugin / Handler |
 | :--- | :--- | :--- |
-| `<leader>u` | Toggle branching undo history tree sidebar | `undotree` |
+| `<leader>uu` | Toggle branching undo history tree sidebar | `undotree` |
+| `<leader>ui` | Toggle LSP Inlay Hints on/off | `snacks.toggle` |
+| `<leader>ud` | Toggle Diagnostics on/off | `snacks.toggle` |
+| `<leader>uf` | Toggle Auto Format on/off globally | `snacks.toggle` |
 | `<leader>ss` | Restore session for the current workspace directory | `persistence.nvim` |
 | `<leader>sl` | Restore last active session | `persistence.nvim` |
 | `<leader>sd` | Do not save session on editor exit | `persistence.nvim` |
@@ -193,15 +206,16 @@ Managed by `undotree` and `persistence.nvim`.
 
 ---
 
-## 10. Autocompletion
+## 10. Autocompletion & Snippets
 
-Managed by `blink-cmp` with `luasnip`.
+Managed by `blink-cmp` with `luasnip` and `friendly-snippets`.
 
 | Keybinding | Action | Plugin / Handler |
 | :--- | :--- | :--- |
 | `<Tab>` | Accept completion candidate / jump forward in snippet | `blink.cmp` |
 | `<S-Tab>` | Jump backward in snippet | `blink.cmp` |
 | `<CR>` (Enter) | Confirm / accept selected completion candidate | `blink.cmp` |
+| `<C-e>` | Dismiss / hide active completion popup and ghost text | `blink.cmp` |
 | `<C-Space>` | Open completion popup / toggle documentation preview | `blink.cmp` |
 | `<C-j>` / `<C-n>` | Select next completion item | `blink.cmp` |
 | `<C-k>` / `<C-p>` | Select previous completion item | `blink.cmp` |
@@ -209,15 +223,19 @@ Managed by `blink-cmp` with `luasnip`.
 
 ---
 
-## 11. Formatters (Auto Format on Save & `<leader>cf`)
+## 11. Formatters & Linters
 
-Managed by `conform-nvim`. Automatically formats on `:w` or on `<leader>cf`:
-
-* **Nix**: `alejandra`
-* **Python**: `ruff_format`
-* **Go**: `gofmt`, `goimports`
-* **JavaScript / TypeScript / React / HTML / CSS / SCSS / JSON / JSONC / YAML / Markdown**: `prettier`
-* **Shell**: `shfmt`
+* **Format on Save & `<leader>cf` (`conform-nvim`)**:
+  * **Nix**: `alejandra`
+  * **Python**: `ruff_organize_imports`, `ruff_format`
+  * **Go**: `gofmt`, `goimports`
+  * **JavaScript / TypeScript / React / HTML / CSS / SCSS / JSON / JSONC / YAML / Markdown**: `prettier`
+  * **TOML**: `taplo`
+  * **Shell / Bash**: `shfmt`
+* **Linter Diagnostics (`nvim-lint` & `<leader>cl`)**:
+  * **Shell / Bash**: `shellcheck`
+  * **Nix**: `statix`
+  * **Markdown**: `markdownlint-cli2`
 
 ---
 
