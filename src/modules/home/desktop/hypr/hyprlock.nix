@@ -14,8 +14,6 @@ extraLib.modules.mkModule args {
   guiConfig = {
     # --- Hyprland Keybindings ---
     wayland.windowManager.hyprland.settings = {
-      "$lock" = "hyprlock";
-
       bind = [
         "$mainMod, O, exec, ${lib.getExe config.programs.hyprlock.package}"
       ];

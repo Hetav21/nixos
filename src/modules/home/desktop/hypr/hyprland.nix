@@ -107,7 +107,6 @@ extraLib.modules.mkModule args {
         $mainMod = SUPER
         $brave = brave
         $browser = helium
-        $browser_alternate = browseros
         $term = ghostty
         $termNew = $term -e
         $code = code
@@ -117,7 +116,6 @@ extraLib.modules.mkModule args {
 
         # --- Application Keybinds ---
         bind = $mainMod, F, exec, $browser
-        bind = SUPER_SHIFT, F, exec, $browser_alternate
         bind = $mainMod, B, exec, $brave
         bind = $mainMod, G, exec, $browser --new-window https://gemini.google.com/
         bind = SUPER_SHIFT, G, exec, $browser --new-window https://chatgpt.com/
@@ -142,18 +140,16 @@ extraLib.modules.mkModule args {
         submap = reset
 
         # --- Media & Function Keys ---
-        bind = , XF86Launch3, exec, $browser_alternate
         bind = , XF86MonBrightnessUp, exec, brightnessctl -q s +10%
         bind = , XF86MonBrightnessDown, exec, brightnessctl -q s 10%-
-        bind = , XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%
-        bind = , XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5%
+        bind = , XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
+        bind = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
         bind = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-        bind = , XF86AudioMicMute, exec, pactl set-source-mute @DEFAULT_SOURCE@ toggle
+        bind = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
         bind = , XF86AudioPlay, exec, playerctl play-pause
         bind = , XF86AudioPause, exec, playerctl pause
         bind = , XF86AudioNext, exec, playerctl next
         bind = , XF86AudioPrev, exec, playerctl previous
-        bind = ALT, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy
 
         # --- Navigation & Focus (Vim keys) ---
         bind = $mainMod, h, movefocus, l
@@ -198,8 +194,6 @@ extraLib.modules.mkModule args {
         exec-once = nm-applet &
         exec-once = blueman-applet &
         exec-once = localsend_app --hidden
-        exec-once = wl-paste --type text --watch cliphist store
-        exec-once = wl-paste --type image --watch cliphist store
       '';
     };
   };
