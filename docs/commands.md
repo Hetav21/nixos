@@ -2,7 +2,7 @@
 
 Interactive system management is performed using `nh` (Nix Helper), while evaluation, automated checks, and AI agent tasks use standard raw `nix` commands.
 
-**Source of truth:** `src/modules/system/nix-settings.nix` (`programs.nh.flake`).
+**Source of truth:** `src/modules/system/settings.nix` (`programs.nh.flake`).
 
 ---
 
