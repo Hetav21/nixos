@@ -15,15 +15,15 @@
     secrets.openai_api_key = {
       sopsFile = extraLib.paths.secret "openai_api_key.yaml";
       mode = "0440";
-      owner = config.users.users.${settings.username}.name;
-      group = config.users.users.${settings.username}.group;
+      owner = settings.username;
+      group = "users";
     };
 
     secrets.context7_api_key = {
       sopsFile = extraLib.paths.secret "context7_api_key.yaml";
       mode = "0440";
-      owner = config.users.users.${settings.username}.name;
-      group = config.users.users.${settings.username}.group;
+      owner = settings.username;
+      group = "users";
     };
   };
 }
