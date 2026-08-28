@@ -12,7 +12,7 @@
   imports = [
     ./user.nix
     ../../modules
-    ./profiles
+    ../../profiles
     ../../secrets
   ];
 
