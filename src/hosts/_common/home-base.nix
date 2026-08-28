@@ -7,7 +7,7 @@
   # --- Imports ---
   imports = [
     ../../modules/home
-    ./profiles/home
+    ../../profiles/home
     inputs.nix-index-database.homeModules.nix-index
     inputs.nixvim.homeModules.nixvim
   ];
