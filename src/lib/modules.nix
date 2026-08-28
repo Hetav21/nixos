@@ -125,7 +125,7 @@ in rec {
     in {
       inherit imports;
 
-      options = lib.mkMerge [
+      options =
         (lib.setAttrByPath pathParts (
           lib.optionalAttrs hasCli {
             enable = lib.mkOption {
@@ -142,8 +142,7 @@ in rec {
             };
           }
         ))
-        extraOptions
-      ];
+        // extraOptions;
 
       config = lib.mkMerge (cliBindings ++ guiBindings ++ [resolvedExtraConfig]);
     };
@@ -151,4 +150,48 @@ in rec {
     if givenArgs == null
     then evaluateCategory spec
     else evaluateCategory spec givenArgs;
+
+  # --- Profile Module Factory ---
+  # Generates boilerplate enable option and conditional config for profile modules (profiles.*.*).
+  mkProfileModule = a: b: let
+    isSpec = x: builtins.isAttrs x && x ? name;
+    spec =
+      if isSpec a
+      then a
+      else b;
+    givenArgs =
+      if isSpec a
+      then b
+      else a;
+
+    evaluateProfile = {
+      name,
+      description ? "Enable ${name} profile",
+      imports ? [],
+      extraOptions ? {},
+      profileConfig ? {},
+    }: {
+      lib,
+      config,
+      ...
+    } @ args: let
+      pathParts = lib.splitString "." name;
+      isEnabled = lib.attrByPath (pathParts ++ ["enable"]) false config;
+      resolvedConfig =
+        if builtins.isFunction profileConfig
+        then profileConfig args
+        else profileConfig;
+    in {
+      inherit imports;
+
+      options =
+        (lib.setAttrByPath (pathParts ++ ["enable"]) (lib.mkEnableOption description))
+        // extraOptions;
+
+      config = lib.mkIf isEnabled resolvedConfig;
+    };
+  in
+    if givenArgs == null
+    then evaluateProfile spec
+    else evaluateProfile spec givenArgs;
 }
