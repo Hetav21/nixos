@@ -70,7 +70,7 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 Load these on demand — only when the task touches their domain:
 
-- **[docs/commands.md](docs/commands.md)** — `nx` command reference, testing changes, troubleshooting. Read before running any build/rebuild/maintenance command.
+- **[docs/commands.md](docs/commands.md)** — Command reference (`nh` & raw `nix`), testing changes, troubleshooting. Read before running any build/rebuild/maintenance command.
 - **[docs/code-style.md](docs/code-style.md)** — naming conventions, the `mkModule` pattern, best practices. Read before writing or editing any module.
 - **[docs/operations.md](docs/operations.md)** — security rules and workflows: namespaces, flake inputs, overlays, packages, secrets.
 - **[docs/agent-environment.md](docs/agent-environment.md)** — declarative agent tooling (`~/.claude`, OpenCode, MCP) via `programs.agent-resources` and the nix-skills flake.

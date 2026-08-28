@@ -3,13 +3,6 @@
   hostname = "nixwslbook";
   wallpaper = "China.jpeg";
 
-  # --- Input Upgrade Channels ---
-  inputs = {
-    standard = [
-      "nixos-wsl"
-    ];
-  };
-
   # --- Nix Build Configuration ---
   nix = {
     maxJobs = 2;

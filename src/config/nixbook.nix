@@ -3,18 +3,6 @@
   hostname = "nixbook";
   wallpaper = "China.jpeg";
 
-  # --- Input Upgrade Channels ---
-  inputs = {
-    standard = [
-      "nix-flatpak"
-      "lanzaboote"
-    ];
-    latest = [
-      "vicinae-extensions"
-      "helium-flake"
-    ];
-  };
-
   # --- Nix Build Configuration ---
   nix = {
     maxJobs = 4;
