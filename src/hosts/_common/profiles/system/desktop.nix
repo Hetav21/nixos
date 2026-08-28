@@ -74,7 +74,6 @@
 
     # --- Web Browsers ---
     system.browser = {
-      browseros.enableGui = true;
       brave.enableGui = true;
       chrome.enableGui = true;
       edge.enableGui = true;

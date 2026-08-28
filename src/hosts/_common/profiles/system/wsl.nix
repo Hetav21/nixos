@@ -79,7 +79,6 @@
       discord.enableGui = false;
     };
     system.browser = {
-      browseros.enableGui = false;
       brave.enableGui = false;
       chrome.enableGui = false;
       edge.enableGui = false;
