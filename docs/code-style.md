@@ -12,9 +12,13 @@ A few pre-convention modules sit flat under `system.` with no category — when 
 
 ## Module Pattern
 
-All modules use the `extraLib.modules.mkModule` helper for consistent behavior and auto-generated enable options.
+All feature modules use `extraLib.modules.mkModule`, and category aggregates (`default.nix`) use `extraLib.modules.mkCategoryModule`.
 
-**Source of truth:** `src/lib/modules.nix`. The full API is exactly six attrs — `name`, `hasCli` (default `true`), `hasGui` (default `false`), `guiRequiresCli` (default `true`), `cliConfig`, `guiConfig` (each may be a function of module args or a plain attrset). There is no `imports`/`extraOptions` passthrough — if a module needs more than these six, write it as a plain module.
+**Source of truth:** `src/lib/modules.nix`.
+
+### Feature Modules (`mkModule`)
+
+The full API is exactly six attrs — `name`, `hasCli` (default `true`), `hasGui` (default `false`), `guiRequiresCli` (default `true`), `cliConfig`, `guiConfig` (each may be a function of module args or a plain attrset).
 
 **Requirements:**
 
@@ -42,6 +46,25 @@ extraLib.modules.mkModule args {
   guiConfig = {
     programs.gui-tool.enable = true;
   };
+}
+```
+
+### Category Modules (`mkCategoryModule`)
+
+Category `default.nix` files aggregate submodules and automatically propagate category-level `enable`/`enableGui` options to children:
+
+```nix
+{
+  extraLib,
+  ...
+} @ args:
+extraLib.modules.mkCategoryModule args {
+  name = "system.<category>";
+  imports = [ ./submodule.nix ];
+  hasCli = true;
+  cliChildren = [ "submodule" ];
+  hasGui = true;
+  guiChildren = [ "submodule" ];
 }
 ```
 
