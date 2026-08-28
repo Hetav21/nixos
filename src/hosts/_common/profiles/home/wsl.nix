@@ -93,10 +93,8 @@ in {
       clipboard.enableGui = false;
       launcher.enableGui = false;
       notification.enableGui = false;
-      rofi.enableGui = false;
       wallpaper.enableGui = false;
       panel.enableGui = false;
-      waybar.enableGui = false;
       wlogout.enableGui = false;
       theme.enableGui = false;
     };

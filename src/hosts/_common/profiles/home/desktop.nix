@@ -47,10 +47,8 @@
       clipboard.enableGui = true;
       launcher.enableGui = true;
       notification.enableGui = true;
-      rofi.enableGui = false;
       wallpaper.enableGui = true;
       panel.enableGui = true;
-      waybar.enableGui = false;
       wlogout.enableGui = true;
       theme.enableGui = true;
     };
