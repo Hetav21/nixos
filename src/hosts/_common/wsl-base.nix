@@ -58,7 +58,11 @@
   systemd.user.services.dbus.wantedBy = ["default.target"];
   environment.systemPackages = [pkgs.dbus];
 
-  # Auto-start user systemd service at boot (ensures dbus is ready for remote/IDE sessions)
+  # TODO: Investigate removing `systemd.services."user@1000"` override.
+  # Issue: `linger = true` already instructs systemd to launch `user@<uid>.service` at boot.
+  # Explicitly targeting "user@1000" is redundant and hardcodes UID 1000 (which may break if UID changes).
+  # Verify whether headless D-Bus and IDE/remote sessions start reliably under WSL with just `linger = true`
+  # and `systemd.user.services.dbus.wantedBy = ["default.target"]`.
   systemd.services."user@1000" = {
     wantedBy = ["multi-user.target"];
     overrideStrategy = "asDropin";
