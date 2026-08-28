@@ -68,6 +68,26 @@ extraLib.modules.mkCategoryModule args {
 }
 ```
 
+### Profile Modules (`mkProfileModule`)
+
+Profile modules (`profiles.<scope>.<name>`) bundle multiple feature enablements and settings:
+
+```nix
+{
+  extraLib,
+  ...
+} @ args:
+extraLib.modules.mkProfileModule args {
+  name = "profiles.<scope>.<name>";
+  description = "<Scope> profile description";
+
+  profileConfig = {
+    # Feature enables and configuration
+    system.<category>.<feature>.enable = true;
+  };
+}
+```
+
 ## Best Practices
 
 **DO:**

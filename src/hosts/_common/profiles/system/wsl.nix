@@ -1,15 +1,12 @@
 {
-  lib,
-  config,
+  extraLib,
   ...
-}: {
-  # --- Profile Options ---
-  options.profiles.system.wsl = {
-    enable = lib.mkEnableOption "WSL profile with CLI/TUI only";
-  };
+} @ args:
+extraLib.modules.mkProfileModule args {
+  name = "profiles.system.wsl";
+  description = "WSL profile with CLI/TUI only";
 
-  # --- Profile Configuration ---
-  config = lib.mkIf config.profiles.system.wsl.enable {
+  profileConfig = {
     # --- Core System ---
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;

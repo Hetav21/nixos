@@ -1,16 +1,13 @@
 {
-  lib,
-  config,
+  extraLib,
   hardware ? {},
   ...
-}: {
-  # --- Profile Options ---
-  options.profiles.system.desktop = {
-    enable = lib.mkEnableOption "Desktop profile with all features";
-  };
+} @ args:
+extraLib.modules.mkProfileModule args {
+  name = "profiles.system.desktop";
+  description = "Desktop profile with all features";
 
-  # --- Profile Configuration ---
-  config = lib.mkIf config.profiles.system.desktop.enable {
+  profileConfig = {
     # --- Core System ---
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
