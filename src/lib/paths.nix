@@ -25,7 +25,7 @@
   # e.g. paths.wallpaper "China.jpeg"
   wallpaper = name: wallpapers + "/${name}";
 
-  # e.g. paths.script "rebuild/test.sh"
+  # e.g. paths.script "patch.sh"
   script = rel: scripts + "/${rel}";
 
   # e.g. paths.secret "openai_api_key.yaml"

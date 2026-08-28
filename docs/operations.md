@@ -14,12 +14,12 @@ Thin index of cross-cutting workflows. Where a topic has an owning doc, the link
 1. Update option paths in module
 2. Update all profile references
 3. Update all host overrides
-4. Test with nx flake check
+4. Test with nix flake check
 ```
 
 ## Update Flake Input
 
-- Routine updates: `nx update` — categories and semantics are owned by [docs/commands.md](commands.md).
+- Routine updates: `nix flake update` (or `nh os switch --update`) — see [docs/commands.md](commands.md).
 - One-off single input: `nix flake update <input>`
 
 ## Add Custom Package

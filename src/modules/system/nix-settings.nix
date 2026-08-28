@@ -1,6 +1,7 @@
 {
   extraLib,
   pkgs,
+  pkgs-unstable,
   settings,
   ...
 } @ args:
@@ -10,6 +11,13 @@ extraLib.modules.mkModule args {
   cliConfig = {
     # --- System Packages ---
     environment.systemPackages = [pkgs.nix-update];
+
+    # --- NH (Nix Helper) ---
+    programs.nh = {
+      enable = true;
+      package = pkgs-unstable.nh;
+      flake = settings.setup_dir;
+    };
 
     # --- Environment Variables ---
     environment.variables = {

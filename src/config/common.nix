@@ -1,20 +1,4 @@
 {
-  # --- Input Upgrade Channels ---
-  inputs = {
-    standard = [
-      "nix-index-database"
-      "home-manager"
-      "sops-nix"
-      "stylix"
-    ];
-    latest = [
-      "nixpkgs-unstable"
-      "nixpkgs-master"
-      "nixvim"
-      "llm-agents"
-    ];
-  };
-
   # --- User Defaults ---
   username = "hetav";
   editor = "nvim";
@@ -35,7 +19,7 @@
   };
 
   # --- Locale & Keyboard ---
-  setup_dir = "/etc/nixos/";
+  setup_dir = "/etc/nixos";
   system = "x86_64-linux";
   locale = "en_US.UTF-8";
   extraLocale = "en_IN";

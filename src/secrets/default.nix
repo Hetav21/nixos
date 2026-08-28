@@ -10,7 +10,7 @@
 
   # --- Sops Secret Decryption ---
   sops = {
-    age.keyFile = "${settings.setup_dir}secrets/keys.asc";
+    age.keyFile = "${settings.setup_dir}/secrets/keys.asc";
 
     secrets.openai_api_key = {
       sopsFile = extraLib.paths.secret "openai_api_key.yaml";

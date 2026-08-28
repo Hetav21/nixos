@@ -43,10 +43,10 @@ extraLib.modules.mkModule args {
           # Set SSH agent socket from systemd service
           $env.SSH_AUTH_SOCK = $"($env.XDG_RUNTIME_DIR)/ssh-agent"
 
-          # NixOS configuration environment variables (used by config.nu)
-          $env.NIXOS_SETUP_DIR = "${settings.setup_dir}"
-          $env.NIXOS_UPDATE_STANDARD = "${settings.update-standard}"
-          $env.NIXOS_UPDATE_LATEST = "${settings.update-latest}"
+          # Flake configuration environment variables for nh
+          $env.FLAKE = "${settings.setup_dir}"
+          $env.NH_FLAKE = "${settings.setup_dir}"
+          $env.NH_OS_FLAKE = "${settings.setup_dir}"
 
           try {
             $env.OPENAI_API_KEY = (cat /run/secrets/openai_api_key | str trim)
