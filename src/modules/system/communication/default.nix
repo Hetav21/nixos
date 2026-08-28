@@ -1,28 +1,19 @@
 {
-  lib,
-  config,
+  extraLib,
   ...
-}: {
-  # --- Communication Submodules ---
+} @ args:
+extraLib.modules.mkCategoryModule args {
+  name = "system.communication";
   imports = [
     ./zoom.nix
     ./thunderbird.nix
     ./discord.nix
   ];
-
-  # --- Options ---
-  options.system.communication = {
-    enableGui = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable all GUI communication applications";
-    };
-  };
-
-  # --- Default Propagations ---
-  config = {
-    system.communication.zoom.enableGui = lib.mkDefault config.system.communication.enableGui;
-    system.communication.thunderbird.enableGui = lib.mkDefault config.system.communication.enableGui;
-    system.communication.discord.enableGui = lib.mkDefault config.system.communication.enableGui;
-  };
+  hasGui = true;
+  guiDescription = "Enable all GUI communication applications";
+  guiChildren = [
+    "zoom"
+    "thunderbird"
+    "discord"
+  ];
 }
