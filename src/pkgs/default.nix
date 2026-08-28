@@ -5,9 +5,7 @@
 }: {
   # --- Standalone Tools ---
   pokego = pkgs.callPackage ./pokego.nix {};
-  browseros = pkgs.callPackage ./browseros/package.nix {};
   gitignore = pkgs.callPackage ./gitignore {};
-  rofi-launcher = pkgs.callPackage ./rofi-launcher.nix {};
 
   # --- Agent & AI Resources ---
   subagent-catalog = pkgs.callPackage ./subagent-catalog {
