@@ -1,8 +1,16 @@
+# Core NixOS System Base
+#
+# Baseline system configuration applied to all hosts. Configures hostname,
+# primary user account, centralized Home Manager integration, and imports.
 {
   lib,
-  pkgs,
   config,
+  pkgs,
+  inputs,
   settings,
+  extraLib,
+  pkgs-unstable,
+  pkgs-master,
   ...
 }: let
   # --- WSL Nushell Compatibility Wrapper ---
@@ -48,21 +56,51 @@
         };
     });
 in {
-  # --- User Account Configuration ---
+  # --- Base System Imports ---
+  imports = [
+    ../modules
+    ../profiles/system
+    ../secrets
+  ];
+
+  # --- Host Options ---
+  options.local.homeConfig = lib.mkOption {
+    type = lib.types.path;
+    description = "Path to host-specific home.nix file";
+  };
+
+  # --- Core Configuration ---
   config = {
+    # Hostname from settings
+    networking.hostName = settings.hostname;
+
+    # Primary User Account
     users.users.${settings.username} = {
       isNormalUser = true;
       description = "Normal User";
-      # WSL: keep Nushell for interactive sessions, but route non-interactive
-      # shell invocations through Bash so WSL/IDE bootstrap scripts work.
       shell =
         if isWslEnabled
         then wslNushellCompat
         else pkgs.nushell;
       ignoreShellProgramCheck = true;
-      extraGroups = [
-        "wheel"
-      ];
+      extraGroups = ["wheel"];
     };
+
+    # Centralized Home Manager Integration
+    home-manager = {
+      extraSpecialArgs = {inherit inputs settings extraLib pkgs-unstable pkgs-master;};
+      users.${settings.username} = {
+        imports = [
+          ./home.nix
+          (import config.local.homeConfig)
+        ];
+      };
+      useGlobalPkgs = true;
+      useUserPackages = true;
+      backupFileExtension = "backup";
+    };
+
+    # Base System State Version
+    system.stateVersion = "25.11";
   };
 }

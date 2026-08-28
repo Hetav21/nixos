@@ -7,7 +7,6 @@
   # --- Host Imports & Path Setup ---
   imports = [
     ./hardware-configuration.nix
-    ../_common
   ];
 
   local.homeConfig = ./home.nix;
@@ -56,5 +55,4 @@
 
   # --- Profiles & State Version ---
   profiles.system.desktop.enable = true;
-  system.stateVersion = lib.mkForce "25.11";
 }

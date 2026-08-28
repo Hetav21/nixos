@@ -122,6 +122,7 @@
           // nixpkgsLib.mkChannelsFor settings.system;
         modules =
           [
+            ./src/core/system.nix
             ./src/hosts/${settings.hostname}/configuration.nix
           ]
           ++ extraLib.modules.common
