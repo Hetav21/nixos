@@ -1,4 +1,4 @@
-# Shared WSL Host Configuration
+# Core WSL Platform Integration
 #
 # Base system configuration for WSL environments (nixwslbook, nixworkbook).
 {
@@ -7,9 +7,6 @@
   settings,
   ...
 }: {
-  # --- Network & Hostname ---
-  networking.hostName = settings.hostname;
-
   # --- NixOS WSL Configuration ---
   wsl = {
     enable = true;

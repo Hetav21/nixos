@@ -1,3 +1,6 @@
+# Core Home Manager Base
+#
+# Baseline Home Manager configuration applied to all user environments.
 {
   inputs,
   settings,
@@ -6,8 +9,8 @@
 }: {
   # --- Imports ---
   imports = [
-    ../../modules/home
-    ../../profiles/home
+    ../modules/home
+    ../profiles/home
     inputs.nix-index-database.homeModules.nix-index
     inputs.nixvim.homeModules.nixvim
   ];
