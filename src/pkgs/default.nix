@@ -4,7 +4,6 @@
   ...
 }: {
   # --- Standalone Tools ---
-  pokego = pkgs.callPackage ./pokego.nix {};
   gitignore = pkgs.callPackage ./gitignore {};
 
   # --- Agent & AI Resources ---
@@ -20,33 +19,12 @@
   mattpocock-skills = pkgs.callPackage ./mattpocock-skills {
     mattpocock-skills-src = inputs.agent-sources.mattpocock-skills or null;
   };
-  agent-config = let
+  agent-config = pkgs.callPackage ./agent-config {
     agent-config-src = inputs.agent-sources.agent-config or null;
-  in
-    assert pkgs.lib.assertMsg (agent-config-src != null) "agent-config-src is required.";
-      pkgs.stdenvNoCC.mkDerivation {
-        pname = "agent-config";
-        version = "devel";
-
-        src = agent-config-src;
-
-        dontBuild = true;
-        dontConfigure = true;
-
-        installPhase = ''
-          mkdir -p $out
-          cp -r $src/. $out/
-        '';
-
-        meta = with pkgs.lib; {
-          description = "Brian Lovin agent configuration resources";
-          homepage = "https://github.com/brianlovin/agent-config";
-          license = licenses.mit;
-          platforms = platforms.all;
-        };
-      };
+  };
 
   # --- System & Editor Integrations ---
   wsl-notify-send = pkgs.callPackage ./wsl-notify-send {};
+  antigravity-wsl-shim = pkgs.callPackage ./antigravity-wsl-shim {};
   direnv-nvim = pkgs.callPackage ./direnv-nvim {};
 }
