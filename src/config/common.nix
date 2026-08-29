@@ -39,6 +39,11 @@
     cores = 8;
   };
 
+  # --- Storage & Mounts ---
+  mountPartition = {
+    partitionId = "";
+  };
+
   # --- Assets ---
   wallpaper_directory = "/etc/nixos/assets/wallpapers";
 }

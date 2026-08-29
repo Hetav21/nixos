@@ -13,7 +13,6 @@
     # Categorized System Modules
     ./browser
     ./communication
-    ./desktop-environment.nix
     ./desktop
     ./hardware
     ./llm

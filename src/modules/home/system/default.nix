@@ -1,25 +1,24 @@
 {
+  extraLib,
   lib,
-  config,
   ...
-}: {
-  # --- Submodule Imports ---
+} @ args:
+extraLib.modules.mkCategoryModule args {
+  name = "home.system";
   imports = [
     ./packages.nix
     ./downloads.nix
     ./settings.nix
   ];
+  hasCli = true;
+  cliDescription = "Enable all system utilities and packages";
+  cliChildren = [
+    "packages"
+    "downloads"
+    "settings"
+  ];
 
-  # --- Options ---
-  options = {
-    home.system = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Enable all system utilities and packages";
-      };
-    };
-
+  extraOptions = {
     # Backwards compatibility options
     home.downloads.enable = lib.mkOption {
       type = lib.types.bool;
@@ -40,10 +39,8 @@
     };
   };
 
-  # --- Module Wiring ---
-  config = {
-    home.system.packages.enable = lib.mkDefault config.home.system.enable;
-    home.system.downloads.enable = lib.mkDefault (config.home.system.enable || config.home.downloads.enable);
-    home.system.settings.enable = lib.mkDefault (config.home.system.enable || config.home.nixSettings.enable || config.home.system.nix.enable);
+  extraConfig = {config, ...}: {
+    home.system.downloads.enable = lib.mkDefault config.home.downloads.enable;
+    home.system.settings.enable = lib.mkDefault (config.home.nixSettings.enable || config.home.system.nix.enable);
   };
 }

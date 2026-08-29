@@ -93,12 +93,14 @@ extraLib.modules.mkProfileModule args {
     };
 
     # --- Desktop Environment & Hardware ---
-    system.desktopEnvironment.enableGui = true;
+    system.desktop.enable = true;
     system.hardware.base.enable = true;
-    system.misc.diskDecryption.enable = false;
+    system.misc.disk-decryption.enable = false;
 
     # --- Hardware Drivers ---
     drivers.nvidia.enable = hardware.nvidia.enable or false;
+    drivers.nvidia.prime.offload.enable = hardware.nvidia.prime.offload.enable or false;
+    drivers.nvidia.prime.sync.enable = hardware.nvidia.prime.sync.enable or false;
     drivers.intel.enable = hardware.intel.enable or false;
     drivers.amdgpu.enable = hardware.amdgpu.enable or false;
     drivers.asus.enable = hardware.asus.enable or false;

@@ -28,4 +28,4 @@ Package definitions live in `src/pkgs/`, exposed via overlay as `pkgs.custom.<na
 
 ## Add/Modify Secret
 
-sops workflow: secrets defined in `src/secrets/default.nix`, encrypted payloads stored in `secrets/` with `.sops.yaml`.
+sops workflow: secrets defined in `src/modules/system/secrets.nix`, encrypted payloads stored in `secrets/` with `.sops.yaml`.

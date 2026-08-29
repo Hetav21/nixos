@@ -2,7 +2,7 @@
 
 ## Naming Conventions
 
-- Use dots (not hyphens) in option paths: `system.category.feature`
+- Use kebab-case for module option paths: `system.<category>.<feature-name>`
 - System modules: `system.<category>.*`
 - Home modules: `home.<category>.*`
 - Hardware drivers: `drivers.<vendor>.*`
@@ -100,7 +100,7 @@ extraLib.modules.mkProfileModule args {
 
 **DON'T:**
 
-- Use hyphens in option paths (use dots)
+- Use camelCase for module option paths (use kebab-case)
 - Mix system and home configurations
 - Hardcode user-specific paths
 - Create modules without enable options

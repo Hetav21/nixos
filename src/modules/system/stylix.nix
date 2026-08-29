@@ -10,7 +10,7 @@ extraLib.modules.mkModule args {
   name = "system.stylix";
   hasGui = false;
   cliConfig = let
-    hasDesktop = config.system.desktopEnvironment.enableGui or false;
+    hasDesktop = config.system.desktop.enable or false;
   in {
     # --- Fonts ---
     fonts = {
