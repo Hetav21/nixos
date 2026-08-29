@@ -12,6 +12,7 @@ extraLib.modules.mkProfileModule args {
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
     system.locale.enable = true;
+    system.secrets.enable = true;
 
     # --- Virtualisation ---
     system.virtualisation = {

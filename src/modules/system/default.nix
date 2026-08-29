@@ -4,6 +4,7 @@
     # Core System
     ./locale.nix
     ./nix-ld.nix
+    ./secrets.nix
     ./settings.nix
 
     # Styling & Theming
