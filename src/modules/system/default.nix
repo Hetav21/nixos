@@ -20,7 +20,6 @@
     ./misc
     ./network
     ./productivity
-    ./services
     ./storage
     ./virtualisation
   ];

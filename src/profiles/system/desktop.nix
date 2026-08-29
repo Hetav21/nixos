@@ -77,12 +77,12 @@ extraLib.modules.mkProfileModule args {
       edge.enableGui = true;
     };
 
-    # --- Base Services ---
-    system.baseservices = {
+    # --- Miscellaneous Utilities ---
+    system.misc = {
       locate.enable = true;
       cron.enable = true;
       gnupg.enable = true;
-      flatpak.enableGui = true;
+      disk-decryption.enable = false;
     };
 
     # --- Local LLM & AI ---
@@ -93,9 +93,11 @@ extraLib.modules.mkProfileModule args {
     };
 
     # --- Desktop Environment & Hardware ---
-    system.desktop.enable = true;
+    system.desktop = {
+      enable = true;
+      flatpak.enableGui = true;
+    };
     system.hardware.base.enable = true;
-    system.misc.disk-decryption.enable = false;
 
     # --- Hardware Drivers ---
     drivers.nvidia.enable = hardware.nvidia.enable or false;
