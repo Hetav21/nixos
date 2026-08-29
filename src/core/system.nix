@@ -60,7 +60,6 @@ in {
   imports = [
     ../modules
     ../profiles/system
-    ../secrets
   ];
 
   # --- Host Options ---
