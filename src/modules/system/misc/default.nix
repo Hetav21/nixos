@@ -1,9 +1,19 @@
-{...}: {
-  # --- Miscellaneous Modules ---
+{
+  extraLib,
+  ...
+} @ args:
+extraLib.modules.mkCategoryModule args {
+  name = "system.misc";
   imports = [
     ./disk-decryption.nix
     ./local-hardware-clock.nix
     ./mount-partition.nix
-    ./vm-guest-services.nix
+  ];
+  hasCli = true;
+  cliDescription = "Enable all miscellaneous system utilities";
+  cliChildren = [
+    "disk-decryption"
+    "local-hardware-clock"
+    "mount-partition"
   ];
 }

@@ -8,6 +8,7 @@ extraLib.modules.mkCategoryModule args {
     ./android.nix
     ./binfmt.nix
     ./docker.nix
+    ./guest.nix
     ./libvirtd.nix
     ./podman.nix
     ./virt-manager.nix
@@ -19,6 +20,7 @@ extraLib.modules.mkCategoryModule args {
     "android"
     "binfmt"
     "docker"
+    "guest"
     "libvirtd"
     "podman"
   ];

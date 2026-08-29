@@ -81,9 +81,9 @@ extraLib.modules.mkProfileModule args {
       chrome.enableGui = false;
       edge.enableGui = false;
     };
-    system.desktopEnvironment.enableGui = false;
+    system.desktop.enable = false;
     system.hardware.base.enable = false;
     system.desktop.security.enable = false;
-    system.misc.diskDecryption.enable = false;
+    system.misc.disk-decryption.enable = false;
   };
 }

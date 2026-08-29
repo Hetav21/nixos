@@ -35,8 +35,8 @@ extraLib.modules.mkModule args {
           "flakes"
         ];
         stalled-download-timeout = 99999999;
-        max-jobs = settings.nix.maxJobs or 2;
-        cores = settings.nix.cores or 8;
+        max-jobs = settings.nix.maxJobs;
+        cores = settings.nix.cores;
       };
       gc = {
         automatic = true;
