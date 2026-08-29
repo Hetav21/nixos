@@ -1,56 +1,9 @@
 {
   extraLib,
-  lib,
   pkgs,
-  pkgs-unstable,
   ...
-} @ args: let
-  # --- WSL Host Compatibility Shims ---
-  antigravityWslShim = lib.hiPrio (pkgs.writeShellScriptBin "antigravity" ''
-    set -euo pipefail
-
-    app=""
-    while IFS= read -r line; do
-      launcher_win="''${line%$'\r'}"
-      [ -n "$launcher_win" ] || continue
-
-      launcher_unix="$(wslpath -u "$launcher_win")"
-      candidate="$(dirname "$(dirname "$launcher_unix")")/Antigravity.exe"
-
-      if [ -x "$candidate" ]; then
-        app="$candidate"
-        break
-      fi
-    done < <(where.exe antigravity 2>/dev/null)
-
-    if [ -n "$app" ]; then
-      if [ "$#" -eq 0 ]; then
-        exec "$app"
-      fi
-
-      args=()
-      for arg in "$@"; do
-        case "$arg" in
-          -*)
-            args+=("$arg")
-            ;;
-          *)
-            if [ "$arg" = "." ] || [ "$arg" = ".." ] || [ -e "$arg" ]; then
-              args+=("$(wslpath -w "$(realpath -m "$arg")")")
-            else
-              args+=("$arg")
-            fi
-            ;;
-        esac
-      done
-
-      exec "$app" "''${args[@]}"
-    fi
-
-    exec ${lib.getExe pkgs-unstable.antigravity-ide} "$@"
-  '');
-in
-  extraLib.modules.mkProfileModule args {
+} @ args:
+extraLib.modules.mkProfileModule args {
     name = "profiles.home.wsl";
     description = "Consolidated WSL home profile";
 
@@ -103,6 +56,6 @@ in
       };
 
       # --- WSL Packages ---
-      home.packages = [antigravityWslShim];
+      home.packages = [pkgs.custom.antigravity-wsl-shim];
     };
   }
