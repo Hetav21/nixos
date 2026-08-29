@@ -2,11 +2,14 @@
 
 ## Naming Conventions
 
-- Use kebab-case for module option paths: `system.<category>.<feature-name>`
-- System modules: `system.<category>.*`
-- Home modules: `home.<category>.*`
-- Hardware drivers: `drivers.<vendor>.*`
-- Profiles (module bundles): `profiles.<scope>.*`
+- Feature and submodule names use kebab-case: `system.<category>.<feature-name>` (e.g. `virt-manager`, `open-webui`, `disk-decryption`)
+- Option attributes and settings use camelCase: `enable`, `enableGui`, `extraConfig`
+- Hierarchy namespaces:
+  - System modules: `system.<category>.*`
+  - Home modules: `home.<category>.*`
+  - Hardware drivers: `drivers.<vendor>.*`
+  - Profiles (module bundles): `profiles.<scope>.*`
+- Deep sub-namespaces prefer dot-separation over compound hyphens: `drivers.nvidia.prime.offload`
 
 A few pre-convention modules sit flat under `system.` with no category — when editing an existing module, match the file you're editing; use the hierarchy above for new modules.
 
@@ -92,6 +95,8 @@ extraLib.modules.mkProfileModule args {
 
 **DO:**
 
+- Use `kebab-case` for feature and submodule namespace paths (`virt-manager`, `open-webui`)
+- Use `camelCase` for module option properties and settings (`enable`, `enableGui`, `extraConfig`)
 - Use profiles for common configurations
 - Follow namespace hierarchy
 - Create enable options for all modules
@@ -100,7 +105,8 @@ extraLib.modules.mkProfileModule args {
 
 **DON'T:**
 
-- Use camelCase for module option paths (use kebab-case)
+- Use `camelCase` for feature names in module paths (use `open-webui`, not `openWebui`)
+- Use `kebab-case` for option properties or settings (use `enableGui`, not `enable-gui`)
 - Mix system and home configurations
 - Hardcode user-specific paths
 - Create modules without enable options
