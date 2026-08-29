@@ -17,6 +17,11 @@ extraLib.modules.mkModule args {
       enable = true;
       package = pkgs-unstable.nh;
       flake = settings.setup_dir;
+      clean = {
+        enable = true;
+        dates = "weekly";
+        extraArgs = "--keep 5 --keep-since 3d --no-direnv";
+      };
     };
 
     # --- Environment Variables ---
