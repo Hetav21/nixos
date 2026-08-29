@@ -1,6 +1,6 @@
 {extraLib, ...} @ args:
 extraLib.modules.mkModule args {
-  name = "system.baseservices.flatpak";
+  name = "system.desktop.flatpak";
   hasCli = false;
   hasGui = true;
   guiConfig = {

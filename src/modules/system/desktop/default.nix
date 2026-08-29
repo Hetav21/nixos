@@ -8,6 +8,7 @@ extraLib.modules.mkCategoryModule args {
     ./appimage.nix
     ./display-manager.nix
     ./environment.nix
+    ./flatpak.nix
     ./power-management.nix
     ./printing.nix
     ./security.nix
@@ -23,5 +24,10 @@ extraLib.modules.mkCategoryModule args {
     "printing"
     "security"
     "xdg-config"
+  ];
+  hasGui = true;
+  guiDescription = "Enable desktop GUI components (flatpak)";
+  guiChildren = [
+    "flatpak"
   ];
 }

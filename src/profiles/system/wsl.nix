@@ -42,11 +42,12 @@ extraLib.modules.mkProfileModule args {
       megasync.enableGui = false;
       onedrive.enableGui = false;
     };
-    system.baseservices = {
+    # --- Miscellaneous Utilities ---
+    system.misc = {
       locate.enable = true;
       cron.enable = true;
       gnupg.enable = true;
-      flatpak.enableGui = false;
+      disk-decryption.enable = false;
     };
     system.llm = {
       ollama.enable = false;
@@ -84,6 +85,5 @@ extraLib.modules.mkProfileModule args {
     system.desktop.enable = false;
     system.hardware.base.enable = false;
     system.desktop.security.enable = false;
-    system.misc.disk-decryption.enable = false;
   };
 }

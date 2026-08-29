@@ -1,6 +1,6 @@
 {extraLib, ...} @ args:
 extraLib.modules.mkModule args {
-  name = "system.baseservices.gnupg";
+  name = "system.misc.gnupg";
   hasCli = true;
   hasGui = false;
   cliConfig = {
