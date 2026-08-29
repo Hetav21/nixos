@@ -92,13 +92,13 @@
 
     # Host settings
     commonSettings = import ./src/config/common.nix;
-    nixbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./src/config/nixbook.nix);
-    nixwslbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./src/config/nixwslbook.nix);
-    nixworkbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./src/config/nixworkbook.nix);
+    nixbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./src/hosts/nixbook/settings.nix);
+    nixwslbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./src/hosts/nixwslbook/settings.nix);
+    nixworkbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./src/hosts/nixworkbook/settings.nix);
 
     # Hardware profiles
-    hardware_asus = import ./src/config/hardware/asus.nix;
-    hardware_wsl = import ./src/config/hardware/wsl.nix;
+    hardware_asus = import ./src/hosts/nixbook/hardware.nix;
+    hardware_wsl = import ./src/config/hardware-wsl.nix;
 
     # System builder helper
     mkSystem = {
