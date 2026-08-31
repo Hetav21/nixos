@@ -9,8 +9,6 @@
   inputs,
   settings,
   extraLib,
-  pkgs-unstable,
-  pkgs-master,
   ...
 }: let
   # --- WSL Nushell Compatibility Wrapper ---
@@ -87,7 +85,7 @@ in {
 
     # Centralized Home Manager Integration
     home-manager = {
-      extraSpecialArgs = {inherit inputs settings extraLib pkgs-unstable pkgs-master;};
+      extraSpecialArgs = {inherit inputs settings extraLib;};
       users.${settings.username} = {
         imports = [
           ./home.nix

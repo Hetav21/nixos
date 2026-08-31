@@ -88,7 +88,6 @@
     inherit (nixpkgs) lib;
 
     extraLib = import ./src/lib {inherit lib inputs outputs;};
-    nixpkgsLib = import ./src/lib/nixpkgs.nix inputs;
 
     # Host settings
     commonSettings = import ./src/config/common.nix;
@@ -108,18 +107,16 @@
     }:
       lib.nixosSystem {
         system = settings.system;
-        specialArgs =
-          {
-            inherit
-              self
-              inputs
-              outputs
-              extraLib
-              settings
-              hardware
-              ;
-          }
-          // nixpkgsLib.mkChannelsFor settings.system;
+        specialArgs = {
+          inherit
+            self
+            inputs
+            outputs
+            extraLib
+            settings
+            hardware
+            ;
+        };
         modules =
           [
             ./src/core/system.nix

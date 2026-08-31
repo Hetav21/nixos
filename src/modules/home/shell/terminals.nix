@@ -1,6 +1,6 @@
 {
   extraLib,
-  pkgs-unstable,
+  pkgs,
   ...
 } @ args:
 extraLib.modules.mkModule args {
@@ -12,12 +12,12 @@ extraLib.modules.mkModule args {
     programs = {
       alacritty = {
         enable = true;
-        package = pkgs-unstable.alacritty;
+        package = pkgs.unstable.alacritty;
       };
 
       ghostty = {
         enable = true;
-        package = pkgs-unstable.ghostty;
+        package = pkgs.unstable.ghostty;
       };
     };
   };

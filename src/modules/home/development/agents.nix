@@ -2,7 +2,6 @@
   extraLib,
   lib,
   pkgs,
-  pkgs-unstable,
   inputs,
   config,
   ...
@@ -29,13 +28,13 @@ extraLib.modules.mkModule args {
       inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
       inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex
       inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.beads
-      pkgs-unstable.agent-browser
+      pkgs.unstable.agent-browser
     ];
 
     # Enable Claude Code auto mode (Bedrock, Vertex, Foundry Opus 4.7/4.8 sessions)
     home.sessionVariables = {
       CLAUDE_CODE_ENABLE_AUTO_MODE = "1";
-      AGENT_BROWSER_EXECUTABLE_PATH = lib.getExe pkgs-unstable.chromium;
+      AGENT_BROWSER_EXECUTABLE_PATH = lib.getExe pkgs.unstable.chromium;
     };
 
     programs = {
