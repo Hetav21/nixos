@@ -42,12 +42,7 @@ extraLib.modules.mkModule args {
         max-jobs = settings.nix.maxJobs;
         cores = settings.nix.cores;
       };
-      gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 7d";
-        persistent = true;
-      };
+
       optimise = {
         automatic = true;
         dates = ["weekly"];
