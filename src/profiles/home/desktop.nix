@@ -1,15 +1,12 @@
 {
-  lib,
-  config,
+  extraLib,
   ...
-}: {
-  # --- Profile Options ---
-  options.profiles.home.desktop = {
-    enable = lib.mkEnableOption "Consolidated desktop home profile";
-  };
+} @ args:
+extraLib.modules.mkProfileModule args {
+  name = "profiles.home.desktop";
+  description = "Consolidated desktop home profile";
 
-  # --- Profile Configuration ---
-  config = lib.mkIf config.profiles.home.desktop.enable {
+  profileConfig = {
     # --- System Settings & Utilities ---
     home.system = {
       packages.enable = true;
@@ -47,10 +44,8 @@
       clipboard.enableGui = true;
       launcher.enableGui = true;
       notification.enableGui = true;
-      rofi.enableGui = false;
       wallpaper.enableGui = true;
       panel.enableGui = true;
-      waybar.enableGui = false;
       wlogout.enableGui = true;
       theme.enableGui = true;
     };

@@ -1,6 +1,6 @@
 {extraLib, ...} @ args:
 extraLib.modules.mkModule args {
-  name = "system.desktop.powerManagement";
+  name = "system.desktop.power-management";
   hasGui = false;
   cliConfig = {
     # --- Power Services ---

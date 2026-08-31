@@ -13,7 +13,7 @@ AI agent tooling (Claude Code, Codex, OpenCode) is configured in `src/modules/ho
 | `~/.agents/agents/`   | Agent definitions (`<agent>.md`)       |
 | `~/.agents/hooks/`    | Hooks configuration                    |
 
-Only `~/.claude/settings.json` and `~/.claude/.mcp.json` are managed under `~/.claude/` — the rest of that directory is Claude Code's mutable state.
+Only `~/.claude/settings.json`, `~/.claude/.mcp.json`, and `~/.claude/plugins/known_marketplaces.json` are managed under `~/.claude/` — the rest of that directory is Claude Code's mutable state.
 
 ## Adding Resources
 

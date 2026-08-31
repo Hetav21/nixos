@@ -1,19 +1,17 @@
 {
-  lib,
-  config,
+  extraLib,
   ...
-}: {
-  # --- Profile Options ---
-  options.profiles.system.wsl = {
-    enable = lib.mkEnableOption "WSL profile with CLI/TUI only";
-  };
+} @ args:
+extraLib.modules.mkProfileModule args {
+  name = "profiles.system.wsl";
+  description = "WSL profile with CLI/TUI only";
 
-  # --- Profile Configuration ---
-  config = lib.mkIf config.profiles.system.wsl.enable {
+  profileConfig = {
     # --- Core System ---
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
     system.locale.enable = true;
+    system.secrets.enable = true;
 
     # --- Theming ---
     system.stylix.enable = true;
@@ -44,11 +42,12 @@
       megasync.enableGui = false;
       onedrive.enableGui = false;
     };
-    system.baseservices = {
+    # --- Miscellaneous Utilities ---
+    system.misc = {
       locate.enable = true;
       cron.enable = true;
       gnupg.enable = true;
-      flatpak.enableGui = false;
+      disk-decryption.enable = false;
     };
     system.llm = {
       ollama.enable = false;
@@ -79,14 +78,12 @@
       discord.enableGui = false;
     };
     system.browser = {
-      browseros.enableGui = false;
       brave.enableGui = false;
       chrome.enableGui = false;
       edge.enableGui = false;
     };
-    system.desktopEnvironment.enableGui = false;
+    system.desktop.enable = false;
     system.hardware.base.enable = false;
     system.desktop.security.enable = false;
-    system.misc.diskDecryption.enable = false;
   };
 }

@@ -1,7 +1,15 @@
-{...}: {
-  # --- Hardware Submodules ---
+{
+  extraLib,
+  ...
+} @ args:
+extraLib.modules.mkCategoryModule args {
+  name = "system.hardware";
   imports = [
-    ./asus.nix
-    ./hardware.nix
+    ./base.nix
+  ];
+  hasCli = true;
+  cliDescription = "Enable system hardware modules";
+  cliChildren = [
+    "base"
   ];
 }

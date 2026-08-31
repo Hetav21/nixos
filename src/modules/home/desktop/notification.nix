@@ -2,7 +2,6 @@
   extraLib,
   lib,
   pkgs,
-  pkgs-unstable,
   osConfig,
   ...
 } @ args:
@@ -30,7 +29,7 @@ extraLib.modules.mkModule args {
       package = pkgs.dunst;
 
       iconTheme = {
-        package = pkgs-unstable.tela-circle-icon-theme;
+        package = pkgs.unstable.tela-circle-icon-theme;
         name = "Tela-circle-dark";
         size = "16";
       };
@@ -72,13 +71,12 @@ extraLib.modules.mkModule args {
           stack_duplicates = true;
           hide_duplicate_count = false;
           show_indicators = true;
-          icon_theme = "Tela-circle-dracula";
+          icon_theme = "Tela-circle-dark";
           icon_position = "left";
           min_icon_size = 32;
           max_icon_size = 128;
           sticky_history = true;
           history_length = 20;
-          dmenu = "${lib.getExe pkgs.rofi} -dmenu -p dunst:";
           browser = "${lib.getExe' pkgs.xdg-utils "xdg-open"}";
           always_run_script = true;
           title = "Dunst";

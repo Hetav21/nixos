@@ -11,7 +11,7 @@ A modular and maintainable NixOS configuration supporting multiple hosts includi
    ```
 2. **Build & switch**
    ```bash
-   sudo nixos-rebuild switch --flake .#<host> # any host directory under hosts/ (except _common)
+   sudo nixos-rebuild switch --flake .#<host>
    ```
    Use `NIX_CONFIG="experimental-features = nix-command flakes"` on the first run if flakes are not globally enabled.
 

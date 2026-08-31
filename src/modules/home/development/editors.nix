@@ -2,7 +2,6 @@
   extraLib,
   lib,
   pkgs,
-  pkgs-unstable,
   ...
 } @ args:
 extraLib.modules.mkModule args {
@@ -12,20 +11,20 @@ extraLib.modules.mkModule args {
   guiConfig = {
     # --- Standalone GUI Editors ---
     home.packages = [
-      pkgs-unstable.antigravity-ide
+      pkgs.unstable.antigravity-ide
     ];
 
     programs = {
       # --- VS Code ---
       vscode = {
         enable = true;
-        package = pkgs-unstable.vscode;
+        package = pkgs.unstable.vscode;
       };
 
       # --- Zed Editor ---
       zed-editor = {
         enable = true;
-        package = pkgs-unstable.zed-editor;
+        package = pkgs.unstable.zed-editor;
         installRemoteServer = true;
         extraPackages = [pkgs.alejandra];
         extensions = [
