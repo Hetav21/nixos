@@ -1,7 +1,6 @@
 {
   extraLib,
   pkgs,
-  pkgs-unstable,
   ...
 } @ args:
 extraLib.modules.mkModule args {
@@ -37,7 +36,7 @@ extraLib.modules.mkModule args {
         awscli2
         distrobox
       ])
-      ++ (with pkgs-unstable; [
+      ++ (with pkgs.unstable; [
         lazygit
         lazydocker
       ]);

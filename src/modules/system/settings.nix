@@ -1,7 +1,6 @@
 {
   extraLib,
   pkgs,
-  pkgs-unstable,
   settings,
   ...
 } @ args:
@@ -15,7 +14,7 @@ extraLib.modules.mkModule args {
     # --- NH (Nix Helper) ---
     programs.nh = {
       enable = true;
-      package = pkgs-unstable.nh;
+      package = pkgs.unstable.nh;
       flake = settings.setup_dir;
       clean = {
         enable = true;
