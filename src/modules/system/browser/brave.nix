@@ -1,6 +1,6 @@
 {
   extraLib,
-  pkgs-unstable,
+  pkgs,
   ...
 } @ args:
 extraLib.modules.mkModule args {
@@ -10,7 +10,7 @@ extraLib.modules.mkModule args {
   guiConfig = {
     # --- Brave Browser ---
     environment.systemPackages = [
-      pkgs-unstable.brave
+      pkgs.unstable.brave
     ];
   };
 }

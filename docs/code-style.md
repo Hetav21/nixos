@@ -2,19 +2,26 @@
 
 ## Naming Conventions
 
-- Use dots (not hyphens) in option paths: `system.category.feature`
-- System modules: `system.<category>.*`
-- Home modules: `home.<category>.*`
-- Hardware drivers: `drivers.<vendor>.*`
-- Profiles (module bundles): `profiles.<scope>.*`
+- Feature and submodule names use kebab-case: `system.<category>.<feature-name>` (e.g. `virt-manager`, `open-webui`, `disk-decryption`)
+- Option attributes and settings use camelCase: `enable`, `enableGui`, `extraConfig`
+- Hierarchy namespaces:
+  - System modules: `system.<category>.*`
+  - Home modules: `home.<category>.*`
+  - Hardware drivers: `drivers.<vendor>.*`
+  - Profiles (module bundles): `profiles.<scope>.*`
+- Deep sub-namespaces prefer dot-separation over compound hyphens: `drivers.nvidia.prime.offload`
 
 A few pre-convention modules sit flat under `system.` with no category — when editing an existing module, match the file you're editing; use the hierarchy above for new modules.
 
 ## Module Pattern
 
-All modules use the `extraLib.modules.mkModule` helper for consistent behavior and auto-generated enable options.
+All feature modules use `extraLib.modules.mkModule`, and category aggregates (`default.nix`) use `extraLib.modules.mkCategoryModule`.
 
-**Source of truth:** `src/lib/modules.nix`. The full API is exactly six attrs — `name`, `hasCli` (default `true`), `hasGui` (default `false`), `guiRequiresCli` (default `true`), `cliConfig`, `guiConfig` (each may be a function of module args or a plain attrset). There is no `imports`/`extraOptions` passthrough — if a module needs more than these six, write it as a plain module.
+**Source of truth:** `src/lib/modules.nix`.
+
+### Feature Modules (`mkModule`)
+
+The full API is exactly six attrs — `name`, `hasCli` (default `true`), `hasGui` (default `false`), `guiRequiresCli` (default `true`), `cliConfig`, `guiConfig` (each may be a function of module args or a plain attrset).
 
 **Requirements:**
 
@@ -45,10 +52,51 @@ extraLib.modules.mkModule args {
 }
 ```
 
+### Category Modules (`mkCategoryModule`)
+
+Category `default.nix` files aggregate submodules and automatically propagate category-level `enable`/`enableGui` options to children:
+
+```nix
+{
+  extraLib,
+  ...
+} @ args:
+extraLib.modules.mkCategoryModule args {
+  name = "system.<category>";
+  imports = [ ./submodule.nix ];
+  hasCli = true;
+  cliChildren = [ "submodule" ];
+  hasGui = true;
+  guiChildren = [ "submodule" ];
+}
+```
+
+### Profile Modules (`mkProfileModule`)
+
+Profile modules (`profiles.<scope>.<name>`) bundle multiple feature enablements and settings:
+
+```nix
+{
+  extraLib,
+  ...
+} @ args:
+extraLib.modules.mkProfileModule args {
+  name = "profiles.<scope>.<name>";
+  description = "<Scope> profile description";
+
+  profileConfig = {
+    # Feature enables and configuration
+    system.<category>.<feature>.enable = true;
+  };
+}
+```
+
 ## Best Practices
 
 **DO:**
 
+- Use `kebab-case` for feature and submodule namespace paths (`virt-manager`, `open-webui`)
+- Use `camelCase` for module option properties and settings (`enable`, `enableGui`, `extraConfig`)
 - Use profiles for common configurations
 - Follow namespace hierarchy
 - Create enable options for all modules
@@ -57,7 +105,8 @@ extraLib.modules.mkModule args {
 
 **DON'T:**
 
-- Use hyphens in option paths (use dots)
+- Use `camelCase` for feature names in module paths (use `open-webui`, not `openWebui`)
+- Use `kebab-case` for option properties or settings (use `enableGui`, not `enable-gui`)
 - Mix system and home configurations
 - Hardcode user-specific paths
 - Create modules without enable options

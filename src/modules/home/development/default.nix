@@ -1,9 +1,9 @@
 {
-  lib,
-  config,
+  extraLib,
   ...
-}: {
-  # --- Module Imports ---
+} @ args:
+extraLib.modules.mkCategoryModule args {
+  name = "home.development";
   imports = [
     ./git.nix
     ./neovim.nix
@@ -12,31 +12,19 @@
     ./misc.nix
     ./editors.nix
   ];
-
-  # --- Options ---
-  options = {
-    home.development = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Enable all development tools and CLI environments";
-      };
-      enableGui = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Enable GUI development tools (VSCode, Zed, Compass)";
-      };
-    };
-  };
-
-  # --- Configuration ---
-  config = {
-    home.development.git.enable = lib.mkDefault config.home.development.enable;
-    home.development.neovim.enable = lib.mkDefault config.home.development.enable;
-    home.development.ssh.enable = lib.mkDefault config.home.development.enable;
-    home.development.agents.enable = lib.mkDefault config.home.development.enable;
-    home.development.misc.enable = lib.mkDefault config.home.development.enable;
-    home.development.misc.enableGui = lib.mkDefault config.home.development.enableGui;
-    home.development.editors.enableGui = lib.mkDefault config.home.development.enableGui;
-  };
+  hasCli = true;
+  cliDescription = "Enable all development tools and CLI environments";
+  cliChildren = [
+    "git"
+    "neovim"
+    "ssh"
+    "agents"
+    "misc"
+  ];
+  hasGui = true;
+  guiDescription = "Enable GUI development tools (VSCode, Zed, Compass)";
+  guiChildren = [
+    "misc"
+    "editors"
+  ];
 }

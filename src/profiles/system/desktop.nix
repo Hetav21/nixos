@@ -1,20 +1,18 @@
 {
-  lib,
-  config,
+  extraLib,
   hardware ? {},
   ...
-}: {
-  # --- Profile Options ---
-  options.profiles.system.desktop = {
-    enable = lib.mkEnableOption "Desktop profile with all features";
-  };
+} @ args:
+extraLib.modules.mkProfileModule args {
+  name = "profiles.system.desktop";
+  description = "Desktop profile with all features";
 
-  # --- Profile Configuration ---
-  config = lib.mkIf config.profiles.system.desktop.enable {
+  profileConfig = {
     # --- Core System ---
     system.nix.settings.enable = true;
     system.nix.ld.enable = true;
     system.locale.enable = true;
+    system.secrets.enable = true;
 
     # --- Virtualisation ---
     system.virtualisation = {
@@ -74,18 +72,17 @@
 
     # --- Web Browsers ---
     system.browser = {
-      browseros.enableGui = true;
       brave.enableGui = true;
       chrome.enableGui = true;
       edge.enableGui = true;
     };
 
-    # --- Base Services ---
-    system.baseservices = {
+    # --- Miscellaneous Utilities ---
+    system.misc = {
       locate.enable = true;
       cron.enable = true;
       gnupg.enable = true;
-      flatpak.enableGui = true;
+      disk-decryption.enable = false;
     };
 
     # --- Local LLM & AI ---
@@ -96,12 +93,16 @@
     };
 
     # --- Desktop Environment & Hardware ---
-    system.desktopEnvironment.enableGui = true;
+    system.desktop = {
+      enable = true;
+      flatpak.enableGui = true;
+    };
     system.hardware.base.enable = true;
-    system.misc.diskDecryption.enable = false;
 
     # --- Hardware Drivers ---
     drivers.nvidia.enable = hardware.nvidia.enable or false;
+    drivers.nvidia.prime.offload.enable = hardware.nvidia.prime.offload.enable or false;
+    drivers.nvidia.prime.sync.enable = hardware.nvidia.prime.sync.enable or false;
     drivers.intel.enable = hardware.intel.enable or false;
     drivers.amdgpu.enable = hardware.amdgpu.enable or false;
     drivers.asus.enable = hardware.asus.enable or false;

@@ -1,9 +1,10 @@
 {
+  extraLib,
   lib,
-  config,
   ...
-}: {
-  # --- Module Imports ---
+} @ args:
+extraLib.modules.mkCategoryModule args {
+  name = "home.shell";
   imports = [
     ./shells.nix
     ./tmux.nix
@@ -11,34 +12,21 @@
     ./terminals.nix
     ./newsboat.nix
   ];
-
-  # --- Options ---
-  options = {
-    home.shell = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Enable all shell environments and CLI tools";
-      };
-      enableGui = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Enable terminal GUI configurations (Alacritty, Ghostty)";
-      };
-    };
-  };
-
-  # --- Configuration ---
-  config = lib.mkMerge [
-    {
-      home.shell.shells.enable = lib.mkDefault config.home.shell.enable;
-      home.shell.tmux.enable = lib.mkDefault config.home.shell.enable;
-      home.shell.tools.enable = lib.mkDefault config.home.shell.enable;
-      home.shell.newsboat.enable = lib.mkDefault config.home.shell.enable;
-      home.shell.terminals.enableGui = lib.mkDefault config.home.shell.enableGui;
-    }
-    (lib.mkIf config.home.shell.enable {
-      home.shell.enableShellIntegration = lib.mkDefault true;
-    })
+  hasCli = true;
+  cliDescription = "Enable all shell environments and CLI tools";
+  cliChildren = [
+    "shells"
+    "tmux"
+    "tools"
+    "newsboat"
   ];
+  hasGui = true;
+  guiDescription = "Enable terminal GUI configurations (Alacritty, Ghostty)";
+  guiChildren = [
+    "terminals"
+  ];
+  extraConfig = {config, ...}:
+    lib.mkIf (config.home.shell.enable or false) {
+      home.shell.enableShellIntegration = lib.mkDefault true;
+    };
 }

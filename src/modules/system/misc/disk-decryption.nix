@@ -1,3 +1,9 @@
+# TODO: Modernize USB keyfile decryption for systemd-initrd (Lanzaboote) when enabled.
+# When enabled on Lanzaboote hosts (`boot.initrd.systemd.enable = true`):
+# 1. `postDeviceCommands` and `preLVM = false` fail assertions in systemd stage 1.
+# 2. Use `boot.initrd.systemd.mounts` for declarative USB mounting under `/key`.
+# 3. Explicitly specify `device = "/dev/disk/by-uuid/<uuid>"` on each LUKS entry.
+# 4. Migrate to list-based schema in host settings: `diskDecryption = { usbUuid = "..."; devices = [ "..." ]; };`.
 {
   extraLib,
   lib,
@@ -7,7 +13,7 @@
   backupUsbId = "A31A-87EC";
 in
   extraLib.modules.mkModule args {
-    name = "system.misc.diskDecryption";
+    name = "system.misc.disk-decryption";
     hasGui = false;
     cliConfig = {
       # --- Initrd Kernel Modules ---

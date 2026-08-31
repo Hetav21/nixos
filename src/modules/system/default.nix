@@ -4,6 +4,7 @@
     # Core System
     ./locale.nix
     ./nix-ld.nix
+    ./secrets.nix
     ./settings.nix
 
     # Styling & Theming
@@ -12,7 +13,6 @@
     # Categorized System Modules
     ./browser
     ./communication
-    ./desktop-environment.nix
     ./desktop
     ./hardware
     ./llm
@@ -20,7 +20,6 @@
     ./misc
     ./network
     ./productivity
-    ./services
     ./storage
     ./virtualisation
   ];

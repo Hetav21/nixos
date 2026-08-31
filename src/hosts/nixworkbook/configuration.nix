@@ -1,8 +1,7 @@
 {...}: {
   # --- Host Imports & Path Setup ---
   imports = [
-    ../_common
-    ../_common/wsl-base.nix
+    ../../core/wsl.nix
   ];
 
   local.homeConfig = ./home.nix;

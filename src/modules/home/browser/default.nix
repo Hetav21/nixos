@@ -1,24 +1,15 @@
 {
-  lib,
-  config,
+  extraLib,
   ...
-}: {
-  # --- Submodule Imports ---
+} @ args:
+extraLib.modules.mkCategoryModule args {
+  name = "home.browser";
   imports = [
     ./helium.nix
   ];
-
-  # --- Options ---
-  options.home.browser = {
-    enableGui = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable all user GUI web browsers";
-    };
-  };
-
-  # --- Module Wiring ---
-  config = {
-    home.browser.helium.enableGui = lib.mkDefault config.home.browser.enableGui;
-  };
+  hasGui = true;
+  guiDescription = "Enable all user GUI web browsers";
+  guiChildren = [
+    "helium"
+  ];
 }

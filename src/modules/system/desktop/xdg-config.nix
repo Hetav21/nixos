@@ -7,7 +7,7 @@
   ...
 } @ args:
 extraLib.modules.mkModule args {
-  name = "system.desktop.xdgConfig";
+  name = "system.desktop.xdg-config";
   hasGui = false;
   cliConfig = {
     # --- Session Variables ---

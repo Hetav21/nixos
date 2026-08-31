@@ -1,7 +1,6 @@
 {
   extraLib,
   pkgs,
-  pkgs-unstable,
   settings,
   ...
 } @ args:
@@ -15,8 +14,13 @@ extraLib.modules.mkModule args {
     # --- NH (Nix Helper) ---
     programs.nh = {
       enable = true;
-      package = pkgs-unstable.nh;
+      package = pkgs.unstable.nh;
       flake = settings.setup_dir;
+      clean = {
+        enable = true;
+        dates = "weekly";
+        extraArgs = "--keep 5 --keep-since 3d --no-direnv";
+      };
     };
 
     # --- Environment Variables ---
@@ -35,8 +39,8 @@ extraLib.modules.mkModule args {
           "flakes"
         ];
         stalled-download-timeout = 99999999;
-        max-jobs = settings.nix.maxJobs or 2;
-        cores = settings.nix.cores or 8;
+        max-jobs = settings.nix.maxJobs;
+        cores = settings.nix.cores;
       };
       gc = {
         automatic = true;

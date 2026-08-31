@@ -1,12 +1,33 @@
-{...}: {
-  # --- Desktop Submodules ---
+{
+  extraLib,
+  ...
+} @ args:
+extraLib.modules.mkCategoryModule args {
+  name = "system.desktop";
   imports = [
     ./appimage.nix
-    ./environment.nix
     ./display-manager.nix
+    ./environment.nix
+    ./flatpak.nix
     ./power-management.nix
     ./printing.nix
     ./security.nix
     ./xdg-config.nix
+  ];
+  hasCli = true;
+  cliDescription = "Enable all desktop environment components";
+  cliChildren = [
+    "appimage"
+    "display-manager"
+    "environment"
+    "power-management"
+    "printing"
+    "security"
+    "xdg-config"
+  ];
+  hasGui = true;
+  guiDescription = "Enable desktop GUI components (flatpak)";
+  guiChildren = [
+    "flatpak"
   ];
 }

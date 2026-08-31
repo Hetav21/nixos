@@ -5,7 +5,7 @@
   ...
 } @ args:
 extraLib.modules.mkModule args {
-  name = "system.baseservices.locate";
+  name = "system.misc.locate";
   hasCli = true;
   hasGui = false;
   cliConfig = {

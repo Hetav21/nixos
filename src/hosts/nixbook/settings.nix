@@ -16,9 +16,8 @@
   };
 
   # --- Storage & Mounts ---
-  mount-partition = {
-    enable = false;
-    partition_id = "";
+  mountPartition = {
+    partitionId = "";
   };
 
   rclone = {

@@ -1,6 +1,6 @@
 {extraLib, ...} @ args:
 extraLib.modules.mkModule args {
-  name = "system.baseservices.cron";
+  name = "system.misc.cron";
   hasCli = true;
   hasGui = false;
   cliConfig = {
