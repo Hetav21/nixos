@@ -60,7 +60,6 @@ extraLib.modules.mkProfileModule args {
       mpv.enable = false;
       pavucontrol.enableGui = false;
       obs.enableGui = false;
-      upscayl.enableGui = false;
       graphics.enableGui = false;
       spotify.enableGui = false;
       stremio.enableGui = false;
@@ -74,7 +73,6 @@ extraLib.modules.mkProfileModule args {
     };
     system.communication = {
       zoom.enableGui = false;
-      thunderbird.enableGui = false;
       discord.enableGui = false;
     };
     system.browser = {

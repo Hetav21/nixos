@@ -21,7 +21,7 @@ extraLib.modules.mkCategoryModule args {
     "newsboat"
   ];
   hasGui = true;
-  guiDescription = "Enable terminal GUI configurations (Alacritty, Ghostty)";
+  guiDescription = "Enable terminal GUI configurations (Ghostty)";
   guiChildren = [
     "terminals"
   ];

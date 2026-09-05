@@ -25,9 +25,6 @@ extraLib.modules.mkModule args {
 
       # Filesystem support
       pkgs.ntfs3g
-
-      # Miscellaneous
-      pkgs.typioca
     ];
   };
 }

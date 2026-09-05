@@ -11,8 +11,8 @@ extraLib.modules.mkModule args {
     # --- Packages ---
     environment.systemPackages = [
       pkgs.virt-manager
-      pkgs.quickemu
-      pkgs.quickgui
+      # pkgs.quickemu # Quickly create and run optimized QEMU virtual machines
+      # pkgs.quickgui # GUI frontend for Quickemu
     ];
 
     # --- Virtualisation & Tools ---

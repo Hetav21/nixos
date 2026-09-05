@@ -8,7 +8,6 @@ extraLib.modules.mkCategoryModule args {
     ./mpv.nix
     ./pavucontrol.nix
     ./obs.nix
-    ./upscayl.nix
     ./graphics.nix
     ./spotify.nix
     ./stremio.nix
@@ -21,7 +20,6 @@ extraLib.modules.mkCategoryModule args {
   guiChildren = [
     "pavucontrol"
     "obs"
-    "upscayl"
     "graphics"
     "spotify"
     "stremio"

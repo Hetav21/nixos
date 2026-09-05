@@ -92,7 +92,8 @@ extraLib.modules.mkModule args {
 
         # URL Handlers
         "x-scheme-handler/discord" = "vesktop.desktop";
-        "hoppscotch" = "hoppscotch-handler.desktop";
+        "x-scheme-handler/bruno" = "bruno.desktop";
+        "bruno" = "bruno.desktop";
         "x-scheme-handler/tonsite" = "org.telegram.desktop.desktop";
       };
 

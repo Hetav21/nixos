@@ -7,7 +7,9 @@ extraLib.modules.mkModule args {
   name = "system.virtualisation.podman";
   cliConfig = {
     # --- Packages ---
-    environment.systemPackages = [pkgs.podman-compose];
+    environment.systemPackages = [
+      # pkgs.podman-compose # Compose specification runner for Podman
+    ];
 
     # --- Container Runtime ---
     virtualisation = {
