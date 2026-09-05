@@ -10,11 +10,6 @@ extraLib.modules.mkModule args {
   guiConfig = {
     # --- Terminal Emulators ---
     programs = {
-      alacritty = {
-        enable = true;
-        package = pkgs.unstable.alacritty;
-      };
-
       ghostty = {
         enable = true;
         package = pkgs.unstable.ghostty;

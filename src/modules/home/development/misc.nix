@@ -33,8 +33,7 @@ extraLib.modules.mkModule args {
     # --- CLI Packages ---
     home.packages =
       (with pkgs; [
-        awscli2
-        distrobox
+        # distrobox # Container wrapper to run any Linux distro in terminal
       ])
       ++ (with pkgs.unstable; [
         lazygit
@@ -45,8 +44,8 @@ extraLib.modules.mkModule args {
   guiConfig = {
     # --- GUI Packages ---
     home.packages = with pkgs; [
-      mongodb-compass
-      hoppscotch
+      # mongodb-compass # GUI for querying and managing MongoDB databases
+      # hoppscotch # Open-source API development and testing ecosystem
       bruno
     ];
   };

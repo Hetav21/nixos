@@ -17,7 +17,7 @@ extraLib.modules.mkProfileModule args {
     # --- Virtualisation ---
     system.virtualisation = {
       docker.enable = true;
-      podman.enable = true;
+      # podman.enable = true; # Podman daemonless container engine and podman-compose
       libvirtd.enable = true;
       virt-manager.enableGui = true;
       waydroid.enableGui = false;
@@ -48,7 +48,6 @@ extraLib.modules.mkProfileModule args {
       mpv.enable = true;
       pavucontrol.enableGui = true;
       obs.enableGui = true;
-      upscayl.enableGui = true;
       graphics.enableGui = true;
       spotify.enableGui = true;
       stremio.enableGui = true;
@@ -60,13 +59,12 @@ extraLib.modules.mkProfileModule args {
       office.enableGui = true;
       obsidian.enableGui = true;
       teams.enableGui = false;
-      latex.enableGui = true;
+      # latex.enableGui = true; # TeX Live LaTeX distribution and TeXstudio IDE
     };
 
     # --- Communication ---
     system.communication = {
       zoom.enableGui = false;
-      thunderbird.enableGui = true;
       discord.enableGui = true;
     };
 

@@ -9,9 +9,13 @@ extraLib.modules.mkModule args {
   hasGui = true;
   guiConfig = {
     # --- Packages ---
-    environment.systemPackages = [pkgs.texliveMinimal];
+    environment.systemPackages = [
+      # pkgs.texliveMinimal # Minimal TeX Live LaTeX distribution
+    ];
 
     # --- Flatpak Applications ---
-    services.flatpak.packages = ["org.texstudio.TeXstudio"];
+    services.flatpak.packages = [
+      # "org.texstudio.TeXstudio" # TeXstudio LaTeX editor and IDE
+    ];
   };
 }
