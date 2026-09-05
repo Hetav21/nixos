@@ -106,7 +106,7 @@
       extraModules ? [],
     }:
       lib.nixosSystem {
-        system = settings.system;
+        inherit (settings) system;
         specialArgs = {
           inherit
             self
