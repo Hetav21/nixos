@@ -15,9 +15,9 @@ extraLib.modules.mkModule args {
       # "org.kde.kdenlive" # Non-linear video editor
     ];
 
-    # --- Upscayl Image Upscaler ---
+    # --- AI Image Upscaler ---
     environment.systemPackages = [
-      # pkgs.upscayl # Upscayl AI image upscaler
+      # pkgs.upscayl # AI image upscaler
     ];
   };
 }

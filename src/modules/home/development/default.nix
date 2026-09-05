@@ -22,7 +22,7 @@ extraLib.modules.mkCategoryModule args {
     "misc"
   ];
   hasGui = true;
-  guiDescription = "Enable GUI development tools (VSCode, Zed, Compass)";
+  guiDescription = "Enable GUI development tools";
   guiChildren = [
     "misc"
     "editors"

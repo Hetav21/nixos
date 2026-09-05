@@ -10,7 +10,7 @@ extraLib.modules.mkProfileModule args {
     # --- System Settings & Utilities ---
     home.system = {
       packages.enable = true;
-      # downloads.enable = true; # CLI download tools (aria2)
+      # downloads.enable = true; # CLI download tools
       settings.enable = true;
     };
 

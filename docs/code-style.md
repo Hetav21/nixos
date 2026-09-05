@@ -102,6 +102,7 @@ extraLib.modules.mkProfileModule args {
 - Create enable options for all modules
 - Keep modules focused and single-purpose
 - Use `lib.getExe` for package binaries
+- Describe functionality and purpose in comments and option descriptions rather than listing specific packages
 
 **DON'T:**
 
@@ -110,3 +111,4 @@ extraLib.modules.mkProfileModule args {
 - Mix system and home configurations
 - Hardcode user-specific paths
 - Create modules without enable options
+- Embed specific package names in comments or option descriptions (e.g. avoid `# GUI Terminal (Ghostty)`, `guiDescription = "... (Ghostty)"`, or `# CLI download tools (aria2)`). Package implementations change over time; comments and descriptions should specify functional roles instead

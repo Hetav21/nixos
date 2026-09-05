@@ -62,7 +62,7 @@
       "https://nix-community.cachix.org" # nix-community inputs
       "https://cuda-maintainers.cachix.org" # CUDA & Nvidia acceleration
       "https://vicinae.cachix.org" # Vicinae launcher & extensions
-      "https://cache.numtide.com" # Numtide (llm-agents)
+      "https://cache.numtide.com" # Numtide cache
     ];
     extra-trusted-substituters = [
       "https://nix-community.cachix.org"

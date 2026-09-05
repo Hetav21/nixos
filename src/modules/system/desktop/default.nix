@@ -26,7 +26,7 @@ extraLib.modules.mkCategoryModule args {
     "xdg-config"
   ];
   hasGui = true;
-  guiDescription = "Enable desktop GUI components (flatpak)";
+  guiDescription = "Enable desktop GUI components";
   guiChildren = [
     "flatpak"
   ];

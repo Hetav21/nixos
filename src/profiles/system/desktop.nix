@@ -17,7 +17,7 @@ extraLib.modules.mkProfileModule args {
     # --- Virtualisation ---
     system.virtualisation = {
       docker.enable = true;
-      # podman.enable = true; # Podman daemonless container engine and podman-compose
+      # podman.enable = true; # Daemonless container engine and compose runner
       libvirtd.enable = true;
       virt-manager.enableGui = true;
       waydroid.enableGui = false;
@@ -59,7 +59,7 @@ extraLib.modules.mkProfileModule args {
       office.enableGui = true;
       obsidian.enableGui = true;
       teams.enableGui = false;
-      # latex.enableGui = true; # TeX Live LaTeX distribution and TeXstudio IDE
+      # latex.enableGui = true; # LaTeX distribution and IDE
     };
 
     # --- Communication ---

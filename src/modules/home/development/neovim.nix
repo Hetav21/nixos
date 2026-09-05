@@ -166,7 +166,7 @@ extraLib.modules.mkModule args {
 
       # --- Plugins ---
       plugins = {
-        # Modern QoL Suite (replaces telescope, neo-tree, illuminate, toggleterm, etc.)
+        # Modern QoL Suite
         snacks = {
           enable = true;
           settings = {

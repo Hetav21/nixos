@@ -100,7 +100,7 @@ extraLib.modules.mkModule args {
           ];
       };
 
-      # --- Jujutsu (jj) ---
+      # --- Jujutsu VCS ---
       jujutsu = {
         enable = true;
         package = pkgs.unstable.jujutsu;
