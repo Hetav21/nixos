@@ -8,7 +8,7 @@ extraLib.modules.mkModule args {
   cliConfig = {
     # --- Packages ---
     environment.systemPackages = [
-      # pkgs.podman-compose # Compose specification runner for Podman
+      # pkgs.podman-compose # Compose specification runner
     ];
 
     # --- Container Runtime ---

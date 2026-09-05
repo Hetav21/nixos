@@ -51,7 +51,7 @@ extraLib.modules.mkModule args {
     hardware = {
       logitech.wireless = {
         enable = true;
-        # enableGraphical = true; # Solaar GUI device manager for Logitech wireless devices
+        # enableGraphical = true; # GUI device manager for Logitech wireless devices
         enableGraphical = false;
       };
       bluetooth = {
