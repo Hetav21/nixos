@@ -24,13 +24,14 @@ extraLib.modules.mkModule args {
     };
 
     fontFamily = config.stylix.fonts.monospace.name;
+    tooltipFontFamily = config.stylix.fonts.sansSerif.name;
     iconThemeName = config.gtk.iconTheme.name or "Papirus-Dark";
 
     # --- QML Template Processing ---
     processQml = file:
       pkgs.replaceVars file {
         iconTheme = iconThemeName;
-        inherit fontFamily;
+        inherit fontFamily tooltipFontFamily;
         baseColor = colors.base;
         textColor = colors.text;
         inherit
