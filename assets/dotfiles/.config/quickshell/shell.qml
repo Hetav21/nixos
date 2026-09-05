@@ -22,6 +22,7 @@ ShellRoot {
   readonly property int fontSize: 16
   readonly property int fontSizeIcon: 24
   readonly property int fontSizeSmall: fontSize - 1
+  readonly property string tooltipFontFamily: "@tooltipFontFamily@"
 
   // Individual icon font sizes (left module)
   readonly property int fontSizeLauncherIcon: 26
@@ -89,6 +90,7 @@ ShellRoot {
     model: Quickshell.screens
 
     PanelWindow {
+      id: barWindow
       property var modelData
       screen: modelData
 
@@ -138,6 +140,7 @@ ShellRoot {
             // Backlight
             IconValueDisplay {
               id: backlightDisplay
+              anchorWindow: barWindow
               height: root.moduleHeight
               iconText: root.getBacklightIcon(backlight.percent)
               valueText: backlight.percent + "%"
@@ -146,6 +149,7 @@ ShellRoot {
               valueSize: root.fontSize
               tooltipText: "Brightness: " + backlight.percent + "%"
               fontFamily: "@fontFamily@"
+              tooltipFontFamily: root.tooltipFontFamily
               tooltipBgColor: "@baseColor@"
               tooltipBorderColor: "@overlay@"
               tooltipTextColor: "@textColor@"
@@ -156,6 +160,7 @@ ShellRoot {
             // Volume
             IconValueDisplay {
               id: volumeDisplay
+              anchorWindow: barWindow
               height: root.moduleHeight
               iconText: root.getVolumeIcon(audio.volumePercent, audio.volumeMuted)
               valueText: audio.volumePercent.toString()
@@ -166,6 +171,7 @@ ShellRoot {
               clickable: true
               onItemClicked: pavuProc.running = true
               fontFamily: "@fontFamily@"
+              tooltipFontFamily: root.tooltipFontFamily
               tooltipBgColor: "@baseColor@"
               tooltipBorderColor: "@overlay@"
               tooltipTextColor: "@textColor@"
@@ -194,18 +200,23 @@ ShellRoot {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 hoverEnabled: true
-                onClicked: pavuMicProc.running = true
-                onEntered: micTooltip.visible = true
-                onExited: micTooltip.visible = false
+                onClicked: {
+                  micTooltip.hide();
+                  pavuMicProc.running = true;
+                }
+                onEntered: micTooltip.show()
+                onExited: micTooltip.hide()
               }
 
               StyledToolTip {
                 id: micTooltip
+                anchorWindow: barWindow
+                anchorItem: micItem
                 text: audio.micMuted ? "Microphone: Muted" : "Microphone: Active"
                 bgColor: "@baseColor@"
                 borderColor: "@overlay@"
                 textColor: "@textColor@"
-                fontFamily: "@fontFamily@"
+                fontFamily: root.tooltipFontFamily
               }
             }
 
@@ -214,6 +225,7 @@ ShellRoot {
             // Battery
             IconValueDisplay {
               id: batteryDisplay
+              anchorWindow: barWindow
               height: root.moduleHeight
               iconText: root.getBatteryIcon(battery.percent, battery.charging)
               valueText: battery.percent + "%"
@@ -222,6 +234,7 @@ ShellRoot {
               valueSize: root.fontSize
               tooltipText: battery.charging ? ("Battery: " + battery.percent + "% (Charging)") : ("Battery: " + battery.percent + "%")
               fontFamily: "@fontFamily@"
+              tooltipFontFamily: root.tooltipFontFamily
               tooltipBgColor: "@baseColor@"
               tooltipBorderColor: "@overlay@"
               tooltipTextColor: "@textColor@"
@@ -355,13 +368,15 @@ ShellRoot {
                   id: trayIconContainer
                   required property SystemTrayItem modelData
                   implicitWidth: 20
-                  implicitHeight: 20
+                  implicitHeight: root.moduleHeight
                   anchors.verticalCenter: parent.verticalCenter
 
                   IconImage {
                     id: trayIcon
                     source: trayIconContainer.modelData.icon
-                    anchors.fill: parent
+                    width: 20
+                    height: 20
+                    anchors.centerIn: parent
                   }
 
                   QsMenuAnchor {
@@ -376,9 +391,10 @@ ShellRoot {
                     acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
                     cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
-                    onEntered: trayTooltip.visible = true
-                    onExited: trayTooltip.visible = false
+                    onEntered: trayTooltip.show()
+                    onExited: trayTooltip.hide()
                     onClicked: function(mouse) {
+                      trayTooltip.hide();
                       if (mouse.button === Qt.LeftButton) {
                         trayIconContainer.modelData.activate();
                       } else if (mouse.button === Qt.RightButton) {
@@ -394,11 +410,13 @@ ShellRoot {
 
                   StyledToolTip {
                     id: trayTooltip
+                    anchorWindow: barWindow
+                    anchorItem: trayIconContainer
                     text: trayIconContainer.modelData.title || trayIconContainer.modelData.id || "System Tray"
                     bgColor: "@baseColor@"
                     borderColor: "@overlay@"
                     textColor: "@textColor@"
-                    fontFamily: "@fontFamily@"
+                    fontFamily: root.tooltipFontFamily
                   }
                 }
               }
@@ -407,6 +425,7 @@ ShellRoot {
             // Clock
             IconValueDisplay {
               id: clockDisplay
+              anchorWindow: barWindow
               height: root.moduleHeight
               iconText: root.clockIcon
               valueText: root.clockText
@@ -414,6 +433,7 @@ ShellRoot {
               iconSize: root.fontSizeClockIcon
               valueSize: root.fontSizeClockText
               fontFamily: "@fontFamily@"
+              tooltipFontFamily: root.tooltipFontFamily
               spacing: 8
             }
           }

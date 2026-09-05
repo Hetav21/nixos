@@ -15,6 +15,8 @@ Item {
   property string fontFamily: "monospace"
 
   // Theme properties for tooltip
+  property var anchorWindow: null
+  property string tooltipFontFamily: "Ubuntu, sans-serif"
   property color tooltipBgColor: "transparent"
   property color tooltipBorderColor: "transparent"
   property color tooltipTextColor: "white"
@@ -53,17 +55,22 @@ Item {
     anchors.fill: parent
     cursorShape: root.clickable ? Qt.PointingHandCursor : Qt.ArrowCursor
     hoverEnabled: root.tooltipText !== ""
-    onClicked: if (root.clickable) root.itemClicked()
-    onEntered: if (root.tooltipText !== "") tooltip.visible = true
-    onExited: tooltip.visible = false
+    onClicked: {
+      tooltip.hide();
+      if (root.clickable) root.itemClicked();
+    }
+    onEntered: if (root.tooltipText !== "") tooltip.show()
+    onExited: tooltip.hide()
   }
 
   StyledToolTip {
     id: tooltip
+    anchorWindow: root.anchorWindow
+    anchorItem: root
     text: root.tooltipText
     bgColor: root.tooltipBgColor
     borderColor: root.tooltipBorderColor
     textColor: root.tooltipTextColor
-    fontFamily: root.fontFamily
+    fontFamily: root.tooltipFontFamily
   }
 }
