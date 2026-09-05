@@ -341,7 +341,7 @@ ShellRoot {
           Row {
             id: rightRow
             anchors.centerIn: parent
-            spacing: 20
+            spacing: 12
 
             // System Tray
             Row {
@@ -414,6 +414,7 @@ ShellRoot {
               iconSize: root.fontSizeClockIcon
               valueSize: root.fontSizeClockText
               fontFamily: "@fontFamily@"
+              spacing: 8
             }
           }
         }
@@ -426,7 +427,7 @@ ShellRoot {
   // Clock
   Process {
     id: clockProc
-    command: ["date", "+%H:%M"]
+    command: ["date", "+%I:%M %p"]
     stdout: SplitParser {
       onRead: data => root.clockText = data.trim()
     }
