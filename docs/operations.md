@@ -29,3 +29,13 @@ Package definitions live in `src/pkgs/`, exposed via overlay as `pkgs.custom.<na
 ## Add/Modify Secret
 
 sops workflow: secrets defined in `src/modules/system/secrets.nix`, encrypted payloads stored in `secrets/` with `.sops.yaml`.
+
+## Binary Caches & CI Evaluation
+
+Substituters in `flake.nix` (`nixConfig`) provide prebuilt binaries when building locally or switching configurations.
+
+- **Evaluation vs Building**: Binary caches (like Cachix) are only queried when realizing (downloading/building) store paths.
+- **Import From Derivation (IFD)**: The only scenario where Nix contacts a binary cache during evaluation is if a configuration uses IFD (where Nix must build a package mid-evaluation to read its output into another Nix expression).
+  - This configuration does not use IFD.
+  - Flake checks restrict/forbid IFD by default.
+  - Therefore, CI evaluation requires no Cachix credentials or dedicated cache actions.

@@ -62,6 +62,11 @@
   };
 
   # --- Binary Caches ---
+  # Note on evaluation: Binary caches (substituters) provide prebuilt binaries
+  # during local builds or activation switches. During CI evaluation (`nix flake check`,
+  # `nix eval`), Nix does not query binary caches unless Import From Derivation (IFD)
+  # is used. This configuration does not use IFD, and flake checks restrict/forbid
+  # IFD by default.
   nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org" # nix-community inputs

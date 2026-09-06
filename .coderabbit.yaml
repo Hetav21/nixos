@@ -1,0 +1,135 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: "en-US"
+early_access: false
+
+tone_instructions: >-
+  Expert NixOS and Flake reviewer: direct, technically precise, and actionable.
+  Prioritize pure evaluation, modularity (mkModule pattern), secret safety (sops-nix),
+  host separation, and flake hygiene.
+
+reviews:
+  profile: "chill"
+  request_changes_workflow: false
+  high_level_summary: true
+  collapse_walkthrough: true
+  poem: false
+  review_status: true
+  changed_files_summary: true
+  sequence_diagrams: false
+  estimate_code_review_effort: true
+  suggested_labels: true
+  auto_apply_labels: false
+
+  auto_review:
+    enabled: true
+    drafts: false
+    base_branches:
+      - "main"
+
+  pre_merge_checks:
+    title:
+      mode: "warning"
+      requirements: "PR titles should follow Conventional Commits (e.g. feat:, fix:, chore:, docs:, pkgs:, modules:, hosts:)."
+    description:
+      mode: "warning"
+    custom_checks:
+      - name: "Plaintext Secrets & SOPS Safety"
+        mode: "error"
+        instructions: |-
+          Verify that:
+          1. No plaintext private keys (SSH/GPG/Age), API tokens, passwords, or credentials appear in any .nix file.
+          2. Any secret added under secrets/ matches .sops.yaml rules (secrets/.*\.yaml$) and is encrypted with SOPS (contains sops: mac, enc, etc.).
+          3. Modules consuming secrets use config.sops.secrets.<name>.path rather than reading raw paths.
+
+      - name: "Host & Module Boundary Separation"
+        mode: "warning"
+        instructions: |-
+          Verify that:
+          1. Files under src/hosts/<host>/ only configure host-specific options (settings, hardware, profile enablement) and do NOT declare global system module definitions.
+          2. Shared logic lives under src/modules/ and adheres to the mkModule abstraction pattern.
+          3. Avoid hardcoded user home directories (e.g. /home/hetav). Use config.home.homeDirectory, settings, or nix store paths.
+
+      - name: "Derivation Purity & SRI Hashes"
+        mode: "warning"
+        instructions: |-
+          1. Any fetcher (fetchFromGitHub, fetchurl, fetchzip) in src/pkgs/**/*.nix must use Subresource Integrity (SRI) hashes (hash = "sha256-...").
+          2. Standalone public packages should not live here — verify they are placed in the NUR/ repository instead as per AGENTS.md rules.
+          3. Machine-specific or private agent packages must accept minimal arguments.
+
+      - name: "CI Workflow Security"
+        mode: "error"
+        instructions: |-
+          In .github/workflows/*.yml:
+          1. Workflows must declare explicit minimal permissions: contents: read.
+          2. Pin GitHub Actions versions.
+          3. Ensure actions and scripts do not expose repository secrets unnecessarily.
+
+  tools:
+    actionlint:
+      enabled: true
+    zizmor:
+      enabled: true
+    shellcheck:
+      enabled: true
+    yamllint:
+      enabled: true
+    markdownlint:
+      enabled: true
+    gitleaks:
+      enabled: true
+    trufflehog:
+      enabled: false
+
+  path_filters:
+    - "!**/*.lock"
+    - "!result*"
+    - "!result/**"
+    - "!.git/**"
+    - "!.direnv/**"
+    - "!assets/wallpapers/**"
+
+  path_instructions:
+    - path: "src/modules/**/*.nix"
+      instructions: |-
+        NixOS & Home Manager Module Guidelines:
+        1. Follow the standard repository mkModule pattern ({ config, lib, pkgs, ... }: ...).
+        2. Ensure option definitions specify types (lib.types.*) and sensible defaults.
+        3. Never hardcode absolute home paths like /home/hetav — use config.home.homeDirectory or settings.
+
+    - path: "src/hosts/**/*.nix"
+      instructions: |-
+        Host Configurations:
+        1. Keep host definitions declarative. Only set overrides specific to that machine (nixbook, nixwslbook, nixworkbook).
+        2. Hardware settings should stay isolated in hardware.nix or config/hardware-wsl.nix.
+
+    - path: "src/pkgs/**/*.nix"
+      instructions: |-
+        Custom Packages:
+        1. Public, standalone packages belong in NUR/pkgs/, not here.
+        2. Packages here are reserved for agent-resources, WSL integrations, or private tools.
+        3. Always use SRI hashes (hash = "sha256-...").
+
+    - path: "secrets/**"
+      instructions: |-
+        SOPS Encrypted Secrets:
+        1. Ensure every YAML file is encrypted using SOPS with age key.
+        2. Reject any commits introducing unencrypted secrets.
+
+    - path: ".github/workflows/*.yml"
+      instructions: |-
+        GitHub Actions:
+        1. Enforce contents: read permission.
+        2. Set concurrency to cancel redundant runs on the same branch.
+
+knowledge_base:
+  opt_out: false
+  web_search:
+    enabled: true
+  code_guidelines:
+    enabled: true
+  learnings:
+    scope: "local"
+
+chat:
+  auto_reply: true
+  art: false

@@ -1,5 +1,8 @@
 # NixOS Configuration
 
+[![CI](https://github.com/Hetav21/nixos/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Hetav21/nixos/actions/workflows/ci.yml)
+[![CodeRabbit Reviews](https://img.shields.io/badge/CodeRabbit-Review-ff5a00?logo=coderabbit)](https://coderabbit.ai)
+
 A modular and maintainable NixOS configuration supporting multiple hosts including desktop environments and WSL setups.
 
 ## Installation (Quick Overview)
