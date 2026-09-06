@@ -26,6 +26,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+        with:
+          # CI jobs are read-only; Nix receives GitHub token separately
+          persist-credentials: false
 
       # Note on evaluation: Binary caches (substituters) provide prebuilt binaries
       # during local builds or activation switches. During CI evaluation (`nix flake check`,
@@ -55,6 +58,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+        with:
+          # CI jobs are read-only; Nix receives GitHub token separately
+          persist-credentials: false
 
       # Note on evaluation: Binary caches (substituters) provide prebuilt binaries
       # during local builds or activation switches. During CI evaluation (`nix flake check`,
