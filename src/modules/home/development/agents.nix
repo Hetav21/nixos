@@ -27,6 +27,7 @@ extraLib.modules.mkModule args {
       inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.antigravity-cli
       inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
       inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex
+      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.coderabbit-cli
       inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.beads
       pkgs.unstable.agent-browser
     ];
