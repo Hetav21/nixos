@@ -1,0 +1,77 @@
+name: "CI"
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  schedule:
+    # Weekly run every Sunday at 04:20 UTC to catch upstream nixpkgs drift
+    - cron: '20 4 * * 0'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  flake-check:
+    name: "Flake Check"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Note on evaluation: Binary caches (substituters) provide prebuilt binaries
+      # during local builds or activation switches. During CI evaluation (`nix flake check`,
+      # `nix eval`), Nix does not query binary caches unless Import From Derivation (IFD)
+      # is used. This configuration does not use IFD, and flake checks restrict/forbid
+      # IFD by default. Hence, no Cachix cache action or auth tokens are required.
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Flake check
+        run: nix flake check --accept-flake-config --show-trace
+
+  eval-hosts:
+    name: "Eval Host: ${{ matrix.host }}"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        host:
+          - nixbook
+          - nixwslbook
+          - nixworkbook
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Note on evaluation: Binary caches (substituters) provide prebuilt binaries
+      # during local builds or activation switches. During CI evaluation (`nix flake check`,
+      # `nix eval`), Nix does not query binary caches unless Import From Derivation (IFD)
+      # is used. This configuration does not use IFD, and flake checks restrict/forbid
+      # IFD by default. Hence, no Cachix cache action or auth tokens are required.
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Evaluate host configuration
+        run: |
+          nix eval .#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel --apply 'x: "ok"'
+
+      - name: Dry-run host build
+        run: |
+          nix build .#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel --dry-run --accept-flake-config
