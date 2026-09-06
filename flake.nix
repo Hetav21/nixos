@@ -36,6 +36,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     vicinae-extensions = {
       url = "github:vicinaehq/extensions";
       inputs.nixpkgs.follows = "nixpkgs";
