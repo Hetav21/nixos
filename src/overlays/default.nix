@@ -22,4 +22,7 @@
       inherit (final) config;
     };
   };
+
+  # --- NUR (Nix User Repository) Overlay (pkgs.nur.*) ---
+  nur = inputs.nur.overlays.default;
 }
