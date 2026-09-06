@@ -8,6 +8,14 @@ Thin index of cross-cutting workflows. Where a topic has an owning doc, the link
 - Use `sops-nix` for secret management
 - Keep SSH keys and API tokens in `secrets/` only
 
+## Git Workflow
+
+- **Never work directly on `main`**: Always create and switch to a branch before making changes:
+  ```bash
+  git switch -c <branch-name>
+  ```
+- Make all changes, test, and commit on the branch instead of `main`.
+
 ## Change Namespace
 
 ```
