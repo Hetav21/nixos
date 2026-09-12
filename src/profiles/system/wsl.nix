@@ -57,7 +57,6 @@ extraLib.modules.mkProfileModule args {
 
     # --- Disabled Desktop & Hardware Components ---
     system.media = {
-      mpv.enable = false;
       pavucontrol.enableGui = false;
       obs.enableGui = false;
       graphics.enableGui = false;

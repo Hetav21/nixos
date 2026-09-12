@@ -54,5 +54,10 @@ extraLib.modules.mkProfileModule args {
     home.browser = {
       helium.enableGui = true;
     };
+
+    # --- Media Tools ---
+    home.media = {
+      mpv.enable = true;
+    };
   };
 }

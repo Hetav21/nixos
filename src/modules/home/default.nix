@@ -9,5 +9,6 @@
     ./system
     ./desktop
     ./browser
+    ./media
   ];
 }
