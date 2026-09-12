@@ -1,4 +1,5 @@
 {
+  config,
   extraLib,
   lib,
   pkgs,
@@ -122,8 +123,16 @@ extraLib.modules.mkModule args {
         sub-fix-timing = false;
         sub-auto = "fuzzy";
         sub-font-size = 40;
-        sub-color = "#FFFFFFFF";
-        sub-border-color = "#FF000000";
+        sub-color =
+          if config ? lib && config.lib ? stylix then
+            config.lib.stylix.colors.withHashtag.base05
+          else
+            "#FFFFFFFF";
+        sub-border-color =
+          if config ? lib && config.lib ? stylix then
+            config.lib.stylix.colors.withHashtag.base00
+          else
+            "#FF000000";
         sub-border-size = 2.0;
         sub-shadow-offset = 0;
         sub-spacing = 0.0;
