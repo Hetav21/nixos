@@ -1,20 +1,17 @@
 {
   extraLib,
   ...
-} @ args:
+}@args:
 extraLib.modules.mkCategoryModule args {
   name = "system.media";
   imports = [
-    ./mpv.nix
     ./pavucontrol.nix
     ./obs.nix
     ./graphics.nix
     ./spotify.nix
     ./stremio.nix
   ];
-  hasCli = true;
-  cliDescription = "Enable media command-line players (CLI)";
-  cliChildren = ["mpv"];
+  hasCli = false;
   hasGui = true;
   guiDescription = "Enable all GUI media creation, editing and playback apps";
   guiChildren = [

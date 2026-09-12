@@ -45,7 +45,6 @@ extraLib.modules.mkProfileModule args {
 
     # --- Media & Graphics ---
     system.media = {
-      mpv.enable = true;
       pavucontrol.enableGui = true;
       obs.enableGui = true;
       graphics.enableGui = true;
