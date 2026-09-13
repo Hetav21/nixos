@@ -400,6 +400,14 @@ extraLib.modules.mkModule args {
         # Live rename
         inc-rename.enable = true;
 
+        # Search and Replace
+        grug-far = {
+          enable = true;
+          settings = {
+            headerMaxWidth = 80;
+          };
+        };
+
         # TODO comments
         todo-comments.enable = true;
 
@@ -449,9 +457,14 @@ extraLib.modules.mkModule args {
                 icon = "󰊢 ";
               }
               {
-                __unkeyed-1 = "<leader>s";
-                group = "Session";
+                __unkeyed-1 = "<leader>q";
+                group = "Quit / Session";
                 icon = "󰗼 ";
+              }
+              {
+                __unkeyed-1 = "<leader>s";
+                group = "Search / Replace";
+                icon = "󰛔 ";
               }
               {
                 __unkeyed-1 = "<leader>u";
@@ -1566,26 +1579,62 @@ extraLib.modules.mkModule args {
           options.desc = "Toggle Auto Format (Global)";
         }
 
-        # --- Session Persistence & Quit ---
+        # --- Quit & Session Persistence ---
         {
-          key = "<leader>ss";
+          key = "<leader>qs";
           action.__raw = ''function() require("persistence").load() end'';
           options.desc = "Restore Session";
         }
         {
-          key = "<leader>sl";
+          key = "<leader>ql";
           action.__raw = ''function() require("persistence").load({ last = true }) end'';
           options.desc = "Restore Last Session";
         }
         {
-          key = "<leader>sd";
+          key = "<leader>qd";
           action.__raw = ''function() require("persistence").stop() end'';
           options.desc = "Don't Save Current Session";
         }
         {
-          key = "<leader>sq";
+          key = "<leader>qq";
           action = "<cmd>qa<cr>";
           options.desc = "Quit Neovim (All)";
+        }
+
+        # --- Search & Replace (grug-far & buffer substitution) ---
+        {
+          mode = [
+            "n"
+            "v"
+          ];
+          key = "<leader>sr";
+          action.__raw = ''
+            function()
+              local grug = require("grug-far")
+              local mode = vim.fn.mode()
+              if mode:match("[vV\22]") then
+                grug.with_visual_selection()
+              else
+                grug.open()
+              end
+            end
+          '';
+          options.desc = "Search & Replace (Workspace / Selection)";
+        }
+        {
+          key = "<leader>sw";
+          action.__raw = ''function() require("grug-far").open({ prefills = { search = vim.fn.expand("<cword>") } }) end'';
+          options.desc = "Search & Replace Word Under Cursor";
+        }
+        {
+          key = "<leader>sf";
+          action.__raw = ''function() require("grug-far").open({ prefills = { paths = vim.fn.expand("%") } }) end'';
+          options.desc = "Search & Replace in Current File";
+        }
+        {
+          key = "<leader>sb";
+          action = ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>";
+          options.desc = "Buffer Replace Word (Live Preview)";
         }
 
         # --- AI / Sidekick CLI ---
