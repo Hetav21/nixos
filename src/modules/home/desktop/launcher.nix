@@ -30,6 +30,7 @@ extraLib.modules.mkModule args {
       systemd = {
         enable = true;
         autoStart = true;
+        target = "hyprland-session.target";
       };
 
       settings = {
