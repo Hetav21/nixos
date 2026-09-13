@@ -7,6 +7,7 @@
 #   - extraLib.modules   : Module helpers (mkModule, common, desktop, wsl)
 #   - extraLib.hosts     : Host settings helpers (mkHostSettings)
 #   - extraLib.dotfiles  : Config file helpers (mkSubstitute, mkProcessFile)
+#   - extraLib.paths     : Path & Resource helpers (root, dotfile, wallpaper, ...)
 {
   lib,
   inputs,
