@@ -11,7 +11,7 @@ Declarative Neovim configuration is managed via [Nixvim](https://github.com/nix-
 * **`<leader>`**: `Space`
 * **`<localleader>`**: `\`
 
-Pressing `<leader>` opens the **which-key** popup menu with categorized groups (AI / Sidekick, Buffer, Code, Find, Git, Session, UI / Toggle, Diagnostics/Trouble).
+Pressing `<leader>` opens the **which-key** popup menu with categorized groups (AI / Sidekick, Buffer, Code, Find, Git, Quit / Session, Search / Replace, UI / Toggle, Diagnostics/Trouble).
 
 ---
 
@@ -91,7 +91,35 @@ Managed by `snacks.nvim`.
 
 ---
 
-## 5. Git & Diffs
+## 5. Search & Replace (Multi-File & Buffer)
+
+Managed by `grug-far.nvim` and native Neovim substitution (`opts.inccommand = "split"`).
+
+| Keybinding | Mode | Action | Plugin / Handler |
+| :--- | :---: | :--- | :--- |
+| `<leader>sr` | Normal, Visual | Search & Replace across workspace (or visual selection) | `grug-far.nvim` |
+| `<leader>sw` | Normal | Search & Replace word under cursor across workspace | `grug-far.nvim` |
+| `<leader>sf` | Normal | Search & Replace scoped to current file (`paths = %`) | `grug-far.nvim` |
+| `<leader>sb` | Normal | Live buffer substitution on word under cursor | Built-in (`:%s/.../`) |
+
+### Buffer Controls Inside `grug-far`
+
+Inside a `grug-far` split buffer, navigation and actions use `<localleader>` (`\`):
+
+| Keybinding | Action | Description |
+| :--- | :--- | :--- |
+| `<Tab>` / `<S-Tab>` | Cycle Inputs | Navigate between Search, Replace, FilesFilter, Flags, and Paths |
+| `<localleader>r` (`\r`) | Replace All | Execute replacement across all matching occurrences |
+| `<localleader>s` (`\s`) | Sync Locations | Sync direct buffer edits in results back to source files |
+| `<localleader>q` (`\q`) | Quickfix | Send remaining search results to Quickfix (`nvim-bqf`) |
+| `<Enter>` | Jump to Match | Open the file at match location |
+| `dd` | Exclude Match | Delete line/block in results buffer to exclude from replace |
+| `g?` | Help | Open cheatsheet popup of all actions and flags |
+| `<localleader>c` (`\c`) | Close | Close the `grug-far` split window |
+
+---
+
+## 6. Git & Diffs
 
 Managed by `diffview.nvim`, `gitsigns.nvim`, and `snacks.picker`.
 
@@ -128,7 +156,7 @@ When merge or rebase conflicts occur, opening Diffview (`<leader>gd` or `:Diffvi
 
 ---
 
-## 6. LSP & Code Intelligence
+## 7. LSP & Code Intelligence
 
 Managed by `nvim-lspconfig`, `inc-rename.nvim`, and `conform-nvim`.
 
@@ -149,7 +177,7 @@ Managed by `nvim-lspconfig`, `inc-rename.nvim`, and `conform-nvim`.
 
 ---
 
-## 7. Diagnostics, Quickfix & Location Lists
+## 8. Diagnostics, Quickfix & Location Lists
 
 Managed by `trouble.nvim`, `todo-comments.nvim`, and Vim unimpaired navigation.
 
@@ -167,7 +195,7 @@ Managed by `trouble.nvim`, `todo-comments.nvim`, and Vim unimpaired navigation.
 
 ---
 
-## 8. Editing, Surround, Auto-pairs & Yank History
+## 9. Editing, Surround, Auto-pairs & Yank History
 
 Managed by `mini.surround`, `mini.pairs`, `nvim-ts-autotag`, `ts-comments.nvim`, `nvim-colorizer`, `nvim-treesitter-textobjects`, and `yanky.nvim`.
 
@@ -189,7 +217,7 @@ Managed by `mini.surround`, `mini.pairs`, `nvim-ts-autotag`, `ts-comments.nvim`,
 
 ---
 
-## 9. Undotree, UI Toggles & Session Recovery
+## 10. Undotree, UI Toggles, Quit & Session Persistence
 
 Managed by `undotree`, `snacks.toggle`, and `persistence.nvim`.
 
@@ -199,14 +227,14 @@ Managed by `undotree`, `snacks.toggle`, and `persistence.nvim`.
 | `<leader>ui` | Toggle LSP Inlay Hints on/off | `snacks.toggle` |
 | `<leader>ud` | Toggle Diagnostics on/off | `snacks.toggle` |
 | `<leader>uf` | Toggle Auto Format on/off globally | `snacks.toggle` |
-| `<leader>ss` | Restore session for the current workspace directory | `persistence.nvim` |
-| `<leader>sl` | Restore last active session | `persistence.nvim` |
-| `<leader>sd` | Do not save session on editor exit | `persistence.nvim` |
-| `<leader>sq` | Quit Neovim (all windows & buffers) | Built-in (`:qa`) |
+| `<leader>qs` | Restore session for the current workspace directory | `persistence.nvim` |
+| `<leader>ql` | Restore last active session | `persistence.nvim` |
+| `<leader>qd` | Do not save session on editor exit | `persistence.nvim` |
+| `<leader>qq` | Quit Neovim (all windows & buffers) | Built-in (`:qa`) |
 
 ---
 
-## 10. Autocompletion & Snippets
+## 11. Autocompletion & Snippets
 
 Managed by `blink-cmp` with `luasnip` and `friendly-snippets`.
 
@@ -223,7 +251,7 @@ Managed by `blink-cmp` with `luasnip` and `friendly-snippets`.
 
 ---
 
-## 11. Formatters & Linters
+## 12. Formatters & Linters
 
 * **Format on Save & `<leader>cf` (`conform-nvim`)**:
   * **Nix**: `alejandra`
@@ -239,7 +267,7 @@ Managed by `blink-cmp` with `luasnip` and `friendly-snippets`.
 
 ---
 
-## 12. AI & CLI Sidekick (Claude Code, OpenCode, Antigravity)
+## 13. AI & CLI Sidekick (Claude Code, OpenCode, Antigravity)
 
 Managed by `sidekick.nvim`.
 
