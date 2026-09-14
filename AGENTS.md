@@ -66,10 +66,44 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 ---
 
+## 5. Planning & Preflight
+
+- Establish explicit scope and verifiable acceptance criteria before editing.
+- Explicitly declare `spec review mode` (`per-task` or `final-only`) and `execution mode` (`interactive` or approved autonomous).
+- **Branch Preflight:** In accordance with [docs/operations.md](docs/operations.md), **never make changes directly on `main`**. Ensure a dedicated feature branch is checked out (`git switch -c <branch>`) before making any modifications.
+
+## 6. Parallelism & Delegation
+
+- Parallel subagents are permitted only when their file write scopes are strictly non-overlapping; sequence overlapping writes.
+- The primary agent or validation owner confirms the integrated result rather than assuming delegated success.
+
+## 7. Review & Verification
+
+- Execute a two-phase review:
+  1. **Phase 1: Spec Compliance Review** — verify requested behavior, exact file paths, safety, and acceptance criteria.
+  2. **Phase 2: Code-Quality Review** — verify Nix module style (`extraLib.modules.mkModule`), formatting, and absence of regressions.
+- **Command-Level Evidence:** Never claim task completion without running relevant Nix verification commands (e.g. `nix eval`, `nix flake check`, or `nh os test`) and reporting verbatim output.
+
+## 8. Completion & Release Gates
+
+- Explicit human approval is required prior to:
+  - `git commit`, `git push`, or Pull Request creation.
+  - Destructive Git operations (`git reset`, `git clean`, deleting files).
+  - Permanent system activation (`nh os switch` or `sudo nixos-rebuild switch`).
+- Keep implementation and release decisions separate.
+
+## 9. Safety & Authentication Invariant
+
+- Authentication is strictly human-controlled. Stop immediately and hand off to the human when SSH keys, GPG signing, GitHub login, or token refresh is needed.
+- Never inspect, request, copy, or log plaintext age keys (`~/.config/sops/age/keys.txt`, `/var/lib/sops-nix/key.txt`) or decrypted sops secret content.
+
+---
+
 ## Project Docs
 
 Load these on demand — only when the task touches their domain:
 
+- **[docs/project-context.md](docs/project-context.md)** — Repository topography, component boundaries, ownership, and security contracts.
 - **[docs/commands.md](docs/commands.md)** — Command reference (`nh` & raw `nix`), testing changes, troubleshooting. Read before running any build/rebuild/maintenance command.
 - **[docs/code-style.md](docs/code-style.md)** — naming conventions, the `mkModule` pattern, best practices. Read before writing or editing any module.
 - **[docs/operations.md](docs/operations.md)** — security rules and workflows: namespaces, flake inputs, overlays, packages, secrets.
