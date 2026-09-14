@@ -142,6 +142,14 @@ extraLib.modules.mkModule args {
             passAsFile = ["json"];
             json = unformatted;
           } "jq . < $jsonPath > $out";
+        ".gemini/skills".source = pkgs.runCommand "gemini-mattpocock-skills" {} ''
+          mkdir -p $out
+          for dir in ${pkgs.custom.mattpocock-skills}/skills/engineering/* ${pkgs.custom.mattpocock-skills}/skills/productivity/*; do
+            if [ -d "$dir" ] && [ -f "$dir/SKILL.md" ]; then
+              ln -s "$dir" "$out/$(basename "$dir")"
+            fi
+          done
+        '';
       }
     ];
   };
