@@ -50,3 +50,4 @@ Provided by the `nix-skills` flake input:
 - **OpenCode**: `programs.opencode` with model settings substituted from `settings.opencode.*`; oh-my-opencode preset config generated from `assets/dotfiles/.config/opencode/oh-my-opencode-slim.json`.
 - **MCP**: `programs.mcp` shares server definitions from `assets/dotfiles/.config/mcp/mcp.json` across tools.
 - **Claude settings**: `~/.claude/settings.json` is symlinked from `assets/dotfiles/.claude/settings.json`.
+- **Antigravity skills**: `~/.gemini/skills/` links engineering and productivity skills from `pkgs.custom.mattpocock-skills`.
