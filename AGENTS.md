@@ -120,3 +120,17 @@ Load these on demand — only when the task touches their domain:
   doc's owning section in the same commit (grep `*.md` for the path).
 - On doc-vs-code conflict, code wins — fix the doc.
 - Write illustrative paths as `<placeholders>` (e.g. `pkgs/<name>/default.nix`).
+
+## Agent skills
+
+### Issue tracker
+
+Issues and PRDs live as GitHub issues, managed with the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Canonical 5-role triage vocabulary (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context repo (`CONTEXT.md` + `docs/adr/` at repo root). See `docs/agents/domain.md`.
