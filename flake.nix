@@ -70,19 +70,19 @@
   nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org" # nix-community inputs
-      "https://cuda-maintainers.cachix.org" # CUDA & Nvidia acceleration
+      "https://cache.nixos-cuda.org" # CUDA & Nvidia acceleration
       "https://vicinae.cachix.org" # Vicinae launcher & extensions
       "https://cache.numtide.com" # Numtide cache
     ];
     extra-trusted-substituters = [
       "https://nix-community.cachix.org"
-      "https://cuda-maintainers.cachix.org"
+      "https://cache.nixos-cuda.org"
       "https://vicinae.cachix.org"
       "https://cache.numtide.com"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" # nix-community
-      "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E=" # cuda-maintainers
+      "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=" # cuda-maintainers
       "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc=" # vicinae
       "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" # numtide
     ];
