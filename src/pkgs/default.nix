@@ -24,7 +24,5 @@
   };
 
   # --- System & Editor Integrations ---
-  wsl-notify-send = pkgs.callPackage ./wsl-notify-send {};
   antigravity-wsl-shim = pkgs.callPackage ./antigravity-wsl-shim {};
-  direnv-nvim = pkgs.callPackage ./direnv-nvim {};
 }
