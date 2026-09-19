@@ -27,5 +27,7 @@
   nur = inputs.nur.overlays.default;
 
   # --- LLM Agents Overlay (pkgs.llm-agents.*) ---
-  llm-agents = inputs.llm-agents.overlays.shared-nixpkgs;
+  llm-agents = final: _prev: {
+    llm-agents = inputs.llm-agents.packages.${final.stdenv.hostPlatform.system};
+  };
 }
