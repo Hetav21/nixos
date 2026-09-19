@@ -46,7 +46,7 @@ Provided by the `nix-skills` flake input:
 
 ## Other Managed Pieces (`agents.nix`)
 
-- **Packages**: AI agent CLIs (e.g. `claude-code`, `codex`, `coderabbit-cli`) come from the `inputs.llm-agents` flake (binary-cached).
+- **Packages**: AI agent CLIs (e.g. `claude-code`, `codex`, `coderabbit-cli`) come from `pkgs.llm-agents.*` via the `llm-agents.overlays.shared-nixpkgs` overlay (binary-cached).
 - **OpenCode**: `programs.opencode` with model settings substituted from `settings.opencode.*`; oh-my-opencode preset config generated from `assets/dotfiles/.config/opencode/oh-my-opencode-slim.json`.
 - **MCP**: `programs.mcp` shares server definitions from `assets/dotfiles/.config/mcp/mcp.json` across tools.
 - **Claude settings**: `~/.claude/settings.json` is symlinked from `assets/dotfiles/.claude/settings.json`.
