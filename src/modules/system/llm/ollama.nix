@@ -1,7 +1,7 @@
 {
   extraLib,
   pkgs,
-  hardware ? {},
+  config,
   ...
 } @ args:
 extraLib.modules.mkModule args {
@@ -9,8 +9,8 @@ extraLib.modules.mkModule args {
   hasCli = true;
   hasGui = false;
   cliConfig = let
-    isNvidiaEnabled = (hardware ? nvidia) && hardware.nvidia.enable;
-    isAmdgpuEnabled = (hardware ? amdgpu) && hardware.amdgpu.enable;
+    isNvidiaEnabled = config.drivers.nvidia.enable or false;
+    isAmdgpuEnabled = config.drivers.amdgpu.enable or false;
   in {
     # --- Ollama Service ---
     services.ollama = {

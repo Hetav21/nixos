@@ -3,7 +3,7 @@
   lib,
   pkgs,
   settings,
-  hardware ? {},
+  config,
   ...
 } @ args:
 extraLib.modules.mkModule args {
@@ -24,13 +24,13 @@ extraLib.modules.mkModule args {
       }
 
       # Intel hardware acceleration
-      (lib.mkIf (hardware ? intel && hardware.intel.enable) {
+      (lib.mkIf (config.drivers.intel.enable or false) {
         ANV_VIDEO_DECODE = "1";
         LIBVA_DRIVER_NAME = "iHD";
       })
 
       # Nvidia hardware acceleration
-      (lib.mkIf (hardware ? nvidia && hardware.nvidia.enable) {
+      (lib.mkIf (config.drivers.nvidia.enable or false) {
         VDPAU_DRIVER = "nvidia";
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
         NVD_BACKEND = "direct";
