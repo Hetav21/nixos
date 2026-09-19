@@ -25,4 +25,7 @@
 
   # --- NUR (Nix User Repository) Overlay (pkgs.nur.*) ---
   nur = inputs.nur.overlays.default;
+
+  # --- LLM Agents Overlay (pkgs.llm-agents.*) ---
+  llm-agents = inputs.llm-agents.overlays.shared-nixpkgs;
 }

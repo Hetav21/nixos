@@ -16,19 +16,19 @@ extraLib.modules.mkModule args {
 
     home.shellAliases = {
       oc = "${lib.getExe config.programs.opencode.package}";
-      oc2 = "${lib.getExe inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode2}";
+      oc2 = "${lib.getExe pkgs.llm-agents.opencode2}";
       ag = "${lib.getExe config.programs.antigravity.package}";
-      cc = "${lib.getExe inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code}";
-      cdx = "${lib.getExe inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex}";
+      cc = "${lib.getExe pkgs.llm-agents.claude-code}";
+      cdx = "${lib.getExe pkgs.llm-agents.codex}";
     };
 
     # --- Packages & Environment ---
     home.packages = [
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.antigravity-cli
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.coderabbit-cli
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.beads
+      pkgs.llm-agents.antigravity-cli
+      pkgs.llm-agents.claude-code
+      pkgs.llm-agents.codex
+      pkgs.llm-agents.coderabbit-cli
+      pkgs.llm-agents.beads
       pkgs.unstable.agent-browser
     ];
 
@@ -42,7 +42,7 @@ extraLib.modules.mkModule args {
       # --- OpenCode & MCP ---
       opencode = {
         enable = true;
-        package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
+        package = pkgs.llm-agents.opencode;
         enableMcpIntegration = true;
         settings = lib.importJSON (extraLib.paths.dotfile ".config/opencode/config.json");
       };
