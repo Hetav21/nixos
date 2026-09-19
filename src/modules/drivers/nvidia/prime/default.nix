@@ -1,7 +1,12 @@
 # NVIDIA PRIME Configuration Module
 #
-# Declares shared PRIME bus IDs and aggregates PRIME offload and sync mode submodules.
-{lib, ...}: {
+# Declares shared PRIME bus IDs, validates mode exclusivity,
+# and aggregates PRIME offload and sync mode submodules.
+{
+  lib,
+  config,
+  ...
+}: {
   # --- PRIME Mode Submodules ---
   imports = [
     ./offload.nix
@@ -20,6 +25,22 @@
       type = lib.types.str;
       default = "";
       description = "PCI Bus ID of the discrete NVIDIA GPU (e.g. PCI:1:0:0).";
+    };
+  };
+
+  # --- Shared PRIME Hardware Configuration ---
+  config = lib.mkIf (config.drivers.nvidia.prime.sync.enable || config.drivers.nvidia.prime.offload.enable) {
+    # --- Mode Exclusivity Validation ---
+    assertions = [
+      {
+        assertion = !(config.drivers.nvidia.prime.sync.enable && config.drivers.nvidia.prime.offload.enable);
+        message = "NVIDIA PRIME 'sync' and 'offload' modes are mutually exclusive. Only one can be enabled at a time.";
+      }
+    ];
+
+    # --- Hardware PRIME Bus IDs ---
+    hardware.nvidia.prime = {
+      inherit (config.drivers.nvidia.prime) intelBusId nvidiaBusId;
     };
   };
 }

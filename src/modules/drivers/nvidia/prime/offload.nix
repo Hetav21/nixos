@@ -4,15 +4,15 @@
 # routing rendering through the discrete GPU on demand via prime-run.
 {
   extraLib,
-  config,
   lib,
+  config,
   ...
 } @ args:
 extraLib.modules.mkModule args {
   name = "drivers.nvidia.prime.offload";
   hasGui = false;
 
-  # --- Declarative Options ---
+  # --- Declarative Module Options ---
   extraOptions = {
     drivers.nvidia.prime.offload = {
       enable = lib.mkEnableOption "NVIDIA PRIME render offload mode (render on dGPU on-demand)";
@@ -26,12 +26,9 @@ extraLib.modules.mkModule args {
 
   # --- PRIME Offload Configuration ---
   cliConfig = {
-    hardware.nvidia.prime = {
-      offload = {
-        enable = config.drivers.nvidia.prime.offload.enable;
-        enableOffloadCmd = config.drivers.nvidia.prime.offload.enableOffloadCmd;
-      };
-      inherit (config.drivers.nvidia.prime) intelBusId nvidiaBusId;
+    hardware.nvidia.prime.offload = {
+      enable = config.drivers.nvidia.prime.offload.enable;
+      inherit (config.drivers.nvidia.prime.offload) enableOffloadCmd;
     };
   };
 }
