@@ -21,7 +21,7 @@ All feature modules use `extraLib.modules.mkModule`, and category aggregates (`d
 
 ### Feature Modules (`mkModule`)
 
-The full API is exactly six attrs — `name`, `hasCli` (default `true`), `hasGui` (default `false`), `guiRequiresCli` (default `true`), `cliConfig`, `guiConfig` (each may be a function of module args or a plain attrset).
+The full API attributes are — `name`, `hasCli` (default `true`), `hasGui` (default `false`), `guiRequiresCli` (default `true`), `imports` (default `[]`), `extraOptions` (default `{}`), `cliConfig`, and `guiConfig` (each config/options attr may be a function of module args or a plain attrset).
 
 **Requirements:**
 
