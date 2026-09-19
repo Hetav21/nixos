@@ -30,8 +30,12 @@
 
   # --- Shared PRIME Hardware Configuration ---
   config = lib.mkIf (config.drivers.nvidia.prime.sync.enable || config.drivers.nvidia.prime.offload.enable) {
-    # --- Mode Exclusivity Validation ---
+    # --- Validation Assertions ---
     assertions = [
+      {
+        assertion = config.drivers.nvidia.enable;
+        message = "NVIDIA PRIME modes require drivers.nvidia.enable = true.";
+      }
       {
         assertion = !(config.drivers.nvidia.prime.sync.enable && config.drivers.nvidia.prime.offload.enable);
         message = "NVIDIA PRIME 'sync' and 'offload' modes are mutually exclusive. Only one can be enabled at a time.";
