@@ -4,8 +4,8 @@
 # running all rendering continuously on the discrete GPU for maximum performance.
 {
   extraLib,
-  config,
   lib,
+  config,
   ...
 } @ args:
 extraLib.modules.mkModule args {
@@ -21,9 +21,6 @@ extraLib.modules.mkModule args {
 
   # --- PRIME Sync Configuration ---
   cliConfig = {
-    hardware.nvidia.prime = {
-      sync.enable = config.drivers.nvidia.prime.sync.enable;
-      inherit (config.drivers.nvidia.prime) intelBusId nvidiaBusId;
-    };
+    hardware.nvidia.prime.sync.enable = config.drivers.nvidia.prime.sync.enable;
   };
 }

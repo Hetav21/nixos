@@ -29,28 +29,14 @@ extraLib.modules.mkModule args {
 
   # --- Driver Configuration ---
   cliConfig = {
-    # --- Container & Compute Tooling ---
-    hardware.nvidia-container-toolkit.enable = true;
-
-    environment.systemPackages = [
-      pkgs.cudaPackages.cudatoolkit
-    ];
-
-    # --- Video Acceleration & Display Server ---
-    hardware.graphics = {
-      extraPackages = [
-        pkgs.nvidia-vaapi-driver
-        pkgs.libvdpau-va-gl
-      ];
-    };
-
-    services.xserver.videoDrivers = ["nvidia"];
-
     # --- Kernel Parameters & DRM Modesetting ---
     boot.kernelParams = [
       "nvidia-drm.modeset=1"
       "nvidia-drm.fbdev=1"
     ];
+
+    # --- Display Server Video Driver ---
+    services.xserver.videoDrivers = ["nvidia"];
 
     # --- Hardware Driver Settings ---
     hardware.nvidia = {
@@ -63,5 +49,20 @@ extraLib.modules.mkModule args {
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.${config.drivers.nvidia.package};
     };
+
+    # --- Hardware Video Acceleration ---
+    hardware.graphics = {
+      extraPackages = [
+        pkgs.nvidia-vaapi-driver
+        pkgs.libvdpau-va-gl
+      ];
+    };
+
+    # --- Container & Compute Tooling ---
+    hardware.nvidia-container-toolkit.enable = true;
+
+    environment.systemPackages = [
+      pkgs.cudaPackages.cudatoolkit
+    ];
   };
 }
