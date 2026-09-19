@@ -1,11 +1,13 @@
+# Hardware Vendor & Graphics Drivers Aggregator
+#
+# Aggregates hardware and vendor-specific drivers (AMD, ASUS, Intel, NVIDIA).
+# Drivers are selectively enabled via host hardware profiles.
 {...}: {
   # --- Driver Submodules ---
   imports = [
-    ./amd-drivers.nix
+    ./amdgpu.nix
     ./asus.nix
-    ./intel-drivers.nix
-    ./nvidia-drivers.nix
-    ./nvidia-prime-drivers-offload.nix
-    ./nvidia-prime-drivers-sync.nix
+    ./intel.nix
+    ./nvidia
   ];
 }

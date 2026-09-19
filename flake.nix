@@ -105,14 +105,9 @@
     nixwslbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./src/hosts/nixwslbook/settings.nix);
     nixworkbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./src/hosts/nixworkbook/settings.nix);
 
-    # Hardware profiles
-    hardware_asus = import ./src/hosts/nixbook/hardware.nix;
-    hardware_wsl = import ./src/config/hardware-wsl.nix;
-
     # System builder helper
     mkSystem = {
       settings,
-      hardware,
       extraModules ? [],
     }:
       lib.nixosSystem {
@@ -124,7 +119,6 @@
             outputs
             extraLib
             settings
-            hardware
             ;
         };
         modules =
@@ -147,19 +141,16 @@
     nixosConfigurations = {
       nixbook = mkSystem {
         settings = nixbookSettings;
-        hardware = hardware_asus;
         extraModules = extraLib.modules.desktop;
       };
 
       nixwslbook = mkSystem {
         settings = nixwslbookSettings;
-        hardware = hardware_wsl;
         extraModules = extraLib.modules.wsl;
       };
 
       nixworkbook = mkSystem {
         settings = nixworkbookSettings;
-        hardware = hardware_wsl;
         extraModules = extraLib.modules.wsl;
       };
     };

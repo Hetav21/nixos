@@ -1,8 +1,4 @@
-{
-  extraLib,
-  hardware ? {},
-  ...
-} @ args:
+{extraLib, ...} @ args:
 extraLib.modules.mkProfileModule args {
   name = "profiles.system.desktop";
   description = "Desktop profile with all features";
@@ -95,13 +91,5 @@ extraLib.modules.mkProfileModule args {
       flatpak.enableGui = true;
     };
     system.hardware.base.enable = true;
-
-    # --- Hardware Drivers ---
-    drivers.nvidia.enable = hardware.nvidia.enable or false;
-    drivers.nvidia.prime.offload.enable = hardware.nvidia.prime.offload.enable or false;
-    drivers.nvidia.prime.sync.enable = hardware.nvidia.prime.sync.enable or false;
-    drivers.intel.enable = hardware.intel.enable or false;
-    drivers.amdgpu.enable = hardware.amdgpu.enable or false;
-    drivers.asus.enable = hardware.asus.enable or false;
   };
 }
