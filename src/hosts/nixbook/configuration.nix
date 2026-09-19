@@ -7,6 +7,7 @@
   # --- Host Imports & Path Setup ---
   imports = [
     ./hardware-configuration.nix
+    ./hardware.nix
   ];
 
   local.homeConfig = ./home.nix;
