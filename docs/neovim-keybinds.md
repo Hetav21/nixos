@@ -21,7 +21,7 @@ Direct split navigation and screen-wide fast motions.
 
 | Keybinding | Mode | Action | Plugin / Handler |
 | :--- | :---: | :--- | :--- |
-| `s` | Normal, Visual, Operator | 2-character fast jump to any visible position | `flash.nvim` |
+| `s` | Normal, Visual, Operator | Type-to-filter jump to a visible position | `flash.nvim` |
 | `S` | Normal, Visual, Operator | Fast jump to Treesitter AST node | `flash.nvim` |
 | `r` | Operator | Remote Flash operation (e.g. `yr` to yank remote target) | `flash.nvim` |
 | `R` | Operator, Visual | Treesitter search | `flash.nvim` |
@@ -219,10 +219,10 @@ Managed by `mini.surround`, `mini.pairs`, `mini.splitjoin`, `nvim-ts-autotag`, `
 | `af` / `if` | Visual, Operator | Outer / Inner function textobject motion | `treesitter-textobjects` |
 | `ac` / `ic` | Visual, Operator | Outer / Inner class textobject motion | `treesitter-textobjects` |
 | `aa` / `ia` | Visual, Operator | Outer / Inner parameter/argument textobject motion | `treesitter-textobjects` |
-| `]m` / `[m` | Normal | Jump to next / previous function start (`def` in Python) | `treesitter-textobjects` |
-| `]M` / `[M` | Normal | Jump to next / previous function end | `treesitter-textobjects` |
-| `]]` / `[[` | Normal | Jump to next / previous class start (`class` in Python) | `treesitter-textobjects` |
-| `][` / `[]` | Normal | Jump to next / previous class end | `treesitter-textobjects` |
+| `]m` / `[m` | Normal, Visual, Operator | Jump to next / previous function start (`def` in Python) | `treesitter-textobjects` |
+| `]M` / `[M` | Normal, Visual, Operator | Jump to next / previous function end | `treesitter-textobjects` |
+| `]]` / `[[` | Normal, Visual, Operator | Jump to next / previous class start (`class` in Python) | `treesitter-textobjects` |
+| `][` / `[]` | Normal, Visual, Operator | Jump to next / previous class end | `treesitter-textobjects` |
 | `p` / `P` | Normal, Visual | Put after / before with clipboard history registration | `yanky.nvim` |
 | `[y` / `]y` | Normal | Cycle backward / forward through yank history ring | `yanky.nvim` |
 
