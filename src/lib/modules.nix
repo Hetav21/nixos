@@ -25,6 +25,7 @@ in rec {
       hasGui ? false,
       guiRequiresCli ? true,
       imports ? [],
+      extraOptions ? {},
       cliConfig ? (_: {}),
       guiConfig ? (_: {}),
     }: {
@@ -42,17 +43,23 @@ in rec {
         if builtins.isFunction guiConfig
         then guiConfig args
         else guiConfig;
+      resolvedExtraOptions =
+        if builtins.isFunction extraOptions
+        then extraOptions args
+        else extraOptions;
     in {
       inherit imports;
 
-      options = lib.setAttrByPath pathParts (
-        lib.optionalAttrs hasCli {
-          enable = lib.mkEnableOption "CLI/TUI tools for ${name}";
-        }
-        // lib.optionalAttrs hasGui {
-          enableGui = lib.mkEnableOption "GUI tools for ${name}";
-        }
-      );
+      options =
+        lib.recursiveUpdate (lib.setAttrByPath pathParts (
+          lib.optionalAttrs hasCli {
+            enable = lib.mkEnableOption "CLI/TUI tools for ${name}";
+          }
+          // lib.optionalAttrs hasGui {
+            enableGui = lib.mkEnableOption "GUI tools for ${name}";
+          }
+        ))
+        resolvedExtraOptions;
 
       config = lib.mkMerge [
         (lib.mkIf (hasCli && cfg.enable or false) resolvedCli)
@@ -110,17 +117,21 @@ in rec {
       cliBindings =
         if hasCli
         then
-          map (child:
-            lib.setAttrByPath (pathParts ++ [child "enable"]) (lib.mkDefault (catCfg.enable or false))
-          ) cliChildren
+          map (
+            child:
+              lib.setAttrByPath (pathParts ++ [child "enable"]) (lib.mkDefault (catCfg.enable or false))
+          )
+          cliChildren
         else [];
 
       guiBindings =
         if hasGui
         then
-          map (child:
-            lib.setAttrByPath (pathParts ++ [child "enableGui"]) (lib.mkDefault (catCfg.enableGui or false))
-          ) guiChildren
+          map (
+            child:
+              lib.setAttrByPath (pathParts ++ [child "enableGui"]) (lib.mkDefault (catCfg.enableGui or false))
+          )
+          guiChildren
         else [];
     in {
       inherit imports;
