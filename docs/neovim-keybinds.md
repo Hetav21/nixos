@@ -15,12 +15,16 @@ Pressing `<leader>` opens the **which-key** popup menu with categorized groups (
 
 ---
 
-## 1. Navigation & Windows
+## 1. Navigation, Jump Motions & Windows
 
-Direct split navigation across windows without `<C-w>` prefix overhead.
+Direct split navigation and screen-wide fast motions.
 
 | Keybinding | Mode | Action | Plugin / Handler |
 | :--- | :---: | :--- | :--- |
+| `s` | Normal, Visual, Operator | Type-to-filter jump to a visible position | `flash.nvim` |
+| `S` | Normal, Visual, Operator | Fast jump to Treesitter AST node | `flash.nvim` |
+| `r` | Operator | Remote Flash operation (e.g. `yr` to yank remote target) | `flash.nvim` |
+| `R` | Operator, Visual | Treesitter search | `flash.nvim` |
 | `<C-h>` | Normal | Move focus to left window split | Built-in (`<C-w>h`) |
 | `<C-j>` | Normal | Move focus to lower window split | Built-in (`<C-w>j`) |
 | `<C-k>` | Normal | Move focus to upper window split | Built-in (`<C-w>k`) |
@@ -28,7 +32,7 @@ Direct split navigation across windows without `<C-w>` prefix overhead.
 
 ---
 
-## 2. Text Manipulation & Visual Mode Ergonomics
+## 2. Text Manipulation & Value Toggling
 
 | Keybinding | Mode | Action | Plugin / Handler |
 | :--- | :---: | :--- | :--- |
@@ -36,6 +40,8 @@ Direct split navigation across windows without `<C-w>` prefix overhead.
 | `K` | Visual | Move selected block up 1 line (auto-reindents) | Built-in (`:m '<-2`) |
 | `<` | Visual | Indent selection left (preserves visual selection) | Built-in (`<gv`) |
 | `>` | Visual | Indent selection right (preserves visual selection) | Built-in (`>gv`) |
+| `<C-a>` / `<C-x>` | Normal, Visual | Intelligent increment/decrement (booleans `True`/`False`, operators, dates, numbers) | `dial.nvim` |
+| `g<C-a>` / `g<C-x>` | Normal, Visual | Additive / sequence increment / decrement | `dial.nvim` |
 | `<Esc>` | Normal | Clear active search highlights (`hlsearch`) | Built-in (`noh`) |
 | `<C-s>` | Normal, Insert, Visual | Save current file | Built-in (`:w`) |
 
@@ -172,6 +178,11 @@ Managed by `nvim-lspconfig`, `inc-rename.nvim`, and `conform-nvim`.
 | `<leader>cf` | Normal, Visual | Manually format buffer or visual selection | `conform-nvim` |
 | `<leader>cl` | Normal | Trigger manual linter diagnostics run | `nvim-lint` |
 | `<leader>cr` / `<leader>rn` | Normal | Incremental LSP symbol rename with live preview | `inc-rename.nvim` |
+| `<leader>cj` | Normal | Toggle split / join arguments (single-line <-> multi-line) | `mini.splitjoin` |
+| `<leader>ct` | Normal, Visual | Toggle / Increment value under cursor (`True`/`False`, `and`/`or`, `==`/`!=`, dates, numbers) | `dial.nvim` |
+| `<leader>cx` | Normal, Visual | Decrement value under cursor | `dial.nvim` |
+| `<leader>cp` / `g>` | Normal | Swap parameter with next parameter | `treesitter-textobjects` |
+| `<leader>cP` / `g<` | Normal | Swap parameter with previous parameter | `treesitter-textobjects` |
 | `[d` / `]d` | Normal | Jump to previous / next LSP diagnostic in file | `plugins.lsp` (`vim.diagnostic.goto_prev` / `vim.diagnostic.goto_next`) |
 | `<leader>cd` | Normal | Open floating diagnostic details for current line | `plugins.lsp` (`vim.diagnostic.open_float`) |
 
@@ -197,16 +208,21 @@ Managed by `trouble.nvim`, `todo-comments.nvim`, and Vim unimpaired navigation.
 
 ## 9. Editing, Surround, Auto-pairs & Yank History
 
-Managed by `mini.surround`, `mini.pairs`, `nvim-ts-autotag`, `ts-comments.nvim`, `nvim-colorizer`, `nvim-treesitter-textobjects`, and `yanky.nvim`.
+Managed by `mini.surround`, `mini.pairs`, `mini.splitjoin`, `nvim-ts-autotag`, `ts-comments.nvim`, `nvim-colorizer`, `nvim-treesitter-textobjects`, `dial.nvim`, and `yanky.nvim`.
 
 | Keybinding | Mode | Action | Plugin / Handler |
 | :--- | :---: | :--- | :--- |
 | `sa<motion><char>` | Normal, Visual | Add surrounding characters (e.g. `saiw"` surrounds word with `"`) | `mini.surround` |
 | `sd<char>` | Normal | Delete surrounding characters (e.g. `sd"` removes `"`) | `mini.surround` |
 | `sr<old><new>` | Normal | Replace surrounding characters (e.g. `sr"'` replaces `"` with `'`) | `mini.surround` |
+| `gS` | Normal, Visual | Toggle split / join arguments or collections (multiline <-> single line) | `mini.splitjoin` |
 | `af` / `if` | Visual, Operator | Outer / Inner function textobject motion | `treesitter-textobjects` |
 | `ac` / `ic` | Visual, Operator | Outer / Inner class textobject motion | `treesitter-textobjects` |
 | `aa` / `ia` | Visual, Operator | Outer / Inner parameter/argument textobject motion | `treesitter-textobjects` |
+| `]m` / `[m` | Normal, Visual, Operator | Jump to next / previous function start (`def` in Python) | `treesitter-textobjects` |
+| `]M` / `[M` | Normal, Visual, Operator | Jump to next / previous function end | `treesitter-textobjects` |
+| `]]` / `[[` | Normal, Visual, Operator | Jump to next / previous class start (`class` in Python) | `treesitter-textobjects` |
+| `][` / `[]` | Normal, Visual, Operator | Jump to next / previous class end | `treesitter-textobjects` |
 | `p` / `P` | Normal, Visual | Put after / before with clipboard history registration | `yanky.nvim` |
 | `[y` / `]y` | Normal | Cycle backward / forward through yank history ring | `yanky.nvim` |
 
