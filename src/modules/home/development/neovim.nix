@@ -370,13 +370,14 @@ extraLib.modules.mkModule args {
         };
         friendly-snippets.enable = true;
 
-        # Surround motions (sa, sd, sr) & Auto-pairs
+        # Surround motions (sa, sd, sr), Auto-pairs & Split/Join (gS)
         mini = {
           enable = true;
           mockDevIcons = false;
           modules = {
             surround = {};
             pairs = {};
+            splitjoin = {};
           };
         };
         ts-autotag.enable = true;
@@ -396,6 +397,59 @@ extraLib.modules.mkModule args {
 
         # Yank history & clipboard ring
         yanky.enable = true;
+
+        # Fast jump motions (s, S, r, R)
+        flash = {
+          enable = true;
+          settings = {
+            labels = "asdfghjklqwertyuiopzxcvbnm";
+            search.mode = "exact";
+            jump.autojump = false;
+          };
+        };
+
+        # Intelligent Value Toggling (<C-a>, <C-x>)
+        dial = {
+          enable = true;
+          luaConfig.post = ''
+            local augend = require("dial.augend")
+            require("dial.config").augends:register_group({
+              default = {
+                augend.integer.alias.decimal,
+                augend.integer.alias.hex,
+                augend.date.alias["%Y/%m/%d"],
+                augend.date.alias["%Y-%m-%d"],
+                augend.constant.alias.bool,
+                augend.constant.new({
+                  elements = { "True", "False" },
+                  word = true,
+                  cyclic = true,
+                }),
+                augend.constant.new({
+                  elements = { "and", "or" },
+                  word = true,
+                  cyclic = true,
+                }),
+                augend.constant.new({
+                  elements = { "&&", "||" },
+                  word = false,
+                  cyclic = true,
+                }),
+                augend.constant.new({
+                  elements = { "==", "!=" },
+                  word = false,
+                  cyclic = true,
+                }),
+                augend.constant.new({
+                  elements = { "is", "is not" },
+                  word = true,
+                  cyclic = true,
+                }),
+                augend.semver.alias.semver,
+              },
+            })
+          '';
+        };
 
         # Live rename
         inc-rename.enable = true;
@@ -830,6 +884,37 @@ extraLib.modules.mkModule args {
                 "ia" = "@parameter.inner";
               };
             };
+            move = {
+              enable = true;
+              set_jumps = true;
+              goto_next_start = {
+                "]m" = "@function.outer";
+                "]]" = "@class.outer";
+              };
+              goto_next_end = {
+                "]M" = "@function.outer";
+                "][" = "@class.outer";
+              };
+              goto_previous_start = {
+                "[m" = "@function.outer";
+                "[[" = "@class.outer";
+              };
+              goto_previous_end = {
+                "[M" = "@function.outer";
+                "[]" = "@class.outer";
+              };
+            };
+            swap = {
+              enable = true;
+              swap_next = {
+                "<leader>cp" = "@parameter.inner";
+                "g>" = "@parameter.inner";
+              };
+              swap_previous = {
+                "<leader>cP" = "@parameter.inner";
+                "g<" = "@parameter.inner";
+              };
+            };
           };
         };
 
@@ -1117,6 +1202,175 @@ extraLib.modules.mkModule args {
           options.desc = "Save File";
         }
 
+        # --- Fast Jump Motions (Flash) ---
+        {
+          mode = [
+            "n"
+            "x"
+            "o"
+          ];
+          key = "s";
+          action.__raw = ''function() require("flash").jump() end'';
+          options.desc = "Flash Jump";
+        }
+        {
+          mode = [
+            "n"
+            "x"
+            "o"
+          ];
+          key = "S";
+          action.__raw = ''function() require("flash").treesitter() end'';
+          options.desc = "Flash Treesitter";
+        }
+        {
+          mode = "o";
+          key = "r";
+          action.__raw = ''function() require("flash").remote() end'';
+          options.desc = "Remote Flash";
+        }
+        {
+          mode = [
+            "o"
+            "x"
+          ];
+          key = "R";
+          action.__raw = ''function() require("flash").treesitter_search() end'';
+          options.desc = "Treesitter Search";
+        }
+
+        # --- Dial Value Increment / Decrement ---
+        {
+          mode = "n";
+          key = "<C-a>";
+          action.__raw = ''function() require("dial.map").manipulate("increment", "normal") end'';
+          options.desc = "Increment (Dial)";
+        }
+        {
+          mode = "n";
+          key = "<C-x>";
+          action.__raw = ''function() require("dial.map").manipulate("decrement", "normal") end'';
+          options.desc = "Decrement (Dial)";
+        }
+        {
+          mode = "n";
+          key = "g<C-a>";
+          action.__raw = ''function() require("dial.map").manipulate("increment", "gnormal") end'';
+          options.desc = "Increment (Dial)";
+        }
+        {
+          mode = "n";
+          key = "g<C-x>";
+          action.__raw = ''function() require("dial.map").manipulate("decrement", "gnormal") end'';
+          options.desc = "Decrement (Dial)";
+        }
+        {
+          mode = "v";
+          key = "<C-a>";
+          action.__raw = ''function() require("dial.map").manipulate("increment", "visual") end'';
+          options.desc = "Increment (Dial)";
+        }
+        {
+          mode = "v";
+          key = "<C-x>";
+          action.__raw = ''function() require("dial.map").manipulate("decrement", "visual") end'';
+          options.desc = "Decrement (Dial)";
+        }
+        {
+          mode = "v";
+          key = "g<C-a>";
+          action.__raw = ''function() require("dial.map").manipulate("increment", "gvisual") end'';
+          options.desc = "Increment (Dial)";
+        }
+        {
+          mode = "v";
+          key = "g<C-x>";
+          action.__raw = ''function() require("dial.map").manipulate("decrement", "gvisual") end'';
+          options.desc = "Decrement (Dial)";
+        }
+
+        # --- Treesitter Textobjects Navigation (Move) ---
+        {
+          mode = [
+            "n"
+            "x"
+            "o"
+          ];
+          key = "]m";
+          action.__raw = ''function() require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer") end'';
+          options.desc = "Next Function Start";
+        }
+        {
+          mode = [
+            "n"
+            "x"
+            "o"
+          ];
+          key = "[m";
+          action.__raw = ''function() require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer") end'';
+          options.desc = "Previous Function Start";
+        }
+        {
+          mode = [
+            "n"
+            "x"
+            "o"
+          ];
+          key = "]M";
+          action.__raw = ''function() require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer") end'';
+          options.desc = "Next Function End";
+        }
+        {
+          mode = [
+            "n"
+            "x"
+            "o"
+          ];
+          key = "[M";
+          action.__raw = ''function() require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer") end'';
+          options.desc = "Previous Function End";
+        }
+        {
+          mode = [
+            "n"
+            "x"
+            "o"
+          ];
+          key = "]]";
+          action.__raw = ''function() require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer") end'';
+          options.desc = "Next Class Start";
+        }
+        {
+          mode = [
+            "n"
+            "x"
+            "o"
+          ];
+          key = "[[";
+          action.__raw = ''function() require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer") end'';
+          options.desc = "Previous Class Start";
+        }
+        {
+          mode = [
+            "n"
+            "x"
+            "o"
+          ];
+          key = "][";
+          action.__raw = ''function() require("nvim-treesitter-textobjects.move").goto_next_end("@class.outer") end'';
+          options.desc = "Next Class End";
+        }
+        {
+          mode = [
+            "n"
+            "x"
+            "o"
+          ];
+          key = "[]";
+          action.__raw = ''function() require("nvim-treesitter-textobjects.move").goto_previous_end("@class.outer") end'';
+          options.desc = "Previous Class End";
+        }
+
         # --- Bufferline & Buffer Management ---
         {
           key = "<leader>bc";
@@ -1335,6 +1589,55 @@ extraLib.modules.mkModule args {
             expr = true;
             desc = "Incremental Rename (Alias)";
           };
+        }
+        {
+          key = "<leader>cj";
+          action.__raw = ''function() require("mini.splitjoin").toggle() end'';
+          options.desc = "Toggle Split/Join Arguments";
+        }
+        {
+          mode = "n";
+          key = "<leader>ct";
+          action.__raw = ''function() require("dial.map").manipulate("increment", "normal") end'';
+          options.desc = "Toggle / Increment Value";
+        }
+        {
+          mode = "v";
+          key = "<leader>ct";
+          action.__raw = ''function() require("dial.map").manipulate("increment", "visual") end'';
+          options.desc = "Toggle / Increment Value";
+        }
+        {
+          mode = "n";
+          key = "<leader>cx";
+          action.__raw = ''function() require("dial.map").manipulate("decrement", "normal") end'';
+          options.desc = "Decrement Value";
+        }
+        {
+          mode = "v";
+          key = "<leader>cx";
+          action.__raw = ''function() require("dial.map").manipulate("decrement", "visual") end'';
+          options.desc = "Decrement Value";
+        }
+        {
+          key = "g>";
+          action.__raw = ''function() require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner") end'';
+          options.desc = "Swap Next Parameter";
+        }
+        {
+          key = "g<";
+          action.__raw = ''function() require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner") end'';
+          options.desc = "Swap Previous Parameter";
+        }
+        {
+          key = "<leader>cp";
+          action.__raw = ''function() require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner") end'';
+          options.desc = "Swap Next Parameter";
+        }
+        {
+          key = "<leader>cP";
+          action.__raw = ''function() require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner") end'';
+          options.desc = "Swap Previous Parameter";
         }
 
         # --- Git & Diffview ---
