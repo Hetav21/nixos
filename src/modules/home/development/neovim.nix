@@ -2,6 +2,7 @@
   extraLib,
   lib,
   pkgs,
+  settings,
   ...
 } @ args:
 extraLib.modules.mkModule args {
@@ -1114,6 +1115,22 @@ extraLib.modules.mkModule args {
                   is_proc = "\\<agy\\>";
                 };
               };
+              context = {
+                keybinds.__raw = ''
+                  function()
+                    return "@${settings.setup_dir}/docs/neovim-keybinds.md"
+                  end
+                '';
+                neovim_config.__raw = ''
+                  function()
+                    return "@${settings.setup_dir}/src/modules/home/development/neovim.nix"
+                  end
+                '';
+              };
+              prompts = {
+                keybinds = "I am learning Neovim. Please refer to @${settings.setup_dir}/docs/neovim-keybinds.md and help me with: ";
+                config = "I am learning Neovim. Please refer to @${settings.setup_dir}/src/modules/home/development/neovim.nix and @${settings.setup_dir}/docs/neovim-keybinds.md to help me configure: ";
+              };
             };
           };
         };
@@ -1981,6 +1998,28 @@ extraLib.modules.mkModule args {
           key = "<leader>ap";
           action.__raw = ''function() require("sidekick.cli").prompt() end'';
           options.desc = "Sidekick Prompt Library";
+        }
+        {
+          key = "<leader>ak";
+          action.__raw = ''
+            function()
+              vim.ui.input({ prompt = "Ask AI about Neovim keybinds & config: " }, function(input)
+                if not input or input == "" then return end
+                local keybinds_path = "${settings.setup_dir}/docs/neovim-keybinds.md"
+                local config_path = "${settings.setup_dir}/src/modules/home/development/neovim.nix"
+                local msg = string.format(
+                  "I am learning Neovim. Please refer to my keybindings guide at @%s (file %s) and my Neovim Nix configuration at @%s (file %s).\n\nQuestion: %s",
+                  keybinds_path,
+                  keybinds_path,
+                  config_path,
+                  config_path,
+                  input
+                )
+                require("sidekick.cli").send({ msg = msg, focus = true })
+              end)
+            end
+          '';
+          options.desc = "Ask AI about Neovim Config & Keybinds";
         }
         {
           key = "<leader>af";

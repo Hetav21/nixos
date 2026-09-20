@@ -296,6 +296,7 @@ Managed by `sidekick.nvim`.
 | `<leader>ao` | Normal | Toggle OpenCode CLI directly | `sidekick.cli` |
 | `<leader>ag` | Normal | Toggle Antigravity (`agy`) CLI directly | `sidekick.cli` |
 | `<leader>ap` | Normal | Open interactive AI prompt library | `sidekick.cli` |
+| `<leader>ak` | Normal | Ask AI about Neovim config & keybinds (interactive input) | `sidekick.cli` / custom |
 | `<leader>af` | Normal | Send current file to active AI CLI (keep editor focus) | `sidekick.cli` |
 | `<leader>aF` | Normal | Send current file to active AI CLI & focus terminal | `sidekick.cli` |
 | `<leader>av` | Visual | Send visual selection to active AI CLI (keep editor focus) | `sidekick.cli` |
