@@ -15,6 +15,7 @@ Thin index of cross-cutting workflows. Where a topic has an owning doc, the link
   git switch -c <branch-name>
   ```
 - Make all changes, test, and commit on the branch instead of `main`.
+- **Ship Protocol (PR & Merge Gate)**: Once changes and verification are complete, the agent presents an interactive release gate (`ask_question` or keyword `ship`). Upon approval, the agent autonomously commits, pushes, creates the PR, addresses CodeRabbit reviews, merges, and pulls fresh `main`. See [AGENTS.md](../AGENTS.md#release-gate-protocol-ship-workflow).
 
 ## Change Namespace
 

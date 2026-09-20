@@ -92,6 +92,22 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
   - Permanent system activation (`nh os switch` or `sudo nixos-rebuild switch`).
 - Keep implementation and release decisions separate.
 
+### Release Gate Protocol ("Ship" Workflow)
+
+Upon completing Phase 2 verification, the agent must present an interactive release gate using `ask_question` (or accept shorthand triggers like `ship`, `ship it`, `merge`, or `release`) so the human does not need to type multi-step instructions.
+
+The interactive prompt should present:
+1. `(Recommended) Ship PR: Commit, push, create PR, address CodeRabbit review, merge, and pull main`
+2. `Test locally with nh os test before release`
+3. `Commit and push to branch only (do not open PR or merge)`
+
+When the **Ship PR** release gate is approved (via `ask_question` or a trigger keyword), the agent autonomously executes the full canonical lifecycle:
+1. **Commit & Push**: Create clean Conventional Commits on the feature branch and push to `origin`.
+2. **Create PR**: Open a PR (`gh pr create`) with a structured Summary, Changes, and Verification.
+3. **Review & CI Watch**: Monitor CI checks and CodeRabbit's review using non-polling timers (`schedule`). Never busy-poll `gh` status in a loop.
+4. **Automated Review Fixes**: If CodeRabbit raises actionable review feedback, make surgical corrections, commit, push, and reply to the review comment.
+5. **Merge & Sync**: Once CI checks and CodeRabbit pass green, merge the PR (`gh pr merge --merge --delete-branch`), switch to `main`, and pull fresh `origin/main`.
+
 ## 9. Safety & Authentication Invariant
 
 - Authentication is strictly human-controlled. Stop immediately and hand off to the human when SSH keys, GPG signing, GitHub login, or token refresh is needed.
