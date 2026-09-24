@@ -90,6 +90,11 @@ extraLib.modules.mkModule args {
       # --- Extra Rules & Keybinds ---
       extraConfig = ''
         env = HYPRCURSOR_SIZE,24
+
+        # Headless virtual output for TV wireless display streaming (Sunshine / Moonlight)
+        exec-once = hyprctl output create headless tv_out
+        monitor = tv_out, 1920x1080@120, auto-right, 1
+
         monitor = ,preferred,auto,1
 
         # --- Window Rules ---

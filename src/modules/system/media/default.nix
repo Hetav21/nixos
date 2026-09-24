@@ -1,7 +1,4 @@
-{
-  extraLib,
-  ...
-}@args:
+{extraLib, ...} @ args:
 extraLib.modules.mkCategoryModule args {
   name = "system.media";
   imports = [
@@ -10,8 +7,11 @@ extraLib.modules.mkCategoryModule args {
     ./graphics.nix
     ./spotify.nix
     ./stremio.nix
+    ./sunshine.nix
   ];
-  hasCli = false;
+  hasCli = true;
+  cliDescription = "Enable media command-line and streaming services";
+  cliChildren = ["sunshine"];
   hasGui = true;
   guiDescription = "Enable all GUI media creation, editing and playback apps";
   guiChildren = [

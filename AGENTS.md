@@ -125,6 +125,7 @@ Load these on demand — only when the task touches their domain:
 - **[docs/operations.md](docs/operations.md)** — security rules and workflows: namespaces, flake inputs, overlays, packages, secrets.
 - **[docs/agent-environment.md](docs/agent-environment.md)** — declarative agent tooling (`~/.claude`, OpenCode, MCP) via `programs.agent-resources` and the nix-skills flake.
 - **[docs/neovim-keybinds.md](docs/neovim-keybinds.md)** — declarative Neovim keybindings and plugin reference.
+- **[docs/wireless-tv-display.md](docs/wireless-tv-display.md)** — Sunshine, Moonlight, and Hyprland wireless TV display setup and streaming profiles.
 
 ## Docs Maintenance
 
