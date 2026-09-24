@@ -62,6 +62,9 @@ output_name = tv_out
 
 ### Step 1: Initialize Admin Credentials (First Time Only)
 
+> [!NOTE]
+> Because Sunshine is configured with `autoStart = false` to conserve resources, ensure the service is running before opening the configuration UI: toggle it on via `Fn + F9` (or `Super + Shift + V` / `toggle-tv-display` as described in [Section 6](#6-hyprland-workflow-for-the-tv-display)) or run `systemctl --user start sunshine`.
+
 1. Open a browser on your laptop and go to:
    **[https://localhost:47990](https://localhost:47990)**
 2. Accept the self-signed HTTPS certificate warning (click **Advanced** -> **Proceed to localhost**).

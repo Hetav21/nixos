@@ -11,13 +11,26 @@ extraLib.modules.mkModule args {
   guiConfig = let
     toggleTvDisplay = pkgs.writeShellScriptBin "toggle-tv-display" ''
       if ${lib.getExe' pkgs.hyprland "hyprctl"} monitors | ${lib.getExe pkgs.gnugrep} -q 'Monitor tv_out'; then
-        ${lib.getExe' pkgs.hyprland "hyprctl"} output remove tv_out
-        ${lib.getExe' pkgs.systemd "systemctl"} --user stop sunshine
-        ${lib.getExe pkgs.libnotify} -u normal -a "Wireless Display" -i video-display "Wireless TV Display Disabled" "Virtual display removed and Sunshine stopped"
+        if ${lib.getExe' pkgs.hyprland "hyprctl"} output remove tv_out; then
+          if ${lib.getExe' pkgs.systemd "systemctl"} --user stop sunshine; then
+            ${lib.getExe pkgs.libnotify} -u normal -a "Wireless Display" -i video-display "Wireless TV Display Disabled" "Virtual display removed and Sunshine stopped"
+          else
+            ${lib.getExe pkgs.libnotify} -u critical -a "Wireless Display" -i video-display "Wireless TV Display Error" "Virtual display removed, but Sunshine could not be stopped"
+          fi
+        else
+          ${lib.getExe pkgs.libnotify} -u critical -a "Wireless Display" -i video-display "Wireless TV Display Error" "Virtual display could not be removed"
+        fi
       else
-        ${lib.getExe' pkgs.hyprland "hyprctl"} output create headless tv_out
-        ${lib.getExe' pkgs.systemd "systemctl"} --user start sunshine
-        ${lib.getExe pkgs.libnotify} -u normal -a "Wireless Display" -i video-display "Wireless TV Display Enabled" "Virtual display (1080p@120Hz) created and Sunshine started"
+        if ${lib.getExe' pkgs.hyprland "hyprctl"} output create headless tv_out; then
+          if ${lib.getExe' pkgs.systemd "systemctl"} --user start sunshine; then
+            ${lib.getExe pkgs.libnotify} -u normal -a "Wireless Display" -i video-display "Wireless TV Display Enabled" "Virtual display (1080p@120Hz) created and Sunshine started"
+          else
+            ${lib.getExe' pkgs.hyprland "hyprctl"} output remove tv_out
+            ${lib.getExe pkgs.libnotify} -u critical -a "Wireless Display" -i video-display "Wireless TV Display Error" "Sunshine could not be started"
+          fi
+        else
+          ${lib.getExe pkgs.libnotify} -u critical -a "Wireless Display" -i video-display "Wireless TV Display Error" "Virtual display could not be created"
+        fi
       fi
     '';
   in {
