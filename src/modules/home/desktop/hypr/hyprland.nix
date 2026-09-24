@@ -93,7 +93,7 @@ extraLib.modules.mkModule args {
 
         # Headless virtual output for TV wireless display streaming (Sunshine / Moonlight)
         exec-once = hyprctl output create headless tv_out
-        monitor = tv_out, 3840x2160@60, auto-right, 1
+        monitor = tv_out, 1920x1080@120, auto-right, 1
 
         monitor = ,preferred,auto,1
 
