@@ -16,8 +16,7 @@ extraLib.modules.mkModule args {
       openFirewall = true;
     };
 
-    # --- User Permissions & High Priority Scheduling ---
+    # --- User Permissions ---
     users.users.${settings.username}.extraGroups = ["uinput"];
-    security.wrappers.sunshine.capabilities = "cap_sys_admin,cap_sys_nice+p";
   };
 }
