@@ -54,6 +54,9 @@
     package32 = pkgs.driversi686Linux.mesa;
   };
 
+  # --- Media & Streaming ---
+  system.media.sunshine.enable = true;
+
   # --- Profiles & State Version ---
   profiles.system.desktop.enable = true;
 }
