@@ -1,5 +1,6 @@
 {
   extraLib,
+  lib,
   pkgs,
   ...
 } @ args:
@@ -7,7 +8,34 @@ extraLib.modules.mkModule args {
   name = "home.desktop.hyprland";
   hasCli = false;
   hasGui = true;
-  guiConfig = {
+  guiConfig = let
+    toggleTvDisplay = pkgs.writeShellScriptBin "toggle-tv-display" ''
+      if ${lib.getExe' pkgs.hyprland "hyprctl"} monitors | ${lib.getExe pkgs.gnugrep} -q 'Monitor tv_out'; then
+        if ${lib.getExe' pkgs.hyprland "hyprctl"} output remove tv_out; then
+          if ${lib.getExe' pkgs.systemd "systemctl"} --user stop sunshine; then
+            ${lib.getExe pkgs.libnotify} -u normal -a "Wireless Display" -i video-display "Wireless TV Display Disabled" "Virtual display removed and Sunshine stopped"
+          else
+            ${lib.getExe pkgs.libnotify} -u critical -a "Wireless Display" -i video-display "Wireless TV Display Error" "Virtual display removed, but Sunshine could not be stopped"
+          fi
+        else
+          ${lib.getExe pkgs.libnotify} -u critical -a "Wireless Display" -i video-display "Wireless TV Display Error" "Virtual display could not be removed"
+        fi
+      else
+        if ${lib.getExe' pkgs.hyprland "hyprctl"} output create headless tv_out; then
+          if ${lib.getExe' pkgs.systemd "systemctl"} --user start sunshine; then
+            ${lib.getExe pkgs.libnotify} -u normal -a "Wireless Display" -i video-display "Wireless TV Display Enabled" "Virtual display (1080p@120Hz) created and Sunshine started"
+          else
+            ${lib.getExe' pkgs.hyprland "hyprctl"} output remove tv_out
+            ${lib.getExe pkgs.libnotify} -u critical -a "Wireless Display" -i video-display "Wireless TV Display Error" "Sunshine could not be started"
+          fi
+        else
+          ${lib.getExe pkgs.libnotify} -u critical -a "Wireless Display" -i video-display "Wireless TV Display Error" "Virtual display could not be created"
+        fi
+      fi
+    '';
+  in {
+    home.packages = [toggleTvDisplay];
+
     wayland.windowManager.hyprland = {
       enable = true;
       configType = "hyprlang";
@@ -92,7 +120,6 @@ extraLib.modules.mkModule args {
         env = HYPRCURSOR_SIZE,24
 
         # Headless virtual output for TV wireless display streaming (Sunshine / Moonlight)
-        exec-once = hyprctl output create headless tv_out
         monitor = tv_out, 1920x1080@120, auto-right, 1
 
         monitor = ,preferred,auto,1
@@ -145,6 +172,8 @@ extraLib.modules.mkModule args {
         submap = reset
 
         # --- Media & Function Keys ---
+        bind = , XF86Display, exec, ${lib.getExe toggleTvDisplay}
+        bind = SUPER_SHIFT, V, exec, ${lib.getExe toggleTvDisplay}
         bind = , XF86MonBrightnessUp, exec, brightnessctl -q s +10%
         bind = , XF86MonBrightnessDown, exec, brightnessctl -q s 10%-
         bind = , XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+

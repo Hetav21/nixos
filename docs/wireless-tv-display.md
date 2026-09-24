@@ -20,19 +20,33 @@ Earlier attempts to stream at 4K/high-refresh assumed NVIDIA CUDA was required f
 ## 2. NixOS Configuration Summary
 
 ### System Module (`src/modules/system/media/sunshine.nix`)
-Enables the Sunshine systemd user daemon, opens necessary TCP/UDP ports in the firewall, adds `cap_sys_admin` execution capabilities, and grants `uinput` permissions for remote mouse/keyboard/gamepad control:
+Enables the Sunshine systemd user daemon (configured with `autoStart = false` so it runs on-demand rather than consuming resources on boot), opens necessary TCP/UDP ports in the firewall, adds `cap_sys_admin` execution capabilities, and grants `uinput` permissions for remote mouse/keyboard/gamepad control:
 
 ```nix
 system.media.sunshine.enable = true;
 ```
 
-### Hyprland Virtual Monitor (`src/modules/home/desktop/hypr/hyprland.nix`)
-Automatically spawns a dedicated virtual output (`tv_out`) on startup positioned to the right of your laptop panel (`eDP-1`):
+### Hyprland Virtual Monitor & On-Demand Toggle (`src/modules/home/desktop/hypr/hyprland.nix`)
+Configures the geometry for `tv_out` without creating phantom screens on boot:
 
 ```ini
-exec-once = hyprctl output create headless tv_out
 monitor = tv_out, 1920x1080@120, auto-right, 1
 ```
+
+Provides an on-demand toggle helper (`toggle-tv-display`) mapped to the laptop display key and keyboard shortcut:
+* **Physical Laptop Key:** `Fn + F9` (`XF86Display`)
+* **Keyboard Shortcut:** `Super + Shift + V`
+* **CLI:** `toggle-tv-display`
+
+When toggled ON:
+* Spawns headless output `tv_out` (Hyprland automatically positions it at `auto-right` at 1080p@120Hz).
+* Starts `sunshine.service` via `systemctl --user start sunshine`.
+* Emits desktop notification.
+
+When toggled OFF:
+* Removes `tv_out` output, shifting active workspaces seamlessly back to `eDP-1`.
+* Stops `sunshine.service` via `systemctl --user stop sunshine`.
+* Emits desktop notification.
 
 ### Sunshine Configuration (`~/.config/sunshine/sunshine.conf`)
 Binds Sunshine to hardware VA-API encoding and targets the virtual display:
@@ -47,6 +61,9 @@ output_name = tv_out
 ## 3. How to Connect to Your TV
 
 ### Step 1: Initialize Admin Credentials (First Time Only)
+
+> [!NOTE]
+> Because Sunshine is configured with `autoStart = false` to conserve resources, ensure the service is running before opening the configuration UI: toggle it on via `Fn + F9` (or `Super + Shift + V` / `toggle-tv-display` as described in [Section 6](#6-hyprland-workflow-for-the-tv-display)) or run `systemctl --user start sunshine`.
 
 1. Open a browser on your laptop and go to:
    **[https://localhost:47990](https://localhost:47990)**
@@ -145,10 +162,17 @@ If you notice stutter or micro-judder, check these TV settings:
 
 ## 6. Hyprland Workflow for the TV Display
 
-Because `tv_out` is configured as `auto-right`:
-
-* **Move mouse:** Move cursor past the right edge of your laptop screen to interact with the TV.
-* **Move windows:** Drag any window to the right onto your TV, or move the active window to the TV workspace using `$mainMod + Shift + <workspace>`.
-* **Dynamic Resolution Toggle:**
-  * For 1080p 120Hz: `hyprctl keyword monitor "tv_out, 1920x1080@120, auto-right, 1"`
-  * For 4K 60Hz: `hyprctl keyword monitor "tv_out, 3840x2160@60, auto-right, 1"`
+1. **Start Streaming Session:**
+   * Press `Fn + F9` (or `Super + Shift + V`, or run `toggle-tv-display` in terminal).
+   * A desktop notification will confirm that `tv_out` (1080p@120Hz) is created and Sunshine has started.
+2. **Connect via TV:**
+   * Launch Moonlight on your TV and select **Desktop**.
+3. **Use Extended Display:**
+   * **Move mouse:** Move cursor past the right edge of your laptop screen to interact with the TV.
+   * **Move windows:** Drag any window to the right onto your TV, or move the active window to the TV workspace using `$mainMod + Shift + <workspace>`.
+   * **Dynamic Resolution Toggle:**
+     * For 1080p 120Hz: `hyprctl keyword monitor "tv_out, 1920x1080@120, auto-right, 1"`
+     * For 4K 60Hz: `hyprctl keyword monitor "tv_out, 3840x2160@60, auto-right, 1"`
+4. **End Streaming Session:**
+   * Press `Fn + F9` (or `Super + Shift + V`).
+   * `tv_out` is immediately removed, workspaces fold cleanly back to your laptop screen, and Sunshine service stops to conserve battery.
