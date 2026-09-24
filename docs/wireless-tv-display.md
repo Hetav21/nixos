@@ -20,7 +20,7 @@ Earlier attempts to stream at 4K/high-refresh assumed NVIDIA CUDA was required f
 ## 2. NixOS Configuration Summary
 
 ### System Module (`src/modules/system/media/sunshine.nix`)
-Enables the Sunshine systemd user daemon, opens necessary TCP/UDP ports in the firewall, adds `cap_sys_admin` and `cap_sys_nice` execution capabilities, and grants `uinput` permissions for remote mouse/keyboard/gamepad control:
+Enables the Sunshine systemd user daemon, opens necessary TCP/UDP ports in the firewall, adds `cap_sys_admin` execution capabilities, and grants `uinput` permissions for remote mouse/keyboard/gamepad control:
 
 ```nix
 system.media.sunshine.enable = true;
