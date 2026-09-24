@@ -11,7 +11,7 @@ extraLib.modules.mkModule args {
     # --- Sunshine Game & Desktop Streaming Service ---
     services.sunshine = {
       enable = true;
-      autoStart = true;
+      autoStart = false;
       capSysAdmin = true;
       openFirewall = true;
     };
