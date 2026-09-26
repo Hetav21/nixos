@@ -17,7 +17,11 @@ extraLib.modules.mkModule args {
     ];
 
     # --- Nix Index & Database ---
-    programs.nix-index.enable = true;
+    programs.nix-index = {
+      enable = true;
+      enableNushellIntegration = false;
+      enableFishIntegration = true;
+    };
     programs.nix-index-database.comma.enable = true;
   };
 }
