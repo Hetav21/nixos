@@ -11,7 +11,7 @@ Declarative Neovim configuration is managed via [Nixvim](https://github.com/nix-
 * **`<leader>`**: `Space`
 * **`<localleader>`**: `\`
 
-Pressing `<leader>` opens the **which-key** popup menu with categorized groups (AI / Sidekick, Buffer, Code, Find, Git, Quit / Session, Search / Replace, UI / Toggle, Diagnostics/Trouble).
+Pressing `<leader>` opens the **which-key** popup menu with categorized groups (AI / Sidekick, Buffer, Code, Database, Find, Git, Quit / Session, Search / Replace, UI / Toggle, Diagnostics/Trouble).
 
 ---
 
@@ -29,6 +29,10 @@ Direct split navigation and screen-wide fast motions.
 | `<C-j>` | Normal | Move focus to lower window split | Built-in (`<C-w>j`) |
 | `<C-k>` | Normal | Move focus to upper window split | Built-in (`<C-w>k`) |
 | `<C-l>` | Normal | Move focus to right window split | Built-in (`<C-w>l`) |
+| `<C-Up>` | Normal | Increase window height (+2 lines) | Built-in (`:resize +2`) |
+| `<C-Down>` | Normal | Decrease window height (-2 lines) | Built-in (`:resize -2`) |
+| `<C-Left>` | Normal | Decrease window width (-2 columns) | Built-in (`:vertical resize -2`) |
+| `<C-Right>` | Normal | Increase window width (+2 columns) | Built-in (`:vertical resize +2`) |
 
 ---
 
@@ -303,3 +307,38 @@ Managed by `sidekick.nvim`.
 | `<leader>aV` | Visual | Send visual selection to active AI CLI & focus terminal | `sidekick.cli` |
 | `<leader>ad` | Normal | Close / detach current AI CLI session | `sidekick.cli` |
 
+---
+
+## 14. Database Management & Queries
+
+Managed by `vim-dadbod`, `vim-dadbod-ui`, and `vim-dadbod-completion` (with `postgresql` / `psql` runtime CLI support).
+
+### Global & Buffer Database Keybindings
+
+| Keybinding | Mode | Action | Plugin / Handler |
+| :--- | :---: | :--- | :--- |
+| `<leader>du` / `<leader>db` | Normal | Toggle Database UI sidebar / drawer | `vim-dadbod-ui` (`:DBUIToggle`) |
+| `<leader>df` | Normal | Find and focus current DBUI buffer in sidebar | `vim-dadbod-ui` (`:DBUIFindBuffer`) |
+| `<leader>dr` | Normal | Rename current query buffer | `vim-dadbod-ui` (`:DBUIRenameBuffer`) |
+| `<leader>dq` | Normal | View last executed query info and timing | `vim-dadbod-ui` (`:DBUILastQueryInfo`) |
+| `<leader>de` | Normal, Visual | Execute DBUI query (attach standalone buffer with `<leader>df`) | `vim-dadbod-ui` (`<Plug>(DBUI_ExecuteQuery)`) |
+
+### DBUI Drawer / Sidebar Controls
+
+Inside the `:DBUI` drawer buffer:
+
+| Keybinding | Action | Description |
+| :--- | :--- | :--- |
+| `o` / `<CR>` | Open / Toggle | Expand database/schema/table tree item, or open table data |
+| `S` | Open Split | Open table data or query in vertical split |
+| `d` | Delete | Delete saved query, buffer, or connection |
+| `R` | Redraw / Refresh | Refresh databases, schemas, and table trees |
+| `A` | Add Connection | Prompt to add a new database connection URL |
+| `H` | Toggle Details | Toggle schema metadata/details visibility |
+| `q` | Close | Close the DBUI drawer |
+
+### Query Buffers & Autocompletion
+
+* **Autocomplete**: Schema-aware completion for tables, columns, and keywords is automatically active for SQL files (`sql`, `mysql`, `plsql`) via `blink-cmp` and `vim-dadbod-completion`.
+* **Execution**: Press `<leader>de` (or select a statement in Visual mode) inside a DBUI query buffer. If editing a standalone SQL file, run `<leader>df` (`:DBUIFindBuffer`) first to attach it to an active connection before executing. Automatic execute-on-save is disabled (`g:db_ui_execute_on_save = 0`) to prevent unintentional query runs on `:w`.
+* **PostgreSQL Connections**: Direct connection URLs format: `postgresql://[user[:password]@][host][:port][/dbname][?param1=value1...]`.

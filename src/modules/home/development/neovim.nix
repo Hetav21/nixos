@@ -100,6 +100,10 @@ extraLib.modules.mkModule args {
         loaded_perl_provider = 0;
         loaded_netrw = 1;
         loaded_netrwPlugin = 1;
+        # vim-dadbod-ui options
+        db_ui_use_nerd_fonts = 1;
+        db_ui_show_database_icon = 1;
+        db_ui_execute_on_save = 0;
       };
 
       # --- Runtime Packages & Tools ---
@@ -119,6 +123,7 @@ extraLib.modules.mkModule args {
         shfmt
         # Tools, Debuggers & Language Servers
         lazygit
+        postgresql
       ];
 
       # --- Clipboard & Runtime Plugins ---
@@ -361,6 +366,38 @@ extraLib.modules.mkModule args {
               ghost_text.enabled = true;
             };
             signature.enabled = false;
+            sources = {
+              default = [
+                "lsp"
+                "path"
+                "snippets"
+                "buffer"
+              ];
+              per_filetype = {
+                sql = [
+                  "snippets"
+                  "dadbod"
+                  "buffer"
+                ];
+                mysql = [
+                  "snippets"
+                  "dadbod"
+                  "buffer"
+                ];
+                plsql = [
+                  "snippets"
+                  "dadbod"
+                  "buffer"
+                ];
+              };
+              providers = {
+                dadbod = {
+                  name = "Dadbod";
+                  module = "vim_dadbod_completion.blink";
+                  score_offset = 100;
+                };
+              };
+            };
           };
         };
 
@@ -497,6 +534,11 @@ extraLib.modules.mkModule args {
                 icon = "󰅩 ";
               }
               {
+                __unkeyed-1 = "<leader>d";
+                group = "Database";
+                icon = "󰆼 ";
+              }
+              {
                 __unkeyed-1 = "<leader>f";
                 group = "Find";
                 icon = "󰈞 ";
@@ -556,6 +598,11 @@ extraLib.modules.mkModule args {
 
         # Markdown rendering
         render-markdown.enable = true;
+
+        # Database management & UI
+        vim-dadbod.enable = true;
+        vim-dadbod-ui.enable = true;
+        vim-dadbod-completion.enable = true;
 
         # Statusline
         lualine = {
@@ -1176,6 +1223,30 @@ extraLib.modules.mkModule args {
           action = "<C-w>l";
           options.desc = "Go to Right Window";
         }
+        {
+          mode = "n";
+          key = "<C-Up>";
+          action = "<cmd>resize +2<cr>";
+          options.desc = "Increase Window Height";
+        }
+        {
+          mode = "n";
+          key = "<C-Down>";
+          action = "<cmd>resize -2<cr>";
+          options.desc = "Decrease Window Height";
+        }
+        {
+          mode = "n";
+          key = "<C-Left>";
+          action = "<cmd>vertical resize -2<cr>";
+          options.desc = "Decrease Window Width";
+        }
+        {
+          mode = "n";
+          key = "<C-Right>";
+          action = "<cmd>vertical resize +2<cr>";
+          options.desc = "Increase Window Width";
+        }
 
         # --- Visual Mode & Text Manipulation ---
         {
@@ -1655,6 +1726,45 @@ extraLib.modules.mkModule args {
           key = "<leader>cP";
           action.__raw = ''function() require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner") end'';
           options.desc = "Swap Previous Parameter";
+        }
+
+        # --- Database Management (vim-dadbod-ui) ---
+        {
+          key = "<leader>du";
+          action = "<cmd>DBUIToggle<cr>";
+          options.desc = "Toggle Database UI";
+        }
+        {
+          key = "<leader>db";
+          action = "<cmd>DBUIToggle<cr>";
+          options.desc = "Toggle Database UI";
+        }
+        {
+          key = "<leader>df";
+          action = "<cmd>DBUIFindBuffer<cr>";
+          options.desc = "Find Database Buffer";
+        }
+        {
+          key = "<leader>dr";
+          action = "<cmd>DBUIRenameBuffer<cr>";
+          options.desc = "Rename Database Buffer";
+        }
+        {
+          key = "<leader>dq";
+          action = "<cmd>DBUILastQueryInfo<cr>";
+          options.desc = "Last Query Info";
+        }
+        {
+          mode = [
+            "n"
+            "v"
+          ];
+          key = "<leader>de";
+          action = "<Plug>(DBUI_ExecuteQuery)";
+          options = {
+            remap = true;
+            desc = "Execute Query (DBUI Buffer)";
+          };
         }
 
         # --- Git & Diffview ---
