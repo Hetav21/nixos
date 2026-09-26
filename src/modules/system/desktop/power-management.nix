@@ -1,4 +1,8 @@
-{extraLib, ...} @ args:
+{
+  extraLib,
+  pkgs,
+  ...
+} @ args:
 extraLib.modules.mkModule args {
   name = "system.desktop.power-management";
   hasGui = false;
@@ -19,10 +23,8 @@ extraLib.modules.mkModule args {
       };
     };
 
-    # --- Powertop & Management ---
-    powerManagement = {
-      enable = true;
-      powertop.enable = true;
-    };
+    # --- Power Management & Diagnostics ---
+    powerManagement.enable = true;
+    environment.systemPackages = [pkgs.powertop];
   };
 }
