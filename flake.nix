@@ -97,7 +97,7 @@
     inherit (self) outputs;
     inherit (nixpkgs) lib;
 
-    extraLib = import ./src/lib {inherit lib inputs outputs;};
+    extraLib = import ./src/lib {inherit self lib inputs outputs;};
 
     # Host settings
     commonSettings = import ./src/config/common.nix;
@@ -105,30 +105,7 @@
     nixwslbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./src/hosts/nixwslbook/settings.nix);
     nixworkbookSettings = extraLib.hosts.mkHostSettings commonSettings (import ./src/hosts/nixworkbook/settings.nix);
 
-    # System builder helper
-    mkSystem = {
-      settings,
-      extraModules ? [],
-    }:
-      lib.nixosSystem {
-        inherit (settings) system;
-        specialArgs = {
-          inherit
-            self
-            inputs
-            outputs
-            extraLib
-            settings
-            ;
-        };
-        modules =
-          [
-            ./src/core/system.nix
-            ./src/hosts/${settings.hostname}/configuration.nix
-          ]
-          ++ extraLib.modules.common
-          ++ extraModules;
-      };
+    inherit (extraLib.hosts) mkSystem;
   in {
     lib = extraLib;
     templates = import ./templates;

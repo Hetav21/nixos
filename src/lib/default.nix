@@ -5,16 +5,28 @@
 #
 # Namespaces:
 #   - extraLib.modules   : Module helpers (mkModule, common, desktop, wsl)
-#   - extraLib.hosts     : Host settings helpers (mkHostSettings)
+#   - extraLib.hosts     : Host & system helpers (mkHostSettings, mkSystem)
 #   - extraLib.dotfiles  : Config file helpers (mkSubstitute, mkProcessFile)
 #   - extraLib.paths     : Path & Resource helpers (root, dotfile, wallpaper, ...)
 {
   lib,
   inputs,
   outputs,
-}: {
-  modules = import ./modules.nix inputs outputs;
-  hosts = import ./hosts.nix {inherit lib;};
-  dotfiles = import ./manage-dotfiles.nix {inherit lib;};
-  paths = import ./paths.nix {inherit lib;};
-}
+  self ? inputs.self,
+}: let
+  extraLib = rec {
+    modules = import ./modules.nix inputs outputs;
+    hosts = import ./hosts.nix {
+      inherit
+        lib
+        self
+        inputs
+        outputs
+        extraLib
+        ;
+    };
+    dotfiles = import ./manage-dotfiles.nix {inherit lib;};
+    paths = import ./paths.nix {inherit lib;};
+  };
+in
+  extraLib
