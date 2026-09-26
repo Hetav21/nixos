@@ -321,7 +321,7 @@ Managed by `vim-dadbod`, `vim-dadbod-ui`, and `vim-dadbod-completion` (with `pos
 | `<leader>df` | Normal | Find and focus current DBUI buffer in sidebar | `vim-dadbod-ui` (`:DBUIFindBuffer`) |
 | `<leader>dr` | Normal | Rename current query buffer | `vim-dadbod-ui` (`:DBUIRenameBuffer`) |
 | `<leader>dq` | Normal | View last executed query info and timing | `vim-dadbod-ui` (`:DBUILastQueryInfo`) |
-| `<leader>de` | Normal, Visual | Execute query (or visual selection) | `vim-dadbod-ui` (`<Plug>(DBUI_ExecuteQuery)`) |
+| `<leader>de` | Normal, Visual | Execute DBUI query (attach standalone buffer with `<leader>df`) | `vim-dadbod-ui` (`<Plug>(DBUI_ExecuteQuery)`) |
 
 ### DBUI Drawer / Sidebar Controls
 
@@ -340,7 +340,5 @@ Inside the `:DBUI` drawer buffer:
 ### Query Buffers & Autocompletion
 
 * **Autocomplete**: Schema-aware completion for tables, columns, and keywords is automatically active for SQL files (`sql`, `mysql`, `plsql`) via `blink-cmp` and `vim-dadbod-completion`.
-* **Execution**: Press `<leader>de` (or select a statement in Visual mode and press `<leader>de`) to execute against the active connection. Automatic execute-on-save is disabled (`g:db_ui_execute_on_save = 0`) to prevent unintentional query runs on `:w`.
+* **Execution**: Press `<leader>de` (or select a statement in Visual mode) inside a DBUI query buffer. If editing a standalone SQL file, run `<leader>df` (`:DBUIFindBuffer`) first to attach it to an active connection before executing. Automatic execute-on-save is disabled (`g:db_ui_execute_on_save = 0`) to prevent unintentional query runs on `:w`.
 * **PostgreSQL Connections**: Direct connection URLs format: `postgresql://[user[:password]@][host][:port][/dbname][?param1=value1...]`.
-
-

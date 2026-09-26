@@ -1763,7 +1763,7 @@ extraLib.modules.mkModule args {
           action = "<Plug>(DBUI_ExecuteQuery)";
           options = {
             remap = true;
-            desc = "Execute Query";
+            desc = "Execute Query (DBUI Buffer)";
           };
         }
 
