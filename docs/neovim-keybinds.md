@@ -29,6 +29,10 @@ Direct split navigation and screen-wide fast motions.
 | `<C-j>` | Normal | Move focus to lower window split | Built-in (`<C-w>j`) |
 | `<C-k>` | Normal | Move focus to upper window split | Built-in (`<C-w>k`) |
 | `<C-l>` | Normal | Move focus to right window split | Built-in (`<C-w>l`) |
+| `<C-Up>` | Normal | Increase window height (+2 lines) | Built-in (`:resize +2`) |
+| `<C-Down>` | Normal | Decrease window height (-2 lines) | Built-in (`:resize -2`) |
+| `<C-Left>` | Normal | Decrease window width (-2 columns) | Built-in (`:vertical resize -2`) |
+| `<C-Right>` | Normal | Increase window width (+2 columns) | Built-in (`:vertical resize +2`) |
 
 ---
 
