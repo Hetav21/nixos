@@ -30,6 +30,7 @@ extraLib.modules.mkModule args {
       pkgs.llm-agents.coderabbit-cli
       pkgs.llm-agents.beads
       pkgs.unstable.agent-browser
+      pkgs.nur.repos.hetav21.px0
     ];
 
     # Enable Claude Code auto mode (Bedrock, Vertex, Foundry Opus 4.7/4.8 sessions)

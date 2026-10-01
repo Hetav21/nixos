@@ -41,6 +41,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hetav21-nur = {
+      url = "github:Hetav21/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     vicinae-extensions = {
       url = "github:vicinaehq/extensions";
       inputs.nixpkgs.follows = "nixpkgs";
