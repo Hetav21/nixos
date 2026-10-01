@@ -403,6 +403,26 @@
         "type": "gitlab"
       }
     },
+    "hetav21-nur": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791180417,
+        "narHash": "sha256-lux+xxat0Q2+MRq/RFpJ5i6LiR8duDoshPvH/sMtgJo=",
+        "owner": "Hetav21",
+        "repo": "NUR",
+        "rev": "03cb6fa3f0e1a7baedfe21b929b44d8a4c84b68e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Hetav21",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -751,6 +771,7 @@
       "inputs": {
         "agent-sources": "agent-sources",
         "helium-flake": "helium-flake",
+        "hetav21-nur": "hetav21-nur",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "llm-agents": "llm-agents",
