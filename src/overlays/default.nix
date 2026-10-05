@@ -24,15 +24,7 @@
   };
 
   # --- NUR (Nix User Repository) Overlay (pkgs.nur.*) ---
-  nur = final: prev: {
-    nur = import inputs.nur {
-      nurpkgs = prev;
-      pkgs = prev;
-      repoOverrides = {
-        hetav21 = import inputs.hetav21-nur { pkgs = prev; };
-      };
-    };
-  };
+  nur = inputs.nur.overlays.default;
 
   # --- LLM Agents Overlay (pkgs.llm-agents.*) ---
   llm-agents = final: _prev: {
