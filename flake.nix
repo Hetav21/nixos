@@ -73,18 +73,21 @@
       "https://cache.nixos-cuda.org" # CUDA & Nvidia acceleration
       "https://vicinae.cachix.org" # Vicinae launcher & extensions
       "https://cache.numtide.com" # Numtide cache
+      "https://hetav21.cachix.org" # Hetav21 NUR packages
     ];
     extra-trusted-substituters = [
       "https://nix-community.cachix.org"
       "https://cache.nixos-cuda.org"
       "https://vicinae.cachix.org"
       "https://cache.numtide.com"
+      "https://hetav21.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" # nix-community
       "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=" # cuda-maintainers
       "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc=" # vicinae
       "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" # numtide
+      "hetav21.cachix.org-1:O5O3aE7/wLp4F0uMLu4vJEr/Rn5UUWu97clxBxFALzc=" # hetav21
     ];
   };
 
