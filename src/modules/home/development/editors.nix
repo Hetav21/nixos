@@ -12,6 +12,7 @@ extraLib.modules.mkModule args {
     # --- Standalone GUI Editors ---
     home.packages = [
       # pkgs.unstable.antigravity-ide # AI-assisted coding environment / IDE
+      pkgs.nur.repos.hetav21.px0
     ];
 
     programs = {
