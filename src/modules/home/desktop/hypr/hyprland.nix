@@ -142,6 +142,7 @@ extraLib.modules.mkModule args {
         $term = ghostty
         $termNew = $term -e
         $code = code
+        $t3code = t3code
         $zeditor = zeditor
         $fileManager = $termNew yazi
         $fileManager2 = thunar
@@ -152,6 +153,7 @@ extraLib.modules.mkModule args {
         bind = $mainMod, G, exec, $browser --new-window https://gemini.google.com/
         bind = SUPER_SHIFT, G, exec, $browser --new-window https://chatgpt.com/
         bind = SUPER_SHIFT, C, exec, $browser --new-window https://claude.ai/
+        bind = $mainMod, C, exec, $t3code
         bind = $mainMod, Z, exec, $zeditor
         bind = $mainMod, X, exec, $code
         bind = $mainMod, T, exec, $term
