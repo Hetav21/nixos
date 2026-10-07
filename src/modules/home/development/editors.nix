@@ -13,6 +13,7 @@ extraLib.modules.mkModule args {
     home.packages = [
       # pkgs.unstable.antigravity-ide # AI-assisted coding environment / IDE
       pkgs.nur.repos.hetav21.px0
+      pkgs.nur.repos.hetav21.t3code
     ];
 
     programs = {
