@@ -142,7 +142,7 @@ extraLib.modules.mkModule args {
         $term = ghostty
         $termNew = $term -e
         $code = code
-        $t3code = t3code
+        $t3code = env SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt t3code-desktop
         $zeditor = zeditor
         $fileManager = $termNew yazi
         $fileManager2 = thunar

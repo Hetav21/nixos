@@ -59,6 +59,7 @@
     agent-sources.url = "path:./src/pkgs/agent-sources";
     nix-skills.url = "github:Hetav21/nix-skills";
     llm-agents.url = "github:numtide/llm-agents.nix";
+    t3code.url = "github:limwa/nix-t3code";
   };
 
   # --- Binary Caches ---
