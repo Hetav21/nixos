@@ -22,7 +22,8 @@
       "model": "openai/gpt-6-luna"
     },
     "title": {
-      "model": "openai/gpt-6-luna"
+      "model": "openai/gpt-6-luna",
+      "variant": "none"
     },
     "explore": {
       "disable": true,
