@@ -32,22 +32,6 @@
         "type": "github"
       }
     },
-    "claude-subagents": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1779878740,
-        "narHash": "sha256-ywObyscvl+/hnZMGJvWnqebS5gHBICMbMl4OabY10ys=",
-        "owner": "VoltAgent",
-        "repo": "awesome-claude-code-subagents",
-        "rev": "2f9cf8b9562dcc235cc2296bda6df82d60e800be",
-        "type": "github"
-      },
-      "original": {
-        "owner": "VoltAgent",
-        "repo": "awesome-claude-code-subagents",
-        "type": "github"
-      }
-    },
     "emilkowalski-skills": {
       "flake": false,
       "locked": {
@@ -84,26 +68,8 @@
       "inputs": {
         "agent-config": "agent-config",
         "anthropic-skills": "anthropic-skills",
-        "claude-subagents": "claude-subagents",
         "emilkowalski-skills": "emilkowalski-skills",
-        "mattpocock-skills": "mattpocock-skills",
-        "superpowers": "superpowers"
-      }
-    },
-    "superpowers": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1777932301,
-        "narHash": "sha256-3E3rO6hR87JUfS3XV1Eaoz6SDWOftleWvN9UPNFEMjw=",
-        "owner": "obra",
-        "repo": "superpowers",
-        "rev": "f2cbfbefebbfef77321e4c9abc9e949826bea9d7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "obra",
-        "repo": "superpowers",
-        "type": "github"
+        "mattpocock-skills": "mattpocock-skills"
       }
     }
   },

@@ -52,5 +52,5 @@ Repository identity, component boundaries, runtime wiring, and security contract
 
 **Source of truth:** [docs/agent-environment.md](agent-environment.md) and [src/modules/home/development/agents.nix](../src/modules/home/development/agents.nix)
 
-- AI agent tooling (OpenCode, Claude Code, Codex, Beads, Antigravity) is configured declaratively in `home.development.agents`.
+- AI agent tooling (OpenCode, Claude Code, Codex, OpenCode 2, Antigravity) is configured declaratively in `home.development.agents`.
 - Declarative agent skills and commands are wired through `programs.agent-resources` using the `nix-skills` flake library.
