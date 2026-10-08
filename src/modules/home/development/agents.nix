@@ -158,9 +158,6 @@ extraLib.modules.mkModule args {
           extraLib.paths.dotfile ".config/opencode/oh-my-opencode-slim.json";
         ".config/opencode/antigravity.json".source = extraLib.paths.dotfile ".config/opencode/antigravity.json";
         ".config/opencode/command".source = extraLib.paths.dotfile ".config/opencode/command";
-        ".claude/settings.json".source = extraLib.paths.dotfile ".claude/settings.json";
-        ".claude/plugins/known_marketplaces.json".source =
-          extraLib.paths.dotfile ".claude/plugins/known_marketplaces.json";
         ".claude/.mcp.json".source = let
           unformatted = builtins.toJSON claudeMcpServers;
         in

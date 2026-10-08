@@ -18,7 +18,7 @@ When `programs.agent-resources` is active, skills and agent resources are synchr
 | `~/.codex/skills/`    | OpenAI Codex (`codex`)        | Skill definitions (`<skill>/SKILL.md`) |
 | `~/.gemini/skills/`   | Antigravity (`gemini`)        | Skill definitions (`<skill>/SKILL.md`) |
 
-Only `~/.claude/settings.json`, `~/.claude/.mcp.json`, and `~/.claude/plugins/known_marketplaces.json` are managed under `~/.claude/` — the rest of that directory is Claude Code's mutable state.
+Only `~/.claude/.mcp.json` is managed under `~/.claude/` — the rest of that directory is Claude Code's mutable state.
 
 ## Adding Resources
 
@@ -66,4 +66,3 @@ Provided by the `nix-skills` flake input:
   - **OpenCode**: `programs.mcp.servers`
   - **OpenAI Codex**: `~/.codex/config.toml`
   - **Antigravity**: `~/.gemini/antigravity/mcp_config.json`, `~/.gemini/antigravity-cli/mcp_config.json`, and `~/.gemini/config/mcp_config.json`
-- **Claude settings**: `~/.claude/settings.json` is symlinked from `assets/dotfiles/.claude/settings.json`.
