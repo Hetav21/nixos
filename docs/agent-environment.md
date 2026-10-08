@@ -18,7 +18,7 @@ When `programs.agent-resources` is active, skills and agent resources are synchr
 | `~/.codex/skills/`    | OpenAI Codex (`codex`)        | Skill definitions (`<skill>/SKILL.md`) |
 | `~/.gemini/skills/`   | Antigravity (`gemini`)        | Skill definitions (`<skill>/SKILL.md`) |
 
-Only `~/.claude/settings.json`, `~/.claude/.mcp.json`, and `~/.claude/plugins/known_marketplaces.json` are managed under `~/.claude/` — the rest of that directory is Claude Code's mutable state.
+Only `~/.claude/.mcp.json` is managed under `~/.claude/` — the rest of that directory is Claude Code's mutable state.
 
 ## Adding Resources
 
@@ -60,6 +60,9 @@ Provided by the `nix-skills` flake input:
 ## Other Managed Pieces (`agents.nix`)
 
 - **Packages**: AI agent CLIs (e.g. `claude-code`, `codex`, `coderabbit-cli`, `antigravity-cli`) come from `pkgs.llm-agents.*` via the `llm-agents` overlay (binary-cached from `cache.numtide.com`).
-- **OpenCode**: `programs.opencode` with model settings substituted from `settings.opencode.*`; oh-my-opencode preset config generated from `assets/dotfiles/.config/opencode/oh-my-opencode-slim.json`.
-- **MCP**: `programs.mcp` shares server definitions from `assets/dotfiles/.config/mcp/mcp.json` across tools.
-- **Claude settings**: `~/.claude/settings.json` is symlinked from `assets/dotfiles/.claude/settings.json`.
+- **OpenCode**: `programs.opencode` with model settings configured in `.config/opencode/opencode.json`; oh-my-opencode preset config generated from `assets/dotfiles/.config/opencode/oh-my-opencode-slim.json`.
+- **MCP**: Standard MCP server definitions in `assets/dotfiles/.config/mcp/mcp.json` (`grep`, `exa`, `context7`, `playwright`, `aws-knowledge-mcp-server`) are declaratively synchronized across all 4 harnesses:
+  - **Claude Code**: `~/.claude/.mcp.json`
+  - **OpenCode**: `programs.mcp.servers`
+  - **OpenAI Codex**: `~/.codex/config.toml`
+  - **Antigravity**: `~/.gemini/antigravity/mcp_config.json`, `~/.gemini/antigravity-cli/mcp_config.json`, and `~/.gemini/config/mcp_config.json`
