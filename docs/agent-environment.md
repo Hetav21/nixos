@@ -18,7 +18,7 @@ When `programs.agent-resources` is active, skills and agent resources are synchr
 | `~/.codex/skills/`    | OpenAI Codex (`codex`)        | Skill definitions (`<skill>/SKILL.md`) |
 | `~/.gemini/skills/`   | Antigravity (`gemini`)        | Skill definitions (`<skill>/SKILL.md`) |
 
-Only `~/.claude/.mcp.json` is managed under `~/.claude/` — the rest of that directory is Claude Code's mutable state.
+Under `~/.claude/` only `skills/` is managed; MCP servers are merged into the user scope of `~/.claude.json` at activation. Everything else there is Claude Code's mutable state.
 
 ## Adding Skills
 
@@ -65,12 +65,14 @@ Provided by the `nix-skills` flake input:
 - **`mkEnvironment pkgs { inputs, agents, skills, commands, hooks, targets }`**: Evaluates sources and builds the `home.file` attribute mapping across target directories (`.agents`, `.claude/skills`, `.codex/skills`, `.gemini/skills`).
 - **`extract pkgs src "path" { includes = [...]; excludes = [...]; }`**: Extracts a subdirectory from a source package, optionally filtering entries.
 - **`flattenSkills pkgs src`**: Recursively finds `SKILL.md` files and flattens directory structures into single-depth folders based on skill folder basenames.
-- **`toClaudeMcpServers`**: Converts the shared MCP server definitions (`assets/dotfiles/.config/mcp/mcp.json`) into Claude Code's `.mcp.json` format. Used in `agents.nix` to generate `~/.claude/.mcp.json`.\n\n## Other Managed Pieces (`agents.nix`)
+- **`programs.agent-mcp`** and **`mcp.*`**: render one canonical `mcp.json` for Claude Code, OpenCode, Codex and Antigravity (see [MCP](#other-managed-pieces-agentsnix) below).
+
+## Other Managed Pieces (`agents.nix`)
 
 - **Packages**: AI agent CLIs (e.g. `claude-code`, `codex`, `coderabbit-cli`, `antigravity-cli`) come from `pkgs.llm-agents.*` via the `llm-agents` overlay (binary-cached from `cache.numtide.com`).
 - **OpenCode**: `programs.opencode` with model settings configured in `.config/opencode/opencode.json`; oh-my-opencode preset config generated from `assets/dotfiles/.config/opencode/oh-my-opencode-slim.json`.
-- **MCP**: Standard MCP server definitions in `assets/dotfiles/.config/mcp/mcp.json` (`grep`, `exa`, `context7`, `playwright`, `aws-knowledge-mcp-server`) are declaratively synchronized across all 4 harnesses:
-  - **Claude Code**: `~/.claude/.mcp.json`
-  - **OpenCode**: `programs.mcp.servers`
-  - **OpenAI Codex**: `~/.codex/config.toml`
-  - **Antigravity**: `~/.gemini/antigravity/mcp_config.json`, `~/.gemini/antigravity-cli/mcp_config.json`, and `~/.gemini/config/mcp_config.json`
+- **MCP**: one canonical `mcp.json` is the only place MCP servers are written; `programs.agent-mcp` (nix-skills) renders it into each agent's own format and location. The format, where each agent's copy lands, and how `${VAR}` references are translated are documented in the [nix-skills `AGENTS.md`](https://github.com/Hetav21/nix-skills/blob/main/AGENTS.md#mcp-servers-programsagent-mcp).
+  - **Global**: `assets/dotfiles/.config/mcp/mcp.json`. `@bunxPath@`/`@uvxPath@` placeholders are substituted with store paths in `agents.nix`, so GUI-launched agents don't depend on `PATH`.
+  - **Per project**: put an `mcp.json` (same format, plain commands) at the project root and run `agent-mcp sync`. It writes `.mcp.json`, `opencode.json` (`mcp` key only), `.codex/config.toml` (`mcp_servers` only) and `.agents/mcp_config.json`.
+  - Gotcha: OpenCode, Codex and Antigravity don't expand `${VAR}`, so servers they can't express are skipped for that agent with an evaluation warning. Antigravity can't send env-based headers at all.
+  - Codex project trust (`programs.codex.settings.projects`) lives in `agents.nix`; Codex only reads a project's `.codex/config.toml` when the project is trusted.

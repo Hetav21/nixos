@@ -2,7 +2,6 @@
   extraLib,
   lib,
   pkgs,
-  inputs,
   config,
   ...
 } @ args:
@@ -10,55 +9,7 @@ extraLib.modules.mkModule args {
   name = "home.development.agents";
   hasCli = true;
   hasGui = false;
-  cliConfig = let
-    substitutedMcpServers =
-      extraLib.dotfiles.mkSubstitute {
-        "@bunxPath@" = lib.getExe' pkgs.bun "bunx";
-        "@uvxPath@" = lib.getExe' pkgs.uv "uvx";
-      }
-      (lib.importJSON (extraLib.paths.dotfile ".config/mcp/mcp.json")).mcpServers;
-
-    claudeMcpServers = {
-      mcpServers = inputs.nix-skills.lib.toClaudeMcpServers substitutedMcpServers;
-    };
-
-    agyMcpConfig = (pkgs.formats.json {}).generate "agy-mcp-config.json" {
-      mcpServers = lib.mapAttrs (name: s:
-        if s ? url then {
-          serverUrl = s.url;
-          disabled = s.disabled or false;
-        } // (lib.optionalAttrs (s ? headers) {
-          headers = lib.mapAttrs (hName: hVal:
-            lib.replaceStrings ["{env:" "}"] ["\${" "}"] hVal
-          ) s.headers;
-        })
-        else {
-          command = s.command;
-          args = s.args;
-          disabled = s.disabled or false;
-        }
-      ) substitutedMcpServers;
-    };
-
-    codexConfig = (pkgs.formats.toml {}).generate "codex-config.toml" {
-      projects = {
-        "/etc/nixos" = { trust_level = "trusted"; };
-        "/home/hetav" = { trust_level = "trusted"; };
-      };
-      mcp_servers = lib.mapAttrs (name: s:
-        if s ? url then {
-          url = s.url;
-        } // (lib.optionalAttrs (s ? headers && s.headers ? CONTEXT7_API_KEY) {
-          bearer_token_env_var = "CONTEXT7_API_KEY";
-        })
-        else {
-          command = s.command;
-          args = s.args;
-          enabled = !(s.disabled or false);
-        }
-      ) substitutedMcpServers;
-    };
-  in {
+  cliConfig = {
     # --- Stylix & Aliases ---
     stylix.targets.opencode.enable = false;
 
@@ -74,7 +25,6 @@ extraLib.modules.mkModule args {
     home.packages = [
       pkgs.llm-agents.antigravity-cli
       pkgs.llm-agents.claude-code
-      pkgs.llm-agents.codex
       pkgs.llm-agents.coderabbit-cli
       pkgs.llm-agents.opencode
       pkgs.llm-agents.opencode2
@@ -92,13 +42,30 @@ extraLib.modules.mkModule args {
       opencode = {
         enable = true;
         package = pkgs.llm-agents.opencode;
-        enableMcpIntegration = true;
         settings = lib.importJSON (extraLib.paths.dotfile ".config/opencode/opencode.json");
       };
 
-      mcp = {
+      # --- Codex ---
+      codex = {
         enable = true;
-        servers = substitutedMcpServers;
+        package = pkgs.llm-agents.codex;
+        settings.projects = {
+          "/etc/nixos".trust_level = "trusted";
+          "/home/hetav".trust_level = "trusted";
+        };
+      };
+
+      # --- Shared MCP Servers ---
+      # One canonical mcp.json rendered for Claude Code, OpenCode, Codex and Antigravity;
+      # projects get the same via `agent-mcp sync`
+      agent-mcp = {
+        enable = true;
+        servers =
+          extraLib.dotfiles.mkSubstitute {
+            "@bunxPath@" = lib.getExe' pkgs.bun "bunx";
+            "@uvxPath@" = lib.getExe' pkgs.uv "uvx";
+          }
+          (lib.importJSON (extraLib.paths.dotfile ".config/mcp/mcp.json")).mcpServers;
       };
 
       # --- Agent Skills ---
@@ -157,27 +124,13 @@ extraLib.modules.mkModule args {
       $DRY_RUN_CMD ln -sf ~/.config/opencode/node_modules/@opencode-ai/plugin ~/.cache/opencode/node_modules/@opencode-ai/plugin
     '';
 
-    # --- Dotfiles & Agent MCP Configuration ---
+    # --- Dotfiles ---
     home.file = lib.mkMerge [
       {
         ".config/opencode/oh-my-opencode-slim.json".source =
           extraLib.paths.dotfile ".config/opencode/oh-my-opencode-slim.json";
         ".config/opencode/antigravity.json".source = extraLib.paths.dotfile ".config/opencode/antigravity.json";
         ".config/opencode/command".source = extraLib.paths.dotfile ".config/opencode/command";
-        ".claude/.mcp.json".source = let
-          unformatted = builtins.toJSON claudeMcpServers;
-        in
-          pkgs.runCommand "pretty-claude-dot-mcp.json" {
-            buildInputs = [pkgs.jq];
-            passAsFile = ["json"];
-            json = unformatted;
-          } "jq . < $jsonPath > $out";
-
-        # Declarative MCP configs for Antigravity & Codex
-        ".gemini/antigravity/mcp_config.json".source = agyMcpConfig;
-        ".gemini/antigravity-cli/mcp_config.json".source = agyMcpConfig;
-        ".gemini/config/mcp_config.json".source = agyMcpConfig;
-        ".codex/config.toml".source = codexConfig;
       }
     ];
   };
