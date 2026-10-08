@@ -56,7 +56,7 @@ Workflow for a new upstream source:
 
 1. Add the repository as an input to the `src/pkgs/agent-sources` sub-flake and update lockfiles in order: first update the sub-flake lockfile (`nix flake lock --update-input <source-name> /etc/nixos/src/pkgs/agent-sources`), then update the root flake lockfile (`nix flake lock --update-input agent-sources /etc/nixos`).
 2. Wrap it as a package under `src/pkgs/<source-name>/` so it's exposed as `pkgs.custom.<source-name>`.
-3. Reference it in `programs.agent-resources` in `agents.nix`, using `extract` to cherry-pick paths.
+3. Reference it in `programs.agent-skills.skills` in `agents.nix` directly as a package or as a filtered source spec (`{ source, includes, excludes }`).
 
 ## nix-skills Library Functions
 
