@@ -23,6 +23,10 @@
       url = "github:mattpocock/skills";
       flake = false;
     };
+    emilkowalski-skills = {
+      url = "github:emilkowalski/skills";
+      flake = false;
+    };
   };
 
   # --- Flake Outputs ---
@@ -34,6 +38,7 @@
       anthropic-skills
       agent-config
       mattpocock-skills
+      emilkowalski-skills
       ;
   };
 }

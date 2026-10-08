@@ -60,9 +60,14 @@ extraLib.modules.mkModule args {
       # --- Agent Resources (Skills & Commands) ---
       agent-resources = {
         enable = true;
+        targets = {
+          agents = true;
+          claude = true;
+          codex = true;
+          gemini = true;
+        };
         commands = [
           pkgs.custom.subagent-catalog
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.superpowers "commands" {})
         ];
         skills = [
           (inputs.nix-skills.lib.extract pkgs pkgs.custom.anthropic-skills "skills" {
@@ -83,27 +88,16 @@ extraLib.modules.mkModule args {
               "reclaude"
             ];
           })
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.superpowers "skills" {})
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.mattpocock-skills "skills/engineering" {
-            includes = [
-              "resolving-merge-conflicts"
-              "wayfinder"
-              "triage"
-              "domain-modeling"
-              "codebase-design"
-              "improve-codebase-architecture"
-              "research"
-              "prototype"
-            ];
-          })
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.emilkowalski-skills "skills" {})
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.mattpocock-skills "skills/engineering" {})
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.mattpocock-skills "skills/productivity" {})
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.mattpocock-skills "skills/misc" {})
+          (inputs.nix-skills.lib.extract pkgs pkgs.custom.mattpocock-skills "skills/personal" {})
         ];
         agents = [
           (inputs.nix-skills.lib.extract pkgs pkgs.custom.agent-config "agents" {})
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.superpowers "agents" {})
         ];
-        hooks = [
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.superpowers "hooks" {})
-        ];
+        hooks = [];
       };
     };
 
@@ -142,14 +136,6 @@ extraLib.modules.mkModule args {
             passAsFile = ["json"];
             json = unformatted;
           } "jq . < $jsonPath > $out";
-        ".gemini/skills".source = pkgs.runCommand "gemini-mattpocock-skills" {} ''
-          mkdir -p $out
-          for dir in ${pkgs.custom.mattpocock-skills}/skills/engineering/* ${pkgs.custom.mattpocock-skills}/skills/productivity/*; do
-            if [ -d "$dir" ] && [ -f "$dir/SKILL.md" ]; then
-              ln -s "$dir" "$out/$(basename "$dir")"
-            fi
-          done
-        '';
       }
     ];
   };
