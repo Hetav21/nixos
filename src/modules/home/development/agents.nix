@@ -100,8 +100,8 @@ extraLib.modules.mkModule args {
         servers = substitutedMcpServers;
       };
 
-      # --- Agent Resources (Skills & Commands) ---
-      agent-resources = {
+      # --- Agent Skills ---
+      agent-skills = {
         enable = true;
         targets = {
           agents = true;
@@ -109,19 +109,21 @@ extraLib.modules.mkModule args {
           codex = true;
           gemini = true;
         };
-        commands = [
-          pkgs.custom.subagent-catalog
-        ];
         skills = [
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.anthropic-skills "skills" {
+          # Anthropic reference skills
+          {
+            source = pkgs.custom.anthropic-skills;
             includes = [
               "docx"
               "pdf"
               "pptx"
               "xlsx"
             ];
-          })
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.agent-config "skills" {
+          }
+
+          # Curated agent tools from personal config
+          {
+            source = pkgs.custom.agent-config;
             includes = [
               "agent-browser"
               "deslop"
@@ -130,17 +132,20 @@ extraLib.modules.mkModule args {
               "find-skills"
               "reclaude"
             ];
-          })
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.emilkowalski-skills "skills" {})
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.mattpocock-skills "skills/engineering" {})
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.mattpocock-skills "skills/productivity" {})
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.mattpocock-skills "skills/misc" {})
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.mattpocock-skills "skills/personal" {})
+          }
+
+          # Emil Kowalski UI & animation skills (auto-discovered & flattened)
+          pkgs.custom.emilkowalski-skills
+
+          # Matt Pocock engineering & productivity skills
+          {
+            source = pkgs.custom.mattpocock-skills;
+            excludes = [
+              "deprecated"
+              "in-progress"
+            ];
+          }
         ];
-        agents = [
-          (inputs.nix-skills.lib.extract pkgs pkgs.custom.agent-config "agents" {})
-        ];
-        hooks = [];
       };
     };
 
