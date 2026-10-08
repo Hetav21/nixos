@@ -44,7 +44,7 @@ extraLib.modules.mkModule args {
         enable = true;
         package = pkgs.llm-agents.opencode;
         enableMcpIntegration = true;
-        settings = lib.importJSON (extraLib.paths.dotfile ".config/opencode/config.json");
+        settings = lib.importJSON (extraLib.paths.dotfile ".config/opencode/opencode.json");
       };
 
       mcp = {
