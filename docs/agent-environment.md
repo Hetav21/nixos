@@ -20,25 +20,35 @@ When `programs.agent-resources` is active, skills and agent resources are synchr
 
 Only `~/.claude/.mcp.json` is managed under `~/.claude/` — the rest of that directory is Claude Code's mutable state.
 
-## Adding Resources
+## Adding Skills
 
-Resources (commands, skills, agents, hooks) are declared via `programs.agent-resources` in `src/modules/home/development/agents.nix`. Each entry is a package (or an extracted subdirectory of one). Shape (illustrative — see `agents.nix` for the current entries):
+Skills are declared declaratively via `programs.agent-skills` in `src/modules/home/development/agents.nix`. Each entry can be a direct package (auto-discovered and flattened) or a filtered spec:
 
 ```nix
-programs.agent-resources = {
+programs.agent-skills = {
   enable = true;
   targets = {
-    agents = true;
-    claude = true;
-    codex = true;
-    gemini = true;
+    agents = true;  # ~/.agents/skills
+    claude = true;  # ~/.claude/skills
+    codex = true;   # ~/.codex/skills
+    gemini = true;  # ~/.gemini/skills & ~/.gemini/antigravity-cli/skills
   };
   skills = [
-    (inputs.nix-skills.lib.extract pkgs pkgs.custom.<source> "<subdir>" {
-      includes = ["<entry>"];
-    })
+    # 1. Direct package: recursively discovers and flattens SKILL.md
+    pkgs.custom.emilkowalski-skills
+
+    # 2. Filtered source with excludes
+    {
+      source = pkgs.custom.mattpocock-skills;
+      excludes = [ "deprecated" "in-progress" ];
+    }
+
+    # 3. Filtered source with cherry-picked includes
+    {
+      source = pkgs.custom.anthropic-skills;
+      includes = [ "docx" "pdf" "pptx" "xlsx" ];
+    }
   ];
-  # same shape for commands, agents, hooks
 };
 ```
 

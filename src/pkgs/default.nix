@@ -7,9 +7,6 @@
   gitignore = pkgs.callPackage ./gitignore {};
 
   # --- Agent & AI Resources ---
-  subagent-catalog = pkgs.callPackage ./subagent-catalog {
-    claude-subagents-src = inputs.agent-sources.claude-subagents or null;
-  };
   superpowers = pkgs.callPackage ./superpowers {
     superpowers-src = inputs.agent-sources.superpowers or null;
   };
