@@ -51,7 +51,7 @@ extraLib.modules.mkModule args {
         package = pkgs.llm-agents.codex;
         settings.projects = {
           "/etc/nixos".trust_level = "trusted";
-          "/home/hetav".trust_level = "trusted";
+          ${config.home.homeDirectory}.trust_level = "trusted";
         };
       };
 
