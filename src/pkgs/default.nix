@@ -19,6 +19,9 @@
   mattpocock-skills = pkgs.callPackage ./mattpocock-skills {
     mattpocock-skills-src = inputs.agent-sources.mattpocock-skills or null;
   };
+  emilkowalski-skills = pkgs.callPackage ./emilkowalski-skills {
+    emilkowalski-skills-src = inputs.agent-sources.emilkowalski-skills or null;
+  };
   agent-config = pkgs.callPackage ./agent-config {
     agent-config-src = inputs.agent-sources.agent-config or null;
   };
