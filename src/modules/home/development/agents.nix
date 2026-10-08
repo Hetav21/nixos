@@ -9,7 +9,42 @@ extraLib.modules.mkModule args {
   name = "home.development.agents";
   hasCli = true;
   hasGui = false;
-  cliConfig = {
+  cliConfig = let
+    # --- Runtime Wrappers ---
+    # Browser automation CLI defaulting to the Nix-packaged browser instead of a downloaded one;
+    # an inherited AGENT_BROWSER_EXECUTABLE_PATH or --executable-path still takes precedence
+    agentBrowser = pkgs.symlinkJoin {
+      inherit (pkgs.unstable.agent-browser) name meta;
+      paths = [pkgs.unstable.agent-browser];
+      nativeBuildInputs = [pkgs.makeWrapper];
+      postBuild = ''
+        wrapProgram $out/bin/agent-browser \
+          --set-default AGENT_BROWSER_EXECUTABLE_PATH ${lib.getExe pkgs.unstable.chromium}
+      '';
+    };
+
+    # Package-neutral launcher for MCP servers with native Node addons:
+    # `mcp-runtime <executable> [arguments...]` with process-local secret-storage and C++ runtime libraries
+    mcpRuntime = pkgs.writeShellApplication {
+      name = "mcp-runtime";
+      runtimeInputs = [
+        pkgs.nodejs
+        pkgs.bun
+      ];
+      text = ''
+        if [ "$#" -eq 0 ]; then
+          echo "usage: mcp-runtime <executable> [arguments...]" >&2
+          exit 64
+        fi
+        export LD_LIBRARY_PATH="${lib.makeLibraryPath [
+          pkgs.libsecret
+          pkgs.glib
+          pkgs.stdenv.cc.cc.lib
+        ]}''${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        exec "$@"
+      '';
+    };
+  in {
     # --- Stylix & Aliases ---
     stylix.targets.opencode.enable = false;
 
@@ -30,13 +65,13 @@ extraLib.modules.mkModule args {
       pkgs.llm-agents.coderabbit-cli
       pkgs.llm-agents.opencode
       pkgs.llm-agents.opencode2
-      pkgs.unstable.agent-browser
+      agentBrowser
+      mcpRuntime
     ];
 
     # Enable Claude Code auto mode (Bedrock, Vertex, Foundry Opus 4.7/4.8 sessions)
     home.sessionVariables = {
       CLAUDE_CODE_ENABLE_AUTO_MODE = "1";
-      AGENT_BROWSER_EXECUTABLE_PATH = lib.getExe pkgs.unstable.chromium;
     };
 
     programs = {

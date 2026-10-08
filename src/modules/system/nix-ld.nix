@@ -1,4 +1,8 @@
-{extraLib, ...} @ args:
+{
+  extraLib,
+  pkgs,
+  ...
+} @ args:
 extraLib.modules.mkModule args {
   name = "system.nix.ld";
   hasGui = false;
@@ -6,6 +10,32 @@ extraLib.modules.mkModule args {
     # --- Nix-LD Dynamic Linker Support ---
     programs.nix-ld = {
       enable = true;
+
+      # Merged with the NixOS base set (C++ runtime, udev, compression, TLS, ...)
+      libraries = with pkgs; [
+        # Secret storage for native credential addons
+        libsecret
+
+        # Downloaded headless browser runtime
+        glib
+        nspr
+        nss
+        at-spi2-core
+        dbus
+        expat
+        alsa-lib
+        libgbm
+        libxkbcommon
+
+        # X11 client libraries required by headless browsers
+        libx11
+        libxcb
+        libxcomposite
+        libxdamage
+        libxext
+        libxfixes
+        libxrandr
+      ];
 
       # Find missing libraries from binary error messages using:
       #   nix run github:nix-community/nix-index-database <missinglib.so>
