@@ -2,6 +2,7 @@
   extraLib,
   lib,
   pkgs,
+  inputs,
   ...
 } @ args:
 extraLib.modules.mkModule args {
@@ -13,8 +14,12 @@ extraLib.modules.mkModule args {
     home.packages = [
       # pkgs.unstable.antigravity-ide # AI-assisted coding environment / IDE
       pkgs.nur.repos.hetav21.px0
-      pkgs.nur.repos.hetav21.t3code
+      inputs.t3code.packages.${pkgs.stdenv.hostPlatform.system}.t3code-nightly
     ];
+
+    home.shellAliases = {
+      t3code = "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt t3code-desktop";
+    };
 
     programs = {
       # --- VS Code ---
