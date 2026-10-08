@@ -21,6 +21,7 @@
         "agent-config": "agent-config",
         "anthropic-skills": "anthropic-skills",
         "claude-subagents": "claude-subagents",
+        "emilkowalski-skills": "emilkowalski-skills",
         "mattpocock-skills": "mattpocock-skills",
         "superpowers": "superpowers"
       },
@@ -180,6 +181,22 @@
       "original": {
         "owner": "ipetkov",
         "repo": "crane",
+        "type": "github"
+      }
+    },
+    "emilkowalski-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790937811,
+        "narHash": "sha256-FG1zm/Vr00QAvpSA6uuVbPJrOjFj2W+F1SAChlJOGMk=",
+        "owner": "emilkowalski",
+        "repo": "skills",
+        "rev": "e8a175de22ae1e49370fc144c1f3bb9aeedf988d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "emilkowalski",
+        "repo": "skills",
         "type": "github"
       }
     },
@@ -538,14 +555,16 @@
     },
     "nix-skills": {
       "inputs": {
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
-        "lastModified": 1784361361,
-        "narHash": "sha256-8pMc6H7q2s2wDWd1PVZvdvvLKc6zqd8kRA3yLhq/f+4=",
+        "lastModified": 1791481586,
+        "narHash": "sha256-SWvnL4ZHtGWqaYO9Ozfa5uGRa9RartAdFWZlxm8u+yw=",
         "owner": "Hetav21",
         "repo": "nix-skills",
-        "rev": "41c6af63a69ceac01b72fd867dbbdb15e68d9156",
+        "rev": "6238219e24e7f5bec69a4de15b4ad16e0fc165b8",
         "type": "github"
       },
       "original": {
@@ -641,22 +660,6 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1788316716,
-        "narHash": "sha256-bc7rSpXIdn9QWGNqfWcPZWOhEVF8NoeAZkWq0XWnf/k=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "3ed67ec0a4d3c7ab4ae1f04f8ee8df07bfa506a2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
         "lastModified": 1788297115,
         "narHash": "sha256-Z+vUNbfd2FIKkWOTkcT7RYlh3oFCnig/d2eXD1SWf2E=",
         "owner": "nixos",
@@ -671,7 +674,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1791260994,
         "narHash": "sha256-Miqqk/ammqnTUxaoCyvtwoPeLbI1ksFyLxi/CazZpWY=",
@@ -789,7 +792,7 @@
         "nix-index-database": "nix-index-database",
         "nix-skills": "nix-skills",
         "nixos-wsl": "nixos-wsl",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_2",
         "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
@@ -970,7 +973,7 @@
     "t3code": {
       "inputs": {
         "flake-compat": "flake-compat_3",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_3",
         "systems": "systems_4",
         "utils": "utils"
       },
