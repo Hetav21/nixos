@@ -1,17 +1,15 @@
 {
   "mcpServers": {
     "grep": {
-      "type": "remote",
       "url": "https://mcp.grep.app"
     },
     "exa": {
-      "type": "remote",
       "url": "https://mcp.exa.ai/mcp"
     },
     "context7": {
       "url": "https://mcp.context7.com/mcp",
       "headers": {
-        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
+        "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
       }
     },
     "playwright": {
@@ -23,7 +21,6 @@
       "disabled": true
     },
     "aws-knowledge-mcp-server": {
-      "type": "remote",
       "url": "https://knowledge-mcp.global.api.aws"
     }
   }
