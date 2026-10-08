@@ -3,14 +3,6 @@
 
   # --- Source Inputs ---
   inputs = {
-    claude-subagents = {
-      url = "github:VoltAgent/awesome-claude-code-subagents";
-      flake = false;
-    };
-    superpowers = {
-      url = "github:obra/superpowers";
-      flake = false;
-    };
     anthropic-skills = {
       url = "github:anthropics/skills";
       flake = false;
@@ -33,8 +25,6 @@
   outputs = {self, ...} @ inputs: {
     inherit
       (inputs)
-      claude-subagents
-      superpowers
       anthropic-skills
       agent-config
       mattpocock-skills

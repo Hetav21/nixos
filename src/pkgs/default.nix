@@ -7,9 +7,6 @@
   gitignore = pkgs.callPackage ./gitignore {};
 
   # --- Agent & AI Resources ---
-  superpowers = pkgs.callPackage ./superpowers {
-    superpowers-src = inputs.agent-sources.superpowers or null;
-  };
   anthropic-skills = pkgs.callPackage ./anthropic-skills {
     anthropic-skills-src = inputs.agent-sources.anthropic-skills or null;
   };
