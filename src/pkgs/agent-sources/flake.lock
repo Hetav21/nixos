@@ -48,6 +48,22 @@
         "type": "github"
       }
     },
+    "emilkowalski-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790937811,
+        "narHash": "sha256-FG1zm/Vr00QAvpSA6uuVbPJrOjFj2W+F1SAChlJOGMk=",
+        "owner": "emilkowalski",
+        "repo": "skills",
+        "rev": "e8a175de22ae1e49370fc144c1f3bb9aeedf988d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "emilkowalski",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
     "mattpocock-skills": {
       "flake": false,
       "locked": {
@@ -69,6 +85,7 @@
         "agent-config": "agent-config",
         "anthropic-skills": "anthropic-skills",
         "claude-subagents": "claude-subagents",
+        "emilkowalski-skills": "emilkowalski-skills",
         "mattpocock-skills": "mattpocock-skills",
         "superpowers": "superpowers"
       }
