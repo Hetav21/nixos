@@ -560,11 +560,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791481586,
-        "narHash": "sha256-SWvnL4ZHtGWqaYO9Ozfa5uGRa9RartAdFWZlxm8u+yw=",
+        "lastModified": 1791485537,
+        "narHash": "sha256-mEHpsNP9uaZTFzMcLrLcbPemgKMAL8+mFwWNiUwIijM=",
         "owner": "Hetav21",
         "repo": "nix-skills",
-        "rev": "6238219e24e7f5bec69a4de15b4ad16e0fc165b8",
+        "rev": "46161232f2f9ab599e2dd9275e1da32a8f6049d3",
         "type": "github"
       },
       "original": {
