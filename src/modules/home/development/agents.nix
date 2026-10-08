@@ -63,9 +63,9 @@ extraLib.modules.mkModule args {
     stylix.targets.opencode.enable = false;
 
     home.shellAliases = {
-      oc = "${lib.getExe config.programs.opencode.package}";
+      oc = "${lib.getExe pkgs.llm-agents.opencode}";
       oc2 = "${lib.getExe pkgs.llm-agents.opencode2}";
-      ag = "${lib.getExe config.programs.antigravity.package}";
+      ag = "${lib.getExe pkgs.llm-agents.antigravity-cli}";
       cc = "${lib.getExe pkgs.llm-agents.claude-code}";
       cdx = "${lib.getExe pkgs.llm-agents.codex}";
     };
@@ -76,7 +76,8 @@ extraLib.modules.mkModule args {
       pkgs.llm-agents.claude-code
       pkgs.llm-agents.codex
       pkgs.llm-agents.coderabbit-cli
-      pkgs.llm-agents.beads
+      pkgs.llm-agents.opencode
+      pkgs.llm-agents.opencode2
       pkgs.unstable.agent-browser
     ];
 
@@ -112,7 +113,7 @@ extraLib.modules.mkModule args {
         skills = [
           # Anthropic reference skills
           {
-            source = pkgs.custom.anthropic-skills;
+            source = pkgs.custom.agent-sources.anthropic-skills;
             includes = [
               "docx"
               "pdf"
@@ -123,7 +124,7 @@ extraLib.modules.mkModule args {
 
           # Curated agent tools from personal config
           {
-            source = pkgs.custom.agent-config;
+            source = pkgs.custom.agent-sources.agent-config;
             includes = [
               "agent-browser"
               "deslop"
@@ -135,11 +136,11 @@ extraLib.modules.mkModule args {
           }
 
           # Emil Kowalski UI & animation skills (auto-discovered & flattened)
-          pkgs.custom.emilkowalski-skills
+          pkgs.custom.agent-sources.emilkowalski-skills
 
           # Matt Pocock engineering & productivity skills
           {
-            source = pkgs.custom.mattpocock-skills;
+            source = pkgs.custom.agent-sources.mattpocock-skills;
             excludes = [
               "deprecated"
               "in-progress"
