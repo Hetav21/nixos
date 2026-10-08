@@ -5,21 +5,8 @@
 }: {
   # --- Standalone Tools ---
   gitignore = pkgs.callPackage ./gitignore {};
+  antigravity-wsl-shim = pkgs.callPackage ./antigravity-wsl-shim {};
 
   # --- Agent & AI Resources ---
-  anthropic-skills = pkgs.callPackage ./anthropic-skills {
-    anthropic-skills-src = inputs.agent-sources.anthropic-skills or null;
-  };
-  mattpocock-skills = pkgs.callPackage ./mattpocock-skills {
-    mattpocock-skills-src = inputs.agent-sources.mattpocock-skills or null;
-  };
-  emilkowalski-skills = pkgs.callPackage ./emilkowalski-skills {
-    emilkowalski-skills-src = inputs.agent-sources.emilkowalski-skills or null;
-  };
-  agent-config = pkgs.callPackage ./agent-config {
-    agent-config-src = inputs.agent-sources.agent-config or null;
-  };
-
-  # --- System & Editor Integrations ---
-  antigravity-wsl-shim = pkgs.callPackage ./antigravity-wsl-shim {};
+  agent-sources = pkgs.callPackage ./agent-sources {inherit inputs;};
 }
