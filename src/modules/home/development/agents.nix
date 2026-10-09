@@ -51,10 +51,6 @@ extraLib.modules.mkModule args {
       codex = {
         enable = true;
         package = pkgs.llm-agents.codex;
-        settings.projects = {
-          "/etc/nixos".trust_level = "trusted";
-          ${config.home.homeDirectory}.trust_level = "trusted";
-        };
       };
 
       # --- Shared MCP Servers ---
@@ -62,6 +58,12 @@ extraLib.modules.mkModule args {
       # projects get the same via `agent-mcp sync`
       agent-mcp = {
         enable = true;
+        targets = {
+          claude = true;
+          opencode = true;
+          codex = true;
+          antigravity = true;
+        };
         servers = extraLib.dotfiles.mkSubstitute {"@bunxPath@" = lib.getExe' pkgs.bun "bunx";} mcpServers;
       };
 
