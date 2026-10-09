@@ -31,14 +31,11 @@ extraLib.modules.mkModule args {
     '';
 
     # --- CLI Packages ---
-    home.packages =
-      (with pkgs; [
-        # distrobox # Container wrapper to run any Linux distro in terminal
-      ])
-      ++ (with pkgs.unstable; [
-        lazygit
-        lazydocker
-      ]);
+    home.packages = with pkgs; [
+      # distrobox # Container wrapper to run any Linux distro in terminal
+      lazygit
+      lazydocker
+    ];
   };
 
   guiConfig = {

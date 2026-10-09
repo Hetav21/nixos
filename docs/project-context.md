@@ -28,7 +28,7 @@ Repository identity, component boundaries, runtime wiring, and security contract
 
 **Source of truth:** [flake.nix](../flake.nix) and [flake.lock](../flake.lock)
 
-- Core distribution: `nixpkgs`, `nixpkgs-unstable`, `nixpkgs-master`.
+- Core distribution: `nixpkgs` (nixos-26.05).
 - System & Environment: `home-manager`, `stylix`, `sops-nix`, `nixos-wsl`, `lanzaboote`, `nix-flatpak`.
 - Agent & Tooling: `inputs.llm-agents` (binary cached agent CLIs), `inputs.nix-skills` (declarative skills & resources), `vicinae-extensions`, `nixvim`.
 

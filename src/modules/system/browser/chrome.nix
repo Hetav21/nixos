@@ -10,7 +10,7 @@ extraLib.modules.mkModule args {
   guiConfig = {
     # --- Google Chrome ---
     environment.systemPackages = [
-      pkgs.unstable.google-chrome
+      pkgs.google-chrome
     ];
   };
 }

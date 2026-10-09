@@ -29,7 +29,7 @@ extraLib.modules.mkModule args {
       package = pkgs.dunst;
 
       iconTheme = {
-        package = pkgs.unstable.tela-circle-icon-theme;
+        package = pkgs.tela-circle-icon-theme;
         name = "Tela-circle-dark";
         size = "16";
       };

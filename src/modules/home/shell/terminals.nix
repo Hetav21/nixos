@@ -12,7 +12,7 @@ extraLib.modules.mkModule args {
     programs = {
       ghostty = {
         enable = true;
-        package = pkgs.unstable.ghostty;
+        package = pkgs.ghostty;
       };
     };
   };

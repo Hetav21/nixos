@@ -13,12 +13,12 @@ extraLib.modules.mkModule args {
       pkgs.pulseaudio
       pkgs.brightnessctl
       pkgs.nvtopPackages.full
-      pkgs.unstable.lact
+      pkgs.lact
     ];
 
     # --- Systemd Services ---
     systemd = {
-      packages = [pkgs.unstable.lact];
+      packages = [pkgs.lact];
       services.lactd.wantedBy = ["multi-user.target"];
     };
 

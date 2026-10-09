@@ -18,8 +18,8 @@ extraLib.modules.mkModule args {
       gpush = "git push origin";
       gpull = "git pull origin";
       grestore = "git restore";
-      lzg = "${lib.getExe pkgs.unstable.lazygit}";
-      lzjj = "${lib.getExe pkgs.unstable.lazyjj}";
+      lzg = "${lib.getExe pkgs.lazygit}";
+      lzjj = "${lib.getExe pkgs.lazyjj}";
     };
 
     programs = {
@@ -66,7 +66,7 @@ extraLib.modules.mkModule args {
       # --- Git & LFS ---
       git = {
         enable = true;
-        package = pkgs.unstable.gitFull;
+        package = pkgs.gitFull;
         settings = {
           user = {
             name = settings.git.personal.name;
@@ -74,7 +74,7 @@ extraLib.modules.mkModule args {
           };
         };
         lfs.enable = true;
-        lfs.package = pkgs.unstable.git-lfs;
+        lfs.package = pkgs.git-lfs;
         includes =
           [
             # Base config (always included)
@@ -103,7 +103,7 @@ extraLib.modules.mkModule args {
       # --- Jujutsu VCS ---
       jujutsu = {
         enable = true;
-        package = pkgs.unstable.jujutsu;
+        package = pkgs.jujutsu;
         settings = {
           user = {
             name = settings.git.personal.name;
@@ -117,7 +117,7 @@ extraLib.modules.mkModule args {
         enable = true;
         enableGitIntegration = true;
         enableJujutsuIntegration = true;
-        package = pkgs.unstable.delta;
+        package = pkgs.delta;
         options = {
           navigate = true;
           light = false;

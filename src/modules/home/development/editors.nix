@@ -12,7 +12,7 @@ extraLib.modules.mkModule args {
   guiConfig = {
     # --- Standalone GUI Editors ---
     home.packages = [
-      # pkgs.unstable.antigravity-ide # AI-assisted coding environment / IDE
+      # pkgs.antigravity-ide # AI-assisted coding environment / IDE
       pkgs.nur.repos.hetav21.px0
       inputs.t3code.packages.${pkgs.stdenv.hostPlatform.system}.t3code-nightly
     ];
@@ -25,13 +25,13 @@ extraLib.modules.mkModule args {
       # --- VS Code ---
       vscode = {
         enable = true;
-        package = pkgs.unstable.vscode;
+        package = pkgs.vscode;
       };
 
       # --- Zed Editor ---
       zed-editor = {
         enable = true;
-        package = pkgs.unstable.zed-editor;
+        package = pkgs.zed-editor;
         installRemoteServer = true;
         extraPackages = [pkgs.alejandra];
         extensions = [
