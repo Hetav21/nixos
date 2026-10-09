@@ -48,6 +48,12 @@
   system.stateVersion = lib.mkForce "24.11";
   services.flatpak.packages = lib.mkForce [];
 
+  # --- Storage & Maintenance ---
+  services.fstrim.enable = true;
+  systemd.tmpfiles.rules = [
+    "e /tmp - - - 10d"
+  ];
+
   # --- Headless DBus & User Services ---
   users.users.${settings.username} = {
     linger = true;
