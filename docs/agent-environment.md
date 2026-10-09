@@ -75,4 +75,3 @@ Provided by the `nix-skills` flake input:
   - **Global**: `assets/dotfiles/.config/mcp/mcp.json`. The `@bunxPath@` placeholder is substituted with a store path in `agents.nix`, so GUI-launched agents don't depend on `PATH`.
   - **Per project**: put an `mcp.json` (same format, plain commands) at the project root and run `agent-mcp sync`. It writes `.mcp.json`, `opencode.json` (`mcp` key only), `.codex/config.toml` (`mcp_servers` only) and `.agents/mcp_config.json`.
   - Gotcha: only OpenCode understands `{env:VAR}`; Claude Code gets `${VAR}` and Codex its env-forwarding keys, and a server an agent can't express is skipped for that agent with an evaluation warning. Antigravity can't send env-based headers at all.
-  - Codex project trust (`programs.codex.settings.projects`) lives in `agents.nix`; Codex only reads a project's `.codex/config.toml` when the project is trusted.
