@@ -22,9 +22,11 @@ extraLib.modules.mkModule args {
     };
 
     # --- Packages & Environment ---
+    # Codex and Antigravity stay plain packages: their Home Manager modules would make
+    # ~/.codex/config.toml and ~/.gemini/config/mcp_config.json read-only, so agent-mcp merges into them instead
     home.packages = [
       pkgs.llm-agents.antigravity-cli
-      pkgs.llm-agents.claude-code
+      pkgs.llm-agents.codex
       pkgs.llm-agents.coderabbit-cli
       pkgs.llm-agents.opencode
       pkgs.llm-agents.opencode2
@@ -45,10 +47,10 @@ extraLib.modules.mkModule args {
         settings = lib.importJSON (extraLib.paths.dotfile ".config/opencode/opencode.json");
       };
 
-      # --- Codex ---
-      codex = {
+      # --- Claude Code ---
+      claude-code = {
         enable = true;
-        package = pkgs.llm-agents.codex;
+        package = pkgs.llm-agents.claude-code;
       };
 
       # --- Shared MCP Servers ---
