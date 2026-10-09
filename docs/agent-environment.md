@@ -78,16 +78,10 @@ Provided by the `nix-skills` flake input:
 
 ## Native Runtime Support
 
-Agent tools that run prebuilt native code get their libraries from Nix centrally — never from a global `LD_LIBRARY_PATH`, per-project dev shells, or patched downloads.
+Prebuilt native code gets its libraries from Nix centrally — never from a global `LD_LIBRARY_PATH`, per-project dev shells, or patched downloads.
 
-**Source of truth:** `src/modules/home/development/agents.nix` (runtime wrappers) and `src/modules/system/nix-ld.nix` (compatibility libraries for downloaded binaries). Read them for the current library lists.
+**Source of truth:** `src/modules/home/development/agents.nix` (agent packages) and `src/modules/system/nix-ld.nix` (compatibility libraries for downloaded binaries).
 
-- **Browser automation CLI**: the installed `agent-browser` is wrapped to default `AGENT_BROWSER_EXECUTABLE_PATH` to the Nix-packaged browser, so it never falls back to a downloaded Chrome. Precedence: `--executable-path` > an inherited `AGENT_BROWSER_EXECUTABLE_PATH` > the wrapper default. Environment outranks config files, so an `executablePath` in `agent-browser.json` is shadowed by the wrapper default.
-- **`mcp-runtime <executable> [arguments...]`**: package-neutral launcher for MCP servers that load native Node addons. It prepends a process-local `LD_LIBRARY_PATH` (secret storage, GLib, C++ runtime), puts packaged Node and Bun first on `PATH` while keeping the rest (e.g. cloud CLIs used for auth), then `exec`s the command unchanged. It holds no server names, credentials, or auth logic.
-  - Servers needing it are registered by the project that uses them, not in the shared `mcp.json`. The project needs no library paths or dev-shell workarounds of its own:
-
-    ```json
-    { "command": "mcp-runtime", "args": ["bunx", "-y", "<package>", "<args>"] }
-    ```
-
-- **Downloaded browsers** (e.g. an app's bundled headless shell): run through nix-ld, whose library set is the NixOS base set plus the browser families in `nix-ld.nix`. Gotcha: `ldd` ignores nix-ld and only sees `LD_LIBRARY_PATH`, so check with `LD_LIBRARY_PATH=/run/current-system/sw/share/nix-ld/lib ldd <binary>`, then confirm by actually launching the binary.
+- **Browser automation CLI**: `agent-browser` comes from `pkgs.llm-agents`, whose package wraps it to launch its own Nix-built Chromium, so it never downloads Chrome. The wrapper forces `AGENT_BROWSER_EXECUTABLE_PATH`, so only `--executable-path` overrides it; an inherited environment value or a config-file `executablePath` is ignored.
+- **T3 Code preview browser**: T3 always runs its own pinned download from `~/.t3/tools/chrome-headless-shell/` and has no option to use a Nix-built browser, so it runs through nix-ld. The library set is the NixOS base set plus T3's required list in `nix-ld.nix`. Gotcha: `ldd` ignores nix-ld and only sees `LD_LIBRARY_PATH`, so check with `LD_LIBRARY_PATH=/run/current-system/sw/share/nix-ld/lib ldd <binary>`, then confirm by actually launching the binary.
+- **Native Node addons in MCP servers**: Nix-built Node and Bun don't use nix-ld, so an npm addon that needs a library outside its own `RUNPATH` fails with `ERR_DLOPEN_FAILED`. Fix it in the project that registers the server (e.g. pin a version without the addon) rather than adding library paths here.

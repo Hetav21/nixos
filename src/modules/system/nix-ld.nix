@@ -13,21 +13,21 @@ extraLib.modules.mkModule args {
 
       # Merged with the NixOS base set (C++ runtime, udev, compression, TLS, ...)
       libraries = with pkgs; [
-        # Secret storage for native credential addons
-        libsecret
-
-        # Downloaded headless browser runtime
+        # T3 Code preview browser: T3 runs its own downloaded headless Chrome
+        # (~/.t3/tools/chrome-headless-shell/) and has no option to use a Nix-built one.
+        # Mirrors DEBIAN_PACKAGES in T3's apps/server/src/preview/PreviewBrowserHost.ts;
+        # re-check it when T3 bumps its Chrome version
         glib
         nspr
         nss
-        at-spi2-core
+        at-spi2-core # ATK, ATK bridge and AT-SPI
         dbus
         expat
         alsa-lib
         libgbm
         libxkbcommon
 
-        # X11 client libraries required by headless browsers
+        # X11 client libraries the T3 browser links even when headless
         libx11
         libxcb
         libxcomposite
