@@ -27,6 +27,14 @@
     "aws-knowledge-mcp-server": {
       "type": "remote",
       "url": "https://knowledge-mcp.global.api.aws"
+    },
+    "excalidraw": {
+      "type": "local",
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-excalidraw-server"
+      ]
     }
   }
 }
