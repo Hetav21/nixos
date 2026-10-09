@@ -7,54 +7,21 @@
     inherit (final) config;
   };
 in {
-  # --- GUI & Desktop Applications ---
-  inherit
-    (unstable)
-    brave
-    discord
-    ghostty
-    google-chrome
-    tela-circle-icon-theme
-    vesktop
-    vscode
-    zed-editor
-    ;
-
-  # --- Development & VCS Tools ---
-  inherit
-    (unstable)
-    delta
-    gitFull
-    git-lfs
-    jujutsu
-    lazydocker
-    lazygit
-    lazyjj
-    ;
-
-  # --- Shell & Terminal Utilities ---
+  # --- User-selected Unstable Overrides ---
   inherit
     (unstable)
     atuin
     bat
+    brave
     carapace
     direnv
-    eza
-    fd
-    fzf
-    mise
+    google-chrome
+    lact
     nix-direnv
     nix-your-shell
-    ripgrep
-    starship
+    vscode
     yazi
+    zed-editor
     zoxide
-    ;
-
-  # --- System & Hardware Tools ---
-  inherit
-    (unstable)
-    lact
-    nh
     ;
 }
