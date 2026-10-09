@@ -75,3 +75,13 @@ Provided by the `nix-skills` flake input:
   - **Global**: `assets/dotfiles/.config/mcp/mcp.json`, passed as `programs.agent-mcp.file`. nix-skills runs `npx`/`bunx`/`uvx` commands from the Nix store, so GUI-launched agents don't depend on `PATH`.
   - **Per project**: put an `mcp.json` (same format) at the project root and run `agent-mcp sync`. It writes `.mcp.json`, `opencode.json` (`mcp` key only), `.codex/config.toml` (`mcp_servers` only) and `.agents/mcp_config.json`.
   - Gotcha: only OpenCode understands `{env:VAR}`; Claude Code gets `${VAR}` and Codex its env-forwarding keys, and a server an agent can't express is skipped for that agent with an evaluation warning. Antigravity can't send env-based headers at all.
+
+## Native Runtime Support
+
+Prebuilt native code gets its libraries from Nix centrally — never from a global `LD_LIBRARY_PATH`, per-project dev shells, or patched downloads.
+
+**Source of truth:** `src/modules/home/development/agents.nix` (agent packages) and `src/modules/system/nix-ld.nix` (compatibility libraries for downloaded binaries).
+
+- **Browser automation CLI**: `agent-browser` comes from `pkgs.llm-agents`, whose package wraps it to launch its own Nix-built Chromium, so it never downloads Chrome. The wrapper forces `AGENT_BROWSER_EXECUTABLE_PATH`, so only `--executable-path` overrides it; an inherited environment value or a config-file `executablePath` is ignored.
+- **T3 Code preview browser**: T3 always runs its own pinned download from `~/.t3/tools/chrome-headless-shell/` and has no option to use a Nix-built browser, so it runs through nix-ld. The library set is the NixOS base set plus T3's required list in `nix-ld.nix`. Gotcha: `ldd` ignores nix-ld and only sees `LD_LIBRARY_PATH`, so check with `LD_LIBRARY_PATH=/run/current-system/sw/share/nix-ld/lib ldd <binary>`, then confirm by actually launching the binary.
+- **Native Node addons in MCP servers**: Nix-built Node and Bun don't use nix-ld, so an npm addon that needs a library outside its own `RUNPATH` fails with `ERR_DLOPEN_FAILED`. Fix it in the project that registers the server (e.g. pin a version without the addon) rather than adding library paths here.

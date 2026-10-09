@@ -25,18 +25,18 @@ extraLib.modules.mkModule args {
     # Codex and Antigravity stay plain packages: their Home Manager modules would make
     # ~/.codex/config.toml and ~/.gemini/config/mcp_config.json read-only, so agent-mcp merges into them instead
     home.packages = [
+      # Wrapped to launch a Nix-built browser, so it never falls back to a downloaded one
+      pkgs.llm-agents.agent-browser
       pkgs.llm-agents.antigravity-cli
       pkgs.llm-agents.codex
       pkgs.llm-agents.coderabbit-cli
       pkgs.llm-agents.opencode
       pkgs.llm-agents.opencode2
-      pkgs.unstable.agent-browser
     ];
 
-    # Enable Claude Code auto mode (Bedrock, Vertex, Foundry Opus 4.7/4.8 sessions)
+    # Enable Claude Code auto mode
     home.sessionVariables = {
       CLAUDE_CODE_ENABLE_AUTO_MODE = "1";
-      AGENT_BROWSER_EXECUTABLE_PATH = lib.getExe pkgs.unstable.chromium;
     };
 
     programs = {
