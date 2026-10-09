@@ -129,10 +129,6 @@ extraLib.modules.mkModule args {
           enable = true;
           package = pkgs.nix-direnv;
         };
-        mise = {
-          enable = true;
-          package = pkgs.mise;
-        };
         silent = true;
       };
     };

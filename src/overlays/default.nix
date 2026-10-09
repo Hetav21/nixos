@@ -11,7 +11,7 @@
     };
   };
 
-  # --- Package Overrides Overlay (e.g. ghostty = unstable.ghostty) ---
+  # --- Package Overrides Overlay ---
   overrides = import ./overrides.nix {inherit inputs;};
 
   # --- NUR (Nix User Repository) Overlay (pkgs.nur.*) ---
