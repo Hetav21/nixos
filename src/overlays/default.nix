@@ -11,17 +11,8 @@
     };
   };
 
-  # --- Alternate Nixpkgs Channels (pkgs.unstable.*, pkgs.master.*) ---
-  channels = final: _prev: {
-    unstable = import inputs.nixpkgs-unstable {
-      system = final.stdenv.hostPlatform.system;
-      inherit (final) config;
-    };
-    master = import inputs.nixpkgs-master {
-      system = final.stdenv.hostPlatform.system;
-      inherit (final) config;
-    };
-  };
+  # --- Package Overrides Overlay (e.g. ghostty = unstable.ghostty) ---
+  overrides = import ./overrides.nix {inherit inputs;};
 
   # --- NUR (Nix User Repository) Overlay (pkgs.nur.*) ---
   nur = inputs.nur.overlays.default;

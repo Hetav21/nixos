@@ -14,7 +14,7 @@ extraLib.modules.mkModule args {
     home.shellAliases = {
       tree = "${lib.getExe pkgs.tree} -a -I .git";
       cat = "${lib.getExe config.programs.bat.package}";
-      grep = "${lib.getExe pkgs.unstable.ripgrep} --color=auto";
+      grep = "${lib.getExe pkgs.ripgrep} --color=auto";
       ff = "${lib.getExe pkgs.fastfetch}";
       lzd = "${lib.getExe pkgs.lazydocker}";
     };
@@ -24,7 +24,7 @@ extraLib.modules.mkModule args {
       nushell.extraConfig = ''
         def --env yz [...args] {
             let tmp = (mktemp -t "yazi-cwd.XXXXXX")
-            ${lib.getExe pkgs.unstable.yazi} ...$args --cwd-file $tmp
+            ${lib.getExe pkgs.yazi} ...$args --cwd-file $tmp
             let cwd = (open $tmp)
             if $cwd != "" and $cwd != $env.PWD {
                 cd $cwd
@@ -36,7 +36,7 @@ extraLib.modules.mkModule args {
       # --- File Management & Navigation ---
       yazi = {
         enable = true;
-        package = pkgs.unstable.yazi;
+        package = pkgs.yazi;
         enableFishIntegration = true;
         enableNushellIntegration = true;
         shellWrapperName = "y";
@@ -44,7 +44,7 @@ extraLib.modules.mkModule args {
 
       eza = {
         enable = true;
-        package = pkgs.unstable.eza;
+        package = pkgs.eza;
         enableFishIntegration = true;
         enableNushellIntegration = false;
         git = true;
@@ -58,20 +58,20 @@ extraLib.modules.mkModule args {
 
       zoxide = {
         enable = true;
-        package = pkgs.unstable.zoxide;
+        package = pkgs.zoxide;
         enableFishIntegration = true;
         enableNushellIntegration = true;
       };
 
       fd = {
         enable = true;
-        package = pkgs.unstable.fd;
+        package = pkgs.fd;
       };
 
       # --- Search & Preview ---
       ripgrep = {
         enable = true;
-        package = pkgs.unstable.ripgrep;
+        package = pkgs.ripgrep;
         arguments = [
           "--max-columns-preview"
           "--colors=line:style:bold"
@@ -80,32 +80,32 @@ extraLib.modules.mkModule args {
 
       fzf = {
         enable = true;
-        package = pkgs.unstable.fzf;
+        package = pkgs.fzf;
       };
 
       bat = {
         enable = true;
-        package = pkgs.unstable.bat;
+        package = pkgs.bat;
       };
 
       # --- Shell Prompt & Autocomplete ---
       starship = {
         enable = true;
-        package = pkgs.unstable.starship;
+        package = pkgs.starship;
         enableFishIntegration = true;
         enableNushellIntegration = true;
       };
 
       carapace = {
         enable = true;
-        package = pkgs.unstable.carapace;
+        package = pkgs.carapace;
         enableFishIntegration = true;
         enableNushellIntegration = true;
       };
 
       atuin = {
         enable = true;
-        package = pkgs.unstable.atuin;
+        package = pkgs.atuin;
         enableFishIntegration = true;
         enableNushellIntegration = true;
         flags = [
@@ -115,7 +115,7 @@ extraLib.modules.mkModule args {
 
       nix-your-shell = {
         enable = true;
-        package = pkgs.unstable.nix-your-shell;
+        package = pkgs.nix-your-shell;
         enableFishIntegration = true;
         enableNushellIntegration = true;
       };
@@ -123,15 +123,15 @@ extraLib.modules.mkModule args {
       # --- Environment Management ---
       direnv = {
         enable = true;
-        package = pkgs.unstable.direnv;
+        package = pkgs.direnv;
         enableNushellIntegration = true;
         nix-direnv = {
           enable = true;
-          package = pkgs.unstable.nix-direnv;
+          package = pkgs.nix-direnv;
         };
         mise = {
           enable = true;
-          package = pkgs.unstable.mise;
+          package = pkgs.mise;
         };
         silent = true;
       };

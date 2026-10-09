@@ -10,8 +10,8 @@ extraLib.modules.mkModule args {
   guiConfig = {
     # --- Discord Clients ---
     environment.systemPackages = [
-      pkgs.unstable.discord
-      pkgs.unstable.vesktop
+      pkgs.discord
+      pkgs.vesktop
     ];
   };
 }
