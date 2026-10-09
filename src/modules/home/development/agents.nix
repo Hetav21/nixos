@@ -9,9 +9,7 @@ extraLib.modules.mkModule args {
   name = "home.development.agents";
   hasCli = true;
   hasGui = false;
-  cliConfig = let
-    inherit (lib.importJSON (extraLib.paths.dotfile ".config/mcp/mcp.json")) mcpServers;
-  in {
+  cliConfig = {
     # --- Stylix & Aliases ---
     stylix.targets.opencode.enable = false;
 
@@ -64,7 +62,7 @@ extraLib.modules.mkModule args {
           codex = true;
           antigravity = true;
         };
-        servers = extraLib.dotfiles.mkSubstitute {"@bunxPath@" = lib.getExe' pkgs.bun "bunx";} mcpServers;
+        file = extraLib.paths.dotfile ".config/mcp/mcp.json";
       };
 
       # --- Agent Skills ---
