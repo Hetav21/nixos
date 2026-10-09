@@ -1,4 +1,8 @@
-{extraLib, ...} @ args:
+{
+  extraLib,
+  pkgs,
+  ...
+} @ args:
 extraLib.modules.mkModule args {
   name = "system.nix.ld";
   hasGui = false;
@@ -6,6 +10,32 @@ extraLib.modules.mkModule args {
     # --- Nix-LD Dynamic Linker Support ---
     programs.nix-ld = {
       enable = true;
+
+      # Merged with the NixOS base set (C++ runtime, udev, compression, TLS, ...)
+      libraries = with pkgs; [
+        # T3 Code preview browser: T3 runs its own downloaded headless Chrome
+        # (~/.t3/tools/chrome-headless-shell/) and has no option to use a Nix-built one.
+        # Mirrors DEBIAN_PACKAGES in T3's apps/server/src/preview/PreviewBrowserHost.ts;
+        # re-check it when T3 bumps its Chrome version
+        glib
+        nspr
+        nss
+        at-spi2-core # ATK, ATK bridge and AT-SPI
+        dbus
+        expat
+        alsa-lib
+        libgbm
+        libxkbcommon
+
+        # X11 client libraries the T3 browser links even when headless
+        libx11
+        libxcb
+        libxcomposite
+        libxdamage
+        libxext
+        libxfixes
+        libxrandr
+      ];
 
       # Find missing libraries from binary error messages using:
       #   nix run github:nix-community/nix-index-database <missinglib.so>
