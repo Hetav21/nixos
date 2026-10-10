@@ -9,6 +9,12 @@
   # Merges common settings with host overrides
   mkHostSettings = common: overrides: lib.recursiveUpdate common overrides;
 
+  # Checks whether desktop graphical environment is enabled for a host
+  hasDesktop = config: config.profiles.system.desktop.enable or false;
+
+  # Checks whether system is running under WSL
+  isWsl = config: config.profiles.system.wsl.enable or false;
+
   # Builds a NixOS system configuration for a host
   mkSystem = {
     settings,

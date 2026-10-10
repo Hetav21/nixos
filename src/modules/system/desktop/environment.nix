@@ -38,8 +38,5 @@ extraLib.modules.mkModule args {
         };
       };
     };
-
-    # --- System Theming ---
-    system.stylix.enable = true;
   };
 }

@@ -10,10 +10,13 @@ extraLib.modules.mkProfileModule args {
     system.locale.enable = true;
     system.secrets.enable = true;
 
+    # --- Theming ---
+    system.stylix.enable = true;
+
     # --- Virtualisation ---
     system.virtualisation = {
       docker.enable = true;
-      # podman.enable = true; # Daemonless container engine and compose runner
+      podman.enable = false;
       libvirtd.enable = true;
       virt-manager.enableGui = true;
       waydroid.enableGui = false;

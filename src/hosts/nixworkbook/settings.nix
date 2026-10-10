@@ -2,7 +2,6 @@
   # --- Host Identity ---
   hostname = "nixworkbook";
   mode = "work";
-  wallpaper = "China.jpeg";
 
   # --- Nix Build Configuration ---
   nix = {
