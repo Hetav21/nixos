@@ -29,7 +29,6 @@ extraLib.modules.mkModule args {
       pkgs.llm-agents.agent-browser
       pkgs.llm-agents.antigravity-cli
       pkgs.llm-agents.codex
-      pkgs.llm-agents.coderabbit-cli
       pkgs.llm-agents.opencode
       pkgs.llm-agents.opencode2
     ];

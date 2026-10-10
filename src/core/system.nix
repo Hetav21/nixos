@@ -12,7 +12,7 @@
   ...
 }: let
   # --- WSL Nushell Compatibility Wrapper ---
-  isWslEnabled = (config.profiles.system.wsl.enable or false) || (config.wsl.enable or false);
+  isWslEnabled = extraLib.hosts.isWsl config;
   wslNushellCompat =
     (pkgs.writeShellScriptBin "wsl-nushell-compat" ''
       # WSL/IDE compatibility wrapper for nushell on NixOS-WSL

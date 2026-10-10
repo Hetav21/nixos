@@ -12,6 +12,7 @@ extraLib.modules.mkCategoryModule args {
     ./power-management.nix
     ./printing.nix
     ./security.nix
+    ./theme.nix
     ./xdg-config.nix
   ];
   hasCli = true;
@@ -23,6 +24,7 @@ extraLib.modules.mkCategoryModule args {
     "power-management"
     "printing"
     "security"
+    "theme"
     "xdg-config"
   ];
   hasGui = true;

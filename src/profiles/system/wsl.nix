@@ -19,7 +19,7 @@ extraLib.modules.mkProfileModule args {
     # --- CLI/TUI Tools & Virtualisation ---
     system.virtualisation = {
       docker.enable = true;
-      podman.enable = true;
+      podman.enable = false;
       libvirtd.enable = false;
       binfmt.enable = false;
       android.enable = false;
