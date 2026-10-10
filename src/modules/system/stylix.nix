@@ -58,6 +58,7 @@ extraLib.modules.mkModule args {
           gtk.enable = hasDesktop;
           qt.enable = hasDesktop;
           font-packages.enable = hasDesktop;
+          fontconfig.enable = hasDesktop;
         };
       }
     ];
