@@ -28,7 +28,7 @@
     };
 
     # Common session paths
-    sessionPath = ["$HOME/.local/bin" "$HOME/go/bin"];
+    sessionPath = ["$HOME/.local/bin"];
   };
 
   # --- Home Manager Program Enablement ---
