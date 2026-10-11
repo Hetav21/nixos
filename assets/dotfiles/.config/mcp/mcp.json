@@ -18,10 +18,7 @@
     "playwright": {
       "type": "local",
       "command": "bunx",
-      "args": [
-        "-y",
-        "@playwright/mcp@latest"
-      ],
+      "args": ["-y", "@playwright/mcp@latest"],
       "disabled": true
     },
     "aws-knowledge-mcp-server": {
@@ -30,11 +27,8 @@
     },
     "excalidraw": {
       "type": "local",
-      "command": "npx",
-      "args": [
-        "-y",
-        "mcp-excalidraw-server"
-      ]
+      "command": "bunx",
+      "args": ["-y", "mcp-excalidraw-server"]
     }
   }
 }
