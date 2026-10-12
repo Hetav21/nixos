@@ -125,8 +125,6 @@ extraLib.modules.mkModule args {
     # --- Dotfiles ---
     home.file = lib.mkMerge [
       {
-        ".config/opencode/oh-my-opencode-slim.json".source =
-          extraLib.paths.dotfile ".config/opencode/oh-my-opencode-slim.json";
         ".config/opencode/antigravity.json".source = extraLib.paths.dotfile ".config/opencode/antigravity.json";
         ".config/opencode/command".source = extraLib.paths.dotfile ".config/opencode/command";
       }

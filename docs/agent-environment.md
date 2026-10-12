@@ -70,7 +70,7 @@ Provided by the `nix-skills` flake input:
 ## Other Managed Pieces (`agents.nix`)
 
 - **Packages**: AI agent CLIs (e.g. `claude-code`, `codex`, `coderabbit-cli`, `antigravity-cli`) come from `pkgs.llm-agents.*` via the `llm-agents` overlay (binary-cached from `cache.numtide.com`).
-- **OpenCode**: `programs.opencode` with model settings configured in `.config/opencode/opencode.json`; oh-my-opencode preset config generated from `assets/dotfiles/.config/opencode/oh-my-opencode-slim.json`.
+- **OpenCode**: `programs.opencode` with model settings configured in `.config/opencode/opencode.json`.
 - **MCP**: one canonical `mcp.json` is the only place MCP servers are written; `programs.agent-mcp` (nix-skills) renders it into each agent's own format and location. The format, where each agent's copy lands, and how `{env:VAR}` references are translated are documented in the [nix-skills `AGENTS.md`](https://github.com/Hetav21/nix-skills/blob/main/AGENTS.md#mcp-servers-programsagent-mcp).
   - **Global**: `assets/dotfiles/.config/mcp/mcp.json`, passed as `programs.agent-mcp.file`. nix-skills runs `npx`/`bunx`/`uvx` commands from the Nix store, so GUI-launched agents don't depend on `PATH`.
   - **Per project**: put an `mcp.json` (same format) at the project root and run `agent-mcp sync`. It writes `.mcp.json`, `opencode.json` (`mcp` key only), `.codex/config.toml` (`mcp_servers` only) and `.agents/mcp_config.json`.
