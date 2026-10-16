@@ -1,8 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": [
-    "@simonwjackson/opencode-direnv"
-  ],
   "share": "disabled",
   "autoupdate": false,
   "model": "openai/gpt-6.1-sol",
