@@ -43,6 +43,9 @@ extraLib.modules.mkModule args {
           # Set SSH agent socket from systemd service
           $env.SSH_AUTH_SOCK = $"($env.XDG_RUNTIME_DIR)/ssh-agent"
 
+          # Let pinentry-curses prompt on this terminal
+          try { $env.GPG_TTY = (^tty | str trim) }
+
           # Flake configuration environment variables for nh
           $env.FLAKE = "${settings.setup_dir}"
           $env.NH_FLAKE = "${settings.setup_dir}"
