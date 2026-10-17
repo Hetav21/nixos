@@ -9,6 +9,36 @@
     permittedInsecurePackages = [];
   };
 in {
+  # --- Flake Input Update Groups ---
+  groups = {
+    stable = [
+      "nixpkgs"
+      "home-manager"
+      "stylix"
+    ];
+    unstable = [
+      "nixpkgs-unstable"
+      "helium-flake"
+      "vicinae-extensions"
+    ];
+    apps = [
+      "nixvim"
+      "llm-agents"
+      "t3code"
+    ];
+    system = [
+      "sops-nix"
+      "lanzaboote"
+      "nixos-wsl"
+      "nix-flatpak"
+      "nix-index-database"
+    ];
+    excluded = [
+      "nur"
+      "nix-skills"
+    ];
+  };
+
   # --- Nixpkgs Config ---
   nixpkgs = nixpkgsConfig;
 
