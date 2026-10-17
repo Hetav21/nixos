@@ -24,5 +24,12 @@ extraLib.modules.mkModule args {
       systemdTargets = ["hyprland-session.target"];
       extraOptions = ["-max-dedupe-search" "10" "-max-items" "500"];
     };
+
+    # --- Persistent Clipboard Daemon ---
+    services.wl-clip-persist = {
+      enable = true;
+      clipboardType = "regular";
+      systemdTargets = ["hyprland-session.target"];
+    };
   };
 }
