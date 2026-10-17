@@ -1,6 +1,8 @@
 {inputs, ...}: final: prev: let
   system = prev.stdenv.hostPlatform.system;
   t3code = inputs.t3code.packages.${system};
+  heliumFlake = inputs.helium-flake.packages.${system};
+  vicinaeExtensions = inputs.vicinae-extensions.packages.${system};
   hetav21Nur =
     (import inputs.nur {
       nurpkgs = prev;
@@ -12,6 +14,15 @@ in {
     (t3code)
     t3code-nightly
     ;
+
+  # --- Helium Browser Addition ---
+  inherit
+    (heliumFlake)
+    helium
+    ;
+
+  # --- Vicinae Extensions Addition ---
+  inherit vicinaeExtensions;
 
   # --- Personal Packages (from NUR) ---
   inherit

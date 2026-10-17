@@ -1,7 +1,6 @@
 {
   extraLib,
   pkgs,
-  inputs,
   ...
 } @ args:
 extraLib.modules.mkModule args {
@@ -12,7 +11,7 @@ extraLib.modules.mkModule args {
   guiConfig = {
     # --- Packages ---
     home.packages = [
-      inputs.helium-flake.packages.${pkgs.stdenv.hostPlatform.system}.default
+      pkgs.helium
     ];
   };
 }
