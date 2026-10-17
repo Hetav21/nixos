@@ -10,7 +10,6 @@ extraLib.modules.mkModule args {
   cliConfig = {
     # --- System Packages ---
     environment.systemPackages = [
-      pkgs.nix-update
       pkgs.just
     ];
 
