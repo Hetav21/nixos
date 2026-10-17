@@ -2,7 +2,6 @@
   extraLib,
   lib,
   pkgs,
-  inputs,
   ...
 } @ args:
 extraLib.modules.mkModule args {
@@ -13,8 +12,8 @@ extraLib.modules.mkModule args {
     # --- Standalone GUI Editors ---
     home.packages = [
       # pkgs.antigravity-ide # AI-assisted coding environment / IDE
-      pkgs.nur.repos.hetav21.px0
-      inputs.t3code.packages.${pkgs.stdenv.hostPlatform.system}.t3code-nightly
+      pkgs.px0
+      pkgs.t3code-nightly
     ];
 
     home.shellAliases = {

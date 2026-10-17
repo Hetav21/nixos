@@ -20,7 +20,7 @@ Repository identity, component boundaries, runtime wiring, and security contract
   - `src/modules/system/` — System-level NixOS modules (desktop, hardware, network, productivity, storage, virtualisation, etc.).
   - `src/modules/home/` — Home Manager user modules (browser, desktop, development, media, shell, system).
   - `src/modules/drivers/` — Hardware graphics and vendor driver modules (AMD, Intel, NVIDIA, ASUS).
-- `src/pkgs/` — Custom packages and overlays; includes `src/pkgs/agent-sources` sub-flake.
+- `src/pkgs/` — Custom packages and overlays; includes agent skills & resource packages in `src/pkgs/agent-sources`.
 - `secrets/` — SOPS-encrypted secret files managed via `sops-nix`.
 - `assets/dotfiles/` — Raw dotfile assets managed and symlinked into user environment.
 
@@ -30,7 +30,7 @@ Repository identity, component boundaries, runtime wiring, and security contract
 
 - Core distribution: `nixpkgs` (nixos-26.05).
 - System & Environment: `home-manager`, `stylix`, `sops-nix`, `nixos-wsl`, `lanzaboote`, `nix-flatpak`.
-- Agent & Tooling: `inputs.llm-agents` (binary cached agent CLIs), `inputs.nix-skills` (declarative skills & resources), `vicinae-extensions`, `nixvim`.
+- Agent & Tooling: `inputs.llm-agents` (binary cached agent CLIs), `inputs.nix-skills` (declarative skills & resources), `inputs.t3code` (T3 Code desktop), `vicinae-extensions`, `nixvim`.
 
 ## Commands & Verification
 
@@ -47,10 +47,3 @@ Repository identity, component boundaries, runtime wiring, and security contract
 
 - **Secrets Storage:** Encrypted with SOPS (`.sops.yaml`) in `secrets/`. Decryption happens at runtime on target hosts via age keys (`~/.config/sops/age/keys.txt` or `/var/lib/sops-nix/key.txt`).
 - **Human Authentication Invariant:** Authentication is strictly human-controlled. Agents must never inspect, read, copy, or print age keys or plaintext secret payloads. Whenever SSH authentication, GPG signing, GitHub push credentials, or token refresh is required, agents must stop and hand off to the human.
-
-## Agent Toolchain Wiring
-
-**Source of truth:** [docs/agent-environment.md](agent-environment.md) and [src/modules/home/development/agents.nix](../src/modules/home/development/agents.nix)
-
-- AI agent tooling (OpenCode, Claude Code, Codex, OpenCode 2, Antigravity) is configured declaratively in `home.development.agents`.
-- Declarative agent skills and commands are wired through `programs.agent-resources` using the `nix-skills` flake library.

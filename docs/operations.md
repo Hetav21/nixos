@@ -33,7 +33,7 @@ Thin index of cross-cutting workflows. Where a topic has an owning doc, the link
 
 ## Add Custom Package
 
-Package definitions live in `src/pkgs/`, exposed via overlay as `pkgs.custom.<name>`, and the agent-sources sub-flake workflow.
+Package definitions live in `src/pkgs/`, exposed via overlay as `pkgs.custom.<name>`.
 
 ## Add/Modify Secret
 

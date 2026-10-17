@@ -55,7 +55,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    agent-sources.url = "path:./src/pkgs/agent-sources";
     nix-skills = {
       url = "github:Hetav21/nix-skills";
       inputs.nixpkgs.follows = "nixpkgs";

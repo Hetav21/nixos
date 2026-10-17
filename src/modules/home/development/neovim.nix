@@ -130,7 +130,7 @@ extraLib.modules.mkModule args {
       clipboard.providers.wl-copy.enable = true;
 
       extraPlugins = [
-        pkgs.nur.repos.hetav21.direnv-nvim
+        pkgs.direnv-nvim
       ];
 
       # --- Lua Hooks & WSL Integration ---

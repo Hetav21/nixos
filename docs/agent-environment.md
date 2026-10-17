@@ -54,8 +54,8 @@ programs.agent-skills = {
 
 Workflow for a new upstream source:
 
-1. Add the repository as an input to the `src/pkgs/agent-sources` sub-flake and update lockfiles in order: first update the sub-flake lockfile (`nix flake lock --update-input <source-name> /etc/nixos/src/pkgs/agent-sources`), then update the root flake lockfile (`nix flake lock --update-input agent-sources /etc/nixos`).
-2. Wrap it as a package under `src/pkgs/agent-sources/default.nix` so it's exposed as `pkgs.custom.agent-sources.<source-name>`.
+1. Add the source definition into `src/pkgs/agent-sources/default.nix` (using `builtins.fetchTree` with pinned commit `rev` and `narHash`).
+2. Wrap it using `mkAgentResource` so it is exposed as `pkgs.custom.agent-sources.<source-name>`.
 3. Reference it in `programs.agent-skills.skills` in `agents.nix` directly as a package or as a filtered source spec (`{ source, includes, excludes }`).
 
 ## nix-skills Library Functions
@@ -69,7 +69,7 @@ Provided by the `nix-skills` flake input:
 
 ## Other Managed Pieces (`agents.nix`)
 
-- **Packages**: AI agent CLIs (e.g. `claude-code`, `codex`, `coderabbit-cli`, `antigravity-cli`) come from `pkgs.llm-agents.*` via the `llm-agents` overlay (binary-cached from `cache.numtide.com`).
+- **Packages**: AI agent CLIs (e.g. `claude-code`, `codex`, `coderabbit-cli`, `antigravity-cli`, `t3code`) are overlaid directly onto `pkgs` via `llm-agents` and `t3code` overlays (binary-cached from `cache.numtide.com`).
 - **OpenCode**: `programs.opencode` with model settings configured in `.config/opencode/opencode.json`.
 - **MCP**: one canonical `mcp.json` is the only place MCP servers are written; `programs.agent-mcp` (nix-skills) renders it into each agent's own format and location. The format, where each agent's copy lands, and how `{env:VAR}` references are translated are documented in the [nix-skills `AGENTS.md`](https://github.com/Hetav21/nix-skills/blob/main/AGENTS.md#mcp-servers-programsagent-mcp).
   - **Global**: `assets/dotfiles/.config/mcp/mcp.json`, passed as `programs.agent-mcp.file`. nix-skills runs `npx`/`bunx`/`uvx` commands from the Nix store, so GUI-launched agents don't depend on `PATH`.
@@ -82,6 +82,6 @@ Prebuilt native code gets its libraries from Nix centrally — never from a glob
 
 **Source of truth:** `src/modules/home/development/agents.nix` (agent packages) and `src/modules/system/nix-ld.nix` (compatibility libraries for downloaded binaries).
 
-- **Browser automation CLI**: `agent-browser` comes from `pkgs.llm-agents`, whose package wraps it to launch its own Nix-built Chromium, so it never downloads Chrome. The wrapper forces `AGENT_BROWSER_EXECUTABLE_PATH`, so only `--executable-path` overrides it; an inherited environment value or a config-file `executablePath` is ignored.
+- **Browser automation CLI**: `agent-browser` comes directly from `pkgs.agent-browser` (overlaid from `llm-agents`), whose package wraps it to launch its own Nix-built Chromium, so it never downloads Chrome. The wrapper forces `AGENT_BROWSER_EXECUTABLE_PATH`, so only `--executable-path` overrides it; an inherited environment value or a config-file `executablePath` is ignored.
 - **T3 Code preview browser**: T3 always runs its own pinned download from `~/.t3/tools/chrome-headless-shell/` and has no option to use a Nix-built browser, so it runs through nix-ld. The library set is the NixOS base set plus T3's required list in `nix-ld.nix`. Gotcha: `ldd` ignores nix-ld and only sees `LD_LIBRARY_PATH`, so check with `LD_LIBRARY_PATH=/run/current-system/sw/share/nix-ld/lib ldd <binary>`, then confirm by actually launching the binary.
 - **Native Node addons in MCP servers**: Nix-built Node and Bun don't use nix-ld, so an npm addon that needs a library outside its own `RUNPATH` fails with `ERR_DLOPEN_FAILED`. Fix it in the project that registers the server (e.g. pin a version without the addon) rather than adding library paths here.
