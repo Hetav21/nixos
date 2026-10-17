@@ -2,7 +2,6 @@
   extraLib,
   pkgs,
   config,
-  inputs,
   ...
 } @ args:
 extraLib.modules.mkModule args {
@@ -50,11 +49,9 @@ extraLib.modules.mkModule args {
         };
       };
 
-      extensions = let
-        vicinaePkgs = inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system};
-      in [
-        vicinaePkgs.nix
-        vicinaePkgs.power-profile
+      extensions = with pkgs.vicinaeExtensions; [
+        nix
+        power-profile
       ];
     };
   };

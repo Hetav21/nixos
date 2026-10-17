@@ -3,64 +3,64 @@
 
   # --- Flake Inputs ---
   inputs = {
+    # --- 1. Stable Group (Release 26.05 Channel & Modules) ---
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    stylix = {
-      url = "github:danth/stylix/release-26.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix = {
+      url = "github:danth/stylix/release-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    nix-flatpak.url = "github:gmodena/nix-flatpak/latest";
+    # --- 2. Unstable Group (Rolling Overrides & Extensions) ---
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    helium-flake = {
+      url = "gitlab:ntgn/helium-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    vicinae-extensions = {
+      url = "github:vicinaehq/extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL/main";
+    # --- 3. Apps Group (Editor & AI Tool Suites) ---
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    llm-agents.url = "github:numtide/llm-agents.nix";
+    t3code.url = "github:limwa/nix-t3code";
+
+    # --- 4. System Group (Infrastructure, Hardware & Security Modules) ---
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    nix-flatpak.url = "github:gmodena/nix-flatpak/latest";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # --- 5. Excluded / Personal (Manual Updates Only) ---
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    vicinae-extensions = {
-      url = "github:vicinaehq/extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    helium-flake = {
-      url = "gitlab:ntgn/helium-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixvim = {
-      url = "github:nix-community/nixvim/nixos-26.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-skills = {
       url = "github:Hetav21/nix-skills";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    llm-agents.url = "github:numtide/llm-agents.nix";
-    t3code.url = "github:limwa/nix-t3code";
   };
 
   # --- Binary Caches ---

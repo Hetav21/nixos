@@ -9,7 +9,10 @@ extraLib.modules.mkModule args {
   hasGui = false;
   cliConfig = {
     # --- System Packages ---
-    environment.systemPackages = [pkgs.nix-update];
+    environment.systemPackages = [
+      pkgs.nix-update
+      pkgs.just
+    ];
 
     # --- NH (Nix Helper) ---
     programs.nh = {
