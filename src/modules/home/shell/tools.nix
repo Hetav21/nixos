@@ -20,6 +20,38 @@ extraLib.modules.mkModule args {
     };
 
     programs = {
+      # --- Nushell Keybindings ---
+      nushell.settings.keybindings = [
+        {
+          name = "fzf_files_nvim";
+          modifier = "control";
+          keycode = "char_t";
+          mode = [
+            "emacs"
+            "vi_normal"
+            "vi_insert"
+          ];
+          event = {
+            send = "executehostcommand";
+            cmd = "${lib.getExe pkgs.fd} --type f --strip-cwd-prefix --hidden --exclude .git | ${lib.getExe pkgs.fzf} --preview '${lib.getExe config.programs.bat.package} --style=numbers --color=always {}' --bind 'ctrl-/:toggle-preview' --bind 'enter:become(nvim {})' --bind 'double-click:become(nvim {})'";
+          };
+        }
+        {
+          name = "fzf_dirs_cd";
+          modifier = "alt";
+          keycode = "char_c";
+          mode = [
+            "emacs"
+            "vi_normal"
+            "vi_insert"
+          ];
+          event = {
+            send = "executehostcommand";
+            cmd = "let dir = (${lib.getExe pkgs.fd} --type d --strip-cwd-prefix --hidden --exclude .git | ${lib.getExe pkgs.fzf} --preview '${lib.getExe pkgs.eza} --tree --color=always {} | head -200' --bind 'ctrl-/:toggle-preview' | str trim); if ($dir | is-not-empty) { cd $dir }";
+          };
+        }
+      ];
+
       # --- File Management & Navigation ---
       yazi = {
         enable = true;
@@ -68,6 +100,24 @@ extraLib.modules.mkModule args {
       fzf = {
         enable = true;
         package = pkgs.fzf;
+        enableFishIntegration = true;
+
+        defaultCommand = "${lib.getExe pkgs.fd} --type f --strip-cwd-prefix --hidden --exclude .git";
+
+        fileWidgetCommand = "${lib.getExe pkgs.fd} --type f --strip-cwd-prefix --hidden --exclude .git";
+        fileWidgetOptions = [
+          "--preview '${lib.getExe config.programs.bat.package} --style=numbers --color=always {}'"
+          "--bind 'ctrl-/:toggle-preview'"
+          "--bind 'enter:become(nvim {})'"
+          "--bind 'double-click:become(nvim {})'"
+          "--bind 'ctrl-y:accept'"
+        ];
+
+        changeDirWidgetCommand = "${lib.getExe pkgs.fd} --type d --strip-cwd-prefix --hidden --exclude .git";
+        changeDirWidgetOptions = [
+          "--preview '${lib.getExe pkgs.eza} --tree --color=always {} | head -200'"
+          "--bind 'ctrl-/:toggle-preview'"
+        ];
       };
 
       bat = {
