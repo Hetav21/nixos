@@ -9,7 +9,16 @@ extraLib.modules.mkModule args {
   name = "home.shell.shells";
   hasCli = true;
   hasGui = false;
-  cliConfig = {
+  cliConfig = {osConfig ? null, ...}: let
+    openaiSecretPath =
+      if osConfig ? sops.secrets.openai_api_key
+      then osConfig.sops.secrets.openai_api_key.path
+      else "/run/secrets/openai_api_key";
+    context7SecretPath =
+      if osConfig ? sops.secrets.context7_api_key
+      then osConfig.sops.secrets.context7_api_key.path
+      else "/run/secrets/context7_api_key";
+  in {
     # --- Aliases ---
     home.shellAliases = {
       cls = "clear";
@@ -60,11 +69,11 @@ extraLib.modules.mkModule args {
           $env.NH_OS_FLAKE = "${settings.setup_dir}"
 
           try {
-            $env.OPENAI_API_KEY = (cat /run/secrets/openai_api_key | str trim)
+            $env.OPENAI_API_KEY = (cat ${openaiSecretPath} | str trim)
           }
 
           try {
-            $env.CONTEXT7_API_KEY = (cat /run/secrets/context7_api_key | str trim)
+            $env.CONTEXT7_API_KEY = (cat ${context7SecretPath} | str trim)
           }
         '';
 
