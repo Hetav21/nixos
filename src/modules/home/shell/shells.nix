@@ -9,7 +9,36 @@ extraLib.modules.mkModule args {
   name = "home.shell.shells";
   hasCli = true;
   hasGui = false;
-  cliConfig = {
+  cliConfig = {osConfig ? null, ...}: let
+    # Map environment variable names to their corresponding sops secret names
+    secretEnvVars = {
+      OPENAI_API_KEY = "openai_api_key";
+      CONTEXT7_API_KEY = "context7_api_key";
+    };
+
+    getSecretPath = secretName:
+      osConfig.sops.secrets.${secretName}.path or "/run/secrets/${secretName}";
+
+    fishSecretEnv = lib.concatStringsSep "\n" (
+      lib.mapAttrsToList (envVar: secretName: let
+        path = getSecretPath secretName;
+      in ''
+        test -f "${path}"; and set -gx ${envVar} (string trim < "${path}")
+      '')
+      secretEnvVars
+    );
+
+    nushellSecretEnv = lib.concatStringsSep "\n" (
+      lib.mapAttrsToList (envVar: secretName: let
+        path = getSecretPath secretName;
+      in ''
+        if ('${path}' | path exists) {
+          $env.${envVar} = (open '${path}' | str trim)
+        }
+      '')
+      secretEnvVars
+    );
+  in {
     # --- Aliases ---
     home.shellAliases = {
       cls = "clear";
@@ -24,6 +53,9 @@ extraLib.modules.mkModule args {
         shellInit = ''
           # Set SSH agent socket from systemd service
           set -gx SSH_AUTH_SOCK $XDG_RUNTIME_DIR/ssh-agent
+
+          # Decrypted SOPS secrets environment variables
+          ${fishSecretEnv}
         '';
       };
 
@@ -59,13 +91,8 @@ extraLib.modules.mkModule args {
           $env.NH_FLAKE = "${settings.setup_dir}"
           $env.NH_OS_FLAKE = "${settings.setup_dir}"
 
-          try {
-            $env.OPENAI_API_KEY = (cat /run/secrets/openai_api_key | str trim)
-          }
-
-          try {
-            $env.CONTEXT7_API_KEY = (cat /run/secrets/context7_api_key | str trim)
-          }
+          # Decrypted SOPS secrets environment variables
+          ${nushellSecretEnv}
         '';
 
         extraConfig = ''

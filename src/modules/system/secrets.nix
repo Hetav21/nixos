@@ -11,6 +11,12 @@ extraLib.modules.mkModule args {
     # --- System Packages ---
     environment.systemPackages = [pkgs.sops];
 
+    # --- Home Manager Symlink for Sops CLI ---
+    home-manager.users.${settings.username} = {config, ...}: {
+      home.file.".config/sops/age/keys.txt".source =
+        config.lib.file.mkOutOfStoreSymlink "${settings.setup_dir}/secrets/keys.asc";
+    };
+
     # --- Sops Secret Decryption ---
     sops = {
       age.keyFile = "${settings.setup_dir}/secrets/keys.asc";
