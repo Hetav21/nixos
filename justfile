@@ -69,7 +69,7 @@ switch group="":
                 nh os switch -U sops-nix -U lanzaboote -U nixos-wsl -U nix-flatpak -U nix-index-database
                 ;;
             all)
-                nh os switch --update
+                nh os switch -U nixpkgs -U home-manager -U stylix -U nixpkgs-unstable -U helium-flake -U vicinae-extensions -U nixvim -U llm-agents -U t3code -U sops-nix -U lanzaboote -U nixos-wsl -U nix-flatpak -U nix-index-database
                 ;;
             *)
                 nh os switch -U "{{group}}"
@@ -98,7 +98,7 @@ test group="":
                 nh os test -U sops-nix -U lanzaboote -U nixos-wsl -U nix-flatpak -U nix-index-database
                 ;;
             all)
-                nh os test --update
+                nh os test -U nixpkgs -U home-manager -U stylix -U nixpkgs-unstable -U helium-flake -U vicinae-extensions -U nixvim -U llm-agents -U t3code -U sops-nix -U lanzaboote -U nixos-wsl -U nix-flatpak -U nix-index-database
                 ;;
             *)
                 nh os test -U "{{group}}"
@@ -112,7 +112,7 @@ boot:
 
 # Dry-run build for a host (default: current host)
 dry host="$(hostname)":
-    nh os build -H {{host}} --dry
+    nix build --dry-run .#nixosConfigurations.{{host}}.config.system.build.toplevel
 
 # Build system toplevel derivation for a host (default: current host)
 build host="$(hostname)":
@@ -120,7 +120,7 @@ build host="$(hostname)":
 
 # Fast evaluation and syntax check without building (default: current host)
 eval host="$(hostname)":
-    nix eval .#nixosConfigurations.{{host}}.config.system.build.toplevel --apply 'x: "ok"'
+    nix eval .#nixosConfigurations.{{host}}.config.system.build.toplevel.drvPath
 
 # Validate flake syntax, inputs, and all host configurations
 check:

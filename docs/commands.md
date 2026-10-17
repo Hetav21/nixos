@@ -51,7 +51,7 @@ just test apps         # updates 'apps' and tests activation
 just boot              # nh os boot
 
 # Dry-run build (defaults to current host)
-just dry [host]        # nh os build -H <host> --dry
+just dry [host]        # nix build --dry-run .#nixosConfigurations.<host>.config.system.build.toplevel
 
 # Build system toplevel derivation
 just build [host]      # nh os build -H <host>
@@ -61,7 +61,7 @@ just build [host]      # nh os build -H <host>
 
 ```bash
 # Fast evaluation check (no build, defaults to current host)
-just eval [host]       # nix eval .#nixosConfigurations.<host>... --apply 'x: "ok"'
+just eval [host]       # nix eval .#nixosConfigurations.<host>.config.system.build.toplevel.drvPath
 
 # Validate flake syntax, inputs, and all host configurations
 just check             # nix flake check
@@ -122,7 +122,7 @@ AI agents and automated scripts use standard raw `nix` CLI commands across any s
 nix flake check
 
 # Fast evaluation check for a specific host (no build)
-nix eval .#nixosConfigurations.<host>.config.system.build.toplevel --apply 'x: "ok"'
+nix eval .#nixosConfigurations.<host>.config.system.build.toplevel.drvPath
 
 # Dry-run build for a specific host
 nix build .#nixosConfigurations.<host>.config.system.build.toplevel --dry-run
