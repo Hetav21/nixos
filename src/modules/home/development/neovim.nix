@@ -1663,19 +1663,12 @@ extraLib.modules.mkModule args {
           options.desc = "Lint Document";
         }
         {
+          mode = "n";
           key = "<leader>cr";
           action.__raw = ''function() return ":IncRename " .. vim.fn.expand("<cword>") end'';
           options = {
             expr = true;
             desc = "Incremental Rename";
-          };
-        }
-        {
-          key = "<leader>rn";
-          action.__raw = ''function() return ":IncRename " .. vim.fn.expand("<cword>") end'';
-          options = {
-            expr = true;
-            desc = "Incremental Rename (Alias)";
           };
         }
         {

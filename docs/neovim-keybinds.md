@@ -181,7 +181,7 @@ Managed by `nvim-lspconfig`, `inc-rename.nvim`, and `conform-nvim`.
 | `<leader>ca` | Normal | Open LSP code actions menu | `plugins.lsp` (`vim.lsp.buf.code_action`) |
 | `<leader>cf` | Normal, Visual | Manually format buffer or visual selection | `conform-nvim` |
 | `<leader>cl` | Normal | Trigger manual linter diagnostics run | `nvim-lint` |
-| `<leader>cr` / `<leader>rn` | Normal | Incremental LSP symbol rename with live preview | `inc-rename.nvim` |
+| `<leader>cr` | Normal | Incremental LSP symbol rename with live preview | `inc-rename.nvim` |
 | `<leader>cj` | Normal | Toggle split / join arguments (single-line <-> multi-line) | `mini.splitjoin` |
 | `<leader>ct` | Normal, Visual | Toggle / Increment value under cursor (`True`/`False`, `and`/`or`, `==`/`!=`, dates, numbers) | `dial.nvim` |
 | `<leader>cx` | Normal, Visual | Decrement value under cursor | `dial.nvim` |
