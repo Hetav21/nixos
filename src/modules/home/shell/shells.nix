@@ -32,6 +32,14 @@ extraLib.modules.mkModule args {
         enable = true;
         package = pkgs.nushell;
 
+        settings = {
+          edit_mode = "vi";
+          cursor_shape = {
+            vi_insert = "line";
+            vi_normal = "block";
+          };
+        };
+
         plugins = with pkgs.nushellPlugins; [
           query
           gstat
