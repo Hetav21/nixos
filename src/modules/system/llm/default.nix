@@ -1,7 +1,4 @@
-{
-  extraLib,
-  ...
-} @ args:
+{extraLib, ...} @ args:
 extraLib.modules.mkCategoryModule args {
   name = "system.llm";
   imports = [

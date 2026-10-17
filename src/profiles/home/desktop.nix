@@ -1,7 +1,4 @@
-{
-  extraLib,
-  ...
-} @ args:
+{extraLib, ...} @ args:
 extraLib.modules.mkProfileModule args {
   name = "profiles.home.desktop";
   description = "Consolidated desktop home profile";

@@ -1,7 +1,4 @@
-{
-  extraLib,
-  ...
-} @ args:
+{extraLib, ...} @ args:
 extraLib.modules.mkProfileModule args {
   name = "profiles.system.wsl";
   description = "WSL profile with CLI/TUI only";

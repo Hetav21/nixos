@@ -1,7 +1,4 @@
-{
-  extraLib,
-  ...
-}: {
+{extraLib, ...}: {
   # --- Profile & State Version ---
   profiles.home.desktop.enable = true;
 
