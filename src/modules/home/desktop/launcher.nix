@@ -51,7 +51,12 @@ extraLib.modules.mkModule args {
 
       extensions = with pkgs.vicinaeExtensions; [
         nix
-        power-profile
+        wifi-commander
+        pulseaudio
+        player-pilot
+        port-killer
+        helium
+        hypr
       ];
     };
   };
