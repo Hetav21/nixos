@@ -16,7 +16,7 @@ extraLib.modules.mkModule args {
   in {
     home.packages =
       if isWsl
-      then [pkgs.nur.repos.hetav21.wsl-notify-send]
+      then [pkgs.wsl-notify-send]
       else [pkgs.libnotify];
   };
 

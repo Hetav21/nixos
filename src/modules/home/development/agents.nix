@@ -14,11 +14,11 @@ extraLib.modules.mkModule args {
     stylix.targets.opencode.enable = false;
 
     home.shellAliases = {
-      oc = "${lib.getExe pkgs.llm-agents.opencode}";
-      oc2 = "${lib.getExe pkgs.llm-agents.opencode2}";
-      ag = "${lib.getExe pkgs.llm-agents.antigravity-cli}";
-      cc = "${lib.getExe pkgs.llm-agents.claude-code}";
-      cdx = "${lib.getExe pkgs.llm-agents.codex}";
+      oc = "${lib.getExe pkgs.opencode}";
+      oc2 = "${lib.getExe pkgs.opencode2}";
+      ag = "${lib.getExe pkgs.antigravity-cli}";
+      cc = "${lib.getExe pkgs.claude-code}";
+      cdx = "${lib.getExe pkgs.codex}";
     };
 
     # --- Packages & Environment ---
@@ -26,11 +26,11 @@ extraLib.modules.mkModule args {
     # ~/.codex/config.toml and ~/.gemini/config/mcp_config.json read-only, so agent-mcp merges into them instead
     home.packages = [
       # Wrapped to launch a Nix-built browser, so it never falls back to a downloaded one
-      pkgs.llm-agents.agent-browser
-      pkgs.llm-agents.antigravity-cli
-      pkgs.llm-agents.codex
-      pkgs.llm-agents.opencode
-      pkgs.llm-agents.opencode2
+      pkgs.agent-browser
+      pkgs.antigravity-cli
+      pkgs.codex
+      pkgs.opencode
+      pkgs.opencode2
     ];
 
     # Enable Claude Code auto mode
@@ -42,14 +42,14 @@ extraLib.modules.mkModule args {
       # --- OpenCode & MCP ---
       opencode = {
         enable = true;
-        package = pkgs.llm-agents.opencode;
+        package = pkgs.opencode;
         settings = lib.importJSON (extraLib.paths.dotfile ".config/opencode/opencode.json");
       };
 
       # --- Claude Code ---
       claude-code = {
         enable = true;
-        package = pkgs.llm-agents.claude-code;
+        package = pkgs.claude-code;
       };
 
       # --- Shared MCP Servers ---

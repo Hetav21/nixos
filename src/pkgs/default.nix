@@ -1,12 +1,8 @@
-{
-  pkgs,
-  inputs ? {},
-  ...
-}: {
+{pkgs, ...}: {
   # --- Standalone Tools ---
   gitignore = pkgs.callPackage ./gitignore {};
   antigravity-wsl-shim = pkgs.callPackage ./antigravity-wsl-shim {};
 
   # --- Agent & AI Resources ---
-  agent-sources = pkgs.callPackage ./agent-sources {inherit inputs;};
+  agent-sources = pkgs.callPackage ./agent-sources {};
 }
