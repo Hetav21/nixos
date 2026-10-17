@@ -20,19 +20,6 @@ extraLib.modules.mkModule args {
     };
 
     programs = {
-      # --- Nushell Helper Functions ---
-      nushell.extraConfig = ''
-        def --env yz [...args] {
-            let tmp = (mktemp -t "yazi-cwd.XXXXXX")
-            ${lib.getExe pkgs.yazi} ...$args --cwd-file $tmp
-            let cwd = (open $tmp)
-            if $cwd != "" and $cwd != $env.PWD {
-                cd $cwd
-            }
-            rm -fp $tmp
-        }
-      '';
-
       # --- File Management & Navigation ---
       yazi = {
         enable = true;
