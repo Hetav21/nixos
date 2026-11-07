@@ -16,8 +16,12 @@ extraLib.modules.mkModule args {
     systemctl = lib.getExe' pkgs.systemd "systemctl";
     hyprlock = lib.getExe pkgs.hyprlock;
 
-    # Check if any window is currently fullscreen across any workspace
-    isAnyWindowFullscreen = "${hyprctl} clients -j 2>/dev/null | ${jq} -e '.[] | select((.fullscreen != 0) or (.fullscreenClient != 0))' >/dev/null 2>&1";
+    # Check if any window is currently in true fullscreen (mode 2) across any workspace
+    isAnyWindowFullscreen = pkgs.writeShellScript "check-hypr-fullscreen" ''
+      clients="$(${hyprctl} clients -j 2>/dev/null)" || exit 1
+      [ -n "$clients" ] || exit 1
+      echo "$clients" | ${jq} -e '.[] | select((((.fullscreen // 0) % 4) >= 2) or (((.fullscreenClient // 0) % 4) >= 2))' >/dev/null 2>&1
+    '';
   in {
     # --- Hypridle Daemon Configuration ---
     services.hypridle = {
@@ -38,7 +42,7 @@ extraLib.modules.mkModule args {
           }
           {
             timeout = 660;
-            on-timeout = "if ! ${isAnyWindowFullscreen}; then ${hyprctl} dispatch dpms off; fi";
+            on-timeout = "if ! ${isAnyWindowFullscreen}; then ${loginctl} lock-session; ${hyprctl} dispatch dpms off; fi";
             on-resume = "${hyprctl} dispatch dpms on";
           }
           {
