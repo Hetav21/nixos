@@ -12,7 +12,6 @@ extraLib.modules.mkModule args {
   guiConfig = let
     hyprctl = lib.getExe' pkgs.hyprland "hyprctl";
     loginctl = lib.getExe' pkgs.systemd "loginctl";
-    systemctl = lib.getExe' pkgs.systemd "systemctl";
     hyprlock = lib.getExe pkgs.hyprlock;
   in {
     # --- Hypridle Daemon Configuration ---
@@ -36,10 +35,6 @@ extraLib.modules.mkModule args {
             timeout = 660;
             on-timeout = "${hyprctl} dispatch dpms off";
             on-resume = "${hyprctl} dispatch dpms on";
-          }
-          {
-            timeout = 1800;
-            on-timeout = "${systemctl} suspend";
           }
         ];
       };

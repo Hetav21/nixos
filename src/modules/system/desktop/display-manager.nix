@@ -14,7 +14,7 @@ extraLib.modules.mkModule args {
     # --- Login Management ---
     services.logind.settings.Login = {
       HandlePowerKey = "suspend";
-      HandleLidSwitch = "hybrid-sleep";
+      HandleLidSwitch = "lock";
     };
 
     # --- Greeter & Display Manager ---
