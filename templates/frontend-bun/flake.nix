@@ -14,10 +14,6 @@
       url = "github:chrisvoncsefalvay/claude-d3js-skill";
       flake = false;
     };
-    agent-config = {
-      url = "github:brianlovin/agent-config";
-      flake = false;
-    };
     awesome-claude-code-subagents = {
       url = "github:VoltAgent/awesome-claude-code-subagents";
       flake = false;
@@ -74,13 +70,11 @@
                 "frontend-design"
                 "theme-factory"
                 "webapp-testing"
+                "skill-creator"
               ];
             })
             "${inputs.anthropic-skills}/skills/web-artifacts-builder"
             "${inputs.claude-d3js-skill}"
-            (nix-skills.lib.extract pkgs inputs.agent-config "skills" {
-              includes = ["react-doctor" "bun" "rams"];
-            })
           ];
 
           agents = [
