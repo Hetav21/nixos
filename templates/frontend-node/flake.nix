@@ -14,6 +14,10 @@
       url = "github:chrisvoncsefalvay/claude-d3js-skill";
       flake = false;
     };
+    react-doctor = {
+      url = "github:millionco/react-doctor";
+      flake = false;
+    };
     awesome-claude-code-subagents = {
       url = "github:VoltAgent/awesome-claude-code-subagents";
       flake = false;
@@ -81,11 +85,13 @@
                 "frontend-design"
                 "theme-factory"
                 "webapp-testing"
-                "skill-creator"
               ];
             })
             "${inputs.anthropic-skills}/skills/web-artifacts-builder"
             "${inputs.claude-d3js-skill}"
+            (nix-skills.lib.extract pkgs inputs.react-doctor "skills" {
+              includes = ["react-doctor"];
+            })
           ];
 
           agents = [

@@ -91,6 +91,7 @@ extraLib.modules.mkModule args {
           # Vercel official agent tools
           pkgs.custom.agent-sources.agent-browser
           pkgs.custom.agent-sources.vercel-skills
+          pkgs.custom.agent-sources.reclaude
 
           # Emil Kowalski UI & animation skills (auto-discovered & flattened)
           pkgs.custom.agent-sources.emilkowalski-skills
