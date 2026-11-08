@@ -1,6 +1,7 @@
 {
   lib,
   stdenvNoCC,
+  fetchurl,
 }: let
   mkAgentResource = pname: description: homepage: src:
     assert lib.assertMsg (src != null) "${pname}-src is required.";
@@ -59,7 +60,11 @@
       rev = "d3701c11b1101251af14c9d148f026e1a47ebe17";
       narHash = "sha256-TDLIerf2DHWDuFfWnzBp5fEEQj3B9jtW4IIrpRXwoHg=";
     };
-    reclaude = ./skills/reclaude;
+  };
+
+  reclaudeSkill = fetchurl {
+    url = "https://raw.githubusercontent.com/aiskillstore/marketplace/69951b8d76e9aeec481408ec1bec21026fa0209b/skills/brianlovin/reclaude/SKILL.md";
+    sha256 = "0lvxiyw2n63ym8vrlskrw55wbkn91rni6yy01ixj969x23sr0vjv";
   };
 in {
   anthropic-skills = mkAgentResource "anthropic-skills" "Anthropic Official Skills" "https://github.com/anthropics/skills" sources.anthropic-skills;
@@ -67,5 +72,23 @@ in {
   emilkowalski-skills = mkAgentResource "emilkowalski-skills" "Emil Kowalski's agent skills" "https://github.com/emilkowalski/skills" sources.emilkowalski-skills;
   agent-browser = mkAgentResource "agent-browser" "Vercel Labs Agent Browser" "https://github.com/vercel-labs/agent-browser" sources.agent-browser;
   vercel-skills = mkAgentResource "vercel-skills" "Vercel Labs Agent Skills" "https://github.com/vercel-labs/skills" sources.vercel-skills;
-  reclaude = mkAgentResource "reclaude" "Refactor CLAUDE.md files following progressive disclosure" "https://skills.sh" sources.reclaude;
+  reclaude = stdenvNoCC.mkDerivation {
+    pname = "reclaude";
+    version = "devel";
+    dontUnpack = true;
+    dontBuild = true;
+    dontConfigure = true;
+    installPhase = ''
+      runHook preInstall
+      mkdir -p $out
+      cp ${reclaudeSkill} $out/SKILL.md
+      runHook postInstall
+    '';
+    meta = with lib; {
+      description = "Refactor CLAUDE.md files following progressive disclosure";
+      homepage = "https://github.com/aiskillstore/marketplace/tree/main/skills/brianlovin/reclaude";
+      license = licenses.mit;
+      platforms = platforms.all;
+    };
+  };
 }

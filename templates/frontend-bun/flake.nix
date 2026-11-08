@@ -81,7 +81,6 @@
             (nix-skills.lib.extract pkgs inputs.react-doctor "skills" {
               includes = ["react-doctor"];
             })
-            "${inputs.self}/skills/bun"
           ];
 
           agents = [
