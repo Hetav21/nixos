@@ -1,6 +1,7 @@
 {
   lib,
   stdenvNoCC,
+  fetchurl,
 }: let
   mkAgentResource = pname: description: homepage: src:
     assert lib.assertMsg (src != null) "${pname}-src is required.";
@@ -45,17 +46,49 @@
       rev = "e8a175de22ae1e49370fc144c1f3bb9aeedf988d";
       narHash = "sha256-FG1zm/Vr00QAvpSA6uuVbPJrOjFj2W+F1SAChlJOGMk=";
     };
-    agent-config = builtins.fetchTree {
+    agent-browser = builtins.fetchTree {
       type = "github";
-      owner = "brianlovin";
-      repo = "agent-config";
-      rev = "1a9819ebf3fee811150fc76cbe177ea4e5f747ff";
-      narHash = "sha256-yY6xBsrC/0HPp/6bk0h+sQFE2zqXfcLxuGA18Y+9dd0=";
+      owner = "vercel-labs";
+      repo = "agent-browser";
+      rev = "4b0e9f01fa8d214d39bbfe5391257640634fb9a0";
+      narHash = "sha256-V0KcdCGAdtYQqFnZYv4DfN1PEj5cAYaoSHaw9HxJJ+8=";
     };
+    vercel-skills = builtins.fetchTree {
+      type = "github";
+      owner = "vercel-labs";
+      repo = "skills";
+      rev = "d3701c11b1101251af14c9d148f026e1a47ebe17";
+      narHash = "sha256-TDLIerf2DHWDuFfWnzBp5fEEQj3B9jtW4IIrpRXwoHg=";
+    };
+  };
+
+  reclaudeSkill = fetchurl {
+    url = "https://raw.githubusercontent.com/aiskillstore/marketplace/69951b8d76e9aeec481408ec1bec21026fa0209b/skills/brianlovin/reclaude/SKILL.md";
+    sha256 = "0lvxiyw2n63ym8vrlskrw55wbkn91rni6yy01ixj969x23sr0vjv";
   };
 in {
   anthropic-skills = mkAgentResource "anthropic-skills" "Anthropic Official Skills" "https://github.com/anthropics/skills" sources.anthropic-skills;
   mattpocock-skills = mkAgentResource "mattpocock-skills" "Matt Pocock's agent skills" "https://github.com/mattpocock/skills" sources.mattpocock-skills;
   emilkowalski-skills = mkAgentResource "emilkowalski-skills" "Emil Kowalski's agent skills" "https://github.com/emilkowalski/skills" sources.emilkowalski-skills;
-  agent-config = mkAgentResource "agent-config" "Brian Lovin agent configuration resources" "https://github.com/brianlovin/agent-config" sources.agent-config;
+  agent-browser = mkAgentResource "agent-browser" "Vercel Labs Agent Browser" "https://github.com/vercel-labs/agent-browser" sources.agent-browser;
+  vercel-skills = mkAgentResource "vercel-skills" "Vercel Labs Agent Skills" "https://github.com/vercel-labs/skills" sources.vercel-skills;
+  reclaude = stdenvNoCC.mkDerivation {
+    pname = "reclaude";
+    version = "devel";
+    dontUnpack = true;
+    dontBuild = true;
+    dontConfigure = true;
+    installPhase = ''
+      runHook preInstall
+      mkdir -p $out
+      cp ${reclaudeSkill} $out/SKILL.md
+      runHook postInstall
+    '';
+    meta = with lib; {
+      description = "Refactor CLAUDE.md files following progressive disclosure";
+      homepage = "https://github.com/aiskillstore/marketplace/tree/main/skills/brianlovin/reclaude";
+      license = licenses.mit;
+      platforms = platforms.all;
+    };
+  };
 }

@@ -84,21 +84,14 @@ extraLib.modules.mkModule args {
               "pdf"
               "pptx"
               "xlsx"
+              "skill-creator"
             ];
           }
 
-          # Curated agent tools from personal config
-          {
-            source = pkgs.custom.agent-sources.agent-config;
-            includes = [
-              "agent-browser"
-              "deslop"
-              "simplify"
-              "workflow"
-              "find-skills"
-              "reclaude"
-            ];
-          }
+          # Vercel official agent tools
+          pkgs.custom.agent-sources.agent-browser
+          pkgs.custom.agent-sources.vercel-skills
+          pkgs.custom.agent-sources.reclaude
 
           # Emil Kowalski UI & animation skills (auto-discovered & flattened)
           pkgs.custom.agent-sources.emilkowalski-skills

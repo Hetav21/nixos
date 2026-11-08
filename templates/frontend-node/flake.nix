@@ -14,8 +14,8 @@
       url = "github:chrisvoncsefalvay/claude-d3js-skill";
       flake = false;
     };
-    agent-config = {
-      url = "github:brianlovin/agent-config";
+    react-doctor = {
+      url = "github:millionco/react-doctor";
       flake = false;
     };
     awesome-claude-code-subagents = {
@@ -89,8 +89,8 @@
             })
             "${inputs.anthropic-skills}/skills/web-artifacts-builder"
             "${inputs.claude-d3js-skill}"
-            (nix-skills.lib.extract pkgs inputs.agent-config "skills" {
-              includes = ["react-doctor" "rams"];
+            (nix-skills.lib.extract pkgs inputs.react-doctor "skills" {
+              includes = ["react-doctor"];
             })
           ];
 
