@@ -121,6 +121,8 @@ extraLib.modules.mkModule args {
         markdownlint-cli2
         prettier
         shfmt
+        gotools
+        golangci-lint
         # Tools, Debuggers & Language Servers
         lazygit
         postgresql
@@ -1145,6 +1147,7 @@ extraLib.modules.mkModule args {
             sh = ["shellcheck"];
             nix = ["statix"];
             markdown = ["markdownlint-cli2"];
+            go = ["golangcilint"];
           };
         };
 
