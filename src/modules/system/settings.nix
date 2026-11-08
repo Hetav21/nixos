@@ -45,6 +45,17 @@ extraLib.modules.mkModule args {
         cores = settings.nix.cores;
       };
 
+      registry.templates = {
+        from = {
+          id = "templates";
+          type = "indirect";
+        };
+        to = {
+          type = "path";
+          path = settings.setup_dir;
+        };
+      };
+
       optimise = {
         automatic = true;
         dates = ["weekly"];
