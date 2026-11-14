@@ -128,29 +128,6 @@ eval "$(starship init zsh)"
 #eval "$(fnm env --use-on-cd)"
 
 
-# Export Paths
-
-# pnpm
-# export PNPM_HOME="/home/hetav/.local/share/pnpm"
-# case ":$PATH:" in
-#   *":$PNPM_HOME:"*) ;;
-#   *) export PATH="$PNPM_HOME:$PATH" ;;
-# esac
-# pnpm end
-
-# Cargo Bin
-# export PATH="$HOME/.cargo/bin:$PATH"
-
-# Android Studio Paths
-# export JAVA_HOME="/opt/android-studio/jbr"
-# export ANDROID_HOME="$HOME/Android/Sdk"
-# export NDK_HOME="$ANDROID_HOME/ndk/$(ls -1 $ANDROID_HOME/ndk)"
-
-# Turso
-# export PATH="$PATH:/home/hetav/.turso"
-
-export PATH="$HOME/.npm-global/bin:$PATH"
-
 # Command Run
 date
 microfetch
