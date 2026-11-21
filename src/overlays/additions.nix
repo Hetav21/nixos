@@ -22,6 +22,7 @@ in {
   inherit
     (hetav21Nur)
     direnv-nvim
+    open-code-review
     px0
     wsl-notify-send
     ;
