@@ -19,6 +19,7 @@ extraLib.modules.mkModule args {
       ag = "${lib.getExe pkgs.antigravity-cli}";
       cc = "${lib.getExe pkgs.claude-code}";
       cdx = "${lib.getExe pkgs.codex}";
+      ocr = "${lib.getExe pkgs.open-code-review}";
     };
 
     # --- Packages & Environment ---
@@ -31,6 +32,7 @@ extraLib.modules.mkModule args {
       pkgs.codex
       pkgs.opencode
       pkgs.opencode2
+      pkgs.open-code-review
     ];
 
     # Enable Claude Code auto mode
@@ -103,6 +105,11 @@ extraLib.modules.mkModule args {
               "deprecated"
               "in-progress"
             ];
+          }
+
+          # Open Code Review official skills
+          {
+            source = pkgs.custom.agent-sources.open-code-review;
           }
         ];
       };

@@ -60,6 +60,13 @@
       rev = "d3701c11b1101251af14c9d148f026e1a47ebe17";
       narHash = "sha256-TDLIerf2DHWDuFfWnzBp5fEEQj3B9jtW4IIrpRXwoHg=";
     };
+    open-code-review = builtins.fetchTree {
+      type = "github";
+      owner = "alibaba";
+      repo = "open-code-review";
+      rev = "d29ca2044a42ea297a7fa93692d0f5ac8f38d84e";
+      narHash = "sha256-lQMAo1R+I6S2+eOW1APqZc2JVmezK+e6mqZuso0ku+k=";
+    };
   };
 
   reclaudeSkill = fetchurl {
@@ -72,6 +79,7 @@ in {
   emilkowalski-skills = mkAgentResource "emilkowalski-skills" "Emil Kowalski's agent skills" "https://github.com/emilkowalski/skills" sources.emilkowalski-skills;
   agent-browser = mkAgentResource "agent-browser" "Vercel Labs Agent Browser" "https://github.com/vercel-labs/agent-browser" sources.agent-browser;
   vercel-skills = mkAgentResource "vercel-skills" "Vercel Labs Agent Skills" "https://github.com/vercel-labs/skills" sources.vercel-skills;
+  open-code-review = mkAgentResource "open-code-review" "Open Code Review agent skills and resources" "https://github.com/alibaba/open-code-review" sources.open-code-review;
   reclaude = stdenvNoCC.mkDerivation {
     pname = "reclaude";
     version = "devel";
