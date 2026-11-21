@@ -13,7 +13,7 @@ extraLib.modules.mkModule args {
     home.packages = [
       # pkgs.antigravity-ide # AI-assisted coding environment / IDE
       pkgs.px0
-      pkgs.t3code-nightly
+      pkgs.t3code
     ];
 
     home.shellAliases = {

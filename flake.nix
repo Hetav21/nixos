@@ -31,7 +31,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     llm-agents.url = "github:numtide/llm-agents.nix";
-    t3code.url = "github:limwa/nix-t3code";
+    t3code = {
+      url = "github:OSSystems/t3code-nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     # --- 4. System Group (Infrastructure, Hardware & Security Modules) ---
     sops-nix = {
@@ -84,7 +87,6 @@
       "https://vicinae.cachix.org"
       "https://cache.numtide.com"
       "https://hetav21.cachix.org"
-      "https://limwa.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" # nix-community
@@ -92,7 +94,6 @@
       "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc=" # vicinae
       "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" # numtide
       "hetav21.cachix.org-1:O5O3aE7/wLp4F0uMLu4vJEr/Rn5UUWu97clxBxFALzc=" # hetav21
-      "limwa.cachix.org-1:W5n83EB/Sx7gd4XMc7hpSK6uDYzOd6ac8aMQ+Ye4i00=" # t3code
     ];
   };
 
