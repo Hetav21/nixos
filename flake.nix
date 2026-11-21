@@ -79,7 +79,6 @@
       "https://vicinae.cachix.org" # Vicinae launcher & extensions
       "https://cache.numtide.com" # Numtide cache
       "https://hetav21.cachix.org" # Hetav21 NUR packages
-      "https://limwa.cachix.org" # T3 Code binaries
     ];
     extra-trusted-substituters = [
       "https://nix-community.cachix.org"
