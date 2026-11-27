@@ -36,7 +36,7 @@ jobs:
       # is used. This configuration does not use IFD, and flake checks restrict/forbid
       # IFD by default. Hence, no Cachix cache action or auth tokens are required.
       - name: Install Nix
-        uses: cachix/install-nix-action@v31
+        uses: cachix/install-nix-action@v32
         with:
           extra_nix_config: |
             experimental-features = nix-command flakes
@@ -68,7 +68,7 @@ jobs:
       # is used. This configuration does not use IFD, and flake checks restrict/forbid
       # IFD by default. Hence, no Cachix cache action or auth tokens are required.
       - name: Install Nix
-        uses: cachix/install-nix-action@v31
+        uses: cachix/install-nix-action@v32
         with:
           extra_nix_config: |
             experimental-features = nix-command flakes
