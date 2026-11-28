@@ -31,10 +31,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     llm-agents.url = "github:numtide/llm-agents.nix";
-    t3code = {
-      url = "github:OSSystems/t3code-nix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    t3code.url = "github:OSSystems/t3code-nix";
 
     # --- 4. System Group (Infrastructure, Hardware & Security Modules) ---
     sops-nix = {
